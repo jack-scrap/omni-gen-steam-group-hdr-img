@@ -1,7 +1,7 @@
-#include <stdio.h>
+#include "asdf.h"
 
 int main() {
-	printf("asdf\n");
+	asdf();
 
 	return 0;
 }
