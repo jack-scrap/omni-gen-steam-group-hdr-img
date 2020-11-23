@@ -7,3 +7,5 @@ typedef struct {
 } Asdf;
 
 extern "C" Asdf asdfMk();
+
+extern "C" void set(Asdf* asdf);
