@@ -11,7 +11,7 @@ PROG = a.out
 
 all: libasdf.so $(PROG)
 
-hjkl.o: hjkl.c hjkl.h
+hjkl.o: hjkl.cpp hjkl.h
 	$(CXX) -c $< -o $@
 
 asdf.o: asdf.cpp asdf.h
