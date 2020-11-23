@@ -8,4 +8,4 @@ typedef struct {
 
 extern "C" Asdf asdfMk();
 
-extern "C" void set(Asdf* asdf);
+extern "C" void set(Asdf* asdf, int hjkl);

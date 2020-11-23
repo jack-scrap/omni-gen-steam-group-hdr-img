@@ -10,12 +10,10 @@ class Asdf(Structure):
 
         set(self._ptr, self._asdf)
 
-    def __init__(self, ptr, asdf):
+    def __init__(self, ptr):
         self._ptr = cast(ptr, POINTER(Asdf))
 
-        self._asdf = asdf
-
-        self.update(self._asdf)
+        self.update(self._ptr.contents._asdf)
 
 lib = CDLL('libhjkl.so')
 
@@ -26,7 +24,7 @@ set.argtypes = [
     c_int
 ]
 
-asdf = Asdf(lib.asdf, 3)
+asdf = Asdf(lib.asdf)
 
 asdf.update(7)
 

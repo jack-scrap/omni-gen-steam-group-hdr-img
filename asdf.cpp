@@ -11,6 +11,6 @@ Asdf asdfMk() {
 	return *_;
 }
 
-void set(Asdf* asdf) {
-	asdf->_asdf = 7;
+void set(Asdf* asdf, int hjkl) {
+	asdf->_asdf = hjkl;
 }
