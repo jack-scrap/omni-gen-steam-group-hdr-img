@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <iostream>
 
 #include "asdf.h"
 #include "hjkl.h"
@@ -6,7 +6,7 @@
 int main() {
 	Asdf asdf = asdfMk();
 
-	printf("%d\n", asdf._asdf);
+	std::cout << asdf._asdf << std::endl;
 
 	hjkl();
 

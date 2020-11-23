@@ -1,7 +1,7 @@
-CC := gcc
+CXX := g++
 
-STATIC := main.c hjkl.c
-DYNA := asdf.c
+STATIC := main.cpp hjkl.cpp
+DYNA := asdf.cpp
 OBJ_STATIC += $(STATIC:.c=.o)
 OBJ_DYNA += $(DYNA:.c=.o)
 
@@ -12,16 +12,16 @@ PROG = a.out
 all: libasdf.so $(PROG)
 
 hjkl.o: hjkl.c hjkl.h
-	$(CC) -c $< -o $@
+	$(CXX) -c $< -o $@
 
-asdf.o: asdf.c asdf.h
-	$(CC) -c -fPIC $< -o $@
+asdf.o: asdf.cpp asdf.h
+	$(CXX) -c -fPIC $< -o $@
 
 libasdf.so: asdf.o
-	$(CC) $< -shared -o $@
+	$(CXX) $< -shared -o $@
 
 $(PROG): $(OBJ_STATIC)
-	$(CC) $^ $(LDFLAGS)
+	$(CXX) $^ $(LDFLAGS)
 
 clean:
 	rm *.o $(PROG)

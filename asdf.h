@@ -1,7 +1,6 @@
-#ifndef ASDF_H
-#define ASDF_H
+#pragma once
 
-#include <stdlib.h>
+#include <cstdlib>
 
 typedef struct {
 	int _asdf;
@@ -10,5 +9,3 @@ typedef struct {
 Asdf asdfMk();
 
 extern Asdf asdf;
-
-#endif

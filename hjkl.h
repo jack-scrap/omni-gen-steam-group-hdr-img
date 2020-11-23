@@ -1,6 +1,3 @@
-#ifndef HJKL_H
-#define HJKL_H
+#pragma once
 
 void hjkl();
-
-#endif
