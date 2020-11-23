@@ -3,11 +3,13 @@ CC := gcc
 SRC := $(wildcard *.c)
 OBJ := $(SRC:.c=.o)
 
+PROG = a.out
+
 %.o: %.c %.h
 	$(CC) -c $< -o $@
 
-a.out: $(OBJ)
+$(PROG): $(OBJ)
 	$(CC) $^
 
 clean:
-	rm *.o a.out
+	rm *.o $(PROG)
