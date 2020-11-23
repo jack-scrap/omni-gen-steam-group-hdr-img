@@ -2,8 +2,8 @@ CC := gcc
 
 STATIC := main.c
 DYNA := asdf.c
-OBJ += $(STATIC:.c=.o)
-OBJ += $(DYNA:.c=.o)
+OBJ_STATIC += $(STATIC:.c=.o)
+OBJ_DYNA += $(DYNA:.c=.o)
 
 LDFLAGS = -L. $(DYNA:%.c=-l%)
 
@@ -17,7 +17,7 @@ asdf.o: asdf.c asdf.h
 libasdf.so: asdf.o
 	$(CC) $< -shared -o $@
 
-$(PROG): $(STATIC)
+$(PROG): $(OBJ_STATIC)
 	$(CC) $^ $(LDFLAGS)
 
 clean:
