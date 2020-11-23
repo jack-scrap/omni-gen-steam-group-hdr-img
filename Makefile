@@ -5,6 +5,8 @@ DYNA := asdf.c
 OBJ += $(STATIC:.c=.o)
 OBJ += $(DYNA:.c=.o)
 
+LDFLAGS = -L. $(DYNA:%.c=-l%)
+
 PROG = a.out
 
 all: libasdf.so $(PROG)
@@ -15,8 +17,8 @@ asdf.o: asdf.c asdf.h
 libasdf.so: asdf.o
 	$(CC) $< -shared -o $@
 
-$(PROG): $(OBJ)
-	$(CC) $< -L. -lasdf
+$(PROG): $(STATIC)
+	$(CC) $^ $(LDFLAGS)
 
 clean:
 	rm *.o $(PROG)
