@@ -10,11 +10,22 @@ int main() {
 
 	std::string buff = rd("asdf.py");
 
-	std::cout << asdf._asdf << std::endl;
-
 	PyRun_SimpleString(buff.c_str());
 
-	std::cout << asdf._asdf << std::endl;
+	SDL_Event e;
+	while (true) {
+		while (SDL_PollEvent(&e)) {
+			if (e.type == SDL_QUIT) {
+				SDL_Quit();
+			}
+		}
+		
+		disp.clear(0.16, 0.16, 0.16);
+
+		asdfDraw(&asdf);
+
+		disp.update();
+	}
 
 	return 0;
 }
