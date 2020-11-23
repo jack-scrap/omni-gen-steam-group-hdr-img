@@ -1,6 +1,6 @@
 CXX := g++
 
-STATIC := main.cpp
+STATIC := main.cpp util.cpp
 DYNA := asdf.cpp hjkl.cpp
 OBJ_STATIC += $(STATIC:.cpp=.o)
 OBJ_DYNA += $(DYNA:.cpp=.o)
@@ -26,11 +26,14 @@ hjkl.o: hjkl.cpp hjkl.h
 libhjkl.so: hjkl.o
 	$(CXX) $< -shared -o $@ -L. -lasdf
 
+util.o: util.cpp
+	$(CXX) -c $< -o $@
+
 main.o: main.cpp
-	$(CXX) $< -o $@ $(PY) -L. -lasdf -lhjkl
+	$(CXX) -c $< -o $@ $(PY) -L. -lasdf -lhjkl
 
 $(PROG): $(OBJ_STATIC)
-	$(CXX) $^
+	$(CXX) $^ $(PY) -L. -lasdf -lhjkl
 
 clean:
 	rm *.o *.so $(PROG)
