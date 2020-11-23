@@ -5,3 +5,5 @@
 void hjkl() {
 	std::cout << hjkl << std::endl;
 }
+
+Asdf asdf = asdfMk();

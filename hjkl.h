@@ -1,3 +1,5 @@
 #pragma once
 
-void hjkl();
+#include "asdf.h"
+
+extern Asdf asdf;

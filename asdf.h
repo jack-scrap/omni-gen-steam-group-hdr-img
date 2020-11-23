@@ -7,5 +7,3 @@ typedef struct {
 } Asdf;
 
 Asdf asdfMk();
-
-extern Asdf asdf;
