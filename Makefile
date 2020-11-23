@@ -2,17 +2,14 @@ CXX := g++
 
 STATIC := main.cpp hjkl.cpp
 DYNA := asdf.cpp
-OBJ_STATIC += $(STATIC:.c=.o)
-OBJ_DYNA += $(DYNA:.c=.o)
+OBJ_STATIC += $(STATIC:.cpp=.o)
+OBJ_DYNA += $(DYNA:.cpp=.o)
 
-LDFLAGS = -L. $(DYNA:%.c=-l%)
+LDFLAGS = -L. $(DYNA:%.cpp=-l%)
 
 PROG = a.out
 
 all: libasdf.so $(PROG)
-
-hjkl.o: hjkl.cpp hjkl.h
-	$(CXX) -c $< -o $@
 
 asdf.o: asdf.cpp asdf.h
 	$(CXX) -c -fPIC $< -o $@
