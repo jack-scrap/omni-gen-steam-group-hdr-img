@@ -33,7 +33,7 @@ main.o: main.cpp
 	$(CXX) -c $< -o $@ $(PY) -L. -lasdf -lhjkl
 
 $(PROG): $(OBJ_STATIC)
-	$(CXX) $^ $(PY) -L. -lasdf -lhjkl
+	$(CXX) $^ $(PY) -L. -lasdf -lhjkl -o $(PROG)
 
 clean:
 	rm *.o *.so $(PROG)
