@@ -1,10 +1,15 @@
 #include <iostream>
+#include <Python.h>
 
 #include "asdf.h"
 #include "hjkl.h"
 
 int main() {
-	std::cout << asdf._asdf << std::endl;
+	Py_Initialize();
+
+	while (true) {
+		std::cout << asdf._asdf << std::endl;
+	}
 
 	return 0;
 }
