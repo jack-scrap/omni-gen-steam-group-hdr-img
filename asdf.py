@@ -27,5 +27,3 @@ set.argtypes = [
 asdf = Asdf(lib.asdf)
 
 asdf.update(7)
-
-print(asdf._asdf)
