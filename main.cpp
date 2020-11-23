@@ -8,11 +8,11 @@
 int main() {
 	Py_Initialize();
 
-	std::string init = rd("asdf.py");
+	std::string buff = rd("asdf.py");
 
 	std::cout << asdf._asdf << std::endl;
 
-	PyRun_SimpleString(init.c_str());
+	PyRun_SimpleString(buff.c_str());
 
 	std::cout << asdf._asdf << std::endl;
 
