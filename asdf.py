@@ -6,6 +6,7 @@ import omni
 
 asdf = omni.Asdf(omni.lib.asdf)
 
-for i in range(0, 2):
-    asdf._loc[i] += 1
-asdf.update(asdf._loc)
+asdf.update([
+    asdf._loc[0] + 1,
+    asdf._loc[1] + 1
+])

@@ -6,7 +6,8 @@ class Asdf(Structure):
     ]
 
     def update(self, loc):
-        self._loc = loc
+        for i in range(0, 2):
+            self._loc[i] = loc[i]
 
         set(self._ptr, self._loc)
 
