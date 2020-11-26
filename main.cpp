@@ -14,9 +14,7 @@ int main() {
 
 	void* handle = dlopen("./libasdf.so", RTLD_LAZY);
 
-	void (*asdfDraw)(Asdf* asdf) = (void (*)(Asdf*)) dlsym(handle, "asdfDraw");
-
-	std::cout << dlerror() << std::endl;
+	void (*draw)(Asdf* asdf) = (void (*)(Asdf*)) dlsym(handle, "asdfDraw");
 
 	SDL_Event e;
 	while (true) {
@@ -28,7 +26,7 @@ int main() {
 
 		disp.clear(0.16, 0.16, 0.16);
 
-		asdfDraw(&asdf);
+		draw(&asdf);
 
 		disp.update();
 	}
