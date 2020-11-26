@@ -26,6 +26,8 @@ Asdf asdfMk() {
 	}
 	glBufferData(GL_ARRAY_BUFFER, sizeof vtc, vtc, GL_STATIC_DRAW);
 
+	_->_prog = Prog();
+
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 
@@ -34,9 +36,11 @@ Asdf asdfMk() {
 
 void asdfDraw(Asdf* asdf) {
 	glBindVertexArray(asdf->_vao);
+	asdf->_prog.use();
 
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 
+	asdf->_prog.unUse();
 	glBindVertexArray(0);
 }
 
