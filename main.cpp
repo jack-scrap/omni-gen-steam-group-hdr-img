@@ -10,7 +10,7 @@ int main() {
 
 	std::string buff = rd("asdf.py");
 
-	PyRun_SimpleString(buff.c_str());
+	/* PyRun_SimpleString(buff.c_str()); */
 
 	SDL_Event e;
 	while (true) {
