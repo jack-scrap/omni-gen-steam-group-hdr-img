@@ -12,6 +12,9 @@ Asdf asdfMk() {
 	glGenVertexArrays(1, &_->_vao);
 	glBindVertexArray(_->_vao);
 
+	glGenBuffers(1, &_->_vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, _->_vbo);
+
 	GLfloat vtc[3 * 2];
 	float rot = M_PI * 2;
 	int n = 3;
@@ -21,9 +24,6 @@ Asdf asdfMk() {
 		vtc[i] = sin(inc);
 		vtc[i + 1] = cos(inc);
 	}
-
-	glGenBuffers(1, &_->_vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, _->_vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof vtc, vtc, GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0);
