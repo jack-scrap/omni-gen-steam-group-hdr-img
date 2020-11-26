@@ -1,7 +1,7 @@
 #include <iostream>
 #include <Python.h>
+#include <dlfcn.h>
 
-#include "asdf.h"
 #include "hjkl.h"
 #include "util.h"
 
@@ -10,7 +10,13 @@ int main() {
 
 	std::string buff = rd("asdf.py");
 
-	/* PyRun_SimpleString(buff.c_str()); */
+	PyRun_SimpleString(buff.c_str());
+
+	void* handle = dlopen("./libasdf.so", RTLD_LAZY);
+
+	void (*asdfDraw)(Asdf* asdf) = (void (*)(Asdf*)) dlsym(handle, "asdfDraw");
+
+	std::cout << dlerror() << std::endl;
 
 	SDL_Event e;
 	while (true) {

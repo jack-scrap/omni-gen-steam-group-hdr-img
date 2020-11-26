@@ -17,6 +17,6 @@ Disp disp("asdf", 800, 600);
 
 Asdf asdfMk();
 
-void asdfDraw(Asdf* asdf);
+extern "C" void asdfDraw(Asdf* asdf);
 
 extern "C" void set(Asdf* asdf, int hjkl);
