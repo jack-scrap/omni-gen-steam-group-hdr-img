@@ -30,7 +30,11 @@ Asdf asdfMk() {
 }
 
 void asdfDraw(Asdf* asdf) {
+	glBindVertexArray(asdf->_vao);
+
 	glDrawArrays(GL_TRIANGLES, 0, 3);
+
+	glBindVertexArray(0);
 }
 
 void set(Asdf* asdf, int hjkl) {
