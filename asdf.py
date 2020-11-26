@@ -26,4 +26,5 @@ set.argtypes = [
 
 asdf = Asdf(lib.asdf)
 
-asdf.update(7)
+asdf._asdf += 1
+asdf.update(asdf._asdf)

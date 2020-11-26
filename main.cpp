@@ -10,8 +10,6 @@ int main() {
 
 	std::string buff = rd("asdf.py");
 
-	PyRun_SimpleString(buff.c_str());
-
 	void* handle = dlopen("./libasdf.so", RTLD_LAZY);
 
 	void (*draw)(Asdf* asdf) = (void (*)(Asdf*)) dlsym(handle, "asdfDraw");
@@ -19,6 +17,12 @@ int main() {
 	SDL_Event e;
 	while (true) {
 		while (SDL_PollEvent(&e)) {
+			if (e.type == SDL_KEYDOWN) {
+				if (e.key.keysym.sym == SDLK_F1) {
+					PyRun_SimpleString(buff.c_str());
+				}
+			}
+
 			if (e.type == SDL_QUIT) {
 				SDL_Quit();
 			}

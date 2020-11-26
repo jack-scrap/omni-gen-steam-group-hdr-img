@@ -37,7 +37,7 @@ Asdf asdfMk() {
 	_->_uniLoc = glGetUniformLocation(_->_prog.id, "loc");
 
 	GLfloat loc[2] = {
-		0.3, 0.7
+		_->_asdf, _->_asdf
 	};
 
 	glUniform2fv(_->_uniLoc, 1, loc);
@@ -48,6 +48,12 @@ Asdf asdfMk() {
 void asdfDraw(Asdf* asdf) {
 	glBindVertexArray(asdf->_vao);
 	asdf->_prog.use();
+
+	GLfloat loc[2] = {
+		asdf->_asdf, asdf->_asdf
+	};
+
+	glUniform2fv(asdf->_uniLoc, 1, loc);
 
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 
