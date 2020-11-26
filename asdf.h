@@ -23,7 +23,7 @@ typedef struct {
 	Prog _prog;
 } Asdf;
 
-Asdf asdfMk();
+Asdf asdfMk(int x, int y);
 
 extern "C" void asdfDraw(Asdf* asdf);
 

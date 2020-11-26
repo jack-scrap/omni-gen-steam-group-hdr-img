@@ -4,11 +4,11 @@
 #include "asdf.h"
 #include "hjkl.h"
 
-Asdf asdfMk() {
+Asdf asdfMk(int x, int y) {
 	Asdf* _ = (Asdf*) malloc(sizeof (Asdf));
 
-	_->_x = 0.0;
-	_->_y = 0.0;
+	_->_x = x;
+	_->_y = y;
 
 	glGenVertexArrays(1, &_->_vao);
 	glBindVertexArray(_->_vao);
