@@ -12,7 +12,7 @@ int main() {
 
 	void* handle = dlopen("./libasdf.so", RTLD_LAZY);
 
-	void (*draw)(Asdf* asdf) = (void (*)(Asdf*)) dlsym(handle, "asdfDraw");
+	void (*asdfDraw)(Asdf* asdf) = (void (*)(Asdf*)) dlsym(handle, "asdfDraw");
 
 	SDL_Event e;
 	while (true) {
@@ -30,7 +30,7 @@ int main() {
 
 		disp.clear(0.16, 0.16, 0.16);
 
-		draw(&asdf);
+		asdfDraw(&asdf);
 
 		disp.update();
 	}
