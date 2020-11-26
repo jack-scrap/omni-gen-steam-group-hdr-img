@@ -7,7 +7,9 @@
 #include "prog.h"
 
 typedef struct {
-	int _asdf;
+	GLfloat
+		_x,
+		_y;
 
 	GLuint
 		_vao,
@@ -25,4 +27,4 @@ Asdf asdfMk();
 
 extern "C" void asdfDraw(Asdf* asdf);
 
-extern "C" void set(Asdf* asdf, int hjkl);
+extern "C" void set(Asdf* asdf, GLfloat x, GLfloat y);

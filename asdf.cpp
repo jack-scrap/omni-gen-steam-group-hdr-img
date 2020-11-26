@@ -7,7 +7,8 @@
 Asdf asdfMk() {
 	Asdf* _ = (Asdf*) malloc(sizeof (Asdf));
 
-	_->_asdf = 3;
+	_->_x = 0.0;
+	_->_y = 0.0;
 
 	glGenVertexArrays(1, &_->_vao);
 	glBindVertexArray(_->_vao);
@@ -37,7 +38,7 @@ Asdf asdfMk() {
 	_->_uniLoc = glGetUniformLocation(_->_prog.id, "loc");
 
 	GLfloat loc[2] = {
-		_->_asdf, _->_asdf
+		_->_x, _->_y
 	};
 
 	glUniform2fv(_->_uniLoc, 1, loc);
@@ -50,7 +51,7 @@ void asdfDraw(Asdf* asdf) {
 	asdf->_prog.use();
 
 	GLfloat loc[2] = {
-		asdf->_asdf, asdf->_asdf
+		asdf->_x, asdf->_y
 	};
 
 	glUniform2fv(asdf->_uniLoc, 1, loc);
@@ -61,6 +62,7 @@ void asdfDraw(Asdf* asdf) {
 	glBindVertexArray(0);
 }
 
-void set(Asdf* asdf, int hjkl) {
-	asdf->_asdf = hjkl;
+void set(Asdf* asdf, GLfloat x, GLfloat y) {
+	asdf->_x = x;
+	asdf->_y = y;
 }
