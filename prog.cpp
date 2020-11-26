@@ -2,20 +2,7 @@
 #include <GL/glew.h>
 
 #include "prog.h"
-
-std::string rd(std::string name) {
-	std::ifstream in;
-	in.open("./" + name);
-
-	std::string total;
-	for (std::string l; std::getline(in, l);) {
-		total += l + "\n";
-	}
-
-	in.close();
-
-	return total;
-}
+#include "util.h"
 
 Shad::Shad(int stage) {
 	std::string ext;

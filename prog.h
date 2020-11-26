@@ -5,8 +5,6 @@
 #include <GL/glew.h>
 #include <fstream>
 
-std::string rd(std::string name);
-
 class Shad {
 	public:
 		GLuint _id;
