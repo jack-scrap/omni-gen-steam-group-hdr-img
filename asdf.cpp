@@ -9,6 +9,9 @@ Asdf asdfMk() {
 
 	_->_asdf = 3;
 
+	glGenVertexArrays(1, &_->_vao);
+	glBindVertexArray(_->_vao);
+
 	GLfloat vtc[3 * 2];
 	float rot = M_PI * 2;
 	int n = 3;
