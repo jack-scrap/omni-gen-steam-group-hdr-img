@@ -28,9 +28,19 @@ Asdf asdfMk() {
 
 	_->_prog = Prog();
 
+	_->_prog.use();
+
 	_->_attrPos = glGetAttribLocation(_->_prog.id, "pos");
 	glVertexAttribPointer(_->_attrPos, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 	glEnableVertexAttribArray(_->_attrPos);
+
+	_->_uniLoc = glGetUniformLocation(_->_prog.id, "loc");
+
+	GLfloat loc[2] = {
+		0.3, 0.7
+	};
+
+	glUniform2fv(_->_uniLoc, 1, loc);
 
 	return *_;
 }
