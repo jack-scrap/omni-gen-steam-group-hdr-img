@@ -4,11 +4,12 @@
 #include "asdf.h"
 #include "hjkl.h"
 
-Asdf asdfMk(int x, int y) {
+Asdf asdfMk(GLfloat* loc) {
 	Asdf* _ = (Asdf*) malloc(sizeof (Asdf));
 
-	_->_x = x;
-	_->_y = y;
+	for (int i = 0; i < 2; i++) {
+		_->_loc[i] = loc[i];
+	}
 
 	glGenVertexArrays(1, &_->_vao);
 	glBindVertexArray(_->_vao);
@@ -37,11 +38,7 @@ Asdf asdfMk(int x, int y) {
 
 	_->_uniLoc = glGetUniformLocation(_->_prog.id, "loc");
 
-	GLfloat loc[2] = {
-		_->_x, _->_y
-	};
-
-	glUniform2fv(_->_uniLoc, 1, loc);
+	glUniform2fv(_->_uniLoc, 1, _->_loc);
 
 	return *_;
 }
@@ -50,11 +47,7 @@ void asdfDraw(Asdf* asdf) {
 	glBindVertexArray(asdf->_vao);
 	asdf->_prog.use();
 
-	GLfloat loc[2] = {
-		asdf->_x, asdf->_y
-	};
-
-	glUniform2fv(asdf->_uniLoc, 1, loc);
+	glUniform2fv(asdf->_uniLoc, 1, asdf->_loc);
 
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 
@@ -62,7 +55,8 @@ void asdfDraw(Asdf* asdf) {
 	glBindVertexArray(0);
 }
 
-void set(Asdf* asdf, GLfloat x, GLfloat y) {
-	asdf->_x = x;
-	asdf->_y = y;
+void set(Asdf* asdf, GLfloat* loc) {
+	for (int i = 0; i < 2; i++) {
+		asdf->_loc[i] = loc[i];
+	}
 }

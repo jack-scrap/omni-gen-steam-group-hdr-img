@@ -4,4 +4,8 @@
 
 Disp disp("asdf", 800, 600);
 
-Asdf asdf = asdfMk(0.0, 0.0);
+GLfloat loc[2] = {
+	0.0, 0.0
+};
+
+Asdf asdf = asdfMk(loc);
