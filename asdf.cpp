@@ -38,8 +38,6 @@ void asdfDraw(Asdf* asdf) {
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 
 	glBindVertexArray(0);
-
-	std::cout << "asdf" << std::endl;
 }
 
 void set(Asdf* asdf, int hjkl) {

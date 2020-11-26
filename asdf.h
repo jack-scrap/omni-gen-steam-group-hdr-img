@@ -13,8 +13,6 @@ typedef struct {
 		_vbo;
 } Asdf;
 
-Disp disp("asdf", 800, 600);
-
 Asdf asdfMk();
 
 extern "C" void asdfDraw(Asdf* asdf);
