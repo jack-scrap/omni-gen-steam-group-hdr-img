@@ -19,7 +19,7 @@ int main() {
 				SDL_Quit();
 			}
 		}
-		
+
 		disp.clear(0.16, 0.16, 0.16);
 
 		asdfDraw(&asdf);
