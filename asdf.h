@@ -5,8 +5,6 @@
 
 #include "disp.h"
 
-extern "C" Disp disp("asdf", 800, 600);
-
 typedef struct {
 	int _asdf;
 
@@ -14,6 +12,8 @@ typedef struct {
 		_vao,
 		_vbo;
 } Asdf;
+
+extern "C" Disp disp("asdf", 800, 600);
 
 extern "C" Asdf asdfMk();
 
