@@ -13,6 +13,8 @@ typedef struct {
 		_vao,
 		_vbo;
 
+	GLint _attrPos;
+
 	Prog _prog;
 } Asdf;
 
