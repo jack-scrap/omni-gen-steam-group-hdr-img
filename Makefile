@@ -16,10 +16,16 @@ LDFLAGS += $(PY)
 
 PROG = a.out
 
-all: libasdf.so libhjkl.so $(PROG)
+all: libprog.so libasdf.so libhjkl.so $(PROG)
+
+prog.o: prog.cpp prog.h
+	$(CXX) -c -fPIC $< -o $@
+
+libprog.so: prog.o
+	$(CXX) $< -shared -o $@
 
 asdf.o: asdf.cpp asdf.h
-	$(CXX) -c -fPIC $< -o $@
+	$(CXX) -c -fPIC $< -o $@ -L. -lprog
 
 libasdf.so: asdf.o
 	$(CXX) $< -shared -o $@ $(GL)
@@ -28,7 +34,7 @@ hjkl.o: hjkl.cpp hjkl.h
 	$(CXX) -c -fPIC $< -o $@
 
 libhjkl.so: hjkl.o
-	$(CXX) $< -shared -o $@ -L. -lasdf
+	$(CXX) $< -shared -o $@ -L. -lasdf -lprog
 
 disp.o: disp.cpp disp.h
 	$(CXX) -c $< -o $@ $(SDL) $(GL)
