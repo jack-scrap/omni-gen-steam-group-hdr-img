@@ -8,13 +8,13 @@
 
 class Disp {
 	private:
-		SDL_Window* win;
-
-		SDL_GLContext ctx;
-
 		bool open = false;
 
 	public:
+		SDL_GLContext ctx;
+
+		SDL_Window* win;
+
 		int
 			_wd,
 			_ht;
