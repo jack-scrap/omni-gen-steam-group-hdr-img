@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <cmath>
+#include <thread>
+#include <chrono>
 
 #include "asdf.h"
 #include "hjkl.h"
@@ -63,4 +65,6 @@ void set(Asdf* asdf, GLfloat* loc) {
 	glUniform2fv(asdf->_uniLoc, 1, asdf->_loc);
 
 	asdf->_prog.unUse();
+
+	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 }
