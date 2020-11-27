@@ -57,8 +57,6 @@ void asdfDraw(Asdf* asdf) {
 }
 
 void set(Asdf* asdf, GLfloat* loc) {
-	SDL_GL_MakeCurrent(disp.win, disp.ctx);
-
 	for (int i = 0; i < 2; i++) {
 		asdf->_loc[i] = loc[i];
 	}

@@ -10,8 +10,14 @@ bool run = true;
 
 std::string buff = rd("asdf.py");
 
-SDL_Event e;
-void kb() {
+int main() {
+	Py_Initialize();
+
+	void* handle = dlopen("./libasdf.so", RTLD_LAZY);
+
+	void (*asdfDraw)(Asdf* asdf) = (void (*)(Asdf*)) dlsym(handle, "asdfDraw");
+
+	SDL_Event e;
 	while (run) {
 		while (SDL_PollEvent(&e)) {
 			if (e.type == SDL_KEYDOWN) {
@@ -24,20 +30,7 @@ void kb() {
 				run = false;
 			}
 		}
-	}
-}
 
-int main() {
-	Py_Initialize();
-
-	void* handle = dlopen("./libasdf.so", RTLD_LAZY);
-
-	void (*asdfDraw)(Asdf* asdf) = (void (*)(Asdf*)) dlsym(handle, "asdfDraw");
-
-	std::thread input(kb);
-	input.detach();
-
-	while (run) {
 		disp.clear(0.16, 0.16, 0.16);
 
 		asdfDraw(&asdf);
