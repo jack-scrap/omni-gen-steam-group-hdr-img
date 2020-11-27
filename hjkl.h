@@ -1,7 +1,7 @@
 #pragma once
 
-#include "asdf.h"
+#include "poly.h"
 
 extern Disp disp;
 
-extern Asdf asdf;
+extern Poly tri;

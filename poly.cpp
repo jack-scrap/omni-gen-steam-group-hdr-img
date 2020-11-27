@@ -4,11 +4,11 @@
 #include <chrono>
 #include <GL/glew.h>
 
-#include "asdf.h"
+#include "poly.h"
 #include "hjkl.h"
 
-Asdf asdfMk(GLfloat* loc) {
-	Asdf* _ = (Asdf*) malloc(sizeof (Asdf));
+Poly polyMk(GLfloat* loc) {
+	Poly* _ = (Poly*) malloc(sizeof (Poly));
 
 	for (int i = 0; i < 2; i++) {
 		_->_loc[i] = loc[i];
@@ -46,26 +46,26 @@ Asdf asdfMk(GLfloat* loc) {
 	return *_;
 }
 
-void asdfDraw(Asdf* asdf) {
-	glBindVertexArray(asdf->_vao);
-	asdf->_prog.use();
+void polyDraw(Poly* poly) {
+	glBindVertexArray(poly->_vao);
+	poly->_prog.use();
 
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 
-	asdf->_prog.unUse();
+	poly->_prog.unUse();
 	glBindVertexArray(0);
 }
 
-void set(Asdf* asdf, GLfloat* loc) {
+void set(Poly* poly, GLfloat* loc) {
 	for (int i = 0; i < 2; i++) {
-		asdf->_loc[i] = loc[i];
+		poly->_loc[i] = loc[i];
 	}
 
-	asdf->_prog.use();
+	poly->_prog.use();
 
-	glUniform2fv(asdf->_uniLoc, 1, asdf->_loc);
+	glUniform2fv(poly->_uniLoc, 1, poly->_loc);
 
-	asdf->_prog.unUse();
+	poly->_prog.unUse();
 
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 }

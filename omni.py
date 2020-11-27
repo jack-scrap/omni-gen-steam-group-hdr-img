@@ -1,6 +1,6 @@
 from ctypes import *
 
-class Asdf(Structure):
+class Poly(Structure):
     _fields_ = [
         ("_loc", c_float * 2)
     ]
@@ -12,7 +12,7 @@ class Asdf(Structure):
         set(self._ptr, self._loc)
 
     def __init__(self, ptr):
-        self._ptr = cast(ptr, POINTER(Asdf))
+        self._ptr = cast(ptr, POINTER(Poly))
 
         self.update(self._ptr.contents._loc)
 
@@ -21,6 +21,6 @@ lib = CDLL('libhjkl.so')
 set = lib.set
 set.restype = c_void_p
 set.argtypes = [
-    POINTER(Asdf),
+    POINTER(Poly),
     c_float * 2
 ]

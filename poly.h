@@ -19,10 +19,10 @@ typedef struct {
 		_uniLoc;
 
 	Prog _prog;
-} Asdf;
+} Poly;
 
-Asdf asdfMk(GLfloat* loc);
+Poly polyMk(GLfloat* loc);
 
-extern "C" void asdfDraw(Asdf* asdf);
+extern "C" void polyDraw(Poly* poly);
 
-extern "C" void set(Asdf* asdf, GLfloat* loc);
+extern "C" void set(Poly* poly, GLfloat* loc);

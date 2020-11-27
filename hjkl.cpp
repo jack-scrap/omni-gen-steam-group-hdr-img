@@ -8,4 +8,4 @@ GLfloat loc[2] = {
 	0.0, 0.0
 };
 
-Asdf asdf = asdfMk(loc);
+Poly tri = polyMk(loc);

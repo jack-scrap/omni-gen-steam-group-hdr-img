@@ -13,9 +13,9 @@ std::string buff = rd("asdf.py");
 int main() {
 	Py_Initialize();
 
-	void* handle = dlopen("./libasdf.so", RTLD_LAZY);
+	void* handle = dlopen("./libpoly.so", RTLD_LAZY);
 
-	void (*asdfDraw)(Asdf* asdf) = (void (*)(Asdf*)) dlsym(handle, "asdfDraw");
+	void (*polyDraw)(Poly* poly) = (void (*)(Poly*)) dlsym(handle, "polyDraw");
 
 	SDL_Event e;
 	while (run) {
@@ -33,7 +33,7 @@ int main() {
 
 		disp.clear(0.16, 0.16, 0.16);
 
-		asdfDraw(&asdf);
+		polyDraw(&tri);
 
 		disp.update();
 	}
