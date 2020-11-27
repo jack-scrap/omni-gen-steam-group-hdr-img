@@ -19,7 +19,7 @@ Disp::Disp(const char* title, int wd, int ht) :
 
 	GLenum status = glewInit();
 	if (status != GLEW_OK) {
-		std::cerr << "Glew failed to initialize" << std::endl;
+		std::cerr << "GLEW failed to initialize" << std::endl;
 	}
 
 	glEnable(GL_DEPTH_TEST);
