@@ -47,8 +47,6 @@ void asdfDraw(Asdf* asdf) {
 	glBindVertexArray(asdf->_vao);
 	asdf->_prog.use();
 
-	glUniform2fv(asdf->_uniLoc, 1, asdf->_loc);
-
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 
 	asdf->_prog.unUse();
@@ -59,4 +57,10 @@ void set(Asdf* asdf, GLfloat* loc) {
 	for (int i = 0; i < 2; i++) {
 		asdf->_loc[i] = loc[i];
 	}
+
+	asdf->_prog.use();
+
+	glUniform2fv(asdf->_uniLoc, 1, asdf->_loc);
+
+	asdf->_prog.unUse();
 }
