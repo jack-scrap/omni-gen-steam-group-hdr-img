@@ -37,7 +37,6 @@ Prog::Prog() {
 	// shader
 	Shad
 		vtx(0),
-
 		frag(1);
 
 	// program
