@@ -34,22 +34,16 @@ void kb() {
 }
 
 int main() {
-	void* handle = dlopen("libpoly.so", RTLD_LAZY);
-
-	void (*polyDraw)(Poly* poly) = (void (*)(Poly*)) dlsym(handle, "polyDraw");
-
-	Py_Initialize();
+	Console console(buffVec, ln, {
+		disp._wd, disp._ht
+	});
 
 	std::thread input(kb);
 	input.detach();
 
-	TTF_Init();
+	void* handle = dlopen("libpoly.so", RTLD_LAZY);
 
-	TTF_Font* font = TTF_OpenFont("terminus.bdf", 24);
-
-	Console console(buffVec, ln, {
-		800, 600
-	});
+	void (*polyDraw)(Poly* poly) = (void (*)(Poly*)) dlsym(handle, "polyDraw");
 
 	while (run) {
 		disp.clear(0.16, 0.16, 0.16);
