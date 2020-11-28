@@ -16,13 +16,39 @@ bool run = true;
 std::string buff = util::fs::rd<std::string>("asdf.py");
 std::vector<std::string> buffVec = util::fs::rd<std::vector<std::string>>("asdf.py");
 
-SDL_Event e;
-void kb() {
-	while (true) {
+Console* console;
+
+int main() {
+	Console* console = new Console(buffVec, ln, {
+		disp._res[0], disp._res[1]
+	});
+
+	void* handle = dlopen("libpoly.so", RTLD_LAZY);
+
+	void (*polyDraw)(Poly* poly) = (void (*)(Poly*)) dlsym(handle, "polyDraw");
+
+	SDL_Event e;
+	while (run) {
 		while (SDL_PollEvent(&e)) {
 			if (e.type == SDL_KEYDOWN) {
-				if (e.key.keysym.sym == SDLK_F1) {
-					PyRun_SimpleString(buff.c_str());
+				switch (e.key.keysym.sym) {
+					case SDLK_BACKSPACE:
+						if (!console->_bg.empty() && !console->_buff.empty()) {
+							if (!console->_bg.back().empty() &&!console->_buff.back().empty()) {
+								console->_bg.back().pop_back();
+								console->_buff.back().pop_back();
+							} else {
+								console->_bg.pop_back();
+								console->_buff.pop_back();
+							}
+						}
+
+						break;
+
+					case SDLK_F1:
+						PyRun_SimpleString(buff.c_str());
+
+						break;
 				}
 			}
 
@@ -30,33 +56,18 @@ void kb() {
 				run = false;
 			}
 		}
-	}
-}
 
-int main() {
-	Console console(buffVec, ln, {
-		disp._res[0], disp._res[1]
-	});
-
-	std::thread input(kb);
-	input.detach();
-
-	void* handle = dlopen("libpoly.so", RTLD_LAZY);
-
-	void (*polyDraw)(Poly* poly) = (void (*)(Poly*)) dlsym(handle, "polyDraw");
-
-	while (run) {
 		disp.clear(col[false]);
 
 		glEnable(GL_DEPTH_TEST);
 
-		glViewport(console._res[0], 0, disp._res[0] - console._res[0], disp._res[1]);
+		glViewport(console->_res[0], 0, disp._res[0] - console->_res[0], disp._res[1]);
 
 		polyDraw(&tri);
 
-		glViewport(0, 0, console._res[0], disp._res[1]);
+		glViewport(0, 0, console->_res[0], disp._res[1]);
 
-		console.print(buffVec);
+		console->print(buffVec);
 
 		disp.update();
 	}
