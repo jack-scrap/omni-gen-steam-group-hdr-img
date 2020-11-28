@@ -31,7 +31,7 @@ Poly polyMk(GLfloat* loc) {
 	}
 	glBufferData(GL_ARRAY_BUFFER, sizeof vtc, vtc, GL_STATIC_DRAW);
 
-	_->_prog = Prog("shad", "shad");
+	_->_prog = Prog("main", "solid");
 
 	_->_prog.use();
 
