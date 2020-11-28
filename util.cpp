@@ -13,3 +13,17 @@ std::string util::rd(std::string name) {
 
 	return cont;
 }
+
+std::vector<std::string> util::rdVec(std::string name) {
+	std::ifstream in;
+	in.open("./" + name);
+
+	std::vector<std::string> cont;
+	for (std::string l; std::getline(in, l);) {
+		cont.push_back(l);
+	}
+
+	in.close();
+
+	return cont;
+}

@@ -3,14 +3,18 @@
 #include <dlfcn.h>
 #include <thread>
 #include <SDL2/SDL.h>
+#include <vector>
 
 #include "scn.h"
-#include "char.h"
+#include "console.h"
 #include "util.h"
+
+unsigned int ln = 36;
 
 bool run = true;
 
 std::string buff = util::rd("asdf.py");
+std::vector<std::string> buffVec = util::rdVec("asdf.py");
 
 SDL_Event e;
 void kb() {
@@ -43,14 +47,14 @@ int main() {
 
 	TTF_Font* font = TTF_OpenFont("terminus.bdf", 24);
 
-	Char c('a', true, font, {
-		0.0, 0.0
+	Console console(buffVec, ln, {
+		800, 600
 	});
 
 	while (run) {
 		disp.clear(0.16, 0.16, 0.16);
 
-		c.draw();
+		console.print(buffVec);
 
 		polyDraw(&tri);
 

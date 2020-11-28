@@ -1,6 +1,6 @@
 CXIX := g++
 
-STATIC := main.cpp disp.cpp util.cpp mesh.cpp char.cpp
+STATIC := main.cpp disp.cpp util.cpp mesh.cpp bg.cpp char.cpp console.cpp
 DYNA := poly.cpp scn.cpp
 OBJ_STATIC := $(STATIC:.cpp=.o)
 OBJ_DYNA := $(DYNA:.cpp=.o)
@@ -45,8 +45,14 @@ util.o: util.cpp util.h
 mesh.o: mesh.cpp mesh.h
 	$(CXX) -c $< -o $@ -L. -lprog
 
+bg.o: bg.cpp bg.h
+	$(CXX) -c $< -o $@ -L. -lprog
+
 char.o: char.cpp char.h
 	$(CXX) -c $< -o $@ -L. -lprog
+
+console.o: console.cpp console.h
+	$(CXX) -c $< -o $@ -L. -lprog $(PY)
 
 main.o: main.cpp
 	$(CXX) -c $< -o $@ $(PY) -L. -lpoly -lscn -lprog

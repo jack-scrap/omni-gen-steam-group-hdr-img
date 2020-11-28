@@ -9,6 +9,7 @@
 
 namespace util {
 	std::string rd(std::string name);
+	std::vector<std::string> rdVec(std::string name);
 
 	namespace mesh {
 		std::vector<GLfloat> plane(glm::vec2 sz);
