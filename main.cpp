@@ -74,7 +74,7 @@ int main() {
 			}
 		}
 
-		disp.clear(col[false]);
+		disp.clear();
 
 		glEnable(GL_DEPTH_TEST);
 

@@ -1,7 +1,8 @@
 #include "disp.h"
 
-Disp::Disp(const char* title, glm::vec2 res) :
-	_res(res) {
+Disp::Disp(const char* title, glm::vec2 res, glm::vec3 bg) :
+	_res(res),
+	_bg(bg) {
 		SDL_Init(SDL_INIT_VIDEO);
 
 		SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
@@ -21,6 +22,8 @@ Disp::Disp(const char* title, glm::vec2 res) :
 			std::cerr << "GLEW failed to initialize" << std::endl;
 		}
 
+		glClearColor(bg[0] / 255.0, bg[1] / 255.0, bg[2] / 255.0, 1);
+
 		glEnable(GL_DEPTH_TEST);
 
 		glEnable(GL_BLEND);
@@ -31,8 +34,7 @@ Disp::Disp(const char* title, glm::vec2 res) :
 		open = true;
 	}
 
-void Disp::clear(glm::vec3 bg) {
-	glClearColor(bg[0] / 255.0, bg[1] / 255.0, bg[2] / 255.0, 1);
+void Disp::clear() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
