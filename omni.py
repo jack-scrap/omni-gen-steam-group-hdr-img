@@ -1,5 +1,7 @@
 from ctypes import *
 
+lib = CDLL('libscn.so')
+
 class Poly(Structure):
     _fields_ = [
         ("_loc", c_float * 2)
@@ -15,8 +17,6 @@ class Poly(Structure):
         self._ptr = cast(ptr, POINTER(Poly))
 
         self.mv(self._ptr.contents._loc)
-
-lib = CDLL('libscn.so')
 
 set = lib.set
 set.restype = c_void_p
