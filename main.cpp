@@ -55,6 +55,12 @@ int main() {
 
 							break;
 
+						case SDLK_RETURN:
+							console->_bg.push_back({});
+							console->_buff.push_back({});
+
+							break;
+
 						case SDLK_F1:
 							PyRun_SimpleString(buff.c_str());
 
