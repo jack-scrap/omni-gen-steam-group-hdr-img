@@ -16,11 +16,11 @@ Shad::Shad(std::string name, unsigned int stage) {
 		type = GL_VERTEX_SHADER;
 	}
 
-	std::string txt = util::fs::rd<std::string>("res/shad/" + name + "." + ext);
-	const char* src = txt.c_str();
+	std::string buff = util::fs::rd<std::string>("res/shad/" + name + "." + ext);
+	const char* src = buff.c_str();
 
 	GLint succ;
-	char buff[] = "";
+	char err[] = "";
 
 	_id = glCreateShader(type);
 	glShaderSource(_id, 1, &src, NULL);
@@ -28,9 +28,9 @@ Shad::Shad(std::string name, unsigned int stage) {
 
 	glGetShaderiv(_id, GL_COMPILE_STATUS, &succ);
 	if (!succ) {
-		glGetShaderInfoLog(_id, 512, NULL, buff);
+		glGetShaderInfoLog(_id, 512, NULL, err);
 		std::cout << "Error: " << std::endl;
-		std::cout << buff << std::endl;
+		std::cout << err << std::endl;
 	}
 }
 
