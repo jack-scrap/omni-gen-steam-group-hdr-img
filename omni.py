@@ -5,7 +5,7 @@ class Poly(Structure):
         ("_loc", c_float * 2)
     ]
 
-    def update(self, loc):
+    def mv(self, loc):
         for i in range(0, 2):
             self._loc[i] = loc[i]
 
@@ -14,7 +14,7 @@ class Poly(Structure):
     def __init__(self, ptr):
         self._ptr = cast(ptr, POINTER(Poly))
 
-        self.update(self._ptr.contents._loc)
+        self.mv(self._ptr.contents._loc)
 
 lib = CDLL('libscn.so')
 
