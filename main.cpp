@@ -10,15 +10,9 @@ bool run = true;
 
 std::string buff = rd("asdf.py");
 
-int main() {
-	void* handle = dlopen("./libpoly.so", RTLD_LAZY);
-
-	void (*polyDraw)(Poly* poly) = (void (*)(Poly*)) dlsym(handle, "polyDraw");
-
-	Py_Initialize();
-
-	SDL_Event e;
-	while (run) {
+SDL_Event e;
+void kb() {
+	while (true) {
 		while (SDL_PollEvent(&e)) {
 			if (e.type == SDL_KEYDOWN) {
 				if (e.key.keysym.sym == SDLK_F1) {
@@ -30,7 +24,20 @@ int main() {
 				run = false;
 			}
 		}
+	}
+}
 
+int main() {
+	void* handle = dlopen("./libpoly.so", RTLD_LAZY);
+
+	void (*polyDraw)(Poly* poly) = (void (*)(Poly*)) dlsym(handle, "polyDraw");
+
+	Py_Initialize();
+
+	std::thread input(kb);
+	input.detach();
+
+	while (run) {
 		disp.clear(0.16, 0.16, 0.16);
 
 		polyDraw(&tri);

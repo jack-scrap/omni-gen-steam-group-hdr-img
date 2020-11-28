@@ -50,6 +50,8 @@ void polyDraw(Poly* poly) {
 	glBindVertexArray(poly->_vao);
 	poly->_prog.use();
 
+	glUniform2fv(poly->_uniLoc, 1, poly->_loc);
+
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 
 	poly->_prog.unUse();
@@ -60,12 +62,6 @@ void set(Poly* poly, GLfloat* loc) {
 	for (int i = 0; i < 2; i++) {
 		poly->_loc[i] = loc[i];
 	}
-
-	poly->_prog.use();
-
-	glUniform2fv(poly->_uniLoc, 1, poly->_loc);
-
-	poly->_prog.unUse();
 
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 }
