@@ -32,8 +32,8 @@ Disp::Disp(const char* title, int wd, int ht) :
 	open = true;
 }
 
-void Disp::clear(float r, float g, float b) {
-	glClearColor(r, g, b, 1);
+void Disp::clear(glm::vec3 bg) {
+	glClearColor(bg[0] / 255.0, bg[1] / 255.0, bg[2] / 255.0, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 

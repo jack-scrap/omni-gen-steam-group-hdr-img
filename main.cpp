@@ -46,11 +46,17 @@ int main() {
 	void (*polyDraw)(Poly* poly) = (void (*)(Poly*)) dlsym(handle, "polyDraw");
 
 	while (run) {
-		disp.clear(0.16, 0.16, 0.16);
+		disp.clear(col[false]);
 
-		console.print(buffVec);
+		glEnable(GL_DEPTH_TEST);
+
+		glViewport(console._res[0], 0, disp._wd - console._res[0], disp._ht);
 
 		polyDraw(&tri);
+
+		glViewport(0, 0, console._res[0], disp._ht);
+
+		console.print(buffVec);
 
 		disp.update();
 	}

@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include <GL/glew.h>
+#include <glm/glm.hpp>
 #include <SDL2/SDL.h>
 
 class Disp {
@@ -21,7 +22,7 @@ class Disp {
 
 		Disp(const char* title, int wd, int ht);
 
-		void clear(float r, float g, float b);
+		void clear(glm::vec3 bg);
 
 		void update();
 
