@@ -39,7 +39,7 @@ Console::Console(std::vector<std::string> buff, unsigned int ln, glm::vec2 scr) 
 	Py_Initialize();
 }
 
-void Console::print(std::vector<std::string> buff) {
+void Console::print() {
 	glDisable(GL_DEPTH_TEST);
 
 	for (int l = 0; l < _buff.size(); l++) {

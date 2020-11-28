@@ -20,5 +20,5 @@ class Console {
 
 		Console(std::vector<std::string> buff, unsigned int ln, glm::vec2 scr);
 
-		void print(std::vector<std::string> buff);
+		void print();
 };
