@@ -8,7 +8,7 @@ class Poly(Structure):
     ]
 
     def mv(self, loc):
-        for i in range(0, 2):
+        for i in range(2):
             self._loc[i] = loc[i]
 
         set(self._ptr, self._loc)
