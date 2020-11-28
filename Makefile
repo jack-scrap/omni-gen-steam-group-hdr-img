@@ -1,6 +1,6 @@
-CXX := g++
+CXIX := g++
 
-STATIC := main.cpp disp.cpp util.cpp
+STATIC := main.cpp disp.cpp util.cpp mesh.cpp char.cpp
 DYNA := poly.cpp scn.cpp
 OBJ_STATIC := $(STATIC:.cpp=.o)
 OBJ_DYNA := $(DYNA:.cpp=.o)
@@ -42,11 +42,17 @@ disp.o: disp.cpp disp.h
 util.o: util.cpp util.h
 	$(CXX) -c $< -o $@
 
+mesh.o: mesh.cpp mesh.h
+	$(CXX) -c $< -o $@ -L. -lprog
+
+char.o: char.cpp char.h
+	$(CXX) -c $< -o $@ -L. -lprog
+
 main.o: main.cpp
-	$(CXX) -c $< -o $@ $(PY) -L. -lpoly -lscn
+	$(CXX) -c $< -o $@ $(PY) -L. -lpoly -lscn -lprog
 
 $(PROG): $(OBJ_STATIC)
-	$(CXX) $^ $(PY) -L. -lpoly -lscn -o $(PROG) $(GL) $(SDL)
+	$(CXX) $^ $(PY) -L. -lpoly -lscn -lprog -o $(PROG) $(GL) $(SDL)
 
 clean:
 	rm *.o *.so $(PROG)

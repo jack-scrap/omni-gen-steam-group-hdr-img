@@ -2,8 +2,10 @@
 #include <Python.h>
 #include <dlfcn.h>
 #include <thread>
+#include <SDL2/SDL.h>
 
 #include "scn.h"
+#include "char.h"
 #include "util.h"
 
 bool run = true;
@@ -37,8 +39,18 @@ int main() {
 	std::thread input(kb);
 	input.detach();
 
+	TTF_Init();
+
+	TTF_Font* font = TTF_OpenFont("terminus.bdf", 24);
+
+	Char c('a', true, font, {
+		0.0, 0.0
+	});
+
 	while (run) {
 		disp.clear(0.16, 0.16, 0.16);
+
+		c.draw();
 
 		polyDraw(&tri);
 
