@@ -6,7 +6,7 @@
 Console::Console(std::vector<std::string> buff, unsigned int ln, glm::vec2 scr) {
 	TTF_Init();
 
-	TTF_Font* font = TTF_OpenFont("terminus.bdf", state::sz[1]);
+	TTF_Font* font = TTF_OpenFont("res/terminus.bdf", state::sz[1]);
 
 	for (int l = 0; l < buff.size(); l++) {
 		std::vector<Bg> str;
