@@ -1,7 +1,7 @@
 CXX := g++
 
 STATIC := main.cpp disp.cpp util.cpp
-DYNA := poly.cpp hjkl.cpp
+DYNA := poly.cpp scn.cpp
 OBJ_STATIC += $(STATIC:.cpp=.o)
 OBJ_DYNA += $(DYNA:.cpp=.o)
 
@@ -16,7 +16,7 @@ LDFLAGS += $(PY)
 
 PROG = a.out
 
-all: libprog.so libpoly.so libhjkl.so $(PROG)
+all: libprog.so libpoly.so libscn.so $(PROG)
 
 prog.o: prog.cpp prog.h
 	$(CXX) -c -fPIC $< -o $@
@@ -30,10 +30,10 @@ poly.o: poly.cpp poly.h
 libpoly.so: poly.o
 	$(CXX) $< -shared -o $@ $(GL)
 
-hjkl.o: hjkl.cpp hjkl.h
+scn.o: scn.cpp scn.h
 	$(CXX) -c -fPIC $< -o $@
 
-libhjkl.so: hjkl.o
+libscn.so: scn.o
 	$(CXX) $< -shared -o $@ -L. -lpoly -lprog
 
 disp.o: disp.cpp disp.h
@@ -43,10 +43,10 @@ util.o: util.cpp util.h
 	$(CXX) -c $< -o $@
 
 main.o: main.cpp
-	$(CXX) -c $< -o $@ $(PY) -L. -lpoly -lhjkl
+	$(CXX) -c $< -o $@ $(PY) -L. -lpoly -lscn
 
 $(PROG): $(OBJ_STATIC)
-	$(CXX) $^ $(PY) -L. -lpoly -lhjkl -o $(PROG) $(GL) $(SDL)
+	$(CXX) $^ $(PY) -L. -lpoly -lscn -o $(PROG) $(GL) $(SDL)
 
 clean:
 	rm *.o *.so $(PROG)

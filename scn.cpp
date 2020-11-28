@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "hjkl.h"
+#include "scn.h"
 
 Disp disp("asdf", 800, 600);
 

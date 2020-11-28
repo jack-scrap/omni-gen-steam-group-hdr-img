@@ -3,7 +3,7 @@
 #include <dlfcn.h>
 #include <thread>
 
-#include "hjkl.h"
+#include "scn.h"
 #include "util.h"
 
 bool run = true;

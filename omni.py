@@ -16,7 +16,7 @@ class Poly(Structure):
 
         self.update(self._ptr.contents._loc)
 
-lib = CDLL('libhjkl.so')
+lib = CDLL('libscn.so')
 
 set = lib.set
 set.restype = c_void_p

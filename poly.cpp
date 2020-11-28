@@ -5,7 +5,7 @@
 #include <GL/glew.h>
 
 #include "poly.h"
-#include "hjkl.h"
+#include "scn.h"
 
 Poly polyMk(GLfloat* loc) {
 	Poly* _ = (Poly*) malloc(sizeof (Poly));
