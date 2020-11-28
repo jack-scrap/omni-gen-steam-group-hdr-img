@@ -1,6 +1,11 @@
 #include "util.h"
 
-std::string util::rd(std::string name) {
+template <typename T>
+T util::fs::rd(std::string name) {
+}
+
+template <>
+std::string util::fs::rd<std::string>(std::string name) {
 	std::ifstream in;
 	in.open(name);
 
@@ -14,7 +19,8 @@ std::string util::rd(std::string name) {
 	return cont;
 }
 
-std::vector<std::string> util::rdVec(std::string name) {
+template <>
+std::vector<std::string> util::fs::rd<std::vector<std::string>>(std::string name) {
 	std::ifstream in;
 	in.open("./" + name);
 

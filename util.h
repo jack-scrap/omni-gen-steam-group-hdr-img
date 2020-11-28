@@ -8,8 +8,16 @@
 #include <glm/glm.hpp>
 
 namespace util {
-	std::string rd(std::string name);
-	std::vector<std::string> rdVec(std::string name);
+	namespace fs {
+		template <typename T>
+		T rd(std::string name);
+
+		template <>
+		std::string rd(std::string name);
+
+		template <>
+		std::vector<std::string> rd(std::string name);
+	}
 
 	namespace mesh {
 		std::vector<GLfloat> plane(glm::vec2 sz);

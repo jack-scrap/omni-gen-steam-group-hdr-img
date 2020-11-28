@@ -13,8 +13,8 @@ unsigned int ln = 36;
 
 bool run = true;
 
-std::string buff = util::rd("asdf.py");
-std::vector<std::string> buffVec = util::rdVec("asdf.py");
+std::string buff = util::fs::rd<std::string>("asdf.py");
+std::vector<std::string> buffVec = util::fs::rd<std::vector<std::string>>("asdf.py");
 
 SDL_Event e;
 void kb() {
