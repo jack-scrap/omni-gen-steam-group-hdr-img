@@ -9,7 +9,7 @@ class Shad {
 	public:
 		GLuint _id;
 
-		Shad(std::string name, int stage);
+		Shad(std::string name, unsigned int stage);
 };
 
 class Prog {

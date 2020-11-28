@@ -4,7 +4,7 @@
 #include "prog.h"
 #include "util.h"
 
-Shad::Shad(std::string name, int stage) {
+Shad::Shad(std::string name, unsigned int stage) {
 	std::string ext;
 	GLenum type;
 	if (stage) {
