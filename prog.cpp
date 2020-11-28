@@ -15,7 +15,7 @@ Shad::Shad(std::string name, unsigned int stage) {
 		type = GL_VERTEX_SHADER;
 	}
 
-	std::string txt = rd("res/shad/" + name + "." + ext);
+	std::string txt = util::rd("res/shad/" + name + "." + ext);
 	const char* src = txt.c_str();
 
 	GLint succ;

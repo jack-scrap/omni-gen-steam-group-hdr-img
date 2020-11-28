@@ -8,7 +8,7 @@
 
 bool run = true;
 
-std::string buff = rd("asdf.py");
+std::string buff = util::rd("asdf.py");
 
 SDL_Event e;
 void kb() {

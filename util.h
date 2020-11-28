@@ -3,4 +3,6 @@
 #include <string>
 #include <fstream>
 
-std::string rd(std::string name);
+namespace util {
+	std::string rd(std::string name);
+}

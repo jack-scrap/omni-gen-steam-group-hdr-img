@@ -1,6 +1,6 @@
 #include "util.h"
 
-std::string rd(std::string name) {
+std::string util::rd(std::string name) {
 	std::ifstream in;
 	in.open(name);
 
