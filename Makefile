@@ -2,8 +2,8 @@ CXX := g++
 
 STATIC := main.cpp disp.cpp util.cpp
 DYNA := poly.cpp scn.cpp
-OBJ_STATIC += $(STATIC:.cpp=.o)
-OBJ_DYNA += $(DYNA:.cpp=.o)
+OBJ_STATIC := $(STATIC:.cpp=.o)
+OBJ_DYNA := $(DYNA:.cpp=.o)
 
 LIB = -L. $(DYNA:%.cpp=-l%)
 SDL = -lSDL2 -lSDL2_ttf
