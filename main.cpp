@@ -28,7 +28,7 @@ void kb() {
 }
 
 int main() {
-	void* handle = dlopen("./libpoly.so", RTLD_LAZY);
+	void* handle = dlopen("libpoly.so", RTLD_LAZY);
 
 	void (*polyDraw)(Poly* poly) = (void (*)(Poly*)) dlsym(handle, "polyDraw");
 
