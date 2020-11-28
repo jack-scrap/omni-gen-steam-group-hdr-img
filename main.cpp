@@ -35,7 +35,7 @@ void kb() {
 
 int main() {
 	Console console(buffVec, ln, {
-		disp._wd, disp._ht
+		disp._res[0], disp._res[1]
 	});
 
 	std::thread input(kb);
@@ -50,11 +50,11 @@ int main() {
 
 		glEnable(GL_DEPTH_TEST);
 
-		glViewport(console._res[0], 0, disp._wd - console._res[0], disp._ht);
+		glViewport(console._res[0], 0, disp._res[0] - console._res[0], disp._res[1]);
 
 		polyDraw(&tri);
 
-		glViewport(0, 0, console._res[0], disp._ht);
+		glViewport(0, 0, console._res[0], disp._res[1]);
 
 		console.print(buffVec);
 
