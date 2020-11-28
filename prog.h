@@ -9,14 +9,14 @@ class Shad {
 	public:
 		GLuint _id;
 
-		Shad(int stage);
+		Shad(std::string name, int stage);
 };
 
 class Prog {
 	public:
 		GLuint id;
 
-		Prog();
+		Prog(std::string nameVtx, std::string nameFrag);
 
 		void use();
 

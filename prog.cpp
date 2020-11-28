@@ -4,7 +4,7 @@
 #include "prog.h"
 #include "util.h"
 
-Shad::Shad(int stage) {
+Shad::Shad(std::string name, int stage) {
 	std::string ext;
 	GLenum type;
 	if (stage) {
@@ -15,7 +15,7 @@ Shad::Shad(int stage) {
 		type = GL_VERTEX_SHADER;
 	}
 
-	std::string txt = rd("shad." + ext);
+	std::string txt = rd(name + "." + ext);
 	const char* src = txt.c_str();
 
 	GLint succ;
@@ -33,11 +33,11 @@ Shad::Shad(int stage) {
 	}
 }
 
-Prog::Prog() {
+Prog::Prog(std::string nameVtx, std::string nameFrag) {
 	// shader
 	Shad
-		vtx(0),
-		frag(1);
+		vtx(nameVtx, 0),
+		frag(nameFrag, 1);
 
 	// program
 	id = glCreateProgram();
