@@ -3,16 +3,15 @@
 #include <thread>
 #include <chrono>
 #include <GL/glew.h>
+#include <glm/gtc/type_ptr.hpp>
 
 #include "poly.h"
 #include "scn.h"
 
-Poly polyMk(GLfloat* loc) {
+Poly polyMk(glm::vec3 loc) {
 	Poly* _ = (Poly*) malloc(sizeof (Poly));
 
-	for (int i = 0; i < 2; i++) {
-		_->_loc[i] = loc[i];
-	}
+	_->_loc = loc;
 
 	glGenVertexArrays(1, &_->_vao);
 	glBindVertexArray(_->_vao);
@@ -41,7 +40,7 @@ Poly polyMk(GLfloat* loc) {
 
 	_->_uniLoc = glGetUniformLocation(_->_prog.id, "loc");
 
-	glUniform2fv(_->_uniLoc, 1, _->_loc);
+	glUniform3fv(_->_uniLoc, 1, glm::value_ptr(_->_loc));
 
 	return *_;
 }
@@ -50,27 +49,10 @@ void polyDraw(Poly* poly) {
 	glBindVertexArray(poly->_vao);
 	poly->_prog.use();
 
-	glUniform2fv(poly->_uniLoc, 1, poly->_loc);
+	glUniform3fv(poly->_uniLoc, 1, glm::value_ptr(poly->_loc));
 
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 
 	poly->_prog.unUse();
 	glBindVertexArray(0);
 }
-
-/* void set(Poly* poly, GLfloat* loc) { */
-/* 	unsigned int fps = 10; */
-
-/* 	float step[2]; */
-/* 	for (int i = 0; i < 2; i++) { */
-/* 		step[i] = loc[i] / fps; */
-/* 	} */
-
-/* 	for (int t = 0; t < fps; t++) { */
-/* 		for (int i = 0; i < 2; i++) { */
-/* 			poly->_loc[i] += step[i]; */
-/* 		} */
-
-/* 		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / fps)); */
-/* 	} */
-/* } */

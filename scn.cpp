@@ -10,9 +10,7 @@ Disp disp("asdf", {
 	800 + consoleWd, 600
 }, col[false]);
 
-GLfloat loc[3] = {
-	0.0, 0.0, 0.0
-};
+glm::vec3 loc = glm::vec3(0.0, 0.0, 0.0);
 
 Poly tri = polyMk(loc);
 

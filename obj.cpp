@@ -12,15 +12,12 @@
 #include "scn.h"
 #include "util.h"
 
-Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, GLfloat* loc) {
+Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, glm::vec3 loc) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
 	_->_noIdc = noIdc;
-
-	for (int i = 0; i < 3; i++) {
-		_->_loc[i] = loc[i];
-	}
+	_->_loc = loc;
 
 	// vertex
 	glGenVertexArrays(1, &_->_id[VAO]);
@@ -38,9 +35,7 @@ Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, G
 	_->_proj = glm::perspective(glm::radians(45.0), 800.0 / 600.0, 0.1, 100.0);
 	_->_view = glm::lookAt(glm::vec3(3, 3, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 	_->_model = glm::mat4(1.0);
-	_->_model = glm::translate(_->_model, {
-		_->_loc[0], _->_loc[1], _->_loc[2]
-	});
+	_->_model = glm::translate(_->_model, _->_loc);
 
 	_->_prog = Prog("main", "dir");
 
@@ -65,13 +60,11 @@ Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, G
 	return *_;
 }
 
-Obj objMk(std::string name, GLfloat* loc) {
+Obj objMk(std::string name, glm::vec3 loc) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
-	for (int i = 0; i < 3; i++) {
-		_->_loc[i] = loc[i];
-	}
+	_->_loc = loc;
 
 	// vertex
 	glGenVertexArrays(1, &_->_id[VAO]);
@@ -93,9 +86,7 @@ Obj objMk(std::string name, GLfloat* loc) {
 	_->_proj = glm::perspective(glm::radians(45.0), 800.0 / 600.0, 0.1, 100.0),
 	_->_view = glm::lookAt(glm::vec3(3, 3, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0)),
 	_->_model = glm::mat4(1.0);
-	_->_model = glm::translate(_->_model, {
-		_->_loc[0], _->_loc[1], _->_loc[2]
-	});
+	_->_model = glm::translate(_->_model, _->_loc);
 
 	_->_prog = Prog("main", "dir");
 

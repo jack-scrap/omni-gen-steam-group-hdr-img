@@ -7,7 +7,7 @@
 #include "prog.h"
 
 typedef struct {
-	GLfloat _loc[2];
+	glm::vec3 _loc;
 
 	GLuint
 		_vao,
@@ -21,8 +21,6 @@ typedef struct {
 	Prog _prog;
 } Poly;
 
-Poly polyMk(GLfloat* loc);
+Poly polyMk(glm::vec3 loc);
 
 extern "C" void polyDraw(Poly* poly);
-
-/* extern "C" void set(Poly* poly, GLfloat* loc); */

@@ -27,7 +27,7 @@ enum uni {
 };
 
 typedef struct {
-	GLfloat _loc[3];
+	glm::vec3 _loc;
 
 	GLuint _id[3];
 
@@ -46,9 +46,9 @@ typedef struct {
 	unsigned int _noIdc;
 } Obj;
 
-Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, GLfloat* loc);
+Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, glm::vec3 loc);
 
-Obj objMk(std::string name, GLfloat* loc);
+Obj objMk(std::string name, glm::vec3 loc);
 
 extern "C" void objDraw(Obj* obj);
 
