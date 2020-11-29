@@ -37,7 +37,7 @@ Obj objMk(GLfloat* vtc, unsigned int noVtc, unsigned short* idc, unsigned int no
 	_->_view = glm::lookAt(glm::vec3(3, 3, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0)),
 	_->_model = glm::mat4(1.0f);
 
-	_->_prog = Prog("main", "solid");
+	_->_prog = Prog("main", "dir");
 
 	_->_prog.use();
 
