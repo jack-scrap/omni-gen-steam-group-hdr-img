@@ -3,7 +3,7 @@
 in vec3 _pos;
 out vec4 col;
 
-bool active = true;
+uniform bool active;
 
 vec3
 	ambient = vec3(0.2, 0.2, 0.2),

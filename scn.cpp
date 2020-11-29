@@ -24,4 +24,4 @@ GLushort idc[] = {
 	0, 1, 2
 };
 
-Obj obj = objMk("wheel", loc);
+Obj obj = objMk("wheel", false, loc);

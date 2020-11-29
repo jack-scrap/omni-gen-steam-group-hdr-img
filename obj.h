@@ -23,7 +23,8 @@ enum uni {
 	VIEW,
 	PROJ,
 
-	LOC
+	LOC,
+	ACTIVE
 };
 
 typedef struct {
@@ -34,7 +35,7 @@ typedef struct {
 	GLint
 		_attr[1],
 
-		_uni[4];
+		_uni[5];
 
 	Prog _prog;
 
@@ -46,9 +47,9 @@ typedef struct {
 	unsigned int _noIdc;
 } Obj;
 
-Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, glm::vec3 loc = glm::vec3(0.0, 0.0, 0.0));
+Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, bool active, glm::vec3 loc = glm::vec3(0.0, 0.0, 0.0));
 
-Obj objMk(std::string name, glm::vec3 loc = glm::vec3(0.0, 0.0, 0.0));
+Obj objMk(std::string name, bool active, glm::vec3 loc = glm::vec3(0.0, 0.0, 0.0));
 
 extern "C" void objDraw(Obj* obj);
 
