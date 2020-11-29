@@ -12,7 +12,9 @@
 class Console {
 	public:
 		std::vector<std::vector<Bg>> _bg;
-		std::vector<std::vector<Char>> _buff;
+		std::vector<std::vector<Char>> _txt;
+
+		std::vector<std::string> _buff;
 
 		Poly* bg;
 
