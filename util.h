@@ -19,7 +19,16 @@ namespace util {
 		std::vector<std::string> rd(std::string name);
 	}
 
+	namespace str {
+		std::vector<std::string> split(std::string buff, char delim);
+	}
+
 	namespace mesh {
 		std::vector<GLfloat> plane(glm::vec2 sz);
+
+		namespace rd {
+			std::vector<GLfloat> vtc(std::string name);
+			std::vector<GLushort> idc(std::string name);
+		}
 	}
 }
