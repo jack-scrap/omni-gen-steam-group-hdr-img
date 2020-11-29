@@ -33,10 +33,10 @@ int main() {
 		while (SDL_PollEvent(&e)) {
 			if (e.type == SDL_KEYDOWN) {
 				if (e.key.keysym.sym >= SDLK_a && e.key.keysym.sym <= SDLK_z) {
-					console->_bg.back().push_back(Bg(true, {
+					console->_bg.back().push_back(Bg(false, {
 						console->_bg.back().size(), console->_bg.size() - 1
 					}));
-					console->_buff.back().push_back(Char((char) e.key.keysym.sym, true, font, {
+					console->_buff.back().push_back(Char((char) e.key.keysym.sym, false, font, {
 						console->_buff.back().size(), console->_bg.size() - 1
 					}));
 				} else {
