@@ -8,20 +8,19 @@
 #include "scn.h"
 #include "console.h"
 #include "util.h"
-
-unsigned int ln = 36;
+#include "state.h"
 
 bool run = true;
 
 std::string buff = util::fs::rd<std::string>("asdf.py");
 std::vector<std::string> buffVec = util::fs::rd<std::vector<std::string>>("asdf.py");
 
+glm::vec2 scr = glm::vec2(800, 600);
+
 Console* console;
 
 int main() {
-	Console* console = new Console(buffVec, ln, {
-		disp._res[0], disp._res[1]
-	});
+	Console* console = new Console(buffVec, state::ln, disp._res);
 
 	void* handle = dlopen("libpoly.so", RTLD_LAZY);
 
@@ -78,11 +77,11 @@ int main() {
 
 		glEnable(GL_DEPTH_TEST);
 
-		glViewport(console->_res[0], 0, disp._res[0] - console->_res[0], disp._res[1]);
+		glViewport(console->_res[0], 0, console->_res[0] + scr[0], scr[1]);
 
 		polyDraw(&tri);
 
-		glViewport(0, 0, console->_res[0], disp._res[1]);
+		glViewport(0, 0, console->_res[0], scr[1]);
 
 		console->print();
 

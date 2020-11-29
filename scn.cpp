@@ -1,10 +1,13 @@
 #include <iostream>
 
 #include "scn.h"
+#include "state.h"
 #include "col.h"
 
+unsigned int consoleWd = state::ln * state::sz[0];
+
 Disp disp("asdf", {
-	800, 600
+	800 + consoleWd, 600
 }, col[false]);
 
 GLfloat loc[2] = {
