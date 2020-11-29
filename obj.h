@@ -2,6 +2,7 @@
 
 #include <cstdlib>
 #include <GL/glew.h>
+#include <glm/glm.hpp>
 
 #include "disp.h"
 #include "prog.h"
@@ -17,6 +18,10 @@ enum attr {
 };
 
 enum uni {
+	MODEL,
+	VIEW,
+	PROJ,
+
 	LOC
 };
 
@@ -28,9 +33,14 @@ typedef struct {
 	GLint
 		_attr[1],
 
-		_uni[1];
+		_uni[4];
 
 	Prog _prog;
+
+	glm::mat4
+		_proj,
+		_view,
+		_model;
 
 	unsigned int _noIdc;
 } Obj;
