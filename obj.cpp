@@ -35,9 +35,12 @@ Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, G
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, noIdc * sizeof (GLushort), idc, GL_STATIC_DRAW);
 
 	// matrix
-	_->_proj = glm::perspective(glm::radians(45.0), 800.0 / 600.0, 0.1, 100.0),
-		_->_view = glm::lookAt(glm::vec3(3, 3, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0)),
-		_->_model = glm::mat4(1.0);
+	_->_proj = glm::perspective(glm::radians(45.0), 800.0 / 600.0, 0.1, 100.0);
+	_->_view = glm::lookAt(glm::vec3(3, 3, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	_->_model = glm::mat4(1.0);
+	_->_model = glm::translate(_->_model, {
+		_->_loc[0], _->_loc[1], _->_loc[2]
+	});
 
 	_->_prog = Prog("main", "dir");
 
@@ -58,8 +61,6 @@ Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, G
 	glUniformMatrix4fv(_->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
 	glUniformMatrix4fv(_->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
 	glUniformMatrix4fv(_->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
-
-	glUniform3fv(_->_uni[LOC], 1, _->_loc);
 
 	return *_;
 }
@@ -92,6 +93,9 @@ Obj objMk(std::string name, GLfloat* loc) {
 	_->_proj = glm::perspective(glm::radians(45.0), 800.0 / 600.0, 0.1, 100.0),
 	_->_view = glm::lookAt(glm::vec3(3, 3, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0)),
 	_->_model = glm::mat4(1.0);
+	_->_model = glm::translate(_->_model, {
+		_->_loc[0], _->_loc[1], _->_loc[2]
+	});
 
 	_->_prog = Prog("main", "dir");
 
@@ -113,13 +117,12 @@ Obj objMk(std::string name, GLfloat* loc) {
 	glUniformMatrix4fv(_->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
 	glUniformMatrix4fv(_->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
 
-	glUniform3fv(_->_uni[LOC], 1, _->_loc);
-
 	return *_;
 }
 
 void objDraw(Obj* obj) {
 	glBindVertexArray(obj->_id[VAO]);
+
 	obj->_prog.use();
 
 	obj->_model = glm::rotate(obj->_model, 0.01f, glm::vec3(0, 1, 0));
@@ -128,10 +131,29 @@ void objDraw(Obj* obj) {
 	glUniformMatrix4fv(obj->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(obj->_view));
 	glUniformMatrix4fv(obj->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(obj->_proj));
 
-	glUniform3fv(obj->_uni[LOC], 1, obj->_loc);
-
 	glDrawElements(GL_TRIANGLES, obj->_noIdc, GL_UNSIGNED_SHORT, (GLvoid*) 0);
 
 	obj->_prog.unUse();
 	glBindVertexArray(0);
+}
+
+void set(Obj* obj, GLfloat* loc) {
+	unsigned int fps = 10;
+
+	float step[3];
+	for (int i = 0; i < 3; i++) {
+		step[i] = loc[i] / fps;
+	}
+
+	for (int t = 0; t < fps; t++) {
+		for (int i = 0; i < 3; i++) {
+			obj->_loc[i] += step[i];
+		}
+
+		obj->_model = glm::translate(glm::mat4(1.0), {
+			obj->_loc[0], obj->_loc[1], obj->_loc[2]
+		});
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / fps));
+	}
 }

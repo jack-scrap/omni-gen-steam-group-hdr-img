@@ -25,4 +25,4 @@ Poly polyMk(GLfloat* loc);
 
 extern "C" void polyDraw(Poly* poly);
 
-extern "C" void set(Poly* poly, GLfloat* loc);
+/* extern "C" void set(Poly* poly, GLfloat* loc); */

@@ -51,3 +51,5 @@ Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, G
 Obj objMk(std::string name, GLfloat* loc);
 
 extern "C" void objDraw(Obj* obj);
+
+extern "C" void set(Obj* obj, GLfloat* loc);

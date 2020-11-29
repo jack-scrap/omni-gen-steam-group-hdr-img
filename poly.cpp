@@ -58,19 +58,19 @@ void polyDraw(Poly* poly) {
 	glBindVertexArray(0);
 }
 
-void set(Poly* poly, GLfloat* loc) {
-	unsigned int fps = 10;
+/* void set(Poly* poly, GLfloat* loc) { */
+/* 	unsigned int fps = 10; */
 
-	float step[2];
-	for (int i = 0; i < 2; i++) {
-		step[i] = loc[i] / fps;
-	}
+/* 	float step[2]; */
+/* 	for (int i = 0; i < 2; i++) { */
+/* 		step[i] = loc[i] / fps; */
+/* 	} */
 
-	for (int t = 0; t < fps; t++) {
-		for (int i = 0; i < 2; i++) {
-			poly->_loc[i] += step[i];
-		}
+/* 	for (int t = 0; t < fps; t++) { */
+/* 		for (int i = 0; i < 2; i++) { */
+/* 			poly->_loc[i] += step[i]; */
+/* 		} */
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / fps));
-	}
-}
+/* 		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / fps)); */
+/* 	} */
+/* } */

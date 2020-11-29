@@ -4,7 +4,7 @@ sys.path.insert(1, '.')
 
 import omni
 
-tri = omni.Poly(omni.lib.tri)
+tri = omni.Obj(omni.lib.obj)
 
 for _ in range(3):
     tri.mv([
