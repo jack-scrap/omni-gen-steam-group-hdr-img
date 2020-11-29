@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <GL/glew.h>
 #include <glm/glm.hpp>
+#include <string>
 
 #include "disp.h"
 #include "prog.h"
@@ -45,6 +46,6 @@ typedef struct {
 	unsigned int _noIdc;
 } Obj;
 
-Obj objMk(GLfloat* vtc, unsigned int noVtc, unsigned short* idc, unsigned int noIdc, GLfloat* loc);
+Obj objMk(std::string name, GLfloat* loc);
 
 extern "C" void objDraw(Obj* obj);

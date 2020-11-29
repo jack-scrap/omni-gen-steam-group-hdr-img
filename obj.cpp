@@ -12,11 +12,9 @@
 #include "scn.h"
 #include "util.h"
 
-Obj objMk(GLfloat* vtc, unsigned int noVtc, unsigned short* idc, unsigned int noIdc, GLfloat* loc) {
+Obj objMk(std::string name, GLfloat* loc) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
-
-	_->_noIdc = noIdc;
 
 	for (int i = 0; i < 3; i++) {
 		_->_loc[i] = loc[i];
@@ -28,26 +26,15 @@ Obj objMk(GLfloat* vtc, unsigned int noVtc, unsigned short* idc, unsigned int no
 
 	glGenBuffers(1, &_->_id[VBO]);
 	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);
-	std::vector<GLfloat> asdf = {
-		0.0, 0.0, 0.0,
-		1.0, 0.0, 0.0,
-		0.0, 1.0, 0.0,
-		1.0, 1.0, 0.0
-	};
-	glBufferData(GL_ARRAY_BUFFER, asdf.size() * sizeof (GLfloat), &vtc[0], GL_STATIC_DRAW);
+	std::vector<GLfloat> vtc = util::mesh::rd::vtc("wheel");
+	glBufferData(GL_ARRAY_BUFFER, vtc.size() * sizeof (GLfloat), &vtc[0], GL_STATIC_DRAW);
 
 	glGenBuffers(1, &_->_id[IBO]);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _->_id[IBO]);
-	std::vector<GLushort> hjkl = {
-		0, 1, 2,
-		2, 1, 3
-	};
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, hjkl.size() * sizeof (GLushort), &hjkl[0], GL_STATIC_DRAW);
+	std::vector<GLushort> idc = util::mesh::rd::idc("wheel");
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, idc.size() * sizeof (GLushort), &idc[0], GL_STATIC_DRAW);
 
-	std::vector<GLushort> qwer = util::mesh::rd::idc("wheel");
-	for (const auto& _ : qwer) {
-		std::cout << _ << std::endl;
-	}
+	_->_noIdc = idc.size();
 
 	// matrix
 	_->_proj = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f),

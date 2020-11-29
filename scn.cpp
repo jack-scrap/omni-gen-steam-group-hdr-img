@@ -16,16 +16,4 @@ GLfloat loc[3] = {
 
 Poly tri = polyMk(loc);
 
-GLfloat vtc[2 * 3 * 3] = {
-	0.0, 0.0, 0.0,
-	1.0, 0.0, 0.0,
-	0.0, 1.0, 0.0,
-	1.0, 1.0, 0.0
-};
-
-GLushort idc[] = {
-	0, 1, 2,
-	2, 1, 3
-};
-
-Obj obj = objMk(vtc, sizeof vtc / sizeof *vtc, idc, sizeof idc / sizeof *idc, loc);
+Obj obj = objMk("wheel", loc);
