@@ -4,7 +4,11 @@
 #include "state.h"
 
 Console::Console(std::vector<std::string> buff, unsigned int ln, glm::vec2 scr) :
-	_buff(buff) {
+	_buff(buff),
+	_cursor(true, {
+		buff.back().size(), buff.size() - 1
+	}) {
+		// font
 		TTF_Init();
 
 		TTF_Font* font = TTF_OpenFont("res/terminus.bdf", state::sz[1]);
@@ -26,8 +30,8 @@ Console::Console(std::vector<std::string> buff, unsigned int ln, glm::vec2 scr) 
 
 			for (int i = 0; i < buff[l].size(); i++) {
 				str.push_back(Char(buff[l][i], true, font, {
-							i, l
-							}));
+					i, l
+				}));
 			}
 
 			_txt.push_back(str);
@@ -41,6 +45,10 @@ Console::Console(std::vector<std::string> buff, unsigned int ln, glm::vec2 scr) 
 	}
 
 void Console::print() {
+	_cursor = Bg(true, {
+		_buff.back().size(), _buff.size() - 1
+	});
+
 	glDisable(GL_DEPTH_TEST);
 
 	for (int l = 0; l < _buff.size(); l++) {
@@ -49,4 +57,6 @@ void Console::print() {
 			_txt[l][i].draw();
 		}
 	}
+
+	_cursor.draw();
 }

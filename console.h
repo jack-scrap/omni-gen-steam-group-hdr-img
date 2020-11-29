@@ -16,6 +16,8 @@ class Console {
 
 		std::vector<std::string> _buff;
 
+		Bg _cursor;
+
 		Poly* bg;
 
 		glm::vec2 _res;
