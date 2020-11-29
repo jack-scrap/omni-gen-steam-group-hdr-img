@@ -77,7 +77,7 @@ int main() {
 
 		glEnable(GL_DEPTH_TEST);
 
-		glViewport(console->_res[0], 0, console->_res[0] + scr[0], scr[1]);
+		glViewport(console->_res[0], 0, scr[0], scr[1]);
 
 		polyDraw(&tri);
 
