@@ -6,7 +6,7 @@
 
 Bg::Bg(bool active, glm::vec2 loc) :
 	Mesh(util::mesh::plane(glm::vec2(state::step[0], state::step[1])), "text", "text", glm::vec2(-1.0, 1.0 - 0.1) + glm::vec2(loc[0] * state::step[0], -(loc[1] * state::step[1]))) {
-		SDL_Surface* surf = SDL_CreateRGBSurface(0, rect.w, rect.h, 4 * sizeof (long int), 0xff000000, 0x00ff0000, 0x0000ff00, 0x000000ff);
+		SDL_Surface* surf = SDL_CreateRGBSurface(0, rect.w, rect.h, 4 * sizeof (long int), 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
 
 		SDL_Color col = colS[active];
 		SDL_FillRect(surf, &rect, SDL_MapRGBA(surf->format, col.r, col.g, col.b, col.a));

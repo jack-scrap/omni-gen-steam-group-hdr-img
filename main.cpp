@@ -36,7 +36,7 @@ int main() {
 					console->_bg.back().push_back(Bg(false, {
 						console->_bg.back().size(), console->_bg.size() - 1
 					}));
-					console->_buff.back().push_back(Char((char) e.key.keysym.sym, false, font, {
+					console->_buff.back().push_back(Char((char) e.key.keysym.sym, true, font, {
 						console->_buff.back().size(), console->_bg.size() - 1
 					}));
 				} else {

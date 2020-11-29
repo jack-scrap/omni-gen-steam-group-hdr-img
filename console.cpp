@@ -24,7 +24,7 @@ Console::Console(std::vector<std::string> buff, unsigned int ln, glm::vec2 scr) 
 		std::vector<Char> str;
 
 		for (int i = 0; i < buff[l].size(); i++) {
-			str.push_back(Char(buff[l][i], false, font, {
+			str.push_back(Char(buff[l][i], true, font, {
 				i, l
 			}));
 		}
