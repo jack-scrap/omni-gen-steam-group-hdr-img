@@ -41,6 +41,16 @@ int main() {
 					}));
 				} else {
 					switch (e.key.keysym.sym) {
+						case SDLK_SPACE:
+							console->_bg.back().push_back(Bg(false, {
+								console->_bg.back().size(), console->_bg.size() - 1
+							}));
+							console->_buff.back().push_back(Char((char) e.key.keysym.sym, true, font, {
+								console->_buff.back().size(), console->_bg.size() - 1
+							}));
+
+						break;
+
 						case SDLK_BACKSPACE:
 							if (!console->_bg.empty() && !console->_buff.empty()) {
 								if (!console->_bg.back().empty() &&!console->_buff.back().empty()) {
