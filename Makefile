@@ -16,7 +16,7 @@ LDFLAGS += $(PY)
 
 PROG = a.out
 
-all: libprog.so libpoly.so libscn.so $(PROG)
+all: libprog.so libpoly.so libobj.so libscn.so $(PROG)
 
 prog.o: prog.cpp prog.h
 	$(CXX) -c -fPIC $< -o $@
@@ -30,11 +30,17 @@ poly.o: poly.cpp poly.h
 libpoly.so: poly.o
 	$(CXX) $< -shared -o $@ $(GL)
 
+obj.o: obj.cpp obj.h
+	$(CXX) -c -fPIC $< -o $@ -L. -lprog
+
+libobj.so: obj.o
+	$(CXX) $< -shared -o $@ $(GL)
+
 scn.o: scn.cpp scn.h
 	$(CXX) -c -fPIC $< -o $@
 
 libscn.so: scn.o
-	$(CXX) $< -shared -o $@ -L. -lpoly -lprog
+	$(CXX) $< -shared -o $@ -L. -lpoly -lobj -lprog
 
 disp.o: disp.cpp disp.h
 	$(CXX) -c $< -o $@ $(SDL) $(GL)
@@ -58,7 +64,7 @@ main.o: main.cpp
 	$(CXX) -c $< -o $@ $(PY) -L. -lpoly -lscn -lprog
 
 $(PROG): $(OBJ_STATIC)
-	$(CXX) $^ $(PY) -L. -lpoly -lscn -lprog -o $(PROG) $(GL) $(SDL)
+	$(CXX) $^ $(PY) -L. -lpoly -lobj -lscn -lprog -o $(PROG) $(GL) $(SDL)
 
 clean:
 	rm *.o *.so $(PROG)

@@ -9,6 +9,7 @@
 #include "console.h"
 #include "util.h"
 #include "state.h"
+#include "obj.h"
 
 bool run = true;
 
@@ -103,7 +104,8 @@ int main() {
 
 		glViewport(console->_res[0], 0, scr[0], scr[1]);
 
-		polyDraw(&tri);
+		/* polyDraw(&tri); */
+		objDraw(&obj);
 
 		glViewport(0, 0, console->_res[0], scr[1]);
 
