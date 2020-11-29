@@ -7,10 +7,10 @@
 #include "obj.h"
 #include "scn.h"
 
-Obj objMk(GLfloat *vtc, unsigned int noVtc, GLfloat* loc) {
+Obj objMk(GLfloat* vtc, unsigned int noVtc, unsigned short* idc, unsigned int noIdc, GLfloat* loc) {
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
-	_->_noVtc = noVtc;
+	_->_noIdc = noIdc;
 
 	for (int i = 0; i < 3; i++) {
 		_->_loc[i] = loc[i];
@@ -21,8 +21,11 @@ Obj objMk(GLfloat *vtc, unsigned int noVtc, GLfloat* loc) {
 
 	glGenBuffers(1, &_->_vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, _->_vbo);
+	glBufferData(GL_ARRAY_BUFFER, noVtc * sizeof (GLfloat), vtc, GL_STATIC_DRAW);
 
-	glBufferData(GL_ARRAY_BUFFER, _->_noVtc * sizeof (GLfloat), vtc, GL_STATIC_DRAW);
+	glGenBuffers(1, &_->_ibo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _->_ibo);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, noIdc * sizeof (GL_UNSIGNED_SHORT), idc, GL_STATIC_DRAW);
 
 	_->_prog = Prog("main", "solid");
 
@@ -45,7 +48,7 @@ void objDraw(Obj* obj) {
 
 	glUniform3fv(obj->_uniLoc, 1, obj->_loc);
 
-	glDrawArrays(GL_TRIANGLES, 0, obj->_noVtc);
+	glDrawElements(GL_TRIANGLES, obj->_noIdc, GL_UNSIGNED_SHORT, (GLvoid*) 0);
 
 	obj->_prog.unUse();
 	glBindVertexArray(0);

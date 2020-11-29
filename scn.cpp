@@ -20,10 +20,12 @@ GLfloat vtc[2 * 3 * 3] = {
 	0.0, 0.0, 0.0,
 	1.0, 0.0, 0.0,
 	0.0, 1.0, 0.0,
-
-	0.0, 1.0, 0.0,
-	1.0, 0.0, 0.0,
 	1.0, 1.0, 0.0
 };
 
-Obj obj = objMk(vtc, sizeof vtc / sizeof *vtc, loc);
+GLushort idc[] = {
+	0, 1, 2,
+	2, 1, 3
+};
+
+Obj obj = objMk(vtc, sizeof vtc / sizeof *vtc, idc, sizeof idc / sizeof *idc, loc);

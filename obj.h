@@ -11,7 +11,8 @@ typedef struct {
 
 	GLuint
 		_vao,
-		_vbo;
+		_vbo,
+		_ibo;
 
 	GLint
 		_attrPos,
@@ -20,9 +21,9 @@ typedef struct {
 
 	Prog _prog;
 
-	unsigned int _noVtc;
+	unsigned int _noIdc;
 } Obj;
 
-Obj objMk(GLfloat *vtc, unsigned int noVtc, GLfloat* loc);
+Obj objMk(GLfloat* vtc, unsigned int noVtc, unsigned short* idc, unsigned int noIdc, GLfloat* loc);
 
 extern "C" void objDraw(Obj* obj);
