@@ -7,7 +7,7 @@
 #include "prog.h"
 
 typedef struct {
-	GLfloat _loc[2];
+	GLfloat _loc[3];
 
 	GLuint
 		_vao,
@@ -19,8 +19,10 @@ typedef struct {
 		_uniLoc;
 
 	Prog _prog;
+
+	unsigned int _noVtc;
 } Obj;
 
-Obj objMk(GLfloat* loc);
+Obj objMk(GLfloat *vtc, unsigned int noVtc, GLfloat* loc);
 
 extern "C" void objDraw(Obj* obj);
