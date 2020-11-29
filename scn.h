@@ -8,4 +8,3 @@ extern Disp disp;
 extern Poly tri;
 
 extern Obj obj;
-extern Obj obj1;
