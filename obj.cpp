@@ -11,6 +11,7 @@
 #include "scn.h"
 
 Obj objMk(GLfloat* vtc, unsigned int noVtc, unsigned short* idc, unsigned int noIdc, GLfloat* loc) {
+	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
 	_->_noIdc = noIdc;
@@ -19,6 +20,7 @@ Obj objMk(GLfloat* vtc, unsigned int noVtc, unsigned short* idc, unsigned int no
 		_->_loc[i] = loc[i];
 	}
 
+	// vertex
 	glGenVertexArrays(1, &_->_id[VAO]);
 	glBindVertexArray(_->_id[VAO]);
 
