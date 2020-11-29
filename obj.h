@@ -46,9 +46,9 @@ typedef struct {
 	unsigned int _noIdc;
 } Obj;
 
-Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, glm::vec3 loc);
+Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, glm::vec3 loc = glm::vec3(0.0, 0.0, 0.0));
 
-Obj objMk(std::string name, glm::vec3 loc);
+Obj objMk(std::string name, glm::vec3 loc = glm::vec3(0.0, 0.0, 0.0));
 
 extern "C" void objDraw(Obj* obj);
 
