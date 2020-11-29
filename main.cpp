@@ -106,6 +106,7 @@ int main() {
 
 		/* polyDraw(&tri); */
 		objDraw(&obj);
+		objDraw(&obj1);
 
 		glViewport(0, 0, console->_res[0], scr[1]);
 
