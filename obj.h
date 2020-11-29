@@ -24,11 +24,21 @@ enum uni {
 	PROJ,
 
 	LOC,
+
 	ACTIVE
 };
 
 typedef struct {
+	unsigned int _noIdc;
+
 	glm::vec3 _loc;
+
+	glm::mat4
+		_model,
+		_view,
+		_proj;
+
+	Prog _prog;
 
 	GLuint _id[3];
 
@@ -36,15 +46,6 @@ typedef struct {
 		_attr[1],
 
 		_uni[5];
-
-	Prog _prog;
-
-	glm::mat4
-		_proj,
-		_view,
-		_model;
-
-	unsigned int _noIdc;
 } Obj;
 
 Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, bool active, glm::vec3 loc = glm::vec3(0.0, 0.0, 0.0));
