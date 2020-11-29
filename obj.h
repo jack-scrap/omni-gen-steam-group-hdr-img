@@ -6,18 +6,29 @@
 #include "disp.h"
 #include "prog.h"
 
+enum id {
+	VAO,
+	VBO,
+	IBO
+};
+
+enum attr {
+	POS
+};
+
+enum uni {
+	LOC
+};
+
 typedef struct {
 	GLfloat _loc[3];
 
-	GLuint
-		_vao,
-		_vbo,
-		_ibo;
+	GLuint _id[3];
 
 	GLint
-		_attrPos,
+		_attr[1],
 
-		_uniLoc;
+		_uni[1];
 
 	Prog _prog;
 
