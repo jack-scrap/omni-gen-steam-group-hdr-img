@@ -28,7 +28,7 @@ enum uni {
 	ACTIVE
 };
 
-typedef struct {
+typedef struct Obj {
 	unsigned int _noIdc;
 
 	glm::vec3 _loc;
@@ -46,6 +46,8 @@ typedef struct {
 		_attr[1],
 
 		_uni[5];
+
+	struct Obj* _child;
 } Obj;
 
 Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, bool active, glm::vec3 loc = glm::vec3(0.0, 0.0, 0.0));

@@ -128,6 +128,10 @@ void objDraw(Obj* obj) {
 
 	obj->_prog.unUse();
 	glBindVertexArray(0);
+
+	if (obj->_child) {
+		objDraw(obj->_child);
+	}
 }
 
 void set(Obj* obj, GLfloat* loc) {

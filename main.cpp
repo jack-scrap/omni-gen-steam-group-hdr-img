@@ -20,6 +20,8 @@ glm::vec2 scr = glm::vec2(800, 600);
 Console* console;
 
 int main() {
+	obj._child = &obj1;
+
 	Console* console = new Console(buff, state::ln, disp._res);
 
 	void* handle = dlopen("libpoly.so", RTLD_LAZY);
