@@ -59,6 +59,8 @@ Obj objMk(std::string name, bool active, glm::vec3 loc = glm::vec3(0.0, 0.0, 0.0
 
 Obj objMk(std::string name, bool active, Obj** child, unsigned int noChild, glm::vec3 loc);
 
+extern "C" void objMv(Obj* obj, GLfloat* d);
+
 extern "C" void objDraw(Obj* obj);
 
 extern "C" void set(Obj* obj, GLfloat* loc);

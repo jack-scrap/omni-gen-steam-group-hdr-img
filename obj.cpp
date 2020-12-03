@@ -218,6 +218,20 @@ Obj objMk(std::string name, bool active, Obj** child, unsigned int noChild, glm:
 	return *_;
 }
 
+void objMv(Obj* obj, GLfloat* d) {
+	for (int i = 0; i < 3; i++) {
+		obj->_loc[i] += d[i];
+	}
+
+	obj->_model = glm::translate(obj->_model, glm::vec3(d[0], d[1], d[2]));
+
+	for (int i = 0; i < obj->_noChild; i++) {
+		if (obj->_child[i]) {
+			obj->_child[i]->_model = glm::translate(obj->_child[i]->_model, glm::vec3(d[0], d[1], d[2]));
+		}
+	}
+}
+
 void objDraw(Obj* obj) {
 	glBindVertexArray(obj->_id[VAO]);
 

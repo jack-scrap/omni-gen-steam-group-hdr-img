@@ -104,6 +104,12 @@ int main() {
 
 		glViewport(console->_res[0], 0, scr[0], scr[1]);
 
+		GLfloat d[3];
+		for (int i = 0; i < 3; i++) {
+			d[i] = 0.05;
+		}
+		objMv(&wheel, d);
+
 		objDraw(&wheel);
 
 		glViewport(0, 0, console->_res[0], scr[1]);
