@@ -4,11 +4,11 @@ lib = CDLL('libscn.so')
 
 class Obj(Structure):
     _fields_ = [
-        ("_loc", c_float * 2)
+        ("_loc", c_float * 3)
     ]
 
     def mv(self, loc):
-        for i in range(2):
+        for i in range(3):
             self._loc[i] = loc[i]
 
         set(self._ptr, self._loc)
@@ -22,5 +22,5 @@ set = lib.set
 set.restype = c_void_p
 set.argtypes = [
     POINTER(Obj),
-    c_float * 2
+    c_float * 3
 ]
