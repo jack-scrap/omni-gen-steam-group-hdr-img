@@ -62,6 +62,58 @@ Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, b
 	return *_;
 }
 
+Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, bool active, Obj** child, unsigned int noChild, glm::vec3 loc) {
+	// initialize
+	Obj* _ = (Obj*) malloc(sizeof (Obj));
+
+	_->_noIdc = noIdc;
+	_->_child = child;
+	_->_noChild = noChild;
+	_->_loc = loc;
+
+	// vertex
+	glGenVertexArrays(1, &_->_id[VAO]);
+	glBindVertexArray(_->_id[VAO]);
+
+	glGenBuffers(1, &_->_id[VBO]);
+	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);
+	glBufferData(GL_ARRAY_BUFFER, noVtc * sizeof (GLfloat), vtc, GL_STATIC_DRAW);
+
+	glGenBuffers(1, &_->_id[IBO]);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _->_id[IBO]);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, noIdc * sizeof (GLushort), idc, GL_STATIC_DRAW);
+
+	// matrix
+	_->_proj = glm::perspective(glm::radians(45.0), 800.0 / 600.0, 0.1, 100.0);
+	_->_view = glm::lookAt(glm::vec3(3, 3, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	_->_model = glm::mat4(1.0);
+	_->_model = glm::translate(_->_model, _->_loc);
+
+	_->_prog = Prog("main", "dir");
+
+	_->_prog.use();
+
+	// attribute
+	_->_attr[POS] = glGetAttribLocation(_->_prog.id, "pos");
+	glVertexAttribPointer(_->_attr[POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+	glEnableVertexAttribArray(_->_attr[POS]);
+
+	// uniform
+	_->_uni[MODEL] = glGetUniformLocation(_->_prog.id, "model");
+	_->_uni[VIEW] = glGetUniformLocation(_->_prog.id, "view");
+	_->_uni[PROJ] = glGetUniformLocation(_->_prog.id, "proj");
+
+	_->_uni[LOC] = glGetUniformLocation(_->_prog.id, "loc");
+
+	glUniformMatrix4fv(_->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
+	glUniformMatrix4fv(_->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
+	glUniformMatrix4fv(_->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
+
+	glUniform1ui(_->_uni[ACTIVE], active);
+
+	return *_;
+}
+
 Obj objMk(std::string name, bool active, glm::vec3 loc) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
@@ -113,6 +165,59 @@ Obj objMk(std::string name, bool active, glm::vec3 loc) {
 	return *_;
 }
 
+Obj objMk(std::string name, bool active, Obj** child, unsigned int noChild, glm::vec3 loc) {
+	// initialize
+	Obj* _ = (Obj*) malloc(sizeof (Obj));
+
+	_->_loc = loc;
+	_->_child = child;
+	_->_noChild = noChild;
+
+	// vertex
+	glGenVertexArrays(1, &_->_id[VAO]);
+	glBindVertexArray(_->_id[VAO]);
+
+	glGenBuffers(1, &_->_id[VBO]);
+	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);
+	std::vector<GLfloat> vtc = util::mesh::rd::vtc("wheel");
+	glBufferData(GL_ARRAY_BUFFER, vtc.size() * sizeof (GLfloat), &vtc[0], GL_STATIC_DRAW);
+
+	glGenBuffers(1, &_->_id[IBO]);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _->_id[IBO]);
+	std::vector<GLushort> idc = util::mesh::rd::idc("wheel");
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, idc.size() * sizeof (GLushort), &idc[0], GL_STATIC_DRAW);
+
+	_->_noIdc = idc.size();
+
+	// matrix
+	_->_proj = glm::perspective(glm::radians(45.0), 800.0 / 600.0, 0.1, 100.0),
+		_->_view = glm::lookAt(glm::vec3(3, 3, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0)),
+		_->_model = glm::mat4(1.0);
+	_->_model = glm::translate(_->_model, _->_loc);
+
+	_->_prog = Prog("main", "dir");
+
+	_->_prog.use();
+
+	// attribute
+	_->_attr[POS] = glGetAttribLocation(_->_prog.id, "pos");
+	glVertexAttribPointer(_->_attr[POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+	glEnableVertexAttribArray(_->_attr[POS]);
+
+	// uniform
+	_->_uni[MODEL] = glGetUniformLocation(_->_prog.id, "model");
+	_->_uni[VIEW] = glGetUniformLocation(_->_prog.id, "view");
+	_->_uni[PROJ] = glGetUniformLocation(_->_prog.id, "proj");
+
+	_->_uni[LOC] = glGetUniformLocation(_->_prog.id, "loc");
+
+	glUniformMatrix4fv(_->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
+	glUniformMatrix4fv(_->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
+	glUniformMatrix4fv(_->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
+
+	return *_;
+}
+
 void objDraw(Obj* obj) {
 	glBindVertexArray(obj->_id[VAO]);
 
@@ -129,8 +234,10 @@ void objDraw(Obj* obj) {
 	obj->_prog.unUse();
 	glBindVertexArray(0);
 
-	if (obj->_child) {
-		objDraw(obj->_child);
+	for (int i = 0; i < obj->_noChild; i++) {
+		if (obj->_child[i]) {
+			objDraw(obj->_child[i]);
+		}
 	}
 }
 

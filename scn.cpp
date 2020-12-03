@@ -24,5 +24,10 @@ GLushort idc[] = {
 	0, 1, 2
 };
 
-Obj obj = objMk("wheel", true, loc);
-Obj obj1 = objMk(vtc, sizeof vtc / sizeof *vtc, idc, sizeof idc / sizeof *idc, true, loc);
+Obj obj = objMk(vtc, sizeof vtc / sizeof *vtc, idc, sizeof idc / sizeof *idc, true, loc);
+
+Obj* child[] = {
+	&obj
+};
+
+Obj obj1 = objMk("wheel", true, child, sizeof child / sizeof *child, loc);

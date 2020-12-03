@@ -20,8 +20,6 @@ glm::vec2 scr = glm::vec2(800, 600);
 Console* console;
 
 int main() {
-	obj._child = &obj1;
-
 	Console* console = new Console(buff, state::ln, disp._res);
 
 	void* handle = dlopen("libpoly.so", RTLD_LAZY);
@@ -106,7 +104,7 @@ int main() {
 
 		glViewport(console->_res[0], 0, scr[0], scr[1]);
 
-		objDraw(&obj);
+		objDraw(&obj1);
 
 		glViewport(0, 0, console->_res[0], scr[1]);
 
