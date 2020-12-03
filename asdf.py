@@ -4,9 +4,9 @@ sys.path.insert(1, '.')
 
 import omni
 
-tri = omni.Obj(omni.lib.obj)
+wheel = omni.Obj(omni.lib.wheel)
 
 for _ in range(3):
-    tri.mv([
+    wheel.mv([
         0.5, 0.5
     ])
