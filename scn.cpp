@@ -12,8 +12,6 @@ Disp disp("asdf", {
 
 glm::vec3 loc = glm::vec3(0.0, 0.0, 0.0);
 
-Poly tri = polyMk(loc);
-
 GLfloat vtc[] = {
 	0.0, 0.0, 0.0,
 	1.0, 0.0, 0.0,
@@ -24,10 +22,10 @@ GLushort idc[] = {
 	0, 1, 2
 };
 
-Obj obj = objMk(vtc, sizeof vtc / sizeof *vtc, idc, sizeof idc / sizeof *idc, true, loc);
+Obj tri = objMk(vtc, sizeof vtc / sizeof *vtc, idc, sizeof idc / sizeof *idc, true, loc);
 
 Obj* child[] = {
-	&obj
+	&tri
 };
 
-Obj obj1 = objMk("wheel", true, child, sizeof child / sizeof *child, loc);
+Obj wheel = objMk("wheel", true, child, sizeof child / sizeof *child, loc);

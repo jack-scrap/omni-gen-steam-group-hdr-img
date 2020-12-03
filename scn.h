@@ -5,7 +5,5 @@
 
 extern Disp disp;
 
-extern Poly tri;
-
-extern Obj obj;
-extern Obj obj1;
+extern Obj tri;
+extern Obj wheel;
