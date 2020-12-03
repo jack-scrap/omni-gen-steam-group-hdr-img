@@ -11,7 +11,7 @@ class Obj(Structure):
         for i in range(3):
             self._loc[i] = loc[i]
 
-        set(self._ptr, self._loc)
+        mv(self._ptr, self._loc)
 
     def __init__(self, ptr):
         self._ptr = cast(ptr, POINTER(Obj))
@@ -23,4 +23,11 @@ set.restype = c_void_p
 set.argtypes = [
     POINTER(Obj),
     c_float * 3
+]
+
+mv = lib.objMv
+mv.restype = c_void_p
+mv.argtypes = [
+        POINTER(Obj),
+        c_float * 3
 ]
