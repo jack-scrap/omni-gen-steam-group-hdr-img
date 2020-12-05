@@ -5,5 +5,5 @@
 
 extern Disp disp;
 
-extern Obj tri;
 extern Obj wheel;
+extern Obj front;

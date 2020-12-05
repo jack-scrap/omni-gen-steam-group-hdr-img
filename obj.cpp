@@ -126,12 +126,12 @@ Obj objMk(std::string name, bool active, glm::vec3 loc) {
 
 	glGenBuffers(1, &_->_id[VBO]);
 	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);
-	std::vector<GLfloat> vtc = util::mesh::rd::vtc("wheel");
+	std::vector<GLfloat> vtc = util::mesh::rd::vtc(name);
 	glBufferData(GL_ARRAY_BUFFER, vtc.size() * sizeof (GLfloat), &vtc[0], GL_STATIC_DRAW);
 
 	glGenBuffers(1, &_->_id[IBO]);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _->_id[IBO]);
-	std::vector<GLushort> idc = util::mesh::rd::idc("wheel");
+	std::vector<GLushort> idc = util::mesh::rd::idc(name);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, idc.size() * sizeof (GLushort), &idc[0], GL_STATIC_DRAW);
 
 	_->_noIdc = idc.size();
@@ -179,12 +179,12 @@ Obj objMk(std::string name, bool active, Obj** child, unsigned int noChild, glm:
 
 	glGenBuffers(1, &_->_id[VBO]);
 	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);
-	std::vector<GLfloat> vtc = util::mesh::rd::vtc("wheel");
+	std::vector<GLfloat> vtc = util::mesh::rd::vtc(name);
 	glBufferData(GL_ARRAY_BUFFER, vtc.size() * sizeof (GLfloat), &vtc[0], GL_STATIC_DRAW);
 
 	glGenBuffers(1, &_->_id[IBO]);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _->_id[IBO]);
-	std::vector<GLushort> idc = util::mesh::rd::idc("wheel");
+	std::vector<GLushort> idc = util::mesh::rd::idc(name);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, idc.size() * sizeof (GLushort), &idc[0], GL_STATIC_DRAW);
 
 	_->_noIdc = idc.size();

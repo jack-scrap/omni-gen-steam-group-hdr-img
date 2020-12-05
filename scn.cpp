@@ -22,10 +22,10 @@ GLushort idc[] = {
 	0, 1, 2
 };
 
-Obj tri = objMk(vtc, sizeof vtc / sizeof *vtc, idc, sizeof idc / sizeof *idc, true, loc);
+Obj wheel = objMk("wheel", true, loc);
 
 Obj* child[] = {
-	&tri
+	&wheel
 };
 
-Obj wheel = objMk("wheel", true, child, sizeof child / sizeof *child, loc);
+Obj front = objMk("truck/front", true, child, sizeof child / sizeof *child, loc);
