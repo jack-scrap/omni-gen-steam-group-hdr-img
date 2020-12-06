@@ -11,6 +11,7 @@
 #include "obj.h"
 #include "scn.h"
 #include "util.h"
+#include "state.h"
 
 Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, bool active, glm::vec3 loc) {
 	// initialize
@@ -33,10 +34,11 @@ Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, b
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, noIdc * sizeof (GLushort), idc, GL_STATIC_DRAW);
 
 	// matrix
-	_->_proj = glm::perspective(glm::radians(45.0), 800.0 / 600.0, 0.1, 100.0);
-	_->_view = glm::lookAt(glm::vec3(3, 3, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	_->_proj = glm::ortho(-(state::view[0] / 2.0f), state::view[0] / 2.0f, -(state::view[1] / 2.0f), state::view[1] / 2.0f, 0.1f, 10000.0f);
+	_->_view = glm::lookAt(glm::vec3(100.0), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::translate(_->_model, _->_loc);
+	_->_model = glm::scale(_->_model, glm::vec3(50));
 
 	_->_prog = Prog("main", "dir");
 
@@ -86,10 +88,11 @@ Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, b
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, noIdc * sizeof (GLushort), idc, GL_STATIC_DRAW);
 
 	// matrix
-	_->_proj = glm::perspective(glm::radians(45.0), 800.0 / 600.0, 0.1, 100.0);
-	_->_view = glm::lookAt(glm::vec3(3, 3, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	_->_proj = glm::ortho(-(state::view[0] / 2.0f), state::view[0] / 2.0f, -(state::view[1] / 2.0f), state::view[1] / 2.0f, 0.1f, 10000.0f);
+	_->_view = glm::lookAt(glm::vec3(100.0), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::translate(_->_model, _->_loc);
+	_->_model = glm::scale(_->_model, glm::vec3(50));
 
 	_->_prog = Prog("main", "dir");
 
@@ -140,10 +143,11 @@ Obj objMk(std::string name, bool active, glm::vec3 loc) {
 	_->_noIdc = idc.size();
 
 	// matrix
-	_->_proj = glm::perspective(glm::radians(45.0), 800.0 / 600.0, 0.1, 100.0),
-	_->_view = glm::lookAt(glm::vec3(3, 3, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0)),
+	_->_proj = glm::ortho(-(state::view[0] / 2.0f), state::view[0] / 2.0f, -(state::view[1] / 2.0f), state::view[1] / 2.0f, 0.1f, 10000.0f);
+	_->_view = glm::lookAt(glm::vec3(100.0), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::translate(_->_model, _->_loc);
+	_->_model = glm::scale(_->_model, glm::vec3(50));
 
 	_->_prog = Prog("main", "dir");
 
@@ -196,10 +200,11 @@ Obj objMk(std::string name, bool active, Obj** child, unsigned int noChild, glm:
 	_->_noIdc = idc.size();
 
 	// matrix
-	_->_proj = glm::perspective(glm::radians(45.0), 800.0 / 600.0, 0.1, 100.0),
-		_->_view = glm::lookAt(glm::vec3(3, 3, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0)),
-		_->_model = glm::mat4(1.0);
+	_->_proj = glm::ortho(-(state::view[0] / 2.0f), state::view[0] / 2.0f, -(state::view[1] / 2.0f), state::view[1] / 2.0f, 0.1f, 10000.0f);
+	_->_view = glm::lookAt(glm::vec3(100.0), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	_->_model = glm::mat4(1.0);
 	_->_model = glm::translate(_->_model, _->_loc);
+	_->_model = glm::scale(_->_model, glm::vec3(50));
 
 	_->_prog = Prog("main", "dir");
 
@@ -232,10 +237,12 @@ void objMv(Obj* obj, GLfloat* d) {
 	}
 
 	obj->_model = glm::translate(obj->_model, glm::vec3(d[0], d[1], d[2]));
+	obj->_model = glm::scale(obj->_model, glm::vec3(50));
 
 	for (int i = 0; i < obj->_noChild; i++) {
 		if (obj->_child[i]) {
 			obj->_child[i]->_model = glm::translate(obj->_child[i]->_model, glm::vec3(d[0], d[1], d[2]));
+			obj->_model = glm::scale(obj->_model, glm::vec3(50));
 		}
 	}
 }
@@ -245,7 +252,8 @@ void objDraw(Obj* obj) {
 
 	obj->_prog.use();
 
-	obj->_model = glm::rotate(obj->_model, 0.01f, glm::vec3(0, 1, 0));
+	obj->_model = glm::mat4(1.0);
+	obj->_model = glm::scale(obj->_model, glm::vec3(50));
 
 	glUniformMatrix4fv(obj->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(obj->_model));
 	glUniformMatrix4fv(obj->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(obj->_view));
