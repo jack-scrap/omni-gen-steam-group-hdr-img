@@ -65,13 +65,16 @@ Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, b
 	return *_;
 }
 
-Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, bool active, Obj** child, unsigned int noChild, glm::vec3 loc) {
+Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, bool active, Obj* child, unsigned int noChild, glm::vec3 loc) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
 	_->_noIdc = noIdc;
 	_->_active = active;
-	_->_child = child;
+	_->_child = (Obj*) malloc(noChild * sizeof (Obj));
+	for (int i = 0; i < noChild; i++) {
+		_->_child[i] = child[i];
+	}
 	_->_noChild = noChild;
 	_->_loc = loc;
 
@@ -174,14 +177,17 @@ Obj objMk(std::string name, bool active, glm::vec3 loc) {
 	return *_;
 }
 
-Obj objMk(std::string name, bool active, Obj** child, unsigned int noChild, glm::vec3 loc) {
+Obj objMk(std::string name, bool active, Obj* child, unsigned int noChild, glm::vec3 loc) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
 	_->_active = active;
-	_->_loc = loc;
-	_->_child = child;
+	_->_child = (Obj*) malloc(noChild * sizeof (Obj));
+	for (int i = 0; i < noChild; i++) {
+		_->_child[i] = child[i];
+	}
 	_->_noChild = noChild;
+	_->_loc = loc;
 
 	// vertex
 	glGenVertexArrays(1, &_->_id[VAO]);
@@ -240,8 +246,8 @@ void objMv(Obj* obj, GLfloat* d) {
 	obj->_model = glm::scale(obj->_model, glm::vec3(50));
 
 	for (int i = 0; i < obj->_noChild; i++) {
-		if (obj->_child[i]) {
-			obj->_child[i]->_model = glm::translate(obj->_child[i]->_model, glm::vec3(d[0], d[1], d[2]));
+		if (&obj->_child[i]) {
+			obj->_child[i]._model = glm::translate(obj->_child[i]._model, glm::vec3(d[0], d[1], d[2]));
 			obj->_model = glm::scale(obj->_model, glm::vec3(50));
 		}
 	}
@@ -267,8 +273,8 @@ void objDraw(Obj* obj) {
 	glBindVertexArray(0);
 
 	for (int i = 0; i < obj->_noChild; i++) {
-		if (obj->_child[i]) {
-			objDraw(obj->_child[i]);
+		if (&obj->_child[i]) {
+			objDraw(&obj->_child[i]);
 		}
 	}
 }
