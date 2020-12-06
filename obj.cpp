@@ -17,6 +17,7 @@ Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, b
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
 	_->_noIdc = noIdc;
+	_->_active = active;
 	_->_loc = loc;
 
 	// vertex
@@ -57,7 +58,7 @@ Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, b
 	glUniformMatrix4fv(_->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
 	glUniformMatrix4fv(_->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
 
-	glUniform1ui(_->_uni[ACTIVE], active);
+	glUniform1ui(_->_uni[ACTIVE], _->_active);
 
 	return *_;
 }
@@ -67,6 +68,7 @@ Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, b
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
 	_->_noIdc = noIdc;
+	_->_active = active;
 	_->_child = child;
 	_->_noChild = noChild;
 	_->_loc = loc;
@@ -109,7 +111,7 @@ Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, b
 	glUniformMatrix4fv(_->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
 	glUniformMatrix4fv(_->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
 
-	glUniform1ui(_->_uni[ACTIVE], active);
+	glUniform1ui(_->_uni[ACTIVE], _->_active);
 
 	return *_;
 }
@@ -118,6 +120,7 @@ Obj objMk(std::string name, bool active, glm::vec3 loc) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
+	_->_active = active;
 	_->_loc = loc;
 
 	// vertex
@@ -162,6 +165,8 @@ Obj objMk(std::string name, bool active, glm::vec3 loc) {
 	glUniformMatrix4fv(_->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
 	glUniformMatrix4fv(_->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
 
+	glUniform1ui(_->_uni[ACTIVE], _->_active);
+
 	return *_;
 }
 
@@ -169,6 +174,7 @@ Obj objMk(std::string name, bool active, Obj** child, unsigned int noChild, glm:
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
+	_->_active = active;
 	_->_loc = loc;
 	_->_child = child;
 	_->_noChild = noChild;
@@ -215,6 +221,8 @@ Obj objMk(std::string name, bool active, Obj** child, unsigned int noChild, glm:
 	glUniformMatrix4fv(_->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
 	glUniformMatrix4fv(_->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
 
+	glUniform1ui(_->_uni[ACTIVE], _->_active);
+
 	return *_;
 }
 
@@ -242,6 +250,8 @@ void objDraw(Obj* obj) {
 	glUniformMatrix4fv(obj->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(obj->_model));
 	glUniformMatrix4fv(obj->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(obj->_view));
 	glUniformMatrix4fv(obj->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(obj->_proj));
+
+	glUniform1ui(obj->_uni[ACTIVE], obj->_active);
 
 	glDrawElements(GL_TRIANGLES, obj->_noIdc, GL_UNSIGNED_SHORT, (GLvoid*) 0);
 

@@ -22,7 +22,7 @@ GLushort idc[] = {
 	0, 1, 2
 };
 
-Obj wheel = objMk("wheel", true, loc);
+Obj wheel = objMk("wheel", false, loc);
 
 Obj* child[] = {
 	&wheel

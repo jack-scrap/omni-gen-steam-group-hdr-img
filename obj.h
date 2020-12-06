@@ -31,6 +31,8 @@ enum uni {
 typedef struct Obj {
 	unsigned int _noIdc;
 
+	bool _active;
+
 	glm::vec3 _loc;
 
 	glm::mat4
