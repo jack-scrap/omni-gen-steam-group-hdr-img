@@ -8,7 +8,9 @@ namespace state {
 
 	static glm::vec2 sz = glm::vec2(16, 32);
 
-	static glm::vec2 res = glm::vec2(ln * sz[0], 600);
+	static glm::vec2 view = glm::vec2(800, 600);
+
+	static glm::vec2 res = glm::vec2(ln * sz[0], view[1]);
 
 	static GLfloat bound = abs(-1.0 - 1.0);
 

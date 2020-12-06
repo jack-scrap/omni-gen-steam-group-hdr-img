@@ -7,20 +7,10 @@
 unsigned int consoleWd = state::ln * state::sz[0];
 
 Disp disp("asdf", {
-	800 + consoleWd, 600
+	state::view[0] + consoleWd, state::view[1]
 }, col[false]);
 
 glm::vec3 loc = glm::vec3(0.0, 0.0, 0.0);
-
-GLfloat vtc[] = {
-	0.0, 0.0, 0.0,
-	1.0, 0.0, 0.0,
-	0.0, 1.0, 0.0
-};
-
-GLushort idc[] = {
-	0, 1, 2
-};
 
 Obj wheel = objMk("wheel", false, loc);
 
