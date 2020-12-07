@@ -71,11 +71,9 @@ Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, b
 
 	_->_noIdc = noIdc;
 	_->_active = active;
-	_->_child = (Obj*) malloc(noChild * sizeof (Obj));
-	for (int i = 0; i < noChild; i++) {
-		_->_child[i] = child[i];
-	}
-	_->_noChild = noChild;
+	_->_child = (Obj*) malloc(sizeof (Obj));
+	*(_->_child) = *child;
+	_->_noChild = 1;
 	_->_loc = loc;
 
 	// vertex
@@ -182,11 +180,9 @@ Obj objMk(std::string name, bool active, Obj* child, unsigned int noChild, glm::
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
 	_->_active = active;
-	_->_child = (Obj*) malloc(noChild * sizeof (Obj));
-	for (int i = 0; i < noChild; i++) {
-		_->_child[i] = child[i];
-	}
-	_->_noChild = noChild;
+	_->_child = (Obj*) malloc(sizeof (Obj));
+	*(_->_child) = *child;
+	_->_noChild = 1;
 	_->_loc = loc;
 
 	// vertex
