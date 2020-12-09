@@ -36,7 +36,7 @@ Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, b
 
 	// matrix
 	_->_proj = glm::ortho(-(state::view[0] / 2.0f), state::view[0] / 2.0f, -(state::view[1] / 2.0f), state::view[1] / 2.0f, 0.1f, 10000.0f);
-	_->_view = glm::lookAt(glm::vec3(100.0), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	_->_view = glm::lookAt(glm::vec3(1000.0), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::scale(_->_model, glm::vec3(50));
 	_->_model = glm::translate(_->_model, _->_loc);
@@ -98,7 +98,7 @@ Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, b
 
 	// matrix
 	_->_proj = glm::ortho(-(state::view[0] / 2.0f), state::view[0] / 2.0f, -(state::view[1] / 2.0f), state::view[1] / 2.0f, 0.1f, 10000.0f);
-	_->_view = glm::lookAt(glm::vec3(100.0), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	_->_view = glm::lookAt(glm::vec3(1000.0), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::scale(_->_model, glm::vec3(50));
 	_->_model = glm::translate(_->_model, _->_loc);
@@ -154,7 +154,7 @@ Obj objMk(std::string name, bool active, glm::vec3 loc) {
 
 	// matrix
 	_->_proj = glm::ortho(-(state::view[0] / 2.0f), state::view[0] / 2.0f, -(state::view[1] / 2.0f), state::view[1] / 2.0f, 0.1f, 10000.0f);
-	_->_view = glm::lookAt(glm::vec3(100.0), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	_->_view = glm::lookAt(glm::vec3(1000.0), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::scale(_->_model, glm::vec3(50));
 	_->_model = glm::translate(_->_model, _->_loc);
@@ -219,7 +219,7 @@ Obj objMk(std::string name, bool active, Obj* child, unsigned int noChild, glm::
 
 	// matrix
 	_->_proj = glm::ortho(-(state::view[0] / 2.0f), state::view[0] / 2.0f, -(state::view[1] / 2.0f), state::view[1] / 2.0f, 0.1f, 10000.0f);
-	_->_view = glm::lookAt(glm::vec3(100.0), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	_->_view = glm::lookAt(glm::vec3(1000.0), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::translate(_->_model, _->_loc);
 	_->_model = glm::scale(_->_model, glm::vec3(50));
