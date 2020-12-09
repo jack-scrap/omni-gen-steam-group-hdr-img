@@ -10,4 +10,4 @@ Disp disp("asdf", {
 	state::view[0] + consoleWd, state::view[1]
 }, col[false]);
 
-Obj front = objMk("truck/front", true, glm::vec3(50.0, 0.0, 0.0));
+Obj front = objMk("truck/front", true, glm::vec3(3.0, 0.0, 0.0));
