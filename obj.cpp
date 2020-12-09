@@ -72,14 +72,9 @@ Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, b
 
 	_->_noIdc = noIdc;
 	_->_active = active;
-	_->_child = (Obj*) malloc(2 * 2 * sizeof (Obj));
-	int i = 0;
-	for (int z = 0; z < 2; z++) {
-		for (int x = 0; x < 2; x++) {
-			_->_child[i] = objMk("wheel", false, glm::vec3(-2.6 * x, -1, z ? 1 : -1));
-
-			i++;
-		}
+	_->_child = (Obj*) malloc(noChild * sizeof (Obj));
+	for (int i = 0; i < _->_noChild; i++) {
+		_->_child[i] = child[i];
 	}
 	_->_noChild = 2 * 2;
 	_->_loc = loc;
@@ -189,14 +184,9 @@ Obj objMk(std::string name, bool active, Obj* child, unsigned int noChild, glm::
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
 	_->_active = active;
-	_->_child = (Obj*) malloc(2 * 2 * sizeof (Obj));
-	int i = 0;
-	for (int z = 0; z < 2; z++) {
-		for (int x = 0; x < 2; x++) {
-			_->_child[i] = objMk("wheel", false, glm::vec3(-2.6 * x, -1, z ? 1 : -1));
-
-			i++;
-		}
+	_->_child = (Obj*) malloc(noChild * sizeof (Obj));
+	for (int i = 0; i < noChild; i++) {
+		_->_child[i] = child[i];
 	}
 	_->_noChild = 2 * 2;
 	_->_loc = loc;
