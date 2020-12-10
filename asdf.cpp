@@ -9,3 +9,7 @@ Asdf asdfMk() {
 
 	return _;
 }
+
+Asdf asdfDraw(Asdf* asdf) {
+	std::cout << asdf->_asdf << std::endl;
+}

@@ -5,3 +5,5 @@ typedef struct {
 } Asdf;
 
 Asdf asdfMk();
+
+extern "C" Asdf asdfDraw(Asdf* asdf);
