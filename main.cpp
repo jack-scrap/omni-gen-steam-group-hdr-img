@@ -106,6 +106,8 @@ int main() {
 
 		objDraw(&front);
 
+		std::cout << asdf._asdf << std::endl;
+
 		glViewport(0, 0, console->_res[0], scr[1]);
 
 		console->print();
