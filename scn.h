@@ -2,7 +2,7 @@
 
 #include "poly.h"
 #include "obj.h"
-#include "asdf.h"
+#include "truck.h"
 
 extern Disp disp;
 
@@ -12,4 +12,4 @@ extern Obj wheel2;
 extern Obj wheel3;
 extern Obj front;
 
-extern Asdf asdf;
+extern Truck truck;

@@ -1,12 +1,15 @@
-#include <cstdlib>
+#include <iostream>
 
 #include "truck.h"
 
 Truck truckMk() {
-	// initialize
-	Truck* _ = (Truck*) malloc(sizeof (Truck));
+	Truck _;
 
-	_->_asdf = 3;
+	_._asdf = 3;
 
-	return *_;
+	return _;
+}
+
+Truck truckDraw(Truck* truck) {
+	std::cout << truck->_asdf << std::endl;
 }

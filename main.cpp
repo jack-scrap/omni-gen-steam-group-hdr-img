@@ -10,6 +10,7 @@
 #include "util.h"
 #include "state.h"
 #include "obj.h"
+#include "truck.h"
 
 bool run = true;
 
@@ -106,7 +107,7 @@ int main() {
 
 		objDraw(&front);
 
-		asdfDraw(&asdf);
+		truckDraw(&truck);
 
 		glViewport(0, 0, console->_res[0], scr[1]);
 

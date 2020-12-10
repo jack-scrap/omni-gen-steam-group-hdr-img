@@ -5,3 +5,5 @@ typedef struct {
 } Truck;
 
 Truck truckMk();
+
+extern "C" Truck truckDraw(Truck* truck);

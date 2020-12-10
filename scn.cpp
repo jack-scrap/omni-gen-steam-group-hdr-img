@@ -19,4 +19,4 @@ Obj child[] = {
 
 Obj front = objMk("truck/front", true, child, sizeof child / sizeof *child, glm::vec3(2.4, 1.3, 0.0));
 
-Asdf asdf = asdfMk();
+Truck truck = truckMk();
