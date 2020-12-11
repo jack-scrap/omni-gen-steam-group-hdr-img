@@ -15,7 +15,7 @@ Pt* ptMk() {
 		0
 	};
 
-	_->_parent = objMk(vtc, sizeof vtc / sizeof *vtc, idc, sizeof idc / sizeof *idc, "main", "dir", true, glm::vec3(0.0, 0.0, 0.0));
+	_->_parent = objMk(vtc, sizeof vtc / sizeof *vtc, idc, sizeof idc / sizeof *idc, "main", "main", "dir", true, glm::vec3(0.0, 0.0, 0.0));
 
 	return _;
 }

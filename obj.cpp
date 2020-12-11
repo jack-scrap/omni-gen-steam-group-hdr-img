@@ -123,6 +123,116 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	return _;
 }
 
+Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string nameVtx, std::string nameGeom, std::string nameFrag, bool active, glm::vec3 loc) {
+	// initialize
+	Obj* _ = (Obj*) malloc(sizeof (Obj));
+
+	_->_noIdc = noIdc;
+	_->_active = active;
+	_->_noChild = 0;
+	_->_loc = loc;
+
+	// vertex
+	glGenVertexArrays(1, &_->_id[VAO]);
+	glBindVertexArray(_->_id[VAO]);
+
+	glGenBuffers(1, &_->_id[VBO]);
+	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);
+	glBufferData(GL_ARRAY_BUFFER, noVtc * sizeof (GLfloat), vtc, GL_STATIC_DRAW);
+
+	glGenBuffers(1, &_->_id[IBO]);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _->_id[IBO]);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, noIdc * sizeof (GLushort), idc, GL_STATIC_DRAW);
+
+	// matrix
+	_->_proj = glm::ortho(-(state::view[0] / 2.0f), state::view[0] / 2.0f, -(state::view[1] / 2.0f), state::view[1] / 2.0f, 0.1f, 10000.0f);
+	_->_view = glm::lookAt(glm::vec3(1000.0), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	_->_model = glm::mat4(1.0);
+	_->_model = glm::scale(_->_model, glm::vec3(50));
+	_->_model = glm::translate(_->_model, _->_loc);
+
+	_->_prog = Prog(nameVtx, nameGeom, nameFrag);
+
+	_->_prog.use();
+
+	// attribute
+	_->_attr[POS] = glGetAttribLocation(_->_prog.id, "pos");
+	glVertexAttribPointer(_->_attr[POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+	glEnableVertexAttribArray(_->_attr[POS]);
+
+	// uniform
+	_->_uni[MODEL] = glGetUniformLocation(_->_prog.id, "model");
+	_->_uni[VIEW] = glGetUniformLocation(_->_prog.id, "view");
+	_->_uni[PROJ] = glGetUniformLocation(_->_prog.id, "proj");
+
+	_->_uni[LOC] = glGetUniformLocation(_->_prog.id, "loc");
+
+	glUniformMatrix4fv(_->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
+	glUniformMatrix4fv(_->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
+	glUniformMatrix4fv(_->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
+
+	glUniform1ui(_->_uni[ACTIVE], _->_active);
+
+	return _;
+}
+
+Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string nameVtx, std::string nameGeom, std::string nameFrag, bool active, Obj* child[], unsigned int noChild, glm::vec3 loc) {
+	// initialize
+	Obj* _ = (Obj*) malloc(sizeof (Obj));
+
+	_->_noIdc = noIdc;
+	_->_active = active;
+	_->_child = (Obj**) malloc(noChild * sizeof (Obj*));
+	for (int i = 0; i < _->_noChild; i++) {
+		_->_child[i] = child[i];
+	}
+	_->_noChild = 2 * 2;
+	_->_loc = loc;
+
+	// vertex
+	glGenVertexArrays(1, &_->_id[VAO]);
+	glBindVertexArray(_->_id[VAO]);
+
+	glGenBuffers(1, &_->_id[VBO]);
+	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);
+	glBufferData(GL_ARRAY_BUFFER, noVtc * sizeof (GLfloat), vtc, GL_STATIC_DRAW);
+
+	glGenBuffers(1, &_->_id[IBO]);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _->_id[IBO]);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, noIdc * sizeof (GLushort), idc, GL_STATIC_DRAW);
+
+	// matrix
+	_->_proj = glm::ortho(-(state::view[0] / 2.0f), state::view[0] / 2.0f, -(state::view[1] / 2.0f), state::view[1] / 2.0f, 0.1f, 10000.0f);
+	_->_view = glm::lookAt(glm::vec3(1000.0), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	_->_model = glm::mat4(1.0);
+	_->_model = glm::scale(_->_model, glm::vec3(50));
+	_->_model = glm::translate(_->_model, _->_loc);
+
+	_->_prog = Prog(nameVtx, nameGeom, nameFrag);
+
+	_->_prog.use();
+
+	// attribute
+	_->_attr[POS] = glGetAttribLocation(_->_prog.id, "pos");
+	glVertexAttribPointer(_->_attr[POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+	glEnableVertexAttribArray(_->_attr[POS]);
+
+	// uniform
+	_->_uni[MODEL] = glGetUniformLocation(_->_prog.id, "model");
+	_->_uni[VIEW] = glGetUniformLocation(_->_prog.id, "view");
+	_->_uni[PROJ] = glGetUniformLocation(_->_prog.id, "proj");
+
+	_->_uni[LOC] = glGetUniformLocation(_->_prog.id, "loc");
+
+	glUniformMatrix4fv(_->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
+	glUniformMatrix4fv(_->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
+	glUniformMatrix4fv(_->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
+
+	glUniform1ui(_->_uni[ACTIVE], _->_active);
+
+	return _;
+}
+
 Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool active, glm::vec3 loc) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
