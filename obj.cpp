@@ -13,7 +13,7 @@
 #include "util.h"
 #include "state.h"
 
-Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, bool active, glm::vec3 loc) {
+Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, bool active, glm::vec3 loc) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -63,16 +63,16 @@ Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, b
 
 	glUniform1ui(_->_uni[ACTIVE], _->_active);
 
-	return *_;
+	return _;
 }
 
-Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, bool active, Obj* child, unsigned int noChild, glm::vec3 loc) {
+Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, bool active, Obj* child[], unsigned int noChild, glm::vec3 loc) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
 	_->_noIdc = noIdc;
 	_->_active = active;
-	_->_child = (Obj*) malloc(noChild * sizeof (Obj));
+	_->_child = (Obj**) malloc(noChild * sizeof (Obj*));
 	for (int i = 0; i < _->_noChild; i++) {
 		_->_child[i] = child[i];
 	}
@@ -120,10 +120,10 @@ Obj objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, b
 
 	glUniform1ui(_->_uni[ACTIVE], _->_active);
 
-	return *_;
+	return _;
 }
 
-Obj objMk(std::string name, bool active, glm::vec3 loc) {
+Obj* objMk(std::string name, bool active, glm::vec3 loc) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -176,15 +176,15 @@ Obj objMk(std::string name, bool active, glm::vec3 loc) {
 
 	glUniform1ui(_->_uni[ACTIVE], _->_active);
 
-	return *_;
+	return _;
 }
 
-Obj objMk(std::string name, bool active, Obj* child, unsigned int noChild, glm::vec3 loc) {
+Obj* objMk(std::string name, bool active, Obj* child[], unsigned int noChild, glm::vec3 loc) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
 	_->_active = active;
-	_->_child = (Obj*) malloc(noChild * sizeof (Obj));
+	_->_child = (Obj**) malloc(noChild * sizeof (Obj*));
 	for (int i = 0; i < noChild; i++) {
 		_->_child[i] = child[i];
 	}
@@ -236,7 +236,7 @@ Obj objMk(std::string name, bool active, Obj* child, unsigned int noChild, glm::
 
 	glUniform1ui(_->_uni[ACTIVE], _->_active);
 
-	return *_;
+	return _;
 }
 
 void objMv(Obj* obj, GLfloat* d) {
@@ -249,7 +249,7 @@ void objMv(Obj* obj, GLfloat* d) {
 
 	for (int i = 0; i < obj->_noChild; i++) {
 		if (&obj->_child[i]) {
-			obj->_child[i]._model = glm::translate(obj->_child[i]._model, glm::vec3(d[0], d[1], d[2]));
+			obj->_child[i]->_model = glm::translate(obj->_child[i]->_model, glm::vec3(d[0], d[1], d[2]));
 			obj->_model = glm::scale(obj->_model, glm::vec3(50));
 		}
 	}
@@ -277,7 +277,7 @@ void objDraw(Obj* obj) {
 
 	for (int i = 0; i < obj->_noChild; i++) {
 		if (&obj->_child[i]) {
-			objDraw(&obj->_child[i]);
+			objDraw(obj->_child[i]);
 		}
 	}
 }

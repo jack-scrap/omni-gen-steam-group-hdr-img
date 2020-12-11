@@ -4,6 +4,6 @@ typedef struct {
 	int _asdf;
 } Truck;
 
-Truck truckMk();
+Truck* truckMk();
 
-extern "C" Truck truckDraw(Truck* truck);
+extern "C" void truckDraw(Truck* truck);

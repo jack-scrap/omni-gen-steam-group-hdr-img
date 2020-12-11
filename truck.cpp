@@ -2,14 +2,14 @@
 
 #include "truck.h"
 
-Truck truckMk() {
-	Truck _;
+Truck* truckMk() {
+	Truck* _ = (Truck*) malloc(sizeof (Truck));
 
-	_._asdf = 3;
+	_->_asdf = 3;
 
 	return _;
 }
 
-Truck truckDraw(Truck* truck) {
+void truckDraw(Truck* truck) {
 	std::cout << truck->_asdf << std::endl;
 }
