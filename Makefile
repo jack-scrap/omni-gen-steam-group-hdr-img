@@ -20,13 +20,13 @@ LDFLAGS += -L. $(patsubst %, -l%, $(DYNA))
 all: $(PROG)
 
 %.o: %.cpp %.h
-	$(CXX) -c $< $(LDFLAGS) -o $@
+	$(CXX) -c $< -o $@ $(LDFLAGS)
 
 lib%.so: %.o
 	$(CC) -shared $< -o $@
 
 main.o: main.cpp
-	$(CXX) -c $< $(LDFLAGS) -o $@
+	$(CXX) -c $< -o $@ $(LDFLAGS)
 
 $(PROG): $(DEP_STATIC) $(DEP_DYNA)
 	$(CXX) $(DEP_STATIC) $(LDFLAGS)
