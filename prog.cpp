@@ -8,12 +8,15 @@
 Shad::Shad(std::string name, unsigned int stage) {
 	std::string ext;
 	GLenum type;
-	if (stage) {
+	if (stage == 1) {
 		ext = "fs";
 		type = GL_FRAGMENT_SHADER;
-	} else {
+	} else if (stage == 0) {
 		ext = "vs";
 		type = GL_VERTEX_SHADER;
+	} else if (stage == 2) {
+		ext = "gs";
+		type = GL_GEOMETRY_SHADER;
 	}
 
 	std::string buff = util::fs::rd<std::string>("res/shad/" + name + "." + ext);
@@ -43,6 +46,21 @@ Prog::Prog(std::string nameVtx, std::string nameFrag) {
 	// program
 	id = glCreateProgram();
 	glAttachShader(id, vtx._id);
+	glAttachShader(id, frag._id);
+	glLinkProgram(id);
+}
+
+Prog::Prog(std::string nameVtx, std::string nameGeom, std::string nameFrag) {
+	// shader
+	Shad
+		vtx(nameVtx, 0),
+		geom(nameVtx, 2),
+		frag(nameFrag, 1);
+
+	// program
+	id = glCreateProgram();
+	glAttachShader(id, vtx._id);
+	glAttachShader(id, geom._id);
 	glAttachShader(id, frag._id);
 	glLinkProgram(id);
 }

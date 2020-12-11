@@ -18,6 +18,8 @@ class Prog {
 
 		Prog(std::string nameVtx, std::string nameFrag);
 
+		Prog(std::string nameVtx, std::string nameGeom, std::string nameFrag);
+
 		void use();
 
 		void unUse();
