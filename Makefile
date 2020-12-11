@@ -3,7 +3,7 @@ CXX = g++
 PROG = a.out
 
 STATIC = main disp util mesh bg char console
-DYNA = poly obj truck scn prog
+DYNA = scn poly obj truck prog
 
 DEP_STATIC = $(patsubst %, %.o, $(STATIC))
 DEP_DYNA = $(patsubst %, lib%.so, $(DYNA))
