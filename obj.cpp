@@ -13,7 +13,7 @@
 #include "util.h"
 #include "state.h"
 
-Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, bool active, glm::vec3 loc) {
+Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string nameVtx, std::string nameFrag, bool active, glm::vec3 loc) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -41,7 +41,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_model = glm::scale(_->_model, glm::vec3(50));
 	_->_model = glm::translate(_->_model, _->_loc);
 
-	_->_prog = Prog("main", "dir");
+	_->_prog = Prog(nameVtx, nameFrag);
 
 	_->_prog.use();
 
@@ -66,7 +66,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	return _;
 }
 
-Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, bool active, Obj* child[], unsigned int noChild, glm::vec3 loc) {
+Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string nameVtx, std::string nameFrag, bool active, Obj* child[], unsigned int noChild, glm::vec3 loc) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -98,7 +98,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_model = glm::scale(_->_model, glm::vec3(50));
 	_->_model = glm::translate(_->_model, _->_loc);
 
-	_->_prog = Prog("main", "dir");
+	_->_prog = Prog(nameVtx, nameFrag);
 
 	_->_prog.use();
 
@@ -123,7 +123,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	return _;
 }
 
-Obj* objMk(std::string name, bool active, glm::vec3 loc) {
+Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool active, glm::vec3 loc) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -154,7 +154,7 @@ Obj* objMk(std::string name, bool active, glm::vec3 loc) {
 	_->_model = glm::scale(_->_model, glm::vec3(50));
 	_->_model = glm::translate(_->_model, _->_loc);
 
-	_->_prog = Prog("main", "dir");
+	_->_prog = Prog(nameVtx, nameFrag);
 
 	_->_prog.use();
 
@@ -179,7 +179,7 @@ Obj* objMk(std::string name, bool active, glm::vec3 loc) {
 	return _;
 }
 
-Obj* objMk(std::string name, bool active, Obj* child[], unsigned int noChild, glm::vec3 loc) {
+Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool active, Obj* child[], unsigned int noChild, glm::vec3 loc) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -214,7 +214,7 @@ Obj* objMk(std::string name, bool active, Obj* child[], unsigned int noChild, gl
 	_->_model = glm::translate(_->_model, _->_loc);
 	_->_model = glm::scale(_->_model, glm::vec3(50));
 
-	_->_prog = Prog("main", "dir");
+	_->_prog = Prog(nameVtx, nameFrag);
 
 	_->_prog.use();
 

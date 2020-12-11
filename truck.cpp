@@ -7,7 +7,7 @@ Truck* truckMk() {
 	int i = 0;
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < 2; x++) {
-			child[i] = objMk("wheel", false, glm::vec3(x * -2.6, -1, z ? 1 : -1));
+			child[i] = objMk("wheel", "main", "dir", false, glm::vec3(x * -2.6, -1, z ? 1 : -1));
 
 			i++;
 		}
@@ -15,7 +15,7 @@ Truck* truckMk() {
 
 	_->_bed = ptMk();
 
-	_->_parent = objMk("truck/front", true, child, sizeof child / sizeof *child, glm::vec3(2.4, 1.3, 0.0));
+	_->_parent = objMk("truck/front", "main", "dir", true, child, sizeof child / sizeof *child, glm::vec3(2.4, 1.3, 0.0));
 
 	return _;
 }
