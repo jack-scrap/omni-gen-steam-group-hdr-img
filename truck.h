@@ -1,7 +1,9 @@
 #pragma once
 
+#include "obj.h"
+
 typedef struct {
-	int _asdf;
+	Obj* _parent;
 } Truck;
 
 Truck* truckMk();
