@@ -11,6 +11,7 @@
 #include "state.h"
 #include "obj.h"
 #include "truck.h"
+#include "pt.h"
 
 bool run = true;
 

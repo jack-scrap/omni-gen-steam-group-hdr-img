@@ -13,6 +13,8 @@ Truck* truckMk() {
 		}
 	}
 
+	_->_bed = ptMk();
+
 	_->_parent = objMk("truck/front", true, child, sizeof child / sizeof *child, glm::vec3(2.4, 1.3, 0.0));
 
 	return _;
@@ -20,4 +22,6 @@ Truck* truckMk() {
 
 void truckDraw(Truck* truck) {
 	objDraw(truck->_parent);
+
+	ptDraw(truck->_bed);
 }
