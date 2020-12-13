@@ -18,8 +18,6 @@ class Obj(Structure):
         self._ptr = ptr
         self._loc = ptr.contents._loc
 
-        self.mv(self._loc)
-
 get = obj.get
 get.restype = POINTER(Obj)
 get.argtypes = None
