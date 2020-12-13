@@ -10,6 +10,8 @@ Disp disp("asdf", {
 	state::view[0] + consoleWd, state::view[1]
 }, col[false]);
 
+Obj* wheel = objMk("wheel", "main", "dir", true, glm::vec3(0.0, 0.0, 0.0));
+
 Obj* child[] = {
 	objMk("wheel", "main", "dir", false, glm::vec3(0.0, 0.0, -1)),
 	objMk("wheel", "main", "dir", false, glm::vec3(0.0, 0.0, 1)),
