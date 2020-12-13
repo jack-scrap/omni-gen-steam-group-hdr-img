@@ -396,7 +396,7 @@ Obj* get() {
 	return wheel;
 }
 
-void set(GLfloat loc[3]) {
+void set(GLfloat* loc) {
 	/* unsigned int fps = 10; */
 
 	/* float step[3]; */
@@ -418,10 +418,6 @@ void set(GLfloat loc[3]) {
 
 	for (int i = 0; i < 3; i++) {
 		wheel->_loc[i] = loc[i];
-	}
-
-	for (int i = 0; i < 3; i++) {
-		std::cout << wheel->_loc[i] << std::endl;
 	}
 
 	wheel->_model = glm::translate(glm::mat4(1.0), {

@@ -71,4 +71,4 @@ extern "C" void objDraw(Obj* obj);
 
 extern "C" Obj* get();
 
-extern "C" void set(GLfloat loc[3]);
+extern "C" void set(GLfloat* loc);
