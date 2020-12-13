@@ -29,3 +29,5 @@ set.restype = c_void_p
 set.argtypes = [
     c_float * 3
 ]
+
+wheel = Obj(get())
