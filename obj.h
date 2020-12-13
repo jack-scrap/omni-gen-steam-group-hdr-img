@@ -69,4 +69,6 @@ extern "C" void objMv(Obj* obj, GLfloat* d);
 
 extern "C" void objDraw(Obj* obj);
 
-extern "C" void set(Obj* obj, GLfloat* loc);
+extern "C" Obj* get();
+
+extern "C" void set(GLfloat* loc);

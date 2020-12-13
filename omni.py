@@ -15,12 +15,17 @@ class Obj(Structure):
         set(self._ptr, self._loc)
 
         for i in range(3):
-            print(self._ptr._loc[i])
+            print(self._ptr.contents._loc[i])
 
     def __init__(self, ptr):
-        self._loc = ptr._loc
+        self._ptr = ptr
+        self._loc = ptr.contents._loc
 
         self.mv(self._loc)
+
+get = obj.get
+get.restype = POINTER(Obj)
+get.argtypes = None
 
 set = obj.set
 set.restype = c_void_p
@@ -28,5 +33,3 @@ set.argtypes = [
     POINTER(Obj),
     c_float * 3
 ]
-
-wheel = Obj(scn.wheel)
