@@ -12,7 +12,7 @@ class Obj(Structure):
         for i in range(3):
             self._loc[i] = loc[i]
 
-        set(self._loc)
+        set(self._ptr, self._loc)
 
     def __init__(self, ptr):
         self._ptr = ptr
@@ -27,6 +27,7 @@ get.argtypes = None
 set = obj.set
 set.restype = c_void_p
 set.argtypes = [
+    POINTER(Obj),
     c_float * 3
 ]
 
