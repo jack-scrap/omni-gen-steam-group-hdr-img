@@ -9,13 +9,9 @@ class Obj(Structure):
     ]
 
     def mv(self, loc):
-        for i in range(3):
-            self._loc[i] = loc[i]
+        self.loc = loc
 
-        set(self._ptr, self._loc)
-
-        for i in range(3):
-            print(self._ptr.contents._loc[i])
+        set(self._loc)
 
     def __init__(self, ptr):
         self._ptr = ptr
@@ -30,6 +26,5 @@ get.argtypes = None
 set = obj.set
 set.restype = c_void_p
 set.argtypes = [
-    POINTER(Obj),
     c_float * 3
 ]
