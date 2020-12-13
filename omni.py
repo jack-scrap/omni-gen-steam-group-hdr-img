@@ -9,7 +9,7 @@ class Obj(Structure):
     ]
 
     def mv(self, loc):
-        for i in range(0, 3):
+        for i in range(3):
             self._loc[i] = loc[i]
 
         set(self._loc)
