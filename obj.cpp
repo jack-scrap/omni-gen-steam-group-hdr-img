@@ -392,11 +392,11 @@ void objDraw(Obj* obj) {
 	}
 }
 
-Obj* get() {
+Obj* objGet() {
 	return wheel;
 }
 
-void set(Obj* obj, GLfloat* d) {
+void objSet(Obj* obj, GLfloat* d) {
 	unsigned int fps = 10;
 
 	float step[3];

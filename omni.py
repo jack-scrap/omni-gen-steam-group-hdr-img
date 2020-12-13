@@ -18,11 +18,11 @@ class Obj(Structure):
         self._ptr = ptr
         self._loc = ptr.contents._loc
 
-get = obj.get
+get = obj.objGet
 get.restype = POINTER(Obj)
 get.argtypes = None
 
-set = obj.set
+set = obj.objSet
 set.restype = c_void_p
 set.argtypes = [
     POINTER(Obj),
