@@ -397,26 +397,20 @@ Obj* get() {
 }
 
 void set(GLfloat* d) {
-	std::cout << "asdf" << std::endl;
+	unsigned int fps = 10;
 
-	/* unsigned int fps = 10; */
+	float step[3];
+	for (int i = 0; i < 3; i++) {
+		step[i] = d[i] / fps;
+	}
 
-	/* float step[3]; */
-	/* for (int i = 0; i < 3; i++) { */
-	/* 	step[i] = d[i] / fps; */
-	/* } */
+	for (int t = 0; t < fps; t++) {
+		for (int i = 0; i < 3; i++) {
+			wheel->_loc[i] += step[i];
+		}
 
-	/* std::cout << step[0] << std::endl; */
-	/* std::cout << step[1] << std::endl; */
-	/* std::cout << step[2] << std::endl; */
+		wheel->_model = glm::translate(glm::mat4(1.0), wheel->_loc);
 
-	/* for (int t = 0; t < fps; t++) { */
-	/* 	for (int i = 0; i < 3; i++) { */
-	/* 		wheel->_loc[i] += step[i]; */
-	/* 	} */
-
-	/* 	wheel->_model = glm::translate(glm::mat4(1.0), wheel->_loc); */
-
-	/* 	std::this_thread::sleep_for(std::chrono::milliseconds(1000 / fps)); */
-	/* } */
+		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / fps));
+	}
 }
