@@ -396,23 +396,35 @@ Obj* get() {
 	return wheel;
 }
 
-void set(GLfloat* loc) {
-	unsigned int fps = 10;
+void set(GLfloat loc[3]) {
+	/* unsigned int fps = 10; */
 
-	float step[3];
+	/* float step[3]; */
+	/* for (int i = 0; i < 3; i++) { */
+	/* 	step[i] = loc[i] / fps; */
+	/* } */
+
+/* 	for (int t = 0; t < fps; t++) { */
+/* 		for (int i = 0; i < 3; i++) { */
+/* 			wheel->_loc[i] += step[i]; */
+/* 		} */
+
+/* 		wheel->_model = glm::translate(glm::mat4(1.0), { */
+/* 			wheel->_loc[0], wheel->_loc[1], wheel->_loc[2] */
+/* 		}); */
+
+/* 		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / fps)); */
+/* 	} */
+
 	for (int i = 0; i < 3; i++) {
-		step[i] = loc[i] / fps;
+		wheel->_loc[i] = loc[i];
 	}
 
-	for (int t = 0; t < fps; t++) {
-		for (int i = 0; i < 3; i++) {
-			wheel->_loc[i] += step[i];
-		}
-
-		wheel->_model = glm::translate(glm::mat4(1.0), {
-			wheel->_loc[0], wheel->_loc[1], wheel->_loc[2]
-		});
-
-		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / fps));
+	for (int i = 0; i < 3; i++) {
+		std::cout << wheel->_loc[i] << std::endl;
 	}
+
+	wheel->_model = glm::translate(glm::mat4(1.0), {
+		wheel->_loc[0], wheel->_loc[1], wheel->_loc[2]
+	});
 }
