@@ -38,6 +38,8 @@ void truckMv(Truck* truck, GLfloat* d) {
 			objMv(truck->_parent->_child[i], d);
 		}
 	}
+
+	ptMv(truck->_bed, d);
 }
 
 Truck* truckGet() {

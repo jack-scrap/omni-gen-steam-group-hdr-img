@@ -8,4 +8,6 @@ typedef struct {
 
 Pt* ptMk();
 
+void ptMv(Pt* pt, GLfloat* d);
+
 void ptDraw(Pt* pt);

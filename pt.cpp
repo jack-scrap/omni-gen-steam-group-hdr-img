@@ -1,8 +1,18 @@
 #include <cstdlib>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <iostream>
 
 #include "pt.h"
+
+void ptMv(Pt* pt, GLfloat* d) {
+	for (int i = 0; i < 3; i++) {
+		pt->_parent->_loc[i] += d[i];
+	}
+
+	pt->_parent->_model = glm::scale(pt->_parent->_model, glm::vec3(50));
+	pt->_parent->_model = glm::translate(pt->_parent->_model, glm::vec3(d[0], d[1], d[2]));
+}
 
 Pt* ptMk() {
 	Pt* _ = (Pt*) malloc(sizeof (Pt));
