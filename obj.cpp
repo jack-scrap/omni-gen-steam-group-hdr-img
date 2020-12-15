@@ -57,6 +57,8 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 	_->_uni[LOC] = glGetUniformLocation(_->_prog.id, "loc");
 
+	_->_uni[ACTIVE] = glGetUniformLocation(_->_prog.id, "active");
+
 	glUniformMatrix4fv(_->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
 	glUniformMatrix4fv(_->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
 	glUniformMatrix4fv(_->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
@@ -114,6 +116,8 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 	_->_uni[LOC] = glGetUniformLocation(_->_prog.id, "loc");
 
+	_->_uni[ACTIVE] = glGetUniformLocation(_->_prog.id, "active");
+
 	glUniformMatrix4fv(_->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
 	glUniformMatrix4fv(_->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
 	glUniformMatrix4fv(_->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
@@ -166,6 +170,8 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_uni[PROJ] = glGetUniformLocation(_->_prog.id, "proj");
 
 	_->_uni[LOC] = glGetUniformLocation(_->_prog.id, "loc");
+
+	_->_uni[ACTIVE] = glGetUniformLocation(_->_prog.id, "active");
 
 	glUniformMatrix4fv(_->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
 	glUniformMatrix4fv(_->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
@@ -224,6 +230,8 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 	_->_uni[LOC] = glGetUniformLocation(_->_prog.id, "loc");
 
+	_->_uni[ACTIVE] = glGetUniformLocation(_->_prog.id, "active");
+
 	glUniformMatrix4fv(_->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
 	glUniformMatrix4fv(_->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
 	glUniformMatrix4fv(_->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
@@ -279,6 +287,8 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 	_->_uni[PROJ] = glGetUniformLocation(_->_prog.id, "proj");
 
 	_->_uni[LOC] = glGetUniformLocation(_->_prog.id, "loc");
+
+	_->_uni[ACTIVE] = glGetUniformLocation(_->_prog.id, "active");
 
 	glUniformMatrix4fv(_->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
 	glUniformMatrix4fv(_->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
@@ -339,6 +349,8 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 	_->_uni[PROJ] = glGetUniformLocation(_->_prog.id, "proj");
 
 	_->_uni[LOC] = glGetUniformLocation(_->_prog.id, "loc");
+
+	_->_uni[ACTIVE] = glGetUniformLocation(_->_prog.id, "active");
 
 	glUniformMatrix4fv(_->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
 	glUniformMatrix4fv(_->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
