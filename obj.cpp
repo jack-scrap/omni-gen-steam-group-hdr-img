@@ -365,6 +365,29 @@ void objMv(Obj* obj, GLfloat* d) {
 	}
 }
 
+Obj* objGet() {
+	return wheel;
+}
+
+void objSet(Obj* obj, GLfloat* d) {
+	unsigned int fps = 10;
+
+	float step[3];
+	for (int i = 0; i < 3; i++) {
+		step[i] = d[i] / fps;
+	}
+
+	for (int t = 0; t < fps; t++) {
+		for (int i = 0; i < 3; i++) {
+			obj->_loc[i] += step[i];
+		}
+
+		obj->_model = glm::translate(glm::mat4(1.0), obj->_loc);
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / fps));
+	}
+}
+
 void objDraw(Obj* obj) {
 	glBindVertexArray(obj->_id[VAO]);
 
@@ -389,28 +412,5 @@ void objDraw(Obj* obj) {
 		if (&obj->_child[i]) {
 			objDraw(obj->_child[i]);
 		}
-	}
-}
-
-Obj* objGet() {
-	return wheel;
-}
-
-void objSet(Obj* obj, GLfloat* d) {
-	unsigned int fps = 10;
-
-	float step[3];
-	for (int i = 0; i < 3; i++) {
-		step[i] = d[i] / fps;
-	}
-
-	for (int t = 0; t < fps; t++) {
-		for (int i = 0; i < 3; i++) {
-			obj->_loc[i] += step[i];
-		}
-
-		obj->_model = glm::translate(glm::mat4(1.0), obj->_loc);
-
-		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / fps));
 	}
 }

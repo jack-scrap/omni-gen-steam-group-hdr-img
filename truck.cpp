@@ -1,4 +1,9 @@
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <thread>
+
 #include "truck.h"
+#include "scn.h"
 
 Truck* truckMk() {
 	Truck* _ = (Truck*) malloc(sizeof (Truck));
@@ -18,6 +23,29 @@ Truck* truckMk() {
 	_->_parent = objMk("truck/front", "main", "dir", true, child, sizeof child / sizeof *child, glm::vec3(2.4, 1.3, 0.0));
 
 	return _;
+}
+
+Truck* truckGet() {
+	return truck;
+}
+
+void truckSet(Truck* truck, GLfloat* d) {
+	unsigned int fps = 10;
+
+	float step[3];
+	for (int i = 0; i < 3; i++) {
+		step[i] = d[i] / fps;
+	}
+
+	for (int t = 0; t < fps; t++) {
+		for (int i = 0; i < 3; i++) {
+			truck->_parent->_loc[i] += step[i];
+		}
+
+		truck->_parent->_model = glm::translate(glm::mat4(1.0), truck->_parent->_loc);
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / fps));
+	}
 }
 
 void truckDraw(Truck* truck) {

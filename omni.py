@@ -1,6 +1,7 @@
 from ctypes import *
 
 obj = CDLL('libobj.so')
+truck = CDLL('libtruck.so')
 scn = CDLL('libscn.so')
 
 class Obj(Structure):
@@ -12,21 +13,48 @@ class Obj(Structure):
         for i in range(3):
             self._loc[i] = loc[i]
 
-        set(self._ptr, self._loc)
+        objSet(self._ptr, self._loc)
 
     def __init__(self, ptr):
         self._ptr = ptr
         self._loc = ptr.contents._loc
 
-get = obj.objGet
-get.restype = POINTER(Obj)
-get.argtypes = None
+class Truck(Structure):
+    _fields_ = [
+        ("_loc", c_float * 3)
+    ]
 
-set = obj.objSet
-set.restype = c_void_p
-set.argtypes = [
+    def mv(self, loc):
+        for i in range(3):
+            self._loc[i] = loc[i]
+
+        truckSet(self._ptr, self._loc)
+
+    def __init__(self, ptr):
+        self._ptr = ptr
+        self._loc = ptr.contents._loc
+
+objGet = obj.objGet
+objGet.restype = POINTER(Obj)
+objGet.argtypes = None
+
+objSet = obj.objSet
+objSet.restype = c_void_p
+objSet.argtypes = [
     POINTER(Obj),
     c_float * 3
 ]
 
-wheel = Obj(get())
+truckGet = truck.truckGet
+truckGet.restype = POINTER(Truck)
+truckGet.argtypes = None
+
+truckSet = truck.truckSet
+truckSet.restype = c_void_p
+truckSet.argtypes = [
+        POINTER(Truck),
+        c_float * 3
+]
+
+wheel = Obj(objGet())
+truck = Truck(truckGet())

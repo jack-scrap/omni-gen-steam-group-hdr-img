@@ -11,4 +11,8 @@ typedef struct {
 
 Truck* truckMk();
 
+extern "C" Truck* truckGet();
+
+extern "C" void truckSet(Truck* truck, GLfloat* d);
+
 extern "C" void truckDraw(Truck* truck);
