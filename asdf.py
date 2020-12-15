@@ -4,10 +4,6 @@ sys.path.insert(1, '.')
 
 import omni
 
-# omni.wheel.mv([
-#     1, 0, 0
-# ])
-
-omni.truck.mv([
+omni.wheel.mv([
     1, 0, 0
 ])

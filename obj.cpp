@@ -76,7 +76,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	for (int i = 0; i < _->_noChild; i++) {
 		_->_child[i] = child[i];
 	}
-	_->_noChild = 2 * 2;
+	_->_noChild = noChild;
 	_->_loc = loc;
 
 	// vertex
@@ -186,7 +186,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	for (int i = 0; i < _->_noChild; i++) {
 		_->_child[i] = child[i];
 	}
-	_->_noChild = 2 * 2;
+	_->_noChild = noChild;
 	_->_loc = loc;
 
 	// vertex
@@ -298,7 +298,7 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 	for (int i = 0; i < noChild; i++) {
 		_->_child[i] = child[i];
 	}
-	_->_noChild = 2 * 2;
+	_->_noChild = noChild;
 	_->_loc = loc;
 
 	// vertex
