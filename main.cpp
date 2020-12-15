@@ -24,10 +24,6 @@ Console* console;
 int main() {
 	Console* console = new Console(buff, state::ln, disp._res);
 
-	void* handle = dlopen("libpoly.so", RTLD_LAZY);
-
-	void (*polyDraw)(Poly* poly) = (void (*)(Poly*)) dlsym(handle, "polyDraw");
-
 	TTF_Font* font = TTF_OpenFont("res/terminus.bdf", 24);
 
 	SDL_Event e;

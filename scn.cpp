@@ -10,11 +10,6 @@ Disp disp("asdf", {
 	state::view[0] + consoleWd, state::view[1]
 }, col[false]);
 
-Obj* child[] = {
-	objMk("wheel", "main", "dir", true, glm::vec3(0.0, 0.0, 0.0))
-};
-Obj* wheel = objMk("wheel", "main", "dir", true, child, sizeof child / sizeof *child, glm::vec3(3.0, 0.0, 0.0));
+Obj* wheel = objMk("wheel", "main", "dir", true, glm::vec3(3.0, 0.0, 0.0));
 
 Truck* truck = truckMk();
-
-Pt* pt = ptMk();
