@@ -106,8 +106,6 @@ int main() {
 
 		glViewport(console->_res[0], 0, scr[0], scr[1]);
 
-		/* objDraw(wheel); */
-
 		truckDraw(truck);
 
 		glViewport(0, 0, console->_res[0], scr[1]);
