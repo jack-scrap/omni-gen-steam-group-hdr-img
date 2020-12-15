@@ -358,9 +358,8 @@ void objMv(Obj* obj, GLfloat* d) {
 	obj->_model = glm::translate(obj->_model, glm::vec3(d[0], d[1], d[2]));
 
 	for (int i = 0; i < obj->_noChild; i++) {
-		if (&obj->_child[i]) {
-			obj->_child[i]->_model = glm::translate(obj->_child[i]->_model, glm::vec3(d[0], d[1], d[2]));
-			obj->_model = glm::scale(obj->_model, glm::vec3(50));
+		if (obj->_child[i]) {
+			objMv(obj->_child[i], d);
 		}
 	}
 }
