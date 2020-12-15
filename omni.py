@@ -19,20 +19,12 @@ class Obj(Structure):
         self._ptr = ptr
         self._loc = ptr.contents._loc
 
-class Truck(Structure):
-    _fields_ = [
-        ("_loc", c_float * 3)
-    ]
-
+class Truck(Obj):
     def mv(self, loc):
         for i in range(3):
             self._loc[i] = loc[i]
 
         truckMv(self._ptr, self._loc)
-
-    def __init__(self, ptr):
-        self._ptr = ptr
-        self._loc = ptr.contents._loc
 
 objGet = obj.objGet
 objGet.restype = POINTER(Obj)
