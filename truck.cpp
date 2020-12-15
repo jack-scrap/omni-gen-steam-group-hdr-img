@@ -34,9 +34,8 @@ void truckMv(Truck* truck, GLfloat* d) {
 	truck->_parent->_model = glm::translate(truck->_parent->_model, glm::vec3(d[0], d[1], d[2]));
 
 	for (int i = 0; i < truck->_parent->_noChild; i++) {
-		if (&truck->_parent->_child[i]) {
-			truck->_parent->_child[i]->_model = glm::translate(truck->_parent->_child[i]->_model, glm::vec3(d[0], d[1], d[2]));
-			truck->_parent->_model = glm::scale(truck->_parent->_model, glm::vec3(50));
+		if (truck->_parent->_child[i]) {
+			objMv(truck->_parent->_child[i], d);
 		}
 	}
 }
