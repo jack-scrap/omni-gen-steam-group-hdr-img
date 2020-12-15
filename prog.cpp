@@ -54,7 +54,7 @@ Prog::Prog(std::string nameVtx, std::string nameGeom, std::string nameFrag) {
 	// shader
 	Shad
 		vtx(nameVtx, 0),
-		geom(nameVtx, 2),
+		geom(nameGeom, 2),
 		frag(nameFrag, 1);
 
 	// program
