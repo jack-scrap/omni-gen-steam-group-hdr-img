@@ -29,7 +29,7 @@ class Console : public Mesh {
 
 		GLuint _tex;
 
-		std::vector<std::vector<SDL_Surface*>> map;
+		std::vector<std::vector<SDL_Surface*>> _map;
 
 	public:
 		std::vector<std::string> _buff;
