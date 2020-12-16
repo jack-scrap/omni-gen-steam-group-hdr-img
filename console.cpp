@@ -75,16 +75,19 @@ void Console::push(char c) {
 		_buff.back().push_back(c);
 	} else {
 		_buff.push_back({});
+		_buff.back().push_back(c);
 	}
 
 	render();
 }
 
 void Console::pop() {
-	if (!_buff.back().empty()) {
-		_buff.back().pop_back();
-	} else {
-		_buff.pop_back();
+	if (!_buff.empty()) {
+		if (!_buff.back().empty()) {
+			_buff.back().pop_back();
+		} else {
+			_buff.pop_back();
+		}
 	}
 
 	render();
