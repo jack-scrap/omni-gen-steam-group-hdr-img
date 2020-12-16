@@ -18,13 +18,12 @@ class Console : public Mesh {
 
 		std::vector<std::vector<bool>> _hl;
 
-		SDL_Rect
-			bgRect = {
-				0,
-				0,
-				state::ln * state::sz[0],
-				600
-			};
+		SDL_Rect canv = {
+			0,
+			0,
+			state::ln * state::sz[0],
+			600
+		};
 
 		std::vector<std::vector<SDL_Surface*>> _map;
 

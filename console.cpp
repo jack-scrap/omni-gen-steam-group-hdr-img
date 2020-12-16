@@ -28,7 +28,7 @@ Console::Console(std::vector<std::string> buff) :
 
 void Console::render() {
 	SDL_Surface* bg = SDL_CreateRGBSurface(0, state::res[0], state::res[1], 4 * sizeof (long int), 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
-	SDL_FillRect(bg, &bgRect, SDL_MapRGBA(bg->format, col[false][0], col[false][1], col[false][2], 255));
+	SDL_FillRect(bg, &canv, SDL_MapRGBA(bg->format, col[false][0], col[false][1], col[false][2], 255));
 
 	_hl.clear();
 	_map.clear();
@@ -58,7 +58,7 @@ void Console::render() {
 		for (int i = 0; i < _buff[l].size(); i++) {
 			if (_hl[l][i]) {
 				SDL_Surface* bg = SDL_CreateRGBSurface(0, state::res[0], state::res[1], 4 * sizeof (long int), 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
-				SDL_FillRect(bg, &bgRect, SDL_MapRGBA(bg->format, col[_hl[l][i]][0], col[_hl[l][i]][1], col[_hl[l][i]][2], 255));
+				SDL_FillRect(bg, &canv, SDL_MapRGBA(bg->format, col[_hl[l][i]][0], col[_hl[l][i]][1], col[_hl[l][i]][2], 255));
 
 				glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::sz[0], l * state::sz[1], state::sz[0], state::sz[1], GL_BGRA, GL_UNSIGNED_BYTE, bg->pixels);
 
