@@ -89,12 +89,7 @@ int main() {
 							break;
 
 						case SDLK_F3:
-							std::string str;
-							for (const std::string& l : console->_buff) {
-								str += l + '\n';
-							}
-
-							PyRun_SimpleString(str.c_str());
+							PyRun_SimpleString(util::str::join(console->_buff).c_str());
 
 							break;
 					}

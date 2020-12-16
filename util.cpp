@@ -49,6 +49,15 @@ std::vector<std::string> util::str::split(std::string buff, char delim) {
 	return tok;
 }
 
+std::string util::str::join(std::vector<std::string> buff) {
+	std::string _;
+	for (const std::string& l : buff) {
+		_ += l + '\n';
+	}
+
+	return _;
+}
+
 std::vector<GLfloat> util::mesh::rd::vtc(std::string name) {
 	std::vector<GLfloat> obj;
 
