@@ -81,6 +81,10 @@ void Console::push(char c) {
 	render();
 }
 
+void Console::newline() {
+	_buff.push_back({});
+}
+
 void Console::pop() {
 	if (!_buff.empty()) {
 		if (!_buff.back().empty()) {
