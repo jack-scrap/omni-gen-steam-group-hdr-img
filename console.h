@@ -16,7 +16,7 @@ class Console : public Mesh {
 	private:
 		TTF_Font* font;
 
-		std::vector<std::vector<bool>> _active;
+		std::vector<std::vector<bool>> _hl;
 
 		SDL_Rect
 			bgRect = {
