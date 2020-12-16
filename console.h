@@ -26,9 +26,9 @@ class Console : public Mesh {
 				600
 			};
 
-		GLuint _tex;
-
 		std::vector<std::vector<SDL_Surface*>> _map;
+
+		GLuint _tex;
 
 	public:
 		unsigned int _mode;
