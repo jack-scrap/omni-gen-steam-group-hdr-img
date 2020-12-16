@@ -13,7 +13,7 @@ Console::Console(std::vector<std::string> buff, unsigned int ln, glm::vec2 scr) 
 
 		TTF_Font* font = TTF_OpenFont("res/terminus.bdf", state::sz[1]);
 
-		for (int l = 0; l < buff.size(); l++) {
+		for (int l = 0; l < state::l; l++) {
 			std::vector<Bg> bg;
 			std::vector<Char> str;
 
@@ -44,7 +44,7 @@ void Console::print() {
 
 	glDisable(GL_DEPTH_TEST);
 
-	for (int l = 0; l < _buff.size(); l++) {
+	for (int l = 0; l < state::l; l++) {
 		for (int i = 0; i < _buff[l].size(); i++) {
 			_bg[l][i].draw();
 			_txt[l][i].draw();
