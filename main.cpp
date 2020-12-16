@@ -79,6 +79,16 @@ int main() {
 							break;
 
 						case SDLK_F1:
+							console->_mode = EDITOR;
+
+							break;
+
+						case SDLK_F2:
+							console->_mode = CMD;
+
+							break;
+
+						case SDLK_F3:
 							std::string str;
 							for (const std::string& l : console->_buff) {
 								str += l + '\n';

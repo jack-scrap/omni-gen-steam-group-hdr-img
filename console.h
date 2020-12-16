@@ -9,11 +9,18 @@
 #include "poly.h"
 #include "col.h"
 
+enum mode {
+	EDITOR,
+	CMD
+};
+
 class Console {
 	private:
 		std::string cmd = "asdf";
 
 	public:
+		unsigned int _mode = EDITOR;
+
 		std::vector<std::vector<Bg>> _bg;
 		std::vector<std::vector<Char>> _txt;
 
