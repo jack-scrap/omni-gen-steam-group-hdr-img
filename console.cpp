@@ -14,26 +14,19 @@ Console::Console(std::vector<std::string> buff, unsigned int ln, glm::vec2 scr) 
 		TTF_Font* font = TTF_OpenFont("res/terminus.bdf", state::sz[1]);
 
 		for (int l = 0; l < buff.size(); l++) {
-			std::vector<Bg> str;
-
-			for (int i = 0; i < buff[l].size(); i++) {
-				str.push_back(Bg(false, {
-					i, l
-				}));
-			}
-
-			_bg.push_back(str);
-		}
-
-		for (int l = 0; l < buff.size(); l++) {
+			std::vector<Bg> bg;
 			std::vector<Char> str;
 
 			for (int i = 0; i < buff[l].size(); i++) {
+				bg.push_back(Bg(false, {
+					i, l
+				}));
 				str.push_back(Char(buff[l][i], true, font, {
 					i, l
 				}));
 			}
 
+			_bg.push_back(bg);
 			_txt.push_back(str);
 		}
 
