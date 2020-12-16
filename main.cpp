@@ -34,6 +34,11 @@ int main() {
 					console->push((char) e.key.keysym.sym);
 				} else {
 					switch (e.key.keysym.sym) {
+						case SDLK_SPACE:
+							console->push(' ');
+
+							break;
+
 						case SDLK_RETURN:
 							console->newline();
 
