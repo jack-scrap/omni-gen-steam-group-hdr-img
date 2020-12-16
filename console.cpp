@@ -29,6 +29,9 @@ void Console::render() {
 	SDL_Surface* bg = SDL_CreateRGBSurface(0, bgRect.w, bgRect.h, 4 * sizeof (long int), 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
 	SDL_FillRect(bg, &bgRect, SDL_MapRGBA(bg->format, col[false][0], col[false][1], col[false][2], 255));
 
+	_active.clear();
+	map.clear();
+
 	for (int l = 0; l < _buff.size(); l++) {
 		std::vector<bool> line;
 
@@ -73,6 +76,8 @@ void Console::push(char c) {
 	} else {
 		_buff.push_back({});
 	}
+
+	render();
 }
 
 void Console::draw() {
