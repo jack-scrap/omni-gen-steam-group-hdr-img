@@ -80,6 +80,16 @@ void Console::push(char c) {
 	render();
 }
 
+void Console::pop() {
+	if (!_buff.back().empty()) {
+		_buff.back().pop_back();
+	} else {
+		_buff.pop_back();
+	}
+
+	render();
+}
+
 void Console::draw() {
 	glBindVertexArray(_id[VAO]);
 	_prog.use();

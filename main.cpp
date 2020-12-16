@@ -32,6 +32,13 @@ int main() {
 			if (e.type == SDL_KEYDOWN) {
 				if (e.key.keysym.sym >= SDLK_a && e.key.keysym.sym <= SDLK_z) {
 					console->push((char) e.key.keysym.sym);
+				} else {
+					switch (e.key.keysym.sym) {
+						case SDLK_BACKSPACE:
+							console->pop();
+
+							break;
+					}	
 				}
 
 				/* if (e.key.keysym.sym >= SDLK_a && e.key.keysym.sym <= SDLK_z) { */

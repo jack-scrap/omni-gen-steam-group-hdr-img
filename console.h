@@ -38,6 +38,8 @@ class Console : public Mesh {
 
 		void push(char c);
 
+		void pop();
+
 		Console(std::vector<std::string> buff);
 
 		void draw() override;
