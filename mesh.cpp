@@ -1,6 +1,4 @@
 #include <iostream>
-#include <thread>
-#include <chrono>
 
 #include <glm/gtc/type_ptr.hpp>
 
@@ -45,28 +43,11 @@ Mesh::Mesh(std::vector<GLfloat> pos, std::string vtx, std::string frag, glm::vec
 	}
 
 void Mesh::mv(glm::vec2 d) {
-	for (int i = 0; i < _fps; i++) {
-		_loc += d;
+	_loc += d;
 
-		_prog.use();
+	_prog.use();
 
-		glUniform2fv(_uni[LOC], 1, glm::value_ptr(_loc));
+	glUniform2fv(_uni[LOC], 1, glm::value_ptr(_loc));
 
-		_prog.unUse();
-
-		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / _fps));
-	}
-}
-
-std::vector<GLfloat> util::mesh::plane(glm::vec2 sz) {
-	std::vector<GLfloat> _;
-
-	for (int y = 0; y < 2; y++) {
-		for (int x = 0; x < 2; x++) {
-			_.push_back(x * sz[0]);
-			_.push_back(y * sz[1]);
-		}
-	}
-
-	return _;
+	_prog.unUse();
 }

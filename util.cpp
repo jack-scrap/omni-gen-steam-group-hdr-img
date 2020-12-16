@@ -58,6 +58,19 @@ std::string util::str::join(std::vector<std::string> buff) {
 	return _;
 }
 
+std::vector<GLfloat> util::mesh::plane(glm::vec2 sz) {
+	std::vector<GLfloat> _;
+
+	for (int y = 0; y < 2; y++) {
+		for (int x = 0; x < 2; x++) {
+			_.push_back(x * sz[0]);
+			_.push_back(y * sz[1]);
+		}
+	}
+
+	return _;
+}
+
 std::vector<GLfloat> util::mesh::rd::vtc(std::string name) {
 	std::vector<GLfloat> obj;
 

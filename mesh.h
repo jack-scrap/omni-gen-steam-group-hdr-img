@@ -12,12 +12,10 @@ class Mesh {
 	private:
 		std::vector<GLfloat> _st = util::mesh::plane(glm::vec2(1, 1));
 
-		unsigned int _fps = 10;
+		glm::vec2 _loc;
 
 	public:
 		std::vector<GLfloat> _pos;
-
-		glm::vec2 _loc;
 
 		enum id {
 			VAO,

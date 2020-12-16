@@ -1,82 +1,79 @@
+#include <vector>
 #include <Python.h>
 
+#include <SDL2/SDL_ttf.h>
+
 #include "console.h"
+#include "col.h"
 #include "state.h"
 
-Console::Console(std::vector<std::string> buff, unsigned int ln, glm::vec2 scr) :
-	_buff(buff),
-	_cursor(true, {
-		buff.back().size(), buff.size() - 1
-	}) {
-		// font
+Console::Console(std::vector<std::string> buff) :
+	Mesh(util::mesh::plane(glm::vec2(abs(-1 - 1), -1 -1)), "text", "text", glm::vec2(-1.0, 1.0)) {
+		// text
 		TTF_Init();
 
 		TTF_Font* font = TTF_OpenFont("res/terminus.bdf", state::sz[1]);
 
-		if (buff.size() < state::l) {
-			roof = buff.size();
-		} else {
-			roof = state::l;
-		}
+		SDL_Surface* bg = SDL_CreateRGBSurface(0, bgRect.w, bgRect.h, 4 * sizeof (long int), 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
+		SDL_FillRect(bg, &bgRect, SDL_MapRGBA(bg->format, colS[false].r, colS[false].g, colS[false].b, 255));
 
-		for (int l = 0; l < roof; l++) {
-			std::vector<Bg> bg;
-			std::vector<Char> str;
+		for (int l = 0; l < buff.size(); l++) {
+			std::vector<bool> line;
 
 			for (int i = 0; i < buff[l].size(); i++) {
-				bg.push_back(Bg(false, {
-					i, l
-				}));
-				str.push_back(Char(buff[l][i], true, font, {
-					i, l
-				}));
+				line.push_back(i > 2);
 			}
 
-			_bg.push_back(bg);
-			_txt.push_back(str);
+			_active.push_back(line);
 		}
 
-		// command-line
-		std::vector<Bg> bg;
-		std::vector<Char> str;
+		std::vector<std::vector<SDL_Surface*>> map;
+		for (int l = 0; l < buff.size(); l++) {
+			std::vector<SDL_Surface*> line;
 
-		for (int i = 0; i < cmd.size(); i++) {
-			bg.push_back(Bg(false, {
-				i, state::l
-			}));
-			str.push_back(Char(cmd[i], true, font, {
-				i, state::l
-			}));
+			for (int i = 0; i < buff[l].size(); i++) {
+				line.push_back(TTF_RenderGlyph_Blended(
+					font,
+					buff[l][i],
+					colS[_active[l][i]]
+				));
+			}
+
+			map.push_back(line);
 		}
 
-		_bg.push_back(bg);
-		_txt.push_back(str);
+		glGenTextures(1, &_tex);
+		glBindTexture(GL_TEXTURE_2D, _tex);
 
-		// dimensions
-		_res = glm::vec2(ln * state::sz[0], scr[1]);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, bg->w, bg->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, bg->pixels);
+		for (int l = 0; l < buff.size(); l++) {
+			for (int i = 0; i < buff[l].size(); i++) {
+				if (_active[l][i]) {
+					SDL_Surface* bg = SDL_CreateRGBSurface(0, bgRect.w, bgRect.h, 4 * sizeof (long int), 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+					SDL_FillRect(bg, &bgRect, SDL_MapRGBA(bg->format, colS[true].r, colS[true].g, colS[true].b, 255));
+
+					glTexSubImage2D(GL_TEXTURE_2D, 0, i * charRect.w, l * charRect.h, charRect.w, charRect.h, GL_BGRA, GL_UNSIGNED_BYTE, bg->pixels);
+
+					glTexSubImage2D(GL_TEXTURE_2D, 0, i * charRect.w, l * charRect.h, charRect.w, charRect.h, GL_BGRA, GL_UNSIGNED_BYTE, map[l][i]->pixels);
+				} else {
+					glTexSubImage2D(GL_TEXTURE_2D, 0, i * charRect.w, l * charRect.h, charRect.w, charRect.h, GL_BGRA, GL_UNSIGNED_BYTE, map[l][i]->pixels);
+				}
+			}
+		}
+		glGenerateMipmap(GL_TEXTURE_2D);
 
 		// Python
 		Py_Initialize();
 	}
 
-void Console::print() {
-	_cursor = Bg(true, {
-		_buff.back().size(), _buff.size() - 1
-	});
+void Console::draw() {
+	glBindVertexArray(_id[VAO]);
+	_prog.use();
 
-	glDisable(GL_DEPTH_TEST);
+	glBindTexture(GL_TEXTURE_2D, _tex);
 
-	for (int l = 0; l < roof; l++) {
-		for (int i = 0; i < _buff[l].size(); i++) {
-			_bg[l][i].draw();
-			_txt[l][i].draw();
-		}
-	}
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, _pos.size());
 
-	for (int i = 0; i < cmd.size(); i++) {
-		_bg[_buff.size()][i].draw();
-		_txt[_buff.size()][i].draw();
-	}
-
-	_cursor.draw();
+	_prog.unUse();
+	glBindVertexArray(0);
 }

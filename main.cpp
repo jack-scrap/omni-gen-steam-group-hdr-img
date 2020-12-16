@@ -22,7 +22,7 @@ glm::vec2 scr = glm::vec2(800, 600);
 Console* console;
 
 int main() {
-	Console* console = new Console(buff, state::ln, disp._res);
+	Console* console = new Console(buff);
 
 	TTF_Font* font = TTF_OpenFont("res/terminus.bdf", 24);
 
@@ -30,70 +30,70 @@ int main() {
 	while (run) {
 		while (SDL_PollEvent(&e)) {
 			if (e.type == SDL_KEYDOWN) {
-				if (e.key.keysym.sym >= SDLK_a && e.key.keysym.sym <= SDLK_z) {
-					console->_buff.back().push_back((char) e.key.keysym.sym);
+				/* if (e.key.keysym.sym >= SDLK_a && e.key.keysym.sym <= SDLK_z) { */
+				/* 	console1->_buff.back().push_back((char) e.key.keysym.sym); */
 
-					console->_bg.back().push_back(Bg(false, {
-						console->_bg.back().size(), console->_bg.size() - 1
-					}));
-					console->_txt.back().push_back(Char((char) e.key.keysym.sym, true, font, {
-						console->_txt.back().size(), console->_bg.size() - 1
-					}));
-				} else {
-					switch (e.key.keysym.sym) {
-						case SDLK_SPACE:
-							console->_buff.back().push_back((char) e.key.keysym.sym);
+				/* 	console1->_bg.back().push_back(Bg(false, { */
+				/* 		console1->_bg.back().size(), console1->_bg.size() - 1 */
+				/* 	})); */
+				/* 	console1->_txt.back().push_back(Char((char) e.key.keysym.sym, true, font, { */
+				/* 		console1->_txt.back().size(), console1->_bg.size() - 1 */
+				/* 	})); */
+				/* } else { */
+				/* 	switch (e.key.keysym.sym) { */
+				/* 		case SDLK_SPACE: */
+				/* 			console1->_buff.back().push_back((char) e.key.keysym.sym); */
 
-							console->_bg.back().push_back(Bg(false, {
-								console->_bg.back().size(), console->_bg.size() - 1
-							}));
-							console->_txt.back().push_back(Char((char) e.key.keysym.sym, true, font, {
-								console->_txt.back().size(), console->_bg.size() - 1
-							}));
+				/* 			console1->_bg.back().push_back(Bg(false, { */
+				/* 				console1->_bg.back().size(), console1->_bg.size() - 1 */
+				/* 			})); */
+				/* 			console1->_txt.back().push_back(Char((char) e.key.keysym.sym, true, font, { */
+				/* 				console1->_txt.back().size(), console1->_bg.size() - 1 */
+				/* 			})); */
 
-						break;
+				/* 		break; */
 
-						case SDLK_BACKSPACE:
-							if (!console->_buff.empty()) {
-								if (!console->_buff.back().empty() &&!console->_txt.back().empty()) {
-									console->_buff.back().pop_back();
+				/* 		case SDLK_BACKSPACE: */
+				/* 			if (!console1->_buff.empty()) { */
+				/* 				if (!console1->_buff.back().empty() &&!console1->_txt.back().empty()) { */
+				/* 					console1->_buff.back().pop_back(); */
 
-									console->_bg.back().pop_back();
-									console->_txt.back().pop_back();
-								} else {
-									console->_buff.pop_back();
+				/* 					console1->_bg.back().pop_back(); */
+				/* 					console1->_txt.back().pop_back(); */
+				/* 				} else { */
+				/* 					console1->_buff.pop_back(); */
 
-									console->_bg.pop_back();
-									console->_txt.pop_back();
-								}
-							}
+				/* 					console1->_bg.pop_back(); */
+				/* 					console1->_txt.pop_back(); */
+				/* 				} */
+				/* 			} */
 
-							break;
+				/* 			break; */
 
-						case SDLK_RETURN:
-							console->_buff.push_back("");
+				/* 		case SDLK_RETURN: */
+				/* 			console1->_buff.push_back(""); */
 
-							console->_bg.push_back({});
-							console->_txt.push_back({});
+				/* 			console1->_bg.push_back({}); */
+				/* 			console1->_txt.push_back({}); */
 
-							break;
+				/* 			break; */
 
-						case SDLK_F1:
-							console->_mode = EDITOR;
+				/* 		case SDLK_F1: */
+				/* 			console1->_mode = EDITOR; */
 
-							break;
+				/* 			break; */
 
-						case SDLK_F2:
-							console->_mode = CMD;
+				/* 		case SDLK_F2: */
+				/* 			console1->_mode = CMD; */
 
-							break;
+				/* 			break; */
 
-						case SDLK_F3:
-							PyRun_SimpleString(util::str::join(console->_buff).c_str());
+				/* 		case SDLK_F3: */
+				/* 			PyRun_SimpleString(util::str::join(console1->_buff).c_str()); */
 
-							break;
-					}
-				}
+				/* 			break; */
+				/* 	} */
+				/* } */
 			}
 
 			if (e.type == SDL_QUIT) {
@@ -105,13 +105,13 @@ int main() {
 
 		glEnable(GL_DEPTH_TEST);
 
-		glViewport(console->_res[0], 0, scr[0], scr[1]);
+		glViewport(state::res[0], 0, scr[0], scr[1]);
 
 		truckDraw(truck);
 
-		glViewport(0, 0, console->_res[0], scr[1]);
+		glViewport(0, 0, state::res[1], scr[1]);
 
-		console->print();
+		console->draw();
 
 		disp.update();
 	}
