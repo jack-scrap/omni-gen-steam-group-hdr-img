@@ -6,6 +6,11 @@
 
 #include "mesh.h"
 
+enum mode {
+	EDITOR,
+	CMD
+};
+
 class Console : public Mesh {
 	private:
 		TTF_Font* font;
@@ -32,6 +37,8 @@ class Console : public Mesh {
 		std::vector<std::vector<SDL_Surface*>> _map;
 
 	public:
+		unsigned int _mode;
+
 		std::vector<std::string> _buff;
 
 		void render();
