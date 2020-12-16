@@ -18,10 +18,10 @@ Console::Console(std::vector<std::string> buff) :
 		SDL_Surface* bg = SDL_CreateRGBSurface(0, bgRect.w, bgRect.h, 4 * sizeof (long int), 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
 		SDL_FillRect(bg, &bgRect, SDL_MapRGBA(bg->format, colS[false].r, colS[false].g, colS[false].b, 255));
 
-		for (int l = 0; l < buff.size(); l++) {
+		for (int l = 0; l < _buff.size(); l++) {
 			std::vector<bool> line;
 
-			for (int i = 0; i < buff[l].size(); i++) {
+			for (int i = 0; i < _buff[l].size(); i++) {
 				line.push_back(i > 2);
 			}
 
@@ -30,13 +30,13 @@ Console::Console(std::vector<std::string> buff) :
 
 		std::vector<std::vector<SDL_Surface*>> map;
 
-		for (int l = 0; l < buff.size(); l++) {
+		for (int l = 0; l < _buff.size(); l++) {
 			std::vector<SDL_Surface*> line;
 
-			for (int i = 0; i < buff[l].size(); i++) {
+			for (int i = 0; i < _buff[l].size(); i++) {
 				line.push_back(TTF_RenderGlyph_Blended(
 					font,
-					buff[l][i],
+					_buff[l][i],
 					colS[_active[l][i]]
 				));
 			}
@@ -48,8 +48,8 @@ Console::Console(std::vector<std::string> buff) :
 		glBindTexture(GL_TEXTURE_2D, _tex);
 
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, bg->w, bg->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, bg->pixels);
-		for (int l = 0; l < buff.size(); l++) {
-			for (int i = 0; i < buff[l].size(); i++) {
+		for (int l = 0; l < _buff.size(); l++) {
+			for (int i = 0; i < _buff[l].size(); i++) {
 				if (_active[l][i]) {
 					SDL_Surface* bg = SDL_CreateRGBSurface(0, bgRect.w, bgRect.h, 4 * sizeof (long int), 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
 					SDL_FillRect(bg, &bgRect, SDL_MapRGBA(bg->format, colS[true].r, colS[true].g, colS[true].b, 255));
