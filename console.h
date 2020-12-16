@@ -8,6 +8,8 @@
 
 class Console : public Mesh {
 	private:
+		TTF_Font* font;
+
 		std::vector<std::vector<bool>> _active;
 
 		SDL_Rect
@@ -27,8 +29,12 @@ class Console : public Mesh {
 
 		GLuint _tex;
 
+		std::vector<std::vector<SDL_Surface*>> map;
+
 	public:
 		std::vector<std::string> _buff;
+
+		void render();
 
 		void push(char c);
 
