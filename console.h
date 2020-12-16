@@ -24,13 +24,6 @@ class Console : public Mesh {
 				0,
 				state::ln * state::sz[0],
 				600
-			},
-
-			charRect = {
-				0,
-				0,
-				16,
-				32
 			};
 
 		GLuint _tex;
