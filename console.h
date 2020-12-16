@@ -5,6 +5,7 @@
 #include <glm/glm.hpp>
 
 #include "mesh.h"
+#include "state.h"
 
 enum mode {
 	EDITOR,
@@ -21,7 +22,7 @@ class Console : public Mesh {
 			bgRect = {
 				0,
 				0,
-				800 / 2,
+				state::ln * state::sz[0],
 				600
 			},
 
