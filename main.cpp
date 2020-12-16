@@ -30,6 +30,10 @@ int main() {
 	while (run) {
 		while (SDL_PollEvent(&e)) {
 			if (e.type == SDL_KEYDOWN) {
+				if (e.key.keysym.sym >= SDLK_a && e.key.keysym.sym <= SDLK_z) {
+					console->push((char) e.key.keysym.sym);
+				}
+
 				/* if (e.key.keysym.sym >= SDLK_a && e.key.keysym.sym <= SDLK_z) { */
 				/* 	console1->_buff.back().push_back((char) e.key.keysym.sym); */
 

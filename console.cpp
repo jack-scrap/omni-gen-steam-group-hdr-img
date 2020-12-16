@@ -1,6 +1,6 @@
 #include <vector>
 #include <Python.h>
-
+#include <iostream>
 #include <SDL2/SDL_ttf.h>
 
 #include "console.h"
@@ -8,6 +8,7 @@
 #include "state.h"
 
 Console::Console(std::vector<std::string> buff) :
+	_buff(buff),
 	Mesh(util::mesh::plane(glm::vec2(abs(-1 - 1), -1 -1)), "text", "text", glm::vec2(-1.0, 1.0)) {
 		// text
 		TTF_Init();
@@ -28,6 +29,7 @@ Console::Console(std::vector<std::string> buff) :
 		}
 
 		std::vector<std::vector<SDL_Surface*>> map;
+
 		for (int l = 0; l < buff.size(); l++) {
 			std::vector<SDL_Surface*> line;
 
@@ -65,6 +67,14 @@ Console::Console(std::vector<std::string> buff) :
 		// Python
 		Py_Initialize();
 	}
+
+void Console::push(char c) {
+	if (!_buff.empty()) {
+		_buff.back().push_back(c);
+	} else {
+		_buff.push_back({});
+	}
+}
 
 void Console::draw() {
 	glBindVertexArray(_id[VAO]);

@@ -28,6 +28,10 @@ class Console : public Mesh {
 		GLuint _tex;
 
 	public:
+		std::vector<std::string> _buff;
+
+		void push(char c);
+
 		Console(std::vector<std::string> buff);
 
 		void draw() override;
