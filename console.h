@@ -22,7 +22,7 @@ class Console : public Mesh {
 			0,
 			0,
 			state::ln * state::sz[0],
-			600
+			state::view[1]
 		};
 
 		std::vector<std::vector<SDL_Surface*>> _map;
