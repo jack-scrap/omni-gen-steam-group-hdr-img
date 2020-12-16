@@ -5,7 +5,7 @@
 
 namespace state {
 	static unsigned int
-		l = 18,
+		line = 18,
 		ln = 36;
 
 	static glm::vec2 sz = glm::vec2(16, 32);
