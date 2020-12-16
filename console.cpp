@@ -13,7 +13,13 @@ Console::Console(std::vector<std::string> buff, unsigned int ln, glm::vec2 scr) 
 
 		TTF_Font* font = TTF_OpenFont("res/terminus.bdf", state::sz[1]);
 
-		for (int l = 0; l < state::l; l++) {
+		if (buff.size() < state::l) {
+			roof = buff.size();
+		} else {
+			roof = state::l;
+		}
+
+		for (int l = 0; l < roof; l++) {
 			std::vector<Bg> bg;
 			std::vector<Char> str;
 
@@ -30,6 +36,22 @@ Console::Console(std::vector<std::string> buff, unsigned int ln, glm::vec2 scr) 
 			_txt.push_back(str);
 		}
 
+		// command-line
+		std::vector<Bg> bg;
+		std::vector<Char> str;
+
+		for (int i = 0; i < cmd.size(); i++) {
+			bg.push_back(Bg(false, {
+				i, state::l
+			}));
+			str.push_back(Char(cmd[i], true, font, {
+				i, state::l
+			}));
+		}
+
+		_bg.push_back(bg);
+		_txt.push_back(str);
+
 		// dimensions
 		_res = glm::vec2(ln * state::sz[0], scr[1]);
 
@@ -44,11 +66,16 @@ void Console::print() {
 
 	glDisable(GL_DEPTH_TEST);
 
-	for (int l = 0; l < state::l; l++) {
+	for (int l = 0; l < roof; l++) {
 		for (int i = 0; i < _buff[l].size(); i++) {
 			_bg[l][i].draw();
 			_txt[l][i].draw();
 		}
+	}
+
+	for (int i = 0; i < cmd.size(); i++) {
+		_bg[_buff.size()][i].draw();
+		_txt[_buff.size()][i].draw();
 	}
 
 	_cursor.draw();
