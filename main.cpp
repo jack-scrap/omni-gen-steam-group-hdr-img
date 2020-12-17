@@ -17,8 +17,6 @@ bool run = true;
 
 std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>("asdf.py");
 
-glm::vec2 scr = glm::vec2(800, 600);
-
 Console* console;
 
 int main() {
@@ -75,11 +73,11 @@ int main() {
 
 		glEnable(GL_DEPTH_TEST);
 
-		glViewport(state::res[0], 0, scr[0], scr[1]);
+		glViewport(state::res[0], 0, state::view[0], state::view[1]);
 
 		truckDraw(truck);
 
-		glViewport(0, 0, state::res[1], scr[1]);
+		glViewport(0, 0, state::res[1], state::view[1]);
 
 		console->draw();
 
