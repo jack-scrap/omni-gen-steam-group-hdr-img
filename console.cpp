@@ -101,11 +101,21 @@ void Console::render() {
 }
 
 void Console::push(char c) {
-	if (!_buff.empty()) {
-		_buff.back().push_back(c);
-	} else {
-		_buff.push_back({});
-		_buff.back().push_back(c);
+	switch (_mode) {
+		case EDITOR:
+			if (!_buff.empty()) {
+				_buff.back().push_back(c);
+			} else {
+				_buff.push_back({});
+				_buff.back().push_back(c);
+			}
+
+			break;
+
+		case CMD:
+			_cmd.push_back(c);
+
+			break;
 	}
 
 	render();
