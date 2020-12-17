@@ -142,6 +142,10 @@ void Console::newline() {
 }
 
 void Console::exec() {
+	if (_cmd == "run") {
+		PyRun_SimpleString(util::str::join(_buff).c_str());
+	}
+
 	_cmd.clear();
 
 	render();

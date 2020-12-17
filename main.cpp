@@ -62,13 +62,6 @@ int main() {
 							console->render();
 
 							break;
-
-						case SDLK_F3:
-							PyRun_SimpleString(util::str::join(console->_buff).c_str());
-
-							console->render();
-
-							break;
 					}	
 				}
 			}
