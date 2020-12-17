@@ -17,12 +17,8 @@ bool run = true;
 
 std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>("asdf.py");
 
-Console* console;
-
 int main() {
 	Console* console = new Console(buff);
-
-	TTF_Font* font = TTF_OpenFont("res/terminus.bdf", 24);
 
 	SDL_Event e;
 	while (run) {
