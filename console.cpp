@@ -158,7 +158,9 @@ void Console::pop() {
 				if (!_buff.back().empty()) {
 					_buff.back().pop_back();
 				} else {
-					_buff.pop_back();
+					if (_buff.size() > 1) {
+						_buff.pop_back();
+					}
 				}
 			}
 
