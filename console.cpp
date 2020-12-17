@@ -16,8 +16,8 @@ Console::Console(std::vector<std::string> buff) :
 
 		font = TTF_OpenFont("res/terminus.bdf", state::sz[1]);
 
-		SDL_FillRect(canv, &canvRect, SDL_MapRGBA(canv->format, col[false][0], col[false][1], col[false][2], 255));
-		SDL_FillRect(bg, &bgRect, SDL_MapRGBA(bg->format, col[true][0], col[true][1], col[true][2], 255));
+		SDL_FillRect(_canv, &_canvRect, SDL_MapRGBA(_canv->format, col[false][0], col[false][1], col[false][2], 255));
+		SDL_FillRect(_bg, &_bgRect, SDL_MapRGBA(_bg->format, col[true][0], col[true][1], col[true][2], 255));
 
 		// OpenGL
 		glGenTextures(1, &_tex);
@@ -53,16 +53,20 @@ void Console::render() {
 		_map.push_back(line);
 	}
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, canv->w, canv->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, canv->pixels);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _canv->w, _canv->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, _canv->pixels);
 	for (int l = 0; l < _buff.size(); l++) {
 		for (int i = 0; i < _buff[l].size(); i++) {
 			if (_hl[l][i]) {
-				glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::sz[0], l * state::sz[1], state::sz[0], state::sz[1], GL_BGRA, GL_UNSIGNED_BYTE, bg->pixels);
+				glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::sz[0], l * state::sz[1], state::sz[0], state::sz[1], GL_BGRA, GL_UNSIGNED_BYTE, _bg->pixels);
 			} else {
 				glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::sz[0], l * state::sz[1], state::sz[0], state::sz[1], GL_BGRA, GL_UNSIGNED_BYTE, _map[l][i]->pixels);
 			}
 		}
 	}
+
+	// cursor
+	glTexSubImage2D(GL_TEXTURE_2D, 0, _buff.back().size() * state::sz[0], (_buff.size() - 1) * state::sz[1], state::sz[0], state::sz[1], GL_BGRA, GL_UNSIGNED_BYTE, _bg->pixels);
+
 	glGenerateMipmap(GL_TEXTURE_2D);
 }
 

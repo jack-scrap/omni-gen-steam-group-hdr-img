@@ -19,18 +19,18 @@ class Console : public Mesh {
 		std::vector<std::vector<bool>> _hl;
 
 		SDL_Surface
-			* canv = SDL_CreateRGBSurface(0, state::res[0], state::res[1], 4 * sizeof (long int), 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000),
-			* bg = SDL_CreateRGBSurface(0, state::sz[0], state::sz[1], 4 * sizeof (long int), 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+			* _canv = SDL_CreateRGBSurface(0, state::res[0], state::res[1], 4 * sizeof (long int), 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000),
+			* _bg = SDL_CreateRGBSurface(0, state::sz[0], state::sz[1], 4 * sizeof (long int), 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
 
 		SDL_Rect
-			canvRect = {
+			_canvRect = {
 				0,
 				0,
 				state::ln * state::sz[0],
 				state::view[1]
 			},
 
-			bgRect = {
+			_bgRect = {
 				0,
 				0,
 				state::sz[0],
