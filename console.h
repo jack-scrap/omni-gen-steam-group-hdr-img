@@ -38,9 +38,9 @@ class Console : public Mesh {
 				state::dim[Y]
 			};
 
-		std::vector<std::vector<SDL_Surface*>> _map;
-		std::vector<SDL_Surface*> _no;
-
+		std::vector<std::vector<SDL_Surface*>>
+			_map,
+			_no;
 
 		GLuint _tex;
 

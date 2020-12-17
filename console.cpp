@@ -32,6 +32,7 @@ Console::Console(std::vector<std::string> buff) :
 void Console::render() {
 	_hl.clear();
 	_map.clear();
+	_no.clear();
 
 	unsigned int roof;
 	if (_buff.size() < state::line - 2) {
@@ -63,8 +64,21 @@ void Console::render() {
 	}
 
 	// line numbers
+	unsigned int max = std::to_string(_buff.size()).size();
+
 	for (int l = 0; l < roof; l++) {
-		_no.push_back(TTF_RenderGlyph_Blended(font, '0' + (1 + l), {col[true][R], col[true][G], col[true][B]}));
+		std::vector<SDL_Surface*> line;
+
+		std::string str = std::to_string(1 + l);
+		for (int i = str.size(); i < max; i++) {
+			str.push_back(' ');
+		}
+
+		for (int i = 0; i < max; i++) {
+			line.push_back(TTF_RenderGlyph_Blended(font, (char) str[i], {col[true][R], col[true][G], col[true][B]}));
+		}
+
+		_no.push_back(line);
 	}
 
 	// command-line
@@ -84,15 +98,17 @@ void Console::render() {
 	}
 
 	for (int l = 0; l < roof; l++) {
-		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, (l + 1) * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _no[l]->pixels);
+		for (int i = 0; i < _no[l].size(); i++) {
+			glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::dim[X], (l + 1) * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _no[l][i]->pixels);
+		}
 	}
 
 	for (int l = 0; l < roof; l++) {
 		for (int i = 0; i < _buff[l].size(); i++) {
 			if (_hl[l][i]) {
-				glTexSubImage2D(GL_TEXTURE_2D, 0, (1 + i) * state::dim[X], (l + 1) * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _bg->pixels);
+				glTexSubImage2D(GL_TEXTURE_2D, 0, (max + i) * state::dim[X], (l + 1) * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _bg->pixels);
 			} else {
-				glTexSubImage2D(GL_TEXTURE_2D, 0, (1 + i) * state::dim[X], (l + 1) * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _map[l][i]->pixels);
+				glTexSubImage2D(GL_TEXTURE_2D, 0, (max + i) * state::dim[X], (l + 1) * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _map[l][i]->pixels);
 			}
 		}
 	}
@@ -104,7 +120,7 @@ void Console::render() {
 	// cursor
 	switch (_mode) {
 		case EDITOR:
-			_idx[X] = _buff.back().size();
+			_idx[X] = max + _buff.back().size();
 			_idx[Y] = _buff.size();
 
 			break;
