@@ -4,10 +4,10 @@
 #include "state.h"
 #include "col.h"
 
-unsigned int consoleWd = state::ln * state::sz[0];
+unsigned int consoleWd = state::ln * state::dim[X];
 
 Disp disp("asdf", {
-	state::view[0] + consoleWd, state::view[1]
+	state::view[X] + consoleWd, state::view[Y]
 }, col[false]);
 
 Obj* wheel = objMk("wheel", "main", "dir", true, glm::vec3(3.0, 0.0, 0.0));
