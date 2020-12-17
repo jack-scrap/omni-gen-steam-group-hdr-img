@@ -16,8 +16,8 @@ Console::Console(std::vector<std::string> buff) :
 
 		font = TTF_OpenFont("res/terminus.bdf", state::dim[Y]);
 
-		SDL_FillRect(_canv, &_canvRect, SDL_MapRGBA(_canv->format, col[false][X], col[false][Y], col[false][2], 255));
-		SDL_FillRect(_bg, &_bgRect, SDL_MapRGBA(_bg->format, col[true][X], col[true][Y], col[true][2], 255));
+		SDL_FillRect(_canv, &_canvRect, SDL_MapRGBA(_canv->format, col[false][R], col[false][G], col[false][B], 255));
+		SDL_FillRect(_bg, &_bgRect, SDL_MapRGBA(_bg->format, col[true][R], col[true][G], col[true][B], 255));
 
 		// OpenGL
 		glGenTextures(1, &_tex);
@@ -56,7 +56,7 @@ void Console::render() {
 		std::vector<SDL_Surface*> line;
 
 		for (int i = 0; i < _buff[l].size(); i++) {
-			line.push_back(TTF_RenderGlyph_Blended(font, _buff[l][i], {col[!_hl[l][i]][X], col[!_hl[l][i]][Y], col[!_hl[l][i]][2]}));
+			line.push_back(TTF_RenderGlyph_Blended(font, _buff[l][i], {col[!_hl[l][i]][R], col[!_hl[l][i]][G], col[!_hl[l][i]][B]}));
 		}
 
 		_map.push_back(line);
@@ -66,7 +66,7 @@ void Console::render() {
 	std::vector<SDL_Surface*> line;
 
 	for (int i = 0; i < _cmd.size(); i++) {
-		line.push_back(TTF_RenderGlyph_Blended(font, _cmd[i], {col[true][X], col[true][Y], col[true][2]}));
+		line.push_back(TTF_RenderGlyph_Blended(font, _cmd[i], {col[true][R], col[true][G], col[true][B]}));
 	}
 
 	_map.push_back(line);
