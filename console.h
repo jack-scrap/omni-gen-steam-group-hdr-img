@@ -46,6 +46,8 @@ class Console : public Mesh {
 
 		std::vector<std::string> _buff;
 
+		std::string _cmd = "asdf";
+
 		void render();
 
 		void push(char c);

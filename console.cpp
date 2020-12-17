@@ -33,6 +33,7 @@ void Console::render() {
 	_hl.clear();
 	_map.clear();
 
+	// highlighting
 	for (int l = 0; l < _buff.size(); l++) {
 		std::vector<bool> line;
 
@@ -43,6 +44,7 @@ void Console::render() {
 		_hl.push_back(line);
 	}
 
+	// buffer
 	for (int l = 0; l < _buff.size(); l++) {
 		std::vector<SDL_Surface*> line;
 
@@ -53,9 +55,10 @@ void Console::render() {
 		_map.push_back(line);
 	}
 
+	// render
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _canv->w, _canv->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, _canv->pixels);
-	for (int l = 0; l < _buff.size(); l++) {
-		for (int i = 0; i < _buff[l].size(); i++) {
+	for (int l = 0; l < _map.size(); l++) {
+		for (int i = 0; i < _map[l].size(); i++) {
 			if (_hl[l][i]) {
 				glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::sz[0], l * state::sz[1], state::sz[0], state::sz[1], GL_BGRA, GL_UNSIGNED_BYTE, _bg->pixels);
 			} else {
