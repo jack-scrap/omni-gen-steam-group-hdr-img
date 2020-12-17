@@ -30,8 +30,8 @@ void Console::render() {
 	SDL_Surface* canv = SDL_CreateRGBSurface(0, state::res[0], state::res[1], 4 * sizeof (long int), 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
 	SDL_FillRect(canv, &canvRect, SDL_MapRGBA(canv->format, col[false][0], col[false][1], col[false][2], 255));
 
-	/* SDL_Surface* bg = SDL_CreateRGBSurface(0, state::sz[0], state::sz[1], 4 * sizeof (long int), 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000); */
-	/* SDL_FillRect(bg, &bgRect, SDL_MapRGBA(canv->format, col[false][0], col[false][1], col[false][2], 255)); */
+	SDL_Surface* bg = SDL_CreateRGBSurface(0, state::sz[0], state::sz[1], 4 * sizeof (long int), 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+	SDL_FillRect(bg, &bgRect, SDL_MapRGBA(canv->format, col[true][0], col[true][1], col[true][2], 255));
 
 	_hl.clear();
 	_map.clear();
@@ -40,7 +40,7 @@ void Console::render() {
 		std::vector<bool> line;
 
 		for (int i = 0; i < _buff[l].size(); i++) {
-			line.push_back(i > 2);
+			line.push_back(i < 2);
 		}
 
 		_hl.push_back(line);
@@ -60,7 +60,7 @@ void Console::render() {
 	for (int l = 0; l < _buff.size(); l++) {
 		for (int i = 0; i < _buff[l].size(); i++) {
 			if (_hl[l][i]) {
-				glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::sz[0], l * state::sz[1], state::sz[0], state::sz[1], GL_BGRA, GL_UNSIGNED_BYTE, _map[l][i]->pixels);
+				/* glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::sz[0], l * state::sz[1], state::sz[0], state::sz[1], GL_BGRA, GL_UNSIGNED_BYTE, bg->pixels); */
 			} else {
 				glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::sz[0], l * state::sz[1], state::sz[0], state::sz[1], GL_BGRA, GL_UNSIGNED_BYTE, _map[l][i]->pixels);
 			}
