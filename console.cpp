@@ -83,6 +83,8 @@ void Console::push(char c) {
 
 void Console::newline() {
 	_buff.push_back({});
+
+	render();
 }
 
 void Console::pop() {
