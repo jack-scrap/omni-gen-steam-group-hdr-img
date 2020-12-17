@@ -14,7 +14,7 @@ Console::Console(std::vector<std::string> buff) :
 		// text
 		TTF_Init();
 
-		font = TTF_OpenFont("res/terminus.bdf", state::sz[1]);
+		font = TTF_OpenFont("res/terminus.bdf", state::dim[1]);
 
 		SDL_FillRect(_canv, &_canvRect, SDL_MapRGBA(_canv->format, col[false][0], col[false][1], col[false][2], 255));
 		SDL_FillRect(_bg, &_bgRect, SDL_MapRGBA(_bg->format, col[true][0], col[true][1], col[true][2], 255));
@@ -69,15 +69,15 @@ void Console::render() {
 	for (int l = 0; l < _buff.size(); l++) {
 		for (int i = 0; i < _buff[l].size(); i++) {
 			if (_hl[l][i]) {
-				glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::sz[0], l * state::sz[1], state::sz[0], state::sz[1], GL_BGRA, GL_UNSIGNED_BYTE, _bg->pixels);
+				glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::dim[0], l * state::dim[1], state::dim[0], state::dim[1], GL_BGRA, GL_UNSIGNED_BYTE, _bg->pixels);
 			} else {
-				glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::sz[0], l * state::sz[1], state::sz[0], state::sz[1], GL_BGRA, GL_UNSIGNED_BYTE, _map[l][i]->pixels);
+				glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::dim[0], l * state::dim[1], state::dim[0], state::dim[1], GL_BGRA, GL_UNSIGNED_BYTE, _map[l][i]->pixels);
 			}
 		}
 	}
 
 	for (int i = 0; i < _cmd.size(); i++) {
-		glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::sz[0], (state::line - 1) * state::sz[1], state::sz[0], state::sz[1], GL_BGRA, GL_UNSIGNED_BYTE, _map[_map.size() - 1][i]->pixels);
+		glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::dim[0], (state::line - 1) * state::dim[1], state::dim[0], state::dim[1], GL_BGRA, GL_UNSIGNED_BYTE, _map[_map.size() - 1][i]->pixels);
 	}
 
 	// cursor
@@ -95,7 +95,7 @@ void Console::render() {
 			break;
 	}
 
-	glTexSubImage2D(GL_TEXTURE_2D, 0, _idx[0] * state::sz[0], _idx[1] * state::sz[1], state::sz[0], state::sz[1], GL_BGRA, GL_UNSIGNED_BYTE, _bg->pixels);
+	glTexSubImage2D(GL_TEXTURE_2D, 0, _idx[0] * state::dim[0], _idx[1] * state::dim[1], state::dim[0], state::dim[1], GL_BGRA, GL_UNSIGNED_BYTE, _bg->pixels);
 
 	glGenerateMipmap(GL_TEXTURE_2D);
 }
