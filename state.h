@@ -10,7 +10,7 @@ namespace state {
 
 	static glm::vec2 sz = glm::vec2(16, 32);
 
-	static glm::vec2 view = glm::vec2(800, 600);
+	static glm::vec2 view = glm::vec2(800, line * sz[1]);
 
 	static glm::vec2 res = glm::vec2(ln * sz[0], view[1]);
 
