@@ -42,7 +42,10 @@ class Console : public Mesh {
 		GLuint _tex;
 
 	public:
-		unsigned int _mode;
+		unsigned int
+			_mode,
+
+			_idx[2];
 
 		std::vector<std::string> _buff;
 

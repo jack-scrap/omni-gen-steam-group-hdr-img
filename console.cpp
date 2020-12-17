@@ -81,7 +81,21 @@ void Console::render() {
 	}
 
 	// cursor
-	glTexSubImage2D(GL_TEXTURE_2D, 0, _buff.back().size() * state::sz[0], (_buff.size() - 1) * state::sz[1], state::sz[0], state::sz[1], GL_BGRA, GL_UNSIGNED_BYTE, _bg->pixels);
+	switch (_mode) {
+		case EDITOR:
+			_idx[0] = _buff.back().size();
+			_idx[1] = _buff.size() - 1;
+
+			break;
+
+		case CMD:
+			_idx[0] = _cmd.size();
+			_idx[1] = state::line - 1;
+
+			break;
+	}
+
+	glTexSubImage2D(GL_TEXTURE_2D, 0, _idx[0] * state::sz[0], _idx[1] * state::sz[1], state::sz[0], state::sz[1], GL_BGRA, GL_UNSIGNED_BYTE, _bg->pixels);
 
 	glGenerateMipmap(GL_TEXTURE_2D);
 }

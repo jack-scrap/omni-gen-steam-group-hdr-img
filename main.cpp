@@ -52,15 +52,21 @@ int main() {
 						case SDLK_F1:
 							console->_mode = EDITOR;
 
+							console->render();
+
 							break;
 
 						case SDLK_F2:
 							console->_mode = CMD;
 
+							console->render();
+
 							break;
 
 						case SDLK_F3:
 							PyRun_SimpleString(util::str::join(console->_buff).c_str());
+
+							console->render();
 
 							break;
 					}	
