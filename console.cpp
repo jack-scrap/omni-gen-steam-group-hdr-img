@@ -99,16 +99,16 @@ void Console::render() {
 
 	for (int l = 0; l < roof; l++) {
 		for (int i = 0; i < _no[l].size(); i++) {
-			glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::dim[X], (l + 1) * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _no[l][i]->pixels);
+			glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::dim[X], (1 + l) * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _no[l][i]->pixels);
 		}
 	}
 
 	for (int l = 0; l < roof; l++) {
 		for (int i = 0; i < _buff[l].size(); i++) {
 			if (_hl[l][i]) {
-				glTexSubImage2D(GL_TEXTURE_2D, 0, (max + i) * state::dim[X], (l + 1) * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _bg->pixels);
+				glTexSubImage2D(GL_TEXTURE_2D, 0, (max + i) * state::dim[X], (1 + l) * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _bg->pixels);
 			} else {
-				glTexSubImage2D(GL_TEXTURE_2D, 0, (max + i) * state::dim[X], (l + 1) * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _map[l][i]->pixels);
+				glTexSubImage2D(GL_TEXTURE_2D, 0, (max + i) * state::dim[X], (1 + l) * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _map[l][i]->pixels);
 			}
 		}
 	}
