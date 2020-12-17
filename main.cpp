@@ -40,7 +40,7 @@ int main() {
 							break;
 
 						case SDLK_RETURN:
-							console->newline();
+							console->enter();
 
 							break;
 

@@ -55,7 +55,11 @@ class Console : public Mesh {
 
 		void push(char c);
 
+		void enter();
+
 		void newline();
+
+		void exec();
 
 		void pop();
 

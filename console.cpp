@@ -121,8 +121,28 @@ void Console::push(char c) {
 	render();
 }
 
+void Console::enter() {
+	switch (_mode) {
+		case EDITOR:
+			newline();
+
+			break;
+
+		case CMD:
+			exec();
+
+			break;
+	}
+}
+
 void Console::newline() {
 	_buff.push_back({});
+
+	render();
+}
+
+void Console::exec() {
+	_cmd.clear();
 
 	render();
 }
