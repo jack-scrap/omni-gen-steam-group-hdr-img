@@ -62,6 +62,11 @@ void Console::render() {
 		_map.push_back(line);
 	}
 
+	// line numbers
+	for (int l = 0; l < roof; l++) {
+		_no.push_back(TTF_RenderGlyph_Blended(font, '0' + (1 + l), {col[true][R], col[true][G], col[true][B]}));
+	}
+
 	// command-line
 	std::vector<SDL_Surface*> line;
 
@@ -71,7 +76,7 @@ void Console::render() {
 
 	_map.push_back(line);
 
-	// render
+	/* render */
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _canv->w, _canv->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, _canv->pixels);
 
 	for (int i = 0; i < state::ln; i++) {
@@ -79,11 +84,15 @@ void Console::render() {
 	}
 
 	for (int l = 0; l < roof; l++) {
+		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, (l + 1) * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _no[l]->pixels);
+	}
+
+	for (int l = 0; l < roof; l++) {
 		for (int i = 0; i < _buff[l].size(); i++) {
 			if (_hl[l][i]) {
-				glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::dim[X], (l + 1) * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _bg->pixels);
+				glTexSubImage2D(GL_TEXTURE_2D, 0, (1 + i) * state::dim[X], (l + 1) * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _bg->pixels);
 			} else {
-				glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::dim[X], (l + 1) * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _map[l][i]->pixels);
+				glTexSubImage2D(GL_TEXTURE_2D, 0, (1 + i) * state::dim[X], (l + 1) * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _map[l][i]->pixels);
 			}
 		}
 	}

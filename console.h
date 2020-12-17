@@ -39,6 +39,8 @@ class Console : public Mesh {
 			};
 
 		std::vector<std::vector<SDL_Surface*>> _map;
+		std::vector<SDL_Surface*> _no;
+
 
 		GLuint _tex;
 
