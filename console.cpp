@@ -38,7 +38,7 @@ void Console::render() {
 		std::vector<bool> line;
 
 		for (int i = 0; i < _buff[l].size(); i++) {
-			line.push_back(i < 2);
+			line.push_back(false);
 		}
 
 		_hl.push_back(line);
