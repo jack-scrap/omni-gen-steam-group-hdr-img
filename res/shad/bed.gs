@@ -21,48 +21,6 @@ float
 	ht = 4.0;
 
 void main() {
-	float vtc[6 * (2 * 3)] = float[6 * (2 * 3)](
-		-ht, -pad, -wd,
-		-ht, pad, -wd,
-
-		// corner
-		ht - pad, -pad, -wd,
-		ht - pad, pad, -wd,
-
-		ht, -pad, -wd + pad,
-		ht, pad, -wd + pad,
-
-		ht, -pad, wd - pad,
-		ht, pad, wd - pad,
-
-		ht - pad, -pad, wd,
-		ht - pad, pad, wd,
-
-		-ht, -pad, wd,
-		-ht, pad, wd
-	);
-
-	// draw
-	for (int i = 0; i < 6 - 1; i++) {
-		int start = i * 2;
-
-		for (int v = 0; v < 2 * 2; v++) {
-			int idx = (start + v) * 3;
-
-			gl_Position = proj * view * model * (gl_in[0].gl_Position + vec4(
-				vec3(
-					vtc[idx],
-					vtc[idx + 1],
-					vtc[idx + 2]
-				),
-				0.0
-			));
-			_pos = gl_Position.xyz;
-			EmitVertex();   
-		}
-		EndPrimitive();
-	}
-
 	/* quad */
 	float vtcQuad[(2 * 2) * 3];
 	int i0 = 0;
@@ -112,6 +70,49 @@ void main() {
 				vtcEdge[i + 2]
 			),
 			0.0
+			));
+			_pos = gl_Position.xyz;
+			EmitVertex();   
+		}
+		EndPrimitive();
+	}
+
+	/* cap */
+	float vtc[6 * (2 * 3)] = float[6 * (2 * 3)](
+		-ht, -pad, -wd,
+		-ht, pad, -wd,
+
+		// corner
+		ht - pad, -pad, -wd,
+		ht - pad, pad, -wd,
+
+		ht, -pad, -wd + pad,
+		ht, pad, -wd + pad,
+
+		ht, -pad, wd - pad,
+		ht, pad, wd - pad,
+
+		ht - pad, -pad, wd,
+		ht - pad, pad, wd,
+
+		-ht, -pad, wd,
+		-ht, pad, wd
+	);
+
+	// draw
+	for (int i = 0; i < 6 - 1; i++) {
+		int start = i * 2;
+
+		for (int v = 0; v < 2 * 2; v++) {
+			int idx = (start + v) * 3;
+
+			gl_Position = proj * view * model * (gl_in[0].gl_Position + vec4(
+				vec3(
+					vtc[idx],
+					vtc[idx + 1],
+					vtc[idx + 2]
+				),
+				0.0
 			));
 			_pos = gl_Position.xyz;
 			EmitVertex();   
