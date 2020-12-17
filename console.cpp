@@ -57,8 +57,6 @@ void Console::render() {
 	for (int l = 0; l < _buff.size(); l++) {
 		for (int i = 0; i < _buff[l].size(); i++) {
 			if (_hl[l][i]) {
-				glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::sz[0], l * state::sz[1], state::sz[0], state::sz[1], GL_BGRA, GL_UNSIGNED_BYTE, canv->pixels);
-
 				glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::sz[0], l * state::sz[1], state::sz[0], state::sz[1], GL_BGRA, GL_UNSIGNED_BYTE, _map[l][i]->pixels);
 			} else {
 				glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::sz[0], l * state::sz[1], state::sz[0], state::sz[1], GL_BGRA, GL_UNSIGNED_BYTE, _map[l][i]->pixels);
