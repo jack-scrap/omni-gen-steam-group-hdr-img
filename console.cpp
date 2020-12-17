@@ -152,12 +152,24 @@ void Console::exec() {
 }
 
 void Console::pop() {
-	if (!_buff.empty()) {
-		if (!_buff.back().empty()) {
-			_buff.back().pop_back();
-		} else {
-			_buff.pop_back();
-		}
+	switch (_mode) {
+		case EDITOR:
+			if (!_buff.empty()) {
+				if (!_buff.back().empty()) {
+					_buff.back().pop_back();
+				} else {
+					_buff.pop_back();
+				}
+			}
+
+			break;
+
+		case CMD:
+			if (!_cmd.empty()) {
+				_cmd.pop_back();
+			}
+
+			break;
 	}
 
 	render();
