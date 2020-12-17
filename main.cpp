@@ -15,10 +15,8 @@
 
 bool run = true;
 
-std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>("asdf.py");
-
 int main() {
-	Console* console = new Console(buff);
+	Console* console = new Console(util::fs::rd<std::vector<std::string>>("asdf.py"));
 
 	SDL_Event e;
 	while (run) {
