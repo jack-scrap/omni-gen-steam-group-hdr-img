@@ -73,11 +73,11 @@ int main() {
 
 		glEnable(GL_DEPTH_TEST);
 
-		glViewport(state::res[0], 0, state::view[0], state::view[1]);
+		glViewport(state::res[X], 0, state::view[X], state::view[Y]);
 
 		truckDraw(truck);
 
-		glViewport(0, 0, state::res[1], state::view[1]);
+		glViewport(0, 0, state::res[Y], state::view[Y]);
 
 		console->draw();
 

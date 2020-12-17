@@ -14,10 +14,10 @@ Console::Console(std::vector<std::string> buff) :
 		// text
 		TTF_Init();
 
-		font = TTF_OpenFont("res/terminus.bdf", state::dim[1]);
+		font = TTF_OpenFont("res/terminus.bdf", state::dim[Y]);
 
-		SDL_FillRect(_canv, &_canvRect, SDL_MapRGBA(_canv->format, col[false][0], col[false][1], col[false][2], 255));
-		SDL_FillRect(_bg, &_bgRect, SDL_MapRGBA(_bg->format, col[true][0], col[true][1], col[true][2], 255));
+		SDL_FillRect(_canv, &_canvRect, SDL_MapRGBA(_canv->format, col[false][X], col[false][Y], col[false][2], 255));
+		SDL_FillRect(_bg, &_bgRect, SDL_MapRGBA(_bg->format, col[true][X], col[true][Y], col[true][2], 255));
 
 		// OpenGL
 		glGenTextures(1, &_tex);
@@ -49,7 +49,7 @@ void Console::render() {
 		std::vector<SDL_Surface*> line;
 
 		for (int i = 0; i < _buff[l].size(); i++) {
-			line.push_back(TTF_RenderGlyph_Blended(font, _buff[l][i], {col[!_hl[l][i]][0], col[!_hl[l][i]][1], col[!_hl[l][i]][2]}));
+			line.push_back(TTF_RenderGlyph_Blended(font, _buff[l][i], {col[!_hl[l][i]][X], col[!_hl[l][i]][Y], col[!_hl[l][i]][2]}));
 		}
 
 		_map.push_back(line);
@@ -59,7 +59,7 @@ void Console::render() {
 	std::vector<SDL_Surface*> line;
 
 	for (int i = 0; i < _cmd.size(); i++) {
-		line.push_back(TTF_RenderGlyph_Blended(font, _cmd[i], {col[true][0], col[true][1], col[true][2]}));
+		line.push_back(TTF_RenderGlyph_Blended(font, _cmd[i], {col[true][X], col[true][Y], col[true][2]}));
 	}
 
 	_map.push_back(line);
@@ -69,33 +69,33 @@ void Console::render() {
 	for (int l = 0; l < _buff.size(); l++) {
 		for (int i = 0; i < _buff[l].size(); i++) {
 			if (_hl[l][i]) {
-				glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::dim[0], l * state::dim[1], state::dim[0], state::dim[1], GL_BGRA, GL_UNSIGNED_BYTE, _bg->pixels);
+				glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::dim[X], l * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _bg->pixels);
 			} else {
-				glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::dim[0], l * state::dim[1], state::dim[0], state::dim[1], GL_BGRA, GL_UNSIGNED_BYTE, _map[l][i]->pixels);
+				glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::dim[X], l * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _map[l][i]->pixels);
 			}
 		}
 	}
 
 	for (int i = 0; i < _cmd.size(); i++) {
-		glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::dim[0], (state::line - 1) * state::dim[1], state::dim[0], state::dim[1], GL_BGRA, GL_UNSIGNED_BYTE, _map[_map.size() - 1][i]->pixels);
+		glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::dim[X], (state::line - 1) * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _map[_map.size() - 1][i]->pixels);
 	}
 
 	// cursor
 	switch (_mode) {
 		case EDITOR:
-			_idx[0] = _buff.back().size();
-			_idx[1] = _buff.size() - 1;
+			_idx[X] = _buff.back().size();
+			_idx[Y] = _buff.size() - 1;
 
 			break;
 
 		case CMD:
-			_idx[0] = _cmd.size();
-			_idx[1] = state::line - 1;
+			_idx[X] = _cmd.size();
+			_idx[Y] = state::line - 1;
 
 			break;
 	}
 
-	glTexSubImage2D(GL_TEXTURE_2D, 0, _idx[0] * state::dim[0], _idx[1] * state::dim[1], state::dim[0], state::dim[1], GL_BGRA, GL_UNSIGNED_BYTE, _bg->pixels);
+	glTexSubImage2D(GL_TEXTURE_2D, 0, _idx[X] * state::dim[X], _idx[Y] * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _bg->pixels);
 
 	glGenerateMipmap(GL_TEXTURE_2D);
 }

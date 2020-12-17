@@ -3,6 +3,8 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 
+#include "math.h"
+
 namespace state {
 	static unsigned int
 		line = 18,
@@ -10,9 +12,9 @@ namespace state {
 
 	static glm::vec2 dim = glm::vec2(16, 32);
 
-	static glm::vec2 view = glm::vec2(800, line * dim[1]);
+	static glm::vec2 view = glm::vec2(800, line * dim[Y]);
 
-	static glm::vec2 res = glm::vec2(ln * dim[0], view[1]);
+	static glm::vec2 res = glm::vec2(ln * dim[X], view[Y]);
 
 	static GLfloat bound = abs(-1.0 - 1.0);
 

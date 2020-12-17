@@ -2,6 +2,7 @@
 #include <sstream>
 
 #include "util.h"
+#include "math.h"
 
 template <typename T>
 T util::fs::rd(std::string name) {
@@ -63,8 +64,8 @@ std::vector<GLfloat> util::mesh::plane(glm::vec2 sz) {
 
 	for (int y = 0; y < 2; y++) {
 		for (int x = 0; x < 2; x++) {
-			_.push_back(x * sz[0]);
-			_.push_back(y * sz[1]);
+			_.push_back(x * sz[X]);
+			_.push_back(y * sz[Y]);
 		}
 	}
 
