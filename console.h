@@ -49,7 +49,7 @@ class Console : public Mesh {
 
 		std::vector<std::string> _buff;
 
-		std::string _cmd = "asdf";
+		std::string _cmd;
 
 		void render();
 
