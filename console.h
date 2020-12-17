@@ -18,7 +18,7 @@ class Console : public Mesh {
 
 		std::vector<std::vector<bool>> _hl;
 
-		SDL_Rect canv = {
+		SDL_Rect canvRect = {
 			0,
 			0,
 			state::ln * state::sz[0],

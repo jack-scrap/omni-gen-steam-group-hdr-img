@@ -27,8 +27,8 @@ Console::Console(std::vector<std::string> buff) :
 	}
 
 void Console::render() {
-	SDL_Surface* bg = SDL_CreateRGBSurface(0, state::res[0], state::res[1], 4 * sizeof (long int), 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
-	SDL_FillRect(bg, &canv, SDL_MapRGBA(bg->format, col[false][0], col[false][1], col[false][2], 255));
+	SDL_Surface* canv = SDL_CreateRGBSurface(0, state::res[0], state::res[1], 4 * sizeof (long int), 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+	SDL_FillRect(canv, &canvRect, SDL_MapRGBA(canv->format, col[false][0], col[false][1], col[false][2], 255));
 
 	_hl.clear();
 	_map.clear();
@@ -53,14 +53,11 @@ void Console::render() {
 		_map.push_back(line);
 	}
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, bg->w, bg->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, bg->pixels);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, canv->w, canv->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, canv->pixels);
 	for (int l = 0; l < _buff.size(); l++) {
 		for (int i = 0; i < _buff[l].size(); i++) {
 			if (_hl[l][i]) {
-				SDL_Surface* bg = SDL_CreateRGBSurface(0, state::res[0], state::res[1], 4 * sizeof (long int), 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
-				SDL_FillRect(bg, &canv, SDL_MapRGBA(bg->format, col[_hl[l][i]][0], col[_hl[l][i]][1], col[_hl[l][i]][2], 255));
-
-				glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::sz[0], l * state::sz[1], state::sz[0], state::sz[1], GL_BGRA, GL_UNSIGNED_BYTE, bg->pixels);
+				glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::sz[0], l * state::sz[1], state::sz[0], state::sz[1], GL_BGRA, GL_UNSIGNED_BYTE, canv->pixels);
 
 				glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::sz[0], l * state::sz[1], state::sz[0], state::sz[1], GL_BGRA, GL_UNSIGNED_BYTE, _map[l][i]->pixels);
 			} else {
