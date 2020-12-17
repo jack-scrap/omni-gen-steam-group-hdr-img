@@ -2,8 +2,8 @@ import sys
 
 sys.path.insert(1, '.')
 
-import omni
+from omni import *
 
-omni.truck.mv([
+truck.mv([
     1, 0, 0
 ])
