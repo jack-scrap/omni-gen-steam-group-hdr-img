@@ -75,13 +75,13 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 		0, 0,
 		0, 0,
 
+		0, 1,
+		0, 0,
+		1, 1,
+
+		1, 1,
 		0, 0,
 		1, 0,
-		0, 1,
-
-		0, 1,
-		1, 0,
-		1, 1
 	};
 	glBufferData(GL_ARRAY_BUFFER, sizeof st, st, GL_STATIC_DRAW);
 
