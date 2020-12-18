@@ -59,8 +59,8 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	unsigned char* data = stbi_load("res/dirt.jpg", &wd, &ht, &chan, 0); 
 
 	if (data) {
-		glGenTextures(1, &_->tex);
-		glBindTexture(GL_TEXTURE_2D, _->tex);
+		glGenTextures(1, &_->_tex);
+		glBindTexture(GL_TEXTURE_2D, _->_tex);
 
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, wd, ht, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
@@ -452,7 +452,7 @@ void objDraw(Obj* obj) {
 
 	glUniform1ui(obj->_uni[ACTIVE], obj->_active);
 
-	glBindTexture(GL_TEXTURE_2D, obj->tex);
+	glBindTexture(GL_TEXTURE_2D, obj->_tex);
 
 	glDrawElements(GL_TRIANGLES, obj->_noIdc, GL_UNSIGNED_SHORT, (GLvoid*) 0);
 
