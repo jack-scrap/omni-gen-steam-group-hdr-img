@@ -16,7 +16,7 @@
 bool run = true;
 
 int main() {
-	Console* console = new Console(util::fs::rd<std::vector<std::string>>("asdf.py"));
+	Console* console = new Console(util::fs::rd<std::vector<std::string>>("script/asdf.py"));
 
 	SDL_Event e;
 	while (run) {
