@@ -34,7 +34,57 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 	glGenBuffers(1, &_->_id[STBO]);
 	glBindBuffer(GL_ARRAY_BUFFER, _->_id[STBO]);
-	glBufferData(GL_ARRAY_BUFFER, 2 * 2 * 2 * sizeof (GLfloat), vtc, GL_STATIC_DRAW);
+	GLfloat st[] = {
+		0, 0,
+		1, 0,
+		0, 1,
+
+		0, 1,
+		1, 0,
+		1, 1,
+
+		0, 0,
+		1, 0,
+		0, 1,
+
+		0, 1,
+		1, 0,
+		1, 1,
+
+
+		0, 0,
+		1, 0,
+		0, 1,
+
+		0, 1,
+		1, 0,
+		1, 1,
+
+		0, 0,
+		1, 0,
+		0, 1,
+
+		0, 1,
+		1, 0,
+		1, 1,
+
+		0, 0,
+		1, 0,
+		0, 1,
+
+		0, 1,
+		1, 0,
+		1, 1,
+
+		0, 0,
+		1, 0,
+		0, 1,
+
+		0, 1,
+		1, 0,
+		1, 1
+	};
+	glBufferData(GL_ARRAY_BUFFER, sizeof st, st, GL_STATIC_DRAW);
 
 	glGenBuffers(1, &_->_id[IBO]);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _->_id[IBO]);
