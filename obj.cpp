@@ -23,7 +23,6 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_noChild = 0;
 	_->_loc = loc;
 
-	// vertex
 	glGenVertexArrays(1, &_->_id[VAO]);
 	glBindVertexArray(_->_id[VAO]);
 
