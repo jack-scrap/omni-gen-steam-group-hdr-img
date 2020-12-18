@@ -125,6 +125,8 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 	glUniform1ui(_->_uni[ACTIVE], _->_active);
 
+	_->_prog.unUse();
+
 	return _;
 }
 
