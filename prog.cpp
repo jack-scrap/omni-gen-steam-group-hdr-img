@@ -8,15 +8,24 @@
 Shad::Shad(std::string name, unsigned int stage) {
 	std::string ext;
 	GLenum type;
-	if (stage == 1) {
-		ext = "fs";
-		type = GL_FRAGMENT_SHADER;
-	} else if (stage == 0) {
-		ext = "vs";
-		type = GL_VERTEX_SHADER;
-	} else if (stage == 2) {
-		ext = "gs";
-		type = GL_GEOMETRY_SHADER;
+	switch (stage) {
+		case 0:
+			ext = "vs";
+			type = GL_VERTEX_SHADER;
+
+			break;
+
+		case 1:
+			ext = "fs";
+			type = GL_FRAGMENT_SHADER;
+
+			break;
+
+		case 2:
+			ext = "gs";
+			type = GL_GEOMETRY_SHADER;
+
+			break;
 	}
 
 	std::string buff = util::fs::rd<std::string>("res/shad/" + name + "." + ext);
