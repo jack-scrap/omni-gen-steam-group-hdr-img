@@ -9,11 +9,11 @@
 
 class Disp {
 	private:
-		bool open = false;
-
 		glm::vec3 _bg;
 
 	public:
+		bool open = false;
+
 		SDL_GLContext ctx;
 
 		SDL_Window* win;
