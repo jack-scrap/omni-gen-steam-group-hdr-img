@@ -14,9 +14,9 @@ Disp::Disp(const char* title, glm::vec2 res, glm::vec3 bg) :
 		SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 32);
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
-		win = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _res[X], _res[Y], SDL_WINDOW_OPENGL);
+		_win = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _res[X], _res[Y], SDL_WINDOW_OPENGL);
 
-		ctx = SDL_GL_CreateContext(win);
+		_ctx = SDL_GL_CreateContext(_win);
 
 		GLenum status = glewInit();
 		if (status != GLEW_OK) {
@@ -30,7 +30,7 @@ Disp::Disp(const char* title, glm::vec2 res, glm::vec3 bg) :
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-		open = true;
+		_open = true;
 	}
 
 void Disp::clear() {
@@ -38,13 +38,13 @@ void Disp::clear() {
 }
 
 void Disp::update() {
-	SDL_GL_SwapWindow(win);
+	SDL_GL_SwapWindow(_win);
 }
 
 Disp::~Disp() {
-	SDL_GL_DeleteContext(ctx);
+	SDL_GL_DeleteContext(_ctx);
 
-	SDL_DestroyWindow(win);
+	SDL_DestroyWindow(_win);
 
 	SDL_Quit();
 }

@@ -12,11 +12,11 @@ class Disp {
 		glm::vec3 _bg;
 
 	public:
-		bool open = false;
+		bool _open = false;
 
-		SDL_GLContext ctx;
+		SDL_GLContext _ctx;
 
-		SDL_Window* win;
+		SDL_Window* _win;
 
 		glm::vec2 _res;
 
