@@ -47,6 +47,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_prog.use();
 
 	// attribute
+	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);
 	_->_attr[POS] = glGetAttribLocation(_->_prog.id, "pos");
 	glVertexAttribPointer(_->_attr[POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 	glEnableVertexAttribArray(_->_attr[POS]);
@@ -106,6 +107,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_prog.use();
 
 	// attribute
+	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);
 	_->_attr[POS] = glGetAttribLocation(_->_prog.id, "pos");
 	glVertexAttribPointer(_->_attr[POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 	glEnableVertexAttribArray(_->_attr[POS]);
@@ -163,6 +165,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_prog.use();
 
 	// attribute
+	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);
 	_->_attr[POS] = glGetAttribLocation(_->_prog.id, "pos");
 	glVertexAttribPointer(_->_attr[POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 	glEnableVertexAttribArray(_->_attr[POS]);
@@ -222,6 +225,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_prog.use();
 
 	// attribute
+	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);
 	_->_attr[POS] = glGetAttribLocation(_->_prog.id, "pos");
 	glVertexAttribPointer(_->_attr[POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 	glEnableVertexAttribArray(_->_attr[POS]);
@@ -280,6 +284,7 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 	_->_prog.use();
 
 	// attribute
+	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);
 	_->_attr[POS] = glGetAttribLocation(_->_prog.id, "pos");
 	glVertexAttribPointer(_->_attr[POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 	glEnableVertexAttribArray(_->_attr[POS]);
@@ -342,6 +347,7 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 	_->_prog.use();
 
 	// attribute
+	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);
 	_->_attr[POS] = glGetAttribLocation(_->_prog.id, "pos");
 	glVertexAttribPointer(_->_attr[POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 	glEnableVertexAttribArray(_->_attr[POS]);
