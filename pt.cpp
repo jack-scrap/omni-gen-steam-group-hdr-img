@@ -15,7 +15,7 @@ void ptMv(Pt* pt, GLfloat* d) {
 	pt->_parent->_model = glm::rotate(pt->_parent->_model, (GLfloat) M_PI, glm::vec3(0.0, 1.0, 0.0));
 }
 
-Pt* ptMk() {
+Pt* ptMk(glm::vec3 loc) {
 	Pt* _ = (Pt*) malloc(sizeof (Pt));
 
 	GLfloat vtc[3] = {
@@ -26,7 +26,7 @@ Pt* ptMk() {
 		0
 	};
 
-	_->_parent = objMk(vtc, sizeof vtc / sizeof *vtc, idc, sizeof idc / sizeof *idc, "tex", "bed", "tex", false, glm::vec3(-1.5, 0.2, 0.0));
+	_->_parent = objMk(vtc, sizeof vtc / sizeof *vtc, idc, sizeof idc / sizeof *idc, "tex", "bed", "tex", false, loc);
 
 	_->_parent->_prog.use();
 

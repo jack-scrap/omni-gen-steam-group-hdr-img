@@ -1,12 +1,14 @@
 #pragma once
 
+#include <glm/glm.hpp>
+
 #include "obj.h"
 
 typedef struct {
 	Obj* _parent;
 } Pt;
 
-Pt* ptMk();
+Pt* ptMk(glm::vec3 loc);
 
 void ptMv(Pt* pt, GLfloat* d);
 

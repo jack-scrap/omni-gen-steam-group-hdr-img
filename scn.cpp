@@ -12,4 +12,4 @@ Disp disp("asdf", {
 
 Obj* wheel = objMk("wheel", "main", "dir", true, glm::vec3(3.0, 0.0, 0.0));
 
-Truck* truck = truckMk();
+Truck* truck = truckMk(glm::vec3(0.0, 0.0, 0.0));
