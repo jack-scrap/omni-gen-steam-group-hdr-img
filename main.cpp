@@ -17,7 +17,7 @@ int main() {
 	Console* console = new Console(util::fs::rd<std::vector<std::string>>("script/asdf.py"));
 
 	SDL_Event e;
-	while (disp.open) {
+	while (disp._open) {
 		while (SDL_PollEvent(&e)) {
 			if (e.type == SDL_KEYDOWN) {
 				if (e.key.keysym.sym >= SDLK_a && e.key.keysym.sym <= SDLK_z) {
@@ -57,7 +57,7 @@ int main() {
 			}
 
 			if (e.type == SDL_QUIT) {
-				disp.open = false;
+				disp._open = false;
 			}
 		}
 
