@@ -26,7 +26,16 @@ Pt* ptMk() {
 		0
 	};
 
-	_->_parent = objMk(vtc, sizeof vtc / sizeof *vtc, idc, sizeof idc / sizeof *idc, "main", "bed", "dir", false, glm::vec3(-1.5, 0.2, 0.0));
+	_->_parent = objMk(vtc, sizeof vtc / sizeof *vtc, idc, sizeof idc / sizeof *idc, "tex", "bed", "tex", false, glm::vec3(-1.5, 0.2, 0.0));
+
+	_->_parent->_prog.use();
+
+	// texture coordinate
+	_->_parent->_attr[ST] = glGetAttribLocation(_->_parent->_prog.id, "loc");
+	glVertexAttribPointer(_->_parent->_attr[ST], 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+	glEnableVertexAttribArray(_->_parent->_attr[ST]);
+
+	_->_parent->_prog.unUse();
 
 	return _;
 }

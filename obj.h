@@ -15,7 +15,8 @@ enum id {
 };
 
 enum attr {
-	POS
+	POS,
+	ST
 };
 
 enum uni {
@@ -45,7 +46,7 @@ typedef struct Obj {
 	GLuint _id[3];
 
 	GLint
-		_attr[1],
+		_attr[2],
 
 		_uni[5];
 
