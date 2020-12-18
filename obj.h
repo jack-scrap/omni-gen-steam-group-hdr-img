@@ -51,6 +51,8 @@ typedef struct Obj {
 
 		_uni[5];
 
+	GLuint tex;
+
 	struct Obj** _child;
 	unsigned int _noChild;
 } Obj;

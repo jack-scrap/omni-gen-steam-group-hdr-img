@@ -13,6 +13,8 @@
 #include "util.h"
 #include "state.h"
 #include "math.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
 Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string nameVtx, std::string nameFrag, bool active, glm::vec3 loc) {
 	// initialize
@@ -48,6 +50,25 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_prog = Prog(nameVtx, nameFrag);
 
 	_->_prog.use();
+
+	// texture
+	int
+		wd,
+		ht,
+		chan;
+	unsigned char* data = stbi_load("res/dirt.jpg", &wd, &ht, &chan, 0); 
+
+	if (data) {
+		glGenTextures(1, &_->tex);
+		glBindTexture(GL_TEXTURE_2D, _->tex);
+
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, wd, ht, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	} else {
+		std::cout << "Texture error: Failed to load" << std::endl;
+	}
 
 	// attribute
 	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);
@@ -430,6 +451,8 @@ void objDraw(Obj* obj) {
 	glUniformMatrix4fv(obj->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(obj->_proj));
 
 	glUniform1ui(obj->_uni[ACTIVE], obj->_active);
+
+	glBindTexture(GL_TEXTURE_2D, obj->tex);
 
 	glDrawElements(GL_TRIANGLES, obj->_noIdc, GL_UNSIGNED_SHORT, (GLvoid*) 0);
 
