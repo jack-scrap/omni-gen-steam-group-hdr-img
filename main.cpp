@@ -42,14 +42,14 @@ int main() {
 							break;
 
 						case SDLK_F1:
-							console->_mode = EDITOR;
+							console->_mode = Console::EDITOR;
 
 							console->render();
 
 							break;
 
 						case SDLK_F2:
-							console->_mode = CMD;
+							console->_mode = Console::CMD;
 
 							console->render();
 

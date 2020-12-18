@@ -7,11 +7,6 @@
 #include "state.h"
 #include "math.h"
 
-enum mode {
-	EDITOR,
-	CMD
-};
-
 class Console : public Mesh {
 	private:
 		TTF_Font* font;
@@ -44,6 +39,11 @@ class Console : public Mesh {
 		GLuint _tex;
 
 	public:
+		enum mode {
+			EDITOR,
+			CMD
+		};
+
 		unsigned int
 			_mode,
 
