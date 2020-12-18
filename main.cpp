@@ -67,7 +67,9 @@ int main() {
 
 		glViewport(state::res[X], 0, state::view[X], state::view[Y]);
 
-		truckDraw(truck);
+		objDraw(cube);
+
+		/* truckDraw(truck); */
 
 		glViewport(0, 0, state::res[Y], state::view[Y]);
 

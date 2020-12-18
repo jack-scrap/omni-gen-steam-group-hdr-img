@@ -10,3 +10,5 @@ extern Disp disp;
 extern Obj* wheel;
 
 extern Truck* truck;
+
+extern Obj* cube;
