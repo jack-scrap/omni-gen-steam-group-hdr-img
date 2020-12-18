@@ -11,6 +11,7 @@
 enum id {
 	VAO,
 	VBO,
+	STBO,
 	IBO
 };
 
@@ -43,10 +44,10 @@ typedef struct Obj {
 
 	Prog _prog;
 
-	GLuint _id[3];
+	GLuint _id[4];
 
 	GLint
-		_attr[2],
+		_attr[3],
 
 		_uni[5];
 

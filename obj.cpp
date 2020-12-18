@@ -31,6 +31,10 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);
 	glBufferData(GL_ARRAY_BUFFER, noVtc * sizeof (GLfloat), vtc, GL_STATIC_DRAW);
 
+	glGenBuffers(1, &_->_id[STBO]);
+	glBindBuffer(GL_ARRAY_BUFFER, _->_id[STBO]);
+	glBufferData(GL_ARRAY_BUFFER, 2 * 2 * 2 * sizeof (GLfloat), vtc, GL_STATIC_DRAW);
+
 	glGenBuffers(1, &_->_id[IBO]);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _->_id[IBO]);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, noIdc * sizeof (GLushort), idc, GL_STATIC_DRAW);
@@ -51,6 +55,11 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_attr[POS] = glGetAttribLocation(_->_prog.id, "pos");
 	glVertexAttribPointer(_->_attr[POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 	glEnableVertexAttribArray(_->_attr[POS]);
+
+	glBindBuffer(GL_ARRAY_BUFFER, _->_id[STBO]);
+	_->_attr[ST] = glGetAttribLocation(_->_prog.id, "st");
+	glVertexAttribPointer(_->_attr[ST], 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+	glEnableVertexAttribArray(_->_attr[ST]);
 
 	// uniform
 	_->_uni[MODEL] = glGetUniformLocation(_->_prog.id, "model");
