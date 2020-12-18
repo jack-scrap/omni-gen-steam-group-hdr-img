@@ -20,7 +20,6 @@ namespace util {
 
 	namespace str {
 		std::vector<std::string> split(std::string buff, char delim);
-
 		std::string join(std::vector<std::string> buff);
 	}
 
