@@ -20,7 +20,7 @@ Disp::Disp(const char* title, glm::vec2 res, glm::vec3 bg) :
 
 		GLenum status = glewInit();
 		if (status != GLEW_OK) {
-			std::cerr << "GLEW failed to initialize" << std::endl;
+			std::cerr << "Error: GLEW failed to initialize" << std::endl;
 		}
 
 		glClearColor(bg[R] / 255.0, bg[G] / 255.0, bg[B] / 255.0, 1);
