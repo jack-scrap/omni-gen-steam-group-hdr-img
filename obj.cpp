@@ -145,6 +145,9 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 	glUniform1ui(_->_uni[ACTIVE], _->_active);
 
+	_->_prog.unUse();
+	glBindVertexArray(0);
+
 	return _;
 }
 
@@ -206,6 +209,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	glUniform1ui(_->_uni[ACTIVE], _->_active);
 
 	_->_prog.unUse();
+	glBindVertexArray(0);
 
 	return _;
 }
@@ -262,6 +266,9 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	glUniformMatrix4fv(_->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
 
 	glUniform1ui(_->_uni[ACTIVE], _->_active);
+
+	_->_prog.unUse();
+	glBindVertexArray(0);
 
 	return _;
 }
@@ -323,6 +330,9 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 	glUniform1ui(_->_uni[ACTIVE], _->_active);
 
+	_->_prog.unUse();
+	glBindVertexArray(0);
+
 	return _;
 }
 
@@ -381,6 +391,9 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 	glUniformMatrix4fv(_->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
 
 	glUniform1ui(_->_uni[ACTIVE], _->_active);
+
+	_->_prog.unUse();
+	glBindVertexArray(0);
 
 	return _;
 }
@@ -444,6 +457,9 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 	glUniformMatrix4fv(_->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
 
 	glUniform1ui(_->_uni[ACTIVE], _->_active);
+
+	_->_prog.unUse();
+	glBindVertexArray(0);
 
 	return _;
 }
