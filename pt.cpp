@@ -12,7 +12,7 @@ void ptMv(Pt* pt, GLfloat* d) {
 
 	pt->_parent->_model = glm::scale(pt->_parent->_model, glm::vec3(50));
 	pt->_parent->_model = glm::translate(pt->_parent->_model, glm::vec3(d[0], d[1], d[2]));
-	pt->_parent->_model = glm::rotate(pt->_parent->_model, (GLfloat) M_PI, glm::vec3(0.0, 1.0, 0.0));
+	pt->_parent->_model = glm::rotate(pt->_parent->_model, (GLfloat) (M_PI / 2), glm::vec3(0.0, 1.0, 0.0));
 }
 
 Pt* ptMk(glm::vec3 loc) {
@@ -43,7 +43,7 @@ void ptDraw(Pt* pt) {
 	pt->_parent->_model = glm::mat4(1.0);
 	pt->_parent->_model = glm::scale(pt->_parent->_model, glm::vec3(50));
 	pt->_parent->_model = glm::translate(pt->_parent->_model, pt->_parent->_loc);
-	pt->_parent->_model = glm::rotate(pt->_parent->_model, (GLfloat) M_PI, glm::vec3(0.0, 1.0, 0.0));
+	pt->_parent->_model = glm::rotate(pt->_parent->_model, (GLfloat) (M_PI / 2), glm::vec3(0.0, 1.0, 0.0));
 
 	glUniformMatrix4fv(pt->_parent->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(pt->_parent->_model));
 	glUniformMatrix4fv(pt->_parent->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(pt->_parent->_view));

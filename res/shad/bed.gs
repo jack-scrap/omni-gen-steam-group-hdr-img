@@ -2,127 +2,94 @@
 
 layout (points) in;
 
-layout (triangle_strip, max_vertices = 36) out;
-
-in vec2 _st;
-out vec2 st_;
-
-out vec3 _pos;
+layout (triangle_strip, max_vertices = 32) out;
 
 uniform mat4
 	proj,
 	view,
 	model;
 
+vec2 sz = vec2(
+	2,
+	-4
+);
+
 float
-	pad = 0.2,
-	stroke = 0.32,
-
-	outer = pad + stroke,
-
-	wd = 2.0,
-	ht = 4.0;
+	fac = 0.1 * 2,
+	thick = -0.2 * 2;
 
 void main() {
-	/* quad */
-	float vtcQuad[(2 * 2) * 3];
-	int i0 = 0;
+	/* generate */
+	// vertices
+	vec3 quad[(2 * 2) + 2];
+
+	int i = 0;
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < 2; x++) {
-			vtcQuad[i0] = bool(x) ? (ht - pad) : -ht;
-			vtcQuad[i0 + 1] = 0.0;
-			vtcQuad[i0 + 2] = (bool(z) ? 1 : -1) * wd;
+			vec3 sheer;
+			if (bool(z)) {
+				for (int b = 0; b < 2; b++) {
+					sheer = vec3(
+						(b * (bool(x) ? 1 : -1) * (bool(b) ? 1 : -1)) * -fac,
+						0,
+						(bool(b) ? 0 : 1) * fac
+					);
 
-			i0 += 3;
+					quad[i] = vec3(
+						(bool(x) ? 1 : -1) * (sz.x / 2),
+						0,
+						z * sz.y
+					) + sheer;
+
+					i++;
+				}
+			} else {
+				quad[i] = vec3(
+					(bool(x) ? 1 : -1) * (sz.x / 2),
+					0,
+					z * sz.y
+				);
+
+				i++;
+			}
 		}
 	}
 
-	// beveled
-	float vtcEdge[(2 * 2) * 3];
-	int i1 = 0;
-	for (int z = 0; z < 2; z++) {
-		for (int x = 0; x < 2; x++) {
-			vtcEdge[i1] = bool(x) ? ht : (ht - pad);
-			vtcEdge[i1 + 1] = 0.0;
-			vtcEdge[i1 + 2] = ((bool(z) ? 1 : -1) * wd) + ((bool(x) ? (bool(z) ? -1 : 1) : 0) * pad);
+	// indices
+	unsigned short idc[2 * 2 * 2] = unsigned short[2 * 2 * 2](
+		0, 1,
+		2, 4,
 
-			i1 += 3;
-		}
-	}
-
-	for (int y = 0; y < 2; y++) {
-		for (int i = 0; i < vtcQuad.length(); i += 3) {
-			gl_Position = proj * view * model * (gl_in[0].gl_Position + vec4(
-				vec3(
-					vtcQuad[i],
-					vtcQuad[i + 1] + ((bool(y) ? 1 : -1) * pad),
-					vtcQuad[i + 2]
-				),
-				0.0
-			));
-			_pos = gl_Position.xyz;
-			st_ = _st;
-			EmitVertex();   
-		}
-		EndPrimitive();
-
-		for (int i = 0; i < vtcEdge.length(); i += 3) {
-			gl_Position = proj * view * model * (gl_in[0].gl_Position + vec4(
-			vec3(
-				vtcEdge[i],
-				vtcEdge[i + 1] + ((bool(y) ? 1 : -1) * pad),
-				vtcEdge[i + 2]
-			),
-			0.0
-			));
-			_pos = gl_Position.xyz;
-			st_ = _st;
-			EmitVertex();   
-		}
-		EndPrimitive();
-	}
-
-	/* cap */
-	float vtc[6 * (2 * 3)] = float[6 * (2 * 3)](
-		-ht, -pad, -wd,
-		-ht, pad, -wd,
-
-		// corner
-		ht - pad, -pad, -wd,
-		ht - pad, pad, -wd,
-
-		ht, -pad, -wd + pad,
-		ht, pad, -wd + pad,
-
-		ht, -pad, wd - pad,
-		ht, pad, wd - pad,
-
-		ht - pad, -pad, wd,
-		ht - pad, pad, wd,
-
-		-ht, -pad, wd,
-		-ht, pad, wd
+		2, 4,
+		3, 5
 	);
 
 	// draw
-	for (int i = 0; i < 6 - 1; i++) {
-		int start = i * 2;
+	// extrude
+	for (int y = 0; y < 2; y++) {
+		for (int q = 0; q < 2; q++) {
+			for (int i = 0; i < 2 * 2; i++) {
+				gl_Position = proj * view * model * vec4(
+					gl_in[0].gl_Position.xyz + quad[idc[(q * 2 * 2) + i]] + vec3(0, y * thick, 0),
+					1.0
+				);
+				EmitVertex();   
+			}
 
-		for (int v = 0; v < 2 * 2; v++) {
-			int idx = (start + v) * 3;
-
-			gl_Position = proj * view * model * (gl_in[0].gl_Position + vec4(
-				vec3(
-					vtc[idx],
-					vtc[idx + 1],
-					vtc[idx + 2]
-				),
-				0.0
-			));
-			_pos = gl_Position.xyz;
-			st_ = _st;
-			EmitVertex();   
+			EndPrimitive();
 		}
-		EndPrimitive();
 	}
-}
+
+	// fill
+	for (int q = 0; q < 2; q++) {
+		for (int i = 0; i < 2 * 2; i++) {
+			for (int y = 0; y < 2; y++) {
+				gl_Position = proj * view * model * vec4(
+					gl_in[0].gl_Position.xyz + quad[idc[(q * 2 * 2) + i]] + vec3(0, y * thick, 0),
+					1.0
+				);
+				EmitVertex();   
+			}
+		}
+	}
+}  
