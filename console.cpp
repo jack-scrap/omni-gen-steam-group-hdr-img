@@ -64,7 +64,7 @@ void Console::render() {
 	}
 
 	// line numbers
-	unsigned int max = std::to_string(_buff.size()).size();
+	unsigned int max = std::to_string(_buff.size()).size() + 1;
 
 	for (int l = 0; l < roof; l++) {
 		std::vector<SDL_Surface*> line;
@@ -73,6 +73,7 @@ void Console::render() {
 		for (int i = str.size(); i < max; i++) {
 			str.push_back(' ');
 		}
+		str.push_back(' ');
 
 		for (int i = 0; i < max; i++) {
 			line.push_back(TTF_RenderGlyph_Blended(font, (char) str[i], {col[true][R], col[true][G], col[true][B]}));
