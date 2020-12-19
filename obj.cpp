@@ -16,6 +16,38 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
+void objSpray(Obj* obj) {
+	// framebuffer
+	GLuint fbo;
+	glGenFramebuffers(1, &fbo);
+	
+	// color attachment
+	glBindTexture(GL_TEXTURE_2D, obj->_tex);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 800, 600, 0, GL_RGB, GL_UNSIGNED_BYTE, (GLvoid*) 0);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	// renderbuffer (stencil)
+	GLuint rbo;
+	glGenRenderbuffers(1, &rbo);
+	glBindRenderbuffer(GL_RENDERBUFFER, rbo);
+
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_STENCIL_INDEX8, 800, 600);
+
+	// attach texture, renderbuffer
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, obj->_tex, 0);
+
+	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+		std::cout << "Error: Framebuffer not complete" << std::endl;
+	}
+
+	// bind default framebuffer
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+}
+
 Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string nameVtx, std::string nameFrag, bool active, glm::vec3 loc) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
@@ -101,23 +133,14 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_prog.use();
 
 	// texture
-	int
-		wd,
-		ht,
-		chan;
-	unsigned char* data = stbi_load("res/dirt.jpg", &wd, &ht, &chan, 0); 
+	glGenTextures(1, &_->_tex);
+	glBindTexture(GL_TEXTURE_2D, _->_tex);
 
-	if (data) {
-		glGenTextures(1, &_->_tex);
-		glBindTexture(GL_TEXTURE_2D, _->_tex);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+	glGenerateMipmap(GL_TEXTURE_2D);
 
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, wd, ht, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-		glGenerateMipmap(GL_TEXTURE_2D);
-	} else {
-		std::cout << "Texture error: Failed to load" << std::endl;
-	}
+	objSpray(_);
 
 	// attribute
 	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);

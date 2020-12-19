@@ -30,7 +30,7 @@ Truck* truckMk(glm::vec3 loc) {
 
 	_->_bed = ptMk(loc);
 
-	_->_parent = objMk("truck/front", "main", "dir", true, child, sizeof child / sizeof *child, loc + glm::vec3(2.4, 1.3, 0.0));
+	_->_parent = objMk("truck/front", "tex", "tex", true, child, sizeof child / sizeof *child, loc + glm::vec3(2.4, 1.3, 0.0));
 
 	return _;
 }

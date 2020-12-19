@@ -4,6 +4,9 @@ layout (points) in;
 
 layout (triangle_strip, max_vertices = 36) out;
 
+in vec2 _st;
+out vec2 st_;
+
 out vec3 _pos;
 
 uniform mat4
@@ -58,6 +61,7 @@ void main() {
 				0.0
 			));
 			_pos = gl_Position.xyz;
+			st_ = _st;
 			EmitVertex();   
 		}
 		EndPrimitive();
@@ -72,6 +76,7 @@ void main() {
 			0.0
 			));
 			_pos = gl_Position.xyz;
+			st_ = _st;
 			EmitVertex();   
 		}
 		EndPrimitive();
@@ -115,6 +120,7 @@ void main() {
 				0.0
 			));
 			_pos = gl_Position.xyz;
+			st_ = _st;
 			EmitVertex();   
 		}
 		EndPrimitive();
