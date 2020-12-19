@@ -3,8 +3,6 @@
 in vec3 pos;
 out vec3 _pos;
 
-uniform vec3 loc;
-
 uniform mat4
 	model,
 	view,
