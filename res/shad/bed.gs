@@ -31,13 +31,13 @@ void main() {
 				for (int b = 0; b < 2; b++) {
 					sheer = vec3(
 						(b * (bool(x) ? 1 : -1) * (bool(b) ? 1 : -1)) * -fac,
-						0,
+						0.0,
 						(bool(b) ? 0 : 1) * fac
 					);
 
 					quad[i] = vec3(
 						(bool(x) ? 1 : -1) * (sz.x / 2),
-						0,
+						0.0,
 						z * sz.y
 					) + sheer;
 
@@ -46,7 +46,7 @@ void main() {
 			} else {
 				quad[i] = vec3(
 					(bool(x) ? 1 : -1) * (sz.x / 2),
-					0,
+					0.0,
 					z * sz.y
 				);
 
@@ -70,7 +70,7 @@ void main() {
 		for (int q = 0; q < 2; q++) {
 			for (int i = 0; i < 2 * 2; i++) {
 				gl_Position = proj * view * model * vec4(
-					gl_in[0].gl_Position.xyz + quad[idc[(q * 2 * 2) + i]] + vec3(0, y * thick, 0),
+					gl_in[0].gl_Position.xyz + quad[idc[(q * 2 * 2) + i]] + vec3(0.0, y * thick, 0.0),
 					1.0
 				);
 				EmitVertex();   
@@ -85,7 +85,7 @@ void main() {
 		for (int i = 0; i < 2 * 2; i++) {
 			for (int y = 0; y < 2; y++) {
 				gl_Position = proj * view * model * vec4(
-					gl_in[0].gl_Position.xyz + quad[idc[(q * 2 * 2) + i]] + vec3(0, y * thick, 0),
+					gl_in[0].gl_Position.xyz + quad[idc[(q * 2 * 2) + i]] + vec3(0.0, y * thick, 0.0),
 					1.0
 				);
 				EmitVertex();   
