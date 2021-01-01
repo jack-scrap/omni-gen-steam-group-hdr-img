@@ -531,7 +531,7 @@ void objDraw(Obj* obj) {
 	obj->_prog.use();
 
 	obj->_model = glm::mat4(1.0);
-	obj->_model = glm::scale(obj->_model, glm::vec3(50));
+	obj->_model = glm::scale(obj->_model, cam._scale);
 	obj->_model = glm::translate(obj->_model, obj->_loc);
 
 	glUniformMatrix4fv(obj->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(obj->_model));

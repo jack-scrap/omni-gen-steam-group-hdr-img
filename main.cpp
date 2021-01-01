@@ -13,6 +13,7 @@
 #include "truck.h"
 #include "crane.h"
 #include "pt.h"
+#include "cam.h"
 
 int main() {
 	Console* console = new Console(util::fs::rd<std::vector<std::string>>("script/asdf.py"));
@@ -54,6 +55,20 @@ int main() {
 
 							break;
 					}	
+				}
+			}
+
+			if (e.type == SDL_MOUSEWHEEL) {
+				if (e.wheel.y > 0) {
+					if (glm::all(glm::lessThan(cam._scale, glm::vec3(100.0, 100.0, 100.0)))) {
+						cam._scale += glm::vec3(10.0, 10.0, 10.0);
+					}
+				}
+
+				if (e.wheel.y < 0) {
+					if (glm::all(glm::greaterThan(cam._scale, glm::vec3(20.0, 20.0, 20.0)))) {
+						cam._scale -= glm::vec3(10.0, 10.0, 10.0);
+					}
 				}
 			}
 

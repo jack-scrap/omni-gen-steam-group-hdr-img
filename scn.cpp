@@ -7,6 +7,14 @@
 
 unsigned int consoleWd = state::ln * state::dim[X];
 
+Cam cam = {
+	{
+		0, 0, 0
+	}, {
+		50, 50, 50
+	}
+};
+
 Disp disp("asdf", {
 	state::view[X] + consoleWd, state::view[Y]
 }, col[false]);

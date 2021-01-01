@@ -5,6 +5,9 @@
 #include "truck.h"
 #include "crane.h"
 #include "pt.h"
+#include "cam.h"
+
+extern Cam cam;
 
 extern Disp disp;
 
