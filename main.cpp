@@ -9,7 +9,6 @@
 #include "console.h"
 #include "util.h"
 #include "state.h"
-#include "obj.h"
 #include "truck.h"
 #include "crane.h"
 #include "pt.h"
@@ -82,8 +81,6 @@ int main() {
 		glEnable(GL_DEPTH_TEST);
 
 		glViewport(state::res[X], 0, state::view[X], state::view[Y]);
-
-		/* objDraw(cube); */
 
 		craneDraw(crane);
 
