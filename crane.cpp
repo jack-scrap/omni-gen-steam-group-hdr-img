@@ -38,21 +38,6 @@ Crane* craneMk(glm::vec3 loc) {
 	return _;
 }
 
-void craneMv(Crane* crane, GLfloat* d) {
-	for (int i = 0; i < 3; i++) {
-		crane->_parent->_loc[i] += d[i];
-	}
-
-	crane->_parent->_model = glm::scale(crane->_parent->_model, glm::vec3(50));
-	crane->_parent->_model = glm::translate(crane->_parent->_model, glm::vec3(d[0], d[1], d[2]));
-
-	for (int i = 0; i < crane->_parent->_noChild; i++) {
-		if (crane->_parent->_child[i]) {
-			objMv(crane->_parent->_child[i], d);
-		}
-	}
-}
-
 void cranePan(Crane* crane, bool dir) {
 	if (dir) {
 		if (crane->_parent->_child[2 * 2 * 2]->_loc[Z] < 3) {

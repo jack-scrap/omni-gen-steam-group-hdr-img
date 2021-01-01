@@ -32,7 +32,7 @@ class Crane(Obj):
         for i in range(3):
             self._loc[i] = loc[i]
 
-        craneMv(self._ptr, self._loc)
+        objMv(self._ptr.contents._parent, self._loc)
 
     def pan(self, dir):
         cranePan(self._ptr, dir)
@@ -83,13 +83,6 @@ craneGet.argtypes = None
 craneSet = crane.craneSet
 craneSet.restype = c_void_p
 craneSet.argtypes = [
-    POINTER(Crane),
-    c_float * 3
-]
-
-craneMv = crane.craneMv
-craneMv.restype = c_void_p
-craneMv.argtypes = [
     POINTER(Crane),
     c_float * 3
 ]
