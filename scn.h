@@ -16,5 +16,3 @@ extern Obj* wheel;
 extern Truck* truck;
 
 extern Crane* crane;
-
-extern Obj* cube;
