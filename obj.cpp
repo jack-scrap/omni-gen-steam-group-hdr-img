@@ -13,6 +13,7 @@
 #include "util.h"
 #include "state.h"
 #include "math.h"
+#include "state.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
@@ -507,21 +508,19 @@ Obj* objGet() {
 }
 
 void objSet(Obj* obj, GLfloat* d) {
-	unsigned int fps = 10;
-
 	float step[3];
 	for (int i = 0; i < 3; i++) {
-		step[i] = d[i] / fps;
+		step[i] = d[i] / state::fps;
 	}
 
-	for (int t = 0; t < fps; t++) {
+	for (int t = 0; t < state::fps; t++) {
 		for (int i = 0; i < 3; i++) {
 			obj->_loc[i] += step[i];
 		}
 
 		obj->_model = glm::translate(glm::mat4(1.0), obj->_loc);
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / fps));
+		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / state::fps));
 	}
 }
 

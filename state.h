@@ -22,4 +22,6 @@ namespace state {
 		pc = bound / res,
 
 		step = pc * dim;
+
+	static unsigned int fps = 10;
 }

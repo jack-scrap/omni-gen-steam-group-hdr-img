@@ -5,6 +5,7 @@
 #include "crane.h"
 #include "scn.h"
 #include "math.h"
+#include "state.h"
 
 Crane* craneMk(glm::vec3 loc) {
 	Crane* _ = (Crane*) malloc(sizeof (Crane));
@@ -79,21 +80,19 @@ Crane* craneGet() {
 }
 
 void craneSet(Crane* crane, GLfloat* d) {
-	unsigned int fps = 10;
-
 	float step[3];
 	for (int i = 0; i < 3; i++) {
-		step[i] = d[i] / fps;
+		step[i] = d[i] / state::fps;
 	}
 
-	for (int t = 0; t < fps; t++) {
+	for (int t = 0; t < state::fps; t++) {
 		for (int i = 0; i < 3; i++) {
 			crane->_parent->_loc[i] += step[i];
 		}
 
 		crane->_parent->_model = glm::translate(glm::mat4(1.0), crane->_parent->_loc);
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / fps));
+		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / state::fps));
 	}
 }
 
