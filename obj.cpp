@@ -504,7 +504,7 @@ void objMv(Obj* obj, GLfloat* d) {
 }
 
 Obj* objGet() {
-	return wheel;
+	return cont;
 }
 
 void objSet(Obj* obj, GLfloat* d) {

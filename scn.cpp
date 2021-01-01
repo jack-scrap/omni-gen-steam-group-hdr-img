@@ -17,8 +17,6 @@ Disp disp("asdf", {
 	state::view[X] + (state::ln * state::dim[X]), state::view[Y]
 }, col[false]);
 
-Obj* wheel = objMk("wheel", "main", "dir", true, glm::vec3(3.0, 0.0, 0.0));
-
 Truck* truck = truckMk(glm::vec3(0.0, 0.0, 0.0));
 
 Crane* crane = craneMk(glm::vec3(0.0, 0.0, 0.0));

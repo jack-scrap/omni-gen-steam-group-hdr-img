@@ -11,8 +11,6 @@ extern Cam cam;
 
 extern Disp disp;
 
-extern Obj* wheel;
-
 extern Truck* truck;
 
 extern Crane* crane;
