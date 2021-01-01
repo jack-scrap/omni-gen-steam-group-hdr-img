@@ -16,11 +16,7 @@ Crane* craneMk(glm::vec3 loc) {
 			child[i] = objMk("wheel", "main", "dir", false, loc + glm::vec3((x ? 1 : -1) * 3.0, -1, (z ? 1 : -1) * 10.0));
 
 			i++;
-		}
-	}
 
-	for (int z = 0; z < 2; z++) {
-		for (int x = 0; x < 2; x++) {
 			child[i] = objMk("rim", "main", "dir", true, loc + glm::vec3((x ? : -1) * 3.0, -1, (z ? 1 : -1) * 10.0));
 
 			i++;
