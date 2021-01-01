@@ -4,11 +4,12 @@
 
 #include "crane.h"
 #include "scn.h"
+#include "math.h"
 
 Crane* craneMk(glm::vec3 loc) {
 	Crane* _ = (Crane*) malloc(sizeof (Crane));
 
-	Obj* child[2 * 2 * 2];
+	Obj* child[(2 * 2 * 2) + 1];
 	int i = 0;
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < 2; x++) {
@@ -26,7 +27,7 @@ Crane* craneMk(glm::vec3 loc) {
 		}
 	}
 
-	child[2 * 2 * 2] = objMk("truck/tail", "main", "dir", false, loc + glm::vec3(-3.84, 0.0, 0.0));
+	child[2 * 2 * 2] = objMk("crane/head", "main", "dir", true, loc + glm::vec3(0.0, 13.8, 0.0));
 
 	_->_parent = objMk("crane/body", "main", "dir", true, child, sizeof child / sizeof *child, loc + glm::vec3(0.0, 0.0, 0.0));
 
@@ -44,6 +45,18 @@ void craneMv(Crane* crane, GLfloat* d) {
 	for (int i = 0; i < crane->_parent->_noChild; i++) {
 		if (crane->_parent->_child[i]) {
 			objMv(crane->_parent->_child[i], d);
+		}
+	}
+}
+
+void cranePan(Crane* crane, bool dir) {
+	if (dir) {
+		if (crane->_parent->_child[2 * 2 * 2]->_loc[Z] < 3) {
+			crane->_parent->_child[2 * 2 * 2]->_loc[Z]++;
+		}
+	} else {
+		if (crane->_parent->_child[2 * 2 * 2]->_loc[Z] > -3) {
+			crane->_parent->_child[2 * 2 * 2]->_loc[Z]--;
 		}
 	}
 }

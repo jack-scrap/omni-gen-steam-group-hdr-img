@@ -34,6 +34,9 @@ class Crane(Obj):
 
         craneMv(self._ptr, self._loc)
 
+    def pan(self, dir):
+        cranePan(self._ptr, dir)
+
 objGet = obj.objGet
 objGet.restype = POINTER(Obj)
 objGet.argtypes = None
@@ -86,6 +89,13 @@ craneMv.restype = c_void_p
 craneMv.argtypes = [
     POINTER(Crane),
     c_float * 3
+]
+
+cranePan = crane.cranePan
+cranePan.restype = c_void_p
+cranePan.argtypes = [
+    POINTER(Crane),
+    c_bool
 ]
 
 wheel = Obj(objGet())
