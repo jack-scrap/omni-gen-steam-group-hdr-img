@@ -5,8 +5,6 @@
 #include "col.h"
 #include "crane.h"
 
-unsigned int consoleWd = state::ln * state::dim[X];
-
 Cam cam = {
 	{
 		0, 0, 0
@@ -16,7 +14,7 @@ Cam cam = {
 };
 
 Disp disp("asdf", {
-	state::view[X] + consoleWd, state::view[Y]
+	state::view[X] + (state::ln * state::dim[X]), state::view[Y]
 }, col[false]);
 
 Obj* wheel = objMk("wheel", "main", "dir", true, glm::vec3(3.0, 0.0, 0.0));
