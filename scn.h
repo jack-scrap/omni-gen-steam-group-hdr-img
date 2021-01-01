@@ -14,3 +14,5 @@ extern Disp disp;
 extern Truck* truck;
 
 extern Crane* crane;
+
+extern Obj* cont;

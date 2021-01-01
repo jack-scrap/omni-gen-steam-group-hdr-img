@@ -84,6 +84,8 @@ int main() {
 
 		craneDraw(crane);
 
+		objDraw(cont);
+
 		glViewport(0, 0, state::res[Y], state::view[Y]);
 
 		console->draw();
