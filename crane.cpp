@@ -63,6 +63,12 @@ void cranePan(Crane* crane, bool dir) {
 			crane->_parent->_child[2 * 2 * 2]->_loc[Z]--;
 		}
 	}
+
+	GLfloat loc[3];
+	for (int i = 0; i < 3; i++) {
+		loc[i] = crane->_parent->_loc[i];
+	}
+	objMv(crane->_parent->_child[2 * 2 * 2], loc);
 }
 
 Crane* craneGet() {
