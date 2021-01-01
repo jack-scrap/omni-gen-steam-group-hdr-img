@@ -71,6 +71,24 @@ void cranePan(Crane* crane, bool dir) {
 	objMv(crane->_parent->_child[2 * 2 * 2], loc);
 }
 
+void cranePed(Crane* crane, bool dir) {
+	if (dir) {
+		if (crane->_parent->_child[2 * 2 * 2]->_loc[Y] < 13.8) {
+			crane->_parent->_child[2 * 2 * 2]->_loc[Y]++;
+		}
+	} else {
+		if (crane->_parent->_child[2 * 2 * 2]->_loc[Y] > 0) {
+			crane->_parent->_child[2 * 2 * 2]->_loc[Y]--;
+		}
+	}
+
+	GLfloat loc[3];
+	for (int i = 0; i < 3; i++) {
+		loc[i] = crane->_parent->_loc[i];
+	}
+	objMv(crane->_parent->_child[2 * 2 * 2], loc);
+}
+
 Crane* craneGet() {
 	return crane;
 }

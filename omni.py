@@ -37,6 +37,9 @@ class Crane(Obj):
     def pan(self, dir):
         cranePan(self._ptr, dir)
 
+    def ped(self, dir):
+        cranePed(self._ptr, dir)
+
 objGet = obj.objGet
 objGet.restype = POINTER(Obj)
 objGet.argtypes = None
@@ -94,6 +97,13 @@ craneMv.argtypes = [
 cranePan = crane.cranePan
 cranePan.restype = c_void_p
 cranePan.argtypes = [
+    POINTER(Crane),
+    c_bool
+]
+
+cranePed = crane.cranePed
+cranePed.restype = c_void_p
+cranePed.argtypes = [
     POINTER(Crane),
     c_bool
 ]
