@@ -2,6 +2,7 @@ from ctypes import *
 
 obj = CDLL('libobj.so')
 truck = CDLL('libtruck.so')
+crane = CDLL('libcrane.so')
 scn = CDLL('libscn.so')
 
 class Obj(Structure):
@@ -25,6 +26,13 @@ class Truck(Obj):
             self._loc[i] = loc[i]
 
         truckMv(self._ptr, self._loc)
+
+class Crane(Obj):
+    def mv(self, loc):
+        for i in range(3):
+            self._loc[i] = loc[i]
+
+        craneMv(self._ptr, self._loc)
 
 objGet = obj.objGet
 objGet.restype = POINTER(Obj)
@@ -62,5 +70,24 @@ truckMv.argtypes = [
     c_float * 3
 ]
 
+craneGet = crane.craneGet
+craneGet.restype = POINTER(Crane)
+craneGet.argtypes = None
+
+craneSet = crane.craneSet
+craneSet.restype = c_void_p
+craneSet.argtypes = [
+    POINTER(Crane),
+    c_float * 3
+]
+
+craneMv = crane.craneMv
+craneMv.restype = c_void_p
+craneMv.argtypes = [
+    POINTER(Crane),
+    c_float * 3
+]
+
 wheel = Obj(objGet())
 truck = Truck(truckGet())
+crane = Crane(craneGet())

@@ -11,6 +11,7 @@
 #include "state.h"
 #include "obj.h"
 #include "truck.h"
+#include "crane.h"
 #include "pt.h"
 
 int main() {
@@ -69,7 +70,7 @@ int main() {
 
 		/* objDraw(cube); */
 
-		truckDraw(truck);
+		craneDraw(crane);
 
 		glViewport(0, 0, state::res[Y], state::view[Y]);
 
