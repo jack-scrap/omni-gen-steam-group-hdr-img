@@ -18,7 +18,7 @@ class Obj(Structure):
 
     def __init__(self, ptr):
         self._ptr = ptr
-        self._loc = ptr.contents._loc
+        self._loc = self._ptr.contents._loc
 
 class Truck(Obj):
     def mv(self, loc):
