@@ -80,7 +80,7 @@ Crane* craneGet() {
 }
 
 void craneSet(Crane* crane, GLfloat* d) {
-	float step[3];
+	GLfloat step[3];
 	for (int i = 0; i < 3; i++) {
 		step[i] = d[i] / state::fps;
 	}
