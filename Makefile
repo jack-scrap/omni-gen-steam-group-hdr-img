@@ -1,6 +1,6 @@
 CXX = g++
 
-PROG = a.out
+PROG = omni
 
 STATIC = main disp util mesh console
 DYNA = scn poly obj truck crane pt prog
@@ -29,7 +29,7 @@ main.o: main.cpp
 	$(CXX) -c $< -o $@ $(LDFLAGS)
 
 $(PROG): $(DEP_STATIC) $(DEP_DYNA)
-	$(CXX) $(DEP_STATIC) $(LDFLAGS)
+	$(CXX) $(DEP_STATIC) $(LDFLAGS) -o $@
 
 clean:
 	rm *.o *.so $(PROG)

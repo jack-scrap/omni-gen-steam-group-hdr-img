@@ -1,6 +1,6 @@
 *.o
 *.so
-a.out
+omni
 
 *.pyc
 __pycache__
