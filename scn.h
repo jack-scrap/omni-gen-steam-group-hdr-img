@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 #include "poly.h"
 #include "obj.h"
 #include "truck.h"
@@ -15,4 +17,4 @@ extern Truck* truck;
 
 extern Crane* crane;
 
-extern Obj* cont;
+extern std::vector<Obj*> obj;

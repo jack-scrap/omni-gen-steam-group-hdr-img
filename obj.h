@@ -73,8 +73,6 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 
 extern "C" void objMv(Obj* obj, GLfloat* d);
 
-extern "C" Obj* objGet();
-
 extern "C" void objSet(Obj* obj, GLfloat* d);
 
 extern "C" void objDraw(Obj* obj);

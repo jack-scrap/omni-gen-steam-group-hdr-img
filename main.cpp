@@ -84,7 +84,9 @@ int main() {
 
 		craneDraw(crane);
 
-		objDraw(cont);
+		for (Obj* _ : obj) {
+			objDraw(_);
+		}
 
 		glViewport(0, 0, state::res[Y], state::view[Y]);
 

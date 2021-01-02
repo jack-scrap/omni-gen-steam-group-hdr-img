@@ -40,17 +40,6 @@ class Crane(Obj):
     def ped(self, dir):
         cranePed(self._ptr, dir)
 
-objGet = obj.objGet
-objGet.restype = POINTER(Obj)
-objGet.argtypes = None
-
-objSet = obj.objSet
-objSet.restype = c_void_p
-objSet.argtypes = [
-    POINTER(Obj),
-    c_float * 3
-]
-
 objMv = obj.objMv
 objMv.restype = c_void_p
 objMv.argtypes = [
@@ -101,6 +90,5 @@ cranePed.argtypes = [
     c_bool
 ]
 
-wheel = Obj(objGet())
 truck = Truck(truckGet())
 crane = Crane(craneGet())

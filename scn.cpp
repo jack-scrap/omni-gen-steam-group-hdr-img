@@ -21,4 +21,6 @@ Truck* truck = truckMk(glm::vec3(0.0, 0.0, 0.0));
 
 Crane* crane = craneMk(glm::vec3(0.0, 0.0, 0.0));
 
-Obj* cont = objMk("container_2x4", "main", "dir", true, glm::vec3(0.0, 0.0, 0.0));
+std::vector<Obj*> obj = {
+	objMk("container_2x4", "main", "dir", true, glm::vec3(0.0, 0.0, 0.0))
+};

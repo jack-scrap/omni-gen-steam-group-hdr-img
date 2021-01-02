@@ -503,10 +503,6 @@ void objMv(Obj* obj, GLfloat* d) {
 	}
 }
 
-Obj* objGet() {
-	return cont;
-}
-
 void objSet(Obj* obj, GLfloat* d) {
 	float step[3];
 	for (int i = 0; i < 3; i++) {
