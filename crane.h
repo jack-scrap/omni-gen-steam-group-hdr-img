@@ -6,6 +6,8 @@
 
 typedef struct {
 	Obj* _parent;
+
+	Obj* _op;
 } Crane;
 
 extern "C" Crane* craneMk(glm::vec3 loc);
@@ -13,6 +15,8 @@ extern "C" Crane* craneMk(glm::vec3 loc);
 extern "C" void cranePan(Crane* crane, bool dir);
 
 extern "C" void cranePed(Crane* crane, bool dir);
+
+extern "C" void craneGrab(Crane* crane);
 
 extern "C" Crane* craneGet();
 

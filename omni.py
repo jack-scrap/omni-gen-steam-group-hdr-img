@@ -40,6 +40,9 @@ class Crane(Obj):
     def ped(self, dir):
         cranePed(self._ptr, dir)
 
+    def grab(self):
+        craneGrab(self._ptr)
+
 objMv = obj.objMv
 objMv.restype = c_void_p
 objMv.argtypes = [
@@ -88,6 +91,12 @@ cranePed.restype = c_void_p
 cranePed.argtypes = [
     POINTER(Crane),
     c_bool
+]
+
+craneGrab = crane.craneGrab
+craneGrab.restype = c_void_p
+craneGrab.argtypes = [
+    POINTER(Crane)
 ]
 
 truck = Truck(truckGet())
