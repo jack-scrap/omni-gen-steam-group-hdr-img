@@ -59,12 +59,12 @@ void cranePan(Crane* crane, bool dir) {
 
 void cranePed(Crane* crane, bool dir) {
 	if (dir) {
-		if (crane->_parent->_child[2 * 2 * 2 * 2 * 2]->_loc[Y] < 13.8) {
-			crane->_parent->_child[2 * 2 * 2 * 2 * 2]->_loc[Y]++;
+		if (crane->_parent->_child[2 * 2 * 2 * 2 * 2]->_child[0]->_loc[Y] < 13.8) {
+			crane->_parent->_child[2 * 2 * 2 * 2 * 2]->_child[0]->_loc[Y]++;
 		}
 	} else {
-		if (crane->_parent->_child[2 * 2 * 2 * 2 * 2]->_loc[Y] > 0.0) {
-			crane->_parent->_child[2 * 2 * 2 * 2 * 2]->_loc[Y]--;
+		if (crane->_parent->_child[2 * 2 * 2 * 2 * 2]->_child[0]->_loc[Y] > 0.0) {
+			crane->_parent->_child[2 * 2 * 2 * 2 * 2]->_child[0]->_loc[Y]--;
 		}
 	}
 
