@@ -1,5 +1,6 @@
 #include "disp.h"
 #include "math.h"
+#include "scn.h"
 
 Disp::Disp(const char* title, glm::vec2 res, glm::vec3 bg) :
 	_res(res),
@@ -39,6 +40,26 @@ void Disp::clear() {
 
 void Disp::update() {
 	SDL_GL_SwapWindow(_win);
+}
+
+void Disp::draw() {
+	clear();
+
+	glEnable(GL_DEPTH_TEST);
+
+	glViewport(state::res[X], 0, state::view[X], state::view[Y]);
+
+	craneDraw(crane);
+
+	for (Obj* _ : obj) {
+		objDraw(_);
+	}
+
+	glViewport(0, 0, state::res[Y], state::view[Y]);
+
+	console->draw();
+
+	update();
 }
 
 Disp::~Disp() {

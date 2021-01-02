@@ -6,7 +6,6 @@
 #include <vector>
 
 #include "scn.h"
-#include "console.h"
 #include "util.h"
 #include "state.h"
 #include "truck.h"
@@ -25,8 +24,10 @@ int
 	curr[2],
 	delta[2];
 
+Console* console;
+
 int main() {
-	Console* console = new Console(util::fs::rd<std::vector<std::string>>("script/asdf.py"));
+	console = new Console(util::fs::rd<std::vector<std::string>>("script/asdf.py"));
 
 	SDL_Event e;
 	while (disp._open) {
@@ -111,23 +112,7 @@ int main() {
 			}
 		}
 
-		disp.clear();
-
-		glEnable(GL_DEPTH_TEST);
-
-		glViewport(state::res[X], 0, state::view[X], state::view[Y]);
-
-		craneDraw(crane);
-
-		for (Obj* _ : obj) {
-			objDraw(_);
-		}
-
-		glViewport(0, 0, state::res[Y], state::view[Y]);
-
-		console->draw();
-
-		disp.update();
+		disp.draw();
 	}
 
 	return 0;

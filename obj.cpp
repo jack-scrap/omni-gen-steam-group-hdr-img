@@ -497,6 +497,8 @@ void objMv(Obj* obj, GLfloat* d) {
 		obj->_model = glm::scale(obj->_model, cam._scale);
 		obj->_model = glm::translate(obj->_model, glm::vec3(d[X], d[Y], d[Z]));
 
+		disp.draw();
+
 		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / state::fps));
 	}
 

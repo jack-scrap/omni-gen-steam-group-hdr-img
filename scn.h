@@ -8,10 +8,13 @@
 #include "crane.h"
 #include "pt.h"
 #include "cam.h"
+#include "console.h"
 
 extern Cam cam;
 
 extern Disp disp;
+
+extern Console* console;
 
 extern Truck* truck;
 
