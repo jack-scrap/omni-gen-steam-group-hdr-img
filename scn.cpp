@@ -13,7 +13,7 @@ Cam cam = {
 	}
 };
 
-Disp disp("asdf", {
+Disp disp("Omni", {
 	state::view[X] + (state::ln * state::dim[X]), state::view[Y]
 }, col[false]);
 
