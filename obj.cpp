@@ -126,7 +126,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
 	_->_view = glm::lookAt(glm::vec3(1000.0), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 	_->_model = glm::mat4(1.0);
-	_->_model = glm::scale(_->_model, glm::vec3(50));
+	_->_model = glm::scale(_->_model, cam._scale);
 	_->_model = glm::translate(_->_model, _->_loc);
 
 	_->_prog = Prog(nameVtx, nameFrag);
@@ -204,7 +204,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
 	_->_view = glm::lookAt(glm::vec3(1000.0), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 	_->_model = glm::mat4(1.0);
-	_->_model = glm::scale(_->_model, glm::vec3(50));
+	_->_model = glm::scale(_->_model, cam._scale);
 	_->_model = glm::translate(_->_model, _->_loc);
 
 	_->_prog = Prog(nameVtx, nameFrag);
@@ -263,7 +263,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
 	_->_view = glm::lookAt(glm::vec3(1000.0), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 	_->_model = glm::mat4(1.0);
-	_->_model = glm::scale(_->_model, glm::vec3(50));
+	_->_model = glm::scale(_->_model, cam._scale);
 	_->_model = glm::translate(_->_model, _->_loc);
 
 	_->_prog = Prog(nameVtx, nameGeom, nameFrag);
@@ -326,7 +326,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
 	_->_view = glm::lookAt(glm::vec3(1000.0), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 	_->_model = glm::mat4(1.0);
-	_->_model = glm::scale(_->_model, glm::vec3(50));
+	_->_model = glm::scale(_->_model, cam._scale);
 	_->_model = glm::translate(_->_model, _->_loc);
 
 	_->_prog = Prog(nameVtx, nameGeom, nameFrag);
@@ -388,7 +388,7 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
 	_->_view = glm::lookAt(glm::vec3(1000.0), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 	_->_model = glm::mat4(1.0);
-	_->_model = glm::scale(_->_model, glm::vec3(50));
+	_->_model = glm::scale(_->_model, cam._scale);
 	_->_model = glm::translate(_->_model, _->_loc);
 
 	_->_prog = Prog(nameVtx, nameFrag);
@@ -455,7 +455,7 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 	_->_view = glm::lookAt(glm::vec3(1000.0), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::translate(_->_model, _->_loc);
-	_->_model = glm::scale(_->_model, glm::vec3(50));
+	_->_model = glm::scale(_->_model, cam._scale);
 
 	_->_prog = Prog(nameVtx, nameFrag);
 
@@ -493,7 +493,7 @@ void objMv(Obj* obj, GLfloat* d) {
 		obj->_loc[i] += d[i];
 	}
 
-	obj->_model = glm::scale(obj->_model, glm::vec3(50));
+	obj->_model = glm::scale(obj->_model, cam._scale);
 	obj->_model = glm::translate(obj->_model, glm::vec3(d[X], d[Y], d[Z]));
 
 	for (int i = 0; i < obj->_noChild; i++) {
