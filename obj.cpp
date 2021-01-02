@@ -489,12 +489,16 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 }
 
 void objMv(Obj* obj, GLfloat* d) {
-	for (int i = 0; i < 3; i++) {
-		obj->_loc[i] += d[i];
-	}
+	for (int t = 0; t < state::fps; t++) {
+		for (int i = 0; i < 3; i++) {
+			obj->_loc[i] += d[i];
+		}
 
-	obj->_model = glm::scale(obj->_model, cam._scale);
-	obj->_model = glm::translate(obj->_model, glm::vec3(d[X], d[Y], d[Z]));
+		obj->_model = glm::scale(obj->_model, cam._scale);
+		obj->_model = glm::translate(obj->_model, glm::vec3(d[X], d[Y], d[Z]));
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / state::fps));
+	}
 
 	for (int i = 0; i < obj->_noChild; i++) {
 		if (obj->_child[i]) {
