@@ -527,10 +527,6 @@ void objDraw(Obj* obj) {
 
 	obj->_view = glm::lookAt(glm::vec3(100, 100, 100) + cam._pos, cam._pos, glm::vec3(0, 1, 0));
 
-/* 	std::cout << cam._pos[0] << std::endl; */
-/* 	std::cout << cam._pos[1] << std::endl; */
-/* 	std::cout << cam._pos[2] << std::endl; */
-
 	obj->_model = glm::mat4(1.0);
 	obj->_model = glm::scale(obj->_model, cam._scale);
 	obj->_model = glm::translate(obj->_model, obj->_loc);
