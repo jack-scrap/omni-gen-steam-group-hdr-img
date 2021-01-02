@@ -27,7 +27,7 @@ int
 Console* console;
 
 int main() {
-	console = new Console(util::fs::rd<std::vector<std::string>>("script/asdf.py"));
+	console = new Console(util::fs::rd<std::vector<std::string>>("script/0.py"));
 
 	SDL_Event e;
 	while (disp._open) {
