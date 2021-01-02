@@ -40,15 +40,7 @@ Crane* craneMk(glm::vec3 loc) {
 }
 
 void craneMv(Crane* crane, GLfloat* d) {
-	for (int i = 0; i < 3; i++) {
-		crane->_parent->_loc[i] += d[i];
-	}
-
-	for (int i = 0; i < crane->_parent->_noChild; i++) {
-		if (crane->_parent->_child[i]) {
-			objMv(crane->_parent->_child[i], d);
-		}
-	}
+	objMv(crane->_parent, d);
 }
 
 void cranePan(Crane* crane, bool dir) {
