@@ -15,8 +15,4 @@ Truck* truckMk(glm::vec3 loc);
 
 extern "C" void truckMv(Truck* truck, GLfloat* d);
 
-extern "C" Truck* truckGet();
-
-extern "C" void truckSet(Truck* truck, GLfloat* d);
-
 extern "C" void truckDraw(Truck* truck);

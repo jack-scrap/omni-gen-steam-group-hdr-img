@@ -50,11 +50,11 @@ objMv.argtypes = [
     c_float * 3
 ]
 
-truckGet = truck.truckGet
+truckGet = scn.truckGet
 truckGet.restype = POINTER(Truck)
 truckGet.argtypes = None
 
-truckSet = truck.truckSet
+truckSet = scn.truckSet
 truckSet.restype = c_void_p
 truckSet.argtypes = [
     POINTER(Truck),
@@ -68,11 +68,11 @@ truckMv.argtypes = [
     c_float * 3
 ]
 
-craneGet = crane.craneGet
+craneGet = scn.craneGet
 craneGet.restype = POINTER(Crane)
 craneGet.argtypes = None
 
-craneSet = crane.craneSet
+craneSet = scn.craneSet
 craneSet.restype = c_void_p
 craneSet.argtypes = [
     POINTER(Crane),

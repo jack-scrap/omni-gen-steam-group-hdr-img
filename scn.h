@@ -18,3 +18,11 @@ extern Truck* truck;
 extern Crane* crane;
 
 extern std::vector<Obj*> obj;
+
+extern "C" Truck* truckGet();
+
+extern "C" void truckSet(Truck* truck, GLfloat* d);
+
+extern "C" Crane* craneGet();
+
+extern "C" void craneSet(Crane* crane, GLfloat* d);

@@ -53,27 +53,6 @@ void truckMv(Truck* truck, GLfloat* d) {
 	ptMv(truck->_bed, d);
 }
 
-Truck* truckGet() {
-	return truck;
-}
-
-void truckSet(Truck* truck, GLfloat* d) {
-	float step[3];
-	for (int i = 0; i < 3; i++) {
-		step[i] = d[i] / state::fps;
-	}
-
-	for (int t = 0; t < state::fps; t++) {
-		for (int i = 0; i < 3; i++) {
-			truck->_parent->_loc[i] += step[i];
-		}
-
-		truck->_parent->_model = glm::translate(glm::mat4(1.0), truck->_parent->_loc);
-
-		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / state::fps));
-	}
-}
-
 void truckDraw(Truck* truck) {
 	objDraw(truck->_parent);
 
