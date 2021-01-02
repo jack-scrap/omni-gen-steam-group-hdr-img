@@ -20,8 +20,4 @@ extern "C" void cranePed(Crane* crane, bool dir);
 
 extern "C" void craneGrab(Crane* crane);
 
-extern "C" Crane* craneGet();
-
-extern "C" void craneSet(Crane* crane, GLfloat* d);
-
 extern "C" void craneDraw(Crane* crane);
