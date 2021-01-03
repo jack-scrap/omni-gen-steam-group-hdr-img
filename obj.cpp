@@ -491,7 +491,7 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 void anim(Obj* obj, GLfloat* d) {
 	for (int t = 0; t < state::fps; t++) {
 		for (int i = 0; i < 3; i++) {
-			obj->_loc[i] += d[i];
+			obj->_loc[i] += d[i] / state::fps;
 		}
 
 		obj->_model = glm::scale(obj->_model, cam._scale);
