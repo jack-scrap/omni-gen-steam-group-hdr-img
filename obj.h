@@ -80,6 +80,6 @@ extern "C" void objMv(Obj* obj, GLfloat* d);
 
 extern "C" void objSet(Obj* obj, GLfloat* d);
 
-extern "C" void objA(Obj* obj);
+void objA(Obj* obj);
 
-extern "C" void objDraw(Obj* obj);
+void objDraw(Obj* obj);

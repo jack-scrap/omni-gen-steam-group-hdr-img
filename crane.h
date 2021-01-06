@@ -10,9 +10,9 @@ typedef struct {
 	Obj* _op;
 } Crane;
 
-extern "C" Crane* craneMk(glm::vec3 loc);
+Crane* craneMk(glm::vec3 loc);
 
-extern "C" void craneAnim(Crane* crane, GLfloat* d);
+void craneAnim(Crane* crane, GLfloat* d);
 
 extern "C" void craneMv(Crane* crane, GLfloat* d);
 
@@ -22,4 +22,4 @@ extern "C" void cranePed(Crane* crane, bool dir);
 
 extern "C" void craneGrab(Crane* crane);
 
-extern "C" void craneDraw(Crane* crane);
+void craneDraw(Crane* crane);
