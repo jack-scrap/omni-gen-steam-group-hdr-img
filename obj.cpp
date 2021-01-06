@@ -432,7 +432,7 @@ void objSet(Obj* obj, GLfloat* d) {
 }
 
 void objDraw(Obj* obj) {
-	if (!util::phys::aabb(obj, 1, 0.0, glm::vec3(obj->_loc[X], obj->_loc[Y] - obj->_v, obj->_loc[Z]))) {
+	if (!util::phys::aabb(obj, Y, 0.0, glm::vec3(obj->_loc[X], obj->_loc[Y] - obj->_v, obj->_loc[Z]))) {
 		obj->_v -= (phys::g / state::fps);
 
 		obj->_loc[Y] += obj->_v;
