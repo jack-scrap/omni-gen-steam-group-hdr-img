@@ -53,6 +53,8 @@ typedef struct Obj {
 
 	GLuint _tex;
 
+	GLfloat _a;
+
 	struct Obj** _child;
 	unsigned int _noChild;
 } Obj;

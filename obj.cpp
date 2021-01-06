@@ -14,6 +14,7 @@
 #include "state.h"
 #include "math.h"
 #include "state.h"
+#include "phys.h"
 
 void objSpray(Obj* obj) {
 	// framebuffer
@@ -55,6 +56,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_active = active;
 	_->_noChild = 0;
 	_->_loc = loc;
+	_->_a = 0.0;
 
 	glGenVertexArrays(1, &_->_id[VAO]);
 	glBindVertexArray(_->_id[VAO]);
@@ -185,6 +187,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	}
 	_->_noChild = noChild;
 	_->_loc = loc;
+	_->_a = 0.0;
 
 	// vertex
 	glGenVertexArrays(1, &_->_id[VAO]);
@@ -244,6 +247,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_active = active;
 	_->_noChild = 0;
 	_->_loc = loc;
+	_->_a = 0.0;
 
 	// vertex
 	glGenVertexArrays(1, &_->_id[VAO]);
@@ -307,6 +311,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	}
 	_->_noChild = noChild;
 	_->_loc = loc;
+	_->_a = 0.0;
 
 	// vertex
 	glGenVertexArrays(1, &_->_id[VAO]);
@@ -365,6 +370,7 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 	_->_active = active;
 	_->_noChild = 0;
 	_->_loc = loc;
+	_->_a = 0.0;
 
 	// vertex
 	glGenVertexArrays(1, &_->_id[VAO]);
@@ -431,6 +437,7 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 	}
 	_->_noChild = noChild;
 	_->_loc = loc;
+	_->_a = 0.0;
 
 	// vertex
 	glGenVertexArrays(1, &_->_id[VAO]);
@@ -525,6 +532,10 @@ void objSet(Obj* obj, GLfloat* d) {
 }
 
 void objDraw(Obj* obj) {
+	obj->_a -= (phys::g / state::fps);
+
+	obj->_loc[Y] += obj->_a;
+
 	glBindVertexArray(obj->_id[VAO]);
 
 	obj->_prog.use();
