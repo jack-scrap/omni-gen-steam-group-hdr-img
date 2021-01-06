@@ -124,7 +124,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 	// matrix
 	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
-	_->_view = glm::lookAt(glm::vec3(1000.0), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	_->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::scale(_->_model, cam._scale);
 	_->_model = glm::translate(_->_model, _->_loc);
@@ -203,7 +203,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 	// matrix
 	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
-	_->_view = glm::lookAt(glm::vec3(1000.0), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	_->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::scale(_->_model, cam._scale);
 	_->_model = glm::translate(_->_model, _->_loc);
@@ -263,7 +263,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 	// matrix
 	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
-	_->_view = glm::lookAt(glm::vec3(1000.0), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	_->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::scale(_->_model, cam._scale);
 	_->_model = glm::translate(_->_model, _->_loc);
@@ -327,7 +327,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 	// matrix
 	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
-	_->_view = glm::lookAt(glm::vec3(1000.0), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	_->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::scale(_->_model, cam._scale);
 	_->_model = glm::translate(_->_model, _->_loc);
@@ -390,7 +390,7 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 
 	// matrix
 	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
-	_->_view = glm::lookAt(glm::vec3(1000.0), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	_->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::scale(_->_model, cam._scale);
 	_->_model = glm::translate(_->_model, _->_loc);
@@ -457,7 +457,7 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 
 	// matrix
 	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
-	_->_view = glm::lookAt(glm::vec3(1000.0), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	_->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::translate(_->_model, _->_loc);
 	_->_model = glm::scale(_->_model, cam._scale);
@@ -540,7 +540,7 @@ void objDraw(Obj* obj) {
 
 	obj->_prog.use();
 
-	obj->_view = glm::lookAt(glm::vec3(100, 100, 100) + cam._pos, cam._pos, glm::vec3(0, 1, 0));
+	obj->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
 
 	obj->_model = glm::mat4(1.0);
 	obj->_model = glm::scale(obj->_model, cam._scale);
