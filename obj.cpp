@@ -436,15 +436,14 @@ void objDraw(Obj* obj) {
 
 	obj->_loc[Y] += obj->_a;
 
-	glBindVertexArray(obj->_id[VAO]);
-
-	obj->_prog.use();
-
 	obj->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
 
 	obj->_model = glm::mat4(1.0);
 	obj->_model = glm::scale(obj->_model, cam._scale);
 	obj->_model = glm::translate(obj->_model, obj->_loc);
+
+	glBindVertexArray(obj->_id[VAO]);
+	obj->_prog.use();
 
 	glUniformMatrix4fv(obj->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(obj->_model));
 	glUniformMatrix4fv(obj->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(obj->_view));

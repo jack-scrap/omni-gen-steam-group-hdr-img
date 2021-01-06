@@ -37,14 +37,13 @@ Pt* ptMk(glm::vec3 loc) {
 }
 
 void ptDraw(Pt* pt) {
-	glBindVertexArray(pt->_parent->_id[VAO]);
-
-	pt->_parent->_prog.use();
-
 	pt->_parent->_model = glm::mat4(1.0);
 	pt->_parent->_model = glm::scale(pt->_parent->_model, cam._scale);
 	pt->_parent->_model = glm::translate(pt->_parent->_model, pt->_parent->_loc);
 	pt->_parent->_model = glm::rotate(pt->_parent->_model, (GLfloat) (M_PI / 2), glm::vec3(0.0, 1.0, 0.0));
+
+	glBindVertexArray(pt->_parent->_id[VAO]);
+	pt->_parent->_prog.use();
 
 	glUniformMatrix4fv(pt->_parent->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(pt->_parent->_model));
 	glUniformMatrix4fv(pt->_parent->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(pt->_parent->_view));
