@@ -27,7 +27,9 @@ enum uni {
 
 	LOC,
 
-	ACTIVE
+	ACTIVE,
+
+	T
 };
 
 typedef struct Obj {
@@ -45,6 +47,8 @@ typedef struct Obj {
 
 	bool _active;
 
+	unsigned int _t;
+
 	glm::mat4
 		_model,
 		_view,
@@ -54,7 +58,7 @@ typedef struct Obj {
 
 	GLint
 		_attr[3],
-		_uni[5];
+		_uni[6];
 
 	struct Obj** _child;
 	unsigned int _noChild;

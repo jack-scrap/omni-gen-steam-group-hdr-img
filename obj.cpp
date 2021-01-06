@@ -26,6 +26,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_loc = loc;
 	_->_rot = rot;
 	_->_v = 0.0;
+	_->_t = 0;
 
 	glGenVertexArrays(1, &_->_id[VAO]);
 	glBindVertexArray(_->_id[VAO]);
@@ -70,11 +71,15 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 	_->_uni[ACTIVE] = glGetUniformLocation(_->_prog.id, "active");
 
+	_->_uni[T] = glGetUniformLocation(_->_prog.id, "t");
+
 	glUniformMatrix4fv(_->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
 	glUniformMatrix4fv(_->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
 	glUniformMatrix4fv(_->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
 
 	glUniform1ui(_->_uni[ACTIVE], _->_active);
+
+	glUniform1ui(_->_uni[T], _->_t);
 
 	_->_prog.unUse();
 	glBindVertexArray(0);
@@ -96,6 +101,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_loc = loc;
 	_->_rot = rot;
 	_->_v = 0.0;
+	_->_t = 0;
 
 	// vertex
 	glGenVertexArrays(1, &_->_id[VAO]);
@@ -141,11 +147,15 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 	_->_uni[ACTIVE] = glGetUniformLocation(_->_prog.id, "active");
 
+	_->_uni[T] = glGetUniformLocation(_->_prog.id, "t");
+
 	glUniformMatrix4fv(_->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
 	glUniformMatrix4fv(_->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
 	glUniformMatrix4fv(_->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
 
 	glUniform1ui(_->_uni[ACTIVE], _->_active);
+
+	glUniform1ui(_->_uni[T], _->_t);
 
 	_->_prog.unUse();
 	glBindVertexArray(0);
@@ -163,6 +173,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_loc = loc;
 	_->_rot = rot;
 	_->_v = 0.0;
+	_->_t = 0;
 
 	// vertex
 	glGenVertexArrays(1, &_->_id[VAO]);
@@ -208,11 +219,15 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 	_->_uni[ACTIVE] = glGetUniformLocation(_->_prog.id, "active");
 
+	_->_uni[T] = glGetUniformLocation(_->_prog.id, "t");
+
 	glUniformMatrix4fv(_->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
 	glUniformMatrix4fv(_->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
 	glUniformMatrix4fv(_->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
 
 	glUniform1ui(_->_uni[ACTIVE], _->_active);
+
+	glUniform1ui(_->_uni[T], _->_t);
 
 	_->_prog.unUse();
 	glBindVertexArray(0);
@@ -234,6 +249,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_loc = loc;
 	_->_rot = rot;
 	_->_v = 0.0;
+	_->_t = 0;
 
 	// vertex
 	glGenVertexArrays(1, &_->_id[VAO]);
@@ -279,11 +295,15 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 	_->_uni[ACTIVE] = glGetUniformLocation(_->_prog.id, "active");
 
+	_->_uni[T] = glGetUniformLocation(_->_prog.id, "t");
+
 	glUniformMatrix4fv(_->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
 	glUniformMatrix4fv(_->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
 	glUniformMatrix4fv(_->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
 
 	glUniform1ui(_->_uni[ACTIVE], _->_active);
+
+	glUniform1ui(_->_uni[T], _->_t);
 
 	_->_prog.unUse();
 	glBindVertexArray(0);
@@ -300,6 +320,7 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 	_->_loc = loc;
 	_->_rot = rot;
 	_->_v = 0.0;
+	_->_t = 0;
 
 	// vertex
 	glGenVertexArrays(1, &_->_id[VAO]);
@@ -349,11 +370,15 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 
 	_->_uni[ACTIVE] = glGetUniformLocation(_->_prog.id, "active");
 
+	_->_uni[T] = glGetUniformLocation(_->_prog.id, "t");
+
 	glUniformMatrix4fv(_->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
 	glUniformMatrix4fv(_->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
 	glUniformMatrix4fv(_->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
 
 	glUniform1ui(_->_uni[ACTIVE], _->_active);
+
+	glUniform1ui(_->_uni[T], _->_t);
 
 	_->_prog.unUse();
 	glBindVertexArray(0);
@@ -374,6 +399,7 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 	_->_loc = loc;
 	_->_rot = rot;
 	_->_v = 0.0;
+	_->_t = 0;
 
 	// vertex
 	glGenVertexArrays(1, &_->_id[VAO]);
@@ -423,11 +449,15 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 
 	_->_uni[ACTIVE] = glGetUniformLocation(_->_prog.id, "active");
 
+	_->_uni[T] = glGetUniformLocation(_->_prog.id, "t");
+
 	glUniformMatrix4fv(_->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
 	glUniformMatrix4fv(_->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
 	glUniformMatrix4fv(_->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
 
 	glUniform1ui(_->_uni[ACTIVE], _->_active);
+
+	glUniform1ui(_->_uni[T], _->_t);
 
 	_->_prog.unUse();
 	glBindVertexArray(0);
@@ -500,10 +530,14 @@ void objDraw(Obj* obj) {
 	glUniformMatrix4fv(obj->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(obj->_model));
 	glUniformMatrix4fv(obj->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(obj->_view));
 
+	glUniform1ui(obj->_uni[T], obj->_t);
+
 	glDrawElements(GL_TRIANGLES, obj->_noIdc, GL_UNSIGNED_SHORT, (GLvoid*) 0);
 
 	obj->_prog.unUse();
 	glBindVertexArray(0);
+
+	obj->_t++;
 
 	for (int i = 0; i < obj->_noChild; i++) {
 		if (&obj->_child[i]) {
