@@ -532,6 +532,8 @@ void objDraw(Obj* obj) {
 
 	glUniform1ui(obj->_uni[T], obj->_t);
 
+	glUniform1ui(obj->_uni[ACTIVE], obj->_active);
+
 	glDrawElements(GL_TRIANGLES, obj->_noIdc, GL_UNSIGNED_SHORT, (GLvoid*) 0);
 
 	obj->_prog.unUse();
