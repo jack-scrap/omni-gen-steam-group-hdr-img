@@ -14,8 +14,6 @@
 #include "state.h"
 #include "math.h"
 #include "state.h"
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
 
 void objSpray(Obj* obj) {
 	// framebuffer
