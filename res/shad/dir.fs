@@ -1,7 +1,6 @@
 #version 400
 
 in vec3 _pos;
-out vec4 col;
 
 uniform bool active;
 
@@ -19,5 +18,5 @@ void main() {
 
 	float i = max(dot(normFace, normalize(sun)), 0.0);
 
-	col = vec4((color[int(active)] / 255.0) * i, 1.0);
+	gl_FragColor = vec4((color[int(active)] / 255.0) * i, 1.0);
 }
