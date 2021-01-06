@@ -8,7 +8,7 @@ vec3
 	ambient = vec3(0.2, 0.2, 0.2),
 	sun = vec3(1.0, 1.0, 1.0);
 
-vec3[2] color = vec3[2](
+vec3[2] col = vec3[2](
 	vec3(38, 38, 38),
 	vec3(255, 155, 71)
 );
@@ -18,5 +18,5 @@ void main() {
 
 	float i = max(dot(normFace, normalize(sun)), 0.0);
 
-	gl_FragColor = vec4((color[int(active)] / 255.0) * i, 1.0);
+	gl_FragColor = vec4((col[int(active)] / 255.0) * i, 1.0);
 }
