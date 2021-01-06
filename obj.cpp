@@ -482,8 +482,7 @@ void anim(Obj* obj, GLfloat* d) {
 }
 
 void objMv(Obj* obj, GLfloat* d) {
-	std::thread t(anim, obj, d);
-	t.detach();
+	anim(obj, d);
 }
 
 void objSet(Obj* obj, GLfloat* d) {

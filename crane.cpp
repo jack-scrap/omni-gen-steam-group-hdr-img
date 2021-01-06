@@ -75,7 +75,8 @@ void craneAnim(Crane* crane, GLfloat* d) {
 		}
 	}
 
-	objMv(crane->_parent, d);
+	std::thread t(objMv, crane->_parent, d);
+	t.join();
 
 	i = 0;
 	for (int y = 0; y < 2; y++) {
