@@ -16,7 +16,7 @@
 #include "state.h"
 #include "phys.h"
 
-Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string nameVtx, std::string nameFrag, bool active, glm::vec3 loc) {
+Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string nameVtx, std::string nameFrag, bool active, glm::vec3 loc, glm::vec3 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -24,6 +24,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_active = active;
 	_->_noChild = 0;
 	_->_loc = loc;
+	_->_rot = rot;
 	_->_v = 0.0;
 
 	glGenVertexArrays(1, &_->_id[VAO]);
@@ -43,6 +44,12 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::scale(_->_model, cam._scale);
 	_->_model = glm::translate(_->_model, _->_loc);
+	for (int i = 0; i < 3; i++) {
+		glm::vec3 axis = glm::vec3(0);
+		axis[i] = 1;
+
+		_->_model = glm::rotate(_->_model, _->_rot[i], axis);
+	}
 
 	_->_prog = Prog(nameVtx, nameFrag);
 
@@ -75,7 +82,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	return _;
 }
 
-Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string nameVtx, std::string nameFrag, bool active, Obj* child[], unsigned int noChild, glm::vec3 loc) {
+Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string nameVtx, std::string nameFrag, bool active, Obj* child[], unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -87,6 +94,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	}
 	_->_noChild = noChild;
 	_->_loc = loc;
+	_->_rot = rot;
 	_->_v = 0.0;
 
 	// vertex
@@ -107,6 +115,12 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::scale(_->_model, cam._scale);
 	_->_model = glm::translate(_->_model, _->_loc);
+	for (int i = 0; i < 3; i++) {
+		glm::vec3 axis = glm::vec3(0);
+		axis[i] = 1;
+
+		_->_model = glm::rotate(_->_model, _->_rot[i], axis);
+	}
 
 	_->_prog = Prog(nameVtx, nameFrag);
 
@@ -139,7 +153,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	return _;
 }
 
-Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string nameVtx, std::string nameGeom, std::string nameFrag, bool active, glm::vec3 loc) {
+Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string nameVtx, std::string nameGeom, std::string nameFrag, bool active, glm::vec3 loc, glm::vec3 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -147,6 +161,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_active = active;
 	_->_noChild = 0;
 	_->_loc = loc;
+	_->_rot = rot;
 	_->_v = 0.0;
 
 	// vertex
@@ -167,6 +182,12 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::scale(_->_model, cam._scale);
 	_->_model = glm::translate(_->_model, _->_loc);
+	for (int i = 0; i < 3; i++) {
+		glm::vec3 axis = glm::vec3(0);
+		axis[i] = 1;
+
+		_->_model = glm::rotate(_->_model, _->_rot[i], axis);
+	}
 
 	_->_prog = Prog(nameVtx, nameGeom, nameFrag);
 
@@ -199,7 +220,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	return _;
 }
 
-Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string nameVtx, std::string nameGeom, std::string nameFrag, bool active, Obj* child[], unsigned int noChild, glm::vec3 loc) {
+Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string nameVtx, std::string nameGeom, std::string nameFrag, bool active, Obj* child[], unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -211,6 +232,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	}
 	_->_noChild = noChild;
 	_->_loc = loc;
+	_->_rot = rot;
 	_->_v = 0.0;
 
 	// vertex
@@ -231,6 +253,12 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::scale(_->_model, cam._scale);
 	_->_model = glm::translate(_->_model, _->_loc);
+	for (int i = 0; i < 3; i++) {
+		glm::vec3 axis = glm::vec3(0);
+		axis[i] = 1;
+
+		_->_model = glm::rotate(_->_model, _->_rot[i], axis);
+	}
 
 	_->_prog = Prog(nameVtx, nameGeom, nameFrag);
 
@@ -263,13 +291,14 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	return _;
 }
 
-Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool active, glm::vec3 loc) {
+Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool active, glm::vec3 loc, glm::vec3 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
 	_->_active = active;
 	_->_noChild = 0;
 	_->_loc = loc;
+	_->_rot = rot;
 	_->_v = 0.0;
 
 	// vertex
@@ -294,6 +323,12 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::scale(_->_model, cam._scale);
 	_->_model = glm::translate(_->_model, _->_loc);
+	for (int i = 0; i < 3; i++) {
+		glm::vec3 axis = glm::vec3(0);
+		axis[i] = 1;
+
+		_->_model = glm::rotate(_->_model, _->_rot[i], axis);
+	}
 
 	_->_prog = Prog(nameVtx, nameFrag);
 
@@ -326,7 +361,7 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 	return _;
 }
 
-Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool active, Obj* child[], unsigned int noChild, glm::vec3 loc) {
+Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool active, Obj* child[], unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -337,6 +372,7 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 	}
 	_->_noChild = noChild;
 	_->_loc = loc;
+	_->_rot = rot;
 	_->_v = 0.0;
 
 	// vertex
@@ -361,6 +397,12 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::translate(_->_model, _->_loc);
 	_->_model = glm::scale(_->_model, cam._scale);
+	for (int i = 0; i < 3; i++) {
+		glm::vec3 axis = glm::vec3(0);
+		axis[i] = 1;
+
+		_->_model = glm::rotate(_->_model, _->_rot[i], axis);
+	}
 
 	_->_prog = Prog(nameVtx, nameFrag);
 
@@ -445,6 +487,12 @@ void objDraw(Obj* obj) {
 	obj->_model = glm::mat4(1.0);
 	obj->_model = glm::scale(obj->_model, cam._scale);
 	obj->_model = glm::translate(obj->_model, obj->_loc);
+	for (int i = 0; i < 3; i++) {
+		glm::vec3 axis = glm::vec3(0);
+		axis[i] = 1;
+
+		obj->_model = glm::rotate(obj->_model, obj->_rot[i], axis);
+	}
 
 	glBindVertexArray(obj->_id[VAO]);
 	obj->_prog.use();
