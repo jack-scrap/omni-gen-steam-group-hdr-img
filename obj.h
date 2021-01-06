@@ -38,7 +38,7 @@ typedef struct Obj {
 	GLfloat _bound[2][3];
 
 	glm::vec3 _loc;
-	GLfloat _a;
+	GLfloat _v;
 
 	bool _active;
 
