@@ -113,10 +113,7 @@ bool util::phys::aabb(Obj* p, unsigned int axis, float floor, glm::vec3 d) {
 		orig = glm::vec3(d.x + p->_bound[MIN][X], d.y + p->_bound[MIN][Y], d.z + p->_bound[MIN][Z]),
 		sz = glm::vec3(abs(p->_bound[MIN][X] - p->_bound[MAX][X]), abs(p->_bound[MIN][Y] - p->_bound[MAX][Y]), abs(p->_bound[MIN][Z] - p->_bound[MAX][Z]));
 
-	bool out = true;
-	if (orig[axis] + sz[axis] > floor) {
-		out = false;
-	}
+	bool out = orig[axis] + sz[axis] > floor;
 
 	return out;
 }
