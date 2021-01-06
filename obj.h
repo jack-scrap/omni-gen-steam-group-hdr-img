@@ -48,7 +48,6 @@ typedef struct Obj {
 
 	GLint
 		_attr[3],
-
 		_uni[5];
 
 	GLuint _tex;
