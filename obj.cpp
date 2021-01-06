@@ -432,9 +432,11 @@ void objSet(Obj* obj, GLfloat* d) {
 }
 
 void objDraw(Obj* obj) {
-	obj->_a -= (phys::g / state::fps);
+	if (!util::phys::aabb(obj, 1, 0.0, glm::vec3(obj->_loc[X], obj->_loc[Y] - obj->_a, obj->_loc[Z]))) {
+		obj->_a -= (phys::g / state::fps);
 
-	obj->_loc[Y] += obj->_a;
+		obj->_loc[Y] += obj->_a;
+	}
 
 	obj->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
 

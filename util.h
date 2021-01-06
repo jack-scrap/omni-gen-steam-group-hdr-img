@@ -6,6 +6,8 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 
+#include "obj.h"
+
 namespace util {
 	namespace fs {
 		template <typename T>
@@ -30,5 +32,9 @@ namespace util {
 			std::vector<GLfloat> vtc(std::string name);
 			std::vector<GLushort> idc(std::string name);
 		}
+	}
+
+	namespace phys {
+		bool aabb(Obj* p, unsigned int axis, float floor, glm::vec3 d);
 	}
 }

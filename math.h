@@ -7,6 +7,11 @@ enum axes {
 	W
 };
 
+enum rng {
+	MIN,
+	MAX
+};
+
 enum col {
 	R,
 	G,

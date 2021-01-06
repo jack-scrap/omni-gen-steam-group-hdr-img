@@ -35,6 +35,8 @@ typedef struct Obj {
 
 	unsigned int _noIdc;
 
+	GLfloat _bound[2][3];
+
 	glm::vec3 _loc;
 	GLfloat _a;
 
