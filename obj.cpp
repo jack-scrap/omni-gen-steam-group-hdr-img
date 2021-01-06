@@ -485,23 +485,6 @@ void objMv(Obj* obj, GLfloat* d) {
 	anim(obj, d);
 }
 
-void objSet(Obj* obj, GLfloat* d) {
-	float step[3];
-	for (int i = 0; i < 3; i++) {
-		step[i] = d[i] / state::fps;
-	}
-
-	for (int t = 0; t < state::fps; t++) {
-		for (int i = 0; i < 3; i++) {
-			obj->_loc[i] += step[i];
-		}
-
-		obj->_model = glm::translate(glm::mat4(1.0), obj->_loc);
-
-		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / state::fps));
-	}
-}
-
 void objA(Obj* obj) {
 	while (!util::phys::aabb(obj, Y, 0.0, glm::vec3(obj->_loc[X], obj->_loc[Y] - obj->_v, obj->_loc[Z]))) {
 		obj->_v -= (phys::g / state::fps);
