@@ -10,7 +10,7 @@
 Crane* craneMk(glm::vec3 loc) {
 	Crane* _ = (Crane*) malloc(sizeof (Crane));
 
-	Obj* child[(2 * 2 * 2 * 2) + 2];
+	Obj* child[(2 * 2 * 2 * 2) + 1 + (2 * 2)];
 	int i = 0;
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < 2; x++) {
@@ -51,7 +51,14 @@ Crane* craneMk(glm::vec3 loc) {
 		2, 1, 3
 	};
 
-	child[(2 * 2 * 2 * 2) + 1] = objMk(vtc, sizeof vtc / sizeof *vtc, idc, sizeof idc / sizeof *idc, "main", "solid", true, loc + glm::vec3(6.0 + (state::pad * 2), 1.74, 10.0));
+	i = 0;
+	for (int z = 0; z < 2; z++) {
+		for (int x = 0; x < 2; x++) {
+			child[(2 * 2 * 2 * 2) + 1 + i] = objMk(vtc, sizeof vtc / sizeof *vtc, idc, sizeof idc / sizeof *idc, "main", "solid", true, loc + glm::vec3((x ? 1 : -1) * (6.0 + (state::pad * 2)), 1.74, (z ? 1 : -1) * 10.0));
+
+			i++;
+		}
+	}
 
 	_->_parent = objMk("crane/body", "main", "dir", true, child, sizeof child / sizeof *child, loc);
 
