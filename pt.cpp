@@ -48,9 +48,6 @@ void ptDraw(Pt* pt) {
 
 	glUniformMatrix4fv(pt->_parent->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(pt->_parent->_model));
 	glUniformMatrix4fv(pt->_parent->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(pt->_parent->_view));
-	glUniformMatrix4fv(pt->_parent->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(pt->_parent->_proj));
-
-	glUniform1ui(pt->_parent->_uni[ACTIVE], pt->_parent->_active);
 
 	glDrawElements(GL_POINTS, pt->_parent->_noIdc, GL_UNSIGNED_SHORT, (GLvoid*) 0);
 
