@@ -31,9 +31,12 @@ enum uni {
 };
 
 typedef struct Obj {
-	glm::vec3 _loc;
+	GLuint _id[4];
 
 	unsigned int _noIdc;
+
+	glm::vec3 _loc;
+	GLfloat _a;
 
 	bool _active;
 
@@ -44,13 +47,9 @@ typedef struct Obj {
 
 	Prog _prog;
 
-	GLuint _id[4];
-
 	GLint
 		_attr[3],
 		_uni[5];
-
-	GLfloat _a;
 
 	struct Obj** _child;
 	unsigned int _noChild;
