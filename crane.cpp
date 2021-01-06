@@ -10,7 +10,7 @@
 Crane* craneMk(glm::vec3 loc) {
 	Crane* _ = (Crane*) malloc(sizeof (Crane));
 
-	Obj* child[(2 * 2 * 2 * 2) + 1];
+	Obj* child[(2 * 2 * 2 * 2) + 2];
 	int i = 0;
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < 2; x++) {
@@ -33,6 +33,25 @@ Crane* craneMk(glm::vec3 loc) {
 	};
 
 	child[2 * 2 * 2 * 2] = objMk("crane/head", "main", "dir", true, claw, 1, loc + glm::vec3(0.0, 13.8, 0.0));
+
+	GLfloat vtc[2 * 2 * 3];
+	i = 0;
+	for (int z = 0; z < 2; z++) {
+		for (int y = 0; y < 2; y++) {
+			vtc[i] = 0.0;
+			vtc[i + 1] = y ? 1 : -1;
+			vtc[i + 2] = (z ? 1 : -1) * 0.6;
+
+			i += 3;
+		}
+	}
+
+	GLushort idc[] = {
+		0, 1, 2,
+		2, 1, 3
+	};
+
+	child[(2 * 2 * 2 * 2) + 1] = objMk(vtc, sizeof vtc / sizeof *vtc, idc, sizeof idc / sizeof *idc, "main", "solid", true, loc + glm::vec3(6.0 + (state::pad * 2), 1.74, 10.0));
 
 	_->_parent = objMk("crane/body", "main", "dir", true, child, sizeof child / sizeof *child, loc);
 

@@ -18,6 +18,8 @@ namespace state {
 
 	static GLfloat bound = abs(-1.0 - 1.0);
 
+	static GLfloat pad = 0.16;
+
 	static glm::vec2
 		pc = bound / res,
 
