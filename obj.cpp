@@ -33,59 +33,6 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);
 	glBufferData(GL_ARRAY_BUFFER, noVtc * sizeof (GLfloat), vtc, GL_STATIC_DRAW);
 
-	glGenBuffers(1, &_->_id[STBO]);
-	glBindBuffer(GL_ARRAY_BUFFER, _->_id[STBO]);
-	GLfloat st[] = {
-		0, 0,
-		0, 0,
-		0, 0,
-
-		0, 0,
-		0, 0,
-		0, 0,
-
-		0, 0,
-		0, 0,
-		0, 0,
-
-		0, 0,
-		0, 0,
-		0, 0,
-
-		0, 0,
-		0, 0,
-		0, 0,
-
-		0, 0,
-		0, 0,
-		0, 0,
-
-		0, 0,
-		0, 0,
-		0, 0,
-
-		0, 0,
-		0, 0,
-		0, 0,
-
-		0, 0,
-		0, 0,
-		0, 0,
-
-		0, 0,
-		0, 0,
-		0, 0,
-
-		0, 1,
-		0, 0,
-		1, 1,
-
-		1, 1,
-		0, 0,
-		1, 0,
-	};
-	glBufferData(GL_ARRAY_BUFFER, sizeof st, st, GL_STATIC_DRAW);
-
 	glGenBuffers(1, &_->_id[IBO]);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _->_id[IBO]);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, noIdc * sizeof (GLushort), idc, GL_STATIC_DRAW);
@@ -101,24 +48,11 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 	_->_prog.use();
 
-	// texture
-	glGenTextures(1, &_->_tex);
-	glBindTexture(GL_TEXTURE_2D, _->_tex);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-	glGenerateMipmap(GL_TEXTURE_2D);
-
 	// attribute
 	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);
 	_->_attr[POS] = glGetAttribLocation(_->_prog.id, "pos");
 	glVertexAttribPointer(_->_attr[POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 	glEnableVertexAttribArray(_->_attr[POS]);
-
-	glBindBuffer(GL_ARRAY_BUFFER, _->_id[STBO]);
-	_->_attr[ST] = glGetAttribLocation(_->_prog.id, "st");
-	glVertexAttribPointer(_->_attr[ST], 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
-	glEnableVertexAttribArray(_->_attr[ST]);
 
 	// uniform
 	_->_uni[MODEL] = glGetUniformLocation(_->_prog.id, "model");
@@ -517,8 +451,6 @@ void objDraw(Obj* obj) {
 	glUniformMatrix4fv(obj->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(obj->_proj));
 
 	glUniform1ui(obj->_uni[ACTIVE], obj->_active);
-
-	glBindTexture(GL_TEXTURE_2D, obj->_tex);
 
 	glDrawElements(GL_TRIANGLES, obj->_noIdc, GL_UNSIGNED_SHORT, (GLvoid*) 0);
 
