@@ -10,7 +10,7 @@
 Console::Console(std::vector<std::string> buff) :
 	_buff(buff),
 	_mode(EDITOR),
-	Mesh(util::mesh::plane(glm::vec2(abs(-1 - 1), -1 -1)), "text", "text", glm::vec2(-1.0, 1.0)) {
+	Mesh(util::mesh::plane(glm::vec2(abs(-1 - 1), -1 -1)), "text", "text") {
 		// text
 		TTF_Init();
 

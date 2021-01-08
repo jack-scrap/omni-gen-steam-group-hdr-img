@@ -24,20 +24,13 @@ class Mesh {
 			ST
 		};
 
-		enum uni {
-			LOC,
-			COL
-		};
-
 		GLuint _id[3];
 
-		GLint
-			_attr[2],
-			_uni[2];
+		GLint _attr[2];
 
 		Prog _prog;
 
-		Mesh(std::vector<GLfloat> pos, std::string vtx, std::string frag, glm::vec2 loc = glm::vec2(0.0), glm::vec3 col = glm::vec3(255));
+		Mesh(std::vector<GLfloat> pos, std::string vtx, std::string frag);
 
 		virtual void draw() = 0;
 };

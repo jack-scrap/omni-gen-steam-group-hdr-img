@@ -4,7 +4,7 @@
 
 #include "mesh.h"
 
-Mesh::Mesh(std::vector<GLfloat> pos, std::string vtx, std::string frag, glm::vec2 loc, glm::vec3 col) :
+Mesh::Mesh(std::vector<GLfloat> pos, std::string vtx, std::string frag) :
 	_prog(vtx, frag) {
 		/* data */
 		glGenVertexArrays(1, &_id[VAO]);
@@ -31,11 +31,4 @@ Mesh::Mesh(std::vector<GLfloat> pos, std::string vtx, std::string frag, glm::vec
 		_attr[ST] = glGetAttribLocation(_prog.id, "st");
 		glVertexAttribPointer(_attr[ST], 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 		glEnableVertexAttribArray(_attr[ST]);
-
-		// uniform
-		_uni[LOC] = glGetUniformLocation(_prog.id, "loc");
-		glUniform2fv(_uni[LOC], 1, glm::value_ptr(loc));
-
-		_uni[COL] = glGetUniformLocation(_prog.id, "col");
-		glUniform3fv(_uni[COL], 1, glm::value_ptr(col));
 	}
