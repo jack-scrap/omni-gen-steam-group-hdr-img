@@ -15,7 +15,7 @@ class Console : public Mesh {
 
 		SDL_Surface
 			* _canv = SDL_CreateRGBSurface(0, state::res[X], state::res[Y], 4 * sizeof (long int), 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000),
-			* _bg = SDL_CreateRGBSurface(0, state::dim[X], state::dim[Y], 4 * sizeof (long int), 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+			* _block = SDL_CreateRGBSurface(0, state::dim[X], state::dim[Y], 4 * sizeof (long int), 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
 
 		SDL_Rect
 			_canvRect = {
@@ -25,7 +25,7 @@ class Console : public Mesh {
 				state::view[Y]
 			},
 
-			_bgRect = {
+			_blockRect = {
 				0,
 				0,
 				state::dim[X],

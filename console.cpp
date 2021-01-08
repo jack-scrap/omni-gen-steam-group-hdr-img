@@ -17,7 +17,7 @@ Console::Console(std::vector<std::string> buff) :
 		font = TTF_OpenFont("res/terminus.bdf", state::dim[Y]);
 
 		SDL_FillRect(_canv, &_canvRect, SDL_MapRGBA(_canv->format, col[false][R], col[false][G], col[false][B], 255));
-		SDL_FillRect(_bg, &_bgRect, SDL_MapRGBA(_bg->format, col[true][R], col[true][G], col[true][B], 255));
+		SDL_FillRect(_block, &_blockRect, SDL_MapRGBA(_block->format, col[true][R], col[true][G], col[true][B], 255));
 
 		// OpenGL
 		glGenTextures(1, &_tex);
@@ -95,7 +95,7 @@ void Console::render() {
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _canv->w, _canv->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, _canv->pixels);
 
 	for (int i = 0; i < state::ln; i++) {
-		glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::dim[X], 0, state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _bg->pixels);
+		glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::dim[X], 0, state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _block->pixels);
 	}
 
 	for (int l = 0; l < roof; l++) {
@@ -107,7 +107,7 @@ void Console::render() {
 	for (int l = 0; l < roof; l++) {
 		for (int i = 0; i < _buff[l].size(); i++) {
 			if (_hl[l][i]) {
-				glTexSubImage2D(GL_TEXTURE_2D, 0, (max + i) * state::dim[X], (1 + l) * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _bg->pixels);
+				glTexSubImage2D(GL_TEXTURE_2D, 0, (max + i) * state::dim[X], (1 + l) * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _block->pixels);
 			} else {
 				glTexSubImage2D(GL_TEXTURE_2D, 0, (max + i) * state::dim[X], (1 + l) * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _map[l][i]->pixels);
 			}
@@ -133,7 +133,7 @@ void Console::render() {
 			break;
 	}
 
-	glTexSubImage2D(GL_TEXTURE_2D, 0, _idx[X] * state::dim[X], _idx[Y] * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _bg->pixels);
+	glTexSubImage2D(GL_TEXTURE_2D, 0, _idx[X] * state::dim[X], _idx[Y] * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _block->pixels);
 
 	glGenerateMipmap(GL_TEXTURE_2D);
 }
