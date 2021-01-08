@@ -29,10 +29,6 @@ Pt* ptMk(glm::vec3 loc) {
 
 	_->_parent = objMk(vtc, sizeof vtc / sizeof *vtc, idc, sizeof idc / sizeof *idc, "tex", "bed", "tex", false, loc);
 
-	_->_parent->_prog.use();
-
-	_->_parent->_prog.unUse();
-
 	return _;
 }
 
