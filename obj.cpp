@@ -20,24 +20,15 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
-	_->_noIdc = noIdc;
+	_->_mesh1 = mesh1Mk(vtc, noVtc, idc, noIdc);
+	_->_mesh1->_noIdc = noIdc;
+
 	_->_active = active;
 	_->_noChild = 0;
 	_->_loc = loc;
 	_->_rot = rot;
 	_->_v = 0.0;
 	_->_t = 0;
-
-	glGenVertexArrays(1, &_->_id[VAO]);
-	glBindVertexArray(_->_id[VAO]);
-
-	glGenBuffers(1, &_->_id[VBO]);
-	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);
-	glBufferData(GL_ARRAY_BUFFER, noVtc * sizeof (GLfloat), vtc, GL_STATIC_DRAW);
-
-	glGenBuffers(1, &_->_id[IBO]);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _->_id[IBO]);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, noIdc * sizeof (GLushort), idc, GL_STATIC_DRAW);
 
 	// matrix
 	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
@@ -57,7 +48,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_prog.use();
 
 	// attribute
-	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);
+	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh1->_id[VBO]);
 	_->_attr[POS] = glGetAttribLocation(_->_prog.id, "pos");
 	glVertexAttribPointer(_->_attr[POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 	glEnableVertexAttribArray(_->_attr[POS]);
@@ -91,7 +82,9 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
-	_->_noIdc = noIdc;
+	_->_mesh1 = mesh1Mk(vtc, noVtc, idc, noIdc);
+	_->_mesh1->_noIdc = noIdc;
+
 	_->_active = active;
 	_->_child = (Obj**) malloc(noChild * sizeof (Obj*));
 	for (int i = 0; i < _->_noChild; i++) {
@@ -102,18 +95,6 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_rot = rot;
 	_->_v = 0.0;
 	_->_t = 0;
-
-	// vertex
-	glGenVertexArrays(1, &_->_id[VAO]);
-	glBindVertexArray(_->_id[VAO]);
-
-	glGenBuffers(1, &_->_id[VBO]);
-	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);
-	glBufferData(GL_ARRAY_BUFFER, noVtc * sizeof (GLfloat), vtc, GL_STATIC_DRAW);
-
-	glGenBuffers(1, &_->_id[IBO]);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _->_id[IBO]);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, noIdc * sizeof (GLushort), idc, GL_STATIC_DRAW);
 
 	// matrix
 	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
@@ -133,7 +114,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_prog.use();
 
 	// attribute
-	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);
+	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh1->_id[VBO]);
 	_->_attr[POS] = glGetAttribLocation(_->_prog.id, "pos");
 	glVertexAttribPointer(_->_attr[POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 	glEnableVertexAttribArray(_->_attr[POS]);
@@ -167,25 +148,15 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
-	_->_noIdc = noIdc;
+	_->_mesh1 = mesh1Mk(vtc, noVtc, idc, noIdc);
+	_->_mesh1->_noIdc = noIdc;
+
 	_->_active = active;
 	_->_noChild = 0;
 	_->_loc = loc;
 	_->_rot = rot;
 	_->_v = 0.0;
 	_->_t = 0;
-
-	// vertex
-	glGenVertexArrays(1, &_->_id[VAO]);
-	glBindVertexArray(_->_id[VAO]);
-
-	glGenBuffers(1, &_->_id[VBO]);
-	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);
-	glBufferData(GL_ARRAY_BUFFER, noVtc * sizeof (GLfloat), vtc, GL_STATIC_DRAW);
-
-	glGenBuffers(1, &_->_id[IBO]);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _->_id[IBO]);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, noIdc * sizeof (GLushort), idc, GL_STATIC_DRAW);
 
 	// matrix
 	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
@@ -205,7 +176,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_prog.use();
 
 	// attribute
-	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);
+	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh1->_id[VBO]);
 	_->_attr[POS] = glGetAttribLocation(_->_prog.id, "pos");
 	glVertexAttribPointer(_->_attr[POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 	glEnableVertexAttribArray(_->_attr[POS]);
@@ -239,7 +210,9 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
-	_->_noIdc = noIdc;
+	_->_mesh1 = mesh1Mk(vtc, noVtc, idc, noIdc);
+	_->_mesh1->_noIdc = noIdc;
+
 	_->_active = active;
 	_->_child = (Obj**) malloc(noChild * sizeof (Obj*));
 	for (int i = 0; i < _->_noChild; i++) {
@@ -250,18 +223,6 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_rot = rot;
 	_->_v = 0.0;
 	_->_t = 0;
-
-	// vertex
-	glGenVertexArrays(1, &_->_id[VAO]);
-	glBindVertexArray(_->_id[VAO]);
-
-	glGenBuffers(1, &_->_id[VBO]);
-	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);
-	glBufferData(GL_ARRAY_BUFFER, noVtc * sizeof (GLfloat), vtc, GL_STATIC_DRAW);
-
-	glGenBuffers(1, &_->_id[IBO]);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _->_id[IBO]);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, noIdc * sizeof (GLushort), idc, GL_STATIC_DRAW);
 
 	// matrix
 	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
@@ -281,7 +242,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_prog.use();
 
 	// attribute
-	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);
+	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh1->_id[VBO]);
 	_->_attr[POS] = glGetAttribLocation(_->_prog.id, "pos");
 	glVertexAttribPointer(_->_attr[POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 	glEnableVertexAttribArray(_->_attr[POS]);
@@ -322,21 +283,11 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 	_->_v = 0.0;
 	_->_t = 0;
 
-	// vertex
-	glGenVertexArrays(1, &_->_id[VAO]);
-	glBindVertexArray(_->_id[VAO]);
-
-	glGenBuffers(1, &_->_id[VBO]);
-	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);
 	std::vector<GLfloat> vtc = util::mesh::rd::vtc(name);
-	glBufferData(GL_ARRAY_BUFFER, vtc.size() * sizeof (GLfloat), &vtc[0], GL_STATIC_DRAW);
-
-	glGenBuffers(1, &_->_id[IBO]);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _->_id[IBO]);
 	std::vector<GLushort> idc = util::mesh::rd::idc(name);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, idc.size() * sizeof (GLushort), &idc[0], GL_STATIC_DRAW);
+	_->_mesh1 = mesh1Mk(&vtc[0], vtc.size(), &idc[0], idc.size());
 
-	_->_noIdc = idc.size();
+	_->_mesh1->_noIdc = idc.size();
 
 	// matrix
 	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
@@ -356,7 +307,7 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 	_->_prog.use();
 
 	// attribute
-	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);
+	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh1->_id[VBO]);
 	_->_attr[POS] = glGetAttribLocation(_->_prog.id, "pos");
 	glVertexAttribPointer(_->_attr[POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 	glEnableVertexAttribArray(_->_attr[POS]);
@@ -401,21 +352,11 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 	_->_v = 0.0;
 	_->_t = 0;
 
-	// vertex
-	glGenVertexArrays(1, &_->_id[VAO]);
-	glBindVertexArray(_->_id[VAO]);
-
-	glGenBuffers(1, &_->_id[VBO]);
-	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);
 	std::vector<GLfloat> vtc = util::mesh::rd::vtc(name);
-	glBufferData(GL_ARRAY_BUFFER, vtc.size() * sizeof (GLfloat), &vtc[0], GL_STATIC_DRAW);
-
-	glGenBuffers(1, &_->_id[IBO]);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _->_id[IBO]);
 	std::vector<GLushort> idc = util::mesh::rd::idc(name);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, idc.size() * sizeof (GLushort), &idc[0], GL_STATIC_DRAW);
+	_->_mesh1 = mesh1Mk(&vtc[0], vtc.size(), &idc[0], idc.size());
 
-	_->_noIdc = idc.size();
+	_->_mesh1->_noIdc = idc.size();
 
 	// matrix
 	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
@@ -435,7 +376,7 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 	_->_prog.use();
 
 	// attribute
-	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);
+	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh1->_id[VBO]);
 	_->_attr[POS] = glGetAttribLocation(_->_prog.id, "pos");
 	glVertexAttribPointer(_->_attr[POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 	glEnableVertexAttribArray(_->_attr[POS]);
@@ -506,7 +447,7 @@ void objDraw(Obj* obj) {
 		obj->_model = glm::rotate(obj->_model, obj->_rot[i], axis);
 	}
 
-	glBindVertexArray(obj->_id[VAO]);
+	glBindVertexArray(obj->_mesh1->_id[VAO]);
 	obj->_prog.use();
 
 	glUniformMatrix4fv(obj->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(obj->_model));
@@ -516,7 +457,7 @@ void objDraw(Obj* obj) {
 
 	glUniform1ui(obj->_uni[ACTIVE], obj->_active);
 
-	glDrawElements(GL_TRIANGLES, obj->_noIdc, GL_UNSIGNED_SHORT, (GLvoid*) 0);
+	glDrawElements(GL_TRIANGLES, obj->_mesh1->_noIdc, GL_UNSIGNED_SHORT, (GLvoid*) 0);
 
 	obj->_prog.unUse();
 	glBindVertexArray(0);

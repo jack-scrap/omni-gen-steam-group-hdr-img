@@ -7,13 +7,7 @@
 
 #include "disp.h"
 #include "prog.h"
-
-enum id {
-	VAO,
-	VBO,
-	STBO,
-	IBO
-};
+#include "mesh1.h"
 
 enum attr {
 	POS,
@@ -33,9 +27,7 @@ enum uni {
 };
 
 typedef struct Obj {
-	GLuint _id[4];
-
-	unsigned int _noIdc;
+	Mesh1* _mesh1;
 
 	GLfloat _bound[2][3];
 

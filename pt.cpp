@@ -42,13 +42,13 @@ void ptDraw(Pt* pt) {
 	pt->_parent->_model = glm::translate(pt->_parent->_model, pt->_parent->_loc);
 	pt->_parent->_model = glm::rotate(pt->_parent->_model, (GLfloat) (M_PI / 2), glm::vec3(0, 1, 0));
 
-	glBindVertexArray(pt->_parent->_id[VAO]);
+	glBindVertexArray(pt->_parent->_mesh1->_id[VAO]);
 	pt->_parent->_prog.use();
 
 	glUniformMatrix4fv(pt->_parent->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(pt->_parent->_model));
 	glUniformMatrix4fv(pt->_parent->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(pt->_parent->_view));
 
-	glDrawElements(GL_POINTS, pt->_parent->_noIdc, GL_UNSIGNED_SHORT, (GLvoid*) 0);
+	glDrawElements(GL_POINTS, pt->_parent->_mesh1->_noIdc, GL_UNSIGNED_SHORT, (GLvoid*) 0);
 
 	pt->_parent->_prog.unUse();
 	glBindVertexArray(0);

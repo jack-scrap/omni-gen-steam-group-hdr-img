@@ -13,12 +13,6 @@ class Mesh {
 		std::vector<GLfloat> _st = util::mesh::plane(glm::vec2(1, 1));
 
 	public:
-		enum id {
-			VAO,
-			VBO,
-			STBO
-		};
-
 		enum attr {
 			POS,
 			ST
