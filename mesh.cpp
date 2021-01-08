@@ -5,9 +5,7 @@
 #include "mesh.h"
 
 Mesh::Mesh(std::vector<GLfloat> pos, std::string vtx, std::string frag, glm::vec2 loc, glm::vec3 col) :
-	_prog(vtx, frag),
-	_pos(pos),
-	_loc(loc) {
+	_prog(vtx, frag) {
 		/* data */
 		glGenVertexArrays(1, &_id[VAO]);
 		glBindVertexArray(_id[VAO]);
@@ -15,7 +13,7 @@ Mesh::Mesh(std::vector<GLfloat> pos, std::string vtx, std::string frag, glm::vec
 		glGenBuffers(2, &_id[1]);
 
 		glBindBuffer(GL_ARRAY_BUFFER, _id[VBO]);
-		glBufferData(GL_ARRAY_BUFFER, _pos.size() * sizeof (GLfloat), &_pos[0], GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, pos.size() * sizeof (GLfloat), &pos[0], GL_STATIC_DRAW);
 
 		glBindBuffer(GL_ARRAY_BUFFER, _id[STBO]);
 		glBufferData(GL_ARRAY_BUFFER, _st.size() * sizeof (GLfloat), &_st[0], GL_STATIC_DRAW);
@@ -36,18 +34,8 @@ Mesh::Mesh(std::vector<GLfloat> pos, std::string vtx, std::string frag, glm::vec
 
 		// uniform
 		_uni[LOC] = glGetUniformLocation(_prog.id, "loc");
-		glUniform2fv(_uni[LOC], 1, glm::value_ptr(_loc));
+		glUniform2fv(_uni[LOC], 1, glm::value_ptr(loc));
 
 		_uni[COL] = glGetUniformLocation(_prog.id, "col");
 		glUniform3fv(_uni[COL], 1, glm::value_ptr(col));
 	}
-
-void Mesh::mv(glm::vec2 d) {
-	_loc += d;
-
-	_prog.use();
-
-	glUniform2fv(_uni[LOC], 1, glm::value_ptr(_loc));
-
-	_prog.unUse();
-}

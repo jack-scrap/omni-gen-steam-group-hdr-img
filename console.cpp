@@ -221,7 +221,7 @@ void Console::draw() {
 
 	glBindTexture(GL_TEXTURE_2D, _tex);
 
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, _pos.size());
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 2 * 2 * 3);
 
 	_prog.unUse();
 	glBindVertexArray(0);
