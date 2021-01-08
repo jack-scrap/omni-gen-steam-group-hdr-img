@@ -19,8 +19,6 @@ enum uni {
 	VIEW,
 	PROJ,
 
-	LOC,
-
 	ACTIVE,
 
 	T
@@ -50,7 +48,7 @@ typedef struct Obj {
 
 	GLint
 		_attr[3],
-		_uni[6];
+		_uni[5];
 
 	struct Obj** _child;
 	unsigned int _noChild;

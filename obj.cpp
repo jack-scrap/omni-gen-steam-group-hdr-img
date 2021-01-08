@@ -58,8 +58,6 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_uni[VIEW] = glGetUniformLocation(_->_prog.id, "view");
 	_->_uni[PROJ] = glGetUniformLocation(_->_prog.id, "proj");
 
-	_->_uni[LOC] = glGetUniformLocation(_->_prog.id, "loc");
-
 	_->_uni[ACTIVE] = glGetUniformLocation(_->_prog.id, "active");
 
 	_->_uni[T] = glGetUniformLocation(_->_prog.id, "t");
@@ -124,8 +122,6 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_uni[VIEW] = glGetUniformLocation(_->_prog.id, "view");
 	_->_uni[PROJ] = glGetUniformLocation(_->_prog.id, "proj");
 
-	_->_uni[LOC] = glGetUniformLocation(_->_prog.id, "loc");
-
 	_->_uni[ACTIVE] = glGetUniformLocation(_->_prog.id, "active");
 
 	_->_uni[T] = glGetUniformLocation(_->_prog.id, "t");
@@ -185,8 +181,6 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_uni[MODEL] = glGetUniformLocation(_->_prog.id, "model");
 	_->_uni[VIEW] = glGetUniformLocation(_->_prog.id, "view");
 	_->_uni[PROJ] = glGetUniformLocation(_->_prog.id, "proj");
-
-	_->_uni[LOC] = glGetUniformLocation(_->_prog.id, "loc");
 
 	_->_uni[ACTIVE] = glGetUniformLocation(_->_prog.id, "active");
 
@@ -252,8 +246,6 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_uni[VIEW] = glGetUniformLocation(_->_prog.id, "view");
 	_->_uni[PROJ] = glGetUniformLocation(_->_prog.id, "proj");
 
-	_->_uni[LOC] = glGetUniformLocation(_->_prog.id, "loc");
-
 	_->_uni[ACTIVE] = glGetUniformLocation(_->_prog.id, "active");
 
 	_->_uni[T] = glGetUniformLocation(_->_prog.id, "t");
@@ -316,8 +308,6 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 	_->_uni[MODEL] = glGetUniformLocation(_->_prog.id, "model");
 	_->_uni[VIEW] = glGetUniformLocation(_->_prog.id, "view");
 	_->_uni[PROJ] = glGetUniformLocation(_->_prog.id, "proj");
-
-	_->_uni[LOC] = glGetUniformLocation(_->_prog.id, "loc");
 
 	_->_uni[ACTIVE] = glGetUniformLocation(_->_prog.id, "active");
 
@@ -385,8 +375,6 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 	_->_uni[MODEL] = glGetUniformLocation(_->_prog.id, "model");
 	_->_uni[VIEW] = glGetUniformLocation(_->_prog.id, "view");
 	_->_uni[PROJ] = glGetUniformLocation(_->_prog.id, "proj");
-
-	_->_uni[LOC] = glGetUniformLocation(_->_prog.id, "loc");
 
 	_->_uni[ACTIVE] = glGetUniformLocation(_->_prog.id, "active");
 
