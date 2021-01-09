@@ -36,8 +36,8 @@ Crane* craneMk(glm::vec3 loc) {
 
 	GLfloat vtc[2 * 2 * 3];
 	i = 0;
-	for (int x = 0; x < 2; x++) {
-		for (int y = 0; y < 2; y++) {
+	for (int y = 0; y < 2; y++) {
+		for (int x = 0; x < 2; x++) {
 			vtc[i] = (x ? 1 : -1) * 0.6;
 			vtc[i + 1] = y ? 1 : -1;
 			vtc[i + 2] = 0.0;
