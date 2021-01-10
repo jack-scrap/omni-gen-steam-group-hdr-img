@@ -11,6 +11,6 @@ typedef struct {
 	Pt* _bed;
 } Truck;
 
-Truck* truckMk(glm::vec3 loc);
+Truck* truckMk(glm::vec3 loc = glm::vec3(0.0, 0.0, 0.0), glm::vec3 rot = glm::vec3(0.0, 0.0, 0.0));
 
 extern "C" void truckMv(Truck* truck, GLfloat* d);
