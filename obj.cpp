@@ -16,7 +16,7 @@
 #include "state.h"
 #include "phys.h"
 
-Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string nameVtx, std::string nameFrag, bool active, glm::vec3 loc, glm::vec3 rot) {
+Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string vtx, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -43,7 +43,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 		_->_model = glm::rotate(_->_model, _->_rot[i], axis);
 	}
 
-	_->_prog = Prog(nameVtx, nameFrag);
+	_->_prog = Prog(vtx, frag);
 
 	_->_prog.use();
 
@@ -76,7 +76,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	return _;
 }
 
-Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string nameVtx, std::string nameFrag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
+Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string vtx, std::string frag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -107,7 +107,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 		_->_model = glm::rotate(_->_model, _->_rot[i], axis);
 	}
 
-	_->_prog = Prog(nameVtx, nameFrag);
+	_->_prog = Prog(vtx, frag);
 
 	_->_prog.use();
 
@@ -140,7 +140,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	return _;
 }
 
-Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string nameVtx, std::string nameGeom, std::string nameFrag, bool active, glm::vec3 loc, glm::vec3 rot) {
+Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string vtx, std::string geom, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -167,7 +167,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 		_->_model = glm::rotate(_->_model, _->_rot[i], axis);
 	}
 
-	_->_prog = Prog(nameVtx, nameGeom, nameFrag);
+	_->_prog = Prog(vtx, geom, frag);
 
 	_->_prog.use();
 
@@ -200,7 +200,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	return _;
 }
 
-Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string nameVtx, std::string nameGeom, std::string nameFrag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
+Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string vtx, std::string geom, std::string frag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -231,7 +231,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 		_->_model = glm::rotate(_->_model, _->_rot[i], axis);
 	}
 
-	_->_prog = Prog(nameVtx, nameGeom, nameFrag);
+	_->_prog = Prog(vtx, geom, frag);
 
 	_->_prog.use();
 
@@ -264,7 +264,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	return _;
 }
 
-Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool active, glm::vec3 loc, glm::vec3 rot) {
+Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -294,7 +294,7 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 		_->_model = glm::rotate(_->_model, _->_rot[i], axis);
 	}
 
-	_->_prog = Prog(nameVtx, nameFrag);
+	_->_prog = Prog(vtx, frag);
 
 	_->_prog.use();
 
@@ -327,7 +327,7 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 	return _;
 }
 
-Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
+Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -361,7 +361,7 @@ Obj* objMk(std::string name, std::string nameVtx, std::string nameFrag, bool act
 		_->_model = glm::rotate(_->_model, _->_rot[i], axis);
 	}
 
-	_->_prog = Prog(nameVtx, nameFrag);
+	_->_prog = Prog(vtx, frag);
 
 	_->_prog.use();
 
