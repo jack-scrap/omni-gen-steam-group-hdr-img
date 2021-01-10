@@ -46,15 +46,16 @@ Crane* craneMk(glm::vec3 loc) {
 		}
 	}
 
-	GLushort idc[] = {
-		0, 1, 2,
-		2, 1, 3
-	};
+	std::vector<GLushort> idc;
+	for (int i = 0; i < 2 * 2; i++) {
+		idc.push_back(i);
+	}
+	std::vector<GLushort> strip = util::mesh::strip(idc);
 
 	i = 0;
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < 2; x++) {
-			child[(2 * 2 * 2 * 2) + 1 + i] = objMk(vtc, sizeof vtc / sizeof *vtc, idc, sizeof idc / sizeof *idc, "main", "alert", false, loc + glm::vec3((x ? 1 : -1) * (6.0 + (state::pad * 2)), 1.74, (z ? 1 : -1) * 10.0), glm::vec3(0.0, M_PI / 2, 0.0));
+			child[(2 * 2 * 2 * 2) + 1 + i] = objMk(vtc, sizeof vtc / sizeof *vtc, &strip[0], strip.size(), "main", "alert", false, loc + glm::vec3((x ? 1 : -1) * (6.0 + (state::pad * 2)), 1.74, (z ? 1 : -1) * 10.0), glm::vec3(0.0, M_PI / 2, 0.0));
 
 			i++;
 		}

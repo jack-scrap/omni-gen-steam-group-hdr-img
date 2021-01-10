@@ -90,6 +90,25 @@ std::vector<GLfloat> util::mesh::rd::vtc(std::string name) {
 	return obj;
 }
 
+std::vector<GLushort> util::mesh::strip(std::vector<GLushort> idc) {
+	std::vector<GLushort> _;
+
+	bool far = false;
+
+	for (int t = 0; t < 2; t++) {
+		for (int i = 0; i < 3; i++) {
+			int
+				start = (far * 2) + (2 * t),
+				step = (i * (t ? -1 : 1)),
+				last = (3 * (t && i == 2));
+
+			_.push_back(start + step + last);
+		}
+	}
+
+	return _;
+}
+
 std::vector<GLushort> util::mesh::rd::idc(std::string name) {
 	std::vector<GLushort> obj;
 

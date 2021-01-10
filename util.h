@@ -28,6 +28,8 @@ namespace util {
 	namespace mesh {
 		std::vector<GLfloat> plane(glm::vec2 sz);
 
+		std::vector<GLushort> strip(std::vector<GLushort> idc);
+
 		namespace rd {
 			std::vector<GLfloat> vtc(std::string name);
 			std::vector<GLushort> idc(std::string name);
