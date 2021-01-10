@@ -21,7 +21,6 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
 	_->_mesh1 = mesh1Mk(vtc, noVtc, idc, noIdc);
-	_->_mesh1->_noIdc = noIdc;
 
 	_->_active = active;
 	_->_noChild = 0;
@@ -81,7 +80,6 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
 	_->_mesh1 = mesh1Mk(vtc, noVtc, idc, noIdc);
-	_->_mesh1->_noIdc = noIdc;
 
 	_->_active = active;
 	_->_child = (Obj**) malloc(noChild * sizeof (Obj*));
@@ -145,7 +143,6 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
 	_->_mesh1 = mesh1Mk(vtc, noVtc, idc, noIdc);
-	_->_mesh1->_noIdc = noIdc;
 
 	_->_active = active;
 	_->_noChild = 0;
@@ -205,7 +202,6 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
 	_->_mesh1 = mesh1Mk(vtc, noVtc, idc, noIdc);
-	_->_mesh1->_noIdc = noIdc;
 
 	_->_active = active;
 	_->_child = (Obj**) malloc(noChild * sizeof (Obj*));
