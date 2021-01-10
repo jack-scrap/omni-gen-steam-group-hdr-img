@@ -56,55 +56,53 @@ Crane* craneMk(glm::vec3 loc) {
 	return _;
 }
 
-void craneUpdate(Obj* obj, glm::vec3 dir) {
-	/* for (int i = 0; i < 3; i++) { */
-	/* 	obj->_loc[i] += dir[i] * Crane::_speed; */
-	/* } */
+void craneUpdate(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
+	obj->_model = glm::translate(obj->_model, loc);
+	for (int i = 0; i < 3; i++) {
+		glm::vec3 axis = glm::vec3(0);
+		axis[i] = 1;
 
-	/* for (int i = 0; i < obj->_noChild; i++) { */
-	/* 	if (obj->_child[i]) { */
-	/* 		craneUpdate(obj->_child[i], dir); */
-	/* 	} */
-	/* } */
+		obj->_model = glm::rotate(obj->_model, rot[i], axis);
+	}
+
+	for (int i = 0; i < obj->_noChild; i++) {
+		if (obj->_child[i]) {
+			craneUpdate(obj->_child[i], loc, rot);
+		}
+	}
 }
 
-void craneAnim(Crane* crane, GLfloat* dest) {
-	/* int i = 0; */
-	/* for (int y = 0; y < 2; y++) { */
-	/* 	for (int x = 0; x < 2; x++) { */
-	/* 		crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + i]->_active = true; */
+void craneAnim(Crane* crane, glm::vec3 loc, glm::vec3 rot) {
+	int i = 0;
+	for (int y = 0; y < 2; y++) {
+		for (int x = 0; x < 2; x++) {
+			crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + i]->_active = true;
 
-	/* 		i++; */
-	/* 	} */
-	/* } */
+			i++;
+		}
+	}
 
-	/* glm::vec3 start = crane->_parent->_loc; */
+	int t = 0;
+	while (t < 10) {
+		craneUpdate(crane->_parent, loc / glm::vec3(state::fps), rot / glm::vec3(state::fps));
 
-	/* int t = 0; */
-	/* while (glm::all(glm::lessThanEqual(crane->_parent->_loc, glm::vec3( */
-	/* 	start[0] + dest[0], */
-	/* 	start[1] + dest[1], */
-	/* 	start[2] + dest[2] */
-	/* )))) { */
-	/* 	craneUpdate(crane->_parent, glm::vec3(1, 0, 0)); */
+		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / state::fps));
 
-	/* 	std::this_thread::sleep_for(std::chrono::milliseconds(1000 / state::fps)); */
+		t++;
+	}
 
-	/* 	t++; */
-	/* } */
+	i = 0;
+	for (int y = 0; y < 2; y++) {
+		for (int x = 0; x < 2; x++) {
+			crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + i]->_active = false;
 
-	/* i = 0; */
-	/* for (int y = 0; y < 2; y++) { */
-	/* 	for (int x = 0; x < 2; x++) { */
-	/* 		crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + i]->_active = false; */
-
-	/* 		i++; */
-	/* 	} */
-	/* } */
+			i++;
+		}
+	}
 }
 
-void craneMv(Crane* crane, GLfloat* dest) {
-	std::thread t(craneAnim, crane, dest);
+void craneMv(Crane* crane, GLfloat* loc) {
+	std::thread t(craneAnim, crane, glm::vec3(loc[0], loc[1], loc[2]), glm::vec3(0.0, 0.0, 0.0));
 	t.detach();
 }
 
