@@ -14,9 +14,9 @@ Crane* craneMk(glm::vec3 loc);
 
 void craneUpdate(Obj* obj, GLfloat* d);
 
-void craneAnim(Crane* crane, GLfloat* loc);
+void craneAnim(Crane* crane, GLfloat* dest);
 
-extern "C" void craneMv(Crane* crane, GLfloat* loc);
+extern "C" void craneMv(Crane* crane, GLfloat* dest);
 
 extern "C" void cranePan(Crane* crane, bool dir);
 
