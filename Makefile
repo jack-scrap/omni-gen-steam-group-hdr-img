@@ -2,11 +2,14 @@ CXX = g++
 
 PROG = omni
 
+HDR = cam col state math phys
+
 STATIC = main disp util mesh mesh1 console
 DYNA = scn poly obj truck crane pt prog
 
 DEP_STATIC = $(patsubst %, %.o, $(STATIC))
 DEP_DYNA = $(patsubst %, lib%.so, $(DYNA))
+DEP_HDR = $(patsubst %, %.h, $(HDR))
 
 SDL = -lSDL2 -lSDL2_ttf
 GL = -lGLEW -lGL
@@ -28,7 +31,7 @@ lib%.so: %.o
 main.o: main.cpp
 	$(CXX) -c $< -o $@ $(LDFLAGS)
 
-$(PROG): $(DEP_STATIC) $(DEP_DYNA)
+$(PROG): $(DEP_STATIC) $(DEP_DYNA) $(DEP_HDR)
 	$(CXX) $(DEP_STATIC) $(LDFLAGS) -o $@
 
 clean:
