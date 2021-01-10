@@ -30,8 +30,6 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_t = 0;
 
 	// matrix
-	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
-	_->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::scale(_->_model, cam._scale);
 	_->_model = glm::translate(_->_model, _->_loc);
@@ -41,6 +39,8 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 		_->_model = glm::rotate(_->_model, _->_rot[i], axis);
 	}
+	_->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
+	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
 
 	_->_prog = Prog(vtx, frag);
 
@@ -93,8 +93,6 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_t = 0;
 
 	// matrix
-	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
-	_->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::scale(_->_model, cam._scale);
 	_->_model = glm::translate(_->_model, _->_loc);
@@ -104,6 +102,8 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 		_->_model = glm::rotate(_->_model, _->_rot[i], axis);
 	}
+	_->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
+	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
 
 	_->_prog = Prog(vtx, frag);
 
@@ -152,8 +152,6 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_t = 0;
 
 	// matrix
-	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
-	_->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::scale(_->_model, cam._scale);
 	_->_model = glm::translate(_->_model, _->_loc);
@@ -163,6 +161,8 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 		_->_model = glm::rotate(_->_model, _->_rot[i], axis);
 	}
+	_->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
+	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
 
 	_->_prog = Prog(vtx, geom, frag);
 
@@ -215,8 +215,6 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_t = 0;
 
 	// matrix
-	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
-	_->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::scale(_->_model, cam._scale);
 	_->_model = glm::translate(_->_model, _->_loc);
@@ -226,6 +224,8 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 		_->_model = glm::rotate(_->_model, _->_rot[i], axis);
 	}
+	_->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
+	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
 
 	_->_prog = Prog(vtx, geom, frag);
 
@@ -278,8 +278,6 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm
 	_->_mesh1->_noIdc = idc.size();
 
 	// matrix
-	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
-	_->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::scale(_->_model, cam._scale);
 	_->_model = glm::translate(_->_model, _->_loc);
@@ -289,6 +287,8 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm
 
 		_->_model = glm::rotate(_->_model, _->_rot[i], axis);
 	}
+	_->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
+	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
 
 	_->_prog = Prog(vtx, frag);
 
@@ -345,8 +345,6 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj
 	_->_mesh1->_noIdc = idc.size();
 
 	// matrix
-	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
-	_->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::translate(_->_model, _->_loc);
 	_->_model = glm::scale(_->_model, cam._scale);
@@ -356,6 +354,8 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj
 
 		_->_model = glm::rotate(_->_model, _->_rot[i], axis);
 	}
+	_->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
+	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
 
 	_->_prog = Prog(vtx, frag);
 
@@ -419,8 +419,6 @@ void objA(Obj* obj) {
 }
 
 void objDraw(Obj* obj) {
-	obj->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
-
 	obj->_model = glm::mat4(1.0);
 	obj->_model = glm::scale(obj->_model, cam._scale);
 	obj->_model = glm::translate(obj->_model, obj->_loc);
@@ -430,6 +428,8 @@ void objDraw(Obj* obj) {
 
 		obj->_model = glm::rotate(obj->_model, obj->_rot[i], axis);
 	}
+
+	obj->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
 
 	glBindVertexArray(obj->_mesh1->_id[VAO]);
 	obj->_prog.use();
