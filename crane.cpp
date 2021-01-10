@@ -109,14 +109,11 @@ void craneMv(Crane* crane, GLfloat* dest) {
 }
 
 void cranePan(Crane* crane, bool dir) {
-	if (dir) {
-		if (crane->_parent->_child[2 * 2 * 2 * 2 * 2]->_loc[Z] < 3.0) {
-			crane->_parent->_child[2 * 2 * 2 * 2 * 2]->_loc[Z]++;
-		}
-	} else {
-		if (crane->_parent->_child[2 * 2 * 2 * 2 * 2]->_loc[Z] > -3.0) {
-			crane->_parent->_child[2 * 2 * 2 * 2 * 2]->_loc[Z]--;
-		}
+	if (
+		crane->_parent->_child[2 * 2 * 2 * 2 * 2]->_loc[Z] < 3.0 &&
+		crane->_parent->_child[2 * 2 * 2 * 2 * 2]->_loc[Z] > -3.0
+	) {
+		crane->_parent->_child[2 * 2 * 2 * 2 * 2]->_loc[Z] += dir ? 1 : -1;
 	}
 
 	GLfloat loc[3];
@@ -127,14 +124,11 @@ void cranePan(Crane* crane, bool dir) {
 }
 
 void cranePed(Crane* crane, bool dir) {
-	if (dir) {
-		if (crane->_parent->_child[2 * 2 * 2 * 2 * 2]->_child[0]->_loc[Y] < 13.8) {
-			crane->_parent->_child[2 * 2 * 2 * 2 * 2]->_child[0]->_loc[Y]++;
-		}
-	} else {
-		if (crane->_parent->_child[2 * 2 * 2 * 2 * 2]->_child[0]->_loc[Y] > 0.0) {
-			crane->_parent->_child[2 * 2 * 2 * 2 * 2]->_child[0]->_loc[Y]--;
-		}
+	if (
+		crane->_parent->_child[2 * 2 * 2 * 2 * 2]->_child[0]->_loc[Y] < 13.8 &&
+		crane->_parent->_child[2 * 2 * 2 * 2 * 2]->_child[0]->_loc[Y] > 0.0
+	) {
+		crane->_parent->_child[2 * 2 * 2 * 2 * 2]->_child[0]->_loc[Y] += dir ? 1 : -1;
 	}
 
 	GLfloat loc[3];
