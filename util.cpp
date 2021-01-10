@@ -109,6 +109,34 @@ std::vector<GLushort> util::mesh::strip(std::vector<GLushort> idc) {
 	return _;
 }
 
+std::vector<GLfloat> util::mesh::quad::pos(glm::vec2 sz) {
+	std::vector<GLfloat> _;
+
+	for (int y = 0; y < 2; y++) {
+		for (int x = 0; x < 2; x++) {
+			_.push_back((x ? 1 : -1) * sz[X]);
+			_.push_back(((y ? 1 : -1)) * sz[Y]);
+			_.push_back(0.0);
+		}
+	}
+
+	return _;
+}
+
+std::vector<GLushort> util::mesh::quad::idc() {
+	std::vector<GLushort> _;
+
+	for (int t = 0; t < 2; t++) {
+		for (int i = 0; i < 3; i++) {
+			GLushort offset = (t * 3);
+
+			_.push_back(offset + (i * (t ? -1 : 1)));
+		}
+	}
+
+	return _;
+}
+
 std::vector<GLushort> util::mesh::rd::idc(std::string name) {
 	std::vector<GLushort> obj;
 

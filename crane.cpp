@@ -34,17 +34,7 @@ Crane* craneMk(glm::vec3 loc) {
 
 	child[2 * 2 * 2 * 2] = objMk("crane/head", "main", "dir", true, claw, 1, loc + glm::vec3(0.0, 13.8, 0.0));
 
-	GLfloat vtc[2 * 2 * 3];
-	i = 0;
-	for (int y = 0; y < 2; y++) {
-		for (int x = 0; x < 2; x++) {
-			vtc[i] = (x ? 1 : -1) * 0.6;
-			vtc[i + 1] = y ? 1 : -1;
-			vtc[i + 2] = 0.0;
-
-			i += 3;
-		}
-	}
+	std::vector<GLfloat> vtc = util::mesh::quad::pos(glm::vec2(0.6, 1.0));
 
 	std::vector<GLushort> idc;
 	for (int i = 0; i < 2 * 2; i++) {
@@ -55,7 +45,7 @@ Crane* craneMk(glm::vec3 loc) {
 	i = 0;
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < 2; x++) {
-			child[(2 * 2 * 2 * 2) + 1 + i] = objMk(vtc, sizeof vtc / sizeof *vtc, &strip[0], strip.size(), "main", "alert", false, loc + glm::vec3((x ? 1 : -1) * (6.0 + (state::pad * 2)), 1.74, (z ? 1 : -1) * 10.0), glm::vec3(0.0, M_PI / 2, 0.0));
+			child[(2 * 2 * 2 * 2) + 1 + i] = objMk(&vtc[0], vtc.size(), &strip[0], strip.size(), "main", "alert", false, loc + glm::vec3((x ? 1 : -1) * (6.0 + (state::pad * 2)), 1.74, (z ? 1 : -1) * 10.0), glm::vec3(0.0, M_PI / 2, 0.0));
 
 			i++;
 		}
