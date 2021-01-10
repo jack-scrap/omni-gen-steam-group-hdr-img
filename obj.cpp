@@ -29,7 +29,6 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 	// matrix
 	_->_model = glm::mat4(1.0);
-	_->_model = glm::scale(_->_model, cam._scale);
 	_->_model = glm::translate(_->_model, loc);
 	for (int i = 0; i < 3; i++) {
 		glm::vec3 axis = glm::vec3(0);
@@ -90,7 +89,6 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 	// matrix
 	_->_model = glm::mat4(1.0);
-	_->_model = glm::scale(_->_model, cam._scale);
 	_->_model = glm::translate(_->_model, loc);
 	for (int i = 0; i < 3; i++) {
 		glm::vec3 axis = glm::vec3(0);
@@ -147,7 +145,6 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 	// matrix
 	_->_model = glm::mat4(1.0);
-	_->_model = glm::scale(_->_model, cam._scale);
 	_->_model = glm::translate(_->_model, loc);
 	for (int i = 0; i < 3; i++) {
 		glm::vec3 axis = glm::vec3(0);
@@ -208,7 +205,6 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 	// matrix
 	_->_model = glm::mat4(1.0);
-	_->_model = glm::scale(_->_model, cam._scale);
 	_->_model = glm::translate(_->_model, loc);
 	for (int i = 0; i < 3; i++) {
 		glm::vec3 axis = glm::vec3(0);
@@ -269,7 +265,6 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm
 
 	// matrix
 	_->_model = glm::mat4(1.0);
-	_->_model = glm::scale(_->_model, cam._scale);
 	_->_model = glm::translate(_->_model, loc);
 	for (int i = 0; i < 3; i++) {
 		glm::vec3 axis = glm::vec3(0);
@@ -334,7 +329,6 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj
 
 	// matrix
 	_->_model = glm::mat4(1.0);
-	_->_model = glm::scale(_->_model, cam._scale);
 	_->_model = glm::translate(_->_model, loc);
 	for (int i = 0; i < 3; i++) {
 		glm::vec3 axis = glm::vec3(0);
@@ -408,6 +402,7 @@ void objA(Obj* obj) {
 
 void objDraw(Obj* obj) {
 	obj->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
+	obj->_view = glm::scale(obj->_view, cam._scale);
 
 	glBindVertexArray(obj->_mesh1->_id[VAO]);
 	obj->_prog.use();
