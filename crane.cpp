@@ -112,8 +112,8 @@ void craneAnim(Crane* crane, GLfloat* loc) {
 	}
 }
 
-void craneMv(Crane* crane, GLfloat* d) {
-	std::thread t(craneAnim, crane, d);
+void craneMv(Crane* crane, GLfloat* loc) {
+	std::thread t(craneAnim, crane, loc);
 	t.detach();
 }
 

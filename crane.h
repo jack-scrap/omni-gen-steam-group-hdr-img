@@ -16,7 +16,7 @@ void craneUpdate(Obj* obj, GLfloat* loc);
 
 void craneAnim(Crane* crane, GLfloat* loc);
 
-extern "C" void craneMv(Crane* crane, GLfloat* d);
+extern "C" void craneMv(Crane* crane, GLfloat* loc);
 
 extern "C" void cranePan(Crane* crane, bool dir);
 
