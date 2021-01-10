@@ -29,10 +29,6 @@ typedef struct Obj {
 
 	GLfloat _bound[2][3];
 
-	glm::vec3
-		_loc,
-		_rot;
-
 	GLfloat _v;
 
 	bool _active;

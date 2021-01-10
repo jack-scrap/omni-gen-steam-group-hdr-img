@@ -31,20 +31,20 @@ std::vector<Obj*> obj = {
 };
 
 void objSet(Obj* obj, GLfloat* d) {
-	float step[3];
-	for (int i = 0; i < 3; i++) {
-		step[i] = d[i] / state::fps;
-	}
+	/* float step[3]; */
+	/* for (int i = 0; i < 3; i++) { */
+	/* 	step[i] = d[i] / state::fps; */
+	/* } */
 
-	for (int t = 0; t < state::fps; t++) {
-		for (int i = 0; i < 3; i++) {
-			obj->_loc[i] += step[i];
-		}
+	/* for (int t = 0; t < state::fps; t++) { */
+	/* 	for (int i = 0; i < 3; i++) { */
+	/* 		obj->_loc[i] += step[i]; */
+	/* 	} */
 
-		obj->_model = glm::translate(glm::mat4(1.0), obj->_loc);
+	/* 	obj->_model = glm::translate(glm::mat4(1.0), obj->_loc); */
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / state::fps));
-	}
+	/* 	std::this_thread::sleep_for(std::chrono::milliseconds(1000 / state::fps)); */
+	/* } */
 }
 
 Truck* truckGet() {
@@ -52,20 +52,20 @@ Truck* truckGet() {
 }
 
 void truckSet(Truck* truck, GLfloat* d) {
-	float step[3];
-	for (int i = 0; i < 3; i++) {
-		step[i] = d[i] / state::fps;
-	}
+	/* float step[3]; */
+	/* for (int i = 0; i < 3; i++) { */
+	/* 	step[i] = d[i] / state::fps; */
+	/* } */
 
-	for (int t = 0; t < state::fps; t++) {
-		for (int i = 0; i < 3; i++) {
-			truck->_parent->_loc[i] += step[i];
-		}
+	/* for (int t = 0; t < state::fps; t++) { */
+	/* 	for (int i = 0; i < 3; i++) { */
+	/* 		truck->_parent->_loc[i] += step[i]; */
+	/* 	} */
 
-		truck->_parent->_model = glm::translate(glm::mat4(1.0), truck->_parent->_loc);
+	/* 	truck->_parent->_model = glm::translate(glm::mat4(1.0), truck->_parent->_loc); */
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / state::fps));
-	}
+	/* 	std::this_thread::sleep_for(std::chrono::milliseconds(1000 / state::fps)); */
+	/* } */
 }
 
 Crane* craneGet() {
@@ -73,18 +73,18 @@ Crane* craneGet() {
 }
 
 void craneSet(Crane* crane, GLfloat* d) {
-	GLfloat step[3];
-	for (int i = 0; i < 3; i++) {
-		step[i] = d[i] / state::fps;
-	}
+	/* GLfloat step[3]; */
+	/* for (int i = 0; i < 3; i++) { */
+	/* 	step[i] = d[i] / state::fps; */
+	/* } */
 
-	for (int t = 0; t < state::fps; t++) {
-		for (int i = 0; i < 3; i++) {
-			crane->_parent->_loc[i] += step[i];
-		}
+	/* for (int t = 0; t < state::fps; t++) { */
+	/* 	for (int i = 0; i < 3; i++) { */
+	/* 		crane->_parent->_loc[i] += step[i]; */
+	/* 	} */
 
-		crane->_parent->_model = glm::translate(glm::mat4(1.0), crane->_parent->_loc);
+	/* 	crane->_parent->_model = glm::translate(glm::mat4(1.0), crane->_parent->_loc); */
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / state::fps));
-	}
+	/* 	std::this_thread::sleep_for(std::chrono::milliseconds(1000 / state::fps)); */
+	/* } */
 }

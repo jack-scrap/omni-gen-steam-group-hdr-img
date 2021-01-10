@@ -24,20 +24,18 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 	_->_active = active;
 	_->_noChild = 0;
-	_->_loc = loc;
-	_->_rot = rot;
 	_->_v = 0.0;
 	_->_t = 0;
 
 	// matrix
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::scale(_->_model, cam._scale);
-	_->_model = glm::translate(_->_model, _->_loc);
+	_->_model = glm::translate(_->_model, loc);
 	for (int i = 0; i < 3; i++) {
 		glm::vec3 axis = glm::vec3(0);
 		axis[i] = 1;
 
-		_->_model = glm::rotate(_->_model, _->_rot[i], axis);
+		_->_model = glm::rotate(_->_model, rot[i], axis);
 	}
 	_->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
 	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
@@ -87,20 +85,18 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 		_->_child[i] = child[i];
 	}
 	_->_noChild = noChild;
-	_->_loc = loc;
-	_->_rot = rot;
 	_->_v = 0.0;
 	_->_t = 0;
 
 	// matrix
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::scale(_->_model, cam._scale);
-	_->_model = glm::translate(_->_model, _->_loc);
+	_->_model = glm::translate(_->_model, loc);
 	for (int i = 0; i < 3; i++) {
 		glm::vec3 axis = glm::vec3(0);
 		axis[i] = 1;
 
-		_->_model = glm::rotate(_->_model, _->_rot[i], axis);
+		_->_model = glm::rotate(_->_model, rot[i], axis);
 	}
 	_->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
 	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
@@ -146,20 +142,18 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 	_->_active = active;
 	_->_noChild = 0;
-	_->_loc = loc;
-	_->_rot = rot;
 	_->_v = 0.0;
 	_->_t = 0;
 
 	// matrix
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::scale(_->_model, cam._scale);
-	_->_model = glm::translate(_->_model, _->_loc);
+	_->_model = glm::translate(_->_model, loc);
 	for (int i = 0; i < 3; i++) {
 		glm::vec3 axis = glm::vec3(0);
 		axis[i] = 1;
 
-		_->_model = glm::rotate(_->_model, _->_rot[i], axis);
+		_->_model = glm::rotate(_->_model, rot[i], axis);
 	}
 	_->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
 	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
@@ -209,20 +203,18 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 		_->_child[i] = child[i];
 	}
 	_->_noChild = noChild;
-	_->_loc = loc;
-	_->_rot = rot;
 	_->_v = 0.0;
 	_->_t = 0;
 
 	// matrix
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::scale(_->_model, cam._scale);
-	_->_model = glm::translate(_->_model, _->_loc);
+	_->_model = glm::translate(_->_model, loc);
 	for (int i = 0; i < 3; i++) {
 		glm::vec3 axis = glm::vec3(0);
 		axis[i] = 1;
 
-		_->_model = glm::rotate(_->_model, _->_rot[i], axis);
+		_->_model = glm::rotate(_->_model, rot[i], axis);
 	}
 	_->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
 	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
@@ -266,8 +258,6 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm
 
 	_->_active = active;
 	_->_noChild = 0;
-	_->_loc = loc;
-	_->_rot = rot;
 	_->_v = 0.0;
 	_->_t = 0;
 
@@ -280,12 +270,12 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm
 	// matrix
 	_->_model = glm::mat4(1.0);
 	_->_model = glm::scale(_->_model, cam._scale);
-	_->_model = glm::translate(_->_model, _->_loc);
+	_->_model = glm::translate(_->_model, loc);
 	for (int i = 0; i < 3; i++) {
 		glm::vec3 axis = glm::vec3(0);
 		axis[i] = 1;
 
-		_->_model = glm::rotate(_->_model, _->_rot[i], axis);
+		_->_model = glm::rotate(_->_model, rot[i], axis);
 	}
 	_->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
 	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
@@ -333,8 +323,6 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj
 		_->_child[i] = child[i];
 	}
 	_->_noChild = noChild;
-	_->_loc = loc;
-	_->_rot = rot;
 	_->_v = 0.0;
 	_->_t = 0;
 
@@ -346,13 +334,13 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj
 
 	// matrix
 	_->_model = glm::mat4(1.0);
-	_->_model = glm::translate(_->_model, _->_loc);
 	_->_model = glm::scale(_->_model, cam._scale);
+	_->_model = glm::translate(_->_model, loc);
 	for (int i = 0; i < 3; i++) {
 		glm::vec3 axis = glm::vec3(0);
 		axis[i] = 1;
 
-		_->_model = glm::rotate(_->_model, _->_rot[i], axis);
+		_->_model = glm::rotate(_->_model, rot[i], axis);
 	}
 	_->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
 	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
@@ -391,19 +379,19 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj
 }
 
 void anim(Obj* obj, GLfloat* d) {
-	for (int t = 0; t < state::fps; t++) {
-		for (int i = 0; i < 3; i++) {
-			obj->_loc[i] += d[i] / state::fps;
-		}
+	/* for (int t = 0; t < state::fps; t++) { */
+	/* 	for (int i = 0; i < 3; i++) { */
+	/* 		obj->loc[i] += d[i] / state::fps; */
+	/* 	} */
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / state::fps));
-	}
+	/* 	std::this_thread::sleep_for(std::chrono::milliseconds(1000 / state::fps)); */
+	/* } */
 
-	for (int i = 0; i < obj->_noChild; i++) {
-		if (obj->_child[i]) {
-			anim(obj->_child[i], d);
-		}
-	}
+	/* for (int i = 0; i < obj->_noChild; i++) { */
+	/* 	if (obj->_child[i]) { */
+	/* 		anim(obj->_child[i], d); */
+	/* 	} */
+	/* } */
 }
 
 void objMv(Obj* obj, GLfloat* d) {
@@ -411,30 +399,21 @@ void objMv(Obj* obj, GLfloat* d) {
 }
 
 void objA(Obj* obj) {
-	while (!util::phys::aabb(obj, Y, 0.0, glm::vec3(obj->_loc[X], obj->_loc[Y] - obj->_v, obj->_loc[Z]))) {
-		obj->_v -= (phys::g / state::fps);
+	/* while (!util::phys::aabb(obj, Y, 0.0, glm::vec3(obj->loc[X], obj->loc[Y] - obj->_v, obj->loc[Z]))) { */
+	/* 	obj->_v -= (phys::g / state::fps); */
 
-		obj->_loc[Y] += obj->_v;
-	}
+	/* 	obj->loc[Y] += obj->_v; */
+	/* } */
 }
 
 void objDraw(Obj* obj) {
-	obj->_model = glm::mat4(1.0);
-	obj->_model = glm::scale(obj->_model, cam._scale);
-	obj->_model = glm::translate(obj->_model, obj->_loc);
-	for (int i = 0; i < 3; i++) {
-		glm::vec3 axis = glm::vec3(0);
-		axis[i] = 1;
-
-		obj->_model = glm::rotate(obj->_model, obj->_rot[i], axis);
-	}
-
 	obj->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
 
 	glBindVertexArray(obj->_mesh1->_id[VAO]);
 	obj->_prog.use();
 
 	glUniformMatrix4fv(obj->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(obj->_model));
+	glUniformMatrix4fv(obj->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(obj->_view));
 	glUniformMatrix4fv(obj->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(obj->_view));
 
 	glUniform1ui(obj->_uni[T], obj->_t);
