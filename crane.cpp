@@ -107,33 +107,43 @@ void craneMv(Crane* crane, GLfloat* loc) {
 }
 
 void cranePan(Crane* crane, bool dir) {
-	/* if ( */
-	/* 	crane->_parent->_child[2 * 2 * 2 * 2 * 2]->_loc[Z] < 3.0 && */
-	/* 	crane->_parent->_child[2 * 2 * 2 * 2 * 2]->_loc[Z] > -3.0 */
-	/* ) { */
-	/* 	crane->_parent->_child[2 * 2 * 2 * 2 * 2]->_loc[Z] += dir ? 1 : -1; */
-	/* } */
+	Obj* targ = crane->_parent->_child[2 * 2 * 2 * 2 * 2];
 
-	/* GLfloat loc[3]; */
-	/* for (int i = 0; i < 3; i++) { */
-	/* 	loc[i] = crane->_parent->_loc[i]; */
-	/* } */
-	/* objMv(crane->_parent->_child[2 * 2 * 2 * 2 * 2], loc); */
+	glm::vec3 loc = targ->_model * glm::vec4(glm::vec3(0.0, 0.0, 0.0), 1.0);
+
+	GLfloat d = dir ? 1 : -1;
+
+	if (
+		loc[Z] < 3.0 &&
+		loc[Z] > -3.0
+	) {
+		GLfloat loc[3] = {
+			d,
+			d,
+			d
+		};
+		objMv(crane->_parent->_child[2 * 2 * 2 * 2 * 2], loc);
+	}
 }
 
 void cranePed(Crane* crane, bool dir) {
-	/* if ( */
-	/* 	crane->_parent->_child[2 * 2 * 2 * 2 * 2]->_child[0]->_loc[Y] < 13.8 && */
-	/* 	crane->_parent->_child[2 * 2 * 2 * 2 * 2]->_child[0]->_loc[Y] > 0.0 */
-	/* ) { */
-	/* 	crane->_parent->_child[2 * 2 * 2 * 2 * 2]->_child[0]->_loc[Y] += dir ? 1 : -1; */
-	/* } */
+	Obj* targ = crane->_parent->_child[2 * 2 * 2 * 2 * 2];
 
-	/* GLfloat loc[3]; */
-	/* for (int i = 0; i < 3; i++) { */
-	/* 	loc[i] = crane->_parent->_loc[i]; */
-	/* } */
-	/* objMv(crane->_parent->_child[2 * 2 * 2 * 2 * 2], loc); */
+	glm::vec3 loc = targ->_model * glm::vec4(glm::vec3(0.0, 0.0, 0.0), 1.0);
+
+	GLfloat d = dir ? 1 : -1;
+
+	if (
+		loc[Y] < 13.8 &&
+		loc[Y] > 0.0
+	) {
+		GLfloat loc[3] = {
+			d,
+			d,
+			d
+		};
+		objMv(crane->_parent->_child[2 * 2 * 2 * 2 * 2], loc);
+	}
 }
 
 void craneGrab(Crane* crane) {
