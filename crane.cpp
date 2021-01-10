@@ -87,10 +87,19 @@ void craneAnim(Crane* crane, GLfloat* loc) {
 		}
 	}
 
-	for (int i = 0; i < state::fps; i++) {
+	glm::vec3 start = crane->_parent->_loc;
+
+	int t = 0;
+	while (glm::all(glm::lessThanEqual(crane->_parent->_loc, glm::vec3(
+		start[0] + loc[0],
+		start[1] + loc[1],
+		start[2] + loc[2]
+	)))) {
 		craneUpdate(crane->_parent, loc);
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / state::fps));
+
+		t++;
 	}
 
 	i = 0;
