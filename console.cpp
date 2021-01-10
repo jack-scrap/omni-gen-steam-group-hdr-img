@@ -83,10 +83,12 @@ void Console::render() {
 	}
 
 	// command-line
+	std::string prompt = _ps1 + _cmd;
+	
 	std::vector<SDL_Surface*> line;
 
-	for (int i = 0; i < _cmd.size(); i++) {
-		line.push_back(TTF_RenderGlyph_Blended(font, _cmd[i], {col[true][R], col[true][G], col[true][B]}));
+	for (int i = 0; i < prompt.size(); i++) {
+		line.push_back(TTF_RenderGlyph_Blended(font, prompt[i], {col[true][R], col[true][G], col[true][B]}));
 	}
 
 	_map.push_back(line);
@@ -114,7 +116,7 @@ void Console::render() {
 		}
 	}
 
-	for (int i = 0; i < _cmd.size(); i++) {
+	for (int i = 0; i < prompt.size(); i++) {
 		glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::dim[X], (state::line - 1) * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _map[_map.size() - 1][i]->pixels);
 	}
 
@@ -127,7 +129,7 @@ void Console::render() {
 			break;
 
 		case CMD:
-			_idx[X] = _cmd.size();
+			_idx[X] = prompt.size();
 			_idx[Y] = state::line - 1;
 
 			break;

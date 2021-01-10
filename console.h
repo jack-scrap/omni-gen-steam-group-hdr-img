@@ -9,6 +9,8 @@
 
 class Console : public Mesh {
 	private:
+		const std::string _ps1 = "[] ";
+
 		TTF_Font* font;
 
 		std::vector<std::vector<bool>> _hl;
