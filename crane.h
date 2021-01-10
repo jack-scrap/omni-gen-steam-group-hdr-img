@@ -25,5 +25,3 @@ extern "C" void cranePan(Crane* crane, bool dir);
 extern "C" void cranePed(Crane* crane, bool dir);
 
 extern "C" void craneGrab(Crane* crane);
-
-void craneDraw(Crane* crane);

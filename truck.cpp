@@ -52,9 +52,3 @@ void truckMv(Truck* truck, GLfloat* d) {
 
 	/* ptMv(truck->_bed, d); */
 }
-
-void truckDraw(Truck* truck) {
-	objDraw(truck->_parent);
-
-	ptDraw(truck->_bed);
-}

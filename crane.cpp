@@ -154,7 +154,3 @@ void craneGrab(Crane* crane) {
 
 	targ->_child[targ->_noChild - 1] = obj[0];
 }
-
-void craneDraw(Crane* crane) {
-	objDraw(crane->_parent);
-}
