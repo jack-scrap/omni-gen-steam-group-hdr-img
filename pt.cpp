@@ -6,16 +6,6 @@
 #include "pt.h"
 #include "scn.h"
 
-void ptMv(Pt* pt, GLfloat* d) {
-	for (int i = 0; i < 3; i++) {
-		pt->_parent->_loc[i] += d[i];
-	}
-
-	pt->_parent->_model = glm::scale(pt->_parent->_model, cam._scale);
-	pt->_parent->_model = glm::translate(pt->_parent->_model, glm::vec3(d[0], d[1], d[2]));
-	pt->_parent->_model = glm::rotate(pt->_parent->_model, (GLfloat) (M_PI / 2), glm::vec3(0, 1, 0));
-}
-
 Pt* ptMk(glm::vec3 loc) {
 	Pt* _ = (Pt*) malloc(sizeof (Pt));
 
@@ -30,6 +20,16 @@ Pt* ptMk(glm::vec3 loc) {
 	_->_parent = objMk(vtc, sizeof vtc / sizeof *vtc, idc, sizeof idc / sizeof *idc, "tex", "bed", "tex", false, loc);
 
 	return _;
+}
+
+void ptMv(Pt* pt, GLfloat* d) {
+	for (int i = 0; i < 3; i++) {
+		pt->_parent->_loc[i] += d[i];
+	}
+
+	pt->_parent->_model = glm::scale(pt->_parent->_model, cam._scale);
+	pt->_parent->_model = glm::translate(pt->_parent->_model, glm::vec3(d[0], d[1], d[2]));
+	pt->_parent->_model = glm::rotate(pt->_parent->_model, (GLfloat) (M_PI / 2), glm::vec3(0, 1, 0));
 }
 
 void ptDraw(Pt* pt) {
