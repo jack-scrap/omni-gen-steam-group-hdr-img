@@ -5,7 +5,7 @@ PROG = omni
 HDR = cam col state math phys
 
 STATIC = main disp util mesh mesh1 console
-DYNA = scn poly obj truck crane pt prog
+DYNA = scn obj truck crane pt prog
 
 DEP_STATIC = $(patsubst %, %.o, $(STATIC))
 DEP_DYNA = $(patsubst %, lib%.so, $(DYNA))

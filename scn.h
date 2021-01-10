@@ -2,7 +2,6 @@
 
 #include <vector>
 
-#include "poly.h"
 #include "obj.h"
 #include "truck.h"
 #include "crane.h"

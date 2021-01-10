@@ -49,8 +49,6 @@ void Disp::draw() {
 
 	glViewport(state::res[X], 0, state::view[X], state::view[Y]);
 
-	craneDraw(crane);
-
 	for (Obj* _ : obj) {
 		objDraw(_);
 	}
