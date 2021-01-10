@@ -58,7 +58,7 @@ Crane* craneMk(glm::vec3 loc) {
 
 void craneUpdate(Obj* obj, glm::vec3 dir) {
 	for (int i = 0; i < 3; i++) {
-		obj->_loc[i] += dir[i] * 0.1;
+		obj->_loc[i] += dir[i] * Crane::_speed;
 	}
 
 	for (int i = 0; i < obj->_noChild; i++) {

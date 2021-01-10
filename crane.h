@@ -4,7 +4,9 @@
 
 #include "obj.h"
 
-typedef struct {
+typedef struct Crane {
+	static constexpr GLfloat _speed = 0.1;
+
 	Obj* _parent;
 
 	Obj* _op;
