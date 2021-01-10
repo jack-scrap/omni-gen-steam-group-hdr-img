@@ -12,7 +12,7 @@ typedef struct {
 
 Crane* craneMk(glm::vec3 loc);
 
-void craneUpdate(Obj* obj, GLfloat* loc);
+void craneUpdate(Obj* obj, GLfloat* d);
 
 void craneAnim(Crane* crane, GLfloat* loc);
 
