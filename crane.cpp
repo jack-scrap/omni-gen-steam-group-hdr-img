@@ -65,14 +65,14 @@ Crane* craneMk(glm::vec3 loc) {
 	return _;
 }
 
-void craneUpdate(Obj* obj, GLfloat* d) {
+void craneUpdate(Obj* obj, glm::vec3 dir) {
 	for (int i = 0; i < 3; i++) {
-		obj->_loc[i] += d[i];
+		obj->_loc[i] += dir[i] * 0.1;
 	}
 
 	for (int i = 0; i < obj->_noChild; i++) {
 		if (obj->_child[i]) {
-			craneUpdate(obj->_child[i], d);
+			craneUpdate(obj->_child[i], dir);
 		}
 	}
 }
@@ -89,19 +89,13 @@ void craneAnim(Crane* crane, GLfloat* dest) {
 
 	glm::vec3 start = crane->_parent->_loc;
 
-	GLfloat d[3] = {
-		dest[0] / state::fps,
-		dest[1] / state::fps,
-		dest[2] / state::fps
-	};
-
 	int t = 0;
 	while (glm::all(glm::lessThanEqual(crane->_parent->_loc, glm::vec3(
 		start[0] + dest[0],
 		start[1] + dest[1],
 		start[2] + dest[2]
 	)))) {
-		craneUpdate(crane->_parent, d);
+		craneUpdate(crane->_parent, glm::vec3(1, 0, 0));
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / state::fps));
 
