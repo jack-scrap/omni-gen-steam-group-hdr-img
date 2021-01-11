@@ -372,24 +372,36 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj
 	return _;
 }
 
-void anim(Obj* obj, GLfloat* d) {
-	/* for (int t = 0; t < state::fps; t++) { */
-	/* 	for (int i = 0; i < 3; i++) { */
-	/* 		obj->loc[i] += d[i] / state::fps; */
-	/* 	} */
+void objUpdate(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
+	obj->_model = glm::translate(obj->_model, loc);
+	for (int i = 0; i < 3; i++) {
+		glm::vec3 axis = glm::vec3(0);
+		axis[i] = 1;
 
-	/* 	std::this_thread::sleep_for(std::chrono::milliseconds(1000 / state::fps)); */
-	/* } */
+		obj->_model = glm::rotate(obj->_model, rot[i], axis);
+	}
 
-	/* for (int i = 0; i < obj->_noChild; i++) { */
-	/* 	if (obj->_child[i]) { */
-	/* 		anim(obj->_child[i], d); */
-	/* 	} */
-	/* } */
+	for (int i = 0; i < obj->_noChild; i++) {
+		if (obj->_child[i]) {
+			objUpdate(obj->_child[i], loc, rot);
+		}
+	}
 }
 
-void objMv(Obj* obj, GLfloat* d) {
-	anim(obj, d);
+void objAnim(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
+	int t = 0;
+	while (t < 10) {
+		objUpdate(obj, loc / glm::vec3(state::fps), rot / glm::vec3(state::fps));
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / state::fps));
+
+		t++;
+	}
+}
+
+void objMv(Obj* obj, GLfloat* loc) {
+	std::thread t(objAnim, obj, glm::vec3(loc[0], loc[1], loc[2]), glm::vec3(0.0, 0.0, 0.0));
+	t.detach();
 }
 
 void objA(Obj* obj) {

@@ -4,6 +4,7 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <string>
+#include <vector>
 
 #include "disp.h"
 #include "prog.h"
@@ -62,7 +63,11 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm
 
 Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot = glm::vec3(0.0, 0.0, 0.0));
 
-extern "C" void objMv(Obj* obj, GLfloat* d);
+void objUpdate(Obj* obj, glm::vec3 loc, glm::vec3 rot);
+
+void objAnim(Obj* obj, glm::vec3 loc, glm::vec3 rot);
+
+extern "C" void objMv(Obj* obj, GLfloat* loc);
 
 void objA(Obj* obj);
 
