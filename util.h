@@ -30,7 +30,7 @@ namespace util {
 
 		std::vector<GLushort> strip(std::vector<GLushort> idc);
 
-		void bound(GLfloat bound[3][2], GLfloat* vtc, unsigned int noVtc);
+		void bound(GLfloat bound[2 * 2 * 2 * 3], GLfloat* vtc, unsigned int noVtc);
 
 		namespace quad {
 			std::vector<GLfloat> pos(glm::vec2 sz);
@@ -44,7 +44,7 @@ namespace util {
 	}
 
 	namespace phys {
-		bool aabb(Obj* p, Obj* q);
+		bool aabb(Obj* p, Obj* q, glm::mat4 d);
 		bool aabb(Obj* p, unsigned int axis, float floor, glm::vec3 d);
 	}
 }

@@ -109,21 +109,37 @@ std::vector<GLushort> util::mesh::strip(std::vector<GLushort> idc) {
 	return _;
 }
 
-void util::mesh::bound(GLfloat bound[3][2], GLfloat* vtc, unsigned int noVtc) {
+void util::mesh::bound(GLfloat bound[2 * 2 * 2 * 3], GLfloat* vtc, unsigned int noVtc) {
+	// range
+	GLfloat rng[3][2];
 	for (int a = 0; a < 3; a++) {
 		for (int i = 0; i < 2; i++) {
-			bound[a][i] = 0.0;
+			rng[a][i] = 0.0;
 		}
 	}
 
 	for (int v = 0; v < noVtc; v += 3) {
 		for (int a = 0; a < 3; a++) {
-			if (vtc[v + a] < bound[a][MIN]) {
-				bound[a][MIN] = vtc[v + a];
+			if (vtc[v + a] < rng[a][MIN]) {
+				rng[a][MIN] = vtc[v + a];
 			}
 
-			if (vtc[v + a] > bound[a][MAX]) {
-				bound[a][MAX] = vtc[v + a];
+			if (vtc[v + a] > rng[a][MAX]) {
+				rng[a][MAX] = vtc[v + a];
+			}
+		}
+	}
+
+	// generate
+	int i = 0;
+	for (int z = 0; z < 2; z++) {
+		for (int y = 0; y < 2; y++) {
+			for (int x = 0; x < 2; x++) {
+				bound[i] = rng[X][x];
+				bound[i + 1] = rng[Y][y];
+				bound[i + 2] = rng[Z][z];
+
+				i += 3;
 			}
 		}
 	}
@@ -175,15 +191,11 @@ std::vector<GLushort> util::mesh::rd::idc(std::string name) {
 	return obj;
 }
 
-bool util::phys::aabb(Obj* p, Obj* q) {
+bool util::phys::aabb(Obj* p, Obj* q, glm::mat4 d) {
+	for (int i = 0; i < 2 * 2 * 2 * 3; i += 3) {
+		glm::vec4 vtx = d * glm::vec4(glm::vec3(p->_bound[i], p->_bound[i + 1], p->_bound[i + 2]), 1.0);
+	}
 }
 
 bool util::phys::aabb(Obj* p, unsigned int axis, float floor, glm::vec3 d) {
-	glm::vec3
-		orig = glm::vec3(d.x + p->_bound[MIN][X], d.y + p->_bound[MIN][Y], d.z + p->_bound[MIN][Z]),
-		sz = glm::vec3(abs(p->_bound[MIN][X] - p->_bound[MAX][X]), abs(p->_bound[MIN][Y] - p->_bound[MAX][Y]), abs(p->_bound[MIN][Z] - p->_bound[MAX][Z]));
-
-	bool out = orig[axis] + sz[axis] > floor;
-
-	return out;
 }
