@@ -37,7 +37,7 @@ Bound* boundMk() {
 		3, 5, 7
 	};
 	
-	_->_parent = objMk(vtc, sizeof vtc / sizeof *vtc, idc, sizeof idc / sizeof *idc, "main", "dir", true);
+	_->_parent = objMk(vtc, sizeof vtc / sizeof *vtc, idc, sizeof idc / sizeof *idc, "obj", "dir", true);
 
 	return _;
 }

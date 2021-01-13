@@ -13,7 +13,7 @@ Truck* truckMk(glm::vec3 loc, glm::vec3 rot) {
 	int i = 0;
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < 2; x++) {
-			child[i] = objMk("wheel", "main", "dir", false, loc + glm::vec3(x * -2.6, -1, z ? 1 : -1), rot);
+			child[i] = objMk("wheel", "obj", "dir", false, loc + glm::vec3(x * -2.6, -1, z ? 1 : -1), rot);
 
 			i++;
 		}
@@ -21,13 +21,13 @@ Truck* truckMk(glm::vec3 loc, glm::vec3 rot) {
 
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < 2; x++) {
-			child[i] = objMk("rim", "main", "dir", true, loc + glm::vec3(x * -2.6, -1, z ? 1 : -1), rot);
+			child[i] = objMk("rim", "obj", "dir", true, loc + glm::vec3(x * -2.6, -1, z ? 1 : -1), rot);
 
 			i++;
 		}
 	}
 
-	child[2 * 2 * 2] = objMk("truck/tail", "main", "dir", false, loc + glm::vec3(-3.84, 0.0, 0.0), rot);
+	child[2 * 2 * 2] = objMk("truck/tail", "obj", "dir", false, loc + glm::vec3(-3.84, 0.0, 0.0), rot);
 
 	_->_bed = ptMk(loc + glm::vec3(0.0, 0.2, 0.0), rot);
 

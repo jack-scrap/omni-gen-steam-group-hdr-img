@@ -17,10 +17,10 @@ Crane* craneMk(glm::vec3 loc) {
 			for (int j = 0; j < 2; j++) {
 				for (int k = 0; k < 2; k++) {
 					Obj* rim[] = {
-						objMk("rim", "main", "dir", true, loc + glm::vec3(((x ? 1 : -1) * 3.0) + (j ? 1 : -1), 1.0, ((z ? 1 : -1) * 10.0) + ((k ? 1 : -1) * 0.6)))
+						objMk("rim", "obj", "dir", true, loc + glm::vec3(((x ? 1 : -1) * 3.0) + (j ? 1 : -1), 1.0, ((z ? 1 : -1) * 10.0) + ((k ? 1 : -1) * 0.6)))
 					};
 
-					child[i] = objMk("wheel", "main", "dir", false, rim, 1, loc + glm::vec3(((x ? 1 : -1) * 3.0) + (j ? 1 : -1), 1.0, ((z ? 1 : -1) * 10.0) + ((k ? 1 : -1) * 0.6)));
+					child[i] = objMk("wheel", "obj", "dir", false, rim, 1, loc + glm::vec3(((x ? 1 : -1) * 3.0) + (j ? 1 : -1), 1.0, ((z ? 1 : -1) * 10.0) + ((k ? 1 : -1) * 0.6)));
 
 					i++;
 				}
@@ -29,10 +29,10 @@ Crane* craneMk(glm::vec3 loc) {
 	}
 
 	Obj* claw[] = {
-		objMk("crane/claw", "main", "dir", true, loc + glm::vec3(0.0, 10.8, 0.0))
+		objMk("crane/claw", "obj", "dir", true, loc + glm::vec3(0.0, 10.8, 0.0))
 	};
 
-	child[2 * 2 * 2 * 2] = objMk("crane/head", "main", "dir", true, claw, 1, loc + glm::vec3(0.0, 13.8, 0.0));
+	child[2 * 2 * 2 * 2] = objMk("crane/head", "obj", "dir", true, claw, 1, loc + glm::vec3(0.0, 13.8, 0.0));
 
 	std::vector<GLfloat> vtc = util::mesh::quad::pos(glm::vec2(0.6, 1.0));
 
@@ -45,13 +45,13 @@ Crane* craneMk(glm::vec3 loc) {
 	i = 0;
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < 2; x++) {
-			child[(2 * 2 * 2 * 2) + 1 + i] = objMk(&vtc[0], vtc.size(), &strip[0], strip.size(), "main", "alert", false, loc + glm::vec3((x ? 1 : -1) * (6.0 + (state::pad * 2)), 1.74, (z ? 1 : -1) * 10.0), glm::vec3(0.0, M_PI / 2, 0.0));
+			child[(2 * 2 * 2 * 2) + 1 + i] = objMk(&vtc[0], vtc.size(), &strip[0], strip.size(), "obj", "alert", false, loc + glm::vec3((x ? 1 : -1) * (6.0 + (state::pad * 2)), 1.74, (z ? 1 : -1) * 10.0), glm::vec3(0.0, M_PI / 2, 0.0));
 
 			i++;
 		}
 	}
 
-	_->_parent = objMk("crane/body", "main", "dir", true, child, sizeof child / sizeof *child, loc);
+	_->_parent = objMk("crane/body", "obj", "dir", true, child, sizeof child / sizeof *child, loc);
 
 	return _;
 }
