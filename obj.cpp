@@ -69,6 +69,9 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_prog.unUse();
 	glBindVertexArray(0);
 
+	// bounds
+	util::mesh::bound(_->_bound, vtc, noVtc);
+
 	return _;
 }
 
@@ -129,6 +132,9 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_prog.unUse();
 	glBindVertexArray(0);
 
+	// bounds
+	util::mesh::bound(_->_bound, vtc, noVtc);
+
 	return _;
 }
 
@@ -184,6 +190,9 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 	_->_prog.unUse();
 	glBindVertexArray(0);
+
+	// bounds
+	util::mesh::bound(_->_bound, vtc, noVtc);
 
 	return _;
 }
@@ -245,6 +254,9 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_prog.unUse();
 	glBindVertexArray(0);
 
+	// bounds
+	util::mesh::bound(_->_bound, vtc, noVtc);
+
 	return _;
 }
 
@@ -304,6 +316,9 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm
 
 	_->_prog.unUse();
 	glBindVertexArray(0);
+
+	// bounds
+	util::mesh::bound(_->_bound, &vtc[0], vtc.size());
 
 	return _;
 }
@@ -368,6 +383,9 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj
 
 	_->_prog.unUse();
 	glBindVertexArray(0);
+
+	// bounds
+	util::mesh::bound(_->_bound, &vtc[0], vtc.size());
 
 	return _;
 }

@@ -109,6 +109,37 @@ std::vector<GLushort> util::mesh::strip(std::vector<GLushort> idc) {
 	return _;
 }
 
+void util::mesh::bound(GLfloat bound[3][2], GLfloat* vtc, unsigned int noVtc) {
+	for (int a = 0; a < 3; a++) {
+		for (int i = 0; i < 2; i++) {
+			bound[a][i] = 0.0;
+		}
+	}
+
+	for (int i = 0; i < noVtc; i += 3) {
+		if (vtc[i] < bound[X][MIN]) {
+			bound[X][MIN] = vtc[i];
+		}
+		if (vtc[i] > bound[X][MAX]) {
+			bound[X][MAX] = vtc[i];
+		}
+
+		if (vtc[i + 1] < bound[Y][MIN]) {
+			bound[Y][MIN] = vtc[i + 1];
+		}
+		if (vtc[i + 1] > bound[Y][MAX]) {
+			bound[Y][MAX] = vtc[i + 1];
+		}
+
+		if (vtc[i + 2] < bound[Z][MAX]) {
+			bound[Z][MIN] = vtc[i + 2];
+		}
+		if (vtc[i + 2] > bound[Z][MAX]) {
+			bound[Z][MAX] = vtc[i + 2];
+		}
+	}
+}
+
 std::vector<GLfloat> util::mesh::quad::pos(glm::vec2 sz) {
 	std::vector<GLfloat> _;
 
@@ -153,6 +184,9 @@ std::vector<GLushort> util::mesh::rd::idc(std::string name) {
 	}
 
 	return obj;
+}
+
+bool util::phys::aabb(Obj* p, Obj* q) {
 }
 
 bool util::phys::aabb(Obj* p, unsigned int axis, float floor, glm::vec3 d) {
