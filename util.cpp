@@ -116,26 +116,15 @@ void util::mesh::bound(GLfloat bound[3][2], GLfloat* vtc, unsigned int noVtc) {
 		}
 	}
 
-	for (int i = 0; i < noVtc; i += 3) {
-		if (vtc[i] < bound[X][MIN]) {
-			bound[X][MIN] = vtc[i];
-		}
-		if (vtc[i] > bound[X][MAX]) {
-			bound[X][MAX] = vtc[i];
-		}
+	for (int v = 0; v < noVtc; v += 3) {
+		for (int a = 0; a < 3; a++) {
+			if (vtc[v + a] < bound[a][MIN]) {
+				bound[a][MIN] = vtc[v + a];
+			}
 
-		if (vtc[i + 1] < bound[Y][MIN]) {
-			bound[Y][MIN] = vtc[i + 1];
-		}
-		if (vtc[i + 1] > bound[Y][MAX]) {
-			bound[Y][MAX] = vtc[i + 1];
-		}
-
-		if (vtc[i + 2] < bound[Z][MAX]) {
-			bound[Z][MIN] = vtc[i + 2];
-		}
-		if (vtc[i + 2] > bound[Z][MAX]) {
-			bound[Z][MAX] = vtc[i + 2];
+			if (vtc[v + a] > bound[a][MAX]) {
+				bound[a][MAX] = vtc[v + a];
+			}
 		}
 	}
 }
