@@ -28,7 +28,7 @@ enum uni {
 typedef struct Obj {
 	Mesh1* _mesh1;
 
-	GLfloat _bound[2][3];
+	GLfloat _bound[3][2];
 
 	GLfloat _v;
 
