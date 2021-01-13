@@ -26,8 +26,4 @@ extern "C" Truck* truckGet();
 
 extern "C" Bound* bound;
 
-extern "C" void truckSet(Truck* truck, GLfloat* d);
-
 extern "C" Crane* craneGet();
-
-extern "C" void craneSet(Crane* crane, GLfloat* d);
