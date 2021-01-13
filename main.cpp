@@ -20,6 +20,10 @@ Console* console;
 int main() {
 	console = new Console(util::fs::rd<std::vector<std::string>>("script/0.py"));
 
+	GLfloat d[3] = {
+		0.3, 0.0, 0.0
+	};
+
 	SDL_Event e;
 	while (disp._open) {
 		while (SDL_PollEvent(&e)) {
@@ -28,6 +32,16 @@ int main() {
 					console->push((char) e.key.keysym.sym);
 				} else {
 					switch (e.key.keysym.sym) {
+						case SDLK_F5:
+							objMv(obj[0], d);
+
+							std::cout << util::phys::aabb(
+								obj[0],
+								obj[1]
+							) << std::endl;
+
+							break;
+
 						case SDLK_SPACE:
 							console->push(' ');
 

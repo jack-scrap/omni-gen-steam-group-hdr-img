@@ -44,7 +44,6 @@ namespace util {
 	}
 
 	namespace phys {
-		bool aabb(Obj* p, Obj* q, glm::mat4 d);
-		bool aabb(Obj* p, unsigned int axis, float floor, glm::vec3 d);
+		bool aabb(Obj* p, Obj* q);
 	}
 }

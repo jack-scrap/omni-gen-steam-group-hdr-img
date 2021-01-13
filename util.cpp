@@ -191,11 +191,31 @@ std::vector<GLushort> util::mesh::rd::idc(std::string name) {
 	return obj;
 }
 
-bool util::phys::aabb(Obj* p, Obj* q, glm::mat4 d) {
-	for (int i = 0; i < 2 * 2 * 2 * 3; i += 3) {
-		glm::vec4 vtx = d * glm::vec4(glm::vec3(p->_bound[i], p->_bound[i + 1], p->_bound[i + 2]), 1.0);
-	}
-}
+bool util::phys::aabb(Obj* p, Obj* q) {
+	bool _ = false;
 
-bool util::phys::aabb(Obj* p, unsigned int axis, float floor, glm::vec3 d) {
+	for (int a = 0; a < 2 * 2 * 2 * 3; a += 3) {
+		glm::vec4 vtx = p->_model * glm::vec4(glm::vec3(p->_bound[a], p->_bound[a + 1], p->_bound[a + 2]), 1.0);
+
+		for (int b = 0; b < 2 * 2 * 2 * 3; b += 3) {
+			glm::vec4
+				min = q->_model * glm::vec4(glm::vec3(q->_bound[b], q->_bound[b + 1], q->_bound[b + 2]), 1.0),
+				max = q->_model * glm::vec4(glm::vec3(q->_bound[b], q->_bound[b + 1], q->_bound[b + 2]), 1.0);
+
+			if (
+				vtx[X] >= min[X] &&
+				vtx[X] <= max[X] &&
+
+				vtx[Y] >= min[Y] &&
+				vtx[Y] <= max[Y] &&
+
+				vtx[Z] >= min[Z] &&
+				vtx[Z] <= max[Z]
+			) {
+				_ = true;
+			}
+		}
+	}
+
+	return _;
 }
