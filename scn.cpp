@@ -24,9 +24,9 @@ Disp disp("Omni", {
 
 Truck* truck = truckMk(glm::vec3(0.0, 0.0, 0.0));
 
-Bound* bound = boundMk();
-
 Crane* crane = craneMk(glm::vec3(0.0, 0.0, 0.0));
+
+Bound* bound = boundMk();
 
 std::vector<Obj*> obj = {
 	bound->_parent

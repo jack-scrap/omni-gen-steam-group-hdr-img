@@ -24,6 +24,6 @@ extern std::vector<Obj*> obj;
 
 extern "C" Truck* truckGet();
 
-extern "C" Bound* bound;
-
 extern "C" Crane* craneGet();
+
+extern "C" Bound* bound;
