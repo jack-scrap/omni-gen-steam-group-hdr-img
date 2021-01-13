@@ -24,11 +24,12 @@ Disp disp("Omni", {
 
 Truck* truck = truckMk(glm::vec3(0.0, 0.0, 0.0));
 
+Bound* bound = boundMk();
+
 Crane* crane = craneMk(glm::vec3(0.0, 0.0, 0.0));
 
 std::vector<Obj*> obj = {
-	objMk("container_2x4", "main", "dir", true),
-	crane->_parent
+	bound->_parent
 };
 
 Truck* truckGet() {

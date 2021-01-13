@@ -8,6 +8,7 @@
 #include "pt.h"
 #include "cam.h"
 #include "console.h"
+#include "bound.h"
 
 extern Cam cam;
 
@@ -22,6 +23,8 @@ extern Crane* crane;
 extern std::vector<Obj*> obj;
 
 extern "C" Truck* truckGet();
+
+extern "C" Bound* bound;
 
 extern "C" void truckSet(Truck* truck, GLfloat* d);
 
