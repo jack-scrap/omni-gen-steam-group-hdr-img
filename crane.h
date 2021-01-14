@@ -12,7 +12,7 @@ typedef struct Crane {
 	Obj* _op;
 } Crane;
 
-Crane* craneMk(glm::vec3 loc);
+Crane* craneMk(glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
 
 extern "C" void craneAnim(Crane* crane, GLfloat* loc);
 

@@ -7,7 +7,7 @@
 #include "math.h"
 #include "state.h"
 
-Crane* craneMk(glm::vec3 loc) {
+Crane* craneMk(glm::vec3 loc, glm::vec3 rot) {
 	Crane* _ = (Crane*) malloc(sizeof (Crane));
 
 	Obj* child[(2 * 2 * 2 * 2) + 1 + (2 * 2)];
@@ -17,10 +17,10 @@ Crane* craneMk(glm::vec3 loc) {
 			for (int j = 0; j < 2; j++) {
 				for (int k = 0; k < 2; k++) {
 					Obj* rim[] = {
-						objMk("rim", "obj", "dir", true, loc + glm::vec3(((x ? 1 : -1) * 3.0) + (j ? 1 : -1), 1.0, ((z ? 1 : -1) * 10.0) + ((k ? 1 : -1) * 0.6)))
+						objMk("rim", "obj", "dir", true, loc + glm::vec3(((x ? 1 : -1) * 3.0) + (j ? 1 : -1), 1.0, ((z ? 1 : -1) * 10.0) + ((k ? 1 : -1) * 0.6)), rot)
 					};
 
-					child[i] = objMk("wheel", "obj", "dir", false, rim, 1, loc + glm::vec3(((x ? 1 : -1) * 3.0) + (j ? 1 : -1), 1.0, ((z ? 1 : -1) * 10.0) + ((k ? 1 : -1) * 0.6)));
+					child[i] = objMk("wheel", "obj", "dir", false, rim, 1, loc + glm::vec3(((x ? 1 : -1) * 3.0) + (j ? 1 : -1), 1.0, ((z ? 1 : -1) * 10.0) + ((k ? 1 : -1) * 0.6)), rot);
 
 					i++;
 				}
@@ -29,10 +29,10 @@ Crane* craneMk(glm::vec3 loc) {
 	}
 
 	Obj* claw[] = {
-		objMk("crane/claw", "obj", "dir", true, loc + glm::vec3(0.0, 10.8, 0.0))
+		objMk("crane/claw", "obj", "dir", true, loc + glm::vec3(0.0, 10.8, 0.0), rot)
 	};
 
-	child[2 * 2 * 2 * 2] = objMk("crane/head", "obj", "dir", true, claw, 1, loc + glm::vec3(0.0, 13.8, 0.0));
+	child[2 * 2 * 2 * 2] = objMk("crane/head", "obj", "dir", true, claw, 1, loc + glm::vec3(0.0, 13.8, 0.0), rot);
 
 	std::vector<GLfloat> vtc = util::mesh::quad::pos(glm::vec2(0.6, 1.0));
 
@@ -45,13 +45,13 @@ Crane* craneMk(glm::vec3 loc) {
 	i = 0;
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < 2; x++) {
-			child[(2 * 2 * 2 * 2) + 1 + i] = objMk(&vtc[0], vtc.size(), &strip[0], strip.size(), "obj", "alert", false, loc + glm::vec3((x ? 1 : -1) * (6.0 + (state::pad * 2)), 1.74, (z ? 1 : -1) * 10.0), glm::vec3(0.0, M_PI / 2, 0.0));
+			child[(2 * 2 * 2 * 2) + 1 + i] = objMk(&vtc[0], vtc.size(), &strip[0], strip.size(), "obj", "alert", false, loc + glm::vec3((x ? 1 : -1) * (6.0 + (state::pad * 2)), 1.74, (z ? 1 : -1) * 10.0), rot + glm::vec3(0.0, M_PI / 2, 0.0));
 
 			i++;
 		}
 	}
 
-	_->_parent = objMk("crane/body", "obj", "dir", true, child, sizeof child / sizeof *child, loc);
+	_->_parent = objMk("crane/body", "obj", "dir", true, child, sizeof child / sizeof *child, loc, rot);
 
 	return _;
 }
