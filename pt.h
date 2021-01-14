@@ -9,7 +9,3 @@ typedef struct {
 } Pt;
 
 Pt* ptMk(glm::vec3 loc = glm::vec3(0.0, 0.0, 0.0), glm::vec3 rot = glm::vec3(0.0, 0.0, 0.0));
-
-void ptMv(Pt* pt, GLfloat* d);
-
-void ptDraw(Pt* pt);

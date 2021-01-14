@@ -9,7 +9,7 @@
 Truck* truckMk(glm::vec3 loc, glm::vec3 rot) {
 	Truck* _ = (Truck*) malloc(sizeof (Truck));
 
-	Obj* child[(2 * 2 * 2) + 1];
+	Obj* child[(2 * 2 * 2) + 1 + 1];
 	int i = 0;
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < 2; x++) {
@@ -29,7 +29,12 @@ Truck* truckMk(glm::vec3 loc, glm::vec3 rot) {
 
 	child[2 * 2 * 2] = objMk("truck/tail", "obj", "dir", false, loc + glm::vec3(-3.84, 0.0, 0.0), rot);
 
-	_->_bed = ptMk(loc + glm::vec3(0.0, 0.2, 0.0), rot);
+	i++;
+
+	Pt* bed = ptMk(loc + glm::vec3(0.0, 0.2, 0.0), rot);
+	child[(2 * 2 * 2) + 1] = bed->_parent;
+
+	i++;
 
 	_->_parent = objMk("truck/front", "tex", "tex", true, child, sizeof child / sizeof *child, loc + glm::vec3(2.4, 1.3, 0.0), rot);
 
