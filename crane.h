@@ -14,6 +14,8 @@ typedef struct Crane {
 
 Crane* craneMk(glm::vec3 loc);
 
+extern "C" void craneAnim(Crane* crane, GLfloat* loc);
+
 extern "C" void craneMv(Crane* crane, GLfloat* loc);
 
 extern "C" void cranePan(Crane* crane, bool dir);

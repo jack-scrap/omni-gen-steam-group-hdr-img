@@ -29,6 +29,7 @@ Crane* crane = craneMk(glm::vec3(0.0, 0.0, 0.0));
 Bound* bound = boundMk();
 
 std::vector<Obj*> obj = {
+	crane->_parent,
 	objMk("container_2x4", "obj", "dir", true, glm::vec3(0.5, 0.0, 0.5)),
 	objMk("container_2x4", "obj", "dir", true)
 };
