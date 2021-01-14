@@ -439,7 +439,6 @@ void objDraw(Obj* obj) {
 
 	glUniformMatrix4fv(obj->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(obj->_model));
 	glUniformMatrix4fv(obj->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(obj->_view));
-	glUniformMatrix4fv(obj->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(obj->_view));
 
 	glUniform1ui(obj->_uni[T], obj->_t);
 
