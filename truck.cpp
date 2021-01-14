@@ -9,30 +9,26 @@
 Truck* truckMk(glm::vec3 loc, glm::vec3 rot) {
 	Truck* _ = (Truck*) malloc(sizeof (Truck));
 
-	Obj* child[(2 * 2 * 2) + 1 + 1];
+	Obj* child[(2 * 2) + 1 + 1];
 	int i = 0;
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < 2; x++) {
-			child[i] = objMk("wheel", "obj", "dir", false, loc + glm::vec3(x * -2.6, -1, z ? 1 : -1), rot);
+			Obj* rim[] = {
+				objMk("rim", "obj", "dir", true, loc + glm::vec3(x * -2.6, -1, z ? 1 : -1), rot)
+			};
+
+			child[i] = objMk("wheel", "obj", "dir", false, rim, sizeof rim / sizeof *rim, loc + glm::vec3(x * -2.6, -1, z ? 1 : -1), rot);
 
 			i++;
 		}
 	}
 
-	for (int z = 0; z < 2; z++) {
-		for (int x = 0; x < 2; x++) {
-			child[i] = objMk("rim", "obj", "dir", true, loc + glm::vec3(x * -2.6, -1, z ? 1 : -1), rot);
-
-			i++;
-		}
-	}
-
-	child[2 * 2 * 2] = objMk("truck/tail", "obj", "dir", false, loc + glm::vec3(-3.84, 0.0, 0.0), rot);
+	child[2 * 2] = objMk("truck/tail", "obj", "dir", false, loc + glm::vec3(-3.84, 0.0, 0.0), rot);
 
 	i++;
 
 	Pt* bed = ptMk(loc + glm::vec3(0.0, 0.2, 0.0), rot);
-	child[(2 * 2 * 2) + 1] = bed->_parent;
+	child[(2 * 2) + 1] = bed->_parent;
 
 	i++;
 
