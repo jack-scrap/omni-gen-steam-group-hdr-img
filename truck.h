@@ -9,4 +9,4 @@ typedef struct {
 	Obj* _parent;
 } Truck;
 
-Truck* truckMk(glm::vec3 loc = glm::vec3(0.0, 0.0, 0.0), glm::vec3 rot = glm::vec3(0.0, 0.0, 0.0));
+Truck* truckMk(glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0, 0.0, 0.0));

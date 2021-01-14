@@ -61,7 +61,7 @@ void craneAnim(Crane* crane, GLfloat* loc) {
 		crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + i]->_active = true;
 	}
 
-	std::thread t(objAnim, crane->_parent, glm::vec3(loc[0], loc[1], loc[2]), glm::vec3(0.0, 0.0, 0.0));
+	std::thread t(objAnim, crane->_parent, glm::vec3(loc[0], loc[1], loc[2]), glm::vec3(0.0));
 	t.detach();
 
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
@@ -79,7 +79,7 @@ void craneMv(Crane* crane, GLfloat* loc) {
 void cranePan(Crane* crane, bool dir) {
 	Obj* targ = crane->_parent->_child[2 * 2 * 2 * 2 * 2];
 
-	glm::vec3 loc = targ->_model * glm::vec4(glm::vec3(0.0, 0.0, 0.0), 1.0);
+	glm::vec3 loc = targ->_model * glm::vec4(glm::vec3(0.0), 1.0);
 
 	GLfloat d = dir ? 1 : -1;
 
@@ -99,7 +99,7 @@ void cranePan(Crane* crane, bool dir) {
 void cranePed(Crane* crane, bool dir) {
 	Obj* targ = crane->_parent->_child[2 * 2 * 2 * 2 * 2];
 
-	glm::vec3 loc = targ->_model * glm::vec4(glm::vec3(0.0, 0.0, 0.0), 1.0);
+	glm::vec3 loc = targ->_model * glm::vec4(glm::vec3(0.0), 1.0);
 
 	GLfloat d = dir ? 1 : -1;
 

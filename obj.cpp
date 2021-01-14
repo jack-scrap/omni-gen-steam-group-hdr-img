@@ -36,7 +36,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 		_->_model = glm::rotate(_->_model, rot[i], axis);
 	}
-	_->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
+	_->_view = glm::lookAt(cam._pos + glm::vec3(100), cam._pos, glm::vec3(0, 1, 0));
 	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
 
 	_->_prog = Prog(vtx, frag);
@@ -99,7 +99,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 		_->_model = glm::rotate(_->_model, rot[i], axis);
 	}
-	_->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
+	_->_view = glm::lookAt(cam._pos + glm::vec3(100), cam._pos, glm::vec3(0, 1, 0));
 	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
 
 	_->_prog = Prog(vtx, frag);
@@ -158,7 +158,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 		_->_model = glm::rotate(_->_model, rot[i], axis);
 	}
-	_->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
+	_->_view = glm::lookAt(cam._pos + glm::vec3(100), cam._pos, glm::vec3(0, 1, 0));
 	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
 
 	_->_prog = Prog(vtx, geom, frag);
@@ -221,7 +221,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 		_->_model = glm::rotate(_->_model, rot[i], axis);
 	}
-	_->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
+	_->_view = glm::lookAt(cam._pos + glm::vec3(100), cam._pos, glm::vec3(0, 1, 0));
 	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
 
 	_->_prog = Prog(vtx, geom, frag);
@@ -284,7 +284,7 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm
 
 		_->_model = glm::rotate(_->_model, rot[i], axis);
 	}
-	_->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
+	_->_view = glm::lookAt(cam._pos + glm::vec3(100), cam._pos, glm::vec3(0, 1, 0));
 	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
 
 	_->_prog = Prog(vtx, frag);
@@ -351,7 +351,7 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj
 
 		_->_model = glm::rotate(_->_model, rot[i], axis);
 	}
-	_->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
+	_->_view = glm::lookAt(cam._pos + glm::vec3(100), cam._pos, glm::vec3(0, 1, 0));
 	_->_proj = glm::ortho(-(state::view[X] / 2.0f), state::view[X] / 2.0f, -(state::view[Y] / 2.0f), state::view[Y] / 2.0f, 0.1f, 10000.0f);
 
 	_->_prog = Prog(vtx, frag);
@@ -418,7 +418,7 @@ void objAnim(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
 }
 
 void objMv(Obj* obj, GLfloat* loc) {
-	std::thread t(objAnim, obj, glm::vec3(loc[0], loc[1], loc[2]), glm::vec3(0.0, 0.0, 0.0));
+	std::thread t(objAnim, obj, glm::vec3(loc[0], loc[1], loc[2]), glm::vec3(0.0));
 	t.detach();
 }
 
@@ -431,7 +431,7 @@ void objA(Obj* obj) {
 }
 
 void objDraw(Obj* obj) {
-	obj->_view = glm::lookAt(cam._pos + glm::vec3(100, 100, 100), cam._pos, glm::vec3(0, 1, 0));
+	obj->_view = glm::lookAt(cam._pos + glm::vec3(100), cam._pos, glm::vec3(0, 1, 0));
 	obj->_view = glm::scale(obj->_view, cam._scale);
 
 	glBindVertexArray(obj->_mesh1->_id[VAO]);

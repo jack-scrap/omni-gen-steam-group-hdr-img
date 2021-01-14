@@ -22,9 +22,9 @@ Disp disp("Omni", {
 	state::view[X] + (state::ln * state::dim[X]), state::view[Y]
 }, col[false]);
 
-Truck* truck = truckMk(glm::vec3(0.0, 0.0, 0.0));
+Truck* truck = truckMk(glm::vec3(0.0));
 
-Crane* crane = craneMk(glm::vec3(0.0, 0.0, 0.0));
+Crane* crane = craneMk(glm::vec3(0.0));
 
 Bound* bound = boundMk();
 
