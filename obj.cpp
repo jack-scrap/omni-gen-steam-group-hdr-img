@@ -408,7 +408,7 @@ void objUpdate(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
 
 void objAnim(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
 	int t = 0;
-	while (t < 10) {
+	while (t < state::fps) {
 		objUpdate(obj, loc / glm::vec3(state::fps), rot / glm::vec3(state::fps));
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / state::fps));
