@@ -7,6 +7,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/string_cast.hpp>
 
 #include "obj.h"
 #include "scn.h"
@@ -16,7 +18,7 @@
 #include "state.h"
 #include "phys.h"
 
-Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string vtx, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
+Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string vtx, std::string frag, bool active, glm::mat4 loc, glm::mat4 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -26,16 +28,13 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_noChild = 0;
 	_->_v = 0.0;
 	_->_t = 0;
+	_->_loc = loc;
+	_->_rot = rot;
 
 	// matrix
 	_->_model = glm::mat4(1.0);
-	_->_model = glm::translate(_->_model, loc);
-	for (int i = 0; i < 3; i++) {
-		glm::vec3 axis = glm::vec3(0);
-		axis[i] = 1;
-
-		_->_model = glm::rotate(_->_model, rot[i], axis);
-	}
+	_->_model *= _->_loc;
+	_->_model *= _->_rot;
 	_->_view = glm::lookAt(cam._pos + glm::vec3(100), cam._pos, glm::vec3(0, 1, 0));
 	_->_proj = glm::ortho(-(state::view[X] / 2.0), state::view[X] / 2.0, -(state::view[Y] / 2.0), state::view[Y] / 2.0, 0.1, 10000.0);
 
@@ -75,7 +74,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	return _;
 }
 
-Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string vtx, std::string frag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
+Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string vtx, std::string frag, bool active, Obj** child, unsigned int noChild, glm::mat4 loc, glm::mat4 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -89,16 +88,13 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_noChild = noChild;
 	_->_v = 0.0;
 	_->_t = 0;
+	_->_loc = loc;
+	_->_rot = rot;
 
 	// matrix
 	_->_model = glm::mat4(1.0);
-	_->_model = glm::translate(_->_model, loc);
-	for (int i = 0; i < 3; i++) {
-		glm::vec3 axis = glm::vec3(0);
-		axis[i] = 1;
-
-		_->_model = glm::rotate(_->_model, rot[i], axis);
-	}
+	_->_model *= _->_loc;
+	_->_model *= _->_rot;
 	_->_view = glm::lookAt(cam._pos + glm::vec3(100), cam._pos, glm::vec3(0, 1, 0));
 	_->_proj = glm::ortho(-(state::view[X] / 2.0), state::view[X] / 2.0, -(state::view[Y] / 2.0), state::view[Y] / 2.0, 0.1, 10000.0);
 
@@ -138,7 +134,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	return _;
 }
 
-Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string vtx, std::string geom, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
+Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string vtx, std::string geom, std::string frag, bool active, glm::mat4 loc, glm::mat4 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -148,16 +144,13 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_noChild = 0;
 	_->_v = 0.0;
 	_->_t = 0;
+	_->_loc = loc;
+	_->_rot = rot;
 
 	// matrix
 	_->_model = glm::mat4(1.0);
-	_->_model = glm::translate(_->_model, loc);
-	for (int i = 0; i < 3; i++) {
-		glm::vec3 axis = glm::vec3(0);
-		axis[i] = 1;
-
-		_->_model = glm::rotate(_->_model, rot[i], axis);
-	}
+	_->_model *= _->_loc;
+	_->_model *= _->_rot;
 	_->_view = glm::lookAt(cam._pos + glm::vec3(100), cam._pos, glm::vec3(0, 1, 0));
 	_->_proj = glm::ortho(-(state::view[X] / 2.0), state::view[X] / 2.0, -(state::view[Y] / 2.0), state::view[Y] / 2.0, 0.1, 10000.0);
 
@@ -197,7 +190,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	return _;
 }
 
-Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string vtx, std::string geom, std::string frag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
+Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string vtx, std::string geom, std::string frag, bool active, Obj** child, unsigned int noChild, glm::mat4 loc, glm::mat4 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -211,16 +204,13 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_noChild = noChild;
 	_->_v = 0.0;
 	_->_t = 0;
+	_->_loc = loc;
+	_->_rot = rot;
 
 	// matrix
 	_->_model = glm::mat4(1.0);
-	_->_model = glm::translate(_->_model, loc);
-	for (int i = 0; i < 3; i++) {
-		glm::vec3 axis = glm::vec3(0);
-		axis[i] = 1;
-
-		_->_model = glm::rotate(_->_model, rot[i], axis);
-	}
+	_->_model *= _->_loc;
+	_->_model *= _->_rot;
 	_->_view = glm::lookAt(cam._pos + glm::vec3(100), cam._pos, glm::vec3(0, 1, 0));
 	_->_proj = glm::ortho(-(state::view[X] / 2.0), state::view[X] / 2.0, -(state::view[Y] / 2.0), state::view[Y] / 2.0, 0.1, 10000.0);
 
@@ -260,7 +250,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	return _;
 }
 
-Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
+Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm::mat4 loc, glm::mat4 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -268,6 +258,8 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm
 	_->_noChild = 0;
 	_->_v = 0.0;
 	_->_t = 0;
+	_->_loc = loc;
+	_->_rot = rot;
 
 	std::vector<GLfloat> vtc = util::mesh::rd::vtc(name);
 	std::vector<GLushort> idc = util::mesh::rd::idc(name);
@@ -277,13 +269,8 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm
 
 	// matrix
 	_->_model = glm::mat4(1.0);
-	_->_model = glm::translate(_->_model, loc);
-	for (int i = 0; i < 3; i++) {
-		glm::vec3 axis = glm::vec3(0);
-		axis[i] = 1;
-
-		_->_model = glm::rotate(_->_model, rot[i], axis);
-	}
+	_->_model *= _->_loc;
+	_->_model *= _->_rot;
 	_->_view = glm::lookAt(cam._pos + glm::vec3(100), cam._pos, glm::vec3(0, 1, 0));
 	_->_proj = glm::ortho(-(state::view[X] / 2.0), state::view[X] / 2.0, -(state::view[Y] / 2.0), state::view[Y] / 2.0, 0.1, 10000.0);
 
@@ -323,7 +310,7 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm
 	return _;
 }
 
-Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
+Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj** child, unsigned int noChild, glm::mat4 loc, glm::mat4 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -335,6 +322,8 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj
 	_->_noChild = noChild;
 	_->_v = 0.0;
 	_->_t = 0;
+	_->_loc = loc;
+	_->_rot = rot;
 
 	std::vector<GLfloat> vtc = util::mesh::rd::vtc(name);
 	std::vector<GLushort> idc = util::mesh::rd::idc(name);
@@ -344,13 +333,8 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj
 
 	// matrix
 	_->_model = glm::mat4(1.0);
-	_->_model = glm::translate(_->_model, loc);
-	for (int i = 0; i < 3; i++) {
-		glm::vec3 axis = glm::vec3(0);
-		axis[i] = 1;
-
-		_->_model = glm::rotate(_->_model, rot[i], axis);
-	}
+	_->_model *= _->_loc;
+	_->_model *= _->_rot;
 	_->_view = glm::lookAt(cam._pos + glm::vec3(100), cam._pos, glm::vec3(0, 1, 0));
 	_->_proj = glm::ortho(-(state::view[X] / 2.0), state::view[X] / 2.0, -(state::view[Y] / 2.0), state::view[Y] / 2.0, 0.1, 10000.0);
 
@@ -390,35 +374,35 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj
 	return _;
 }
 
-void objUpdate(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
-	obj->_model = glm::translate(obj->_model, loc);
-	for (int i = 0; i < 3; i++) {
-		glm::vec3 axis = glm::vec3(0);
-		axis[i] = 1;
+void objUpdate(Obj* obj, glm::mat4 loc, glm::mat4 rot) {
+	/* obj->_model = glm::translate(obj->_model, loc); */
+	/* for (int i = 0; i < 3; i++) { */
+	/* 	glm::vec3 axis = glm::vec3(0); */
+	/* 	axis[i] = 1; */
 
-		obj->_model = glm::rotate(obj->_model, rot[i], axis);
-	}
+	/* 	obj->_model = glm::rotate(obj->_model, rot[i], axis); */
+	/* } */
 
-	for (int i = 0; i < obj->_noChild; i++) {
-		if (obj->_child[i]) {
-			objUpdate(obj->_child[i], loc, rot);
-		}
-	}
+	/* for (int i = 0; i < obj->_noChild; i++) { */
+	/* 	if (obj->_child[i]) { */
+	/* 		objUpdate(obj->_child[i], loc, rot); */
+	/* 	} */
+	/* } */
 }
 
-void objAnim(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
-	int t = 0;
-	while (t < state::fps) {
-		objUpdate(obj, loc / glm::vec3(state::fps), rot / glm::vec3(state::fps));
+void objAnim(Obj* obj, glm::mat4 loc, glm::mat4 rot) {
+	/* int t = 0; */
+	/* while (t < state::fps) { */
+	/* 	objUpdate(obj, loc / glm::vec3(state::fps), rot / glm::vec3(state::fps)); */
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / state::fps));
+	/* 	std::this_thread::sleep_for(std::chrono::milliseconds(1000 / state::fps)); */
 
-		t++;
-	}
+	/* 	t++; */
+	/* } */
 }
 
 void objMv(Obj* obj, GLfloat* loc) {
-	std::thread t(objAnim, obj, glm::vec3(loc[0], loc[1], loc[2]), glm::vec3(0.0));
+	std::thread t(objAnim, obj, glm::translate(glm::mat4(1.0), glm::vec3(loc[0], loc[1], loc[2])), glm::rotate(glm::mat4(1.0), (GLfloat) 0.0, glm::vec3(1, 0, 0)));
 	t.detach();
 }
 
