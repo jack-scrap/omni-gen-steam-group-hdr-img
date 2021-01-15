@@ -59,7 +59,8 @@ craneGet.argtypes = None
 craneMv = crane.craneMv
 craneMv.restype = c_void_p
 craneMv.argtypes = [
-    POINTER(Crane)
+    POINTER(Crane),
+    c_float * 3
 ]
 
 cranePan = crane.cranePan
