@@ -10,7 +10,34 @@
 Console::Console(std::vector<std::string> buff) :
 	_buff(buff),
 	_mode(EDITOR),
-	Mesh(util::mesh::plane(glm::vec2(abs(-1 - 1), -1 -1)), "text", "text") {
+	_prog("text", "text") {
+		/* data */
+		glGenVertexArrays(1, &_id[VAO]);
+		glBindVertexArray(_id[VAO]);
+
+		glGenBuffers(2, &_id[1]);
+
+		glBindBuffer(GL_ARRAY_BUFFER, _id[VBO]);
+		std::vector<GLfloat> pos = util::mesh::plane(glm::vec2(abs(-1 - 1), -1 - 1));
+		glBufferData(GL_ARRAY_BUFFER, pos.size() * sizeof (GLfloat), &pos[0], GL_STATIC_DRAW);
+
+		glBindBuffer(GL_ARRAY_BUFFER, _id[STBO]);
+		glBufferData(GL_ARRAY_BUFFER, _st.size() * sizeof (GLfloat), &_st[0], GL_STATIC_DRAW);
+
+		/* shader */
+		_prog.use();
+
+		// attribute
+		glBindBuffer(GL_ARRAY_BUFFER, _id[VBO]);
+		_attr[POS] = glGetAttribLocation(_prog.id, "pos");
+		glVertexAttribPointer(_attr[POS], 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+		glEnableVertexAttribArray(_attr[POS]);
+
+		glBindBuffer(GL_ARRAY_BUFFER, _id[STBO]);
+		_attr[ST] = glGetAttribLocation(_prog.id, "st");
+		glVertexAttribPointer(_attr[ST], 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+		glEnableVertexAttribArray(_attr[ST]);
+
 		// text
 		TTF_Init();
 

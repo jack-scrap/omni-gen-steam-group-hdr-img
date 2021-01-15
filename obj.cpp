@@ -22,7 +22,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
-	_->_mesh1 = mesh1Mk(vtc, noVtc, idc, noIdc);
+	_->_mesh = meshMk(vtc, noVtc, idc, noIdc);
 
 	_->_active = active;
 	_->_noChild = 0;
@@ -49,7 +49,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_prog.use();
 
 	// attribute
-	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh1->_id[VBO]);
+	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh->_id[VBO]);
 	_->_attr[POS] = glGetAttribLocation(_->_prog.id, "pos");
 	glVertexAttribPointer(_->_attr[POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 	glEnableVertexAttribArray(_->_attr[POS]);
@@ -84,7 +84,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
-	_->_mesh1 = mesh1Mk(vtc, noVtc, idc, noIdc);
+	_->_mesh = meshMk(vtc, noVtc, idc, noIdc);
 
 	_->_active = active;
 	_->_child = (Obj**) malloc(noChild * sizeof (Obj*));
@@ -115,7 +115,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_prog.use();
 
 	// attribute
-	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh1->_id[VBO]);
+	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh->_id[VBO]);
 	_->_attr[POS] = glGetAttribLocation(_->_prog.id, "pos");
 	glVertexAttribPointer(_->_attr[POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 	glEnableVertexAttribArray(_->_attr[POS]);
@@ -150,7 +150,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
-	_->_mesh1 = mesh1Mk(vtc, noVtc, idc, noIdc);
+	_->_mesh = meshMk(vtc, noVtc, idc, noIdc);
 
 	_->_active = active;
 	_->_noChild = 0;
@@ -177,7 +177,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_prog.use();
 
 	// attribute
-	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh1->_id[VBO]);
+	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh->_id[VBO]);
 	_->_attr[POS] = glGetAttribLocation(_->_prog.id, "pos");
 	glVertexAttribPointer(_->_attr[POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 	glEnableVertexAttribArray(_->_attr[POS]);
@@ -212,7 +212,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
-	_->_mesh1 = mesh1Mk(vtc, noVtc, idc, noIdc);
+	_->_mesh = meshMk(vtc, noVtc, idc, noIdc);
 
 	_->_active = active;
 	_->_child = (Obj**) malloc(noChild * sizeof (Obj*));
@@ -243,7 +243,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_prog.use();
 
 	// attribute
-	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh1->_id[VBO]);
+	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh->_id[VBO]);
 	_->_attr[POS] = glGetAttribLocation(_->_prog.id, "pos");
 	glVertexAttribPointer(_->_attr[POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 	glEnableVertexAttribArray(_->_attr[POS]);
@@ -293,9 +293,9 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm
 
 	std::vector<GLfloat> vtc = util::mesh::rd::vtc(name);
 	std::vector<GLushort> idc = util::mesh::rd::idc(name);
-	_->_mesh1 = mesh1Mk(&vtc[0], vtc.size(), &idc[0], idc.size());
+	_->_mesh = meshMk(&vtc[0], vtc.size(), &idc[0], idc.size());
 
-	_->_mesh1->_noIdc = idc.size();
+	_->_mesh->_noIdc = idc.size();
 
 	// matrix
 	_->_model = glm::mat4(1.0);
@@ -309,7 +309,7 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm
 	_->_prog.use();
 
 	// attribute
-	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh1->_id[VBO]);
+	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh->_id[VBO]);
 	_->_attr[POS] = glGetAttribLocation(_->_prog.id, "pos");
 	glVertexAttribPointer(_->_attr[POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 	glEnableVertexAttribArray(_->_attr[POS]);
@@ -363,9 +363,9 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj
 
 	std::vector<GLfloat> vtc = util::mesh::rd::vtc(name);
 	std::vector<GLushort> idc = util::mesh::rd::idc(name);
-	_->_mesh1 = mesh1Mk(&vtc[0], vtc.size(), &idc[0], idc.size());
+	_->_mesh = meshMk(&vtc[0], vtc.size(), &idc[0], idc.size());
 
-	_->_mesh1->_noIdc = idc.size();
+	_->_mesh->_noIdc = idc.size();
 
 	// matrix
 	_->_model = glm::mat4(1.0);
@@ -379,7 +379,7 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj
 	_->_prog.use();
 
 	// attribute
-	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh1->_id[VBO]);
+	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh->_id[VBO]);
 	_->_attr[POS] = glGetAttribLocation(_->_prog.id, "pos");
 	glVertexAttribPointer(_->_attr[POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 	glEnableVertexAttribArray(_->_attr[POS]);
@@ -454,7 +454,7 @@ void objDraw(Obj* obj) {
 	obj->_view = glm::lookAt(cam._pos + glm::vec3(100), cam._pos, glm::vec3(0, 1, 0));
 	obj->_view = glm::scale(obj->_view, cam._scale);
 
-	glBindVertexArray(obj->_mesh1->_id[VAO]);
+	glBindVertexArray(obj->_mesh->_id[VAO]);
 	obj->_prog.use();
 
 	glUniformMatrix4fv(obj->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(obj->_model));
@@ -464,7 +464,7 @@ void objDraw(Obj* obj) {
 
 	glUniform1ui(obj->_uni[ACTIVE], obj->_active);
 
-	glDrawElements(GL_TRIANGLES, obj->_mesh1->_noIdc, GL_UNSIGNED_SHORT, (GLvoid*) 0);
+	glDrawElements(GL_TRIANGLES, obj->_mesh->_noIdc, GL_UNSIGNED_SHORT, (GLvoid*) 0);
 
 	obj->_prog.unUse();
 	glBindVertexArray(0);

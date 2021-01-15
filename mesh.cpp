@@ -1,34 +1,20 @@
-#include <iostream>
-
-#include <glm/gtc/type_ptr.hpp>
+#include <cstdlib>
 
 #include "mesh.h"
 
-Mesh::Mesh(std::vector<GLfloat> pos, std::string vtx, std::string frag) :
-	_prog(vtx, frag) {
-		/* data */
-		glGenVertexArrays(1, &_id[VAO]);
-		glBindVertexArray(_id[VAO]);
+Mesh* meshMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc) {
+	Mesh* _ = (Mesh*) malloc(sizeof (Mesh));
 
-		glGenBuffers(2, &_id[1]);
+	glGenVertexArrays(1, &_->_id[VAO]);
+	glBindVertexArray(_->_id[VAO]);
 
-		glBindBuffer(GL_ARRAY_BUFFER, _id[VBO]);
-		glBufferData(GL_ARRAY_BUFFER, pos.size() * sizeof (GLfloat), &pos[0], GL_STATIC_DRAW);
+	glGenBuffers(1, &_->_id[VBO]);
+	glBindBuffer(GL_ARRAY_BUFFER, _->_id[VBO]);
+	glBufferData(GL_ARRAY_BUFFER, noVtc * sizeof (GLfloat), vtc, GL_STATIC_DRAW);
 
-		glBindBuffer(GL_ARRAY_BUFFER, _id[STBO]);
-		glBufferData(GL_ARRAY_BUFFER, _st.size() * sizeof (GLfloat), &_st[0], GL_STATIC_DRAW);
+	glGenBuffers(1, &_->_id[IBO]);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _->_id[IBO]);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, noIdc * sizeof (GLushort), idc, GL_STATIC_DRAW);
 
-		/* shader */
-		_prog.use();
-
-		// attribute
-		glBindBuffer(GL_ARRAY_BUFFER, _id[VBO]);
-		_attr[POS] = glGetAttribLocation(_prog.id, "pos");
-		glVertexAttribPointer(_attr[POS], 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
-		glEnableVertexAttribArray(_attr[POS]);
-
-		glBindBuffer(GL_ARRAY_BUFFER, _id[STBO]);
-		_attr[ST] = glGetAttribLocation(_prog.id, "st");
-		glVertexAttribPointer(_attr[ST], 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
-		glEnableVertexAttribArray(_attr[ST]);
-	}
+	return _;
+}

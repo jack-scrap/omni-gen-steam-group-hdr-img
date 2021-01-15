@@ -3,12 +3,21 @@
 #include <SDL2/SDL_ttf.h>
 #include <glm/glm.hpp>
 
-#include "mesh.h"
 #include "state.h"
 #include "math.h"
+#include "util.h"
 
-class Console : public Mesh {
+class Console {
 	private:
+		std::vector<GLfloat> _st = util::mesh::plane(glm::vec2(1, 1));
+
+		GLuint _id[3];
+
+		GLint _attr[2];
+
+		Prog _prog;
+
+
 		const std::string _ps1 = "[] ";
 
 		TTF_Font* font;
@@ -69,5 +78,5 @@ class Console : public Mesh {
 
 		Console(std::vector<std::string> buff);
 
-		void draw() override;
+		void draw();
 };

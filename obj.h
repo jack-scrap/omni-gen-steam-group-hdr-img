@@ -8,7 +8,7 @@
 
 #include "disp.h"
 #include "prog.h"
-#include "mesh1.h"
+#include "mesh.h"
 
 enum attr {
 	POS,
@@ -26,7 +26,7 @@ enum uni {
 };
 
 typedef struct Obj {
-	Mesh1* _mesh1;
+	Mesh* _mesh;
 
 	GLfloat _bound[2 * 2 * 2 * 3];
 
