@@ -38,7 +38,7 @@ typedef struct Obj {
 
 	glm::mat4
 		_model,
-		_origin,
+		_loc,
 		_rot,
 		_view,
 		_proj;
