@@ -26,6 +26,8 @@ enum uni {
 };
 
 typedef struct Obj {
+	GLfloat _loc[3];
+
 	Mesh1* _mesh1;
 
 	GLfloat _bound[2 * 2 * 2 * 3];
@@ -38,7 +40,7 @@ typedef struct Obj {
 
 	glm::mat4
 		_model,
-		_loc,
+		_origin,
 		_rot,
 		_view,
 		_proj;

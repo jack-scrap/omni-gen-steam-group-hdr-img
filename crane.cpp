@@ -57,43 +57,43 @@ Crane* craneMk(glm::vec3 loc, glm::vec3 rot) {
 }
 
 void craneAnim(Crane* crane, GLfloat* loc) {
-	/* for (int i = 0; i < 2 * 2; i++) { */
-	/* 	crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + i]->_active = true; */
-	/* } */
+	for (int i = 0; i < 2 * 2; i++) {
+		crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + i]->_active = true;
+	}
 
-	/* std::thread t(objAnim, crane->_parent, glm::vec3(loc[0], loc[1], loc[2]), glm::vec3(0.0)); */
-	/* t.detach(); */
+	std::thread t(objAnim, crane->_parent, glm::vec3(loc[0], loc[1], loc[2]), glm::vec3(0.0));
+	t.detach();
 
-	/* std::this_thread::sleep_for(std::chrono::milliseconds(1000)); */
+	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
-	/* for (int i = 0; i < 2 * 2; i++) { */
-	/* 	crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + i]->_active = false; */
-	/* } */
+	for (int i = 0; i < 2 * 2; i++) {
+		crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + i]->_active = false;
+	}
 }
 
 void craneMv(Crane* crane, GLfloat* loc) {
-	/* std::thread t(craneAnim, crane, loc); */
-	/* t.detach(); */
+	std::thread t(craneAnim, crane, loc);
+	t.detach();
 }
 
 void cranePan(Crane* crane, bool dir) {
-	/* Obj* targ = crane->_parent->_child[2 * 2 * 2 * 2 * 2]; */
+	Obj* targ = crane->_parent->_child[2 * 2 * 2 * 2 * 2];
 
-	/* glm::vec3 loc = targ->_model * glm::vec4(glm::vec3(0.0), 1.0); */
+	glm::vec3 loc = targ->_model * glm::vec4(glm::vec3(0.0), 1.0);
 
-	/* GLfloat d = dir ? 1 : -1; */
+	GLfloat d = dir ? 1 : -1;
 
-	/* if ( */
-	/* 	loc[Z] < 3.0 && */
-	/* 	loc[Z] > -3.0 */
-	/* ) { */
-	/* 	GLfloat loc[3] = { */
-	/* 		d, */
-	/* 		d, */
-	/* 		d */
-	/* 	}; */
-	/* 	objMv(crane->_parent->_child[2 * 2 * 2 * 2 * 2], loc); */
-	/* } */
+	if (
+		loc[Z] < 3.0 &&
+		loc[Z] > -3.0
+	) {
+		GLfloat loc[3] = {
+			d,
+			d,
+			d
+		};
+		objMv(crane->_parent->_child[2 * 2 * 2 * 2 * 2], loc);
+	}
 }
 
 void cranePed(Crane* crane, bool dir) {
