@@ -421,7 +421,14 @@ void objUpdate(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
 
 	for (int i = 0; i < obj->_noChild; i++) {
 		if (obj->_child[i]) {
-			objUpdate(obj->_child[i], loc, rot);
+			glm::mat4 tmp = glm::mat4(1.0);
+			tmp *= obj->_child[i]->_loc;
+			tmp *= obj->_child[i]->_rot;
+
+			obj->_child[i]->_model = obj->_model;
+			obj->_child[i]->_model *= tmp;
+
+			objUpdate(obj->_child[i], glm::vec3(0.0), glm::vec3(0.0));
 		}
 	}
 }
