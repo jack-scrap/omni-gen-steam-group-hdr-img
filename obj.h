@@ -53,21 +53,21 @@ typedef struct Obj {
 	unsigned int _noChild;
 } Obj;
 
-Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string vtx, std::string frag, bool active, glm::mat4 loc = glm::mat4(1.0), glm::mat4 rot = glm::mat4(1.0));
+Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string vtx, std::string frag, bool active, glm::vec3 loc = glm::vec3(1.0), glm::vec3 rot = glm::vec3(0.0));
 
-Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string vtx, std::string frag, bool active, Obj** child, unsigned int noChild, glm::mat4 loc = glm::mat4(1.0), glm::mat4 rot = glm::mat4(1.0));
+Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string vtx, std::string frag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc = glm::vec3(1.0), glm::vec3 rot = glm::vec3(0.0));
 
-Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string vtx, std::string geom, std::string frag, bool active, glm::mat4 loc = glm::mat4(1.0), glm::mat4 rot = glm::mat4(1.0));
+Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string vtx, std::string geom, std::string frag, bool active, glm::vec3 loc = glm::vec3(1.0), glm::vec3 rot = glm::vec3(0.0));
 
-Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string vtx, std::string geom, std::string frag, bool active, Obj** child, unsigned int noChild, glm::mat4 loc = glm::mat4(1.0), glm::mat4 rot = glm::mat4(1.0));
+Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string vtx, std::string geom, std::string frag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc = glm::vec3(1.0), glm::vec3 rot = glm::vec3(0.0));
 
-Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm::mat4 loc = glm::mat4(1.0), glm::mat4 rot = glm::mat4(1.0));
+Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm::vec3 loc = glm::vec3(1.0), glm::vec3 rot = glm::vec3(0.0));
 
-Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj** child, unsigned int noChild, glm::mat4 loc = glm::mat4(1.0), glm::mat4 rot = glm::mat4(1.0));
+Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc = glm::vec3(1.0), glm::vec3 rot = glm::vec3(0.0));
 
-void objUpdate(Obj* obj, glm::mat4 loc, glm::mat4 rot);
+void objUpdate(Obj* obj, glm::vec3 loc, glm::vec3 rot);
 
-void objAnim(Obj* obj, glm::mat4 loc, glm::mat4 rot);
+void objAnim(Obj* obj, glm::vec3 loc, glm::vec3 rot);
 
 extern "C" void objMv(Obj* obj, GLfloat* loc);
 
