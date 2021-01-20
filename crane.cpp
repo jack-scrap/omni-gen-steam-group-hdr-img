@@ -10,6 +10,7 @@
 Crane* craneMk(glm::vec3 loc, glm::vec3 rot) {
 	Crane* _ = (Crane*) malloc(sizeof (Crane));
 
+	// wheel
 	Obj* child[(2 * 2 * 2 * 2) + 1 + (2 * 2)];
 	int i = 0;
 	for (int z = 0; z < 2; z++) {
@@ -28,12 +29,14 @@ Crane* craneMk(glm::vec3 loc, glm::vec3 rot) {
 		}
 	}
 
+	// claw
 	Obj* claw[] = {
 		objMk("crane/claw", "obj", "dir", true, loc + glm::vec3(0.0, 10.8, 0.0), rot)
 	};
 
 	child[2 * 2 * 2 * 2] = objMk("crane/head", "obj", "dir", true, claw, 1, loc + glm::vec3(0.0, 13.8, 0.0), rot);
 
+	// light
 	std::vector<GLfloat> vtc = util::mesh::quad::pos(glm::vec2(0.6, 1.0));
 
 	std::vector<GLushort> idc;
