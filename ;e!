@@ -6,4 +6,4 @@ sys.path.insert(1, '.')
 
 from omni import *
 
-crane.ped(False)
+crane.mv([1, 0, 0])

@@ -10,6 +10,15 @@ typedef struct Crane {
 	Obj* _parent;
 
 	Obj* _op;
+
+	static constexpr GLfloat _rngHead[2] = {
+		-3.0,
+		3.0
+	};
+	static constexpr GLfloat _rngClaw[2] = {
+		0.0,
+		13.8
+	};
 } Crane;
 
 Crane* craneMk(glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
