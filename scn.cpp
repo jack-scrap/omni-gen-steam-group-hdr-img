@@ -28,9 +28,20 @@ Crane* crane = craneMk();
 
 Bound* bound = boundMk();
 
+GLfloat vtc[] = {
+	0.0, 0.0, 0.0,
+	1.0, 0.0, 0.0,
+	0.0, 0.0, 1.0,
+	1.0, 0.0, 1.0
+};
+GLushort idc[] = {
+};
+Obj* min = objMk(vtc, sizeof vtc / sizeof *vtc, idc, sizeof idc / sizeof *idc, "obj", "solid", true, glm::vec3(5.0, 0.0, 5.0));
+
 std::vector<Obj*> obj = {
 	crane->_parent,
-	objMk("container_2x4", "obj", "dir", true)
+	objMk("container_2x4", "obj", "dir", true),
+	min
 };
 
 Truck* truckGet() {
