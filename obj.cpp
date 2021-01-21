@@ -397,9 +397,18 @@ void objUpdate(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
 }
 
 void objAnim(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
+	float max = 0.0;
+	for (int i = 0; i < 3; i++) {
+		if (loc[i] > max) {
+			max = loc[i];
+		}
+	}
+
+	float end = max * state::fps;
+
 	int t = 0;
-	while (t < state::fps) {
-		objUpdate(obj, loc / glm::vec3(state::fps), rot / glm::vec3(state::fps));
+	while (t < end) {
+		objUpdate(obj, loc / glm::vec3(end), rot / glm::vec3(end));
 
 		t++;
 

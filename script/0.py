@@ -6,4 +6,4 @@ sys.path.insert(1, '.')
 
 from omni import *
 
-crane.zoom([1, 0, 0])
+crane.zoom([10, 0, 0])
