@@ -9,6 +9,7 @@
 #include "cam.h"
 #include "console.h"
 #include "bound.h"
+#include "vec.h"
 
 extern Cam cam;
 
@@ -21,6 +22,8 @@ extern Truck* truck;
 extern Crane* crane;
 
 extern std::vector<Obj*> obj;
+
+extern Vec* vec;
 
 extern "C" Truck* truckGet();
 
