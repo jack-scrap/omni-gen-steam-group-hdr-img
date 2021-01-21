@@ -28,107 +28,114 @@ int main() {
 	while (disp._open) {
 		while (SDL_PollEvent(&e)) {
 			if (e.type == SDL_KEYDOWN) {
-				if (e.key.keysym.sym >= SDLK_a && e.key.keysym.sym <= SDLK_z) {
-					console->push((char) e.key.keysym.sym);
-				} else if (e.key.keysym.sym >= SDLK_0 && e.key.keysym.sym <= SDLK_9) {
-					console->push((char) e.key.keysym.sym);
+				// modifier
+				if (e.key.keysym.mod & (KMOD_LSHIFT | KMOD_RSHIFT)) {
+					if (e.key.keysym.sym >= SDLK_a && e.key.keysym.sym <= SDLK_z) {
+						console->push((char) (e.key.keysym.sym - 32));
+					}
 				} else {
-					switch (e.key.keysym.sym) {
-						case SDLK_SPACE:
-							console->push(' ');
+					if (e.key.keysym.sym >= SDLK_a && e.key.keysym.sym <= SDLK_z) {
+						console->push((char) e.key.keysym.sym);
+					} else if (e.key.keysym.sym >= SDLK_0 && e.key.keysym.sym <= SDLK_9) {
+						console->push((char) e.key.keysym.sym);
+					} else {
+						switch (e.key.keysym.sym) {
+							case SDLK_SPACE:
+								console->push(' ');
 
-							break;
+								break;
 
-						case SDLK_BACKQUOTE:
-							console->push('`');
+							case SDLK_BACKQUOTE:
+								console->push('`');
 
-							break;
+								break;
 
-						case SDLK_MINUS:
-							console->push('-');
+							case SDLK_MINUS:
+								console->push('-');
 
-							break;
+								break;
 
-						case SDLK_EQUALS:
-							console->push('=');
+							case SDLK_EQUALS:
+								console->push('=');
 
-							break;
+								break;
 
-						// bracket
-						case SDLK_LEFTBRACKET:
-							console->push('[');
+								// bracket
+							case SDLK_LEFTBRACKET:
+								console->push('[');
 
-							break;
+								break;
 
-						case SDLK_RIGHTBRACKET:
-							console->push(']');
+							case SDLK_RIGHTBRACKET:
+								console->push(']');
 
-							break;
+								break;
 
-						case SDLK_BACKSLASH:
-							console->push('\\');
+							case SDLK_BACKSLASH:
+								console->push('\\');
 
-							break;
+								break;
 
-						case SDLK_SEMICOLON:
-							console->push(';');
+							case SDLK_SEMICOLON:
+								console->push(';');
 
-							break;
+								break;
 
-						case SDLK_QUOTE:
-							console->push('\'');
+							case SDLK_QUOTE:
+								console->push('\'');
 
-							break;
+								break;
 
-						case SDLK_COMMA:
-							console->push(',');
+							case SDLK_COMMA:
+								console->push(',');
 
-							break;
+								break;
 
-						case SDLK_PERIOD:
-							console->push('.');
+							case SDLK_PERIOD:
+								console->push('.');
 
-							break;
+								break;
 
-						case SDLK_SLASH:
-							console->push('/');
+							case SDLK_SLASH:
+								console->push('/');
 
-							break;
+								break;
 
-						case SDLK_RETURN:
-							console->enter();
+							case SDLK_RETURN:
+								console->enter();
 
-							break;
+								break;
 
-						case SDLK_BACKSPACE:
-							console->pop();
+							case SDLK_BACKSPACE:
+								console->pop();
 
-							break;
+								break;
 
-						case SDLK_F1:
-							console->_mode = Console::EDITOR;
+							case SDLK_F1:
+								console->_mode = Console::EDITOR;
 
-							console->render();
+								console->render();
 
-							break;
+								break;
 
-						case SDLK_F2:
-							console->_mode = Console::CMD;
+							case SDLK_F2:
+								console->_mode = Console::CMD;
 
-							console->render();
+								console->render();
 
-							break;
+								break;
 
-						case SDLK_F5:
-							objMv(obj[0], d);
+							case SDLK_F5:
+								objMv(obj[0], d);
 
-							std::cout << util::phys::aabb(
-								obj[0],
-								obj[1]
-							) << std::endl;
+								std::cout << util::phys::aabb(
+										obj[0],
+										obj[1]
+										) << std::endl;
 
-							break;
-					}	
+								break;
+						}	
+					}
 				}
 			}
 
