@@ -158,6 +158,13 @@ int main() {
 
 								break;
 
+							case SDLK_TAB:
+								for (int i = 0; i < 2; i++) {
+									console->push(' ');
+								}
+
+								break;
+
 							case SDLK_BACKQUOTE:
 								console->push('`');
 
