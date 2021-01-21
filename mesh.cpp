@@ -5,6 +5,8 @@
 Mesh* meshMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc) {
 	Mesh* _ = (Mesh*) malloc(sizeof (Mesh));
 
+	_->_noIdc = noIdc;
+
 	glGenVertexArrays(1, &_->_id[VAO]);
 	glBindVertexArray(_->_id[VAO]);
 
@@ -14,7 +16,7 @@ Mesh* meshMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc
 
 	glGenBuffers(1, &_->_id[IBO]);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _->_id[IBO]);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, noIdc * sizeof (GLushort), idc, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, _->_noIdc * sizeof (GLushort), idc, GL_STATIC_DRAW);
 
 	return _;
 }
