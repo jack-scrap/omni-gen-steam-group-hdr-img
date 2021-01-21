@@ -20,11 +20,10 @@ class Truck(Obj):
             self._loc[i] = loc[i]
 
 class Crane(Obj):
-    def zoom(self, loc):
-        for i in range(3):
-            self._loc[i] = loc[i]
+    def zoom(self, dir):
+        self._loc[0] += dir
 
-        craneZoom(self._ptr, self._loc)
+        craneZoom(self._ptr, dir)
 
     def pan(self, dir):
         cranePan(self._ptr, dir)
@@ -47,7 +46,7 @@ craneZoom = crane.craneZoom
 craneZoom.restype = c_void_p
 craneZoom.argtypes = [
     POINTER(Crane),
-    c_float * 3
+    c_bool
 ]
 
 cranePan = crane.cranePan
