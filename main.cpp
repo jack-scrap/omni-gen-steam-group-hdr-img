@@ -32,16 +32,6 @@ int main() {
 					console->push((char) e.key.keysym.sym);
 				} else {
 					switch (e.key.keysym.sym) {
-						case SDLK_F5:
-							objMv(obj[0], d);
-
-							std::cout << util::phys::aabb(
-								obj[0],
-								obj[1]
-							) << std::endl;
-
-							break;
-
 						case SDLK_SPACE:
 							console->push(' ');
 
@@ -68,6 +58,16 @@ int main() {
 							console->_mode = Console::CMD;
 
 							console->render();
+
+							break;
+
+						case SDLK_F5:
+							objMv(obj[0], d);
+
+							std::cout << util::phys::aabb(
+								obj[0],
+								obj[1]
+							) << std::endl;
 
 							break;
 					}	
