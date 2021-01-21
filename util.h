@@ -5,6 +5,7 @@
 #include <vector>
 #include <GL/glew.h>
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #include "obj.h"
 
@@ -41,6 +42,10 @@ namespace util {
 			std::vector<GLfloat> vtc(std::string name);
 			std::vector<GLushort> idc(std::string name);
 		}
+	}
+
+	namespace matr {
+		glm::mat4 rot(glm::mat4 model, glm::vec3 rot);
 	}
 
 	namespace phys {

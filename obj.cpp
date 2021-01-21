@@ -29,13 +29,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_v = 0.0;
 	_->_t = 0;
 	_->_loc = glm::translate(glm::mat4(1.0), loc);
-	_->_rot = glm::mat4(1.0);
-	for (int i = 0; i < 3; i++) {
-		glm::vec3 axis = glm::vec3(0);
-		axis[i] = 1;
-
-		_->_rot = glm::rotate(_->_rot, rot[i], axis);
-	}
+	_->_rot = util::matr::rot(glm::mat4(1.0), rot);
 
 	// matrix
 	_->_model = glm::mat4(1.0);
@@ -95,13 +89,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_v = 0.0;
 	_->_t = 0;
 	_->_loc = glm::translate(glm::mat4(1.0), loc);
-	_->_rot = glm::mat4(1.0);
-	for (int i = 0; i < 3; i++) {
-		glm::vec3 axis = glm::vec3(0);
-		axis[i] = 1;
-
-		_->_rot = glm::rotate(_->_rot, rot[i], axis);
-	}
+	_->_rot = util::matr::rot(glm::mat4(1.0), rot);
 
 	// matrix
 	_->_model = glm::mat4(1.0);
@@ -157,13 +145,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_v = 0.0;
 	_->_t = 0;
 	_->_loc = glm::translate(glm::mat4(1.0), loc);
-	_->_rot = glm::mat4(1.0);
-	for (int i = 0; i < 3; i++) {
-		glm::vec3 axis = glm::vec3(0);
-		axis[i] = 1;
-
-		_->_rot = glm::rotate(_->_rot, rot[i], axis);
-	}
+	_->_rot = util::matr::rot(glm::mat4(1.0), rot);
 
 	// matrix
 	_->_model = glm::mat4(1.0);
@@ -223,13 +205,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_v = 0.0;
 	_->_t = 0;
 	_->_loc = glm::translate(glm::mat4(1.0), loc);
-	_->_rot = glm::mat4(1.0);
-	for (int i = 0; i < 3; i++) {
-		glm::vec3 axis = glm::vec3(0);
-		axis[i] = 1;
-
-		_->_rot = glm::rotate(_->_rot, rot[i], axis);
-	}
+	_->_rot = util::matr::rot(glm::mat4(1.0), rot);
 
 	// matrix
 	_->_model = glm::mat4(1.0);
@@ -283,13 +259,7 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm
 	_->_v = 0.0;
 	_->_t = 0;
 	_->_loc = glm::translate(glm::mat4(1.0), loc);
-	_->_rot = glm::mat4(1.0);
-	for (int i = 0; i < 3; i++) {
-		glm::vec3 axis = glm::vec3(0);
-		axis[i] = 1;
-
-		_->_rot = glm::rotate(_->_rot, rot[i], axis);
-	}
+	_->_rot = util::matr::rot(glm::mat4(1.0), rot);
 
 	std::vector<GLfloat> vtc = util::mesh::rd::vtc(name);
 	std::vector<GLushort> idc = util::mesh::rd::idc(name);
@@ -351,13 +321,7 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj
 	_->_v = 0.0;
 	_->_t = 0;
 	_->_loc = glm::translate(glm::mat4(1.0), loc);
-	_->_rot = glm::mat4(1.0);
-	for (int i = 0; i < 3; i++) {
-		glm::vec3 axis = glm::vec3(0);
-		axis[i] = 1;
-
-		_->_rot = glm::rotate(_->_rot, rot[i], axis);
-	}
+	_->_rot = util::matr::rot(glm::mat4(1.0), rot);
 
 	std::vector<GLfloat> vtc = util::mesh::rd::vtc(name);
 	std::vector<GLushort> idc = util::mesh::rd::idc(name);

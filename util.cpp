@@ -191,6 +191,19 @@ std::vector<GLushort> util::mesh::rd::idc(std::string name) {
 	return obj;
 }
 
+glm::mat4 util::matr::rot(glm::mat4 model, glm::vec3 rot) {
+	glm::mat4 _ = glm::mat4(1.0);
+
+	for (int i = 0; i < 3; i++) {
+		glm::vec3 axis = glm::vec3(0);
+		axis[i] = 1;
+
+		_ = glm::rotate(_, rot[i], axis);
+	}
+
+	return _;
+}
+
 bool util::phys::aabb(Obj* p, Obj* q) {
 	bool _ = false;
 
