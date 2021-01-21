@@ -151,7 +151,7 @@ std::vector<GLfloat> util::mesh::quad::pos(glm::vec2 sz) {
 	for (int y = 0; y < 2; y++) {
 		for (int x = 0; x < 2; x++) {
 			_.push_back((x ? 1 : -1) * sz[X]);
-			_.push_back(((y ? 1 : -1)) * sz[Y]);
+			_.push_back((y ? 1 : -1) * sz[Y]);
 			_.push_back(0.0);
 		}
 	}
