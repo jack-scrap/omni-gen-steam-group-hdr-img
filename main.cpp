@@ -32,6 +32,61 @@ int main() {
 				if (e.key.keysym.mod & (KMOD_LSHIFT | KMOD_RSHIFT)) {
 					if (e.key.keysym.sym >= SDLK_a && e.key.keysym.sym <= SDLK_z) {
 						console->push((char) (e.key.keysym.sym - 32));
+					} else if (e.key.keysym.sym >= SDLK_0 && e.key.keysym.sym <= SDLK_9) {
+						char c;
+						switch (e.key.keysym.sym) {
+							case SDLK_1:
+								c = '!';
+
+								break;
+
+							case SDLK_2:
+								c = '@';
+
+								break;
+
+							case SDLK_3:
+								c = '#';
+
+								break;
+
+							case SDLK_4:
+								c = '$';
+
+								break;
+
+							case SDLK_5:
+								c = '%';
+
+								break;
+
+							case SDLK_6:
+								c = '^';
+
+								break;
+
+							case SDLK_7:
+								c = '&';
+
+								break;
+
+							case SDLK_8:
+								c = '*';
+
+								break;
+
+							case SDLK_9:
+								c = '(';
+
+								break;
+
+							case SDLK_0:
+								c = ')';
+
+								break;
+						}
+
+						console->push((char) c);
 					}
 				} else {
 					if (e.key.keysym.sym >= SDLK_a && e.key.keysym.sym <= SDLK_z) {
