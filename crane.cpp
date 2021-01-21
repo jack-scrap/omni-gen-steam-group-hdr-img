@@ -86,7 +86,7 @@ void cranePan(Crane* crane, bool dir) {
 
 	glm::mat4 d = glm::translate(glm::mat4(1.0), glm::vec3(0.0, 0.0, inc));
 
-	glm::vec3 loc = targ->_model * d * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 loc = glm::vec3(targ->_model * d * glm::vec4(glm::vec3(0.0), 1.0));
 
 	if (
 		loc[Z] > crane->_rngHead[MIN] &&
@@ -108,7 +108,7 @@ void cranePed(Crane* crane, bool dir) {
 
 	glm::mat4 d = glm::translate(glm::mat4(1.0), glm::vec3(0.0, 0.0, inc));
 
-	glm::vec3 loc = targ->_model * d * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 loc = glm::vec3(targ->_model * d * glm::vec4(glm::vec3(0.0), 1.0));
 
 	if (
 		loc[Y] > crane->_rngClaw[MIN] &&
