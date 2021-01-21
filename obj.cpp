@@ -22,8 +22,6 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
-	_->_mesh = meshMk(vtc, noVtc, idc, noIdc);
-
 	_->_active = active;
 	_->_child = nullptr;
 	_->_noChild = 0;
@@ -31,6 +29,8 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_t = 0;
 	_->_loc = glm::translate(glm::mat4(1.0), loc);
 	_->_rot = util::matr::rot(glm::mat4(1.0), rot);
+
+	_->_mesh = meshMk(vtc, noVtc, idc, noIdc);
 
 	// matrix
 	_->_model = glm::mat4(1.0);
@@ -79,8 +79,6 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
-	_->_mesh = meshMk(vtc, noVtc, idc, noIdc);
-
 	_->_active = active;
 	_->_child = (Obj**) malloc(noChild * sizeof (Obj*));
 	for (int i = 0; i < _->_noChild; i++) {
@@ -91,6 +89,8 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_t = 0;
 	_->_loc = glm::translate(glm::mat4(1.0), loc);
 	_->_rot = util::matr::rot(glm::mat4(1.0), rot);
+
+	_->_mesh = meshMk(vtc, noVtc, idc, noIdc);
 
 	// matrix
 	_->_model = glm::mat4(1.0);
@@ -139,8 +139,6 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
-	_->_mesh = meshMk(vtc, noVtc, idc, noIdc);
-
 	_->_active = active;
 	_->_child = nullptr;
 	_->_noChild = 0;
@@ -148,6 +146,8 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_t = 0;
 	_->_loc = glm::translate(glm::mat4(1.0), loc);
 	_->_rot = util::matr::rot(glm::mat4(1.0), rot);
+
+	_->_mesh = meshMk(vtc, noVtc, idc, noIdc);
 
 	// matrix
 	_->_model = glm::mat4(1.0);
@@ -196,8 +196,6 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
-	_->_mesh = meshMk(vtc, noVtc, idc, noIdc);
-
 	_->_active = active;
 	_->_child = (Obj**) malloc(noChild * sizeof (Obj*));
 	for (int i = 0; i < _->_noChild; i++) {
@@ -208,6 +206,8 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_t = 0;
 	_->_loc = glm::translate(glm::mat4(1.0), loc);
 	_->_rot = util::matr::rot(glm::mat4(1.0), rot);
+
+	_->_mesh = meshMk(vtc, noVtc, idc, noIdc);
 
 	// matrix
 	_->_model = glm::mat4(1.0);
