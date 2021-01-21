@@ -82,9 +82,11 @@ void craneMv(Crane* crane, GLfloat* loc) {
 void cranePan(Crane* crane, bool dir) {
 	Obj* targ = crane->_parent->_child[2 * 2 * 2 * 2];
 
-	glm::vec3 loc = targ->_model * glm::vec4(glm::vec3(0.0), 1.0);
+	bool inc = dir ? 1 : -1;
 
-	GLfloat d = dir ? 1 : -1;
+	glm::mat4 d = glm::translate(glm::mat4(1.0), glm::vec3(0.0, 0.0, inc));
+
+	glm::vec3 loc = targ->_model * d * glm::vec4(glm::vec3(0.0), 1.0);
 
 	if (
 		loc[Z] > crane->_rngHead[MIN] &&
@@ -93,7 +95,7 @@ void cranePan(Crane* crane, bool dir) {
 		GLfloat loc[3] = {
 			0.0,
 			0.0,
-			d
+			inc
 		};
 		objMv(crane->_parent->_child[2 * 2 * 2 * 2], loc);
 	}
@@ -102,16 +104,18 @@ void cranePan(Crane* crane, bool dir) {
 void cranePed(Crane* crane, bool dir) {
 	Obj* targ = crane->_parent->_child[2 * 2 * 2 * 2];
 
-	glm::vec3 loc = targ->_model * glm::vec4(glm::vec3(0.0), 1.0);
+	bool inc = dir ? 1 : -1;
 
-	GLfloat d = dir ? 1 : -1;
+	glm::mat4 d = glm::translate(glm::mat4(1.0), glm::vec3(0.0, 0.0, inc));
+
+	glm::vec3 loc = targ->_model * d * glm::vec4(glm::vec3(0.0), 1.0);
 
 	if (
 		loc[Y] > crane->_rngClaw[MIN] &&
 		loc[Y] < crane->_rngClaw[MAX]
 	) {
 		GLfloat loc[3] = {
-			d,
+			inc,
 			0.0,
 			0.0
 		};
