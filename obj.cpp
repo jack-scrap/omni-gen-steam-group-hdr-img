@@ -422,11 +422,6 @@ void objMv(Obj* obj, GLfloat* loc) {
 }
 
 void objA(Obj* obj) {
-	/* while (!util::phys::aabb(obj, Y, 0.0, glm::vec3(obj->loc[X], obj->loc[Y] - obj->_v, obj->loc[Z]))) { */
-	/* 	obj->_v -= (phys::g / state::fps); */
-
-	/* 	obj->loc[Y] += obj->_v; */
-	/* } */
 }
 
 void objDraw(Obj* obj) {
