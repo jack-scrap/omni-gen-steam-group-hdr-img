@@ -26,11 +26,11 @@ class Truck(Obj):
             self._loc[i] = loc[i]
 
 class Crane(Obj):
-    def mv(self, loc):
+    def zoom(self, loc):
         for i in range(3):
             self._loc[i] = loc[i]
 
-        craneMv(self._ptr, self._loc)
+        craneZoom(self._ptr, self._loc)
 
     def pan(self, dir):
         cranePan(self._ptr, dir)
@@ -56,9 +56,9 @@ craneGet = scn.craneGet
 craneGet.restype = POINTER(Crane)
 craneGet.argtypes = None
 
-craneMv = crane.craneMv
-craneMv.restype = c_void_p
-craneMv.argtypes = [
+craneZoom = crane.craneZoom
+craneZoom.restype = c_void_p
+craneZoom.argtypes = [
     POINTER(Crane),
     c_float * 3
 ]

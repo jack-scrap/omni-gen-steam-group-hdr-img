@@ -74,7 +74,7 @@ void craneAnim(Crane* crane, GLfloat* loc) {
 	}
 }
 
-void craneMv(Crane* crane, GLfloat* loc) {
+void craneZoom(Crane* crane, GLfloat* loc) {
 	std::thread t(craneAnim, crane, loc);
 	t.detach();
 }
