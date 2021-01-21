@@ -12,6 +12,6 @@ uniform mat4
 void main() {
 	gl_Position = proj * view * model * vec4(pos, 1.0);
 
-	_pos = vec3((proj * view * model) * vec4(pos, 1.0));
+	_pos = vec3(proj * view * model * vec4(pos, 1.0));
 	_posNoTrans = pos;
 }
