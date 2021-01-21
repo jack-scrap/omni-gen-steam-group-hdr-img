@@ -87,6 +87,64 @@ int main() {
 						}
 
 						console->push((char) c);
+					} else {
+						switch (e.key.keysym.sym) {
+							case SDLK_BACKQUOTE:
+								console->push('~');
+
+								break;
+
+							case SDLK_MINUS:
+								console->push('_');
+
+								break;
+
+							case SDLK_EQUALS:
+								console->push('+');
+
+								break;
+
+								// bracket
+							case SDLK_LEFTBRACKET:
+								console->push('{');
+
+								break;
+
+							case SDLK_RIGHTBRACKET:
+								console->push('}');
+
+								break;
+
+							case SDLK_BACKSLASH:
+								console->push('|');
+
+								break;
+
+							case SDLK_SEMICOLON:
+								console->push(':');
+
+								break;
+
+							case SDLK_QUOTE:
+								console->push('"');
+
+								break;
+
+							case SDLK_COMMA:
+								console->push('<');
+
+								break;
+
+							case SDLK_PERIOD:
+								console->push('>');
+
+								break;
+
+							case SDLK_SLASH:
+								console->push('?');
+
+								break;
+						}
 					}
 				} else {
 					if (e.key.keysym.sym >= SDLK_a && e.key.keysym.sym <= SDLK_z) {
