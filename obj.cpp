@@ -72,6 +72,12 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	// bounds
 	util::mesh::bound(_->_bound, vtc, noVtc);
 
+	// children
+	for (int i = 0; i < _->_noChild; i++) {
+		_->_child[i]->_model *= _->_loc;
+		_->_child[i]->_model *= _->_rot;
+	}
+
 	return _;
 }
 
@@ -132,6 +138,12 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	// bounds
 	util::mesh::bound(_->_bound, vtc, noVtc);
 
+	// children
+	for (int i = 0; i < _->_noChild; i++) {
+		_->_child[i]->_model *= _->_loc;
+		_->_child[i]->_model *= _->_rot;
+	}
+
 	return _;
 }
 
@@ -188,6 +200,12 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 	// bounds
 	util::mesh::bound(_->_bound, vtc, noVtc);
+
+	// children
+	for (int i = 0; i < _->_noChild; i++) {
+		_->_child[i]->_model *= _->_loc;
+		_->_child[i]->_model *= _->_rot;
+	}
 
 	return _;
 }
@@ -249,6 +267,12 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	// bounds
 	util::mesh::bound(_->_bound, vtc, noVtc);
 
+	// children
+	for (int i = 0; i < _->_noChild; i++) {
+		_->_child[i]->_model *= _->_loc;
+		_->_child[i]->_model *= _->_rot;
+	}
+
 	return _;
 }
 
@@ -307,6 +331,12 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm
 
 	// bounds
 	util::mesh::bound(_->_bound, &vtc[0], vtc.size());
+
+	// children
+	for (int i = 0; i < _->_noChild; i++) {
+		_->_child[i]->_model *= _->_loc;
+		_->_child[i]->_model *= _->_rot;
+	}
 
 	return _;
 }
@@ -369,6 +399,12 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj
 
 	// bounds
 	util::mesh::bound(_->_bound, &vtc[0], vtc.size());
+
+	// children
+	for (int i = 0; i < _->_noChild; i++) {
+		_->_child[i]->_model *= _->_loc;
+		_->_child[i]->_model *= _->_rot;
+	}
 
 	return _;
 }
