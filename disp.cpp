@@ -3,8 +3,7 @@
 #include "scn.h"
 
 Disp::Disp(const char* title, glm::vec2 res, glm::vec3 bg) :
-	_res(res),
-	_bg(bg) {
+	_res(res) {
 		SDL_Init(SDL_INIT_VIDEO);
 
 		SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);

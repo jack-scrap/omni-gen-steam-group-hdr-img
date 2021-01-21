@@ -8,9 +8,6 @@
 #include <SDL2/SDL.h>
 
 class Disp {
-	private:
-		glm::vec3 _bg;
-
 	public:
 		bool _open = false;
 
