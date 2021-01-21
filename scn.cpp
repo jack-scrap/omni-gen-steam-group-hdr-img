@@ -28,20 +28,26 @@ Crane* crane = craneMk();
 
 Bound* bound = boundMk();
 
-GLfloat vtc[] = {
-	0.0, 0.0, 0.0,
-	1.0, 0.0, 0.0,
-	0.0, 0.0, 1.0,
-	1.0, 0.0, 1.0
+std::vector<GLfloat> vtc = util::mesh::quad::pos(glm::vec2(
+	state::pad * 2,
+	100.0
+));
+
+std::vector<GLushort> idc = {
+	0, 1, 2, 3
 };
-GLushort idc[] = {
+std::vector<GLushort> strip = util::mesh::strip(idc);
+
+Obj* rng[2] = {
+	objMk(&vtc[0], vtc.size() * sizeof (GLfloat), &strip[0], strip.size() * sizeof (GLushort), "obj", "solid", true, glm::vec3(0.0, 0.0, -(11.0 + (state::pad * 2) + (state::pad * 2) + (state::pad * 2) + (state::pad * 2))), glm::vec3(M_PI / 2, 0.0, M_PI / 2)),
+	objMk(&vtc[0], vtc.size() * sizeof (GLfloat), &strip[0], strip.size() * sizeof (GLushort), "obj", "solid", true, glm::vec3(0.0, 0.0, 11.0 + (state::pad * 2) + (state::pad * 2)), glm::vec3(M_PI / 2, 0.0, M_PI / 2))
 };
-Obj* min = objMk(vtc, sizeof vtc / sizeof *vtc, idc, sizeof idc / sizeof *idc, "obj", "solid", true, glm::vec3(5.0, 0.0, 5.0));
 
 std::vector<Obj*> obj = {
 	crane->_parent,
 	objMk("container_2x4", "obj", "dir", true),
-	min
+	rng[MIN],
+	rng[MAX]
 };
 
 Truck* truckGet() {
