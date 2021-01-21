@@ -10,12 +10,6 @@ class Obj(Structure):
         ("_loc", c_float * 3)
     ]
 
-    def mv(self, loc):
-        for i in range(3):
-            self._loc[i] = loc[i]
-
-        objMv(self._ptr, self._loc)
-
     def __init__(self, ptr):
         self._ptr = ptr
         self._loc = self._ptr.contents._loc
@@ -40,13 +34,6 @@ class Crane(Obj):
 
     def grab(self):
         craneGrab(self._ptr)
-
-objMv = obj.objMv
-objMv.restype = c_void_p
-objMv.argtypes = [
-    POINTER(Obj),
-    c_float * 3
-]
 
 truckGet = scn.truckGet
 truckGet.restype = POINTER(Truck)
