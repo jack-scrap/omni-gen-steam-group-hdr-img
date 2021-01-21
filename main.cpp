@@ -159,7 +159,7 @@ int main() {
 								break;
 
 							case SDLK_TAB:
-								for (int i = 0; i < 2; i++) {
+								for (int i = 0; i < state::tabWd; i++) {
 									console->push(' ');
 								}
 

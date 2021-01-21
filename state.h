@@ -26,4 +26,6 @@ namespace state {
 		step = pc * dim;
 
 	static unsigned int fps = 15;
+
+	static unsigned int tabWd = 2;
 }
