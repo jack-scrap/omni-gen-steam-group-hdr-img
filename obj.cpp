@@ -25,6 +25,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_mesh = meshMk(vtc, noVtc, idc, noIdc);
 
 	_->_active = active;
+	_->_child = nullptr;
 	_->_noChild = 0;
 	_->_v = 0.0;
 	_->_t = 0;
@@ -141,6 +142,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_mesh = meshMk(vtc, noVtc, idc, noIdc);
 
 	_->_active = active;
+	_->_child = nullptr;
 	_->_noChild = 0;
 	_->_v = 0.0;
 	_->_t = 0;
@@ -255,6 +257,7 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
 	_->_active = active;
+	_->_child = nullptr;
 	_->_noChild = 0;
 	_->_v = 0.0;
 	_->_t = 0;
