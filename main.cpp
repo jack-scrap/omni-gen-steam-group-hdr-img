@@ -37,6 +37,62 @@ int main() {
 
 							break;
 
+						case SDLK_BACKQUOTE:
+							console->push('`');
+
+							break;
+
+						case SDLK_MINUS:
+							console->push('-');
+
+							break;
+
+						case SDLK_EQUALS:
+							console->push('=');
+
+							break;
+
+						// bracket
+						case SDLK_LEFTBRACKET:
+							console->push('[');
+
+							break;
+
+						case SDLK_RIGHTBRACKET:
+							console->push(']');
+
+							break;
+
+						case SDLK_BACKSLASH:
+							console->push('\\');
+
+							break;
+
+						case SDLK_SEMICOLON:
+							console->push(';');
+
+							break;
+
+						case SDLK_QUOTE:
+							console->push('\'');
+
+							break;
+
+						case SDLK_COMMA:
+							console->push(',');
+
+							break;
+
+						case SDLK_PERIOD:
+							console->push('.');
+
+							break;
+
+						case SDLK_SLASH:
+							console->push('/');
+
+							break;
+
 						case SDLK_RETURN:
 							console->enter();
 
