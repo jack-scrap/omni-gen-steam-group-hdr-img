@@ -59,12 +59,12 @@ Crane* craneMk(glm::vec3 loc, glm::vec3 rot) {
 	return _;
 }
 
-void craneAnim(Crane* crane, GLfloat* loc) {
+void craneAnim(Crane* crane, glm::vec3 loc) {
 	for (int i = 0; i < 2 * 2; i++) {
 		crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + i]->_active = true;
 	}
 
-	std::thread t(objAnim, crane->_parent, glm::vec3(loc[0], loc[1], loc[2]), glm::vec3(0.0));
+	std::thread t(objAnim, crane->_parent, loc, glm::vec3(0.0));
 	t.join();
 
 	for (int i = 0; i < 2 * 2; i++) {
@@ -73,11 +73,11 @@ void craneAnim(Crane* crane, GLfloat* loc) {
 }
 
 void craneZoom(Crane* crane, bool dir) {
-	GLfloat d[3] = {
+	glm::vec3 d = glm::vec3(
 		dir ? 1 : -1,
 		0.0,
 		0.0
-	};
+	);
 	std::thread t(craneAnim, crane, d);
 	t.detach();
 }
