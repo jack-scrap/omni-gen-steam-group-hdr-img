@@ -9,7 +9,7 @@ struct Cam {
 
 		_prev;
 
-	bool _drag;
+	bool _drag = false;
 
 	int
 		_begin[2],
