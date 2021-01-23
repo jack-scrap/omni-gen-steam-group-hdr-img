@@ -73,12 +73,12 @@ void craneAnim(Crane* crane, glm::vec3 loc) {
 }
 
 void craneZoom(Crane* crane, bool dir) {
-	glm::vec3 d = glm::vec3(
+	glm::vec3 loc = glm::vec3(
 		dir ? 1 : -1,
 		0.0,
 		0.0
 	);
-	std::thread t(craneAnim, crane, d);
+	std::thread t(craneAnim, crane, loc);
 	t.detach();
 }
 
