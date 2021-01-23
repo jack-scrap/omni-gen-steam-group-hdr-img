@@ -5,9 +5,9 @@
 struct Cam {
 	glm::vec3
 		_pos,
-		_scale;
+		_scale,
 
-	glm::vec3 _prev;
+		_prev;
 
 	bool _drag;
 
