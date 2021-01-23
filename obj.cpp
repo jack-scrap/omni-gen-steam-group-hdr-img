@@ -452,8 +452,8 @@ void objAnim(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
 	}
 }
 
-void objTrans(Obj* obj, GLfloat* loc, GLfloat* rot) {
-	std::thread t(objAnim, obj, glm::vec3(loc[0], loc[1], loc[2]), glm::vec3(rot[0], rot[1], rot[2]));
+void objTrans(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
+	std::thread t(objAnim, obj, loc, rot);
 	t.detach();
 }
 

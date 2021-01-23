@@ -95,17 +95,7 @@ void cranePan(Crane* crane, bool dir) {
 		loc[Z] > crane->_rngHead[MIN] &&
 		loc[Z] < crane->_rngHead[MAX]
 	) {
-		GLfloat loc[3] = {
-			0.0,
-			0.0,
-			inc
-		};
-		GLfloat rot[3] = {
-			0.0,
-			0.0,
-			0.0
-		};
-		objTrans(crane->_parent->_child[2 * 2 * 2 * 2], loc, rot);
+		objTrans(crane->_parent->_child[2 * 2 * 2 * 2], glm::vec3(0.0, 0.0, inc), glm::vec3(0.0, 0.0, 0.0));
 	}
 }
 
@@ -122,17 +112,7 @@ void cranePed(Crane* crane, bool dir) {
 		loc[Y] > crane->_rngClaw[MIN] &&
 		loc[Y] < crane->_rngClaw[MAX]
 	) {
-		GLfloat loc[3] = {
-			inc,
-			0.0,
-			0.0
-		};
-		GLfloat rot[3] = {
-			0.0,
-			0.0,
-			0.0
-		};
-		objTrans(crane->_parent->_child[2 * 2 * 2 * 2], loc, rot);
+		objTrans(crane->_parent->_child[2 * 2 * 2 * 2], glm::vec3(inc, 0.0, 0.0), glm::vec3(0.0, 0.0, 0.0));
 	}
 }
 
