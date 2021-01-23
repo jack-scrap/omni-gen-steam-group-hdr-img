@@ -100,7 +100,12 @@ void cranePan(Crane* crane, bool dir) {
 			0.0,
 			inc
 		};
-		objMv(crane->_parent->_child[2 * 2 * 2 * 2], loc);
+		GLfloat rot[3] = {
+			0.0,
+			0.0,
+			0.0
+		};
+		objMv(crane->_parent->_child[2 * 2 * 2 * 2], loc, rot);
 	}
 }
 
@@ -122,7 +127,12 @@ void cranePed(Crane* crane, bool dir) {
 			0.0,
 			0.0
 		};
-		objMv(crane->_parent->_child[2 * 2 * 2 * 2], loc);
+		GLfloat rot[3] = {
+			0.0,
+			0.0,
+			0.0
+		};
+		objMv(crane->_parent->_child[2 * 2 * 2 * 2], loc, rot);
 	}
 }
 

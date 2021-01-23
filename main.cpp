@@ -244,16 +244,6 @@ int main() {
 								console->render();
 
 								break;
-
-							case SDLK_F5:
-								objMv(obj[0], d);
-
-								std::cout << util::phys::aabb(
-										obj[0],
-										obj[1]
-										) << std::endl;
-
-								break;
 						}	
 					}
 				}
