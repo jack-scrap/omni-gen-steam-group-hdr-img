@@ -69,7 +69,7 @@ void objUpdate(Obj* obj, glm::vec3 loc, glm::vec3 rot);
 
 void objAnim(Obj* obj, glm::vec3 loc, glm::vec3 rot);
 
-void objMv(Obj* obj, GLfloat* loc, GLfloat* rot);
+void objTrans(Obj* obj, GLfloat* loc, GLfloat* rot);
 
 void objA(Obj* obj);
 

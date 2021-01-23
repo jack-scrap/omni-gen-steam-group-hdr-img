@@ -105,7 +105,7 @@ void cranePan(Crane* crane, bool dir) {
 			0.0,
 			0.0
 		};
-		objMv(crane->_parent->_child[2 * 2 * 2 * 2], loc, rot);
+		objTrans(crane->_parent->_child[2 * 2 * 2 * 2], loc, rot);
 	}
 }
 
@@ -132,7 +132,7 @@ void cranePed(Crane* crane, bool dir) {
 			0.0,
 			0.0
 		};
-		objMv(crane->_parent->_child[2 * 2 * 2 * 2], loc, rot);
+		objTrans(crane->_parent->_child[2 * 2 * 2 * 2], loc, rot);
 	}
 }
 
