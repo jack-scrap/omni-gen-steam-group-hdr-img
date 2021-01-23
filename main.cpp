@@ -260,26 +260,27 @@ int main() {
 			}
 
 			if (e.type == SDL_MOUSEBUTTONDOWN) {
-				cam._drag = true;
-
 				SDL_GetMouseState(&cam._begin[0], &cam._begin[1]);
 
-				cam._prev = cam._pos;
+				cam._drag = true;
 			}
 
 			if (e.type == SDL_MOUSEBUTTONUP) {
 				cam._drag = false;
+
+				cam._prev = cam._pos;
 			}
 
 			if (e.type == SDL_MOUSEMOTION) {
 				if (cam._drag) {
 					SDL_GetMouseState(&cam._curr[0], &cam._curr[1]);
 
-					cam._delta[0] = cam._begin[0] - cam._curr[0];
-					cam._delta[1] = cam._begin[1] - cam._curr[1];
+					cam._delta[0] = cam._curr[0] - cam._begin[0];
+					cam._delta[1] = -(cam._curr[1] - cam._begin[1]);
 
-					cam._pos[0] = cam._prev.x + cam._delta[0];
-					cam._pos[2] = cam._prev.y + cam._delta[1];
+					cam._pos[0] = cam._prev[0] + cam._delta[0];
+					cam._pos[1] = cam._prev[1] + cam._delta[1];
+					cam._pos[2] = cam._prev[2] - cam._delta[0];
 				}
 			}
 

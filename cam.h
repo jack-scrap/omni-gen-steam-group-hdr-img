@@ -7,9 +7,9 @@ struct Cam {
 		_pos,
 		_scale;
 
-	bool _drag;
-
 	glm::vec3 _prev;
+
+	bool _drag;
 
 	int
 		_begin[2],
