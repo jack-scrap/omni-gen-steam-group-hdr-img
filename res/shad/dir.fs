@@ -18,5 +18,5 @@ void main() {
 
 	float i = max(dot(normFace, normalize(sun)), 0.0);
 
-	gl_FragColor = vec4((col[int(active)] / 255.0) * i, 1.0);
+	gl_FragColor = vec4(i * (col[int(active)] / 255.0), 1.0);
 }
