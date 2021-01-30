@@ -26,7 +26,7 @@ Disp disp("Omni", {
 
 Truck* truck = truckMk();
 
-Crane* crane = craneMk(glm::vec3(3.0, 0.0, 7.0));
+Crane* crane = craneMk();
 
 Bound* bound = boundMk();
 
