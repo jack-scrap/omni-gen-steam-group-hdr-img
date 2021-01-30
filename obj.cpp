@@ -78,6 +78,8 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 		_->_child[i]->_model *= _->_rot;
 	}
 
+	objAcc(_, glm::mat4(1.0));
+
 	return _;
 }
 
@@ -144,6 +146,8 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 		_->_child[i]->_model *= _->_rot;
 	}
 
+	objAcc(_, glm::mat4(1.0));
+
 	return _;
 }
 
@@ -206,6 +210,8 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 		_->_child[i]->_model *= _->_loc;
 		_->_child[i]->_model *= _->_rot;
 	}
+
+	objAcc(_, glm::mat4(1.0));
 
 	return _;
 }
@@ -273,6 +279,8 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 		_->_child[i]->_model *= _->_rot;
 	}
 
+	objAcc(_, glm::mat4(1.0));
+
 	return _;
 }
 
@@ -337,6 +345,8 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm
 		_->_child[i]->_model *= _->_loc;
 		_->_child[i]->_model *= _->_rot;
 	}
+
+	objAcc(_, glm::mat4(1.0));
 
 	return _;
 }
@@ -405,6 +415,8 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj
 		_->_child[i]->_model *= _->_loc;
 		_->_child[i]->_model *= _->_rot;
 	}
+
+	objAcc(_, glm::mat4(1.0));
 
 	return _;
 }
