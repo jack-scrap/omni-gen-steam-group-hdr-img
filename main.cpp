@@ -20,10 +20,6 @@ Console* console;
 int main() {
 	console = new Console(util::fs::rd<std::vector<std::string>>("script/0.py"));
 
-	GLfloat d[3] = {
-		0.3, 0.0, 0.0
-	};
-
 	SDL_Event e;
 	while (disp._open) {
 		while (SDL_PollEvent(&e)) {
