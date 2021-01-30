@@ -64,7 +64,7 @@ void craneAnim(Crane* crane, glm::vec3 loc) {
 		crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + i]->_active = true;
 	}
 
-	std::thread t(objAnim, crane->_parent, loc, glm::vec3(0.0));
+	std::thread t(objAnim, crane->_parent, loc, glm::vec3(0.0, M_PI, 0.0));
 	t.join();
 
 	for (int i = 0; i < 2 * 2; i++) {

@@ -65,7 +65,7 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm
 
 Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
 
-void objUpdate(Obj* obj, glm::vec3 loc, glm::vec3 rot);
+void objAcc(Obj* obj, glm::mat4 prev);
 
 void objAnim(Obj* obj, glm::vec3 loc, glm::vec3 rot);
 

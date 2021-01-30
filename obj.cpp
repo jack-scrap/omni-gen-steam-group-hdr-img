@@ -409,44 +409,35 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj
 	return _;
 }
 
-void objUpdate(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
-	obj->_model = glm::translate(obj->_model, loc);
-	for (int i = 0; i < 3; i++) {
-		glm::vec3 axis = glm::vec3(0);
-		axis[i] = 1;
-
-		obj->_model = glm::rotate(obj->_model, rot[i], axis);
-	}
+void objAcc(Obj* obj, glm::mat4 prev) {
+	obj->_model = prev * obj->_model;
 
 	for (int i = 0; i < obj->_noChild; i++) {
-		if (obj->_child[i]) {
-			glm::mat4 tmp = glm::mat4(1.0);
-			tmp *= obj->_child[i]->_loc;
-			tmp *= obj->_child[i]->_rot;
-
-			obj->_child[i]->_model = obj->_model;
-			obj->_child[i]->_model *= tmp;
-
-			objUpdate(obj->_child[i], glm::vec3(0.0), glm::vec3(0.0));
-		}
+		objAcc(obj->_child[i], prev);
 	}
 }
 
 void objAnim(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
-	float max = 0.0;
-	for (int i = 0; i < 3; i++) {
-		if (loc[i] > max) {
-			max = loc[i];
-		}
-	}
+	glm::vec3 locInc = loc / glm::vec3(state::fps);
+	glm::vec3 rotInc = rot / glm::vec3(state::fps);
 
-	float end = max * state::fps;
+	glm::vec3 locMax = glm::abs(loc);
+	glm::vec3 rotMax = glm::abs(rot);
 
-	int t = 0;
-	while (t < end) {
-		objUpdate(obj, loc / glm::vec3(end), rot / glm::vec3(end));
+	glm::vec3 locFrame = glm::vec3(0.0);
+	glm::vec3 rotFrame = glm::vec3(0.0);
+	while (
+		glm::any(glm::lessThan(locFrame, locMax)) ||
+		glm::any(glm::lessThan(rotFrame, rotMax))
+	) {
+		glm::mat4 d = glm::mat4(1.0);
+		d = glm::translate(d, locInc);
+		d = util::matr::rot(d, rotInc);
 
-		t++;
+		objAcc(obj, d);
+
+		locFrame += glm::abs(locInc);
+		rotFrame += glm::abs(rotInc);
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / state::fps));
 	}
