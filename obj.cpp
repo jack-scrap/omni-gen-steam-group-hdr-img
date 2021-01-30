@@ -380,10 +380,16 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj
 }
 
 void objAcc(Obj* obj, glm::mat4 prev) {
-	obj->_model = prev * obj->_model;
+	glm::mat4 _ = prev * obj->_model;
+
+	obj->_prog.use();
+
+	glUniformMatrix4fv(obj->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(_));
+
+	obj->_prog.unUse();
 
 	for (int i = 0; i < obj->_noChild; i++) {
-		objAcc(obj->_child[i], prev);
+		objAcc(obj->_child[i], _);
 	}
 }
 
@@ -428,7 +434,6 @@ void objDraw(Obj* obj) {
 	glBindVertexArray(obj->_mesh->_id[VAO]);
 	obj->_prog.use();
 
-	glUniformMatrix4fv(obj->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(obj->_model));
 	glUniformMatrix4fv(obj->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(obj->_view));
 
 	glUniform1ui(obj->_uni[T], obj->_t);
