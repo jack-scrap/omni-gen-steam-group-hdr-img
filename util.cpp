@@ -145,20 +145,12 @@ void util::mesh::bound(GLfloat bound[2 * 2 * 2 * 3], GLfloat* vtc, unsigned int 
 	}
 }
 
-void util::mesh::bound(GLfloat bound[2 * 2 * 2 * 3], std::vector<Obj*> scn) {
-	// range
-	GLfloat rng[3][2];
-	for (int i = 0; i < 3; i++) {
-		for (int b = 0; b < 2; b++) {
-			rng[i][b] = 0.0;
-		}
-	}
-
-	for (int o = 0; o < scn.size(); o++) {
-		glm::mat4 prev = scn[o]->_model;
+void util::mesh::bound(GLfloat rng[3][2], glm::mat4 prev, Obj** obj, unsigned int noObj) {
+	for (int o = 0; o < noObj; o++) {
+		glm::mat4 acc = prev * obj[o]->_model;
 
 		for (int v = 0; v < 2 * 2 * 2 * 3; v += 3) {
-			glm::vec3 vtx = glm::vec3(prev * glm::vec4(glm::vec3(scn[o]->_bound[v], scn[o]->_bound[v + 1], scn[o]->_bound[v + 2]), 1.0));
+			glm::vec3 vtx = glm::vec3(acc * glm::vec4(glm::vec3(obj[o]->_bound[v], obj[o]->_bound[v + 1], obj[o]->_bound[v + 2]), 1.0));
 
 			for (int i = 0; i < 3; i++) {
 				if (vtx[i] < rng[i][MIN]) {
@@ -171,39 +163,7 @@ void util::mesh::bound(GLfloat bound[2 * 2 * 2 * 3], std::vector<Obj*> scn) {
 			}
 		}
 
-		if (scn[o]->_noChild) {
-			for (int c = 0; c < scn[o]->_noChild; c++) {
-				glm::mat4 model = prev * scn[o]->_child[c]->_model;
-
-				for (int v = 0; v < 2 * 2 * 2 * 3; v += 3) {
-					glm::vec3 vtx = glm::vec3(model * glm::vec4(glm::vec3(scn[o]->_child[c]->_bound[v], scn[o]->_child[c]->_bound[v + 1], scn[o]->_child[c]->_bound[v + 2]), 1.0));
-
-					for (int i = 0; i < 3; i++) {
-						if (vtx[i] < rng[i][MIN]) {
-							rng[i][MIN] = vtx[i];
-						}
-
-						if (vtx[i] > rng[i][MAX]) {
-							rng[i][MAX] = vtx[i];
-						}
-					}
-				}
-			}
-		}
-	}
-
-	// generate
-	int i = 0;
-	for (int z = 0; z < 2; z++) {
-		for (int y = 0; y < 2; y++) {
-			for (int x = 0; x < 2; x++) {
-				bound[i] = rng[X][x];
-				bound[i + 1] = rng[Y][y];
-				bound[i + 2] = rng[Z][z];
-
-				i += 3;
-			}
-		}
+		util::mesh::bound(rng, acc, obj[o]->_child, obj[o]->_noChild);
 	}
 }
 

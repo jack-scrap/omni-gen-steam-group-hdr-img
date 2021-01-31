@@ -8,4 +8,4 @@ typedef struct {
 	Obj* _parent;
 } Bound;
 
-Bound* boundMk(std::vector<Obj*> scn);
+Bound* boundMk(Obj** obj, unsigned int noObj);

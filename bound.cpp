@@ -1,11 +1,35 @@
 #include "bound.h"
 #include "util.h"
+#include "math.h"
 
-Bound* boundMk(std::vector<Obj*> scn) {
+Bound* boundMk(Obj** obj, unsigned int noObj) {
 	Bound* _ = (Bound*) malloc(sizeof (Bound));
 
 	GLfloat vtc[2 * 2 * 2 * 3];
-	util::mesh::bound(vtc, scn);
+
+	// range
+	GLfloat rng[3][2];
+	for (int i = 0; i < 3; i++) {
+		for (int b = 0; b < 2; b++) {
+			rng[i][b] = 0.0;
+		}
+	}
+
+	util::mesh::bound(rng, glm::mat4(1.0), obj, noObj);
+
+	// generate
+	int i = 0;
+	for (int z = 0; z < 2; z++) {
+		for (int y = 0; y < 2; y++) {
+			for (int x = 0; x < 2; x++) {
+				vtc[i] = rng[X][x];
+				vtc[i + 1] = rng[Y][y];
+				vtc[i + 2] = rng[Z][z];
+
+				i += 3;
+			}
+		}
+	}
 
 	GLushort idc[3 * 2 * 3 * 2] = {
 		0, 1, 2,

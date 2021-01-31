@@ -50,7 +50,14 @@ std::vector<Obj*> obj = {
 	/* rng[MAX] */
 };
 
-Bound* bound = boundMk(obj);
+Obj* test[] = {
+	crane->_parent,
+	objMk("container_2x4", "obj", "dir", true),
+	/* rng[MIN], */
+	/* rng[MAX] */
+};
+
+Bound* bound = boundMk(test, sizeof test / sizeof *test);
 
 Truck* truckGet() {
 	return truck;
