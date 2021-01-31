@@ -155,8 +155,10 @@ void util::mesh::bound(GLfloat bound[2 * 2 * 2 * 3], std::vector<Obj*> scn) {
 	}
 
 	for (int o = 0; o < scn.size(); o++) {
+		glm::mat4 prev = scn[o]->_model;
+
 		for (int v = 0; v < 2 * 2 * 2 * 3; v += 3) {
-			glm::vec3 vtx = glm::vec3(scn[o]->_model * glm::vec4(glm::vec3(scn[o]->_bound[v], scn[o]->_bound[v + 1], scn[o]->_bound[v + 2]), 1.0));
+			glm::vec3 vtx = glm::vec3(prev * glm::vec4(glm::vec3(scn[o]->_bound[v], scn[o]->_bound[v + 1], scn[o]->_bound[v + 2]), 1.0));
 
 			for (int i = 0; i < 3; i++) {
 				if (vtx[i] < rng[i][MIN]) {
@@ -165,6 +167,26 @@ void util::mesh::bound(GLfloat bound[2 * 2 * 2 * 3], std::vector<Obj*> scn) {
 
 				if (vtx[i] > rng[i][MAX]) {
 					rng[i][MAX] = vtx[i];
+				}
+			}
+		}
+
+		if (scn[o]->_noChild) {
+			for (int c = 0; c < scn[o]->_noChild; c++) {
+				glm::mat4 model = prev * scn[o]->_child[c]->_model;
+
+				for (int v = 0; v < 2 * 2 * 2 * 3; v += 3) {
+					glm::vec3 vtx = glm::vec3(model * glm::vec4(glm::vec3(scn[o]->_child[c]->_bound[v], scn[o]->_child[c]->_bound[v + 1], scn[o]->_child[c]->_bound[v + 2]), 1.0));
+
+					for (int i = 0; i < 3; i++) {
+						if (vtx[i] < rng[i][MIN]) {
+							rng[i][MIN] = vtx[i];
+						}
+
+						if (vtx[i] > rng[i][MAX]) {
+							rng[i][MAX] = vtx[i];
+						}
+					}
 				}
 			}
 		}
