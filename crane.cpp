@@ -31,7 +31,7 @@ Crane* craneMk(glm::vec3 loc, glm::vec3 rot) {
 
 	// claw
 	Obj* claw[] = {
-		objMk("crane/claw", "obj", "dir", true, glm::vec3(0.0, 10.8, 0.0))
+		objMk("crane/claw", "obj", "dir", true)
 	};
 
 	child[2 * 2 * 2 * 2] = objMk("crane/head", "obj", "dir", true, claw, 1, glm::vec3(0.0, 13.8, 0.0));
