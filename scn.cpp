@@ -26,7 +26,7 @@ Disp disp("Omni", {
 
 Truck* truck = truckMk();
 
-Crane* crane = craneMk();
+Crane* crane = craneMk(glm::vec3(3.0, 0.0, 7.0));
 
 std::vector<GLfloat> vtc = util::mesh::quad::pos(glm::vec2(
 	state::pad * 2,

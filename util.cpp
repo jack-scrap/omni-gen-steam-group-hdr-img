@@ -156,13 +156,15 @@ void util::mesh::bound(GLfloat bound[2 * 2 * 2 * 3], std::vector<Obj*> scn) {
 
 	for (int i = 0; i < scn.size(); i++) {
 		for (int v = 0; v < 2 * 2 * 2 * 3; v += 3) {
+			glm::vec3 vtx = glm::vec3(scn[i]->_model * glm::vec4(glm::vec3(scn[i]->_bound[v], scn[i]->_bound[v + 1], scn[i]->_bound[v + 2]), 1.0));
+
 			for (int a = 0; a < 3; a++) {
-				if (scn[i]->_bound[v + a] < rng[a][MIN]) {
-					rng[a][MIN] = scn[i]->_bound[v + a];
+				if (vtx[a] < rng[a][MIN]) {
+					rng[a][MIN] = vtx[a];
 				}
 
-				if (scn[i]->_bound[v + a] > rng[a][MAX]) {
-					rng[a][MAX] = scn[i]->_bound[v + a];
+				if (vtx[a] > rng[a][MAX]) {
+					rng[a][MAX] = vtx[a];
 				}
 			}
 		}
