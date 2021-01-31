@@ -52,6 +52,8 @@ void Disp::draw() {
 		objDraw(_);
 	}
 
+	objDraw(bound->_parent);
+
 	glViewport(0, 0, state::res[Y], state::view[Y]);
 
 	console->draw();

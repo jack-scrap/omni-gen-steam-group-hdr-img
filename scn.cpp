@@ -28,8 +28,6 @@ Truck* truck = truckMk();
 
 Crane* crane = craneMk();
 
-Bound* bound = boundMk();
-
 std::vector<GLfloat> vtc = util::mesh::quad::pos(glm::vec2(
 	state::pad * 2,
 	100.0
@@ -46,12 +44,13 @@ Obj* rng[2] = {
 };
 
 std::vector<Obj*> obj = {
-	/* crane->_parent, */
-	/* objMk("container_2x4", "obj", "dir", true), */
+	crane->_parent,
+	objMk("container_2x4", "obj", "dir", true),
 	/* rng[MIN], */
-	/* rng[MAX], */
-	bound->_parent
+	/* rng[MAX] */
 };
+
+Bound* bound = boundMk(obj);
 
 Truck* truckGet() {
 	return truck;

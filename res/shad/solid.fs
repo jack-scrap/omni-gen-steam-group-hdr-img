@@ -8,5 +8,5 @@ vec3[2] col = vec3[2](
 );
 
 void main() {
-	gl_FragColor = vec4(col[int(active)] / 255.0, 1.0);
+	gl_FragColor = vec4(col[int(active)] / 255.0, 0.32);
 }
