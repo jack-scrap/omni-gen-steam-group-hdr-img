@@ -51,7 +51,7 @@ Bound* boundMk(Obj** obj, unsigned int noObj) {
 		3, 5, 7
 	};
 
-	_->_parent = objMk(vtc, 2 * 2 * 2 * 3, idc, 3 * 2 * 3 * 2, "obj", "solid", true);
+	_->_parent = objMk(vtc, 2 * 2 * 2 * 3, idc, 3 * 2 * 3 * 2, "obj", "trans", true);
 
 	return _;
 }
