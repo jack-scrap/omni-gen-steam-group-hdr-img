@@ -15,7 +15,7 @@ Bound* boundMk(Obj** obj, unsigned int noObj) {
 		}
 	}
 
-	util::mesh::bound(rng, glm::mat4(1.0), obj, noObj);
+	util::mesh::bound(obj, noObj, rng, glm::mat4(1.0));
 
 	// generate
 	int i = 0;

@@ -145,7 +145,7 @@ void util::mesh::bound(GLfloat bound[2 * 2 * 2 * 3], GLfloat* vtc, unsigned int 
 	}
 }
 
-void util::mesh::bound(GLfloat rng[3][2], glm::mat4 prev, Obj** obj, unsigned int noObj) {
+void util::mesh::bound(Obj** obj, unsigned int noObj, GLfloat rng[3][2], glm::mat4 prev) {
 	for (int o = 0; o < noObj; o++) {
 		glm::mat4 acc = prev * obj[o]->_model;
 
@@ -163,7 +163,7 @@ void util::mesh::bound(GLfloat rng[3][2], glm::mat4 prev, Obj** obj, unsigned in
 			}
 		}
 
-		util::mesh::bound(rng, acc, obj[o]->_child, obj[o]->_noChild);
+		util::mesh::bound(obj[o]->_child, obj[o]->_noChild, rng, acc);
 	}
 }
 
