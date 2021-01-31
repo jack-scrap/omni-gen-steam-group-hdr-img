@@ -68,7 +68,26 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	glBindVertexArray(0);
 
 	// bounds
-	util::mesh::bound(_->_bound, vtc, noVtc);
+	for (int i = 0; i < 3; i++) {
+		for (int b = 0; b < 2; b++) {
+			_->_rng[i][b] = 0.0;
+		}
+	}
+
+	util::mesh::bound(_->_rng, vtc, noVtc);
+
+	int i = 0;
+	for (int z = 0; z < 2; z++) {
+		for (int y = 0; y < 2; y++) {
+			for (int x = 0; x < 2; x++) {
+				_->_bound[i] = _->_rng[X][x];
+				_->_bound[i + 1] = _->_rng[Y][y];
+				_->_bound[i + 2] = _->_rng[Z][z];
+
+				i += 3;
+			}
+		}
+	}
 
 	// children
 	objAcc(_, glm::mat4(1.0));
@@ -129,7 +148,26 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	glBindVertexArray(0);
 
 	// bounds
-	util::mesh::bound(_->_bound, vtc, noVtc);
+	for (int i = 0; i < 3; i++) {
+		for (int b = 0; b < 2; b++) {
+			_->_rng[i][b] = 0.0;
+		}
+	}
+
+	util::mesh::bound(_->_rng, vtc, noVtc);
+
+	int i = 0;
+	for (int z = 0; z < 2; z++) {
+		for (int y = 0; y < 2; y++) {
+			for (int x = 0; x < 2; x++) {
+				_->_bound[i] = _->_rng[X][x];
+				_->_bound[i + 1] = _->_rng[Y][y];
+				_->_bound[i + 2] = _->_rng[Z][z];
+
+				i += 3;
+			}
+		}
+	}
 
 	// children
 	objAcc(_, glm::mat4(1.0));
@@ -187,7 +225,26 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	glBindVertexArray(0);
 
 	// bounds
-	util::mesh::bound(_->_bound, vtc, noVtc);
+	for (int i = 0; i < 3; i++) {
+		for (int b = 0; b < 2; b++) {
+			_->_rng[i][b] = 0.0;
+		}
+	}
+
+	util::mesh::bound(_->_rng, vtc, noVtc);
+
+	int i = 0;
+	for (int z = 0; z < 2; z++) {
+		for (int y = 0; y < 2; y++) {
+			for (int x = 0; x < 2; x++) {
+				_->_bound[i] = _->_rng[X][x];
+				_->_bound[i + 1] = _->_rng[Y][y];
+				_->_bound[i + 2] = _->_rng[Z][z];
+
+				i += 3;
+			}
+		}
+	}
 
 	// children
 	objAcc(_, glm::mat4(1.0));
@@ -248,7 +305,26 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	glBindVertexArray(0);
 
 	// bounds
-	util::mesh::bound(_->_bound, vtc, noVtc);
+	for (int i = 0; i < 3; i++) {
+		for (int b = 0; b < 2; b++) {
+			_->_rng[i][b] = 0.0;
+		}
+	}
+
+	util::mesh::bound(_->_rng, vtc, noVtc);
+
+	int i = 0;
+	for (int z = 0; z < 2; z++) {
+		for (int y = 0; y < 2; y++) {
+			for (int x = 0; x < 2; x++) {
+				_->_bound[i] = _->_rng[X][x];
+				_->_bound[i + 1] = _->_rng[Y][y];
+				_->_bound[i + 2] = _->_rng[Z][z];
+
+				i += 3;
+			}
+		}
+	}
 
 	// children
 	objAcc(_, glm::mat4(1.0));
@@ -308,7 +384,26 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm
 	glBindVertexArray(0);
 
 	// bounds
-	util::mesh::bound(_->_bound, &vtc[0], vtc.size());
+	for (int i = 0; i < 3; i++) {
+		for (int b = 0; b < 2; b++) {
+			_->_rng[i][b] = 0.0;
+		}
+	}
+
+	util::mesh::bound(_->_rng, &vtc[0], vtc.size());
+
+	int i = 0;
+	for (int z = 0; z < 2; z++) {
+		for (int y = 0; y < 2; y++) {
+			for (int x = 0; x < 2; x++) {
+				_->_bound[i] = _->_rng[X][x];
+				_->_bound[i + 1] = _->_rng[Y][y];
+				_->_bound[i + 2] = _->_rng[Z][z];
+
+				i += 3;
+			}
+		}
+	}
 
 	// children
 	objAcc(_, glm::mat4(1.0));
@@ -371,7 +466,26 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj
 	glBindVertexArray(0);
 
 	// bounds
-	util::mesh::bound(_->_bound, &vtc[0], vtc.size());
+	for (int i = 0; i < 3; i++) {
+		for (int b = 0; b < 2; b++) {
+			_->_rng[i][b] = 0.0;
+		}
+	}
+
+	util::mesh::bound(_->_rng, &vtc[0], vtc.size());
+
+	int i = 0;
+	for (int z = 0; z < 2; z++) {
+		for (int y = 0; y < 2; y++) {
+			for (int x = 0; x < 2; x++) {
+				_->_bound[i] = _->_rng[X][x];
+				_->_bound[i + 1] = _->_rng[Y][y];
+				_->_bound[i + 2] = _->_rng[Z][z];
+
+				i += 3;
+			}
+		}
+	}
 
 	// children
 	objAcc(_, glm::mat4(1.0));

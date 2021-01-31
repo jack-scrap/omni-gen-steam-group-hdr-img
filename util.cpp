@@ -109,15 +109,7 @@ std::vector<GLushort> util::mesh::strip(std::vector<GLushort> idc) {
 	return _;
 }
 
-void util::mesh::bound(GLfloat bound[2 * 2 * 2 * 3], GLfloat* vtc, unsigned int noVtc) {
-	// range
-	GLfloat rng[3][2];
-	for (int i = 0; i < 3; i++) {
-		for (int b = 0; b < 2; b++) {
-			rng[i][b] = 0.0;
-		}
-	}
-
+void util::mesh::bound(GLfloat rng[3][2], GLfloat* vtc, unsigned int noVtc) {
 	for (int v = 0; v < noVtc; v += 3) {
 		for (int i = 0; i < 3; i++) {
 			if (vtc[v + i] < rng[i][MIN]) {
@@ -126,20 +118,6 @@ void util::mesh::bound(GLfloat bound[2 * 2 * 2 * 3], GLfloat* vtc, unsigned int 
 
 			if (vtc[v + i] > rng[i][MAX]) {
 				rng[i][MAX] = vtc[v + i];
-			}
-		}
-	}
-
-	// generate
-	int i = 0;
-	for (int z = 0; z < 2; z++) {
-		for (int y = 0; y < 2; y++) {
-			for (int x = 0; x < 2; x++) {
-				bound[i] = rng[X][x];
-				bound[i + 1] = rng[Y][y];
-				bound[i + 2] = rng[Z][z];
-
-				i += 3;
 			}
 		}
 	}
