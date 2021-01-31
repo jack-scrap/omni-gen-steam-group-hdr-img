@@ -112,20 +112,20 @@ std::vector<GLushort> util::mesh::strip(std::vector<GLushort> idc) {
 void util::mesh::bound(GLfloat bound[2 * 2 * 2 * 3], GLfloat* vtc, unsigned int noVtc) {
 	// range
 	GLfloat rng[3][2];
-	for (int a = 0; a < 3; a++) {
-		for (int i = 0; i < 2; i++) {
-			rng[a][i] = 0.0;
+	for (int i = 0; i < 3; i++) {
+		for (int b = 0; b < 2; b++) {
+			rng[i][b] = 0.0;
 		}
 	}
 
 	for (int v = 0; v < noVtc; v += 3) {
-		for (int a = 0; a < 3; a++) {
-			if (vtc[v + a] < rng[a][MIN]) {
-				rng[a][MIN] = vtc[v + a];
+		for (int i = 0; i < 3; i++) {
+			if (vtc[v + i] < rng[i][MIN]) {
+				rng[i][MIN] = vtc[v + i];
 			}
 
-			if (vtc[v + a] > rng[a][MAX]) {
-				rng[a][MAX] = vtc[v + a];
+			if (vtc[v + i] > rng[i][MAX]) {
+				rng[i][MAX] = vtc[v + i];
 			}
 		}
 	}
@@ -148,23 +148,23 @@ void util::mesh::bound(GLfloat bound[2 * 2 * 2 * 3], GLfloat* vtc, unsigned int 
 void util::mesh::bound(GLfloat bound[2 * 2 * 2 * 3], std::vector<Obj*> scn) {
 	// range
 	GLfloat rng[3][2];
-	for (int a = 0; a < 3; a++) {
-		for (int i = 0; i < 2; i++) {
-			rng[a][i] = 0.0;
+	for (int i = 0; i < 3; i++) {
+		for (int b = 0; b < 2; b++) {
+			rng[i][b] = 0.0;
 		}
 	}
 
-	for (int i = 0; i < scn.size(); i++) {
+	for (int o = 0; o < scn.size(); o++) {
 		for (int v = 0; v < 2 * 2 * 2 * 3; v += 3) {
-			glm::vec3 vtx = glm::vec3(scn[i]->_model * glm::vec4(glm::vec3(scn[i]->_bound[v], scn[i]->_bound[v + 1], scn[i]->_bound[v + 2]), 1.0));
+			glm::vec3 vtx = glm::vec3(scn[o]->_model * glm::vec4(glm::vec3(scn[o]->_bound[v], scn[o]->_bound[v + 1], scn[o]->_bound[v + 2]), 1.0));
 
-			for (int a = 0; a < 3; a++) {
-				if (vtx[a] < rng[a][MIN]) {
-					rng[a][MIN] = vtx[a];
+			for (int i = 0; i < 3; i++) {
+				if (vtx[i] < rng[i][MIN]) {
+					rng[i][MIN] = vtx[i];
 				}
 
-				if (vtx[a] > rng[a][MAX]) {
-					rng[a][MAX] = vtx[a];
+				if (vtx[i] > rng[i][MAX]) {
+					rng[i][MAX] = vtx[i];
 				}
 			}
 		}
