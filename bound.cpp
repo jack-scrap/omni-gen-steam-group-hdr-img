@@ -27,7 +27,7 @@ Bound* boundMk(std::vector<Obj*> scn) {
 		3, 5, 7
 	};
 
-	_->_parent = objMk(vtc, sizeof vtc / sizeof *vtc, idc, sizeof idc / sizeof *idc, "obj", "solid", true);
+	_->_parent = objMk(vtc, 2 * 2 * 2 * 3, idc, 3 * 2 * 3 * 2, "obj", "solid", true);
 
 	return _;
 }
