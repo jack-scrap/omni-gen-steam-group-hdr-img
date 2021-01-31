@@ -1,20 +1,23 @@
 #include "bound.h"
+#include "util.h"
 
 Bound* boundMk() {
 	Bound* _ = (Bound*) malloc(sizeof (Bound));
 
 	GLfloat vtc[2 * 2 * 2 * 3];
-	int i = 0;
-	for (int z = 0; z < 2; z++) {
-		for (int y = 0; y < 2; y++) {
-			for (int x = 0; x < 2; x++) {
-				vtc[i] = x ? 1 : -1;
-				vtc[i + 1] = y ? 1 : -1;
-				vtc[i + 2] = z ? 1 : -1;
+	for (int i = 0; i < 2 * 2 * 2 * 3; i++) {
+		vtc[i] = 0.0;
+	}
+	std::vector<Obj*> scn = {
+		objMk("wheel", "obj", "dir", true)
+	};
+	util::mesh::bound(vtc, scn);
 
-				i += 3;
-			}
-		}
+	for (int i = 0; i < 2 * 2 * 2 * 3; i += 3) {
+		std::cout << vtc[i] << std::endl;
+		std::cout << vtc[i + 1] << std::endl;
+		std::cout << vtc[i + 2] << std::endl;
+		std::cout << std::endl;
 	}
 
 	GLushort idc[3 * 2 * 3 * 2] = {
@@ -36,8 +39,8 @@ Bound* boundMk() {
 		1, 5, 3,
 		3, 5, 7
 	};
-	
-	_->_parent = objMk(vtc, sizeof vtc / sizeof *vtc, idc, sizeof idc / sizeof *idc, "obj", "dir", true);
+
+	_->_parent = objMk(vtc, 2, idc, 3 * 2 * 3 * 2, "obj", "dir", true);
 
 	return _;
 }

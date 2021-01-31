@@ -32,6 +32,7 @@ namespace util {
 		std::vector<GLushort> strip(std::vector<GLushort> idc);
 
 		void bound(GLfloat bound[2 * 2 * 2 * 3], GLfloat* vtc, unsigned int noVtc);
+		void bound(GLfloat bound[2 * 2 * 2 * 3], std::vector<Obj*> scn);
 
 		namespace quad {
 			std::vector<GLfloat> pos(glm::vec2 sz);

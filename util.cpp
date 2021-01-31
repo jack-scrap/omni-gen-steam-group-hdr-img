@@ -145,6 +145,44 @@ void util::mesh::bound(GLfloat bound[2 * 2 * 2 * 3], GLfloat* vtc, unsigned int 
 	}
 }
 
+void util::mesh::bound(GLfloat bound[2 * 2 * 2 * 3], std::vector<Obj*> scn) {
+	// range
+	GLfloat rng[3][2];
+	for (int a = 0; a < 3; a++) {
+		for (int i = 0; i < 2; i++) {
+			rng[a][i] = 0.0;
+		}
+	}
+
+	for (int i = 0; i < scn.size(); i++) {
+		for (int v = 0; v < 2 * 2 * 2 * 3; v += 3) {
+			for (int a = 0; a < 3; a++) {
+				if (scn[i]->_bound[v + a] < rng[a][MIN]) {
+					rng[a][MIN] = scn[i]->_bound[v + a];
+				}
+
+				if (scn[i]->_bound[v + a] > rng[a][MAX]) {
+					rng[a][MAX] = scn[i]->_bound[v + a];
+				}
+			}
+		}
+	}
+
+	// generate
+	int i = 0;
+	for (int z = 0; z < 2; z++) {
+		for (int y = 0; y < 2; y++) {
+			for (int x = 0; x < 2; x++) {
+				bound[i] = rng[X][x];
+				bound[i + 1] = rng[Y][y];
+				bound[i + 2] = rng[Z][z];
+
+				i += 3;
+			}
+		}
+	}
+}
+
 std::vector<GLfloat> util::mesh::quad::pos(glm::vec2 sz) {
 	std::vector<GLfloat> _;
 

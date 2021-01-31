@@ -46,10 +46,11 @@ Obj* rng[2] = {
 };
 
 std::vector<Obj*> obj = {
-	crane->_parent,
-	objMk("container_2x4", "obj", "dir", true),
-	rng[MIN],
-	rng[MAX]
+	/* crane->_parent, */
+	/* objMk("container_2x4", "obj", "dir", true), */
+	/* rng[MIN], */
+	/* rng[MAX], */
+	bound->_parent
 };
 
 Truck* truckGet() {
