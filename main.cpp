@@ -264,8 +264,26 @@ int main() {
 					cam._delta[0] = cam._curr[0] - cam._begin[0];
 					cam._delta[1] = -(cam._curr[1] - cam._begin[1]);
 
-					cam._pos[0] = cam._prev[0] - cam._delta[0] + cam._delta[1];
-					cam._pos[2] = cam._prev[2] + cam._delta[0] + cam._delta[1];
+					glm::vec2 proj = glm::vec2(
+						cam._prev[0] - cam._delta[0] + cam._delta[1] + 1000.0,
+						cam._prev[2] + cam._delta[0] + cam._delta[1] + 1000.0
+					);
+
+					glm::vec2 bound[2] = {
+						glm::vec2(-400, 400),
+						glm::vec2(-400, 400)
+					};
+
+					if (
+						proj[0] > bound[0][0] &&
+						proj[0] < bound[0][1] &&
+
+						proj[1] > bound[1][0] &&
+						proj[1] < bound[1][1]
+					) {
+						cam._pos[0] = cam._prev[0] - cam._delta[0] + cam._delta[1];
+						cam._pos[2] = cam._prev[2] + cam._delta[0] + cam._delta[1];
+					}
 				}
 			}
 
