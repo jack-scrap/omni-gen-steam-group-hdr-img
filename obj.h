@@ -40,7 +40,9 @@ typedef struct Obj {
 	glm::mat4
 		_model,
 		_view,
-		_proj;
+		_proj,
+
+		_acc;
 
 	Prog _prog;
 
