@@ -50,8 +50,6 @@ std::vector<Obj*> obj = {
 	/* rng[MAX] */
 };
 
-Bound* bound = boundMk(&obj[0], obj.size());
-
 Truck* truckGet() {
 	return truck;
 }
