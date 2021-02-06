@@ -521,10 +521,11 @@ void objAnim(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
 		glm::any(glm::lessThan(rotFrame, rotMax))
 	) {
 		glm::mat4 d = glm::mat4(1.0);
-		d = glm::translate(d, locFrame);
-		d = util::matr::rot(d, rotFrame);
+		d = glm::translate(d, locInc);
+		d = util::matr::rot(d, rotInc);
 
-		objAcc(obj, d);
+		obj->_model *= d;
+		objAcc(obj, glm::mat4(1.0));
 
 		locFrame += glm::abs(locInc);
 		rotFrame += glm::abs(rotInc);
