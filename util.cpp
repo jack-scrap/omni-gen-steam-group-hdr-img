@@ -192,7 +192,7 @@ std::vector<GLushort> util::mesh::rd::idc(std::string name) {
 }
 
 glm::mat4 util::matr::rot(glm::mat4 model, glm::vec3 rot) {
-	glm::mat4 _ = glm::mat4(1.0);
+	glm::mat4 _ = model;
 
 	for (int i = 0; i < 3; i++) {
 		glm::vec3 axis = glm::vec3(0);
