@@ -48,7 +48,7 @@ void Disp::draw() {
 
 	glViewport(state::res[X], 0, state::view[X], state::view[Y]);
 
-	for (Obj* _ : obj) {
+	for (Obj* _ : scn) {
 		objDraw(_);
 	}
 

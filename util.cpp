@@ -1,5 +1,7 @@
 #include <iostream>
 #include <sstream>
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/string_cast.hpp>
 
 #include "util.h"
 #include "math.h"
@@ -205,27 +207,25 @@ glm::mat4 util::matr::rot(glm::mat4 model, glm::vec3 rot) {
 }
 
 bool util::phys::aabb(Obj* p, Obj* q) {
-	bool _ = false;
+	bool _;
 
 	for (int a = 0; a < 2 * 2 * 2 * 3; a += 3) {
-		glm::vec4 vtx = p->_model * glm::vec4(glm::vec3(p->_bound[a], p->_bound[a + 1], p->_bound[a + 2]), 1.0);
+		glm::vec4 vtx = p->_acc * glm::vec4(glm::vec3(p->_bound[a], p->_bound[a + 1], p->_bound[a + 2]), 1.0);
 
-		for (int b = 0; b < 2 * 2 * 2 * 3; b += 3) {
+		for (int b = 0; b < 2 * 2 * 2 * 3; b += 2 * 3) {
 			glm::vec4
-				min = q->_model * glm::vec4(glm::vec3(q->_bound[b], q->_bound[b + 1], q->_bound[b + 2]), 1.0),
-				max = q->_model * glm::vec4(glm::vec3(q->_bound[b], q->_bound[b + 1], q->_bound[b + 2]), 1.0);
+				min = q->_acc * glm::vec4(glm::vec3(q->_bound[b], q->_bound[b + 1], q->_bound[b + 2]), 1.0),
+				max = q->_acc * glm::vec4(glm::vec3(q->_bound[b + 3], q->_bound[b + 3 + 1], q->_bound[b + 3 + 2]), 1.0);
 
-			if (
-				vtx[X] >= min[X] &&
-				vtx[X] <= max[X] &&
+			_ = true;
 
-				vtx[Y] >= min[Y] &&
-				vtx[Y] <= max[Y] &&
-
-				vtx[Z] >= min[Z] &&
-				vtx[Z] <= max[Z]
-			) {
-				_ = true;
+			for (int i = 0; i < 3; i++) {
+				if (!(
+					vtx[i] >= min[i] &&
+					vtx[i] <= max[i]
+				)) {
+					_ = false;
+				}
 			}
 		}
 	}

@@ -127,5 +127,5 @@ void craneGrab(Crane* crane) {
 	targ->_noChild++;
 	targ->_child = (Obj**) realloc(targ->_child, targ->_noChild * sizeof (Obj*));
 
-	targ->_child[targ->_noChild - 1] = obj[0];
+	targ->_child[targ->_noChild - 1] = scn[1];
 }

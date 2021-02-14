@@ -21,7 +21,7 @@ extern Truck* truck;
 
 extern Crane* crane;
 
-extern std::vector<Obj*> obj;
+extern std::vector<Obj*> scn;
 
 extern Vec* vec;
 
