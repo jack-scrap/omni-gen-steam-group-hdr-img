@@ -207,28 +207,31 @@ glm::mat4 util::matr::rot(glm::mat4 model, glm::vec3 rot) {
 }
 
 bool util::phys::aabb(Obj* p, Obj* q) {
-	bool _;
-
 	for (int a = 0; a < 2 * 2 * 2 * 3; a += 3) {
-		glm::vec4 vtx = p->_acc * glm::vec4(glm::vec3(p->_bound[a], p->_bound[a + 1], p->_bound[a + 2]), 1.0);
+		glm::vec3 vtx = glm::vec3(p->_acc * glm::vec4(glm::vec3(p->_bound[a], p->_bound[a + 1], p->_bound[a + 2]), 1.0));
 
 		for (int b = 0; b < 2 * 2 * 2 * 3; b += 2 * 3) {
-			glm::vec4
-				min = q->_acc * glm::vec4(glm::vec3(q->_bound[b], q->_bound[b + 1], q->_bound[b + 2]), 1.0),
-				max = q->_acc * glm::vec4(glm::vec3(q->_bound[b + 3], q->_bound[b + 3 + 1], q->_bound[b + 3 + 2]), 1.0);
+			glm::vec3 rng[2] = {
+				glm::vec3(q->_acc * glm::vec4(glm::vec3(q->_bound[b], q->_bound[b + 1], q->_bound[b + 2]), 1.0)),
+				glm::vec3(q->_acc * glm::vec4(glm::vec3(q->_bound[b + 3], q->_bound[b + 3 + 1], q->_bound[b + 3 + 2]), 1.0))
+			};
 
-			_ = true;
+			bool _ = true;
 
 			for (int i = 0; i < 3; i++) {
 				if (!(
-					vtx[i] >= min[i] &&
-					vtx[i] <= max[i]
+					vtx[i] > rng[MIN][i] &&
+					vtx[i] < rng[MAX][i]
 				)) {
 					_ = false;
 				}
 			}
+
+			if (_) {
+				return _;
+			}
 		}
 	}
 
-	return _;
+	return false;
 }
