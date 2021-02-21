@@ -8,12 +8,12 @@ from omni import *
 
 i = 0
 while i < 3:
-    crane.ped(0)
+    crane.ped(False)
 
     i += 1
 
 i = 0
 while i < 3:
-    crane.zoom(1)
+    crane.zoom(True)
 
     i += 1
