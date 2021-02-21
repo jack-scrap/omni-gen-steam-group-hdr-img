@@ -120,12 +120,3 @@ void cranePed(Crane* crane, bool dir) {
 		t.detach();
 	}
 }
-
-void craneGrab(Crane* crane) {
-	Obj* targ = crane->_parent->_child[2 * 2 * 2 * 2];
-
-	targ->_noChild++;
-	targ->_child = (Obj**) realloc(targ->_child, targ->_noChild * sizeof (Obj*));
-
-	targ->_child[targ->_noChild - 1] = scn[1];
-}

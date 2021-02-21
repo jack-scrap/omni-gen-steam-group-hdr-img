@@ -30,3 +30,5 @@ extern "C" Truck* truckGet();
 extern "C" Crane* craneGet();
 
 extern "C" Bound* bound;
+
+extern "C" Obj* contGet();

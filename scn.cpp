@@ -57,3 +57,7 @@ Truck* truckGet() {
 Crane* craneGet() {
 	return crane;
 }
+
+Obj* contGet() {
+	return scn[1];
+}

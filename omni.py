@@ -31,9 +31,6 @@ class Crane(Obj):
     def ped(self, dir):
         cranePed(self._ptr, dir)
 
-    def grab(self):
-        craneGrab(self._ptr)
-
 truckGet = scn.truckGet
 truckGet.restype = POINTER(Truck)
 truckGet.argtypes = None
@@ -41,6 +38,10 @@ truckGet.argtypes = None
 craneGet = scn.craneGet
 craneGet.restype = POINTER(Crane)
 craneGet.argtypes = None
+
+contGet = scn.contGet
+contGet.restype = POINTER(Obj)
+contGet.argtypes = None
 
 craneZoom = crane.craneZoom
 craneZoom.restype = c_void_p
@@ -61,12 +62,6 @@ cranePed.restype = c_void_p
 cranePed.argtypes = [
     POINTER(Crane),
     c_bool
-]
-
-craneGrab = crane.craneGrab
-craneGrab.restype = c_void_p
-craneGrab.argtypes = [
-    POINTER(Crane)
 ]
 
 truck = Truck(truckGet())

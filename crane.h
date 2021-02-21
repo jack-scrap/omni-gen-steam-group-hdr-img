@@ -30,5 +30,3 @@ extern "C" void craneZoom(Crane* crane, bool dir);
 extern "C" void cranePan(Crane* crane, bool dir);
 
 extern "C" void cranePed(Crane* crane, bool dir);
-
-extern "C" void craneGrab(Crane* crane);
