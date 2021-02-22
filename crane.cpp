@@ -14,7 +14,7 @@ Crane* craneMk(glm::vec3 loc, glm::vec3 rot) {
 	Crane* _ = (Crane*) malloc(sizeof (Crane));
 
 	// wheel
-	Obj* child[(2 * 2 * 2 * 2) + 1 + (2 * 2)];
+	Obj* child[(2 * 2 * 2 * 2) + 1 + (2 * 2) + 1];
 	int i = 0;
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < 2; x++) {
@@ -135,6 +135,6 @@ void craneGrab(Crane* crane) {
 	glm::vec3 top = glm::vec3(b->_acc * glm::vec4(glm::vec3(0.0, b->_rng[Y][MAX], 0.0), 1.0));
 
 	if (btm[Y] < top[Y]) {
-		crane->_parent->_child[0] = b;
+		crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)] = b;
 	}
 }
