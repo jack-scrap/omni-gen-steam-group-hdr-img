@@ -206,6 +206,10 @@ glm::mat4 util::matr::rot(glm::mat4 model, glm::vec3 rot) {
 	return _;
 }
 
+glm::vec3 apply(glm::vec3 vtx, glm::mat4 model) {
+	return glm::vec3(model * glm::vec4(glm::vec3(0.0), 1.0));
+}
+
 bool util::phys::aabb(Obj* p, Obj* q) {
 	for (int a = 0; a < 2 * 2 * 2 * 3; a += 3) {
 		glm::vec3 vtx = glm::vec3(p->_acc * glm::vec4(glm::vec3(p->_bound[a], p->_bound[a + 1], p->_bound[a + 2]), 1.0));

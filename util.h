@@ -47,6 +47,8 @@ namespace util {
 
 	namespace matr {
 		glm::mat4 rot(glm::mat4 model, glm::vec3 rot);
+
+		glm::vec3 apply(glm::vec3 vtx, glm::mat4 model);
 	}
 
 	namespace phys {

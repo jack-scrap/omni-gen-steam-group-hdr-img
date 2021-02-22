@@ -1,6 +1,9 @@
 #include <cstdlib>
 #include <glm/gtc/matrix_transform.hpp>
 #include <thread>
+#include <iostream>
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/string_cast.hpp>
 
 #include "crane.h"
 #include "scn.h"
@@ -116,7 +119,22 @@ void cranePed(Crane* crane, bool dir) {
 			inc,
 			0.0
 		);
+
 		std::thread t(objAnim, targ, loc, glm::vec3(0.0));
 		t.detach();
+	}
+}
+
+void craneGrab(Crane* crane) {
+	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+
+	Obj* a = scn[0]->_child[2 * 2 * 2 * 2]->_child[0];
+	Obj* b = scn[1];
+
+	glm::vec3 btm = glm::vec3(a->_acc * glm::vec4(glm::vec3(0.0, a->_rng[Y][MIN], 0.0), 1.0));
+	glm::vec3 top = glm::vec3(b->_acc * glm::vec4(glm::vec3(0.0, b->_rng[Y][MAX], 0.0), 1.0));
+
+	if (btm[Y] < top[Y]) {
+		crane->_parent->_child[0] = b;
 	}
 }

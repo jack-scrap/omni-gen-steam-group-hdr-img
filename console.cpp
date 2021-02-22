@@ -6,6 +6,7 @@
 #include "console.h"
 #include "col.h"
 #include "state.h"
+#include "scn.h"
 
 Console::Console(std::vector<std::string> buff) :
 	_buff(buff),
