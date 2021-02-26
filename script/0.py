@@ -11,3 +11,11 @@ while i < 10:
     crane.ped(False)
 
     i += 1
+
+crane.grab()
+
+i = 0
+while i < 10:
+    crane.zoom(False)
+
+    i += 1
