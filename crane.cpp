@@ -122,13 +122,16 @@ void cranePed(Crane* crane, bool dir) {
 }
 
 void craneGrab(Crane* crane) {
-	Obj* a = scn[0]->_child[2 * 2 * 2 * 2]->_child[0];
-	Obj* b = scn[1];
-
+	Obj* a = crane->_parent->_child[2 * 2 * 2 * 2]->_child[0];
 	glm::vec3 btm = glm::vec3(a->_acc * glm::vec4(glm::vec3(0.0, a->_rng[Y][MIN], 0.0), 1.0));
-	glm::vec3 top = glm::vec3(b->_acc * glm::vec4(glm::vec3(0.0, b->_rng[Y][MAX], 0.0), 1.0));
 
-	if (btm[Y] < top[Y]) {
-		crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)] = b;
+	for (Obj* _ : scn) {
+		if (_ != crane->_parent) {
+			glm::vec3 top = glm::vec3(_->_acc * glm::vec4(glm::vec3(0.0, _->_rng[Y][MAX], 0.0), 1.0));
+
+			if (btm[Y] < top[Y]) {
+				crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)] = _;
+			}
+		}
 	}
 }
