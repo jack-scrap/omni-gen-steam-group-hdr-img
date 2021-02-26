@@ -1,6 +1,5 @@
 #include <cstdlib>
 #include <glm/gtc/matrix_transform.hpp>
-#include <thread>
 #include <iostream>
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/string_cast.hpp>
@@ -68,8 +67,7 @@ void craneAnim(Crane* crane, glm::vec3 loc) {
 		crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + i]->_active = true;
 	}
 
-	std::thread t(objAnim, crane->_parent, glm::vec3(1.0, 0.0, 0.0), glm::vec3(0.0, 0.0, 0.0));
-	t.join();
+	objTrans(crane->_parent, glm::vec3(1.0, 0.0, 0.0), glm::vec3(0.0, 0.0, 0.0));
 
 	for (int i = 0; i < 2 * 2; i++) {
 		crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + i]->_active = false;
@@ -82,8 +80,7 @@ void craneZoom(Crane* crane, bool dir) {
 		0.0,
 		0.0
 	);
-	std::thread t(craneAnim, crane, loc);
-	t.detach();
+	craneAnim(crane, loc);
 }
 
 void cranePan(Crane* crane, bool dir) {
@@ -125,8 +122,6 @@ void cranePed(Crane* crane, bool dir) {
 }
 
 void craneGrab(Crane* crane) {
-	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-
 	Obj* a = scn[0]->_child[2 * 2 * 2 * 2]->_child[0];
 	Obj* b = scn[1];
 

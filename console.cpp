@@ -1,3 +1,4 @@
+#include <thread>
 #include <vector>
 #include <Python.h>
 #include <iostream>
@@ -7,6 +8,10 @@
 #include "col.h"
 #include "state.h"
 #include "scn.h"
+
+void dispatch(Console* console) {
+	PyRun_SimpleString(util::str::join(console->_buff).c_str());
+}
 
 Console::Console(std::vector<std::string> buff) :
 	_buff(buff),
@@ -211,7 +216,8 @@ void Console::newline() {
 
 void Console::exec() {
 	if (_cmd == "run") {
-		PyRun_SimpleString(util::str::join(_buff).c_str());
+		std::thread t(dispatch, this);
+		t.detach();
 	}
 
 	_cmd.clear();
