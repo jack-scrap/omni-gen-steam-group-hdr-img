@@ -120,8 +120,7 @@ void cranePed(Crane* crane, bool dir) {
 			0.0
 		);
 
-		std::thread t(objAnim, targ, loc, glm::vec3(0.0));
-		t.detach();
+		objTrans(targ, loc, glm::vec3(0.0));
 	}
 }
 
