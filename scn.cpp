@@ -39,8 +39,8 @@ std::vector<GLushort> idc = {
 std::vector<GLushort> strip = util::mesh::strip(idc);
 
 Obj* rng[2] = {
-	objMk(&vtc[0], vtc.size() * sizeof (GLfloat), &strip[0], strip.size() * sizeof (GLushort), "obj", "solid", true, glm::vec3(0.0, 0.0, -(11.0 + (state::pad * 2) + (state::pad * 2) + (state::pad * 2) + (state::pad * 2))), glm::vec3(M_PI / 2, 0.0, M_PI / 2)),
-	objMk(&vtc[0], vtc.size() * sizeof (GLfloat), &strip[0], strip.size() * sizeof (GLushort), "obj", "solid", true, glm::vec3(0.0, 0.0, 11.0 + (state::pad * 2) + (state::pad * 2)), glm::vec3(M_PI / 2, 0.0, M_PI / 2))
+	objMk(&vtc[0], vtc.size() * sizeof (GLfloat), &strip[0], strip.size() * sizeof (GLushort), "obj", "solid", true, glm::vec3(0.0, 0.0, -(11.0 + (state::pad * 2) + (state::pad * 2) + (state::pad * 2) + (state::pad * 2))) + glm::vec3(state::pad * 4, 0.0, state::pad * 4), glm::vec3(M_PI / 2, 0.0, M_PI / 2)),
+	objMk(&vtc[0], vtc.size() * sizeof (GLfloat), &strip[0], strip.size() * sizeof (GLushort), "obj", "solid", true, glm::vec3(0.0, 0.0, 11.0 + (state::pad * 2) + (state::pad * 2)) + glm::vec3(state::pad * 4, 0.0, state::pad * 4), glm::vec3(M_PI / 2, 0.0, M_PI / 2))
 };
 
 std::vector<Obj*> scn = {
