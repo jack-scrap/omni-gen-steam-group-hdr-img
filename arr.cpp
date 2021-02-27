@@ -81,7 +81,7 @@ Arr* arrMk(Node* data, glm::vec3 loc, glm::vec3 rot) {
 	}
 
 	// name
-	Str* str = strMk("asdf", loc + glm::vec3(-layout::margin, 0.0, -layout::offset));
+	Str* str = strMk("asdf", loc + glm::vec3(layout::margin, 0.0, -layout::offset));
 
 	_->_parent->_child[_->_y + (_->_x * 2 * _->_y)] = str->_parent;
 
