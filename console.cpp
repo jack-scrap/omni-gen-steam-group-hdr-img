@@ -47,7 +47,7 @@ Console::Console(std::vector<std::string> buff) :
 		// text
 		TTF_Init();
 
-		font = TTF_OpenFont("res/terminus.bdf", state::dim[Y]);
+		font = TTF_OpenFont("res/terminus.bdf", layout::dim[Y]);
 
 		SDL_FillRect(_canv, &_canvRect, SDL_MapRGBA(_canv->format, col[false][R], col[false][G], col[false][B], 255));
 		SDL_FillRect(_block, &_blockRect, SDL_MapRGBA(_block->format, col[true][R], col[true][G], col[true][B], 255));
@@ -130,27 +130,27 @@ void Console::render() {
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _canv->w, _canv->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, _canv->pixels);
 
 	for (int i = 0; i < state::ln; i++) {
-		glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::dim[X], 0, state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _block->pixels);
+		glTexSubImage2D(GL_TEXTURE_2D, 0, i * layout::dim[X], 0, layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _block->pixels);
 	}
 
 	for (int l = 0; l < roof; l++) {
 		for (int i = 0; i < _no[l].size(); i++) {
-			glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::dim[X], (1 + l) * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _no[l][i]->pixels);
+			glTexSubImage2D(GL_TEXTURE_2D, 0, i * layout::dim[X], (1 + l) * layout::dim[Y], layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _no[l][i]->pixels);
 		}
 	}
 
 	for (int l = 0; l < roof; l++) {
 		for (int i = 0; i < _buff[l].size(); i++) {
 			if (_hl[l][i]) {
-				glTexSubImage2D(GL_TEXTURE_2D, 0, (max + i) * state::dim[X], (1 + l) * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _block->pixels);
+				glTexSubImage2D(GL_TEXTURE_2D, 0, (max + i) * layout::dim[X], (1 + l) * layout::dim[Y], layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _block->pixels);
 			} else {
-				glTexSubImage2D(GL_TEXTURE_2D, 0, (max + i) * state::dim[X], (1 + l) * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _map[l][i]->pixels);
+				glTexSubImage2D(GL_TEXTURE_2D, 0, (max + i) * layout::dim[X], (1 + l) * layout::dim[Y], layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _map[l][i]->pixels);
 			}
 		}
 	}
 
 	for (int i = 0; i < prompt.size(); i++) {
-		glTexSubImage2D(GL_TEXTURE_2D, 0, i * state::dim[X], (state::line - 1) * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _map[_map.size() - 1][i]->pixels);
+		glTexSubImage2D(GL_TEXTURE_2D, 0, i * layout::dim[X], (state::line - 1) * layout::dim[Y], layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _map[_map.size() - 1][i]->pixels);
 	}
 
 	// cursor
@@ -168,7 +168,7 @@ void Console::render() {
 			break;
 	}
 
-	glTexSubImage2D(GL_TEXTURE_2D, 0, _idx[X] * state::dim[X], _idx[Y] * state::dim[Y], state::dim[X], state::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _block->pixels);
+	glTexSubImage2D(GL_TEXTURE_2D, 0, _idx[X] * layout::dim[X], _idx[Y] * layout::dim[Y], layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _block->pixels);
 
 	glGenerateMipmap(GL_TEXTURE_2D);
 }

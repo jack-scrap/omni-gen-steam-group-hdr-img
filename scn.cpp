@@ -6,7 +6,7 @@
 #include <chrono>
 
 #include "scn.h"
-#include "state.h"
+#include "layout.h"
 #include "col.h"
 #include "crane.h"
 #include "node.h"
@@ -23,7 +23,7 @@ Cam cam = {
 };
 
 Disp disp("Omni", {
-	state::view[X] + (state::ln * state::dim[X]), state::view[Y]
+	layout::view[X] + (state::ln * layout::dim[X]), layout::view[Y]
 }, col[false]);
 
 Truck* truck = truckMk();
@@ -31,7 +31,7 @@ Truck* truck = truckMk();
 Crane* crane = craneMk();
 
 std::vector<GLfloat> vtc = util::mesh::quad::pos(glm::vec2(
-	state::pad * 2,
+	layout::pad,
 	100.0
 ));
 
@@ -41,8 +41,8 @@ std::vector<GLushort> idc = {
 std::vector<GLushort> strip = util::mesh::strip(idc);
 
 Obj* rng[2] = {
-	objMk(&vtc[0], vtc.size() * sizeof (GLfloat), &strip[0], strip.size() * sizeof (GLushort), "obj", "solid", true, glm::vec3(0.0, 0.0, -(11.0 + (state::pad * 2) + (state::pad * 2) + (state::pad * 2) + (state::pad * 2))) + glm::vec3(state::pad * 4, 0.0, state::pad * 4), glm::vec3(M_PI / 2, 0.0, M_PI / 2)),
-	objMk(&vtc[0], vtc.size() * sizeof (GLfloat), &strip[0], strip.size() * sizeof (GLushort), "obj", "solid", true, glm::vec3(0.0, 0.0, 11.0 + (state::pad * 2) + (state::pad * 2)) + glm::vec3(state::pad * 4, 0.0, state::pad * 4), glm::vec3(M_PI / 2, 0.0, M_PI / 2))
+	objMk(&vtc[0], vtc.size() * sizeof (GLfloat), &strip[0], strip.size() * sizeof (GLushort), "obj", "solid", true, glm::vec3(0.0, 0.0, -(11.0 + (layout::stroke) + (layout::stroke) + (layout::stroke) + (layout::stroke))) + glm::vec3(layout::pad * 4, 0.0, layout::pad * 4), glm::vec3(M_PI / 2, 0.0, M_PI / 2)),
+	objMk(&vtc[0], vtc.size() * sizeof (GLfloat), &strip[0], strip.size() * sizeof (GLushort), "obj", "solid", true, glm::vec3(0.0, 0.0, 11.0 + (layout::stroke) + (layout::stroke)) + glm::vec3(layout::pad * 4, 0.0, layout::pad * 4), glm::vec3(M_PI / 2, 0.0, M_PI / 2))
 };
 
 char asdf[] = {

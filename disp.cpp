@@ -46,13 +46,13 @@ void Disp::draw() {
 
 	glEnable(GL_DEPTH_TEST);
 
-	glViewport(state::res[X], 0, state::view[X], state::view[Y]);
+	glViewport(layout::res[X], 0, layout::view[X], layout::view[Y]);
 
 	for (Obj* _ : scn) {
 		objDraw(_);
 	}
 
-	glViewport(0, 0, state::res[Y], state::view[Y]);
+	glViewport(0, 0, layout::res[Y], layout::view[Y]);
 
 	console->draw();
 

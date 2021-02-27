@@ -3,6 +3,7 @@
 #include <SDL2/SDL_ttf.h>
 #include <glm/glm.hpp>
 
+#include "layout.h"
 #include "state.h"
 #include "math.h"
 #include "util.h"
@@ -25,22 +26,22 @@ class Console {
 		std::vector<std::vector<bool>> _hl;
 
 		SDL_Surface
-			* _canv = SDL_CreateRGBSurface(0, state::res[X], state::res[Y], 4 * sizeof (long int), 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000),
-			* _block = SDL_CreateRGBSurface(0, state::dim[X], state::dim[Y], 4 * sizeof (long int), 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+			* _canv = SDL_CreateRGBSurface(0, layout::res[X], layout::res[Y], 4 * sizeof (long int), 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000),
+			* _block = SDL_CreateRGBSurface(0, layout::dim[X], layout::dim[Y], 4 * sizeof (long int), 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
 
 		SDL_Rect
 			_canvRect = {
 				0,
 				0,
-				state::ln * state::dim[X],
-				state::view[Y]
+				state::ln * layout::dim[X],
+				layout::view[Y]
 			},
 
 			_blockRect = {
 				0,
 				0,
-				state::dim[X],
-				state::dim[Y]
+				layout::dim[X],
+				layout::dim[Y]
 			};
 
 		std::vector<std::vector<SDL_Surface*>>
