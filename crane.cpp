@@ -130,12 +130,14 @@ void craneGrab(Crane* crane) {
 
 	if (!crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)]) {
 		for (Obj* _ : scn) {
-			glm::vec3 top = glm::vec3(_->_acc * glm::vec4(glm::vec3(0.0, _->_rng[Y][MAX], 0.0), 1.0));
-
 			if (_ != crane->_parent) {
+				glm::vec3 top = glm::vec3(_->_acc * glm::vec4(glm::vec3(0.0, _->_rng[Y][MAX], 0.0), 1.0));
+
 				if (btm[Y] < top[Y]) {
 					crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)] = _;
 				}
+
+				break;
 			}
 		}
 	} else {
