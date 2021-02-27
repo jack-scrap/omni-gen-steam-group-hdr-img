@@ -46,8 +46,8 @@ Obj* rng[2] = {
 std::vector<Obj*> scn = {
 	crane->_parent,
 	objMk("container_2x4", "obj", "dir", true, glm::vec3(0.0, 1.0, 0.0)),
-	/* rng[MIN], */
-	/* rng[MAX] */
+	rng[MIN],
+	rng[MAX]
 };
 
 Truck* truckGet() {
