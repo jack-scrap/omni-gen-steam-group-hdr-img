@@ -9,6 +9,8 @@
 #include "state.h"
 #include "col.h"
 #include "crane.h"
+#include "node.h"
+#include "arr.h"
 
 Cam cam = {
 	{
@@ -43,11 +45,33 @@ Obj* rng[2] = {
 	objMk(&vtc[0], vtc.size() * sizeof (GLfloat), &strip[0], strip.size() * sizeof (GLushort), "obj", "solid", true, glm::vec3(0.0, 0.0, 11.0 + (state::pad * 2) + (state::pad * 2)) + glm::vec3(state::pad * 4, 0.0, state::pad * 4), glm::vec3(M_PI / 2, 0.0, M_PI / 2))
 };
 
+char asdf[] = {
+	0,
+	97,
+	97
+};
+char hjkl[] = {
+	0,
+	97,
+	97
+};
+char qwer[] = {
+	97
+};
+
+Node* child[] = {
+	nodeMk(asdf, sizeof asdf / sizeof *asdf),
+	nodeMk(hjkl, sizeof hjkl / sizeof *hjkl)
+};
+
+Node* data = nodeMk(asdf, sizeof asdf / sizeof *asdf, child, sizeof child / sizeof *child);
+Arr* arr = arrMk(data);
+
 std::vector<Obj*> scn = {
 	crane->_parent,
-	objMk("container_2x4", "obj", "dir", true, glm::vec3(0.0, 1.0, 0.0)),
 	rng[MIN],
-	rng[MAX]
+	rng[MAX],
+	arr->_parent
 };
 
 Truck* truckGet() {

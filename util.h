@@ -36,6 +36,7 @@ namespace util {
 
 		namespace quad {
 			std::vector<GLfloat> pos(glm::vec2 sz);
+			std::vector<GLfloat> pos1(glm::vec2 sz);
 			std::vector<GLushort> idc();
 		}
 

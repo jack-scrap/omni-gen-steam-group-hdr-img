@@ -11,7 +11,7 @@ Border* borderMk(glm::vec2 sz, glm::vec3 loc, glm::vec3 rot) {
 
 	GLfloat vtc[2 * 2 * 3 * 2];
 
-	std::vector<GLfloat> outer = util::mesh::quad::pos({
+	std::vector<GLfloat> outer = util::mesh::quad::pos1({
 		sz[X] + (layout::stroke * 2), sz[Y] + (layout::stroke * 2)
 	});
 	int i = 0;
@@ -25,7 +25,7 @@ Border* borderMk(glm::vec2 sz, glm::vec3 loc, glm::vec3 rot) {
 		}
 	}
 
-	std::vector<GLfloat> inner = util::mesh::quad::pos({
+	std::vector<GLfloat> inner = util::mesh::quad::pos1({
 		sz[X], sz[Y]
 	});
 	i = 0;
@@ -45,7 +45,6 @@ Border* borderMk(glm::vec2 sz, glm::vec3 loc, glm::vec3 rot) {
 		quad[2 * 2 * 2 * 2];
 
 	// quad
-	i = 0;
 	int cnt = 0;
 	for (int q = 0; q < 2; q++) {
 		i = 0;

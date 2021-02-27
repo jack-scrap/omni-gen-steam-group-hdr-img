@@ -161,6 +161,20 @@ std::vector<GLfloat> util::mesh::quad::pos(glm::vec2 sz) {
 	return _;
 }
 
+std::vector<GLfloat> util::mesh::quad::pos1(glm::vec2 sz) {
+	std::vector<GLfloat> _;
+
+	for (int y = 0; y < 2; y++) {
+		for (int x = 0; x < 2; x++) {
+			_.push_back(x * sz[X]);
+			_.push_back(0.0);
+			_.push_back(y * sz[Y]);
+		}
+	}
+
+	return _;
+}
+
 std::vector<GLushort> util::mesh::quad::idc() {
 	std::vector<GLushort> _;
 
