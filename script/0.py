@@ -15,7 +15,9 @@ while i < 10:
 crane.grab()
 
 i = 0
-while i < 10:
+while i < 3:
     crane.zoom(False)
 
     i += 1
+
+crane.grab()
