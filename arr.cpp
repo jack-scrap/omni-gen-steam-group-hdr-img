@@ -44,8 +44,8 @@ Arr* arrMk(Node* data, glm::vec3 loc, glm::vec3 rot) {
 		GLfloat offset = layout::stroke + (layout::margin * 2);
 
 		Border* child = borderMk({
-			parent->_sz[X] - (((j + 1) * ((layout::offset) * 2))) - (layout::margin * 2),
-			parent->_sz[Y] - (((j + 1) * ((layout::offset) * 2))) - (layout::margin * 2)
+			parent->_sz[X] - (((j + 1) * (layout::offset * 2))) - (layout::margin * 2),
+			parent->_sz[Y] - (((j + 1) * (layout::offset * 2))) - (layout::margin * 2)
 		}, loc + glm::vec3(0.0, layout::margin, 0.0) + glm::vec3(
 			(j + 1) * offset,
 			0.0,
@@ -71,7 +71,7 @@ Arr* arrMk(Node* data, glm::vec3 loc, glm::vec3 rot) {
 
 			// data
 			if (data->_data[i]) {
-				_->_parent->_child[c] = objMk("container_2x4", "obj", "dir", true, loc + glm::vec3(offset + (i * stride[X]), 2.0, offset) + glm::vec3(-layout::margin + (layout::stroke * 4) + (layout::idx[X] / 2) + (layout::margin * 2), 0.0, -layout::margin + (layout::stroke * 4) + (layout::idx[Y] / 2) + (layout::margin * 2)));
+				_->_parent->_child[c] = objMk("container_2x4", "obj", "dir", true, loc + glm::vec3(offset + (i * stride[X]), 2.0, offset) + glm::vec3(-1.0 + -layout::margin + (layout::stroke * 2) + (layout::margin * 2) + (layout::idx[X] / 2), 0.0, -1.0 + -layout::margin + (layout::stroke * 2) + (layout::margin * 2) + (layout::idx[Y] / 2)));
 			} else {
 				_->_parent->_child[c] = nullptr;
 			}
