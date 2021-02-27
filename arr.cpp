@@ -24,8 +24,8 @@ Arr* arrMk(Node* data, glm::vec3 loc, glm::vec3 rot) {
 		},
 
 		scale[2] = {
-			layout::stroke + (_->_y * (layout::stroke * 2 * 2)) + (_->_x * stride[X]),
-			layout::stroke + (_->_y * (layout::stroke * 2 * 2)) + (_->_y * stride[Y])
+			(_->_y * layout::stroke) + (_->_x * stride[X]),
+			(_->_y * layout::stroke) + (_->_y * stride[Y])
 		};
 
 	Border* parent = borderMk({
@@ -43,21 +43,12 @@ Arr* arrMk(Node* data, glm::vec3 loc, glm::vec3 rot) {
 	for (int j = 0; j < _->_y; j++) {
 		GLfloat offset = layout::stroke + (layout::margin * 2);
 
-		Border* child = borderMk({
-			parent->_sz[X] - (((j + 1) * (layout::offset * 2))) - (layout::margin * 2),
-			parent->_sz[Y] - (((j + 1) * (layout::offset * 2))) - (layout::margin * 2)
-		}, loc + glm::vec3(0.0, layout::margin, 0.0) + glm::vec3(
-			(j + 1) * offset,
-			0.0,
-			(j + 1) * offset
-		), rot);
-
-		_->_parent->_child[c] = child->_parent;
+		_->_parent->_child[c] = nullptr;
 
 		c++;
 
 		for (int i = 0; i < _->_x; i++) {
-			GLfloat offset = (1 + j + 1) * (layout::stroke + (layout::margin * 2));
+			GLfloat offset = (j + 1) * (layout::stroke + (layout::margin * 2));
 
 			Idx* idx = idxMk(i, loc + glm::vec3(0.0, layout::margin, 0.0) + glm::vec3(
 				offset + (i * stride[X]),
