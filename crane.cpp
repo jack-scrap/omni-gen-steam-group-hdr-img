@@ -57,6 +57,8 @@ Crane* craneMk(glm::vec3 loc, glm::vec3 rot) {
 		}
 	}
 
+	child[(2 * 2 * 2 * 2) + 1 + (2 * 2)] = nullptr;
+
 	_->_parent = objMk("crane/body", "obj", "dir", true, child, sizeof child / sizeof *child, loc, rot);
 
 	return _;
@@ -127,6 +129,10 @@ void craneGrab(Crane* crane) {
 
 	for (Obj* _ : scn) {
 		if (_ != crane->_parent) {
+			if (crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)] != nullptr) {
+				std::cout << _ << std::endl;
+			}
+
 			glm::vec3 top = glm::vec3(_->_acc * glm::vec4(glm::vec3(0.0, _->_rng[Y][MAX], 0.0), 1.0));
 
 			if (btm[Y] < top[Y]) {

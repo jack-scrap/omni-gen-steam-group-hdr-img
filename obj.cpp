@@ -503,7 +503,9 @@ void objAcc(Obj* obj, glm::mat4 prev) {
 	obj->_acc = prev * obj->_model;
 
 	for (int i = 0; i < obj->_noChild; i++) {
-		objAcc(obj->_child[i], obj->_acc);
+		if (obj->_child[i]) {
+			objAcc(obj->_child[i], obj->_acc);
+		}
 	}
 }
 
@@ -575,9 +577,8 @@ void objDraw(Obj* obj) {
 	glBindVertexArray(0);
 
 	obj->_t++;
-
 	for (int i = 0; i < obj->_noChild; i++) {
-		if (&obj->_child[i]) {
+		if (obj->_child[i]) {
 			objDraw(obj->_child[i]);
 		}
 	}
