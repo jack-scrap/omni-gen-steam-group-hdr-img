@@ -1,4 +1,5 @@
 #include <cstdlib>
+#include <thread>
 #include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
 #define GLM_ENABLE_EXPERIMENTAL
@@ -140,4 +141,6 @@ void craneGrab(Crane* crane) {
 	} else {
 		crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)] = nullptr;
 	}
+
+	std::this_thread::sleep_for(std::chrono::milliseconds(1000 / state::fps));
 }
