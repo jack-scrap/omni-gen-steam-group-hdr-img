@@ -70,7 +70,7 @@ void craneAnim(Crane* crane, glm::vec3 loc) {
 		crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + i]->_active = true;
 	}
 
-	objTrans(crane->_parent, glm::vec3(1.0, 0.0, 0.0), glm::vec3(0.0, 0.0, 0.0));
+	objTrans(crane->_parent, loc, glm::vec3(0.0, 0.0, 0.0));
 
 	for (int i = 0; i < 2 * 2; i++) {
 		crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + i]->_active = false;

@@ -21,3 +21,9 @@ while i < 3:
     i += 1
 
 crane.grab()
+
+i = 0
+while i < 3:
+    crane.zoom(False)
+
+    i += 1
