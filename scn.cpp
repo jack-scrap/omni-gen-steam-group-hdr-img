@@ -50,18 +50,9 @@ char asdf[] = {
 	97,
 	97
 };
-char hjkl[] = {
-	0,
-	97,
-	97
-};
-char qwer[] = {
-	97
-};
 
 Node* child[] = {
-	nodeMk(asdf, sizeof asdf / sizeof *asdf),
-	nodeMk(hjkl, sizeof hjkl / sizeof *hjkl)
+	nodeMk(asdf, sizeof asdf / sizeof *asdf)
 };
 
 Node* data = nodeMk(asdf, sizeof asdf / sizeof *asdf, child, sizeof child / sizeof *child);
