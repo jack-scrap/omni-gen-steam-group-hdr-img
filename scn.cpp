@@ -56,7 +56,7 @@ Node* child[] = {
 };
 
 Node* data = nodeMk(asdf, sizeof asdf / sizeof *asdf, child, sizeof child / sizeof *child);
-Arr* arr = arrMk(data);
+Arr* arr = arrMk(data, "data");
 
 std::vector<Obj*> scn = {
 	crane->_parent,
