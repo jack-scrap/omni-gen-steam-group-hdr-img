@@ -50,22 +50,22 @@ Arr* arrMk(Node* data, glm::vec3 loc, glm::vec3 rot) {
 		for (int i = 0; i < _->_x; i++) {
 			GLfloat offset = (j + 1) * (layout::stroke + (layout::margin * 2));
 
-			Idx* idx = idxMk(i, glm::vec3(0.0, layout::margin, 0.0) + glm::vec3(
-				offset + (i * stride[X]),
-				0.0,
-				offset
-			), rot);
+			Idx* idx;
+			if (data->_data[i]) {
+				idx = idxMk(i, c, glm::vec3(0.0, layout::margin, 0.0) + glm::vec3(offset + (i * stride[X]), 0.0, offset));
+			} else {
+				idx = idxMk(i, glm::vec3(0.0, layout::margin, 0.0) + glm::vec3(
+					offset + (i * stride[X]),
+					0.0,
+					offset
+				));
+			}
 
 			_->_parent->_child[c] = idx->_parent;
 
 			c++;
 
-			// data
-			if (data->_data[i]) {
-				_->_parent->_child[c] = objMk("container_2x4", "obj", "dir", true, glm::vec3(offset + (i * stride[X]), 2.0, offset) + glm::vec3(-1.0 + -layout::margin + (layout::stroke * 2) + (layout::margin * 2) + (layout::idx[X] / 2), 0.0, -1.0 + -layout::margin + (layout::stroke * 2) + (layout::margin * 2) + (layout::idx[Y] / 2)));
-			} else {
-				_->_parent->_child[c] = nullptr;
-			}
+			_->_parent->_child[c] = nullptr;
 
 			c++;
 		}

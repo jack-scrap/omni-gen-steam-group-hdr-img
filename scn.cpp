@@ -69,9 +69,9 @@ Arr* arr = arrMk(data);
 
 std::vector<Obj*> scn = {
 	crane->_parent,
+	arr->_parent,
 	rng[MIN],
-	rng[MAX],
-	arr->_parent
+	rng[MAX]
 };
 
 Truck* truckGet() {

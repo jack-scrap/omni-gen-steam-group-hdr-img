@@ -131,20 +131,17 @@ void craneGrab(Crane* crane) {
 	if (!crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)]) {
 		unsigned int offset = 1;
 
-		for (int i = 1; i < scn[3]->_noChild; i += 2) {
-			if (scn[3]->_child[i]) {
-				crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)] = scn[3]->_child[i];
+		for (int i = 1; i < scn[1]->_noChild; i++) {
+			if (scn[1]->_child[i]->_child[0]) {
+				crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)] = scn[1]->_child[i];
 
-				scn[3]->_child[i] = nullptr;
+				scn[1]->_child[i]->_child[0] = nullptr;
 
 				break;
 			}
 		}
 	} else {
-		if (crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)]) {
-		} else {
-			scn.push_back(crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)]);
-		}
+		scn.push_back(crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)]);
 
 		crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)] = nullptr;
 	}
