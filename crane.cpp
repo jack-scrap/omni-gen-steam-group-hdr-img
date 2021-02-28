@@ -129,11 +129,9 @@ void craneGrab(Crane* crane) {
 	glm::vec3 btm = glm::vec3(a->_acc * glm::vec4(glm::vec3(0.0, a->_rng[Y][MIN], 0.0), 1.0));
 
 	if (!crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)]) {
-		unsigned int offset = 1;
-
-		for (int i = 1; i < scn[1]->_noChild; i++) {
+		for (int i = 1; i < scn[1]->_noChild - 1; i++) {
 			if (scn[1]->_child[i]->_child[0]) {
-				crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)] = scn[1]->_child[i];
+				crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)] = scn[1]->_child[i]->_child[0];
 
 				scn[1]->_child[i]->_child[0] = nullptr;
 
