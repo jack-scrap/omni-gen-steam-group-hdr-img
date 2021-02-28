@@ -35,17 +35,13 @@ Arr* arrMk(Node* data, glm::vec3 loc, glm::vec3 rot) {
 
 	_->_parent = parent->_parent;
 
-	_->_parent->_noChild = _->_y + (_->_x * 2 * _->_y) + 1;
+	_->_parent->_noChild = _->_y + (_->_x * _->_y) + 1;
 	_->_parent->_child = (Obj**) realloc(_->_parent->_child, _->_parent->_noChild * sizeof (Obj*));
 
 	// scope
 	int c = 0;
 	for (int j = 0; j < _->_y; j++) {
 		GLfloat offset = layout::stroke + (layout::margin * 2);
-
-		_->_parent->_child[c] = nullptr;
-
-		c++;
 
 		for (int i = 0; i < _->_x; i++) {
 			GLfloat offset = (j + 1) * (layout::stroke + (layout::margin * 2));
@@ -64,17 +60,13 @@ Arr* arrMk(Node* data, glm::vec3 loc, glm::vec3 rot) {
 			_->_parent->_child[c] = idx->_parent;
 
 			c++;
-
-			_->_parent->_child[c] = nullptr;
-
-			c++;
 		}
 	}
 
 	// name
 	Str* str = strMk("data", glm::vec3(layout::margin, 0.0, -layout::offset), glm::vec3(0.0, M_PI / 2, 0.0));
 
-	_->_parent->_child[_->_y + (_->_x * 2 * _->_y)] = str->_parent;
+	_->_parent->_child[_->_y + (_->_x * _->_y)] = str->_parent;
 
 	return _;
 }
