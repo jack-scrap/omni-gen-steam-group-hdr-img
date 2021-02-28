@@ -14,25 +14,25 @@ Truck* truckMk(glm::vec3 loc, glm::vec3 rot) {
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < 2; x++) {
 			Obj* rim[] = {
-				objMk("rim", "obj", "dir", true, loc + glm::vec3(x * -2.6, -1, z ? 1 : -1), rot)
+				objMk("rim", "obj", "dir", true, glm::vec3(x * -2.6, -1, z ? 1 : -1), rot)
 			};
 
-			child[i] = objMk("wheel", "obj", "dir", false, rim, sizeof rim / sizeof *rim, loc + glm::vec3(x * -2.6, -1, z ? 1 : -1), rot);
+			child[i] = objMk("wheel", "obj", "dir", false, rim, sizeof rim / sizeof *rim, glm::vec3(x * -2.6, -1, z ? 1 : -1), rot);
 
 			i++;
 		}
 	}
 
-	child[2 * 2] = objMk("truck/tail", "obj", "dir", false, loc + glm::vec3(-3.84, 0.0, 0.0), rot);
+	child[2 * 2] = objMk("truck/tail", "obj", "dir", false, glm::vec3(-3.84, 0.0, 0.0), rot);
 
 	i++;
 
-	Pt* bed = ptMk(loc + glm::vec3(0.0, 0.2, 0.0), rot);
+	Pt* bed = ptMk(glm::vec3(0.0, 0.2, 0.0), rot);
 	child[(2 * 2) + 1] = bed->_parent;
 
 	i++;
 
-	_->_parent = objMk("truck/front", "tex", "tex", true, child, sizeof child / sizeof *child, loc + glm::vec3(2.4, 1.3, 0.0), rot);
+	_->_parent = objMk("truck/front", "tex", "tex", true, child, sizeof child / sizeof *child, glm::vec3(2.4, 1.3, 0.0), rot);
 
 	return _;
 }

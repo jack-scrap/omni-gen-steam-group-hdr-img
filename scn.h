@@ -32,3 +32,5 @@ extern "C" Crane* craneGet();
 extern "C" Bound* bound;
 
 extern "C" Obj* contGet();
+
+extern bool fin;

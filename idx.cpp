@@ -13,7 +13,7 @@ Idx* idxMk(unsigned int i, glm::vec3 loc, glm::vec3 rot) {
 	_->_parent = border->_parent;
 
 	Obj* child[] = {
-		objMk("glyph/" + std::to_string(i), "main", "solid", true, loc + glm::vec3(
+		objMk("glyph/" + std::to_string(i), "main", "solid", true, glm::vec3(
 			(layout::idx[X] / 2) + layout::stroke + (layout::margin * 2), 0.0, (layout::idx[Y] / 2) + layout::stroke + (layout::margin * 2)
 		), rot)
 	};

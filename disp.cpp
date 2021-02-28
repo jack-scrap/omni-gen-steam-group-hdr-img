@@ -57,6 +57,8 @@ void Disp::draw() {
 	console->draw();
 
 	update();
+
+	std::cout << fin << std::endl;
 }
 
 Disp::~Disp() {

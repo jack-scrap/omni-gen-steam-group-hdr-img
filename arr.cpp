@@ -31,7 +31,7 @@ Arr* arrMk(Node* data, glm::vec3 loc, glm::vec3 rot) {
 	Border* parent = borderMk({
 		scale[X],
 		scale[Y]
-	}, loc + glm::vec3(0.0, layout::margin, 0.0), rot);
+	}, glm::vec3(0.0, layout::margin, 0.0), rot);
 
 	_->_parent = parent->_parent;
 
@@ -50,7 +50,7 @@ Arr* arrMk(Node* data, glm::vec3 loc, glm::vec3 rot) {
 		for (int i = 0; i < _->_x; i++) {
 			GLfloat offset = (j + 1) * (layout::stroke + (layout::margin * 2));
 
-			Idx* idx = idxMk(i, loc + glm::vec3(0.0, layout::margin, 0.0) + glm::vec3(
+			Idx* idx = idxMk(i, glm::vec3(0.0, layout::margin, 0.0) + glm::vec3(
 				offset + (i * stride[X]),
 				0.0,
 				offset
@@ -62,7 +62,7 @@ Arr* arrMk(Node* data, glm::vec3 loc, glm::vec3 rot) {
 
 			// data
 			if (data->_data[i]) {
-				_->_parent->_child[c] = objMk("container_2x4", "obj", "dir", true, loc + glm::vec3(offset + (i * stride[X]), 2.0, offset) + glm::vec3(-1.0 + -layout::margin + (layout::stroke * 2) + (layout::margin * 2) + (layout::idx[X] / 2), 0.0, -1.0 + -layout::margin + (layout::stroke * 2) + (layout::margin * 2) + (layout::idx[Y] / 2)));
+				_->_parent->_child[c] = objMk("container_2x4", "obj", "dir", true, glm::vec3(offset + (i * stride[X]), 2.0, offset) + glm::vec3(-1.0 + -layout::margin + (layout::stroke * 2) + (layout::margin * 2) + (layout::idx[X] / 2), 0.0, -1.0 + -layout::margin + (layout::stroke * 2) + (layout::margin * 2) + (layout::idx[Y] / 2)));
 			} else {
 				_->_parent->_child[c] = nullptr;
 			}
@@ -72,7 +72,7 @@ Arr* arrMk(Node* data, glm::vec3 loc, glm::vec3 rot) {
 	}
 
 	// name
-	Str* str = strMk("data", loc + glm::vec3(layout::margin, 0.0, -layout::offset));
+	Str* str = strMk("data", glm::vec3(layout::margin, 0.0, -layout::offset), glm::vec3(0.0, M_PI / 2, 0.0));
 
 	_->_parent->_child[_->_y + (_->_x * 2 * _->_y)] = str->_parent;
 

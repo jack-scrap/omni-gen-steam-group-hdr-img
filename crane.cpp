@@ -141,7 +141,10 @@ void craneGrab(Crane* crane) {
 			}
 		}
 	} else {
-		scn.push_back(crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)]);
+		if (crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)]) {
+		} else {
+			scn.push_back(crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)]);
+		}
 
 		crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)] = nullptr;
 	}
