@@ -126,14 +126,14 @@ void cranePed(Crane* crane, bool dir) {
 
 void craneGrab(Crane* crane) {
 	Obj* a = crane->_parent->_child[2 * 2 * 2 * 2]->_child[0];
-	glm::vec3 btm = glm::vec3(a->_acc * glm::vec4(glm::vec3(0.0, a->_rng[Y][MIN], 0.0), 1.0));
+	glm::vec3 head = glm::vec3(a->_acc * glm::vec4(glm::vec3(0.0, a->_rng[Y][MIN], 0.0), 1.0));
 
 	if (!crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)]) {
 		for (int i = 1; i < scn[1]->_noChild - 1; i++) {
 			if (scn[1]->_child[i]->_child[0]) {
 				glm::vec3 top = glm::vec3(scn[1]->_child[i]->_child[0]->_acc * glm::vec4(glm::vec3(0.0, a->_rng[Y][MAX], 0.0), 1.0));
 
-				if (btm[Y] < top[Y]) {
+				if (head[Y] < top[Y]) {
 					crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)] = scn[1]->_child[i]->_child[0];
 
 					scn[1]->_child[i]->_child[0] = nullptr;
@@ -143,9 +143,21 @@ void craneGrab(Crane* crane) {
 			}
 		}
 	} else {
-		scn.push_back(crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)]);
+		for (int i = 1; i < scn[1]->_noChild - 1; i++) {
+			glm::vec3 idx = scn[1]->_child[i]->_acc * glm::vec4(glm::vec3(0.0, scn[1]->_child[i]->_rng[Y][MAX], 0.0), 1.0);
 
-		crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)] = nullptr;
+			if (head[X] < idx[X]) {
+				scn[1]->_child[i]->_child[0] = crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)];
+
+				crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)] = nullptr;
+			} else {
+				scn.push_back(crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)]);
+
+				crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)] = nullptr;
+			}
+
+			break;
+		}
 	}
 
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
