@@ -131,11 +131,15 @@ void craneGrab(Crane* crane) {
 	if (!crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)]) {
 		for (int i = 1; i < scn[1]->_noChild - 1; i++) {
 			if (scn[1]->_child[i]->_child[0]) {
-				crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)] = scn[1]->_child[i]->_child[0];
+				glm::vec3 top = glm::vec3(scn[1]->_child[i]->_child[0]->_acc * glm::vec4(glm::vec3(0.0, a->_rng[Y][MAX], 0.0), 1.0));
 
-				scn[1]->_child[i]->_child[0] = nullptr;
+				if (btm[Y] < top[Y]) {
+					crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)] = scn[1]->_child[i]->_child[0];
 
-				break;
+					scn[1]->_child[i]->_child[0] = nullptr;
+
+					break;
+				}
 			}
 		}
 	} else {
