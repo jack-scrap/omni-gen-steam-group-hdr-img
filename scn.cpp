@@ -51,6 +51,12 @@ char asdf[] = {
 	97
 };
 
+char right[] = {
+	97,
+	0,
+	0
+};
+
 Node* child[] = {
 	nodeMk(asdf, sizeof asdf / sizeof *asdf)
 };

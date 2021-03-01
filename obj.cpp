@@ -544,12 +544,6 @@ void objAnim(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / state::fps));
 	}
-
-	for (Obj* _ : scn) {
-		if (_ != obj) {
-			std::cout << util::phys::aabb(obj, _) << std::endl;
-		}
-	}
 }
 
 void objTrans(Obj* obj, glm::vec3 loc, glm::vec3 rot) {

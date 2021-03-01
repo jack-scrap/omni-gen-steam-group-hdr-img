@@ -57,6 +57,24 @@ void Disp::draw() {
 	console->draw();
 
 	update();
+
+	char state[3];
+	for (int i = 0; i < scn[1]->_noChild; i++) {
+		if (scn[1]->_child[i]) {
+			state[i] = 97;
+		} else {
+			state[i] = 0;
+		}
+	}
+
+	fin = true;
+	for (int i = 0; i < 3; i++) {
+		if (state[i] != right[i]) {
+			fin = false;
+		}
+	}
+
+	std::cout << fin << std::endl;
 }
 
 Disp::~Disp() {
