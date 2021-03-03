@@ -4,7 +4,7 @@ PROG = omni
 
 HDR = cam col state math phys
 
-STATIC = main disp util mesh console str border node idx arr
+STATIC = main disp util mesh console str border node cont idx arr
 DYNA = scn vec obj truck crane pt prog bound
 
 DEP_STATIC = $(patsubst %, %.o, $(STATIC))
