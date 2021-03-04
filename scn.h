@@ -34,7 +34,7 @@ extern "C" Bound* bound;
 
 extern "C" Obj* contGet();
 
-extern "C" char right[];
+extern "C" char rhs[];
 
 extern bool fin;
 

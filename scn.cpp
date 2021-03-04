@@ -45,23 +45,23 @@ Obj* rng[2] = {
 	objMk(&vtc[0], vtc.size() * sizeof (GLfloat), &strip[0], strip.size() * sizeof (GLushort), "obj", "solid", true, glm::vec3(0.0, 0.0, -layout::stroke + 10.0 + (layout::stroke * 2 * 2) + layout::stroke), glm::vec3(M_PI / 2, 0.0, M_PI / 2))
 };
 
-char asdf[] = {
+char init[] = {
 	0,
 	97,
 	97
 };
 
-char right[] = {
+char rhs[] = {
 	97,
 	0,
 	0
 };
 
 Node* child[] = {
-	nodeMk(asdf, sizeof asdf / sizeof *asdf)
+	nodeMk(init, sizeof init / sizeof *init)
 };
 
-Node* node = nodeMk(asdf, sizeof asdf / sizeof *asdf, child, sizeof child / sizeof *child);
+Node* node = nodeMk(init, sizeof init / sizeof *init, child, sizeof child / sizeof *child);
 Arr* data = arrMk(node, "data");
 
 std::vector<Obj*> scn = {

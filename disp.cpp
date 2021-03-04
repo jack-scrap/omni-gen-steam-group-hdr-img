@@ -69,7 +69,7 @@ void Disp::draw() {
 
 	fin = true;
 	for (int i = 0; i < 3; i++) {
-		if (state[i] != right[i]) {
+		if (state[i] != rhs[i]) {
 			fin = false;
 		}
 	}
