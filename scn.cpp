@@ -53,7 +53,7 @@ char init[] = {
 
 char rhs[] = {
 	'a',
-	0,
+	'a',
 	0
 };
 
