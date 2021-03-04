@@ -3,10 +3,11 @@
 
 #include "idx.h"
 #include "layout.h"
-#include "cont.h"
 
 Idx* idxMk(unsigned int i, glm::vec3 loc, glm::vec3 rot) {
 	Idx* _ = (Idx*) malloc(sizeof (Idx));
+
+	_->_data = nullptr;
 
 	Border* border = borderMk({
 		layout::idx[X] + (layout::margin * 2 * 2), layout::idx[Y] + (layout::margin * 2 * 2)
@@ -24,6 +25,8 @@ Idx* idxMk(unsigned int i, char c, glm::vec3 loc, glm::vec3 rot) {
 	Obj* child[1] = {
 		cont->_parent
 	};
+
+	_->_data = cont;
 
 	Border* border = borderMk({
 		layout::idx[X] + (layout::margin * 2 * 2), layout::idx[Y] + (layout::margin * 2 * 2)
