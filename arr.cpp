@@ -6,6 +6,7 @@
 #include "layout.h"
 #include "idx.h"
 #include "str.h"
+#include "cont.h"
 
 Arr* arrMk(Node* data, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	Arr* _ = (Arr*) malloc(sizeof (Arr));
@@ -15,6 +16,8 @@ Arr* arrMk(Node* data, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	nodeMax(data, &_->_x);
 	nodeDepth(data, &_->_depth);
 	_->_y = _->_depth - 1;
+
+	_->_data = (Idx**) malloc(_->_x * sizeof (Idx*));
 
 	// layout
 	GLfloat
@@ -56,6 +59,8 @@ Arr* arrMk(Node* data, std::string name, glm::vec3 loc, glm::vec3 rot) {
 					offset
 				));
 			}
+
+			_->_data[i] = idx;
 
 			_->_parent->_child[c] = idx->_parent;
 
