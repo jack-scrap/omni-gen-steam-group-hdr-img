@@ -13,7 +13,6 @@ typedef struct {
 
 		_x,
 		_y;
-
 } Arr;
 
 Arr* arrMk(Node* data, std::string name = "", glm::vec3 loc = glm::vec3(0.0, 0.0, 0.0), glm::vec3 rot = glm::vec3(0.0, 0.0, 0.0));

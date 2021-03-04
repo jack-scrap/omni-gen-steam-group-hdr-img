@@ -10,6 +10,7 @@
 #include "console.h"
 #include "bound.h"
 #include "vec.h"
+#include "arr.h"
 
 extern Cam cam;
 
@@ -36,3 +37,5 @@ extern "C" Obj* contGet();
 extern "C" char right[];
 
 extern bool fin;
+
+extern Arr* data;
