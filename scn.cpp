@@ -66,7 +66,7 @@ Arr* data = arrMk(node, "data");
 
 std::vector<Obj*> scn = {
 	crane->_parent,
-	arr->_parent,
+	data->_parent,
 	rng[MIN],
 	rng[MAX]
 };

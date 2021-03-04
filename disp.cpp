@@ -58,8 +58,8 @@ void Disp::draw() {
 
 	update();
 
-	char state[3];
-	for (int i = 0; i < scn[1]->_noChild; i++) {
+	char state[data->_x];
+	for (int i = 0; i < data->_x; i++) {
 		if (scn[1]->_child[i]) {
 			state[i] = 97;
 		} else {
