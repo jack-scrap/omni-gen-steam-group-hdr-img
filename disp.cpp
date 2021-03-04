@@ -60,12 +60,17 @@ void Disp::draw() {
 
 	char state[data->_x];
 	for (int i = 0; i < data->_x; i++) {
-		if (scn[1]->_child[i]) {
-			state[i] = 97;
+		if (data->_data[i]->_data) {
+			state[i] = data->_data[i]->_data->_c;
 		} else {
 			state[i] = 0;
 		}
 	}
+
+	for (int i = 0; i < data->_x; i++) {
+		std::cout << state[i] << std::endl;
+	}
+	std::cout << std::endl;
 
 	fin = true;
 	for (int i = 0; i < data->_x; i++) {
@@ -74,7 +79,7 @@ void Disp::draw() {
 		}
 	}
 
-	std::cout << fin << std::endl;
+	/* std::cout << fin << std::endl; */
 }
 
 Disp::~Disp() {

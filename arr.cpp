@@ -6,7 +6,6 @@
 #include "layout.h"
 #include "idx.h"
 #include "str.h"
-#include "cont.h"
 
 Arr* arrMk(Node* data, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	Arr* _ = (Arr*) malloc(sizeof (Arr));
@@ -51,7 +50,7 @@ Arr* arrMk(Node* data, std::string name, glm::vec3 loc, glm::vec3 rot) {
 
 			Idx* idx;
 			if (data->_data[i]) {
-				idx = idxMk(i, c, glm::vec3(0.0, layout::margin, 0.0) + glm::vec3(offset + (i * stride[X]), 0.0, offset));
+				idx = idxMk(i, data->_data[i], glm::vec3(0.0, layout::margin, 0.0) + glm::vec3(offset + (i * stride[X]), 0.0, offset));
 			} else {
 				idx = idxMk(i, glm::vec3(0.0, layout::margin, 0.0) + glm::vec3(
 					offset + (i * stride[X]),
