@@ -79,4 +79,4 @@ Crane* craneGet() {
 	return crane;
 }
 
-bool fin = false;
+bool eq = false;

@@ -72,14 +72,14 @@ void Disp::draw() {
 	}
 	std::cout << std::endl;
 
-	fin = true;
+	eq = true;
 	for (int i = 0; i < data->_x; i++) {
 		if (state[i] != rhs[i]) {
-			fin = false;
+			eq = false;
 		}
 	}
 
-	/* std::cout << fin << std::endl; */
+	/* std::cout << eq << std::endl; */
 }
 
 Disp::~Disp() {

@@ -34,6 +34,6 @@ extern "C" Bound* bound;
 
 extern "C" char rhs[];
 
-extern bool fin;
+extern bool eq;
 
 extern Arr* data;
