@@ -68,7 +68,7 @@ void Disp::draw() {
 	}
 
 	fin = true;
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < data->_x; i++) {
 		if (state[i] != rhs[i]) {
 			fin = false;
 		}
