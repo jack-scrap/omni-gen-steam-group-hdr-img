@@ -79,8 +79,4 @@ Crane* craneGet() {
 	return crane;
 }
 
-Obj* contGet() {
-	return scn[1];
-}
-
 bool fin = false;

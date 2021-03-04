@@ -42,10 +42,6 @@ craneGet = scn.craneGet
 craneGet.restype = POINTER(Crane)
 craneGet.argtypes = None
 
-contGet = scn.contGet
-contGet.restype = POINTER(Obj)
-contGet.argtypes = None
-
 craneZoom = crane.craneZoom
 craneZoom.restype = c_void_p
 craneZoom.argtypes = [
