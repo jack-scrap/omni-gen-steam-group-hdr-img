@@ -32,8 +32,8 @@ extern "C" Crane* craneGet();
 
 extern "C" Bound* bound;
 
+extern Arr* data;
+
 extern "C" char rhs[];
 
 extern bool eq;
-
-extern Arr* data;

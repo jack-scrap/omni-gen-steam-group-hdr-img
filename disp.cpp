@@ -58,23 +58,23 @@ void Disp::draw() {
 
 	update();
 
-	char state[data->_x];
+	char lhs[data->_x];
 	for (int i = 0; i < data->_x; i++) {
 		if (data->_data[i]->_data) {
-			state[i] = data->_data[i]->_data->_c;
+			lhs[i] = data->_data[i]->_data->_c;
 		} else {
-			state[i] = 0;
+			lhs[i] = 0;
 		}
 	}
 
 	for (int i = 0; i < data->_x; i++) {
-		std::cout << state[i] << std::endl;
+		std::cout << lhs[i] << std::endl;
 	}
 	std::cout << std::endl;
 
 	eq = true;
 	for (int i = 0; i < data->_x; i++) {
-		if (state[i] != rhs[i]) {
+		if (lhs[i] != rhs[i]) {
 			eq = false;
 		}
 	}

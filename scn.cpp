@@ -51,12 +51,6 @@ char init[] = {
 	'a'
 };
 
-char rhs[] = {
-	'a',
-	'a',
-	0
-};
-
 Node* child[] = {
 	nodeMk(init, sizeof init / sizeof *init)
 };
@@ -78,5 +72,11 @@ Truck* truckGet() {
 Crane* craneGet() {
 	return crane;
 }
+
+char rhs[] = {
+	'a',
+	'a',
+	0
+};
 
 bool eq = false;
