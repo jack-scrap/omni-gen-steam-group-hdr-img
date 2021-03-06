@@ -146,15 +146,13 @@ void craneGrab(Crane* crane) {
 		}
 	} else {
 		for (int i = 1; i < scn[1]->_noChild - 1; i++) {
-			glm::vec3 idx = scn[1]->_child[i]->_acc * glm::vec4(glm::vec3(0.0, scn[1]->_child[i]->_rng[Y][MAX], 0.0), 1.0);
+			glm::vec3 offset = scn[1]->_child[i]->_acc * glm::vec4(glm::vec3(0.0, scn[1]->_child[i]->_rng[Y][MAX], 0.0), 1.0);
 
-			if (a[X] < idx[X]) {
+			if (a[X] < offset[X]) {
 				scn[1]->_child[i]->_child[0] = crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)];
-
 				slot = nullptr;
 			} else {
 				scn.push_back(slot);
-
 				slot = nullptr;
 			}
 
