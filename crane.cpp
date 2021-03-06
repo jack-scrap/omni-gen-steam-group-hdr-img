@@ -135,7 +135,7 @@ void craneGrab(Crane* crane) {
 			Obj*& idx = scn[1]->_child[i];
 			Obj*& data = idx->_child[0];
 
-			if (idx->_child[0]) {
+			if (data) {
 				glm::vec3 b = glm::vec3(data->_acc * glm::vec4(glm::vec3(0.0, head->_rng[Y][MAX], 0.0), 1.0));
 
 				if (a[Y] < b[Y]) {
