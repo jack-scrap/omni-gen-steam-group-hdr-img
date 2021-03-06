@@ -138,7 +138,7 @@ void craneGrab(Crane* crane) {
 			if (data) {
 				glm::vec3 b = glm::vec3(data->_acc * glm::vec4(glm::vec3(0.0, head->_rng[Y][MAX], 0.0), 1.0));
 
-				if (a[Y] < b[Y]) {
+				if (a[X] < b[X]) {
 					slot = data;
 
 					data = nullptr;
