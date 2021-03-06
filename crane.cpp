@@ -132,13 +132,15 @@ void craneGrab(Crane* crane) {
 
 	if (!slot) {
 		for (int i = 1; i < scn[1]->_noChild - 1; i++) {
-			if (scn[1]->_child[i]->_child[0]) {
-				glm::vec3 b = glm::vec3(scn[1]->_child[i]->_child[0]->_acc * glm::vec4(glm::vec3(0.0, head->_rng[Y][MAX], 0.0), 1.0));
+			Obj* idx = scn[1]->_child[i];
+
+			if (idx->_child[0]) {
+				glm::vec3 b = glm::vec3(idx->_child[0]->_acc * glm::vec4(glm::vec3(0.0, head->_rng[Y][MAX], 0.0), 1.0));
 
 				if (a[Y] < b[Y]) {
-					slot = scn[1]->_child[i]->_child[0];
+					slot = idx->_child[0];
 
-					scn[1]->_child[i]->_child[0] = nullptr;
+					idx->_child[0] = nullptr;
 
 					break;
 				}
@@ -146,10 +148,12 @@ void craneGrab(Crane* crane) {
 		}
 	} else {
 		for (int i = 1; i < scn[1]->_noChild - 1; i++) {
-			glm::vec3 offset = scn[1]->_child[i]->_acc * glm::vec4(glm::vec3(0.0, scn[1]->_child[i]->_rng[Y][MAX], 0.0), 1.0);
+			Obj* idx = scn[1]->_child[i];
+
+			glm::vec3 offset = idx->_acc * glm::vec4(glm::vec3(0.0, scn[1]->_child[i]->_rng[Y][MAX], 0.0), 1.0);
 
 			if (a[X] < offset[X]) {
-				scn[1]->_child[i]->_child[0] = crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)];
+				idx->_child[0] = slot;
 				slot = nullptr;
 			} else {
 				scn.push_back(slot);
