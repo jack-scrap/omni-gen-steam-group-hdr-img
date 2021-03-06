@@ -11,8 +11,6 @@
 
 void dispatch(Console* console) {
 	PyRun_SimpleString(util::str::join(console->_buff).c_str());
-
-	eq = true;
 }
 
 Console::Console(std::vector<std::string> buff) :
