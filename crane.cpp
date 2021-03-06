@@ -128,13 +128,15 @@ void craneGrab(Crane* crane) {
 	Obj* head = crane->_parent->_child[2 * 2 * 2 * 2]->_child[0];
 	glm::vec3 a = glm::vec3(head->_acc * glm::vec4(glm::vec3(0.0, head->_rng[Y][MIN], 0.0), 1.0));
 
-	if (!crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)]) {
+	Obj*& slot = crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)];
+
+	if (!slot) {
 		for (int i = 1; i < scn[1]->_noChild - 1; i++) {
 			if (scn[1]->_child[i]->_child[0]) {
 				glm::vec3 b = glm::vec3(scn[1]->_child[i]->_child[0]->_acc * glm::vec4(glm::vec3(0.0, head->_rng[Y][MAX], 0.0), 1.0));
 
 				if (a[Y] < b[Y]) {
-					crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)] = scn[1]->_child[i]->_child[0];
+					slot = scn[1]->_child[i]->_child[0];
 
 					scn[1]->_child[i]->_child[0] = nullptr;
 
@@ -149,11 +151,11 @@ void craneGrab(Crane* crane) {
 			if (a[X] < idx[X]) {
 				scn[1]->_child[i]->_child[0] = crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)];
 
-				crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)] = nullptr;
+				slot = nullptr;
 			} else {
-				scn.push_back(crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)]);
+				scn.push_back(slot);
 
-				crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)] = nullptr;
+				slot = nullptr;
 			}
 
 			break;
