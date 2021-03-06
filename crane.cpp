@@ -131,17 +131,17 @@ void craneGrab(Crane* crane) {
 	Obj*& slot = crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)];
 
 	if (!slot) {
-		for (int i = 1; i < scn[1]->_noChild - 1; i++) {
-			Obj*& idx = scn[1]->_child[i];
-			Obj*& data = idx->_child[0];
+		for (int i = 0; i < data->_x; i++) {
+			Idx*& idx = data->_data[i];
+			Cont*& byte = idx->_data;
 
-			if (data) {
-				glm::vec3 b = glm::vec3(data->_acc * glm::vec4(glm::vec3(0.0, head->_rng[Y][MAX], 0.0), 1.0));
+			if (byte) {
+				glm::vec3 b = glm::vec3(byte->_parent->_acc * glm::vec4(glm::vec3(0.0, head->_rng[Y][MAX], 0.0), 1.0));
 
 				if (a[X] < b[X]) {
-					slot = data;
+					slot = byte->_parent;
 
-					data = nullptr;
+					byte = nullptr;
 
 					break;
 				}
@@ -150,12 +150,12 @@ void craneGrab(Crane* crane) {
 	} else {
 		for (int i = 1; i < scn[1]->_noChild - 1; i++) {
 			Obj*& idx = scn[1]->_child[i];
-			Obj*& data = idx->_child[0];
+			Obj*& byte = idx->_child[0];
 
 			glm::vec3 offset = idx->_acc * glm::vec4(glm::vec3(0.0, scn[1]->_child[i]->_rng[Y][MAX], 0.0), 1.0);
 
 			if (a[X] < offset[X]) {
-				data = slot;
+				byte = slot;
 				slot = nullptr;
 			} else {
 				scn.push_back(slot);
