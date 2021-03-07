@@ -3,13 +3,14 @@
 #include <glm/glm.hpp>
 
 #include "obj.h"
+#include "cont.h"
 
 typedef struct Crane {
 	static constexpr GLfloat _speed = 0.1;
 
 	Obj* _parent;
 
-	Obj* _op;
+	Cont* _op;
 
 	static constexpr GLfloat _rngHead[2] = {
 		-3.0,

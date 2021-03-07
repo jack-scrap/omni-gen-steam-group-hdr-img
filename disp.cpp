@@ -67,10 +67,10 @@ void Disp::draw() {
 		}
 	}
 
-	for (int i = 0; i < data->_x; i++) {
-		std::cout << lhs[i] << std::endl;
-	}
-	std::cout << std::endl;
+/* 	for (int i = 0; i < data->_x; i++) { */
+/* 		std::cout << lhs[i] << std::endl; */
+/* 	} */
+/* 	std::cout << std::endl; */
 
 	eq = true;
 	for (int i = 0; i < data->_x; i++) {
