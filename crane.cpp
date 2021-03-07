@@ -130,6 +130,8 @@ void craneGrab(Crane* crane) {
 	Obj* head = crane->_parent->_child[2 * 2 * 2 * 2]->_child[0];
 	glm::vec3 a = glm::vec3(head->_acc * glm::vec4(glm::vec3(0.0, head->_rng[Y][MIN], 0.0), 1.0));
 
+	Obj*& slot = crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)];
+
 	if (!crane->_op) {
 		for (int i = 0; i < data->_x; i++) {
 			Idx*& idx = data->_data[i];
@@ -139,7 +141,7 @@ void craneGrab(Crane* crane) {
 				glm::vec3 b = glm::vec3(byte->_parent->_acc * glm::vec4(glm::vec3(0.0, 0.0, 0.0), 1.0));
 
 				if (a[X] < b[X]) {
-					crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)] = byte->_parent;
+					slot = byte->_parent;
 					crane->_op = byte;
 
 					scn[1]->_child[1 + i]->_child[0] = nullptr; // object for drawing
