@@ -7,7 +7,7 @@ sys.path.insert(1, '.')
 from omni import *
 
 i = 0
-crane.ped(False)
+crane.ped(-1.0)
 
 i += 1
 
@@ -15,7 +15,7 @@ crane.grab()
 
 i = 0
 while i < 3:
-    crane.zoom(False)
+    crane.zoom(-1.0)
 
     i += 1
 
@@ -23,6 +23,6 @@ crane.grab()
 
 i = 0
 while i < 3:
-    crane.zoom(False)
+    crane.zoom(-1.0)
 
     i += 1

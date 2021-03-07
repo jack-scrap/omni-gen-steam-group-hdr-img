@@ -79,37 +79,33 @@ void craneAnim(Crane* crane, glm::vec3 loc) {
 	}
 }
 
-void craneZoom(Crane* crane, bool dir) {
+void craneZoom(Crane* crane, float delta) {
 	glm::vec3 loc = glm::vec3(
-		dir ? 1 : -1,
+		delta,
 		0.0,
 		0.0
 	);
 	craneAnim(crane, loc);
 }
 
-void cranePan(Crane* crane, bool dir) {
+void cranePan(Crane* crane, float delta) {
 	Obj* targ = crane->_parent->_child[2 * 2 * 2 * 2];
 
-	float inc = dir ? 1 : -1;
-
-	glm::mat4 d = glm::translate(glm::mat4(1.0), glm::vec3(0.0, 0.0, inc));
+	glm::mat4 d = glm::translate(glm::mat4(1.0), glm::vec3(0.0, 0.0, delta));
 	glm::vec3 loc = glm::vec3(targ->_model * d * glm::vec4(glm::vec3(0.0), 1.0));
 
 	if (
 		loc[Z] > crane->_rngHead[MIN] &&
 		loc[Z] < crane->_rngHead[MAX]
 	) {
-		objTrans(targ, glm::vec3(0.0, 0.0, inc), glm::vec3(0.0, 0.0, 0.0));
+		objTrans(targ, glm::vec3(0.0, 0.0, delta), glm::vec3(0.0, 0.0, 0.0));
 	}
 }
 
-void cranePed(Crane* crane, bool dir) {
+void cranePed(Crane* crane, float delta) {
 	Obj* targ = crane->_parent->_child[2 * 2 * 2 * 2]->_child[0];
 
-	float inc = dir ? 1 : -1;
-
-	glm::mat4 d = glm::translate(glm::mat4(1.0), glm::vec3(0.0, inc, 0.0));
+	glm::mat4 d = glm::translate(glm::mat4(1.0), glm::vec3(0.0, delta, 0.0));
 	glm::vec3 loc = glm::vec3(targ->_acc * d * glm::vec4(glm::vec3(0.0), 1.0));
 
 	if (
@@ -118,7 +114,7 @@ void cranePed(Crane* crane, bool dir) {
 	) {
 		glm::vec3 loc = glm::vec3(
 			0.0,
-			inc,
+			delta,
 			0.0
 		);
 

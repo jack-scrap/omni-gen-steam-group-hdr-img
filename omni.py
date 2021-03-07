@@ -20,16 +20,16 @@ class Truck(Obj):
             self._loc[i] = loc[i]
 
 class Crane(Obj):
-    def zoom(self, dir):
-        self._loc[0] += dir
+    def zoom(self, delta):
+        self._loc[0] += delta
 
-        craneZoom(self._ptr, dir)
+        craneZoom(self._ptr, delta)
 
-    def pan(self, dir):
-        cranePan(self._ptr, dir)
+    def pan(self, delta):
+        cranePan(self._ptr, delta)
 
-    def ped(self, dir):
-        cranePed(self._ptr, dir)
+    def ped(self, delta):
+        cranePed(self._ptr, delta)
 
     def grab(self):
         craneGrab(self._ptr)
@@ -46,21 +46,21 @@ craneZoom = crane.craneZoom
 craneZoom.restype = c_void_p
 craneZoom.argtypes = [
     POINTER(Crane),
-    c_bool
+    c_float
 ]
 
 cranePan = crane.cranePan
 cranePan.restype = c_void_p
 cranePan.argtypes = [
     POINTER(Crane),
-    c_bool
+    c_float
 ]
 
 cranePed = crane.cranePed
 cranePed.restype = c_void_p
 cranePed.argtypes = [
     POINTER(Crane),
-    c_bool
+    c_float
 ]
 
 craneGrab = crane.craneGrab

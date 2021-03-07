@@ -26,10 +26,10 @@ Crane* craneMk(glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
 
 extern "C" void craneAnim(Crane* crane, glm::vec3 loc);
 
-extern "C" void craneZoom(Crane* crane, bool dir);
+extern "C" void craneZoom(Crane* crane, float delta);
 
-extern "C" void cranePan(Crane* crane, bool dir);
+extern "C" void cranePan(Crane* crane, float delta);
 
-extern "C" void cranePed(Crane* crane, bool dir);
+extern "C" void cranePed(Crane* crane, float delta);
 
 extern "C" void craneGrab(Crane* crane);
