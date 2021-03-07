@@ -144,6 +144,8 @@ void craneGrab(Crane* crane) {
 					slot = byte->_parent;
 					crane->_op = byte;
 
+					byte = nullptr;
+
 					break;
 				}
 			}
@@ -157,7 +159,6 @@ void craneGrab(Crane* crane) {
 				glm::vec3 b = glm::vec3(byte->_parent->_acc * glm::vec4(glm::vec3(0.0, 0.0, 0.0), 1.0));
 
 				if (a[X] < b[X]) {
-					byte->_parent = slot;
 					byte = crane->_op;
 
 					slot = nullptr;
