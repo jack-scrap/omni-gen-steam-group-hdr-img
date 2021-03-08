@@ -74,7 +74,10 @@ void Disp::draw() {
 		}
 	}
 
-	std::cout << eq << std::endl;
+	if (eq) {
+		console->_buff = util::log(state::ln, console->_buff.size());
+		console->render();
+	}
 }
 
 Disp::~Disp() {

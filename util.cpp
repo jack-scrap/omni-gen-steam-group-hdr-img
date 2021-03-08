@@ -5,6 +5,7 @@
 
 #include "util.h"
 #include "math.h"
+#include "state.h"
 
 template <typename T>
 T util::fs::rd(std::string name) {
@@ -252,4 +253,37 @@ bool util::phys::aabb(Obj* p, Obj* q) {
 	}
 
 	return false;
+}
+
+std::vector<std::string> util::log(unsigned int wd, unsigned int loc) {
+	std::vector<std::string> buff;
+
+	std::string head = "Level complete";
+	buff.push_back(head);
+
+	std::string lb;
+	for (int i = 0; i < wd; i++) {
+		lb.push_back('=');
+	}
+	buff.push_back(lb);
+
+	unsigned int noWd = std::to_string(loc).length() + 1;
+
+	std::string key = "LOC: ";
+	std::string val = std::to_string(loc);
+
+	for (int i = key.length(); i < wd - noWd - val.length(); i++) {
+		key.push_back(' ');
+	}
+	for (int i = 0; i < val.length(); i++) {
+		key.push_back(val[i]);
+	}
+	buff.push_back(key);
+
+	for (int i = buff.size(); i < state::line - 2 - 1; i++) {
+		buff.push_back("");
+	}
+	buff.push_back("Enter `next` to proceed");
+
+	return buff;
 }

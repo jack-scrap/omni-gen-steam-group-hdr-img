@@ -55,4 +55,6 @@ namespace util {
 	namespace phys {
 		bool aabb(Obj* p, Obj* q);
 	}
+
+	std::vector<std::string> log(unsigned int wd, unsigned int loc);
 }
