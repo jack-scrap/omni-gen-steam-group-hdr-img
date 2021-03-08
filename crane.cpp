@@ -151,8 +151,8 @@ void craneGrab(Crane* crane) {
 			Idx*& idx = data->_data[i];
 			Cont*& byte = idx->_data;
 
-			if (byte) {
-				glm::vec3 b = glm::vec3(byte->_parent->_acc * glm::vec4(glm::vec3(0.0, 0.0, 0.0), 1.0));
+			if (!byte) {
+				glm::vec3 b = glm::vec3(idx->_parent->_acc * glm::vec4(glm::vec3(0.0, 0.0, 0.0), 1.0));
 
 				if (a[X] < b[X]) {
 					byte = crane->_op;
