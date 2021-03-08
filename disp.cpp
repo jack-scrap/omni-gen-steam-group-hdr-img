@@ -42,6 +42,8 @@ void Disp::update() {
 }
 
 void Disp::draw() {
+	console->render();
+
 	clear();
 
 	glEnable(GL_DEPTH_TEST);
@@ -57,27 +59,6 @@ void Disp::draw() {
 	console->draw();
 
 	update();
-
-	char lhs[data->_x];
-	for (int i = 0; i < data->_x; i++) {
-		if (data->_data[i]->_data) {
-			lhs[i] = data->_data[i]->_data->_c;
-		} else {
-			lhs[i] = 0;
-		}
-	}
-
-	eq = true;
-	for (int i = 0; i < data->_x; i++) {
-		if (lhs[i] != rhs[i]) {
-			eq = false;
-		}
-	}
-
-	if (eq) {
-		console->_buff = util::log(state::ln, console->_buff.size());
-		console->render();
-	}
 }
 
 Disp::~Disp() {

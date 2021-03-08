@@ -11,6 +11,26 @@
 
 void dispatch(Console* console) {
 	PyRun_SimpleString(util::str::join(console->_buff).c_str());
+
+	char lhs[data->_x];
+	for (int i = 0; i < data->_x; i++) {
+		if (data->_data[i]->_data) {
+			lhs[i] = data->_data[i]->_data->_c;
+		} else {
+			lhs[i] = 0;
+		}
+	}
+
+	eq = true;
+	for (int i = 0; i < data->_x; i++) {
+		if (lhs[i] != rhs[i]) {
+			eq = false;
+		}
+	}
+
+	if (eq) {
+		console->_buff = util::log(state::ln, console->_buff.size());
+	}
 }
 
 Console::Console(std::vector<std::string> buff) :
