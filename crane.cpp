@@ -164,6 +164,13 @@ void craneGrab(Crane* crane) {
 				}
 			}
 		}
+
+		if (slot) {
+			scn.push_back(slot);
+
+			slot = nullptr;
+			crane->_op = nullptr;
+		}
 	}
 
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
