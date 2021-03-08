@@ -75,8 +75,8 @@ Crane* craneGet() {
 
 char rhs[] = {
 	'a',
-	'a',
-	0
+	0,
+	'a'
 };
 
 bool eq = false;
