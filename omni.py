@@ -69,3 +69,13 @@ craneGrab.argtypes = None
 
 truck = Truck(truckGet())
 crane = Crane(craneGet())
+
+
+asdfGet = scn.asdfGet
+asdfGet.restype = POINTER(POINTER(c_int))
+asdfGet.argtypes = None
+
+asdf = asdfGet()
+
+print(asdf[0][0])
+print(asdf[1][0])

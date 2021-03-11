@@ -74,3 +74,13 @@ char rhs[] = {
 };
 
 bool eq = false;
+
+int asdf = 3;
+int hjkl = 7;
+int* qwer[] = {
+	&asdf,
+	&hjkl
+};
+extern "C" int** asdfGet() {
+	return qwer;
+}

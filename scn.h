@@ -37,3 +37,5 @@ extern Arr* data;
 extern "C" char rhs[];
 
 extern bool eq;
+
+extern "C" int** asdfGet();
