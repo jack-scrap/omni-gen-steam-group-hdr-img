@@ -59,10 +59,10 @@ Node* node = nodeMk(init, sizeof init / sizeof *init, child, sizeof child / size
 Arr* data = arrMk(node, "data");
 
 std::vector<Obj*> scn = {
-	crane->_parent,
-	data->_parent,
-	rng[MIN],
-	rng[MAX]
+	/* crane->_parent, */
+	/* data->_parent, */
+	/* rng[MIN], */
+	/* rng[MAX] */
 };
 
 Truck* truckGet() {

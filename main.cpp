@@ -4,6 +4,7 @@
 #include <thread>
 #include <SDL2/SDL.h>
 #include <vector>
+#include <nlohmann/json.hpp>
 
 #include "scn.h"
 #include "util.h"
@@ -19,6 +20,11 @@ Console* console;
 
 int main() {
 	console = new Console(util::fs::rd<std::vector<std::string>>("script/0.py"));
+
+	nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("lvl/" + std::to_string(0) + ".json"));
+	for (const auto& entry : serial["obj"]) {
+		scn.push_back(objMk(entry["name"], "obj", "dir", true, glm::vec3(entry["loc"][0], entry["loc"][1], entry["loc"][2]), glm::vec3(entry["rot"][0], entry["rot"][1], entry["rot"][2])));
+	}
 
 	SDL_Event e;
 	while (disp._open) {
