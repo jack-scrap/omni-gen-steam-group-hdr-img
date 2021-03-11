@@ -28,18 +28,33 @@ int main() {
 	for (const auto& entry : serial["data"]) {
 		init.push_back(entry);
 	}
-	char arr[init.size()];
+	char initArr[init.size()];
 	for (int i = 0; i < init.size(); i++) {
-		arr[i] = (char) init[i];
+		initArr[i] = (char) init[i];
 	}
 
 	Node* child[] = {
-		nodeMk(arr, sizeof arr / sizeof *arr)
+		nodeMk(initArr, sizeof initArr / sizeof *initArr)
 	};
-	Node* node = nodeMk(arr, sizeof arr / sizeof *arr, child, sizeof child / sizeof *child);
+	Node* node = nodeMk(initArr, sizeof initArr / sizeof *initArr, child, sizeof child / sizeof *child);
 	data = arrMk(node, "data");
 
 	scn.push_back(data->_parent);
+
+	std::vector<void*> vehicle;
+	for (const auto& entry : serial["vehicle"]) {
+		if (entry == "crane") {
+			vehicle.push_back(craneMk(glm::vec3(entry["loc"][0], entry["loc"][1], entry["loc"][2]), glm::vec3(entry["rot"][0], entry["loc"][1], entry["loc"][2])));
+		}
+
+		if (entry == "truck") {
+			vehicle.push_back(truckMk(glm::vec3(entry["loc"][0], entry["loc"][1], entry["loc"][2]), glm::vec3(entry["rot"][0], entry["loc"][1], entry["loc"][2])));
+		}
+	}
+	void* vehicleArr[vehicle.size()];
+	for (int i = 0; i < vehicle.size(); i++) {
+		vehicleArr[i] = vehicle[i];
+	}
 
 	SDL_Event e;
 	while (disp._open) {
