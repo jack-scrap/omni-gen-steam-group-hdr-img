@@ -22,9 +22,24 @@ int main() {
 	console = new Console(util::fs::rd<std::vector<std::string>>("script/0.py"));
 
 	nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("lvl/" + std::to_string(0) + ".json"));
-	for (const auto& entry : serial["obj"]) {
-		scn.push_back(objMk(entry["name"], "obj", "dir", true, glm::vec3(entry["loc"][0], entry["loc"][1], entry["loc"][2]), glm::vec3(entry["rot"][0], entry["rot"][1], entry["rot"][2])));
+
+	// data
+	std::vector<int> init;
+	for (const auto& entry : serial["data"]) {
+		init.push_back(entry);
 	}
+	char arr[init.size()];
+	for (int i = 0; i < init.size(); i++) {
+		arr[i] = (char) init[i];
+	}
+
+	Node* child[] = {
+		nodeMk(arr, sizeof arr / sizeof *arr)
+	};
+	Node* node = nodeMk(arr, sizeof arr / sizeof *arr, child, sizeof child / sizeof *child);
+	data = arrMk(node, "data");
+
+	scn.push_back(data->_parent);
 
 	SDL_Event e;
 	while (disp._open) {
@@ -271,9 +286,9 @@ int main() {
 					cam._delta[1] = -(cam._curr[1] - cam._begin[1]);
 
 					glm::vec2 proj = glm::vec2(
-						cam._prev[0] - cam._delta[0] + cam._delta[1] + 1000.0,
-						cam._prev[2] + cam._delta[0] + cam._delta[1] + 1000.0
-					);
+							cam._prev[0] - cam._delta[0] + cam._delta[1] + 1000.0,
+							cam._prev[2] + cam._delta[0] + cam._delta[1] + 1000.0
+							);
 
 					glm::vec2 bound[2] = {
 						glm::vec2(-400, 400),
@@ -281,12 +296,12 @@ int main() {
 					};
 
 					if (
-						proj[0] > bound[0][0] &&
-						proj[0] < bound[0][1] &&
+							proj[0] > bound[0][0] &&
+							proj[0] < bound[0][1] &&
 
-						proj[1] > bound[1][0] &&
-						proj[1] < bound[1][1]
-					) {
+							proj[1] > bound[1][0] &&
+							proj[1] < bound[1][1]
+						 ) {
 						cam._pos[0] = cam._prev[0] - cam._delta[0] + cam._delta[1];
 						cam._pos[2] = -(cam._prev[2] + cam._delta[0] + cam._delta[1]);
 					}

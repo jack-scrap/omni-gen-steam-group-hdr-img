@@ -51,18 +51,12 @@ char init[] = {
 	'a'
 };
 
-Node* child[] = {
-	nodeMk(init, sizeof init / sizeof *init)
-};
-
-Node* node = nodeMk(init, sizeof init / sizeof *init, child, sizeof child / sizeof *child);
-Arr* data = arrMk(node, "data");
+Arr* data;
 
 std::vector<Obj*> scn = {
-	/* crane->_parent, */
-	/* data->_parent, */
-	/* rng[MIN], */
-	/* rng[MAX] */
+	crane->_parent,
+	rng[MIN],
+	rng[MAX]
 };
 
 Truck* truckGet() {
