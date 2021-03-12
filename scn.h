@@ -18,20 +18,14 @@ extern Disp disp;
 
 extern Console* console;
 
+extern Arr* data;
+extern "C" char rhs[];
+extern bool eq;
+
 extern Truck* truck;
 
 extern Crane* crane;
 
-extern std::vector<Obj*> scn;
-
-extern Vec* vec;
-
-extern "C" Bound* bound;
-
-extern Arr* data;
-
-extern "C" char rhs[];
-
-extern bool eq;
-
 extern "C" void** vehicleGet();
+
+extern std::vector<Obj*> scn;
