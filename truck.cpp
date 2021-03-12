@@ -36,3 +36,9 @@ Truck* truckMk(glm::vec3 loc, glm::vec3 rot) {
 
 	return _;
 }
+
+void truckZoom(Truck* truck, glm::vec3 loc) {
+	objAnim(truck->_parent, loc, glm::vec3(0.0));
+
+	std::cout << "asdf" << std::endl;
+}

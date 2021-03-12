@@ -55,6 +55,7 @@ Arr* data;
 
 std::vector<Obj*> scn = {
 	crane->_parent,
+	truck->_parent,
 	rng[MIN],
 	rng[MAX]
 };
