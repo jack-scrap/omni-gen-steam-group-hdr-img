@@ -72,10 +72,9 @@ crane = Crane(craneGet())
 
 
 asdfGet = scn.asdfGet
-asdfGet.restype = POINTER(POINTER(c_int))
+asdfGet.restype = POINTER(POINTER(Crane))
 asdfGet.argtypes = None
 
 asdf = asdfGet()
 
-print(asdf[0][0])
-print(asdf[1][0])
+crane = Crane(asdf[1])

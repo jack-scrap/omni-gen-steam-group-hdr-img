@@ -75,12 +75,17 @@ char rhs[] = {
 
 bool eq = false;
 
-int asdf = 3;
-int hjkl = 7;
-int* qwer[] = {
-	&asdf,
-	&hjkl
+void* qwer[] = {
+	truck,
+	crane
 };
-extern "C" int** asdfGet() {
+extern "C" void** asdfGet() {
 	return qwer;
+}
+
+int lol = 3;
+int* uiop = &lol;
+
+int* uiopGet() {
+	return uiop;
 }
