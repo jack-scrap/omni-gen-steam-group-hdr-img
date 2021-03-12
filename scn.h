@@ -38,8 +38,4 @@ extern "C" char rhs[];
 
 extern bool eq;
 
-extern "C" void** asdfGet();
-
-extern "C" int* uiop;
-
-extern "C" int* uiopGet();
+extern "C" void** vehicleGet();

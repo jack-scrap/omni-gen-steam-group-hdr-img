@@ -21,6 +21,13 @@ class Truck(Obj):
 
             truckZoom(self._ptr, self._loc)
 
+truckZoom = truck.truckZoom
+truckZoom.restype = c_void_p
+truckZoom.argtypes = [
+    POINTER(Truck),
+    c_float * 3
+]
+
 class Crane(Obj):
     def zoom(self, delta):
         self._loc[0] += delta
@@ -35,21 +42,6 @@ class Crane(Obj):
 
     def grab(self):
         craneGrab(self._ptr)
-
-# truckGet = scn.truckGet
-# truckGet.restype = POINTER(Truck)
-# truckGet.argtypes = None
-
-# craneGet = scn.craneGet
-# craneGet.restype = POINTER(Crane)
-# craneGet.argtypes = None
-
-truckZoom = truck.truckZoom
-truckZoom.restype = c_void_p
-truckZoom.argtypes = [
-    POINTER(Truck),
-    c_float * 3
-]
 
 craneZoom = crane.craneZoom
 craneZoom.restype = c_void_p
@@ -76,25 +68,12 @@ craneGrab = crane.craneGrab
 craneGrab.restype = c_void_p
 craneGrab.argtypes = None
 
-# truck = Truck(truckGet())
-# crane = Crane(craneGet())
 
+vehicleGet = scn.vehicleGet
+vehicleGet.restype = POINTER(POINTER(Crane))
+vehicleGet.argtypes = None
 
-asdfGet = scn.asdfGet
-asdfGet.restype = POINTER(POINTER(Crane))
-asdfGet.argtypes = None
+vehicle = vehicleGet()
 
-def craneGet():
-    print('asdf')
-craneGet.restype = POINTER(Crane)
-craneGet.argtypes = None
-
-def truckGet():
-    print('asdf')
-truckGet.restype = POINTER(Truck)
-truckGet.argtypes = None
-
-asdf = asdfGet()
-
-truck = Truck(asdf[0])
-crane = Crane(asdf[1])
+truck = Truck(vehicle[0])
+crane = Crane(vehicle[1])

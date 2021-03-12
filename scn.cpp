@@ -76,17 +76,10 @@ char rhs[] = {
 
 bool eq = false;
 
-void* qwer[] = {
+void* vehicle[] = {
 	truck,
 	crane
 };
-extern "C" void** asdfGet() {
-	return qwer;
-}
-
-int lol = 3;
-int* uiop = &lol;
-
-int* uiopGet() {
-	return uiop;
+extern "C" void** vehicleGet() {
+	return vehicle;
 }
