@@ -26,10 +26,6 @@ extern std::vector<Obj*> scn;
 
 extern Vec* vec;
 
-extern "C" Truck* truckGet();
-
-extern "C" Crane* craneGet();
-
 extern "C" Bound* bound;
 
 extern Arr* data;

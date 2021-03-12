@@ -60,14 +60,6 @@ std::vector<Obj*> scn = {
 	rng[MAX]
 };
 
-Truck* truckGet() {
-	return truck;
-}
-
-Crane* craneGet() {
-	return crane;
-}
-
 char rhs[] = {
 	'a',
 	0,
