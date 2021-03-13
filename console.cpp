@@ -32,6 +32,8 @@ void dispatch(Console* console, std::string name) {
 	}
 
 	if (eq) {
+		rank++;
+
 		console->_name.clear();
 		console->_buff = util::log(state::ln, console->_buff.size());
 	}
@@ -263,10 +265,8 @@ void Console::exec() {
 	}
 
 	if (_cmd == "next") {
-		unsigned int lvl = 1;
-
-		_buff = util::fs::rd<std::vector<std::string>>("script/" + std::to_string(lvl) + ".py");
-		ld(lvl);
+		_buff = util::fs::rd<std::vector<std::string>>("script/" + std::to_string(rank) + ".py");
+		ld(rank);
 	}
 
 	_prompt.clear();

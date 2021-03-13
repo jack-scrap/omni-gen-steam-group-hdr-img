@@ -18,6 +18,8 @@ extern Disp disp;
 
 extern Console* console;
 
+extern unsigned int rank;
+
 void ld(unsigned int i);
 
 extern Arr* data;

@@ -28,6 +28,8 @@ Disp disp("Omni", {
 	layout::view[X] + (state::ln * layout::dim[X]), layout::view[Y]
 }, col[false]);
 
+unsigned int rank = 0;
+
 void ld(unsigned int i) {
 	nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("lvl/" + std::to_string(i) + ".json"));
 
