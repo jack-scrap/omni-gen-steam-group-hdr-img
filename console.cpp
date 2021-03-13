@@ -3,6 +3,7 @@
 #include <fstream>
 #include <Python.h>
 #include <iostream>
+#include <algorithm>
 #include <SDL2/SDL_ttf.h>
 
 #include "console.h"
@@ -247,33 +248,43 @@ void Console::exec() {
 	if (tok.size()) {
 		std::string _cmd = tok[0];
 
-		if (_cmd == "open") {
-			if (tok.size() > 1) {
-				open(tok[1]);
+		std::vector<std::string> _lib = {
+			"open",
+			"run",
+			"save",
+			"next"
+		};
+		if (std::find(_lib.begin(), _lib.end(), _cmd) != _lib.end()) {
+			if (_cmd == "open") {
+				if (tok.size() > 1) {
+					open(tok[1]);
+				}
 			}
-		}
 
-		if (_cmd == "run") {
-			if (tok.size() > 1) {
-				std::thread t(dispatch, this, tok[1]);
-				t.detach();
-			} else {
-				std::thread t(dispatch, this, _name);
-				t.detach();
+			if (_cmd == "run") {
+				if (tok.size() > 1) {
+					std::thread t(dispatch, this, tok[1]);
+					t.detach();
+				} else {
+					std::thread t(dispatch, this, _name);
+					t.detach();
+				}
 			}
-		}
 
-		if (_cmd == "save") {
-			if (tok.size() > 1) {
-				save(tok[1]);
-			} else {
-				save(_name);
+			if (_cmd == "save") {
+				if (tok.size() > 1) {
+					save(tok[1]);
+				} else {
+					save(_name);
+				}
 			}
-		}
 
-		if (_cmd == "next") {
-			_buff = util::fs::rd<std::vector<std::string>>("script/" + std::to_string(rank) + ".py");
-			ld(rank);
+			if (_cmd == "next") {
+				_buff = util::fs::rd<std::vector<std::string>>("script/" + std::to_string(rank) + ".py");
+				ld(rank);
+			}
+		} else {
+			std::cout << "Error: Command `" + _cmd + "` not found" << std::endl;
 		}
 
 		_prompt.clear();
