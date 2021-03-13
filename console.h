@@ -78,7 +78,7 @@ class Console {
 
 		void exec();
 
-		void save();
+		void save(std::string name);
 
 		void pop();
 

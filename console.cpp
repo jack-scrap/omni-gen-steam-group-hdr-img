@@ -248,7 +248,11 @@ void Console::exec() {
 	}
 
 	if (_cmd == "save") {
-		save();
+		if (tok.size() > 1) {
+			save(tok[1]);
+		} else {
+			save(_name);
+		}
 	}
 
 	_prompt.clear();
@@ -256,9 +260,9 @@ void Console::exec() {
 	render();
 }
 
-void Console::save() {
+void Console::save(std::string name) {
 	std::ofstream f;
-	f.open(_name);
+	f.open(name);
 
 	for (const std::string& l : _buff) {
 		f << l + '\n';
