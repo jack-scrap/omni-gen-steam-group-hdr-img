@@ -58,6 +58,13 @@ int main() {
 		}
 	}
 
+	// object
+	for (const auto& entry : serial["obj"]) {
+		Obj* obj = objMk(entry["name"], "obj", "dir", true, glm::vec3(entry["loc"][0], entry["loc"][1], entry["loc"][2]), glm::vec3(entry["rot"][0], entry["rot"][1], entry["rot"][2]));
+
+		scn.push_back(obj);
+	}
+
 	SDL_Event e;
 	while (disp._open) {
 		while (SDL_PollEvent(&e)) {
