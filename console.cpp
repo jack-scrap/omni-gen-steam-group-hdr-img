@@ -10,8 +10,10 @@
 #include "state.h"
 #include "scn.h"
 
-void dispatch(Console* console) {
-	PyRun_SimpleString(util::str::join(console->_buff).c_str());
+void dispatch(Console* console, std::string name) {
+	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(name);
+
+	PyRun_SimpleString(util::str::join(buff).c_str());
 
 	char lhs[data->_x];
 	for (int i = 0; i < data->_x; i++) {
@@ -243,8 +245,13 @@ void Console::exec() {
 	std::string _cmd = tok[0];
 
 	if (_cmd == "run") {
-		std::thread t(dispatch, this);
-		t.detach();
+		if (tok.size() > 1) {
+			std::thread t(dispatch, this, tok[1]);
+			t.detach();
+		} else {
+			std::thread t(dispatch, this, _name);
+			t.detach();
+		}
 	}
 
 	if (_cmd == "save") {
