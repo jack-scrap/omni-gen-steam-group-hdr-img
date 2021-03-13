@@ -37,19 +37,15 @@ void ld(unsigned int i) {
 	scn.clear();
 
 	// data
-	std::vector<int> init;
+	std::vector<char> init;
 	for (const auto& entry : serial["data"]) {
-		init.push_back(entry);
-	}
-	char initArr[init.size()];
-	for (int i = 0; i < init.size(); i++) {
-		initArr[i] = (char) init[i];
+		init.push_back((char) ((int) entry));
 	}
 
 	Node* child[] = {
-		nodeMk(initArr, sizeof initArr / sizeof *initArr)
+		nodeMk(&init[0], init.size())
 	};
-	Node* node = nodeMk(initArr, sizeof initArr / sizeof *initArr, child, sizeof child / sizeof *child);
+	Node* node = nodeMk(&init[0], init.size(), child, sizeof child / sizeof *child);
 	data = arrMk(node, "data");
 
 	scn.push_back(data->_parent);
