@@ -12,9 +12,10 @@ Lim* limMk(glm::vec3 loc, glm::vec3 rot) {
 		100.0
 	));
 
-	std::vector<GLushort> idc = {
-		0, 1, 2, 3
-	};
+	std::vector<GLushort> idc;
+	for (int i = 0; i < 2 * 2; i++) {
+		idc.push_back(i);
+	}
 	std::vector<GLushort> strip = util::mesh::strip(idc);
 
 	_->_parent = objMk(&vtc[0], vtc.size() * sizeof (GLfloat), &strip[0], strip.size() * sizeof (GLushort), "obj", "solid", true, loc, rot);
