@@ -244,34 +244,36 @@ void Console::newline() {
 void Console::exec() {
 	std::vector<std::string> tok = util::str::split(_prompt, ' ');
 
-	std::string _cmd = tok[0];
+	if (tok.size()) {
+		std::string _cmd = tok[0];
 
-	if (_cmd == "run") {
-		if (tok.size() > 1) {
-			std::thread t(dispatch, this, tok[1]);
-			t.detach();
-		} else {
-			std::thread t(dispatch, this, _name);
-			t.detach();
+		if (_cmd == "run") {
+			if (tok.size() > 1) {
+				std::thread t(dispatch, this, tok[1]);
+				t.detach();
+			} else {
+				std::thread t(dispatch, this, _name);
+				t.detach();
+			}
 		}
-	}
 
-	if (_cmd == "save") {
-		if (tok.size() > 1) {
-			save(tok[1]);
-		} else {
-			save(_name);
+		if (_cmd == "save") {
+			if (tok.size() > 1) {
+				save(tok[1]);
+			} else {
+				save(_name);
+			}
 		}
+
+		if (_cmd == "next") {
+			_buff = util::fs::rd<std::vector<std::string>>("script/" + std::to_string(rank) + ".py");
+			ld(rank);
+		}
+
+		_prompt.clear();
+
+		render();
 	}
-
-	if (_cmd == "next") {
-		_buff = util::fs::rd<std::vector<std::string>>("script/" + std::to_string(rank) + ".py");
-		ld(rank);
-	}
-
-	_prompt.clear();
-
-	render();
 }
 
 void Console::save(std::string name) {
