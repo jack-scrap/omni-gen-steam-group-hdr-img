@@ -78,13 +78,14 @@ void ld(unsigned int i) {
 		scn.push_back(obj);
 	}
 
-	Lim* rng[2] = {
-		limMk(glm::vec3(0.0, 0.0, -layout::stroke + -(10.0 + (layout::stroke * 2 * 2) + layout::stroke)), glm::vec3(M_PI / 2, 0.0, M_PI / 2)),
-		limMk(glm::vec3(0.0, 0.0, -layout::stroke + 10.0 + (layout::stroke * 2 * 2) + layout::stroke), glm::vec3(M_PI / 2, 0.0, M_PI / 2))
-	};
+	Lim* rng[2];
+	for (int i = 0; i < 2; i++) {
+		rng[i] = limMk(glm::vec3(0.0, 0.0, -layout::stroke + ((i ? 1 : -1) * (10.0 + (layout::stroke * 2 * 2) + layout::stroke))), glm::vec3(M_PI / 2, 0.0, M_PI / 2));
+	}
 
-	scn.push_back(rng[MIN]->_parent);
-	scn.push_back(rng[MAX]->_parent);
+	for (int i = 0; i < 2; i++) {
+		scn.push_back(rng[i]->_parent);
+	}
 }
 
 char init[] = {
