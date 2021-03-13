@@ -1,5 +1,6 @@
 #include <thread>
 #include <vector>
+#include <fstream>
 #include <Python.h>
 #include <iostream>
 #include <SDL2/SDL_ttf.h>
@@ -238,6 +239,17 @@ void Console::exec() {
 	if (_cmd == "run") {
 		std::thread t(dispatch, this);
 		t.detach();
+	}
+
+	if (_cmd == "save") {
+		std::ofstream f;
+		f.open("script/" + std::to_string(0) + ".py");
+
+		for (const std::string& l : _buff) {
+			f << l + '\n';
+		}
+
+		f.close();
 	}
 
 	_cmd.clear();
