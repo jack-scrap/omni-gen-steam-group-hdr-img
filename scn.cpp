@@ -105,9 +105,4 @@ extern "C" void** vehicleGet() {
 	return &vehicle[0];
 }
 
-std::vector<Obj*> scn = {
-	/* rng[MIN], */
-	/* rng[MAX] */
-
-	objMk("container_2x4", "obj", "dir", true) // necessary, needs one item to not segfault
-};
+std::vector<Obj*> scn;
