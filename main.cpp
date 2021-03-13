@@ -17,7 +17,7 @@ Console* console;
 
 int main() {
 	unsigned int lvl = 0;
-	console = new Console(util::fs::rd<std::vector<std::string>>("script/" + std::to_string(lvl) + ".py"));
+	console = new Console("script/" + std::to_string(lvl) + ".py", util::fs::rd<std::vector<std::string>>("script/" + std::to_string(lvl) + ".py"));
 	ld(lvl);
 
 	SDL_Event e;

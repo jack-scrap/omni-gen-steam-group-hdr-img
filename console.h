@@ -62,6 +62,7 @@ class Console {
 			_idx[2];
 
 		std::vector<std::string> _buff;
+		std::string _name;
 
 		std::string _cmd;
 
@@ -77,7 +78,7 @@ class Console {
 
 		void pop();
 
-		Console(std::vector<std::string> buff);
+		Console(std::string name, std::vector<std::string> buff);
 
 		void draw();
 };

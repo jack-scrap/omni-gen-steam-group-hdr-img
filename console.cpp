@@ -34,7 +34,8 @@ void dispatch(Console* console) {
 	}
 }
 
-Console::Console(std::vector<std::string> buff) :
+Console::Console(std::string name, std::vector<std::string> buff) :
+	_name(name),
 	_buff(buff),
 	_mode(EDITOR),
 	_prog("text", "text") {
@@ -243,7 +244,7 @@ void Console::exec() {
 
 	if (_cmd == "save") {
 		std::ofstream f;
-		f.open("script/" + std::to_string(0) + ".py");
+		f.open(_name);
 
 		for (const std::string& l : _buff) {
 			f << l + '\n';
