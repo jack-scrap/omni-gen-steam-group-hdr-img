@@ -18,6 +18,8 @@ extern Disp disp;
 
 extern Console* console;
 
+void ld(unsigned int i);
+
 extern Arr* data;
 extern "C" char rhs[];
 extern bool eq;
