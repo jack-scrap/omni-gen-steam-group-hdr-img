@@ -66,6 +66,8 @@ class Console {
 
 		std::string _cmd;
 
+		Console(std::string name, std::vector<std::string> buff);
+
 		void render();
 
 		void push(char c);
@@ -77,8 +79,6 @@ class Console {
 		void exec();
 
 		void pop();
-
-		Console(std::string name, std::vector<std::string> buff);
 
 		void draw();
 };
