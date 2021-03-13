@@ -139,7 +139,7 @@ void Console::render() {
 	}
 
 	// command-line
-	std::string prompt = _ps1 + _cmd;
+	std::string prompt = _ps1 + _prompt;
 	
 	std::vector<SDL_Surface*> line;
 
@@ -209,7 +209,7 @@ void Console::push(char c) {
 			break;
 
 		case CMD:
-			_cmd.push_back(c);
+			_prompt.push_back(c);
 
 			break;
 	}
@@ -238,6 +238,10 @@ void Console::newline() {
 }
 
 void Console::exec() {
+	std::vector<std::string> tok = util::str::split(_prompt, ' ');
+
+	std::string _cmd = tok[0];
+
 	if (_cmd == "run") {
 		std::thread t(dispatch, this);
 		t.detach();
@@ -247,7 +251,7 @@ void Console::exec() {
 		save();
 	}
 
-	_cmd.clear();
+	_prompt.clear();
 
 	render();
 }
@@ -279,8 +283,8 @@ void Console::pop() {
 			break;
 
 		case CMD:
-			if (!_cmd.empty()) {
-				_cmd.pop_back();
+			if (!_prompt.empty()) {
+				_prompt.pop_back();
 			}
 
 			break;

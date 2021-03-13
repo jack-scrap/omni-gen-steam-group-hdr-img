@@ -64,7 +64,7 @@ class Console {
 		std::vector<std::string> _buff;
 		std::string _name;
 
-		std::string _cmd;
+		std::string _prompt;
 
 		Console(std::string name, std::vector<std::string> buff);
 
