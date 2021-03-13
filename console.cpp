@@ -10,6 +10,7 @@
 #include "col.h"
 #include "state.h"
 #include "scn.h"
+#include "omni.h"
 
 void dispatch(Console* console, std::string name) {
 	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(name);
@@ -284,7 +285,7 @@ void Console::exec() {
 				ld(rank);
 			}
 		} else {
-			std::cout << "Error: Command `" + _cmd + "` not found" << std::endl;
+			omni::err("Command `" + _cmd + "` not found");
 		}
 
 		_prompt.clear();
