@@ -12,6 +12,7 @@
 #include "crane.h"
 #include "node.h"
 #include "arr.h"
+#include "lim.h"
 
 Cam cam = {
 	{
@@ -74,6 +75,14 @@ void ld(unsigned int i) {
 
 		scn.push_back(obj);
 	}
+
+	Lim* rng[2] = {
+		limMk(glm::vec3(0.0, 0.0, -layout::stroke + -(10.0 + (layout::stroke * 2 * 2) + layout::stroke)), glm::vec3(M_PI / 2, 0.0, M_PI / 2)),
+		limMk(glm::vec3(0.0, 0.0, -layout::stroke + 10.0 + (layout::stroke * 2 * 2) + layout::stroke), glm::vec3(M_PI / 2, 0.0, M_PI / 2))
+	};
+
+	scn.push_back(rng[MIN]->_parent);
+	scn.push_back(rng[MAX]->_parent);
 }
 
 char init[] = {
@@ -89,27 +98,14 @@ char rhs[] = {
 };
 bool eq = false;
 
-std::vector<GLfloat> vtc = util::mesh::quad::pos(glm::vec2(
-	layout::pad,
-	100.0
-));
-
-std::vector<GLushort> idc = {
-	0, 1, 2, 3
-};
-std::vector<GLushort> strip = util::mesh::strip(idc);
-
-Obj* rng[2] = {
-	objMk(&vtc[0], vtc.size() * sizeof (GLfloat), &strip[0], strip.size() * sizeof (GLushort), "obj", "solid", true, glm::vec3(0.0, 0.0, -layout::stroke + -(10.0 + (layout::stroke * 2 * 2) + layout::stroke)), glm::vec3(M_PI / 2, 0.0, M_PI / 2)),
-	objMk(&vtc[0], vtc.size() * sizeof (GLfloat), &strip[0], strip.size() * sizeof (GLushort), "obj", "solid", true, glm::vec3(0.0, 0.0, -layout::stroke + 10.0 + (layout::stroke * 2 * 2) + layout::stroke), glm::vec3(M_PI / 2, 0.0, M_PI / 2))
-};
-
 std::vector<void*> vehicle;
 extern "C" void** vehicleGet() {
 	return &vehicle[0];
 }
 
 std::vector<Obj*> scn = {
-	rng[MIN],
-	rng[MAX]
+	/* rng[MIN], */
+	/* rng[MAX] */
+
+	objMk("container_2x4", "obj", "dir", true) // necessary, needs one item to not segfault
 };
