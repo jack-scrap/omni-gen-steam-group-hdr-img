@@ -78,6 +78,8 @@ class Console {
 
 		void exec();
 
+		void save();
+
 		void pop();
 
 		void draw();

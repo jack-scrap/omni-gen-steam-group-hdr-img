@@ -243,19 +243,23 @@ void Console::exec() {
 	}
 
 	if (_cmd == "save") {
-		std::ofstream f;
-		f.open(_name);
-
-		for (const std::string& l : _buff) {
-			f << l + '\n';
-		}
-
-		f.close();
+		save();
 	}
 
 	_cmd.clear();
 
 	render();
+}
+
+void Console::save() {
+	std::ofstream f;
+	f.open(_name);
+
+	for (const std::string& l : _buff) {
+		f << l + '\n';
+	}
+
+	f.close();
 }
 
 void Console::pop() {
