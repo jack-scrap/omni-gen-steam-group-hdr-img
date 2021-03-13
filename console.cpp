@@ -30,6 +30,7 @@ void dispatch(Console* console) {
 	}
 
 	if (eq) {
+		console->_name.clear();
 		console->_buff = util::log(state::ln, console->_buff.size());
 	}
 }
