@@ -247,6 +247,12 @@ void Console::exec() {
 	if (tok.size()) {
 		std::string _cmd = tok[0];
 
+		if (_cmd == "open") {
+			if (tok.size() > 1) {
+				open(tok[1]);
+			}
+		}
+
 		if (_cmd == "run") {
 			if (tok.size() > 1) {
 				std::thread t(dispatch, this, tok[1]);
@@ -274,6 +280,10 @@ void Console::exec() {
 
 		render();
 	}
+}
+
+void Console::open(std::string name) {
+	_buff = util::fs::rd<std::vector<std::string>>(name);
 }
 
 void Console::save(std::string name) {
