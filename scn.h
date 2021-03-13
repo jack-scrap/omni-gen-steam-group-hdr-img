@@ -22,6 +22,8 @@ extern Arr* data;
 extern "C" char rhs[];
 extern bool eq;
 
+extern std::vector<void*> vehicle;
+
 extern "C" void** vehicleGet();
 
 extern std::vector<Obj*> scn;

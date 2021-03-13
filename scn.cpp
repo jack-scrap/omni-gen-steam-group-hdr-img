@@ -54,21 +54,12 @@ Obj* rng[2] = {
 	objMk(&vtc[0], vtc.size() * sizeof (GLfloat), &strip[0], strip.size() * sizeof (GLushort), "obj", "solid", true, glm::vec3(0.0, 0.0, -layout::stroke + 10.0 + (layout::stroke * 2 * 2) + layout::stroke), glm::vec3(M_PI / 2, 0.0, M_PI / 2))
 };
 
-Truck* truck = truckMk();
-
-Crane* crane = craneMk();
-
-std::vector<void*> vehicle = {
-	truck,
-	crane
-};
+std::vector<void*> vehicle;
 extern "C" void** vehicleGet() {
 	return &vehicle[0];
 }
 
 std::vector<Obj*> scn = {
-	crane->_parent,
-	truck->_parent,
 	rng[MIN],
 	rng[MAX]
 };

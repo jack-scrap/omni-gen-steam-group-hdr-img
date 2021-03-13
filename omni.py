@@ -75,5 +75,4 @@ vehicleGet.argtypes = None
 
 vehicle = vehicleGet()
 
-truck = Truck(vehicle[0])
-crane = Crane(vehicle[1])
+crane = Crane(vehicle[0])
