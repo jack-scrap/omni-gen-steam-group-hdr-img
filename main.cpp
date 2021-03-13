@@ -14,8 +14,6 @@
 #include "pt.h"
 #include "cam.h"
 
-bool run;
-
 Console* console;
 
 int main() {
