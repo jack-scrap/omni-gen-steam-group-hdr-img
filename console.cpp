@@ -262,6 +262,13 @@ void Console::exec() {
 		}
 	}
 
+	if (_cmd == "next") {
+		unsigned int lvl = 1;
+
+		_buff = util::fs::rd<std::vector<std::string>>("script/" + std::to_string(lvl) + ".py");
+		ld(lvl);
+	}
+
 	_prompt.clear();
 
 	render();

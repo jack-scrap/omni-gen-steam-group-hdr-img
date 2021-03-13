@@ -1,4 +1,4 @@
-# Move the container into the other index
+# Move the container into the index
 
 import sys
 
