@@ -58,12 +58,12 @@ Truck* truck = truckMk();
 
 Crane* crane = craneMk();
 
-void* vehicle[] = {
+std::vector<void*> vehicle = {
 	truck,
 	crane
 };
 extern "C" void** vehicleGet() {
-	return vehicle;
+	return &vehicle[0];
 }
 
 std::vector<Obj*> scn = {
