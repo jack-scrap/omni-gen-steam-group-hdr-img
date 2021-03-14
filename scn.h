@@ -23,7 +23,7 @@ extern unsigned int rank;
 void ld(unsigned int i);
 
 extern Arr* data;
-extern "C" char rhs[];
+extern std::vector<char> rhs;
 extern bool eq;
 
 extern std::vector<void*> vehicle;

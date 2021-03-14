@@ -72,6 +72,10 @@ void ld(unsigned int i) {
 	Node* node = nodeMk(&init[0], init.size(), child, sizeof child / sizeof *child);
 	data = arrMk(node, "data");
 
+	for (const auto& entry : serial["rhs"]) {
+		rhs.push_back((char) ((int) entry));
+	}
+
 	// object
 	for (const auto& entry : serial["obj"]) {
 		Obj* obj = objMk(entry["name"], "obj", "dir", true, glm::vec3(entry["loc"][0], entry["loc"][1], entry["loc"][2]), glm::vec3(entry["rot"][0], entry["rot"][1], entry["rot"][2]));
@@ -91,17 +95,8 @@ void ld(unsigned int i) {
 	}
 }
 
-char init[] = {
-	0,
-	'a',
-	'a'
-};
 Arr* data;
-char rhs[] = {
-	'a',
-	0,
-	'a'
-};
+std::vector<char> rhs;
 bool eq = false;
 
 std::vector<void*> vehicle;
