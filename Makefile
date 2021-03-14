@@ -28,7 +28,7 @@ main.o: main.cpp
 	$(CXX) -c $< -o $@ $(LDFLAGS)
 
 $(PROG): $(DEP_STATIC) $(DEP_DYNA) $(DEP_HDR)
-	$(CXX) $(DEP_STATIC) $(LDFLAGS) -o $@
+	$(CXX) $(DEP_STATIC) -o $@ $(LDFLAGS)
 
 clean:
 	rm *.o *.so $(PROG)
