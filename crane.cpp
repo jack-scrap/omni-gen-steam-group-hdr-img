@@ -166,7 +166,7 @@ void craneGrab(Crane* crane) {
 		}
 
 		if (slot) {
-			scn.push_back(slot);
+			mesh.push_back(slot);
 
 			slot = nullptr;
 			crane->_op = nullptr;

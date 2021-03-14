@@ -522,7 +522,7 @@ void objAnim(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
 		glm::any(glm::lessThan(locFrame, locMax)) ||
 		glm::any(glm::lessThan(rotFrame, rotMax))
 	) {
-		if (util::phys::aabb(obj, scn[1])) {
+		if (util::phys::aabb(obj, mesh[1])) {
 			break;
 		}
 

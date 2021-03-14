@@ -20,8 +20,6 @@ extern Console* console;
 
 extern unsigned int rank;
 
-void ld(unsigned int i);
-
 extern Arr* data;
 extern std::vector<char> rhs;
 extern bool eq;
@@ -30,4 +28,8 @@ extern std::vector<void*> vehicle;
 
 extern "C" void** vehicleGet();
 
-extern std::vector<Obj*> scn;
+extern std::vector<Obj*> mesh;
+
+namespace scn {
+	void ld(unsigned int i);
+}

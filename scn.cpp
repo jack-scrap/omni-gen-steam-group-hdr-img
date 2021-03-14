@@ -30,7 +30,7 @@ Disp disp("Omni", {
 
 unsigned int rank = 0;
 
-void ld(unsigned int i) {
+void scn::ld(unsigned int i) {
 	nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("lvl/" + std::to_string(i) + ".json"));
 
 	// vehicles
@@ -40,24 +40,24 @@ void ld(unsigned int i) {
 	vehicle.clear();
 
 	// drawable objects
-	for (void* _ : scn) {
+	for (void* _ : mesh) {
 		free(_);
 	}
-	scn.clear();
+	mesh.clear();
 
 	for (const auto& entry : serial["vehicle"]) {
 		if (entry["name"] == "crane") {
 			Crane* crane = craneMk(glm::vec3(entry["loc"][0], entry["loc"][1], entry["loc"][2]), glm::vec3(entry["rot"][0], entry["loc"][1], entry["loc"][2]));
 
 			vehicle.push_back(crane);
-			scn.push_back(crane->_parent);
+			mesh.push_back(crane->_parent);
 		}
 
 		if (entry["name"] == "truck") {
 			Truck* truck = truckMk(glm::vec3(entry["loc"][0], entry["loc"][1], entry["loc"][2]), glm::vec3(entry["rot"][0], entry["loc"][1], entry["loc"][2]));
 
 			vehicle.push_back(truck);
-			scn.push_back(truck->_parent);
+			mesh.push_back(truck->_parent);
 		}
 	}
 
@@ -80,10 +80,10 @@ void ld(unsigned int i) {
 	for (const auto& entry : serial["obj"]) {
 		Obj* obj = objMk(entry["name"], "obj", "dir", true, glm::vec3(entry["loc"][0], entry["loc"][1], entry["loc"][2]), glm::vec3(entry["rot"][0], entry["rot"][1], entry["rot"][2]));
 
-		scn.push_back(obj);
+		mesh.push_back(obj);
 	}
 
-	scn.push_back(data->_parent);
+	mesh.push_back(data->_parent);
 
 	Lim* rng[2];
 	for (int i = 0; i < 2; i++) {
@@ -91,7 +91,7 @@ void ld(unsigned int i) {
 	}
 
 	for (int i = 0; i < 2; i++) {
-		scn.push_back(rng[i]->_parent);
+		mesh.push_back(rng[i]->_parent);
 	}
 }
 
@@ -104,4 +104,4 @@ extern "C" void** vehicleGet() {
 	return &vehicle[0];
 }
 
-std::vector<Obj*> scn;
+std::vector<Obj*> mesh;

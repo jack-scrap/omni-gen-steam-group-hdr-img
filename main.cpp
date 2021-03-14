@@ -18,7 +18,7 @@ Console* console;
 int main() {
 	unsigned int lvl = 0;
 	console = new Console("script/" + std::to_string(lvl) + ".py", util::fs::rd<std::vector<std::string>>("script/" + std::to_string(lvl) + ".py"));
-	ld(lvl);
+	scn::ld(lvl);
 
 	SDL_Event e;
 	while (disp._open) {

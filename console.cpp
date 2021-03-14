@@ -286,7 +286,7 @@ void Console::exec() {
 					eq = false;
 
 					_buff = util::fs::rd<std::vector<std::string>>("script/" + std::to_string(rank) + ".py");
-					ld(rank);
+					scn::ld(rank);
 				} else {
 					omni::err("Current level not complete");
 				}

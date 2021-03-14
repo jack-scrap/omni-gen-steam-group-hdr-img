@@ -50,7 +50,7 @@ void Disp::draw() {
 
 	glViewport(layout::res[X], 0, layout::view[X], layout::view[Y]);
 
-	for (Obj* _ : scn) {
+	for (Obj* _ : mesh) {
 		objDraw(_);
 	}
 
