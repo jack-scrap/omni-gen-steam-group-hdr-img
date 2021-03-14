@@ -281,8 +281,14 @@ void Console::exec() {
 			}
 
 			if (_cmd == "next") {
-				_buff = util::fs::rd<std::vector<std::string>>("script/" + std::to_string(rank) + ".py");
-				ld(rank);
+				if (eq) {
+					eq = false;
+
+					_buff = util::fs::rd<std::vector<std::string>>("script/" + std::to_string(rank) + ".py");
+					ld(rank);
+				} else {
+					omni::err("Current level not complete");
+				}
 			}
 		} else {
 			omni::err("Command `" + _cmd + "` not found");
