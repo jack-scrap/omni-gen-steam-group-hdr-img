@@ -4,6 +4,7 @@
 #include <Python.h>
 #include <iostream>
 #include <algorithm>
+#include <nlohmann/json.hpp>
 #include <SDL2/SDL_ttf.h>
 
 #include "console.h"

@@ -33,24 +33,18 @@ unsigned int rank = 0;
 void ld(unsigned int i) {
 	nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("lvl/" + std::to_string(i) + ".json"));
 
+	// vehicles
+	for (void* _ : vehicle) {
+		free(_);
+	}
 	vehicle.clear();
+
+	// drawable objects
+	for (void* _ : scn) {
+		free(_);
+	}
 	scn.clear();
 
-	// data
-	std::vector<char> init;
-	for (const auto& entry : serial["data"]) {
-		init.push_back((char) ((int) entry));
-	}
-
-	Node* child[] = {
-		nodeMk(&init[0], init.size())
-	};
-	Node* node = nodeMk(&init[0], init.size(), child, sizeof child / sizeof *child);
-	data = arrMk(node, "data");
-
-	scn.push_back(data->_parent);
-
-	// vehicle
 	for (const auto& entry : serial["vehicle"]) {
 		if (entry["name"] == "crane") {
 			Crane* crane = craneMk(glm::vec3(entry["loc"][0], entry["loc"][1], entry["loc"][2]), glm::vec3(entry["rot"][0], entry["loc"][1], entry["loc"][2]));
@@ -67,12 +61,25 @@ void ld(unsigned int i) {
 		}
 	}
 
+	// data
+	std::vector<char> init;
+	for (const auto& entry : serial["data"]) {
+		init.push_back((char) ((int) entry));
+	}
+	Node* child[] = {
+		nodeMk(&init[0], init.size())
+	};
+	Node* node = nodeMk(&init[0], init.size(), child, sizeof child / sizeof *child);
+	data = arrMk(node, "data");
+
 	// object
 	for (const auto& entry : serial["obj"]) {
 		Obj* obj = objMk(entry["name"], "obj", "dir", true, glm::vec3(entry["loc"][0], entry["loc"][1], entry["loc"][2]), glm::vec3(entry["rot"][0], entry["rot"][1], entry["rot"][2]));
 
 		scn.push_back(obj);
 	}
+
+	scn.push_back(data->_parent);
 
 	Lim* rng[2];
 	for (int i = 0; i < 2; i++) {
