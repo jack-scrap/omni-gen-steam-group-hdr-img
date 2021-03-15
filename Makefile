@@ -1,6 +1,6 @@
 PROG = omni
 
-CXX = g++
+CXX = g++ -std=c++14
 
 HDR = cam col state math phys
 
