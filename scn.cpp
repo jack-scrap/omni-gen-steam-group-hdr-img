@@ -62,15 +62,19 @@ void scn::init(unsigned int i) {
 	}
 
 	// data
-	std::vector<char> init;
-	for (const auto& entry : serial["data"]) {
-		init.push_back((char) ((int) entry));
+	for (const auto& pair : serial["data"].items()) {
+		std::vector<char> init;
+
+		for (const auto& item : serial["data"][pair.key()]) {
+			init.push_back((char) ((int) item));
+		}
+
+		Node* child[] = {
+			nodeMk(&init[0], init.size())
+		};
+		Node* node = nodeMk(&init[0], init.size(), child, sizeof child / sizeof *child);
+		data = arrMk(node, pair.key());
 	}
-	Node* child[] = {
-		nodeMk(&init[0], init.size())
-	};
-	Node* node = nodeMk(&init[0], init.size(), child, sizeof child / sizeof *child);
-	data = arrMk(node, "data");
 
 	for (const auto& entry : serial["rhs"]) {
 		rhs.push_back((char) ((int) entry));
