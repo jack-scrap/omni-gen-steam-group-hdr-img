@@ -41,6 +41,17 @@ std::vector<std::string> util::fs::rd<std::vector<std::string>>(std::string name
 	return cont;
 }
 
+void util::fs::write(std::string name, std::vector<std::string> buff) {
+	std::ofstream f;
+	f.open(name);
+
+	for (const std::string& l : buff) {
+		f << l + '\n';
+	}
+
+	f.close();
+}
+
 std::vector<std::string> util::str::split(std::string buff, char delim) {
 	std::vector<std::string> tok;
 

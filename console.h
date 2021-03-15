@@ -78,10 +78,6 @@ class Console {
 
 		void exec();
 
-		void open(std::string name);
-
-		void save(std::string name);
-
 		void pop();
 
 		void draw();

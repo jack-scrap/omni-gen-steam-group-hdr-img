@@ -19,6 +19,8 @@ namespace util {
 
 		template <>
 		std::vector<std::string> rd(std::string name);
+
+		void write(std::string name, std::vector<std::string> buff);
 	}
 
 	namespace str {

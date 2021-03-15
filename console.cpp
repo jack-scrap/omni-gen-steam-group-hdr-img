@@ -37,8 +37,12 @@ void dispatch(Console* console, std::string name) {
 	if (eq) {
 		rank++;
 
+		std::string log = "log/" + std::to_string(rank) + ".log";
+
+		util::fs::write(log, util::log(state::ln, console->_buff.size()));
+
 		console->_name.clear();
-		console->_buff = util::log(state::ln, console->_buff.size());
+		console->_buff = util::fs::rd<std::vector<std::string>>(log);
 	}
 }
 
@@ -259,7 +263,7 @@ void Console::exec() {
 		if (std::find(_lib.begin(), _lib.end(), _cmd) != _lib.end()) {
 			if (_cmd == "open") {
 				if (tok.size() > 1) {
-					open(tok[1]);
+					_buff = util::fs::rd<std::vector<std::string>>(tok[1]);
 				}
 			}
 
@@ -275,9 +279,9 @@ void Console::exec() {
 
 			if (_cmd == "save") {
 				if (tok.size() > 1) {
-					save(tok[1]);
+					util::fs::write(tok[1], _buff);
 				} else {
-					save(_name);
+					util::fs::write(_name, _buff);
 				}
 			}
 
@@ -299,21 +303,6 @@ void Console::exec() {
 
 		render();
 	}
-}
-
-void Console::open(std::string name) {
-	_buff = util::fs::rd<std::vector<std::string>>(name);
-}
-
-void Console::save(std::string name) {
-	std::ofstream f;
-	f.open(name);
-
-	for (const std::string& l : _buff) {
-		f << l + '\n';
-	}
-
-	f.close();
 }
 
 void Console::pop() {
