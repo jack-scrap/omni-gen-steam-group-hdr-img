@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 
@@ -13,4 +14,6 @@ namespace state {
 	static unsigned int fps = 15;
 
 	static unsigned int tabWd = 2;
+
+	static std::string format = "%Y-%m-%d %H:%m";
 }

@@ -280,10 +280,27 @@ std::vector<std::string> util::log(unsigned int wd, unsigned int loc) {
 	}
 	buff.push_back(key);
 
-	for (int i = buff.size(); i < state::line - 2 - 1; i++) {
+	for (int i = buff.size(); i < state::line - 2 - 1 - 2 - 1; i++) {
 		buff.push_back("");
 	}
+
+	buff.push_back("");
+	buff.push_back(util::now(state::format));
+
+	buff.push_back("");
 	buff.push_back("Enter `next` to proceed");
 
 	return buff;
+}
+
+std::string util::now(std::string format) {
+	time_t raw;
+	time(&raw);
+
+	struct tm* info = localtime(&raw);
+
+	char out[30];
+	strftime(out, sizeof out / sizeof *out, format.c_str(), info);
+
+	return std::string(out);
 }

@@ -57,4 +57,6 @@ namespace util {
 	}
 
 	std::vector<std::string> log(unsigned int wd, unsigned int loc);
+
+	std::string now(std::string format);
 }
