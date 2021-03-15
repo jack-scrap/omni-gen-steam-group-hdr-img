@@ -30,7 +30,7 @@ Disp disp("Omni", {
 
 unsigned int rank = 0;
 
-void scn::ld(unsigned int i) {
+void scn::init(unsigned int i) {
 	nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("lvl/" + std::to_string(i) + ".json"));
 
 	// vehicles

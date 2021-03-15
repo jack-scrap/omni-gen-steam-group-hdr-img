@@ -31,5 +31,5 @@ extern "C" void** vehicleGet();
 extern std::vector<Obj*> mesh;
 
 namespace scn {
-	void ld(unsigned int i);
+	void init(unsigned int i);
 }
