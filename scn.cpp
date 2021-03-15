@@ -74,6 +74,11 @@ void scn::init(unsigned int i) {
 		};
 		Node* node = nodeMk(&init[0], init.size(), child, sizeof child / sizeof *child);
 		data = arrMk(node, pair.key());
+
+		for (int i = 0; i < sizeof child / sizeof *child; i++) {
+			free(child[i]);
+		}
+		free(node);
 	}
 
 	for (const auto& entry : serial["rhs"]) {
@@ -87,7 +92,7 @@ void scn::init(unsigned int i) {
 		mesh.push_back(obj);
 	}
 
-	mesh.push_back(data->_parent);
+	/* mesh.push_back(data->_parent); */
 
 	Lim* rng[2];
 	for (int i = 0; i < 2; i++) {
