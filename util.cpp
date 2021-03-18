@@ -305,10 +305,10 @@ std::vector<std::string> util::log(unsigned int wd, unsigned int loc) {
 }
 
 std::string util::now(std::string format) {
-	time_t raw;
-	time(&raw);
+	time_t epoch;
+	time(&epoch);
 
-	struct tm* info = localtime(&raw);
+	struct tm* info = localtime(&epoch);
 
 	char out[state::ln];
 	strftime(out, sizeof out / sizeof *out, format.c_str(), info);
