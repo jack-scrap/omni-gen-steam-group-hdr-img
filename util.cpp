@@ -57,11 +57,8 @@ void util::fs::write(std::string name, std::vector<std::string> buff) {
 std::vector<std::map<std::string, std::string>> util::fs::ls(std::string name) {
 	std::vector<std::map<std::string, std::string>> tree;
 
-	std::string base = "./";
-	std::string path = base + name;
+	std::string path = "./" + name;
 	auto dir = opendir(path.c_str());
-
-	base = path + "/";
 
 	if (!dir) {
 		omni::err("Could not open directory " + path);
@@ -104,7 +101,6 @@ std::vector<std::map<std::string, std::string>> util::fs::ls(std::string name) {
 		}
 	}
 
-	base.resize(base.length() - 1 - name.length());
 	closedir(dir);
 
 	return tree;
