@@ -15,5 +15,5 @@ namespace state {
 
 	static unsigned int tabWd = 2;
 
-	static std::string format = "%Y-%m-%d %H:%m";
+	static std::string format = "%Y-%m-%d %H:%M";
 }
