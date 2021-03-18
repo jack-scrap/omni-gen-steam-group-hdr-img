@@ -49,7 +49,7 @@ int main() {
 					case Console::FS:
 						switch (e.key.keysym.sym) {
 							case SDLK_s:
-								if (console->_l < 3) {
+								if (console->_l < console->_tree.size() - 1) {
 									console->_l++;
 								}
 

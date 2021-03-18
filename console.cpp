@@ -47,15 +47,15 @@ void dispatch(Console* console, std::string name) {
 }
 
 Console::Console(std::string name, std::vector<std::string> buff) :
+	_tree(util::fs::ls("script")),
 	_name(name),
 	_buff(buff),
 	_mode(EDITOR),
 	_prog("text", "text") {
 		_buff.clear();
 
-		std::vector<std::map<std::string, std::string>> tree = util::fs::ls("script");
-		std::sort(tree.begin(), tree.end());
-		for (auto _ : tree) {
+		std::sort(_tree.begin(), _tree.end());
+		for (auto _ : _tree) {
 			_buff.push_back(_["name"]);
 		}
 

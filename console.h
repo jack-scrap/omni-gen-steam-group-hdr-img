@@ -63,6 +63,8 @@ class Console {
 			_idx[2],
 			_l = 0;
 
+		std::vector<std::map<std::string, std::string>> _tree;
+
 		std::vector<std::string> _buff;
 		std::string _name;
 
