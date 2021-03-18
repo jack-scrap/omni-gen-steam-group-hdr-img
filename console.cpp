@@ -64,17 +64,7 @@ Console::Console(std::string name, std::vector<std::string> buff) :
 		}
 
 		for (int l = 0; l < _tree.size(); l++) {
-			std::string line;
-
-			for (int c = 0; c < maxFs; c++) {
-				if (c < _tree[l]["name"].size()) {
-					line.push_back(_tree[l]["name"][c]);
-				} else {
-					line.push_back(' ');
-				}
-			}
-
-			_buff.push_back(line);
+			_buff.push_back(util::str::pad(_tree[l]["name"], maxFs));
 		}
 
 		/* data */

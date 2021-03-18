@@ -131,6 +131,15 @@ std::string util::str::join(std::vector<std::string> buff) {
 	return _;
 }
 
+std::string util::str::pad(std::string buff, unsigned int roof) {
+	std::string line = buff;
+	for (int i = buff.length(); i < roof; i++) {
+		line.push_back(' ');
+	}
+
+	return line;
+}
+
 std::vector<GLfloat> util::mesh::plane(glm::vec2 sz) {
 	std::vector<GLfloat> _;
 
