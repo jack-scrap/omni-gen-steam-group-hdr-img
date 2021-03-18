@@ -53,7 +53,7 @@ class Console {
 	public:
 		enum mode {
 			EDITOR,
-			CMD
+			PROMPT
 		};
 
 		unsigned int

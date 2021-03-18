@@ -207,7 +207,7 @@ void Console::render() {
 
 			break;
 
-		case CMD:
+		case PROMPT:
 			_idx[X] = prompt.size();
 			_idx[Y] = state::line - 1;
 
@@ -231,7 +231,7 @@ void Console::push(char c) {
 
 			break;
 
-		case CMD:
+		case PROMPT:
 			_prompt.push_back(c);
 
 			break;
@@ -247,7 +247,7 @@ void Console::enter() {
 
 			break;
 
-		case CMD:
+		case PROMPT:
 			exec();
 
 			break;
@@ -332,7 +332,7 @@ void Console::pop() {
 
 			break;
 
-		case CMD:
+		case PROMPT:
 			if (!_prompt.empty()) {
 				_prompt.pop_back();
 			}

@@ -235,7 +235,7 @@ int main() {
 								break;
 
 							case SDLK_F2:
-								console->_mode = Console::CMD;
+								console->_mode = Console::PROMPT;
 
 								console->render();
 
