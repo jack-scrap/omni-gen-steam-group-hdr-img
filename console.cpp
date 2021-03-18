@@ -113,17 +113,17 @@ Console::Console(std::string name, std::vector<std::string> buff) :
 				}
 			}
 
-			// line numbers
 			line.push_back(' ');
 
+			// line numbers
 			std::string no = std::to_string(l + 1);
 			for (int i = 0; i < no.size(); i++) {
 				line.push_back(no[i]);
 			}
 
-			// buffer
 			line.push_back(' ');
 
+			// buffer
 			unsigned int curr = line.size();
 
 			std::string padded = util::str::pad(_buff[l], state::ln);
