@@ -55,7 +55,24 @@ Console::Console(std::string name, std::vector<std::string> buff) :
 		std::sort(_tree.begin(), _tree.end());
 
 		// status bar
-		_scr.push_back(util::str::pad("asdf", state::ln));
+		switch (_mode) {
+			case FS:
+				_modeStr = "FS";
+
+				break;
+
+			case EDITOR:
+				_modeStr = "EDITOR";
+
+				break;
+
+			case PROMPT:
+				_modeStr = "PROMPT";
+
+				break;
+		};
+
+		_scr.push_back(util::str::pad(_modeStr, state::ln));
 
 		// file system
 		for (std::map<std::string, std::string> _ : _tree) {

@@ -66,6 +66,8 @@ class Console {
 			maxFs = 0,
 			maxLn = 0;
 
+		std::string _modeStr;
+
 		std::vector<std::map<std::string, std::string>> _tree;
 
 		std::vector<std::string> _buff;
