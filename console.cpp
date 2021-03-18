@@ -102,26 +102,23 @@ Console::Console(std::string name, std::vector<std::string> buff) :
 			std::string line;
 
 			// file system
+			std::string entry;
 			if (l < _tree.size()) {
-				std::string fs = util::str::pad(_tree[l]["name"], maxFs);
-				for (int i = 0; i < fs.size(); i++) {
-					line.push_back(fs[i]);
-				}
+				entry = _tree[l]["name"];
 			} else {
-				for (int i = 0; i < maxFs; i++) {
-					line.push_back(' ');
-				}
+				entry = "";
 			}
 
-			line.push_back(' ');
+			std::string fs = util::str::pad(entry, maxFs + 1);
+			for (int i = 0; i < maxFs + 1; i++) {
+				line.push_back(fs[i]);
+			}
 
 			// line numbers
-			std::string no = std::to_string(l + 1);
+			std::string no = util::str::pad(std::to_string(l + 1), maxLn + 1);
 			for (int i = 0; i < no.size(); i++) {
 				line.push_back(no[i]);
 			}
-
-			line.push_back(' ');
 
 			// buffer
 			unsigned int curr = line.size();
