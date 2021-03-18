@@ -54,8 +54,10 @@ Console::Console(std::string name, std::vector<std::string> buff) :
 	_prog("text", "text") {
 		std::sort(_tree.begin(), _tree.end());
 
+		// status bar
+		_scr.push_back(util::str::pad("asdf", state::ln));
+
 		// file system
-		unsigned int maxFs = 0;
 		for (std::map<std::string, std::string> _ : _tree) {
 			if (_["name"].size() > maxFs) {
 				maxFs = _["name"].size();
@@ -70,7 +72,6 @@ Console::Console(std::string name, std::vector<std::string> buff) :
 			roof = state::line - 2;
 		}
 
-		unsigned int maxLn = 0;
 		for (int i = 0; i < roof; i++) {
 			std::string str = std::to_string(i);
 
@@ -80,13 +81,19 @@ Console::Console(std::string name, std::vector<std::string> buff) :
 		}
 
 		// screen
-		for (int l = 0; l < _tree.size(); l++) {
+		for (int l = 0; l < _buff.size(); l++) {
 			std::string line;
 
 			// file system
-			std::string fs = util::str::pad(_tree[l]["name"], maxFs);
-			for (int i = 0; i < fs.size(); i++) {
-				line.push_back(fs[i]);
+			if (l < _tree.size()) {
+				std::string fs = util::str::pad(_tree[l]["name"], maxFs);
+				for (int i = 0; i < fs.size(); i++) {
+					line.push_back(fs[i]);
+				}
+			} else {
+				for (int i = 0; i < maxFs; i++) {
+					line.push_back(' ');
+				}
 			}
 
 			// line numbers
@@ -109,6 +116,13 @@ Console::Console(std::string name, std::vector<std::string> buff) :
 
 			_scr.push_back(line);
 		}
+
+		for (int l = _scr.size(); l < state::line - 1; l++) {
+			_scr.push_back(util::str::pad("", state::ln));
+		}
+
+		// command-line
+		_scr.push_back(util::str::pad(_prompt, state::ln));
 
 		/* data */
 		glGenVertexArrays(1, &_id[VAO]);
@@ -160,112 +174,32 @@ Console::Console(std::string name, std::vector<std::string> buff) :
 	}
 
 void Console::render() {
-	_hl.clear();
-	_map.clear();
-	_no.clear();
-
-	unsigned int roof;
-	if (_buff.size() < state::line - 2) {
-		roof = _buff.size();
-	} else {
-		roof = state::line - 2;
-	}
-
-	// highlighting
-	for (int l = 0; l < _buff.size(); l++) {
-		std::vector<bool> line;
-
-		for (int i = 0; i < _buff[l].size(); i++) {
-			line.push_back(false);
-		}
-
-		_hl.push_back(line);
-	}
-
-	// buffer
-	for (int l = 0; l < roof; l++) {
-		std::vector<SDL_Surface*> line;
-
-		for (int i = 0; i < _buff[l].size(); i++) {
-			line.push_back(TTF_RenderGlyph_Blended(font, _buff[l][i], {col[!_hl[l][i]][R], col[!_hl[l][i]][G], col[!_hl[l][i]][B]}));
-		}
-
-		_map.push_back(line);
-	}
-
-	// line numbers
-	unsigned int maxNo = std::to_string(_buff.size()).size() + 1;
-
-	for (int l = 0; l < roof; l++) {
-		std::vector<SDL_Surface*> line;
-
-		std::string str = std::to_string(1 + l);
-		for (int i = str.size(); i < maxNo; i++) {
-			str.push_back(' ');
-		}
-		str.push_back(' ');
-
-		for (int i = 0; i < maxNo; i++) {
-			line.push_back(TTF_RenderGlyph_Blended(font, (char) str[i], {col[true][R], col[true][G], col[true][B]}));
-		}
-
-		_no.push_back(line);
-	}
-
-	// command-line
-	std::string prompt = _ps1 + _prompt;
-
-	std::vector<SDL_Surface*> line;
-
-	for (int i = 0; i < prompt.size(); i++) {
-		line.push_back(TTF_RenderGlyph_Blended(font, prompt[i], {col[true][R], col[true][G], col[true][B]}));
-	}
-
-	_map.push_back(line);
-
-	/* render */
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _canv->w, _canv->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, _canv->pixels);
 
-	for (int i = 0; i < state::ln; i++) {
-		glTexSubImage2D(GL_TEXTURE_2D, 0, i * layout::dim[X], 0, layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _block->pixels);
-	}
-
-	for (int l = 0; l < roof; l++) {
-		for (int i = 0; i < _no[l].size(); i++) {
-			glTexSubImage2D(GL_TEXTURE_2D, 0, i * layout::dim[X], (1 + l) * layout::dim[Y], layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _no[l][i]->pixels);
+	for (int l = 0; l < _scr.size(); l++) {
+		for (int i = 0; i < _scr[l].size(); i++) {
+			SDL_Surface* surf = TTF_RenderGlyph_Blended(font, _scr[l][i], {col[true][R], col[true][G], col[true][B]});
+			glTexSubImage2D(GL_TEXTURE_2D, 0, i * layout::dim[X], l * layout::dim[Y], layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, surf->pixels);
 		}
-	}
-
-	for (int l = 0; l < roof; l++) {
-		for (int i = 0; i < _buff[l].size(); i++) {
-			if (_hl[l][i]) {
-				glTexSubImage2D(GL_TEXTURE_2D, 0, (maxNo + i) * layout::dim[X], (1 + l) * layout::dim[Y], layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _block->pixels);
-			} else {
-				glTexSubImage2D(GL_TEXTURE_2D, 0, (maxNo + i) * layout::dim[X], (1 + l) * layout::dim[Y], layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _map[l][i]->pixels);
-			}
-		}
-	}
-
-	for (int i = 0; i < prompt.size(); i++) {
-		glTexSubImage2D(GL_TEXTURE_2D, 0, i * layout::dim[X], (state::line - 1) * layout::dim[Y], layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _map[_map.size() - 1][i]->pixels);
 	}
 
 	// cursor
 	switch (_mode) {
 		case EDITOR:
-			_idx[X] = maxNo + _buff.back().size();
-			_idx[Y] = _buff.size();
+			_idx[X] = maxFs + 1 + maxLn + 1 + _buff[_buff.size() - 1].size();
+			_idx[Y] = 1 + _buff.size() - 1;
 
 			break;
 
 		case PROMPT:
-			_idx[X] = prompt.size();
+			_idx[X] = _prompt.size();
 			_idx[Y] = state::line - 1;
 
 			break;
 	}
 
 	glTexSubImage2D(GL_TEXTURE_2D, 0, _idx[X] * layout::dim[X], _idx[Y] * layout::dim[Y], layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _block->pixels);
+	SDL_FillRect(_block, &_blockRect, SDL_MapRGBA(_block->format, col[true][R], col[true][G], col[true][B], 255));
 
 	glGenerateMipmap(GL_TEXTURE_2D);
 }

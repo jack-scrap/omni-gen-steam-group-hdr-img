@@ -61,7 +61,10 @@ class Console {
 			_mode,
 
 			_idx[2],
-			_l = 0;
+			_l = 0,
+
+			maxFs = 0,
+			maxLn = 0;
 
 		std::vector<std::map<std::string, std::string>> _tree;
 
