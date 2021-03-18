@@ -63,7 +63,7 @@ int main() {
 								break;
 						}
 
-						console->_idx[X] = 0;
+						console->_idx[X] = std::to_string(console->_buff.size()).size() + 1;
 						console->_idx[Y] = 1 + console->_l;
 
 						break;
