@@ -185,6 +185,12 @@ void Console::render() {
 
 	// cursor
 	switch (_mode) {
+		case FS:
+			_idx[X] = 0;
+			_idx[Y] = 1 + _l;
+
+			break;
+
 		case EDITOR:
 			_idx[X] = maxFs + 1 + maxLn + 1 + _buff[_buff.size() - 1].size();
 			_idx[Y] = 1 + _buff.size() - 1;
