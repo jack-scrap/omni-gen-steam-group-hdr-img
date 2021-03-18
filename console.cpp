@@ -52,10 +52,9 @@ Console::Console(std::string name, std::vector<std::string> buff) :
 	_buff(buff),
 	_mode(EDITOR),
 	_prog("text", "text") {
-		_buff.clear();
-
 		std::sort(_tree.begin(), _tree.end());
 
+		// file system
 		unsigned int maxFs = 0;
 		for (std::map<std::string, std::string> _ : _tree) {
 			if (_["name"].size() > maxFs) {
@@ -63,8 +62,52 @@ Console::Console(std::string name, std::vector<std::string> buff) :
 			}
 		}
 
+		// line numbers
+		unsigned int roof;
+		if (_buff.size() < state::line - 2) {
+			roof = _buff.size();
+		} else {
+			roof = state::line - 2;
+		}
+
+		unsigned int maxLn = 0;
+		for (int i = 0; i < roof; i++) {
+			std::string str = std::to_string(i);
+
+			if (str.size() > maxLn) {
+				maxLn = str.size();
+			}
+		}
+
+		// screen
 		for (int l = 0; l < _tree.size(); l++) {
-			_buff.push_back(util::str::pad(_tree[l]["name"], maxFs));
+			std::string line;
+
+			// file system
+			std::string fs = util::str::pad(_tree[l]["name"], maxFs);
+			for (int i = 0; i < fs.size(); i++) {
+				line.push_back(fs[i]);
+			}
+
+			// line numbers
+			line.push_back(' ');
+
+			std::string no = std::to_string(l + 1);
+			for (int i = 0; i < no.size(); i++) {
+				line.push_back(no[i]);
+			}
+
+			// buffer
+			line.push_back(' ');
+
+			unsigned int curr = line.size();
+
+			std::string padded = util::str::pad(_buff[l], state::ln);
+			for (int i = 0; i < state::ln - curr; i++) {
+				line.push_back(padded[i]);
+			}
+
+			_scr.push_back(line);
 		}
 
 		/* data */
