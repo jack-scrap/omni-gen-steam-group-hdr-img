@@ -1,11 +1,13 @@
 #include <iostream>
 #include <sstream>
+#include <dirent.h>
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/string_cast.hpp>
 
 #include "util.h"
 #include "math.h"
 #include "state.h"
+#include "omni.h"
 
 template <typename T>
 T util::fs::rd(std::string name) {
@@ -50,6 +52,62 @@ void util::fs::write(std::string name, std::vector<std::string> buff) {
 	}
 
 	f.close();
+}
+
+std::vector<std::map<std::string, std::string>> util::fs::ls(std::string name) {
+	std::vector<std::map<std::string, std::string>> tree;
+
+	std::string base = "./";
+	std::string path = base + name;
+	auto dir = opendir(path.c_str());
+
+	base = path + "/";
+
+	if (!dir) {
+		omni::err("Could not open directory " + path);
+	}
+
+	while (auto entity = readdir(dir)) {
+		if (strcmp(entity->d_name, ".")) {
+			std::string type;
+			if (entity->d_type == DT_REG) {
+				type = "file";
+			}
+
+			if (entity->d_type == DT_DIR) {
+				type = "dir";
+			}
+
+			if (strcmp(entity->d_name, "..")) {
+				tree.push_back({
+					{
+						"name",
+						std::string(entity->d_name)
+					}, {
+						"type",
+						type
+					}
+				});
+			} else {
+				if (name != "") {
+					tree.push_back({
+						{
+							"name",
+							std::string(entity->d_name)
+						}, {
+							"type",
+							type
+						}
+					});
+				}
+			}
+		}
+	}
+
+	base.resize(base.length() - 1 - name.length());
+	closedir(dir);
+
+	return tree;
 }
 
 std::vector<std::string> util::str::split(std::string buff, char delim) {

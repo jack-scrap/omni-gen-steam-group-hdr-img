@@ -51,6 +51,14 @@ Console::Console(std::string name, std::vector<std::string> buff) :
 	_buff(buff),
 	_mode(EDITOR),
 	_prog("text", "text") {
+		_buff.clear();
+
+		std::vector<std::map<std::string, std::string>> tree = util::fs::ls("script");
+		std::sort(tree.begin(), tree.end());
+		for (auto _ : tree) {
+			_buff.push_back(_["name"]);
+		}
+
 		/* data */
 		glGenVertexArrays(1, &_id[VAO]);
 		glBindVertexArray(_id[VAO]);

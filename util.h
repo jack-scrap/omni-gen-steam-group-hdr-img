@@ -3,6 +3,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <map>
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -21,6 +22,8 @@ namespace util {
 		std::vector<std::string> rd(std::string name);
 
 		void write(std::string name, std::vector<std::string> buff);
+
+		std::vector<std::map<std::string, std::string>> ls(std::string name);
 	}
 
 	namespace str {
