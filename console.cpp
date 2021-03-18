@@ -122,7 +122,7 @@ Console::Console(std::string name, std::vector<std::string> buff) :
 		}
 
 		// command-line
-		_scr.push_back(util::str::pad(_prompt, state::ln));
+		_scr.push_back(util::str::pad(_ps1 + _prompt, state::ln));
 
 		/* data */
 		glGenVertexArrays(1, &_id[VAO]);
@@ -198,7 +198,7 @@ void Console::render() {
 			break;
 
 		case PROMPT:
-			_idx[X] = _prompt.size();
+			_idx[X] = (_ps1 + _prompt).size();
 			_idx[Y] = state::line - 1;
 
 			break;
