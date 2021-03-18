@@ -64,7 +64,7 @@ class Console {
 			_l = 0,
 
 			maxFs = 0,
-			maxLn = 0;
+			maxNo = 0;
 
 		std::string _modeStr;
 

@@ -92,8 +92,8 @@ Console::Console(std::string name, std::vector<std::string> buff) :
 		for (int i = 0; i < roof; i++) {
 			std::string str = std::to_string(i);
 
-			if (str.size() > maxLn) {
-				maxLn = str.size();
+			if (str.size() > maxNo) {
+				maxNo = str.size();
 			}
 		}
 
@@ -115,7 +115,7 @@ Console::Console(std::string name, std::vector<std::string> buff) :
 			}
 
 			// line numbers
-			std::string no = util::str::pad(std::to_string(l + 1), maxLn + 1);
+			std::string no = util::str::pad(std::to_string(l + 1), maxNo + 1);
 			for (int i = 0; i < no.size(); i++) {
 				line.push_back(no[i]);
 			}
@@ -206,7 +206,7 @@ void Console::render() {
 			break;
 
 		case EDITOR:
-			_idx[X] = maxFs + 1 + maxLn + 1 + _buff[_buff.size() - 1].size();
+			_idx[X] = maxFs + 1 + maxNo + 1 + _buff[_buff.size() - 1].size();
 			_idx[Y] = 1 + _buff.size() - 1;
 
 			break;
