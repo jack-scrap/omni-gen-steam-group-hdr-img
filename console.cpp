@@ -35,14 +35,14 @@ void dispatch(Console* console, std::string name) {
 	}
 
 	if (eq) {
-		rank++;
-
 		std::string log = "log/" + std::to_string(rank) + ".log";
 
 		util::fs::write(log, util::log(state::ln, console->_buff.size()));
 
 		console->_name.clear();
 		console->_buff = util::fs::rd<std::vector<std::string>>(log);
+
+		rank++;
 	}
 }
 
