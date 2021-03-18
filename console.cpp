@@ -94,6 +94,10 @@ Console::Console(std::string name, std::vector<std::string> buff) :
 
 		// Python
 		Py_Initialize();
+
+		// path
+		PyObject* path = PySys_GetObject("path");
+		PyList_Append(path, PyUnicode_FromString("."));
 	}
 
 void Console::render() {
