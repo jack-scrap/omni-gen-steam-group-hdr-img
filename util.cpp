@@ -310,7 +310,7 @@ std::string util::now(std::string format) {
 
 	struct tm* info = localtime(&raw);
 
-	char out[30];
+	char out[state::ln];
 	strftime(out, sizeof out / sizeof *out, format.c_str(), info);
 
 	return std::string(out);
