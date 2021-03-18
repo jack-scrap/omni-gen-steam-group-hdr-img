@@ -52,6 +52,7 @@ class Console {
 
 	public:
 		enum mode {
+			FS,
 			EDITOR,
 			PROMPT
 		};
@@ -59,7 +60,8 @@ class Console {
 		unsigned int
 			_mode,
 
-			_idx[2];
+			_idx[2],
+			_l = 0;
 
 		std::vector<std::string> _buff;
 		std::string _name;

@@ -24,224 +24,258 @@ int main() {
 	while (disp._open) {
 		while (SDL_PollEvent(&e)) {
 			if (e.type == SDL_KEYDOWN) {
-				// modifier
-				if (e.key.keysym.mod & (KMOD_LSHIFT | KMOD_RSHIFT)) {
-					if (e.key.keysym.sym >= SDLK_a && e.key.keysym.sym <= SDLK_z) {
-						console->push((char) (e.key.keysym.sym - 32));
-					} else if (e.key.keysym.sym >= SDLK_0 && e.key.keysym.sym <= SDLK_9) {
-						char c;
+				switch (e.key.keysym.sym) {
+					case SDLK_F1:
+						console->_mode = Console::FS;
+
+						break;
+
+					case SDLK_F2:
+						console->_mode = Console::EDITOR;
+
+						console->render();
+
+						break;
+
+					case SDLK_F3:
+						console->_mode = Console::PROMPT;
+
+						console->render();
+
+						break;
+				}
+
+				switch (console->_mode) {
+					case Console::FS:
 						switch (e.key.keysym.sym) {
-							case SDLK_1:
-								c = '!';
-
-								break;
-
-							case SDLK_2:
-								c = '@';
-
-								break;
-
-							case SDLK_3:
-								c = '#';
-
-								break;
-
-							case SDLK_4:
-								c = '$';
-
-								break;
-
-							case SDLK_5:
-								c = '%';
-
-								break;
-
-							case SDLK_6:
-								c = '^';
-
-								break;
-
-							case SDLK_7:
-								c = '&';
-
-								break;
-
-							case SDLK_8:
-								c = '*';
-
-								break;
-
-							case SDLK_9:
-								c = '(';
-
-								break;
-
-							case SDLK_0:
-								c = ')';
-
-								break;
-						}
-
-						console->push((char) c);
-					} else {
-						switch (e.key.keysym.sym) {
-							case SDLK_BACKQUOTE:
-								console->push('~');
-
-								break;
-
-							case SDLK_MINUS:
-								console->push('_');
-
-								break;
-
-							case SDLK_EQUALS:
-								console->push('+');
-
-								break;
-
-								// bracket
-							case SDLK_LEFTBRACKET:
-								console->push('{');
-
-								break;
-
-							case SDLK_RIGHTBRACKET:
-								console->push('}');
-
-								break;
-
-							case SDLK_BACKSLASH:
-								console->push('|');
-
-								break;
-
-							case SDLK_SEMICOLON:
-								console->push(':');
-
-								break;
-
-							case SDLK_QUOTE:
-								console->push('"');
-
-								break;
-
-							case SDLK_COMMA:
-								console->push('<');
-
-								break;
-
-							case SDLK_PERIOD:
-								console->push('>');
-
-								break;
-
-							case SDLK_SLASH:
-								console->push('?');
-
-								break;
-						}
-					}
-				} else {
-					if (e.key.keysym.sym >= SDLK_a && e.key.keysym.sym <= SDLK_z) {
-						console->push((char) e.key.keysym.sym);
-					} else if (e.key.keysym.sym >= SDLK_0 && e.key.keysym.sym <= SDLK_9) {
-						console->push((char) e.key.keysym.sym);
-					} else {
-						switch (e.key.keysym.sym) {
-							case SDLK_SPACE:
-								console->push(' ');
-
-								break;
-
-							case SDLK_TAB:
-								for (int i = 0; i < state::tabWd; i++) {
-									console->push(' ');
+							case SDLK_s:
+								if (console->_l < 3) {
+									console->_l++;
 								}
 
 								break;
 
-							case SDLK_BACKQUOTE:
-								console->push('`');
-
-								break;
-
-							case SDLK_MINUS:
-								console->push('-');
-
-								break;
-
-							case SDLK_EQUALS:
-								console->push('=');
-
-								break;
-
-								// bracket
-							case SDLK_LEFTBRACKET:
-								console->push('[');
-
-								break;
-
-							case SDLK_RIGHTBRACKET:
-								console->push(']');
-
-								break;
-
-							case SDLK_BACKSLASH:
-								console->push('\\');
-
-								break;
-
-							case SDLK_SEMICOLON:
-								console->push(';');
-
-								break;
-
-							case SDLK_QUOTE:
-								console->push('\'');
-
-								break;
-
-							case SDLK_COMMA:
-								console->push(',');
-
-								break;
-
-							case SDLK_PERIOD:
-								console->push('.');
-
-								break;
-
-							case SDLK_SLASH:
-								console->push('/');
-
-								break;
-
-							case SDLK_RETURN:
-								console->enter();
-
-								break;
-
-							case SDLK_BACKSPACE:
-								console->pop();
-
-								break;
-
-							case SDLK_F1:
-								console->_mode = Console::EDITOR;
-
-								console->render();
-
-								break;
-
-							case SDLK_F2:
-								console->_mode = Console::PROMPT;
-
-								console->render();
+							case SDLK_w:
+								if (console->_l > 0) {
+									console->_l--;
+								}
 
 								break;
 						}
-					}
+
+						console->_idx[X] = 0;
+						console->_idx[Y] = 1 + console->_l;
+
+						break;
+
+					case Console::EDITOR:
+						// modifier
+						if (e.key.keysym.mod & (KMOD_LSHIFT | KMOD_RSHIFT)) {
+							if (e.key.keysym.sym >= SDLK_a && e.key.keysym.sym <= SDLK_z) {
+								console->push((char) (e.key.keysym.sym - 32));
+							} else if (e.key.keysym.sym >= SDLK_0 && e.key.keysym.sym <= SDLK_9) {
+								char c;
+								switch (e.key.keysym.sym) {
+									case SDLK_1:
+										c = '!';
+
+										break;
+
+									case SDLK_2:
+										c = '@';
+
+										break;
+
+									case SDLK_3:
+										c = '#';
+
+										break;
+
+									case SDLK_4:
+										c = '$';
+
+										break;
+
+									case SDLK_5:
+										c = '%';
+
+										break;
+
+									case SDLK_6:
+										c = '^';
+
+										break;
+
+									case SDLK_7:
+										c = '&';
+
+										break;
+
+									case SDLK_8:
+										c = '*';
+
+										break;
+
+									case SDLK_9:
+										c = '(';
+
+										break;
+
+									case SDLK_0:
+										c = ')';
+
+										break;
+								}
+
+								console->push((char) c);
+							} else {
+								switch (e.key.keysym.sym) {
+									case SDLK_BACKQUOTE:
+										console->push('~');
+
+										break;
+
+									case SDLK_MINUS:
+										console->push('_');
+
+										break;
+
+									case SDLK_EQUALS:
+										console->push('+');
+
+										break;
+
+										// bracket
+									case SDLK_LEFTBRACKET:
+										console->push('{');
+
+										break;
+
+									case SDLK_RIGHTBRACKET:
+										console->push('}');
+
+										break;
+
+									case SDLK_BACKSLASH:
+										console->push('|');
+
+										break;
+
+									case SDLK_SEMICOLON:
+										console->push(':');
+
+										break;
+
+									case SDLK_QUOTE:
+										console->push('"');
+
+										break;
+
+									case SDLK_COMMA:
+										console->push('<');
+
+										break;
+
+									case SDLK_PERIOD:
+										console->push('>');
+
+										break;
+
+									case SDLK_SLASH:
+										console->push('?');
+
+										break;
+								}
+							}
+						} else {
+							if (e.key.keysym.sym >= SDLK_a && e.key.keysym.sym <= SDLK_z) {
+								console->push((char) e.key.keysym.sym);
+							} else if (e.key.keysym.sym >= SDLK_0 && e.key.keysym.sym <= SDLK_9) {
+								console->push((char) e.key.keysym.sym);
+							} else {
+								switch (e.key.keysym.sym) {
+									case SDLK_SPACE:
+										console->push(' ');
+
+										break;
+
+									case SDLK_TAB:
+										for (int i = 0; i < state::tabWd; i++) {
+											console->push(' ');
+										}
+
+										break;
+
+									case SDLK_BACKQUOTE:
+										console->push('`');
+
+										break;
+
+									case SDLK_MINUS:
+										console->push('-');
+
+										break;
+
+									case SDLK_EQUALS:
+										console->push('=');
+
+										break;
+
+										// bracket
+									case SDLK_LEFTBRACKET:
+										console->push('[');
+
+										break;
+
+									case SDLK_RIGHTBRACKET:
+										console->push(']');
+
+										break;
+
+									case SDLK_BACKSLASH:
+										console->push('\\');
+
+										break;
+
+									case SDLK_SEMICOLON:
+										console->push(';');
+
+										break;
+
+									case SDLK_QUOTE:
+										console->push('\'');
+
+										break;
+
+									case SDLK_COMMA:
+										console->push(',');
+
+										break;
+
+									case SDLK_PERIOD:
+										console->push('.');
+
+										break;
+
+									case SDLK_SLASH:
+										console->push('/');
+
+										break;
+
+									case SDLK_RETURN:
+										console->enter();
+
+										break;
+
+									case SDLK_BACKSPACE:
+										console->pop();
+
+										break;
+								}
+							}
+						}
+
+						break;
 				}
 			}
 
