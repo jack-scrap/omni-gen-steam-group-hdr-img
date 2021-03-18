@@ -155,7 +155,7 @@ void Console::render() {
 
 	// command-line
 	std::string prompt = _ps1 + _prompt;
-	
+
 	std::vector<SDL_Surface*> line;
 
 	for (int i = 0; i < prompt.size(); i++) {
