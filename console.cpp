@@ -317,13 +317,7 @@ void Console::exec() {
 	if (tok.size()) {
 		std::string _cmd = tok[0];
 
-		std::vector<std::string> _lib = {
-			"open",
-			"run",
-			"save",
-			"next"
-		};
-		if (std::find(_lib.begin(), _lib.end(), _cmd) != _lib.end()) {
+		if (std::find(omni::lib.begin(), omni::lib.end(), _cmd) != omni::lib.end()) {
 			if (_cmd == "open") {
 				if (tok.size() > 1) {
 					_buff = util::fs::rd<std::vector<std::string>>(tok[1]);
