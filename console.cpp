@@ -55,8 +55,26 @@ Console::Console(std::string name, std::vector<std::string> buff) :
 		_buff.clear();
 
 		std::sort(_tree.begin(), _tree.end());
+
+		unsigned int maxFs = 0;
 		for (auto _ : _tree) {
-			_buff.push_back(_["name"]);
+			if (_["name"].size() > maxFs) {
+				maxFs = _["name"].size();
+			}
+		}
+
+		for (int l = 0; l < _tree.size(); l++) {
+			std::string line;
+
+			for (int c = 0; c < maxFs; c++) {
+				if (c < _tree[l]["name"].size()) {
+					line.push_back(_tree[l]["name"][c]);
+				} else {
+					line.push_back(' ');
+				}
+			}
+
+			_buff.push_back(line);
 		}
 
 		/* data */

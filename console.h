@@ -70,6 +70,8 @@ class Console {
 
 		std::string _prompt;
 
+		std::vector<std::string> _scr;
+
 		Console(std::string name, std::vector<std::string> buff);
 
 		void render();
