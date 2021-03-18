@@ -57,7 +57,7 @@ Console::Console(std::string name, std::vector<std::string> buff) :
 		std::sort(_tree.begin(), _tree.end());
 
 		unsigned int maxFs = 0;
-		for (auto _ : _tree) {
+		for (std::map<std::string, std::string> _ : _tree) {
 			if (_["name"].size() > maxFs) {
 				maxFs = _["name"].size();
 			}
