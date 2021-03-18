@@ -69,6 +69,7 @@ int main() {
 						break;
 
 					case Console::EDITOR:
+					case Console::PROMPT:
 						// modifier
 						if (e.key.keysym.mod & (KMOD_LSHIFT | KMOD_RSHIFT)) {
 							if (e.key.keysym.sym >= SDLK_a && e.key.keysym.sym <= SDLK_z) {
