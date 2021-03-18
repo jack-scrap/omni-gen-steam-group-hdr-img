@@ -48,14 +48,14 @@ int main() {
 				switch (console->_mode) {
 					case Console::FS:
 						switch (e.key.keysym.sym) {
-							case SDLK_s:
+							case SDLK_DOWN:
 								if (console->_l < console->_tree.size() - 1) {
 									console->_l++;
 								}
 
 								break;
 
-							case SDLK_w:
+							case SDLK_UP:
 								if (console->_l > 0) {
 									console->_l--;
 								}
