@@ -151,18 +151,18 @@ void Console::render() {
 	}
 
 	// line numbers
-	unsigned int max = std::to_string(_buff.size()).size() + 1;
+	unsigned int maxNo = std::to_string(_buff.size()).size() + 1;
 
 	for (int l = 0; l < roof; l++) {
 		std::vector<SDL_Surface*> line;
 
 		std::string str = std::to_string(1 + l);
-		for (int i = str.size(); i < max; i++) {
+		for (int i = str.size(); i < maxNo; i++) {
 			str.push_back(' ');
 		}
 		str.push_back(' ');
 
-		for (int i = 0; i < max; i++) {
+		for (int i = 0; i < maxNo; i++) {
 			line.push_back(TTF_RenderGlyph_Blended(font, (char) str[i], {col[true][R], col[true][G], col[true][B]}));
 		}
 
@@ -196,9 +196,9 @@ void Console::render() {
 	for (int l = 0; l < roof; l++) {
 		for (int i = 0; i < _buff[l].size(); i++) {
 			if (_hl[l][i]) {
-				glTexSubImage2D(GL_TEXTURE_2D, 0, (max + i) * layout::dim[X], (1 + l) * layout::dim[Y], layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _block->pixels);
+				glTexSubImage2D(GL_TEXTURE_2D, 0, (maxNo + i) * layout::dim[X], (1 + l) * layout::dim[Y], layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _block->pixels);
 			} else {
-				glTexSubImage2D(GL_TEXTURE_2D, 0, (max + i) * layout::dim[X], (1 + l) * layout::dim[Y], layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _map[l][i]->pixels);
+				glTexSubImage2D(GL_TEXTURE_2D, 0, (maxNo + i) * layout::dim[X], (1 + l) * layout::dim[Y], layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _map[l][i]->pixels);
 			}
 		}
 	}
@@ -210,7 +210,7 @@ void Console::render() {
 	// cursor
 	switch (_mode) {
 		case EDITOR:
-			_idx[X] = max + _buff.back().size();
+			_idx[X] = maxNo + _buff.back().size();
 			_idx[Y] = _buff.size();
 
 			break;
