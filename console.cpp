@@ -104,7 +104,6 @@ Console::Console(std::string name, std::vector<std::string> buff) :
 	}
 
 void Console::render() {
-		// status bar
 		switch (_mode) {
 			case FS:
 				_modeStr = "FS";
@@ -122,20 +121,17 @@ void Console::render() {
 				break;
 		};
 
-		// status bar
 		std::string status = util::str::pad(_modeStr, state::ln);
 		for (int i = 0; i < state::ln; i++) {
 			_scr[0][i] = status[i];
 		}
 
-		// file system
 		for (std::map<std::string, std::string> _ : _tree) {
 			if (_["name"].size() > maxFs) {
 				maxFs = _["name"].size();
 			}
 		}
 
-		// line numbers
 		maxNo = std::to_string(_buff.size()).size();
 
 		unsigned int roof;
