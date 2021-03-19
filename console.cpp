@@ -121,9 +121,12 @@ void Console::render() {
 			break;
 	};
 
-	std::string status = util::str::pad(_modeStr, state::ln);
+	std::string status;
+	status += _name;
+	std::string statusPadded = util::str::pad(status, state::ln - _modeStr.size());
+	statusPadded += _modeStr;
 	for (int i = 0; i < state::ln; i++) {
-		_scr[0][i] = status[i];
+		_scr[0][i] = statusPadded[i];
 	}
 
 	for (std::map<std::string, std::string> _ : _tree) {
