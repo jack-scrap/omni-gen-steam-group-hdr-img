@@ -54,90 +54,6 @@ Console::Console(std::string name, std::vector<std::string> buff) :
 	_prog("text", "text") {
 		std::sort(_tree.begin(), _tree.end());
 
-		// status bar
-		switch (_mode) {
-			case FS:
-				_modeStr = "FS";
-
-				break;
-
-			case EDITOR:
-				_modeStr = "EDITOR";
-
-				break;
-
-			case PROMPT:
-				_modeStr = "PROMPT";
-
-				break;
-		};
-
-		_scr.push_back(util::str::pad(_modeStr, state::ln));
-
-		// file system
-		for (std::map<std::string, std::string> _ : _tree) {
-			if (_["name"].size() > maxFs) {
-				maxFs = _["name"].size();
-			}
-		}
-
-		// line numbers
-		unsigned int roof;
-		if (_buff.size() < state::line - 2) {
-			roof = _buff.size();
-		} else {
-			roof = state::line - 2;
-		}
-
-		for (int i = 0; i < roof; i++) {
-			std::string str = std::to_string(i);
-
-			if (str.size() > maxNo) {
-				maxNo = str.size();
-			}
-		}
-
-		// screen
-		for (int l = 0; l < _buff.size(); l++) {
-			std::string line;
-
-			// file system
-			std::string entry;
-			if (l < _tree.size()) {
-				entry = _tree[l]["name"];
-			} else {
-				entry = "";
-			}
-
-			std::string fs = util::str::pad(entry, maxFs + 1);
-			for (int i = 0; i < maxFs + 1; i++) {
-				line.push_back(fs[i]);
-			}
-
-			// line numbers
-			std::string no = util::str::pad(std::to_string(l + 1), maxNo + 1);
-			for (int i = 0; i < no.size(); i++) {
-				line.push_back(no[i]);
-			}
-
-			// buffer
-			unsigned int curr = line.size();
-
-			std::string padded = util::str::pad(_buff[l], state::ln);
-			for (int i = 0; i < state::ln - curr; i++) {
-				line.push_back(padded[i]);
-			}
-
-			_scr.push_back(line);
-		}
-
-		for (int l = _scr.size(); l < state::line - 1; l++) {
-			_scr.push_back(util::str::pad("", state::ln));
-		}
-
-		// command-line
-		_scr.push_back(util::str::pad(_ps1 + _prompt, state::ln));
-
 		/* data */
 		glGenVertexArrays(1, &_id[VAO]);
 		glBindVertexArray(_id[VAO]);
@@ -188,10 +104,100 @@ Console::Console(std::string name, std::vector<std::string> buff) :
 	}
 
 void Console::render() {
+		// status bar
+		switch (_mode) {
+			case FS:
+				_modeStr = "FS";
+
+				break;
+
+			case EDITOR:
+				_modeStr = "EDITOR";
+
+				break;
+
+			case PROMPT:
+				_modeStr = "PROMPT";
+
+				break;
+		};
+
+		// status bar
+		std::string status = util::str::pad(_modeStr, state::ln);
+		for (int i = 0; i < state::ln; i++) {
+			_scr[0][i] = status[i];
+		}
+
+		// file system
+		for (std::map<std::string, std::string> _ : _tree) {
+			if (_["name"].size() > maxFs) {
+				maxFs = _["name"].size();
+			}
+		}
+
+		// line numbers
+		maxNo = std::to_string(_buff.size()).size();
+
+		unsigned int roof;
+		if (_buff.size() < state::line - 2) {
+			roof = _buff.size();
+		} else {
+			roof = state::line - 2;
+		}
+
+		for (int l = 0; l < state::line - 1 - 1; l++) {
+			std::string line;
+
+			// file system
+			std::string entry;
+			if (l < _tree.size()) {
+				entry = _tree[l]["name"];
+			} else {
+				entry = "";
+			}
+			std::string entryPadded = util::str::pad(entry, maxFs + 1);
+
+			line += entryPadded;
+
+			// line numbers
+			std::string no;
+			if (l < _buff.size()) {
+				no = std::to_string(l + 1);
+			} else {
+				no = "";
+			}
+			std::string noPadded = util::str::pad(no, maxNo + 1);
+
+			line += noPadded;
+
+			// buffer
+			std::string str;
+			if (l < _buff.size()) {
+				str = _buff[l];
+			} else {
+				str = "";
+			}
+			std::string strPadded = util::str::pad(str, state::ln);
+
+			line += strPadded;
+
+			for (int i = 0; i < state::ln; i++) {
+				_scr[1 + l][i] = line[i];
+			}
+		}
+
+		// command-line
+		std::string str = _ps1 + _prompt;
+		std::string strPadded = util::str::pad(str, state::ln);
+
+		for (int i = 0; i < state::ln; i++) {
+			_scr[state::line - 1][i] = strPadded[i];
+		}
+
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _canv->w, _canv->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, _canv->pixels);
 
-	for (int l = 0; l < _scr.size(); l++) {
-		for (int i = 0; i < _scr[l].size(); i++) {
+	for (int l = 0; l < state::line; l++) {
+		for (int i = 0; i < state::ln; i++) {
 			SDL_Surface* surf = TTF_RenderGlyph_Blended(font, _scr[l][i], {col[true][R], col[true][G], col[true][B]});
 			glTexSubImage2D(GL_TEXTURE_2D, 0, i * layout::dim[X], l * layout::dim[Y], layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, surf->pixels);
 		}

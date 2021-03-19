@@ -7,13 +7,13 @@
 #include "math.h"
 
 namespace state {
-	static unsigned int
+	static const unsigned int
 		line = 18,
 		ln = 36;
 
-	static unsigned int fps = 15;
+	static const unsigned int fps = 15;
 
-	static unsigned int tabWd = 2;
+	static const unsigned int tabWd = 2;
 
-	static std::string format = "%Y-%m-%d %H:%M";
+	static const std::string format = "%Y-%m-%d %H:%M";
 }
