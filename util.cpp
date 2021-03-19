@@ -106,6 +106,14 @@ std::vector<std::map<std::string, std::string>> util::fs::ls(std::string name) {
 	return tree;
 }
 
+std::string util::fs::base(std::string buff) {
+	std::vector<std::string> name = util::str::split(buff, '/');
+
+	std::string f = name[name.size() - 1];
+
+	return util::str::split(f, '.')[0];
+}
+
 std::vector<std::string> util::str::split(std::string buff, char delim) {
 	std::vector<std::string> tok;
 

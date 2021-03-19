@@ -24,6 +24,8 @@ namespace util {
 		void write(std::string name, std::vector<std::string> buff);
 
 		std::vector<std::map<std::string, std::string>> ls(std::string name);
+
+		std::string base(std::string buff);
 	}
 
 	namespace str {
