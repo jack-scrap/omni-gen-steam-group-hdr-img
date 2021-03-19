@@ -132,7 +132,7 @@ void Console::render() {
 	std::string status;
 	std::string time = util::now("%Y-%m-%d");
 	status += util::str::pad(time, time.size() + 1);
-	status += util::str::pad(_name, _name.size() + 1);
+	status += util::str::pad(util::fs::name(_name), _name.size() + 1);
 	std::string statusPadded = util::str::pad(status, state::ln - _modeStr.size());
 	statusPadded += _modeStr;
 	for (int i = 0; i < state::ln; i++) {

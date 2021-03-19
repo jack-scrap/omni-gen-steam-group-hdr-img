@@ -25,6 +25,8 @@ namespace util {
 
 		std::vector<std::map<std::string, std::string>> ls(std::string name);
 
+		std::string name(std::string buff);
+
 		std::string base(std::string buff);
 	}
 
