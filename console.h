@@ -18,7 +18,6 @@ class Console {
 
 		Prog _prog;
 
-
 		const std::string _ps1 = "[] ";
 
 		TTF_Font* font;
