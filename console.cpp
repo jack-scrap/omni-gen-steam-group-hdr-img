@@ -104,91 +104,91 @@ Console::Console(std::string name, std::vector<std::string> buff) :
 	}
 
 void Console::render() {
-		switch (_mode) {
-			case FS:
-				_modeStr = "FS";
+	switch (_mode) {
+		case FS:
+			_modeStr = "FS";
 
-				break;
+			break;
 
-			case EDITOR:
-				_modeStr = "EDITOR";
+		case EDITOR:
+			_modeStr = "EDITOR";
 
-				break;
+			break;
 
-			case PROMPT:
-				_modeStr = "PROMPT";
+		case PROMPT:
+			_modeStr = "PROMPT";
 
-				break;
-		};
+			break;
+	};
 
-		std::string status = util::str::pad(_modeStr, state::ln);
-		for (int i = 0; i < state::ln; i++) {
-			_scr[0][i] = status[i];
+	std::string status = util::str::pad(_modeStr, state::ln);
+	for (int i = 0; i < state::ln; i++) {
+		_scr[0][i] = status[i];
+	}
+
+	for (std::map<std::string, std::string> _ : _tree) {
+		if (_["name"].size() > _maxFs) {
+			_maxFs = _["name"].size();
 		}
+	}
 
-		for (std::map<std::string, std::string> _ : _tree) {
-			if (_["name"].size() > _maxFs) {
-				_maxFs = _["name"].size();
-			}
-		}
+	_maxNo = std::to_string(_buff.size()).size();
 
-		_maxNo = std::to_string(_buff.size()).size();
+	unsigned int roof;
+	if (_buff.size() < state::line - 2) {
+		roof = _buff.size();
+	} else {
+		roof = state::line - 2;
+	}
 
-		unsigned int roof;
-		if (_buff.size() < state::line - 2) {
-			roof = _buff.size();
+	for (int l = 0; l < state::line - 1 - 1; l++) {
+		std::string line;
+
+		// file system
+		std::string entry;
+		if (l < _tree.size()) {
+			entry = _tree[l]["name"];
 		} else {
-			roof = state::line - 2;
+			entry = "";
 		}
+		std::string entryPadded = util::str::pad(entry, _maxFs + 1);
 
-		for (int l = 0; l < state::line - 1 - 1; l++) {
-			std::string line;
+		line += entryPadded;
 
-			// file system
-			std::string entry;
-			if (l < _tree.size()) {
-				entry = _tree[l]["name"];
-			} else {
-				entry = "";
-			}
-			std::string entryPadded = util::str::pad(entry, _maxFs + 1);
-
-			line += entryPadded;
-
-			// line numbers
-			std::string no;
-			if (l < _buff.size()) {
-				no = std::to_string(l + 1);
-			} else {
-				no = "";
-			}
-			std::string noPadded = util::str::pad(no, _maxNo + 1);
-
-			line += noPadded;
-
-			// buffer
-			std::string str;
-			if (l < _buff.size()) {
-				str = _buff[l];
-			} else {
-				str = "";
-			}
-			std::string strPadded = util::str::pad(str, state::ln);
-
-			line += strPadded;
-
-			for (int i = 0; i < state::ln; i++) {
-				_scr[1 + l][i] = line[i];
-			}
+		// line numbers
+		std::string no;
+		if (l < _buff.size()) {
+			no = std::to_string(l + 1);
+		} else {
+			no = "";
 		}
+		std::string noPadded = util::str::pad(no, _maxNo + 1);
 
-		// command-line
-		std::string str = _ps1 + _prompt;
+		line += noPadded;
+
+		// buffer
+		std::string str;
+		if (l < _buff.size()) {
+			str = _buff[l];
+		} else {
+			str = "";
+		}
 		std::string strPadded = util::str::pad(str, state::ln);
 
+		line += strPadded;
+
 		for (int i = 0; i < state::ln; i++) {
-			_scr[state::line - 1][i] = strPadded[i];
+			_scr[1 + l][i] = line[i];
 		}
+	}
+
+	// command-line
+	std::string str = _ps1 + _prompt;
+	std::string strPadded = util::str::pad(str, state::ln);
+
+	for (int i = 0; i < state::ln; i++) {
+		_scr[state::line - 1][i] = strPadded[i];
+	}
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _canv->w, _canv->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, _canv->pixels);
 
