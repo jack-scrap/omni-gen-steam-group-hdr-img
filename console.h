@@ -22,7 +22,7 @@ class Console {
 
 		TTF_Font* font;
 
-		std::vector<std::vector<bool>> _hl;
+		bool _hl[state::line][state::ln];
 
 		SDL_Surface
 			* _canv = SDL_CreateRGBSurface(0, layout::res[X], layout::res[Y], 4 * sizeof (long int), 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000),

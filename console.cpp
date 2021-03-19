@@ -52,6 +52,13 @@ Console::Console(std::string name, std::vector<std::string> buff) :
 	_buff(buff),
 	_mode(EDITOR),
 	_prog("text", "text") {
+		// highlighting
+		for (int l = 0; l < state::line; l++) {
+			for (int i = 0; i < state::ln; i++) {
+				_hl[l][i] = false;
+			}
+		}
+
 		std::sort(_tree.begin(), _tree.end());
 
 		/* data */
@@ -199,8 +206,12 @@ void Console::render() {
 
 	for (int l = 0; l < state::line; l++) {
 		for (int i = 0; i < state::ln; i++) {
-			SDL_Surface* surf = TTF_RenderGlyph_Blended(font, _scr[l][i], {col[true][R], col[true][G], col[true][B]});
-			glTexSubImage2D(GL_TEXTURE_2D, 0, i * layout::dim[X], l * layout::dim[Y], layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, surf->pixels);
+			if (_hl[l][i]) {
+				glTexSubImage2D(GL_TEXTURE_2D, 0, i * layout::dim[X], l * layout::dim[Y], layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _block->pixels);
+			} else {
+				SDL_Surface* surf = TTF_RenderGlyph_Blended(font, _scr[l][i], {col[true][R], col[true][G], col[true][B]});
+				glTexSubImage2D(GL_TEXTURE_2D, 0, i * layout::dim[X], l * layout::dim[Y], layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, surf->pixels);
+			}
 		}
 	}
 
