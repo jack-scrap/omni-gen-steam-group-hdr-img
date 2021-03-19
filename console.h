@@ -60,10 +60,7 @@ class Console {
 			_mode,
 
 			_idx[2],
-			_l = 0,
-
-			_maxFs = 0,
-			_maxNo = 0;
+			_l = 0;
 
 		std::string _modeStr;
 
@@ -75,6 +72,10 @@ class Console {
 		std::string _prompt;
 
 		char _scr[state::line][state::ln];
+
+		unsigned int
+			_maxFs = 0,
+			_maxNo = 0;
 
 		Console(std::string name, std::vector<std::string> buff);
 
