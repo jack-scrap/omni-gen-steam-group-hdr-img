@@ -355,18 +355,13 @@ std::vector<std::string> util::log(unsigned int loc) {
 	}
 	buff.push_back(lb);
 
-	unsigned int noWd = std::to_string(loc).length() + 1;
-
 	std::string key = "LOC: ";
 	std::string val = std::to_string(loc);
 
-	for (int i = key.length(); i < state::ln - noWd - val.length(); i++) {
-		key.push_back(' ');
-	}
-	for (int i = 0; i < val.length(); i++) {
-		key.push_back(val[i]);
-	}
-	buff.push_back(key);
+	std::string pair = util::str::pad(key, state::ln - val.size());
+	pair += val;
+
+	buff.push_back(pair);
 
 	for (int i = buff.size(); i < state::line - 2 - 1 - 2 - 1; i++) {
 		buff.push_back("");
