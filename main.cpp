@@ -4,6 +4,7 @@
 #include <thread>
 #include <SDL2/SDL.h>
 #include <vector>
+#include <string>
 
 #include "scn.h"
 #include "util.h"
@@ -12,10 +13,13 @@
 #include "crane.h"
 #include "pt.h"
 #include "cam.h"
+#include "omni.h"
 
 Console* console;
 
 int main() {
+	std::map<std::string, int> data = util::cfg::parse("cfg/init");
+
 	unsigned int lvl = 0;
 	std::string name = "script/" + std::to_string(lvl) + "/main.py";
 	console = new Console(name, util::fs::rd<std::vector<std::string>>(name));

@@ -67,6 +67,16 @@ namespace util {
 		bool aabb(Obj* p, Obj* q);
 	}
 
+	namespace cfg {
+		std::string key(std::string buff);
+
+		bool var(std::string buff);
+
+		bool no(std::string buff);
+
+		std::map<std::string, int> parse(std::string name);
+	}
+
 	std::vector<std::string> log(unsigned int loc);
 
 	std::string now(std::string format);

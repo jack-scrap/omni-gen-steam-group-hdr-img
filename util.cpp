@@ -343,6 +343,129 @@ bool util::phys::aabb(Obj* p, Obj* q) {
 	return false;
 }
 
+std::string util::cfg::key(std::string buff) {
+	std::string _;
+
+	int i = 0;
+	while (i < buff.size()) {
+		if (buff[i] == '[') {
+			i++;
+
+			while (buff[i] != ']') {
+				_.push_back(buff[i]);
+
+				i++;
+			}
+		}
+
+		i++;
+	}
+
+	return _;
+}
+
+bool util::cfg::var(std::string buff) {
+	bool _ = true;
+
+	for (int i = 0; i < buff.size(); i++) {
+		if (
+				!isdigit(buff[i]) &&
+				!isalpha(buff[i])
+			 ) {
+			_ = false;
+
+			break;
+		}
+	}
+
+	return _;
+}
+
+bool util::cfg::no(std::string buff) {
+	bool _ = true;
+
+	for (int i = 0; i < buff.size(); i++) {
+		if (
+				!isdigit(buff[i])
+			 ) {
+			_ = false;
+
+			break;
+		}
+	}
+
+	return _;
+}
+
+std::map<std::string, int> util::cfg::parse(std::string name) {
+	std::map<std::string, int> _;
+
+	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(name);
+
+	for (const std::string& line : buff) {
+		std::vector<std::string> ast;
+
+		// lex
+		int i = 0;
+		while (i < line.size()) {
+			// whitespace
+			if (isspace(line[i])) {
+				i++;
+
+				continue;
+			}
+
+			// token
+			if (!isspace(line[i])) {
+				std::string tok;
+
+				while (
+						!isspace(line[i]) &&
+						i < line.size()
+						) {
+					tok.push_back(line[i]);
+
+					i++;
+				}
+
+				ast.push_back(tok);
+
+				continue;
+			}
+		}
+
+		// parse
+		if (ast.size() == 1) {
+			continue;
+		}
+
+		// error
+		if (ast.size() != 3) {
+			omni::err("Inappropriate number of tokens in config entry `" + ast[0] + "`");
+		}
+
+		if (ast[1] != "=") {
+			omni::err("Inappropriate token `" + ast[1] + "`");
+		}
+
+		if (!cfg::var(ast[0])) {
+			omni::err("Inappropriate key " + ast[0] + ", can only be alpha-numeric");
+
+			break;
+		}
+
+		if (!cfg::no(ast[2])) {
+			omni::err("Invalid integer value `" + ast[2] + "`");
+
+			break;
+		}
+
+		_[ast[0]] = std::stoi(ast[2]);
+	}
+
+	return _;
+}
+
 std::vector<std::string> util::log(unsigned int loc) {
 	std::vector<std::string> buff;
 
