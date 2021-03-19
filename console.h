@@ -22,8 +22,6 @@ class Console {
 
 		TTF_Font* font;
 
-		bool _hl[state::line][state::ln];
-
 		SDL_Surface
 			* _canv = SDL_CreateRGBSurface(0, layout::res[X], layout::res[Y], 4 * sizeof (long int), 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000),
 			* _block = SDL_CreateRGBSurface(0, layout::dim[X], layout::dim[Y], 4 * sizeof (long int), 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
@@ -76,6 +74,8 @@ class Console {
 		unsigned int
 			_maxFs = 0,
 			_maxNo = 0;
+
+		bool _hl[state::line][state::ln];
 
 		Console(std::string name, std::vector<std::string> buff);
 
