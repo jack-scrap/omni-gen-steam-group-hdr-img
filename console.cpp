@@ -37,7 +37,7 @@ void dispatch(Console* console, std::string name) {
 	if (eq) {
 		std::string log = "log/" + util::fs::base(name) + ".log";
 
-		util::fs::write(log, util::log(state::ln, console->_buff.size()));
+		util::fs::write(log, util::log(console->_buff.size()));
 
 		console->_name.clear();
 		console->_buff = util::fs::rd<std::vector<std::string>>(log);

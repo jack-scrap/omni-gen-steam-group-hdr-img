@@ -343,14 +343,14 @@ bool util::phys::aabb(Obj* p, Obj* q) {
 	return false;
 }
 
-std::vector<std::string> util::log(unsigned int wd, unsigned int loc) {
+std::vector<std::string> util::log(unsigned int loc) {
 	std::vector<std::string> buff;
 
 	std::string head = "Level complete";
 	buff.push_back(head);
 
 	std::string lb;
-	for (int i = 0; i < wd; i++) {
+	for (int i = 0; i < state::ln; i++) {
 		lb.push_back('=');
 	}
 	buff.push_back(lb);
@@ -360,7 +360,7 @@ std::vector<std::string> util::log(unsigned int wd, unsigned int loc) {
 	std::string key = "LOC: ";
 	std::string val = std::to_string(loc);
 
-	for (int i = key.length(); i < wd - noWd - val.length(); i++) {
+	for (int i = key.length(); i < state::ln - noWd - val.length(); i++) {
 		key.push_back(' ');
 	}
 	for (int i = 0; i < val.length(); i++) {
