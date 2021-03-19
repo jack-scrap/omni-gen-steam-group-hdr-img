@@ -63,8 +63,8 @@ class Console {
 			_idx[2],
 			_l = 0,
 
-			maxFs = 0,
-			maxNo = 0;
+			_maxFs = 0,
+			_maxNo = 0;
 
 		std::string _modeStr;
 

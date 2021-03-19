@@ -127,12 +127,12 @@ void Console::render() {
 		}
 
 		for (std::map<std::string, std::string> _ : _tree) {
-			if (_["name"].size() > maxFs) {
-				maxFs = _["name"].size();
+			if (_["name"].size() > _maxFs) {
+				_maxFs = _["name"].size();
 			}
 		}
 
-		maxNo = std::to_string(_buff.size()).size();
+		_maxNo = std::to_string(_buff.size()).size();
 
 		unsigned int roof;
 		if (_buff.size() < state::line - 2) {
@@ -151,7 +151,7 @@ void Console::render() {
 			} else {
 				entry = "";
 			}
-			std::string entryPadded = util::str::pad(entry, maxFs + 1);
+			std::string entryPadded = util::str::pad(entry, _maxFs + 1);
 
 			line += entryPadded;
 
@@ -162,7 +162,7 @@ void Console::render() {
 			} else {
 				no = "";
 			}
-			std::string noPadded = util::str::pad(no, maxNo + 1);
+			std::string noPadded = util::str::pad(no, _maxNo + 1);
 
 			line += noPadded;
 
@@ -208,7 +208,7 @@ void Console::render() {
 			break;
 
 		case EDITOR:
-			_idx[X] = maxFs + 1 + maxNo + 1 + _buff[_buff.size() - 1].size();
+			_idx[X] = _maxFs + 1 + _maxNo + 1 + _buff[_buff.size() - 1].size();
 			_idx[Y] = 1 + _buff.size() - 1;
 
 			break;
