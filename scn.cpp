@@ -14,20 +14,6 @@
 #include "arr.h"
 #include "lim.h"
 
-Cam cam = {
-	{
-		-1000.0, 1000.0, 1000.0
-	}, {
-		50, 50, 50
-	}, {
-		-1000.0, 1000.0, -1000.0
-	}
-};
-
-Disp disp("Omni", {
-	layout::view[X] + (state::ln * layout::dim[X]), layout::view[Y]
-}, col[false]);
-
 unsigned int rank = 0;
 
 void scn::init(unsigned int i) {

@@ -14,11 +14,27 @@
 #include "pt.h"
 #include "cam.h"
 #include "omni.h"
+#include "col.h"
 
+Disp* disp;
 Console* console;
+
+Cam cam = {
+	{
+		-1000.0, 1000.0, 1000.0
+	}, {
+		50, 50, 50
+	}, {
+		-1000.0, 1000.0, -1000.0
+	}
+};
 
 int main() {
 	std::map<std::string, int> data = util::cfg::parse("cfg/init");
+
+	disp = new Disp("Omni", {
+		layout::view[X] + (state::ln * layout::dim[X]), layout::view[Y]
+	}, col[false]);
 
 	unsigned int lvl = 0;
 	std::string name = "script/" + std::to_string(lvl) + "/main.py";
@@ -26,7 +42,7 @@ int main() {
 	scn::init(lvl);
 
 	SDL_Event e;
-	while (disp._open) {
+	while (disp->_open) {
 		while (SDL_PollEvent(&e)) {
 			if (e.type == SDL_KEYDOWN) {
 				switch (e.key.keysym.sym) {
@@ -369,11 +385,11 @@ int main() {
 			}
 
 			if (e.type == SDL_QUIT) {
-				disp._open = false;
+				disp->_open = false;
 			}
 		}
 
-		disp.draw();
+		disp->draw();
 	}
 
 	return 0;

@@ -14,7 +14,7 @@
 
 extern Cam cam;
 
-extern Disp disp;
+extern Disp* disp;
 
 extern Console* console;
 
