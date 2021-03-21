@@ -385,9 +385,7 @@ bool util::cfg::no(std::string buff) {
 	bool _ = true;
 
 	for (int i = 0; i < buff.size(); i++) {
-		if (
-			!isdigit(buff[i])
-		) {
+		if (!isdigit(buff[i])) {
 			_ = false;
 
 			break;
