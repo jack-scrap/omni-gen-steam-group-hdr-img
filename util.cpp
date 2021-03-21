@@ -370,7 +370,8 @@ bool util::cfg::var(std::string buff) {
 	for (int i = 0; i < buff.size(); i++) {
 		if (
 			!isdigit(buff[i]) &&
-			!isalpha(buff[i])
+			!isalpha(buff[i]) &&
+			buff[i] != '_'
 		) {
 			_ = false;
 
@@ -447,7 +448,7 @@ std::map<std::string, int> util::cfg::parse(std::string name) {
 			}
 
 			if (!cfg::var(ast[0])) {
-				omni::err("Inappropriate key `" + ast[0] + "`, can only be alpha-numeric");
+				omni::err("Inappropriate key `" + ast[0] + "`, can only be alpha-numeric with `_` separator");
 
 				break;
 			}

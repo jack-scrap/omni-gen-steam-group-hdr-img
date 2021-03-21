@@ -4,4 +4,4 @@ ht              = 600
 fps             = 15
 
 [Console]
-line            = 18
+line_width      = 18

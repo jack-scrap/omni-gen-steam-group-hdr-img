@@ -34,7 +34,7 @@ int main() {
 	std::map<std::string, int> data = util::cfg::parse("cfg/init");
 
 	for (const auto& [key, val] : data) {
-		if (key == "line") {
+		if (key == "line_width") {
 			state::line = val;
 		}
 	}
