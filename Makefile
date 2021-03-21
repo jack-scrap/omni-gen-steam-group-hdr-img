@@ -1,6 +1,7 @@
 PROG = omni
 
-CXX = g++ -std=c++14
+CXX = g++
+CXXFLAGS = -std=c++14
 
 HDR = cam col state math phys
 
@@ -19,16 +20,16 @@ LDFLAGS += -L. $(patsubst %, -l%, $(DYNA))
 all: $(PROG)
 
 %.o: %.cpp %.h
-	$(CXX) -c $< -o $@ $(LDFLAGS)
+	$(CXX) $(CXXFLAGS) -c $< -o $@ $(LDFLAGS)
 
 lib%.so: %.o
-	$(CC) -shared $< -o $@
+	$(CC) $(CXXFLAGS) -shared $< -o $@
 
 main.o: main.cpp
-	$(CXX) -c $< -o $@ $(LDFLAGS)
+	$(CXX) $(CXXFLAGS) -c $< -o $@ $(LDFLAGS)
 
 $(PROG): $(OBJ_STATIC) $(OBJ_DYNA) $(DEP_HDR)
-	$(CXX) $(OBJ_STATIC) -o $@ $(LDFLAGS)
+	$(CXX) $(CXXFLAGS) $(OBJ_STATIC) -o $@ $(LDFLAGS)
 
 clean:
 	rm *.o *.so $(PROG)
