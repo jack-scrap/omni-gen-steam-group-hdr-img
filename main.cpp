@@ -30,7 +30,16 @@ Cam cam = {
 };
 
 int main() {
+	// initialize
 	std::map<std::string, int> data = util::cfg::parse("cfg/init");
+
+	for (const auto& [key, val] : data) {
+		if (key == "line") {
+			state::line = val;
+		}
+	}
+
+	layout::view[Y] = state::line * layout::dim[Y];
 
 	disp = new Disp("Omni", {
 		layout::view[X] + (state::ln * layout::dim[X]), layout::view[Y]

@@ -7,7 +7,7 @@
 #include "math.h"
 
 namespace state {
-	static const unsigned int
+	static unsigned int
 		line = 18,
 		ln = 36;
 
