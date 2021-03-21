@@ -401,7 +401,6 @@ std::map<std::string, int> util::cfg::parse(std::string name) {
 	std::map<std::string, int> _;
 
 	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(name);
-
 	for (const std::string& line : buff) {
 		std::vector<std::string> ast;
 
