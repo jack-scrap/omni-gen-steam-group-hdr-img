@@ -420,9 +420,9 @@ std::map<std::string, int> util::cfg::parse(std::string name) {
 				std::string tok;
 
 				while (
-						!isspace(line[i]) &&
-						i < line.size()
-						) {
+					!isspace(line[i]) &&
+					i < line.size()
+				) {
 					tok.push_back(line[i]);
 
 					i++;
@@ -434,33 +434,35 @@ std::map<std::string, int> util::cfg::parse(std::string name) {
 			}
 		}
 
-		// parse
-		if (ast.size() == 1) {
-			continue;
+		if (ast.size()) {
+			// parse
+			if (ast.size() == 1) {
+				continue;
+			}
+
+			// error
+			if (ast.size() != 3) {
+				omni::err("Inappropriate number of tokens in config entry `" + ast[0] + "`");
+			}
+
+			if (ast[1] != "=") {
+				omni::err("Inappropriate token `" + ast[1] + "`");
+			}
+
+			if (!cfg::var(ast[0])) {
+				omni::err("Inappropriate key " + ast[0] + ", can only be alpha-numeric");
+
+				break;
+			}
+
+			if (!cfg::no(ast[2])) {
+				omni::err("Invalid integer value `" + ast[2] + "`");
+
+				break;
+			}
+
+			_[ast[0]] = std::stoi(ast[2]);
 		}
-
-		// error
-		if (ast.size() != 3) {
-			omni::err("Inappropriate number of tokens in config entry `" + ast[0] + "`");
-		}
-
-		if (ast[1] != "=") {
-			omni::err("Inappropriate token `" + ast[1] + "`");
-		}
-
-		if (!cfg::var(ast[0])) {
-			omni::err("Inappropriate key " + ast[0] + ", can only be alpha-numeric");
-
-			break;
-		}
-
-		if (!cfg::no(ast[2])) {
-			omni::err("Invalid integer value `" + ast[2] + "`");
-
-			break;
-		}
-
-		_[ast[0]] = std::stoi(ast[2]);
 	}
 
 	return _;
