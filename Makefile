@@ -7,9 +7,9 @@ HDR = cam col state math phys
 STATIC = main disp util mesh console str border node cont idx arr lim omni
 DYNA = scn vec obj truck crane pt prog bound
 
-DEP_STATIC = $(patsubst %, %.o, $(STATIC))
-DEP_DYNA = $(patsubst %, lib%.so, $(DYNA))
 DEP_HDR = $(patsubst %, %.h, $(HDR))
+OBJ_STATIC = $(patsubst %, %.o, $(STATIC))
+OBJ_DYNA = $(patsubst %, lib%.so, $(DYNA))
 
 LDFLAGS += -lSDL2 -lSDL2_ttf
 LDFLAGS += -lGLEW -lGL
@@ -27,8 +27,8 @@ lib%.so: %.o
 main.o: main.cpp
 	$(CXX) -c $< -o $@ $(LDFLAGS)
 
-$(PROG): $(DEP_STATIC) $(DEP_DYNA) $(DEP_HDR)
-	$(CXX) $(DEP_STATIC) -o $@ $(LDFLAGS)
+$(PROG): $(OBJ_STATIC) $(OBJ_DYNA) $(DEP_HDR)
+	$(CXX) $(OBJ_STATIC) -o $@ $(LDFLAGS)
 
 clean:
 	rm *.o *.so $(PROG)
