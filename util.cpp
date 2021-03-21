@@ -369,9 +369,9 @@ bool util::cfg::var(std::string buff) {
 
 	for (int i = 0; i < buff.size(); i++) {
 		if (
-				!isdigit(buff[i]) &&
-				!isalpha(buff[i])
-			 ) {
+			!isdigit(buff[i]) &&
+			!isalpha(buff[i])
+		) {
 			_ = false;
 
 			break;
