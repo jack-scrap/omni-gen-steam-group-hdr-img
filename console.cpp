@@ -52,10 +52,13 @@ Console::Console(std::string name, std::vector<std::string> buff) :
 	_buff(buff),
 	_mode(EDITOR),
 	_prog("text", "text") {
+		_scr = (char*) malloc(sizeof (char) * state::line * state::ln);
+		_hl = (bool*) malloc(sizeof (bool) * state::line * state::ln);
+
 		// highlighting
 		for (int l = 0; l < state::line; l++) {
 			for (int i = 0; i < state::ln; i++) {
-				_hl[l][i] = false;
+				_hl[(l * state::ln) + i] = false;
 			}
 		}
 
@@ -136,7 +139,7 @@ void Console::render() {
 	std::string statusPadded = util::str::pad(status, state::ln - _modeStr.size());
 	statusPadded += _modeStr;
 	for (int i = 0; i < state::ln; i++) {
-		_scr[0][i] = statusPadded[i];
+		_scr[i] = statusPadded[i];
 	}
 
 	for (std::map<std::string, std::string> _ : _tree) {
@@ -191,7 +194,7 @@ void Console::render() {
 		line += strPadded;
 
 		for (int i = 0; i < state::ln; i++) {
-			_scr[1 + l][i] = line[i];
+			_scr[((1 + l) * state::ln) + i] = line[i];
 		}
 	}
 
@@ -200,17 +203,17 @@ void Console::render() {
 	std::string strPadded = util::str::pad(str, state::ln);
 
 	for (int i = 0; i < state::ln; i++) {
-		_scr[state::line - 1][i] = strPadded[i];
+		_scr[((state::line - 1) * state::ln) + i] = strPadded[i];
 	}
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _canv->w, _canv->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, _canv->pixels);
 
 	for (int l = 0; l < state::line; l++) {
 		for (int i = 0; i < state::ln; i++) {
-			if (_hl[l][i]) {
+			if (_hl[(l * state::ln) + i]) {
 				glTexSubImage2D(GL_TEXTURE_2D, 0, i * layout::dim[X], l * layout::dim[Y], layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _block->pixels);
 			} else {
-				SDL_Surface* surf = TTF_RenderGlyph_Blended(font, _scr[l][i], {col[true][R], col[true][G], col[true][B]});
+				SDL_Surface* surf = TTF_RenderGlyph_Blended(font, _scr[(l * state::ln) + i], {col[true][R], col[true][G], col[true][B]});
 				glTexSubImage2D(GL_TEXTURE_2D, 0, i * layout::dim[X], l * layout::dim[Y], layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, surf->pixels);
 			}
 		}

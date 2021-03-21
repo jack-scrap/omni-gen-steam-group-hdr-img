@@ -103,12 +103,12 @@ int main() {
 
 						for (int l = 0; l < console->_tree.size(); l++) {
 							for (int i = 0; i < console->_maxFs; i++) {
-								console->_hl[1 + l][i] = false;
+								console->_hl[((1 + l) * state::ln) + i] = false;
 							}
 						}
 
 						for (int i = 0; i < console->_maxFs; i++) {
-							console->_hl[1 + console->_l][i] = true;
+							console->_hl[((1 + console->_l) * state::ln) + i] = true;
 						}
 
 						console->_idx[X] = std::to_string(console->_buff.size()).size() + 1;

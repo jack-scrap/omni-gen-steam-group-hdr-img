@@ -69,13 +69,14 @@ class Console {
 
 		std::string _prompt;
 
-		char _scr[state::line][state::ln];
+		/* char _scr[state::line][state::ln]; */
+		char* _scr;
 
 		unsigned int
 			_maxFs = 0,
 			_maxNo = 0;
 
-		bool _hl[state::line][state::ln];
+		bool* _hl;
 
 		Console(std::string name, std::vector<std::string> buff);
 
