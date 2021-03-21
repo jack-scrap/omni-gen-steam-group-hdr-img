@@ -3,4 +3,5 @@ wd              = 1200
 ht              = 600
 fps             = 15
 
+[Console]
 line            = 18
