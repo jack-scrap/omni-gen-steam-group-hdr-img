@@ -16,6 +16,10 @@
 
 unsigned int rank = 0;
 
+Arr* data;
+std::vector<char> rhs;
+bool eq = false;
+
 void scn::init(unsigned int i) {
 	nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("lvl/" + std::to_string(i) + ".json"));
 
@@ -78,8 +82,6 @@ void scn::init(unsigned int i) {
 		mesh.push_back(obj);
 	}
 
-	/* mesh.push_back(data->_parent); */
-
 	// bound
 	for (const auto& entry : serial["bound"].items()) {
 		if (entry.key() == "rng") {
@@ -90,11 +92,9 @@ void scn::init(unsigned int i) {
 			}
 		}
 	}
-}
 
-Arr* data;
-std::vector<char> rhs;
-bool eq = false;
+	/* mesh.push_back(data->_parent); */
+}
 
 std::vector<void*> vehicle;
 extern "C" void** vehicleGet() {
