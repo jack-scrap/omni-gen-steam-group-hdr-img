@@ -147,26 +147,11 @@ void craneGrab(Crane* crane) {
 			}
 		}
 	} else {
-		for (int i = 0; i < data->_x; i++) {
-			Idx*& idx = data->_data[i];
-			Cont*& byte = idx->_data;
+		Idx* idx = data->_data[0];
+		Cont* byte = idx->_data;
 
-			if (!byte) {
-				glm::vec3 b = glm::vec3(idx->_parent->_acc * glm::vec4(glm::vec3(0.0, 0.0, 0.0), 1.0));
-
-				if (a[X] < b[X]) {
-					byte = crane->_op;
-
-					slot = nullptr;
-					crane->_op = nullptr;
-
-					break;
-				}
-			}
-		}
-
-		if (slot) {
-			mesh.push_back(slot);
+		if (!byte) {
+			data->_data[0]->_data = crane->_op;
 
 			slot = nullptr;
 			crane->_op = nullptr;

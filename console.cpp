@@ -39,7 +39,7 @@ void dispatch(Console* console, std::string name) {
 
 		util::fs::write(log, util::log(console->_buff.size()));
 
-		console->_name.clear();
+		console->_name = log;
 		console->_buff = util::fs::rd<std::vector<std::string>>(log);
 
 		rank++;
