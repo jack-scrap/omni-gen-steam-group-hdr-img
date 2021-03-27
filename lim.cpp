@@ -10,7 +10,7 @@ Lim* limMk(glm::vec3 loc, glm::vec3 rot) {
 	std::vector<GLfloat> vtc = util::mesh::quad::pos(glm::vec2(
 		layout::pad,
 		100.0
-	));
+	), true);
 
 	std::vector<GLushort> idc;
 	for (int i = 0; i < 2 * 2; i++) {

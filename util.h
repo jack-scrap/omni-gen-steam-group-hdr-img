@@ -46,7 +46,7 @@ namespace util {
 		void bound(Obj** obj, unsigned int noObj, GLfloat rng[3][2], glm::mat4 prev);
 
 		namespace quad {
-			std::vector<GLfloat> pos(glm::vec2 sz);
+			std::vector<GLfloat> pos(glm::vec2 sz, bool norm);
 			std::vector<GLfloat> pos1(glm::vec2 sz);
 			std::vector<GLushort> idc();
 		}
