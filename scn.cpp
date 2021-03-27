@@ -93,7 +93,7 @@ void scn::init(unsigned int i) {
 		}
 	}
 
-	/* mesh.push_back(data->_parent); */
+	mesh.push_back(data->_parent);
 }
 
 std::vector<void*> vehicle;
