@@ -80,13 +80,15 @@ void scn::init(unsigned int i) {
 
 	/* mesh.push_back(data->_parent); */
 
-	Lim* rng[2];
-	for (int i = 0; i < 2; i++) {
-		rng[i] = limMk(glm::vec3(0.0, 0.0, -layout::stroke + ((i ? 1 : -1) * (10.0 + (layout::stroke * 2 * 2) + layout::stroke))), glm::vec3(M_PI / 2, 0.0, M_PI / 2));
-	}
+	// bound
+	for (const auto& entry : serial["bound"].items()) {
+		if (entry.key() == "rng") {
+			for (const auto& _ : entry.value().items()) {
+				Lim* lim = limMk(glm::vec3(_.value()["loc"][0], _.value()["loc"][1], _.value()["loc"][2]), glm::vec3(_.value()["rot"][0], _.value()["rot"][1], _.value()["rot"][2]));
 
-	for (int i = 0; i < 2; i++) {
-		mesh.push_back(rng[i]->_parent);
+				mesh.push_back(lim->_parent);
+			}
+		}
 	}
 }
 
