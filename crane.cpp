@@ -123,7 +123,7 @@ void cranePed(Crane* crane, float delta) {
 }
 
 void craneGrab(Crane* crane) {
-	Obj* head = crane->_parent->_child[2 * 2 * 2 * 2]->_child[0];
+	Obj*& head = crane->_parent->_child[2 * 2 * 2 * 2]->_child[0];
 	glm::vec3 a = glm::vec3(head->_acc * glm::vec4(glm::vec3(0.0, head->_rng[Y][MIN], 0.0), 1.0));
 
 	Obj*& slot = crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)];
