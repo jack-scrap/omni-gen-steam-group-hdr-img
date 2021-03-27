@@ -41,7 +41,7 @@ Crane* craneMk(glm::vec3 loc, glm::vec3 rot) {
 	child[2 * 2 * 2 * 2] = objMk("crane/head", "obj", "dir", true, claw, 1, glm::vec3(0.0, 13.8, 0.0));
 
 	// light
-	std::vector<GLfloat> quad = util::mesh::quad::pos(glm::vec2(0.6, 1.0), true);
+	std::vector<GLfloat> rect = util::mesh::rect::pos(glm::vec2(0.6, 1.0), true);
 
 	std::vector<GLushort> rng;
 	for (int i = 0; i < 2 * 2; i++) {
@@ -52,7 +52,7 @@ Crane* craneMk(glm::vec3 loc, glm::vec3 rot) {
 	i = 0;
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < 2; x++) {
-			child[(2 * 2 * 2 * 2) + 1 + i] = objMk(&quad[0], 2 * 2 * 3, &strip[0], 3 * 2, "obj", "alert", false, glm::vec3((x ? 1 : -1) * (6.0 + (layout::pad * 2)), 1.74, (z ? 1 : -1) * 10.0), glm::vec3(0.0, M_PI / 2, 0.0));
+			child[(2 * 2 * 2 * 2) + 1 + i] = objMk(&rect[0], 2 * 2 * 3, &strip[0], 3 * 2, "obj", "alert", false, glm::vec3((x ? 1 : -1) * (6.0 + (layout::pad * 2)), 1.74, (z ? 1 : -1) * 10.0), glm::vec3(0.0, M_PI / 2, 0.0));
 
 			i++;
 		}

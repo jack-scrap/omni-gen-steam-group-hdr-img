@@ -7,7 +7,7 @@
 Lim* limMk(glm::vec3 loc, glm::vec3 rot) {
 	Lim* _ = (Lim*) malloc(sizeof (Lim));
 
-	std::vector<GLfloat> vtc = util::mesh::quad::pos(glm::vec2(
+	std::vector<GLfloat> vtc = util::mesh::rect::pos(glm::vec2(
 		layout::pad,
 		100.0
 	), true);

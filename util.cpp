@@ -236,7 +236,7 @@ void util::mesh::bound(Obj** obj, unsigned int noObj, GLfloat rng[3][2], glm::ma
 	}
 }
 
-std::vector<GLfloat> util::mesh::quad::pos(glm::vec2 sz, bool norm) {
+std::vector<GLfloat> util::mesh::rect::pos(glm::vec2 sz, bool norm) {
 	std::vector<GLfloat> _;
 
 	for (int y = 0; y < 2; y++) {
@@ -250,7 +250,7 @@ std::vector<GLfloat> util::mesh::quad::pos(glm::vec2 sz, bool norm) {
 	return _;
 }
 
-std::vector<GLfloat> util::mesh::quad::pos1(glm::vec2 sz) {
+std::vector<GLfloat> util::mesh::rect::pos1(glm::vec2 sz) {
 	std::vector<GLfloat> _;
 
 	for (int y = 0; y < 2; y++) {
@@ -264,7 +264,7 @@ std::vector<GLfloat> util::mesh::quad::pos1(glm::vec2 sz) {
 	return _;
 }
 
-std::vector<GLushort> util::mesh::quad::idc() {
+std::vector<GLushort> util::mesh::rect::idc() {
 	std::vector<GLushort> _;
 
 	for (int t = 0; t < 2; t++) {
