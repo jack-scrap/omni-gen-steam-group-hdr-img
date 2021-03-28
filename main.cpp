@@ -49,6 +49,10 @@ int main(int argc, char** argv) {
 		if (key == "line_width") {
 			state::ln = val;
 		}
+
+		if (key == "tab_wd") {
+			state::tabWd = val;
+		}
 	}
 
 	layout::res = glm::vec2(state::ln * layout::dim[X], layout::view[Y]);

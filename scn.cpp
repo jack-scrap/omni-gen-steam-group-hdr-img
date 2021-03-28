@@ -14,8 +14,6 @@
 #include "arr.h"
 #include "lim.h"
 
-unsigned int rank = 0;
-
 Arr* data;
 std::vector<char> rhs;
 bool eq = false;

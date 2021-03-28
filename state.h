@@ -13,7 +13,7 @@ namespace state {
 
 	extern unsigned int fps;
 
-	static const unsigned int tabWd = 2;
+	extern unsigned int tabWd;
 
 	static const std::string format = "%Y-%m-%d %H:%M";
 }

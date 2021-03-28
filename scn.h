@@ -18,8 +18,6 @@ extern Disp* disp;
 
 extern Console* console;
 
-extern unsigned int rank;
-
 extern Arr* data;
 extern std::vector<char> rhs;
 extern bool eq;

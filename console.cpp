@@ -42,7 +42,26 @@ void dispatch(Console* console, std::string name) {
 		console->_name = log;
 		console->_buff = util::fs::rd<std::vector<std::string>>(log);
 
+		nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("asdf.json"));
+
+		unsigned int rank = serial["rank"];
+
 		rank++;
+
+		nlohmann::json asdf = {
+			{
+				"rank", rank
+			}
+		};
+
+		std::string deser = asdf.dump();
+
+		std::ofstream f;
+		f.open("player.json");
+
+		f << deser;
+
+		f.close();
 	}
 }
 
@@ -328,6 +347,10 @@ void Console::exec() {
 			if (_cmd == "next") {
 				if (eq) {
 					eq = false;
+
+					nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("asdf.json"));
+
+					unsigned int rank = serial["rank"];
 
 					_buff = util::fs::rd<std::vector<std::string>>("script/" + std::to_string(rank) + "/" + "main.py");
 					scn::init(rank);
