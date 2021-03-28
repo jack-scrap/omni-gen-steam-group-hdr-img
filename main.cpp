@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
 		}
 	}
 
-	layout::view[Y] = state::line * layout::dim[Y];
+	layout::res = glm::vec2(state::ln * layout::dim[X], layout::view[Y]);
 
 	disp = new Disp("Omni", {
 		layout::view[X] + (state::ln * layout::dim[X]), layout::view[Y]

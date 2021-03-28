@@ -7,7 +7,7 @@
 #include "math.h"
 
 namespace state {
-	unsigned int
+	extern unsigned int
 		line,
 		ln;
 

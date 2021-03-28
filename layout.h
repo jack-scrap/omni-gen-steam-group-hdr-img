@@ -7,9 +7,9 @@
 namespace layout {
 	static glm::vec2 dim = glm::vec2(16, 32);
 
-	glm::vec2 view;
+	extern glm::vec2 view;
 
-	glm::vec2 res = glm::vec2(state::ln * dim[X], view[Y]);
+	extern glm::vec2 res;
 
 	static GLfloat bound = abs(-1.0 - 1.0);
 

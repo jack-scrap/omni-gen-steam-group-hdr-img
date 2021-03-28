@@ -3,9 +3,9 @@ PROG = omni
 CXX = g++
 CXXFLAGS = -std=c++14
 
-HDR = cam col state math phys
+HDR = cam col math phys
 
-STATIC = main disp util mesh console str border node cont idx arr lim omni
+STATIC = main disp util mesh console str border node cont idx arr lim state layout omni
 DYNA = scn vec obj truck crane pt prog bound
 
 DEP_HDR = $(patsubst %, %.h, $(HDR))
