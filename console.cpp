@@ -49,9 +49,16 @@ void dispatch(Console* console, std::string name) {
 Console::Console(std::string name, std::vector<std::string> buff) :
 	_tree(util::fs::ls("script")),
 	_name(name),
-	_buff(buff),
 	_mode(EDITOR),
 	_prog("text", "text") {
+		if (buff.size()) {
+			_buff = buff;
+		} else {
+			_buff = {
+				""
+			};
+		}
+
 		_scr = (char*) malloc(sizeof (char) * state::line * state::ln);
 		_hl = (bool*) malloc(sizeof (bool) * state::line * state::ln);
 

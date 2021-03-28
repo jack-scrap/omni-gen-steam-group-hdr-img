@@ -45,7 +45,7 @@ int main() {
 		layout::view[X] + (state::ln * layout::dim[X]), layout::view[Y]
 	}, col[false]);
 
-	unsigned int lvl = 0;
+	unsigned int lvl = 3;
 	std::string name = "script/" + std::to_string(lvl) + "/main.py";
 	console = new Console(name, util::fs::rd<std::vector<std::string>>(name));
 	scn::init(lvl);
