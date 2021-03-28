@@ -126,12 +126,17 @@ void craneGrab(Crane* crane) {
 	Obj*& head = crane->_parent->_child[2 * 2 * 2 * 2];
 	Obj*& claw = head->_child[0];
 
+	Obj*& slot = crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)];
+
 	for (int i = 0; i < data->_x; i++) {
 		Cont*& byte = data->_data[i]->_data;
 
 		if (byte) {
 			if (util::phys::aabb(claw, data->_data[i]->_data->_parent)) {
-				std::cout << "asdf" << std::endl;
+				crane->_op = byte;
+				slot = byte->_parent;
+
+				data->_data[i]->_data = nullptr;
 
 				break;
 			}
