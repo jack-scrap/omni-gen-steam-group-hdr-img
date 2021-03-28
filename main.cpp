@@ -34,6 +34,10 @@ int main(int argc, char** argv) {
 	std::map<std::string, int> data = util::cfg::parse("cfg/init.cfg");
 
 	for (const auto& [key, val] : data) {
+		if (key == "wd") {
+			layout::view = glm::vec2(val, state::line * layout::dim[Y]);
+		}
+
 		if (key == "line_width") {
 			state::line = val;
 		}
