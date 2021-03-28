@@ -38,6 +38,10 @@ int main(int argc, char** argv) {
 			layout::view = glm::vec2(val, state::line * layout::dim[Y]);
 		}
 
+		if (key == "fps") {
+			state::fps = val;
+		}
+
 		if (key == "line_count") {
 			state::line = val;
 		}

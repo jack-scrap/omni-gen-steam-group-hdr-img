@@ -11,7 +11,7 @@ namespace state {
 		line,
 		ln;
 
-	static const unsigned int fps = 15;
+	extern int fps;
 
 	static const unsigned int tabWd = 2;
 
