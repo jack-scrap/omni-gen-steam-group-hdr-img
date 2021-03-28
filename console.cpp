@@ -346,7 +346,7 @@ void Console::exec() {
 
 					unsigned int rank = serial["rank"];
 
-					_buff = util::fs::rd<std::vector<std::string>>("script/" + std::to_string(rank) + "/" + "main.py");
+					_buff = util::fs::rd<std::vector<std::string>>("script/" + omni::stage[0] + "/" + std::to_string(rank) + "/" + "main.py");
 					scn::init(0, rank);
 				} else {
 					omni::err("Current level not complete");

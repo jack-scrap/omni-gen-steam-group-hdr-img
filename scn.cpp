@@ -13,6 +13,7 @@
 #include "node.h"
 #include "arr.h"
 #include "lim.h"
+#include "omni.h"
 
 Arr* data;
 std::vector<char> rhs;
@@ -21,7 +22,7 @@ bool eq = false;
 Obj* test;
 
 void scn::init(unsigned int stage, unsigned int lvl) {
-	nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("lvl/" + std::to_string(stage) + "/" + std::to_string(lvl) + ".json"));
+	nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("lvl/" + omni::stage[stage] + "/" + std::to_string(lvl) + ".json"));
 
 	// vehicles
 	for (void* _ : vehicle) {
