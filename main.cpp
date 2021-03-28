@@ -61,15 +61,16 @@ int main(int argc, char** argv) {
 		layout::view[X] + (state::ln * layout::dim[X]), layout::view[Y]
 	}, col[false]);
 
+	unsigned int stage = 0;
 	unsigned int lvl;
 	if (argv[1]) {
 		lvl = atoi(argv[1]);
 	} else {
 		lvl = 0;
 	}
-	std::string name = "script/" + std::to_string(lvl) + "/main.py";
+	std::string name = "script/" + std::to_string(stage) + "/" + std::to_string(lvl) + "/main.py";
 	console = new Console(name, util::fs::rd<std::vector<std::string>>(name));
-	scn::init(lvl);
+	scn::init(stage, lvl);
 
 	SDL_Event e;
 	while (disp->_open) {

@@ -20,8 +20,8 @@ bool eq = false;
 
 Obj* test;
 
-void scn::init(unsigned int i) {
-	nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("lvl/" + std::to_string(i) + ".json"));
+void scn::init(unsigned int stage, unsigned int lvl) {
+	nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("lvl/" + std::to_string(stage) + "/" + std::to_string(lvl) + ".json"));
 
 	// vehicles
 	for (void* _ : vehicle) {

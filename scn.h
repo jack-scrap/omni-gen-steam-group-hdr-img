@@ -29,5 +29,5 @@ extern "C" void** vehicleGet();
 extern std::vector<Obj*> mesh;
 
 namespace scn {
-	void init(unsigned int i);
+	void init(unsigned int stage, unsigned int lvl);
 }
