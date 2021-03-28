@@ -314,33 +314,25 @@ glm::vec3 apply(glm::vec3 vtx, glm::mat4 model) {
 }
 
 bool util::phys::aabb(Obj* p, Obj* q) {
-	for (int a = 0; a < 2 * 2 * 2 * 3; a += 3) {
-		glm::vec3 vtx = glm::vec3(p->_acc * glm::vec4(glm::vec3(p->_bound[a], p->_bound[a + 1], p->_bound[a + 2]), 1.0));
+	bool _ = false;
 
-		for (int b = 0; b < 2 * 2 * 2 * 3; b += 2 * 3) {
-			glm::vec3 rng[2] = {
-				glm::vec3(q->_acc * glm::vec4(glm::vec3(q->_bound[b], q->_bound[b + 1], q->_bound[b + 2]), 1.0)),
-				glm::vec3(q->_acc * glm::vec4(glm::vec3(q->_bound[b + 3], q->_bound[b + 3 + 1], q->_bound[b + 3 + 2]), 1.0))
-			};
+	for (int i = 0; i < 2 * 2 * 2 * 3; i += 3) {
+		glm::vec3 a = glm::vec3(p->_acc * glm::vec4(glm::vec3(p->_bound[i], p->_bound[i + 1], p->_bound[i + 2]), 1.0));
 
-			bool _ = true;
+		glm::vec3 min = glm::vec3(q->_acc * glm::vec4(glm::vec3(q->_bound[3 + 0], q->_bound[3 + 1], q->_bound[3 + 2]), 1.0));
+		glm::vec3 max = glm::vec3(q->_acc * glm::vec4(glm::vec3(q->_bound[(3 * 2) + 0], q->_bound[(3 * 2) + 1], q->_bound[(3 * 2) + 2]), 1.0));
 
-			for (int i = 0; i < 3; i++) {
-				if (!(
-					vtx[i] > rng[MIN][i] &&
-					vtx[i] < rng[MAX][i]
-				)) {
-					_ = false;
-				}
-			}
+		if (
+			a[Y] > min[Y] &&
+			a[Y] < max[Y]
+		) {
+			_ = true;
 
-			if (_) {
-				return _;
-			}
+			break;
 		}
 	}
 
-	return false;
+	return _;
 }
 
 std::string util::cfg::key(std::string buff) {

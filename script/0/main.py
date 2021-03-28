@@ -2,14 +2,10 @@
 
 from omni import *
 
-crane.ped(-1.0)
+i = 0
+while i < 11:
+    crane.ped(-1.0)
+     
+    crane.grab()
 
-crane.grab()
-
-crane.zoom(-1.0)
-
-crane.zoom(1.0)
-
-crane.grab()
-
-crane.zoom(-1.0)
+    i += 1

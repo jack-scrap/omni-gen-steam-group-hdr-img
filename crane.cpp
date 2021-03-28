@@ -124,39 +124,6 @@ void cranePed(Crane* crane, float delta) {
 
 void craneGrab(Crane* crane) {
 	Obj*& head = crane->_parent->_child[2 * 2 * 2 * 2]->_child[0];
-	glm::vec3 a = glm::vec3(head->_acc * glm::vec4(glm::vec3(0.0, head->_rng[Y][MIN], 0.0), 1.0));
 
-	Obj*& slot = crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)];
-
-	if (!crane->_op) {
-		for (int i = 0; i < data->_x; i++) {
-			Idx*& idx = data->_data[i];
-			Cont*& byte = idx->_data;
-
-			if (byte) {
-				glm::vec3 b = glm::vec3(byte->_parent->_acc * glm::vec4(glm::vec3(0.0, 0.0, 0.0), 1.0));
-
-				if (a[X] < b[X]) {
-					slot = byte->_parent;
-					crane->_op = byte;
-
-					byte = nullptr;
-
-					break;
-				}
-			}
-		}
-	} else {
-		Idx* idx = data->_data[0];
-		Cont* byte = idx->_data;
-
-		if (!byte) {
-			data->_data[0]->_data = crane->_op;
-
-			slot = nullptr;
-			crane->_op = nullptr;
-		}
-	}
-
-	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+	std::cout << util::phys::aabb(head, mesh[5 - 1]) << std::endl;
 }

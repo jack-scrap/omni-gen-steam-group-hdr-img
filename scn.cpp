@@ -20,6 +20,8 @@ Arr* data;
 std::vector<char> rhs;
 bool eq = false;
 
+Obj* test;
+
 void scn::init(unsigned int i) {
 	nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("lvl/" + std::to_string(i) + ".json"));
 
@@ -94,6 +96,10 @@ void scn::init(unsigned int i) {
 	}
 
 	mesh.push_back(data->_parent);
+
+	test = objMk("container_2x4", "obj", "dir", true, glm::vec3(2.0, 0.0, 1.0));
+
+	mesh.push_back(test);
 }
 
 std::vector<void*> vehicle;
