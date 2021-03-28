@@ -23,3 +23,9 @@ while i < 6:
     i += 1
 
 crane.grab()
+
+i = 0
+while i < 3:
+    crane.zoom(-1)
+
+    i += 1

@@ -148,12 +148,14 @@ void craneGrab(Crane* crane) {
 			Cont*& byte = data->_data[i]->_data;
 
 			if (!byte) {
-				data->_data[i]->_data = crane->_op;
+				if (util::phys::aabb(crane->_op->_parent, data->_data[i]->_parent)) {
+					data->_data[i]->_data = crane->_op;
 
-				crane->_op = nullptr;
-				slot = nullptr;
+					crane->_op = nullptr;
+					slot = nullptr;
 
-				break;
+					break;
+				}
 			}
 		}
 	}
