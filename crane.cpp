@@ -133,7 +133,12 @@ void craneGrab(Crane* crane) {
 			Cont*& byte = data->_data[i]->_data;
 
 			if (byte) {
-				if (util::phys::aabb(claw, data->_data[i]->_data->_parent)) {
+				Obj* el[2] = {
+					claw,
+					data->_data[i]->_data->_parent
+				};
+
+				if (util::phys::aabb(el)) {
 					crane->_op = byte;
 					slot = byte->_parent;
 

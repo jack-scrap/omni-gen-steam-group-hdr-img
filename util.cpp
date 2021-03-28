@@ -313,58 +313,37 @@ glm::vec3 apply(glm::vec3 vtx, glm::mat4 model) {
 	return glm::vec3(model * glm::vec4(glm::vec3(0.0), 1.0));
 }
 
-bool util::phys::aabb(Obj* p, Obj* q) {
+bool util::phys::aabb(Obj* el[2]) {
 	bool _ = false;
 
-	for (int i = 0; i < 2 * 2 * 2 * 3; i += 3) {
-		glm::vec3 vtx = glm::vec3(p->_acc * glm::vec4(glm::vec3(p->_bound[i], p->_bound[i + 1], p->_bound[i + 2]), 1.0));
+	for (int e = 0; e < 2; e++) {
+		int a = e < 2 ? e : 0;
+		int b = (e + 1) < 2 ? (e + 1) : 0;
 
-		glm::vec3 minX = glm::vec3(q->_acc * glm::vec4(glm::vec3(q->_rng[X][MIN], 0.0, 0.0), 1.0));
-		glm::vec3 maxX = glm::vec3(q->_acc * glm::vec4(glm::vec3(q->_rng[X][MAX], 0.0, 0.0), 1.0));
+		for (int i = 0; i < 2 * 2 * 2 * 3; i += 3) {
+			glm::vec3 vtx = glm::vec3(el[a]->_acc * glm::vec4(glm::vec3(el[a]->_bound[i], el[a]->_bound[i + 1], el[a]->_bound[i + 2]), 1.0));
 
-		glm::vec3 minY = glm::vec3(q->_acc * glm::vec4(glm::vec3(0.0, q->_rng[Y][MIN], 0.0), 1.0));
-		glm::vec3 maxY = glm::vec3(q->_acc * glm::vec4(glm::vec3(0.0, q->_rng[Y][MAX], 0.0), 1.0));
+			glm::vec3 minX = glm::vec3(el[b]->_acc * glm::vec4(glm::vec3(el[b]->_rng[X][MIN], 0.0, 0.0), 1.0));
+			glm::vec3 maxX = glm::vec3(el[b]->_acc * glm::vec4(glm::vec3(el[b]->_rng[X][MAX], 0.0, 0.0), 1.0));
 
-		glm::vec3 minZ = glm::vec3(q->_acc * glm::vec4(glm::vec3(0.0, 0.0, q->_rng[Z][MIN]), 1.0));
-		glm::vec3 maxZ = glm::vec3(q->_acc * glm::vec4(glm::vec3(0.0, 0.0, q->_rng[Z][MAX]), 1.0));
+			glm::vec3 minY = glm::vec3(el[b]->_acc * glm::vec4(glm::vec3(0.0, el[b]->_rng[Y][MIN], 0.0), 1.0));
+			glm::vec3 maxY = glm::vec3(el[b]->_acc * glm::vec4(glm::vec3(0.0, el[b]->_rng[Y][MAX], 0.0), 1.0));
 
-		if (
-			vtx[X] > minX[X] &&
-			vtx[X] < maxX[X] &&
-			vtx[Y] > minY[Y] &&
-			vtx[Y] < maxY[Y] &&
-			vtx[Z] > minZ[Z] &&
-			vtx[Z] < maxZ[Z]
-		) {
-			_ = true;
+			glm::vec3 minZ = glm::vec3(el[b]->_acc * glm::vec4(glm::vec3(0.0, 0.0, el[b]->_rng[Z][MIN]), 1.0));
+			glm::vec3 maxZ = glm::vec3(el[b]->_acc * glm::vec4(glm::vec3(0.0, 0.0, el[b]->_rng[Z][MAX]), 1.0));
 
-			break;
-		}
-	}
+			if (
+				vtx[X] > minX[X] &&
+				vtx[X] < maxX[X] &&
+				vtx[Y] > minY[Y] &&
+				vtx[Y] < maxY[Y] &&
+				vtx[Z] > minZ[Z] &&
+				vtx[Z] < maxZ[Z]
+			) {
+				_ = true;
 
-	for (int i = 0; i < 2 * 2 * 2 * 3; i += 3) {
-		glm::vec3 vtx = glm::vec3(q->_acc * glm::vec4(glm::vec3(q->_bound[i], q->_bound[i + 1], q->_bound[i + 2]), 1.0));
-
-		glm::vec3 minX = glm::vec3(p->_acc * glm::vec4(glm::vec3(p->_rng[X][MIN], 0.0, 0.0), 1.0));
-		glm::vec3 maxX = glm::vec3(p->_acc * glm::vec4(glm::vec3(p->_rng[X][MAX], 0.0, 0.0), 1.0));
-
-		glm::vec3 minY = glm::vec3(p->_acc * glm::vec4(glm::vec3(0.0, p->_rng[Y][MIN], 0.0), 1.0));
-		glm::vec3 maxY = glm::vec3(p->_acc * glm::vec4(glm::vec3(0.0, p->_rng[Y][MAX], 0.0), 1.0));
-
-		glm::vec3 minZ = glm::vec3(p->_acc * glm::vec4(glm::vec3(0.0, 0.0, p->_rng[Z][MIN]), 1.0));
-		glm::vec3 maxZ = glm::vec3(p->_acc * glm::vec4(glm::vec3(0.0, 0.0, p->_rng[Z][MAX]), 1.0));
-
-		if (
-			vtx[X] > minX[X] &&
-			vtx[X] < maxX[X] &&
-			vtx[Y] > minY[Y] &&
-			vtx[Y] < maxY[Y] &&
-			vtx[Z] > minZ[Z] &&
-			vtx[Z] < maxZ[Z]
-		) {
-			_ = true;
-
-			break;
+				break;
+			}
 		}
 	}
 
