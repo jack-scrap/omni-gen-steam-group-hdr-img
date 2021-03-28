@@ -52,6 +52,10 @@ Arr* arrMk(Node* data, std::string name, glm::vec3 loc, glm::vec3 rot) {
 		child[i] = _->_data[i]->_parent;
 	}
 
+	// identifier
+	Str* id = strMk(name, loc + glm::vec3(0.0, 0.0, -layout::margin * 2));
+	child[noChild - 1] = id->_parent;
+
 	Border* parent = borderMk({
 		scale[X],
 		scale[Y]
