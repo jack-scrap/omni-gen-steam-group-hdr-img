@@ -313,24 +313,21 @@ glm::vec3 apply(glm::vec3 vtx, glm::mat4 model) {
 	return glm::vec3(model * glm::vec4(glm::vec3(0.0), 1.0));
 }
 
-bool util::phys::aabb(Obj* el[2]) {
+bool util::phys::aabb(Obj* p, Obj* q) {
 	bool _ = false;
 
 	for (int e = 0; e < 2; e++) {
-		int a = e < 2 ? e : 0;
-		int b = (e + 1) < 2 ? (e + 1) : 0;
-
 		for (int i = 0; i < 2 * 2 * 2 * 3; i += 3) {
-			glm::vec3 vtx = glm::vec3(el[a]->_acc * glm::vec4(glm::vec3(el[a]->_bound[i], el[a]->_bound[i + 1], el[a]->_bound[i + 2]), 1.0));
+			glm::vec3 vtx = glm::vec3((e ? q : p)->_acc * glm::vec4(glm::vec3((e ? q : p)->_bound[i], (e ? q : p)->_bound[i + 1], (e ? q : p)->_bound[i + 2]), 1.0));
 
-			glm::vec3 minX = glm::vec3(el[b]->_acc * glm::vec4(glm::vec3(el[b]->_rng[X][MIN], 0.0, 0.0), 1.0));
-			glm::vec3 maxX = glm::vec3(el[b]->_acc * glm::vec4(glm::vec3(el[b]->_rng[X][MAX], 0.0, 0.0), 1.0));
+			glm::vec3 minX = glm::vec3((e ? p : q)->_acc * glm::vec4(glm::vec3((e ? p : q)->_rng[X][MIN], 0.0, 0.0), 1.0));
+			glm::vec3 maxX = glm::vec3((e ? p : q)->_acc * glm::vec4(glm::vec3((e ? p : q)->_rng[X][MAX], 0.0, 0.0), 1.0));
 
-			glm::vec3 minY = glm::vec3(el[b]->_acc * glm::vec4(glm::vec3(0.0, el[b]->_rng[Y][MIN], 0.0), 1.0));
-			glm::vec3 maxY = glm::vec3(el[b]->_acc * glm::vec4(glm::vec3(0.0, el[b]->_rng[Y][MAX], 0.0), 1.0));
+			glm::vec3 minY = glm::vec3((e ? p : q)->_acc * glm::vec4(glm::vec3(0.0, (e ? p : q)->_rng[Y][MIN], 0.0), 1.0));
+			glm::vec3 maxY = glm::vec3((e ? p : q)->_acc * glm::vec4(glm::vec3(0.0, (e ? p : q)->_rng[Y][MAX], 0.0), 1.0));
 
-			glm::vec3 minZ = glm::vec3(el[b]->_acc * glm::vec4(glm::vec3(0.0, 0.0, el[b]->_rng[Z][MIN]), 1.0));
-			glm::vec3 maxZ = glm::vec3(el[b]->_acc * glm::vec4(glm::vec3(0.0, 0.0, el[b]->_rng[Z][MAX]), 1.0));
+			glm::vec3 minZ = glm::vec3((e ? p : q)->_acc * glm::vec4(glm::vec3(0.0, 0.0, (e ? p : q)->_rng[Z][MIN]), 1.0));
+			glm::vec3 maxZ = glm::vec3((e ? p : q)->_acc * glm::vec4(glm::vec3(0.0, 0.0, (e ? p : q)->_rng[Z][MAX]), 1.0));
 
 			if (
 				vtx[X] > minX[X] &&

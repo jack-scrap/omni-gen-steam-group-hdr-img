@@ -64,7 +64,7 @@ namespace util {
 	}
 
 	namespace phys {
-		bool aabb(Obj* el[2]);
+		bool aabb(Obj* p, Obj* q);
 	}
 
 	namespace cfg {
