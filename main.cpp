@@ -31,7 +31,7 @@ Cam cam = {
 
 int main() {
 	// initialize
-	std::map<std::string, int> data = util::cfg::parse("cfg/init");
+	std::map<std::string, int> data = util::cfg::parse("cfg/init.cfg");
 
 	for (const auto& [key, val] : data) {
 		if (key == "line_width") {
