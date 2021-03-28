@@ -3,4 +3,4 @@
 unsigned int state::line;
 unsigned int state::ln;
 
-int state::fps;
+unsigned int state::fps;
