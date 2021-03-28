@@ -39,7 +39,7 @@ int main(int argc, char** argv) {
 		}
 
 		if (key == "line_width") {
-			state::line = val;
+			state::ln = val;
 		}
 	}
 

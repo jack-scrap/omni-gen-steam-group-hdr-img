@@ -7,9 +7,9 @@
 #include "math.h"
 
 namespace state {
-	static unsigned int
+	unsigned int
 		line = 18,
-		ln = 36;
+		ln;
 
 	static const unsigned int fps = 15;
 
