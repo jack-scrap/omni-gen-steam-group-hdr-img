@@ -1,0 +1,27 @@
+# Mode
+[F1] File Browser
+[F2] Editor
+[F2] Prompt
+
+## File Browser
+[Down Arrow] -           Next entry
+[Up Arrow] -             Previous entry
+[Enter (Directory)] -    Change current directory
+[Enter (File)] -         Open in editor
+
+## Editor
+[Enter] -                New line
+
+## Prompt
+*command* *argument* ...
+
+[Enter] -                Run
+
+# Display
+[Left Mouse Button] -    Pan camera
+[Scroll Wheel] -         Zoom
+
+# Command
+save -                   Write buffer to disk
+open -                   Open in editor
+run -                    Execute
