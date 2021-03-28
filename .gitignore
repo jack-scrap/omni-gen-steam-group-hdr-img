@@ -1,4 +1,5 @@
 *.log
+player.json
 
 *.o
 *.so
