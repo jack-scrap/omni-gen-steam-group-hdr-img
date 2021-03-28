@@ -8,7 +8,7 @@
 
 namespace state {
 	unsigned int
-		line = 18,
+		line,
 		ln;
 
 	static const unsigned int fps = 15;

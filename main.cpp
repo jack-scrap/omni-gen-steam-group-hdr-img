@@ -38,6 +38,10 @@ int main(int argc, char** argv) {
 			layout::view = glm::vec2(val, state::line * layout::dim[Y]);
 		}
 
+		if (key == "line_count") {
+			state::line = val;
+		}
+
 		if (key == "line_width") {
 			state::ln = val;
 		}
