@@ -29,7 +29,7 @@ Cam cam = {
 	}
 };
 
-int main() {
+int main(int argc, char** argv) {
 	// initialize
 	std::map<std::string, int> data = util::cfg::parse("cfg/init.cfg");
 
@@ -45,7 +45,12 @@ int main() {
 		layout::view[X] + (state::ln * layout::dim[X]), layout::view[Y]
 	}, col[false]);
 
-	unsigned int lvl = 5;
+	unsigned int lvl;
+	if (argv[1]) {
+		lvl = atoi(argv[1]);
+	} else {
+		lvl = 0;
+	}
 	std::string name = "script/" + std::to_string(lvl) + "/main.py";
 	console = new Console(name, util::fs::rd<std::vector<std::string>>(name));
 	scn::init(lvl);
