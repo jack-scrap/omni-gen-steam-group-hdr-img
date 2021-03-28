@@ -144,7 +144,17 @@ void craneGrab(Crane* crane) {
 			}
 		}
 	} else {
-		crane->_op = nullptr;
-		slot = nullptr;
+		for (int i = 0; i < data->_x; i++) {
+			Cont*& byte = data->_data[i]->_data;
+
+			if (!byte) {
+				data->_data[i]->_data = crane->_op;
+
+				crane->_op = nullptr;
+				slot = nullptr;
+
+				break;
+			}
+		}
 	}
 }
