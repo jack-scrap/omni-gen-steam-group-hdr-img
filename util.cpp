@@ -325,11 +325,16 @@ bool util::phys::aabb(Obj* p, Obj* q) {
 		glm::vec3 minY = glm::vec3(q->_acc * glm::vec4(glm::vec3(0.0, q->_rng[Y][MIN], 0.0), 1.0));
 		glm::vec3 maxY = glm::vec3(q->_acc * glm::vec4(glm::vec3(0.0, q->_rng[Y][MAX], 0.0), 1.0));
 
+		glm::vec3 minZ = glm::vec3(q->_acc * glm::vec4(glm::vec3(0.0, 0.0, q->_rng[Z][MIN]), 1.0));
+		glm::vec3 maxZ = glm::vec3(q->_acc * glm::vec4(glm::vec3(0.0, 0.0, q->_rng[Z][MAX]), 1.0));
+
 		if (
 			a[X] > minX[X] &&
 			a[X] < maxX[X] &&
 			a[Y] > minY[Y] &&
-			a[Y] < maxY[Y]
+			a[Y] < maxY[Y] &&
+			a[Z] > minZ[Z] &&
+			a[Z] < maxZ[Z]
 		) {
 			_ = true;
 

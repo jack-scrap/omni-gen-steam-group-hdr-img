@@ -30,8 +30,6 @@ extern "C" void** vehicleGet();
 
 extern std::vector<Obj*> mesh;
 
-extern Obj* test;
-
 namespace scn {
 	void init(unsigned int i);
 }

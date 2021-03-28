@@ -123,7 +123,18 @@ void cranePed(Crane* crane, float delta) {
 }
 
 void craneGrab(Crane* crane) {
-	Obj*& head = crane->_parent->_child[2 * 2 * 2 * 2]->_child[0];
+	Obj*& head = crane->_parent->_child[2 * 2 * 2 * 2];
+	Obj*& claw = head->_child[0];
 
-	std::cout << util::phys::aabb(head, mesh[5 - 1]) << std::endl;
+	for (int i = 0; i < data->_x; i++) {
+		Cont*& byte = data->_data[i]->_data;
+
+		if (byte) {
+			if (util::phys::aabb(claw, data->_data[i]->_data->_parent)) {
+				std::cout << "asdf" << std::endl;
+
+				break;
+			}
+		}
+	}
 }
