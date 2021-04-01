@@ -1,0 +1,92 @@
+The following section will run you through the order of execution in a program.
+
+# Conditionals
+## if
+The `if` statement handles a condition and a block of code.
+It will only execute its given block of code should the condition be true.
+
+This can be used to only execute statements should certain circumstances be met.
+
+```
+if 3 == 7:
+	...
+```
+
+## elif
+The `elif` statements are additional statements following the first.
+
+```
+if 3 == 7:
+	print("Yes")
+
+elif 3 == 8:
+	...
+```
+
+## else
+The `else` statement may follow an existing `if` statement, and will executed should none of the previous conditions be met.
+
+No condition is required, simply handling every other case.
+
+```
+if 3 == 7:
+	print("Yes")
+
+elif 3 == 8:
+	print("Yes")
+
+else:
+	...
+```
+
+# Loops
+Loops will run repeatedly until a condition is met.
+
+This is useful for handling sets of data that are redundant, where blocks can be re-used.
+
+## while
+The general-purpose "while" loop executes a block of code while the condition remains true.
+
+```
+while 3 < 7
+	...
+```
+
+Because this condition is true, and the program cannot proceed beyond the loop, the block will execute forever.
+
+By manipulating this condition within the block of code itself, a running loop can alter its future behavior and terminate itself.
+
+An example of running this loop a determined number of times can be examplified as follows:
+
+```
+i = 0
+while i < 3
+	print(i)
+
+	i += 1
+```
+
+# Statements
+## short-circuiting
+The `break` statement will terminate the loop, ignoring the rest of the current iteration and all future ones.
+
+```
+i = 0
+while i < 3
+	break
+
+	i += 1
+```
+
+Here, the loop simply terminates.
+
+## continue
+The `continue` will ignore the rest of the current iteration, and proceed to the next.
+
+```
+i = 0 
+while i < 3:
+	continue
+
+	i += 1
+```
