@@ -211,8 +211,28 @@ void Console::render() {
 
 		line += strPadded;
 
-		for (int i = 0; i < state::ln; i++) {
-			_scr[((1 + l) * state::ln) + i] = line[i];
+		int i = 0;
+		int c = 0;
+		while (i < state::ln) {
+			if (line[c] == '\t') {
+				int t = 0;
+				while (
+					t < state::tabWd &&
+					i < state::ln
+				) {
+					_scr[((1 + l) * state::ln) + i] = ' ';
+
+					i++;
+					t++;
+				}
+
+				c++;
+			} else {
+				_scr[((1 + l) * state::ln) + i] = line[c];
+
+				i++;
+				c++;
+			}
 		}
 	}
 
