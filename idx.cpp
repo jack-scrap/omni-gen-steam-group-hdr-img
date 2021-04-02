@@ -9,7 +9,11 @@ Idx* idxMk(unsigned int i, glm::vec3 loc, glm::vec3 rot) {
 
 	_->_data = nullptr;
 
-	Obj* no = objMk("glyph/" + std::to_string(i), "obj", "solid", true, loc + glm::vec3(1.0, 0.0, 2.0), rot);
+	Obj* no = objMk("glyph/" + std::to_string(i), "obj", "solid", true, glm::vec3(
+		(layout::stroke * 2) + (layout::idx[X] / 2),
+		0.0,
+		(layout::stroke * 2) + (layout::idx[Y] / 2)
+	), rot);
 
 	Obj* child[] = {
 		no
