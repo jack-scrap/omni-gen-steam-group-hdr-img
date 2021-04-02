@@ -19,8 +19,6 @@ Arr* data;
 std::vector<char> rhs;
 bool eq = false;
 
-Obj* test;
-
 void scn::init(unsigned int stage, unsigned int lvl) {
 	nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("lvl/" + omni::stage[stage] + "/" + std::to_string(lvl) + ".json"));
 
