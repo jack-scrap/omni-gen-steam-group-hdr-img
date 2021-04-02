@@ -1,3 +1,6 @@
+#include <thread>
+#include <glm/gtc/type_ptr.hpp>
+
 #include "disp.h"
 #include "math.h"
 #include "scn.h"

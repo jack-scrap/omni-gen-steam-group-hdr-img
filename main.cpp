@@ -5,6 +5,7 @@
 #include <SDL2/SDL.h>
 #include <vector>
 #include <string>
+#include <glm/gtc/type_ptr.hpp>
 
 #include "scn.h"
 #include "util.h"
@@ -71,6 +72,60 @@ int main(int argc, char** argv) {
 	std::string name = "script/" + omni::stage[stage] + "/" + std::to_string(lvl) + "/main.py";
 	console = new Console(name, util::fs::rd<std::vector<std::string>>(name));
 	scn::init(stage, lvl);
+
+	if (true) {
+		GLuint vao;
+		glGenVertexArrays(1, &vao);
+		glBindVertexArray(vao);
+
+		GLuint vbo;
+		glGenBuffers(1, &vbo);
+		glBindBuffer(GL_ARRAY_BUFFER, vbo);
+
+		GLfloat vtc[4 * 3 * 2] = {
+			-0.26, -0.26,
+			-0.26, 0.16,
+			-0.16, 0.26,
+			-0.16, -0.26,
+
+			-0.16, -0.26,
+			0.16, -0.26,
+			0.16, 0.26,
+			-0.16, 0.26,
+
+			0.26, -0.16,
+			0.26, 0.26,
+			0.16, 0.26,
+			0.16, -0.26
+		};
+		glBufferData(GL_ARRAY_BUFFER, sizeof vtc, vtc, GL_STATIC_DRAW);
+
+		// shader
+		Prog prog("logo", "solid");
+
+		/// attribute
+		GLint attrPos = glGetAttribLocation(prog.id, "pos");
+		glVertexAttribPointer(attrPos, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+		glEnableVertexAttribArray(attrPos);
+
+		/// uniform
+		GLint uniActive = glGetUniformLocation(prog.id, "active");
+		GLint uniRes = glGetUniformLocation(prog.id, "res");
+
+		// initialize
+		prog.use();
+
+		glUniform1ui(uniActive, true);
+		glUniform2fv(uniRes, 1, glm::value_ptr(disp->_res));
+
+		disp->clear();
+
+		glDrawArrays(GL_QUADS, 0, 4 * 3);
+
+		disp->update();
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+	}
 
 	SDL_Event e;
 	while (disp->_open) {

@@ -7,6 +7,8 @@
 #include <glm/glm.hpp>
 #include <SDL2/SDL.h>
 
+#include "obj.h"
+
 class Disp {
 	public:
 		bool _open = false;
