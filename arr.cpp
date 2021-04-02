@@ -14,7 +14,7 @@ Arr* arrMk(Node* data, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	_->_depth = 0;
 	nodeMax(data, &_->_x);
 	nodeDepth(data, &_->_depth);
-	_->_y = 2;
+	_->_y = _->_depth - 1;
 
 	_->_data = (Idx**) malloc(_->_y * _->_x * sizeof (Idx*));
 
@@ -38,7 +38,7 @@ Arr* arrMk(Node* data, std::string name, glm::vec3 loc, glm::vec3 rot) {
 		for (int i = 0; i < _->_x; i++) {
 			Idx* idx;
 			glm::vec3 offset = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2);
-			if (true) {
+			if (data->_data[(j * _->_y) + i]) {
 				idx = idxMk(i, data->_data[(j * _->_y) + i], offset + glm::vec3(
 					i * stride[X],
 					0.0,

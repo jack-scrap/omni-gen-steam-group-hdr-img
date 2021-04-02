@@ -55,7 +55,15 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		std::vector<char> init;
 
 		for (const auto& item : serial["data"][pair.key()]) {
-			init.push_back((char) ((int) item));
+			if (item.type() == nlohmann::json::value_t::number_unsigned) {
+				init.push_back((char) ((int) item));
+			}
+
+			if (item.type() == nlohmann::json::value_t::array) {
+				for (const auto& byte : item) {
+					init.push_back((char) ((int) byte));
+				}
+			}
 		}
 
 		Node* child[] = {
