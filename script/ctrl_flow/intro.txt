@@ -1,9 +1,23 @@
-The following section will run you through the order of execution in a program.
+The following section will run you through the order of execution in a program, referred to as "control-flow".
+
+# Scope
+Like functions, the blocks in conditionals have their scope.
+
+Variables can be defined, expressions can be evaluated and other statements can be nested.
+
+```
+if 3 == 7
+	var = 3
+
+	if 3 == 12
+		...
+```
 
 # Conditionals
+Conditionals handle a condition and a block of code.
+
 ## if
-The `if` statement handles a condition and a block of code.
-It will only execute its given block of code should the condition be true.
+The `if` statement will only execute its given block of code should the condition be true.
 
 This can be used to only execute statements should certain circumstances be met.
 
@@ -19,7 +33,7 @@ The `elif` statements are additional statements following the first.
 if 3 == 7:
 	print("Yes")
 
-elif 3 == 8:
+elif 3 == 12:
 	...
 ```
 
@@ -32,7 +46,7 @@ No condition is required, simply handling every other case.
 if 3 == 7:
 	print("Yes")
 
-elif 3 == 8:
+elif 3 == 12:
 	print("Yes")
 
 else:
