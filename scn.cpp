@@ -71,7 +71,15 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	for (const auto& entry : serial["rhs"]) {
-		rhs.push_back((char) ((int) entry));
+		if (entry.type() == nlohmann::json::value_t::number_unsigned) {
+			rhs.push_back((char) ((int) entry));
+		}
+
+		if (entry.type() == nlohmann::json::value_t::array) {
+			for (const auto& byte : entry) {
+				rhs.push_back((char) ((int) byte));
+			}
+		}
 	}
 
 	// object
