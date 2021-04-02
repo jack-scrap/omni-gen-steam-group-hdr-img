@@ -67,7 +67,7 @@ while i < 3
 ```
 
 # Statements
-## short-circuiting
+## Short-circuiting
 The `break` statement will terminate the loop, ignoring the rest of the current iteration and all future ones.
 
 ```
