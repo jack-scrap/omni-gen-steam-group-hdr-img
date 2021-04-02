@@ -37,24 +37,11 @@ Arr* arrMk(Node* data, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	for (int j = 0; j < _->_y; j++) {
 		for (int i = 0; i < _->_x; i++) {
 			Idx* idx;
-			glm::vec3 offset = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2);
+			glm::vec3 offset = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2) + glm::vec3(i * stride[X], 0.0, j * stride[Y]);
 			if (data->_data[(j * _->_y) + i]) {
-				idx = idxMk(i, data->_data[(j * _->_y) + i], offset + glm::vec3(
-					i * stride[X],
-					0.0,
-					j * stride[Y]
-				));
+				idx = idxMk(i, data->_data[(j * _->_y) + i], offset);
 			} else {
-				glm::vec3 offset = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2);
-
-				idx = idxMk(
-					(j * _->_y) + i,
-					offset + glm::vec3(
-						i * stride[X],
-						0.0,
-						(j * _->_y) * stride[Y]
-					)
-				);
+				idx = idxMk((j * _->_y) + i, offset);
 			}
 
 			_->_data[(j * _->_y) + i] = idx;
