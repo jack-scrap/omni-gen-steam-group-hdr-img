@@ -3,6 +3,7 @@
 #include <dirent.h>
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/string_cast.hpp>
+#include <sys/stat.h>
 
 #include "util.h"
 #include "math.h"
@@ -118,6 +119,14 @@ std::string util::fs::base(std::string buff) {
 	std::string f = util::fs::name(buff);
 
 	return util::str::split(f, '.')[0];
+}
+
+bool util::fs::w(std::string name) {
+	struct stat info;
+	stat(name.c_str(), &info);
+	int perm = info.st_mode & S_IWUSR;
+
+	return perm == 128;
 }
 
 std::vector<std::string> util::str::split(std::string buff, char delim) {

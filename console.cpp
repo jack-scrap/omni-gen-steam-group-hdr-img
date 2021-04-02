@@ -37,7 +37,6 @@ void dispatch(Console* console, std::string name) {
 	if (eq) {
 		std::string log = "log/" + util::fs::base(name) + ".log";
 
-		console->_name = log;
 		console->_buff = util::log(console->_buff.size());
 
 		nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("player.json"));
@@ -59,7 +58,6 @@ void dispatch(Console* console, std::string name) {
 
 Console::Console(std::string name, std::vector<std::string> buff) :
 	_tree(util::fs::ls("script")),
-	_name(name),
 	_mode(EDITOR),
 	_prog("text", "text") {
 		if (buff.size()) {
@@ -68,6 +66,18 @@ Console::Console(std::string name, std::vector<std::string> buff) :
 			_buff = {
 				""
 			};
+		}
+
+		_name = name;
+
+		_w = util::fs::w(_name);
+
+		if (!_w) {
+			std::string post;
+			post += " ";
+			post += "[RO]";
+
+			_name += post;
 		}
 
 		_scr = (char*) malloc(sizeof (char) * state::line * state::ln);

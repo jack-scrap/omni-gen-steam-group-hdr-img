@@ -28,6 +28,8 @@ namespace util {
 		std::string name(std::string buff);
 
 		std::string base(std::string buff);
+
+		bool w(std::string name);
 	}
 
 	namespace str {

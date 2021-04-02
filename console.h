@@ -47,6 +47,8 @@ class Console {
 
 		GLuint _tex;
 
+		bool _w;
+
 	public:
 		enum mode {
 			FS,
