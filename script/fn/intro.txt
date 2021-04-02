@@ -1,0 +1,96 @@
+The following section will run you through the process of creating and using functions.
+
+# Usage
+The section of code displays where functionality is essentially re-used.
+
+```
+i = 0
+
+i += 1
+print(i)
+
+print('asdf')
+
+i += 1
+print(i)
+```
+
+For the redundant blocks, a function can be created to encompass this functionality.
+This is referred to as an "abstraction."
+
+```
+i = 0
+
+def fn():
+	i += 1
+
+	print(i)
+
+fn()
+
+print('asdf')
+
+fn()
+```
+
+The following creates a function:
+
+```
+def fn():
+	...
+```
+
+The following calls the function:
+
+```
+fn()
+```
+
+# Arguments
+Arguments are values that are passed to the function.
+
+These values only exist in the scope of the function.
+
+```
+def fn(i):
+	print(i)
+```
+
+The function can then perform different tasks depending on the provided values, beyond simply statically executing the block of code.
+
+The following examplifies eliminating some redundancy where other complexity is still present.
+
+```
+i = 0
+
+def fn(inc):
+	i += inc
+
+	print(i)
+
+fn(3)
+fn(7)
+
+```
+
+# Return values
+In the process of terminating a function, a value can be given back.
+
+This is referred to as the "return value".
+
+The function produces the value after completion:
+
+```
+def fn():
+	i = 3 + 7
+
+	return i
+```
+
+To access this value, simply evaluate the function:
+
+```
+var = fn()
+
+print(var)
+```
