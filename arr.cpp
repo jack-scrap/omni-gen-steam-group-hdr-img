@@ -32,7 +32,7 @@ Arr* arrMk(Node* data, std::string name, glm::vec3 loc, glm::vec3 rot) {
 
 	// data
 	Obj** child = (Obj**) malloc(0);
-	unsigned int noChild = 0;
+	unsigned int noChild = 1;
 
 	for (int i = 0; i < _->_x; i++) {
 		Idx* idx;
