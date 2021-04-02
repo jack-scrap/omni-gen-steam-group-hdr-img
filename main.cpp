@@ -301,7 +301,7 @@ int main(int argc, char** argv) {
 
 										break;
 
-										// bracket
+									// bracket
 									case SDLK_LEFTBRACKET:
 										console->push('[');
 
