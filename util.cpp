@@ -45,6 +45,14 @@ std::vector<std::string> util::fs::rd<std::vector<std::string>>(std::string name
 }
 
 void util::fs::write(std::string name, std::vector<std::string> buff) {
+	bool w = util::fs::w(name);
+
+	if (!w) {
+		omni::err("File read-only");
+
+		return;
+	}
+
 	std::ofstream f;
 	f.open(name);
 
