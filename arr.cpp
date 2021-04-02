@@ -14,9 +14,9 @@ Arr* arrMk(Node* data, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	_->_depth = 0;
 	nodeMax(data, &_->_x);
 	nodeDepth(data, &_->_depth);
-	_->_y = _->_depth - 1;
+	_->_y = 2;
 
-	_->_data = (Idx**) malloc(_->_x * sizeof (Idx*));
+	_->_data = (Idx**) malloc(_->_y * _->_x * sizeof (Idx*));
 
 	// layout
 	GLfloat
@@ -34,22 +34,35 @@ Arr* arrMk(Node* data, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	Obj** child = (Obj**) malloc(0);
 	unsigned int noChild = 1;
 
-	for (int i = 0; i < _->_x; i++) {
-		Idx* idx;
-		glm::vec3 offset = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2);
-		if (data->_data[i]) {
-			idx = idxMk(i, data->_data[i], offset + glm::vec3(i * stride[X], 0.0, 0.0));
-		} else {
+	for (int j = 0; j < _->_y; j++) {
+		for (int i = 0; i < _->_x; i++) {
+			Idx* idx;
 			glm::vec3 offset = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2);
+			if (true) {
+				idx = idxMk(i, data->_data[(j * _->_y) + i], offset + glm::vec3(
+					i * stride[X],
+					0.0,
+					j * stride[Y]
+				));
+			} else {
+				glm::vec3 offset = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2);
 
-			idx = idxMk(i, offset + glm::vec3(i * stride[X], 0.0, 0.0));
+				idx = idxMk(
+					(j * _->_y) + i,
+					offset + glm::vec3(
+						i * stride[X],
+						0.0,
+						(j * _->_y) * stride[Y]
+					)
+				);
+			}
+
+			_->_data[(j * _->_y) + i] = idx;
+
+			noChild++;
+			child = (Obj**) realloc(child, noChild * sizeof (Obj*));
+			child[(j * _->_y) + i] = _->_data[(j * _->_y) + i]->_parent;
 		}
-
-		_->_data[i] = idx;
-
-		noChild++;
-		child = (Obj**) realloc(child, noChild * sizeof (Obj*));
-		child[i] = _->_data[i]->_parent;
 	}
 
 	// identifier

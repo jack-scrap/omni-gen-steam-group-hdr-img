@@ -73,7 +73,7 @@ int main(int argc, char** argv) {
 	if (argv[1]) {
 		lvl = atoi(argv[1]);
 	} else {
-		lvl = 0;
+		lvl = 6;
 	}
 	std::string name = "script/" + omni::stage[stage] + "/" + std::to_string(lvl) + "/main.py";
 	console = new Console(name, util::fs::rd<std::vector<std::string>>(name));

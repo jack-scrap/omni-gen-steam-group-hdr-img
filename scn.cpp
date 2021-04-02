@@ -39,7 +39,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			Crane* crane = craneMk(glm::vec3(entry["loc"][0], entry["loc"][1], entry["loc"][2]), glm::vec3(entry["rot"][0], entry["loc"][1], entry["loc"][2]));
 
 			vehicle.push_back(crane);
-			mesh.push_back(crane->_parent);
+			/* mesh.push_back(crane->_parent); */
 		}
 
 		if (entry["name"] == "truck") {
