@@ -1,7 +1,7 @@
 # Mode
 [F1] File Browser
 [F2] Editor
-[F2] Prompt
+[F3] Prompt
 
 ## File Browser
 [Down Arrow] -           Next entry
