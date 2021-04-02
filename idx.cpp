@@ -9,9 +9,16 @@ Idx* idxMk(unsigned int i, glm::vec3 loc, glm::vec3 rot) {
 
 	_->_data = nullptr;
 
+	Obj* no = objMk("glyph/" + std::to_string(i), "obj", "solid", true, loc + glm::vec3(1.0, 0.0, 2.0), rot);
+
+	Obj* child[] = {
+		no
+	};
+
 	Border* border = borderMk({
 		layout::idx[X] + (layout::margin * 2 * 2), layout::idx[Y] + (layout::margin * 2 * 2)
-	}, loc, rot);
+	}, child, sizeof child / sizeof *child,
+	loc, rot);
 	_->_parent = border->_parent;
 
 	return _;
