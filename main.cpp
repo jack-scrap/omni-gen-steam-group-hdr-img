@@ -31,10 +31,16 @@ Cam cam = {
 };
 
 int main(int argc, char** argv) {
+	bool boot;
+
 	// initialize
 	std::map<std::string, int> data = util::cfg::parse("cfg/init.cfg");
 
 	for (const auto& [key, val] : data) {
+		if (key == "skip_boot") {
+			boot = !val;
+		}
+
 		if (key == "wd") {
 			layout::view = glm::vec2(val, state::line * layout::dim[Y]);
 		}
@@ -73,7 +79,7 @@ int main(int argc, char** argv) {
 	console = new Console(name, util::fs::rd<std::vector<std::string>>(name));
 	scn::init(stage, lvl);
 
-	if (true) {
+	if (boot) {
 		GLuint vao;
 		glGenVertexArrays(1, &vao);
 		glBindVertexArray(vao);
