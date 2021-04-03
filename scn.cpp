@@ -52,30 +52,43 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 	// data
 	for (const auto& pair : serial["data"].items()) {
-		std::vector<char> init;
+		// 1D
+		/* char* init = (char*) malloc(0); */
+		/* unsigned int sz = 0; */
+
+		/* for (const auto& item : serial["data"][pair.key()]) { */
+		/* 	if (item.type() == nlohmann::json::value_t::number_unsigned) { */
+		/* 		sz++; */
+
+		/* 		init = (char*) realloc(init, sz * sizeof (char)); */
+		/* 		init[sz - 1] = (char) ((int) item); */
+		/* 	} */
+		/* } */
+
+		/* data = arrMk(init, sz, pair.key()); */
+
+		// 2D
+		char* init = (char*) malloc(0);
+		unsigned int x = 0;
+		unsigned int y = 0;
+		unsigned int sz = 0;
 
 		for (const auto& item : serial["data"][pair.key()]) {
-			if (item.type() == nlohmann::json::value_t::number_unsigned) {
-				init.push_back((char) ((int) item));
+			x = 0;
+
+			for (const auto& byte : item) {
+				sz++;
+
+				init = (char*) realloc(init, sz * sizeof (char));
+				init[sz - 1] = (char) ((int) byte);
+
+				x++;
 			}
 
-			if (item.type() == nlohmann::json::value_t::array) {
-				for (const auto& byte : item) {
-					init.push_back((char) ((int) byte));
-				}
-			}
+			y++;
 		}
 
-		Node* child[] = {
-			nodeMk(&init[0], init.size())
-		};
-		Node* node = nodeMk(&init[0], init.size(), child, sizeof child / sizeof *child);
-		data = arrMk(node, pair.key());
-
-		for (int i = 0; i < sizeof child / sizeof *child; i++) {
-			free(child[i]);
-		}
-		free(node);
+		data = arrMk(init, x, y, pair.key());
 	}
 
 	for (const auto& entry : serial["rhs"]) {
