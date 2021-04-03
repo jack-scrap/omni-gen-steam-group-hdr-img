@@ -10,6 +10,14 @@ The `.` operator is used to access these properties.
 ;obj.property
 ```
 
+Within the class itself, a special variable `self` refers to the current object.
+
+```
+class Blueprint:
+	def __init__(self):
+		self.var = 3
+```
+
 # Classes
 Classes are templates for creating objects.
 
@@ -19,7 +27,7 @@ The following defines a class.
 
 ```
 class Blueprint:
-	def __init__():
+	def __init__(self):
 		pass
 ```
 
@@ -27,7 +35,7 @@ The following creates an object that adheres to that class.
 
 ```
 class Blueprint:
-	def __init__():
+	def __init__(self):
 		pass
 
 obj = Blueprint()
@@ -40,7 +48,7 @@ It is defined as `__init__`
 
 ```
 class Blueprint:
-	def __init__():
+	def __init__(self):
 		asdf = 3
 
 		pass

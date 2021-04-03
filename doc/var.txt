@@ -31,6 +31,17 @@ print(3)
 ```
 
 ```
-asdf = 3
+var = 3
 print(asdf)
 ```
+
+# Casting
+"Casting" is re-interpreting data as another type.
+
+The process of doing so reads like a function with a single argument.
+
+```
+var = string(3)
+```
+
+In the above snippet, the literal `3` is converted into a string.

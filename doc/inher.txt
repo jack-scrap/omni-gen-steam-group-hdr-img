@@ -1,0 +1,69 @@
+# Inheritance
+The
+
+Doing so can effectively asdf
+
+```
+class Parent():
+	var = 3
+
+	def fn():
+		print("Text")
+
+	def __init__(self):
+		pass
+
+class Child(Parent):
+	pass
+```
+
+Here, the properties have been automatically added.
+
+## Parent property
+```
+class Asdf:
+    def __init__(self):
+        self.asdf = 3
+
+        pass
+
+class Qwer(Asdf):
+    def __init__(self):
+        Asdf.__init__(self)
+
+        pass
+```
+
+## Multiple
+A child class can inherit from more than one parent.
+
+```
+class Parent():
+	var = 3
+
+	def fn():
+		print("Text")
+
+		def __init__(self):
+			pass
+	
+class OtherParent():
+	var = 3
+
+	def fn():
+		print("Text")
+
+		def __init__(self):
+			pass
+
+class Child(Parent, OtherParent):
+	pass
+```
+
+## Overriding
+Overriding will discard the parent and substitute it with one provided by the child.
+
+```
+```
+
+## Overloading

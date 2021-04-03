@@ -1,0 +1,11 @@
+The following section will walk you through arrays.
+
+Arrays are sets of data.
+
+# Creating
+`arr = [3, 7];`
+
+# Accessing
+The `[]` operator, provided with a number will access the array at the specified location.
+
+`arr[3]`

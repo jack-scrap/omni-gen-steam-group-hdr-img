@@ -94,3 +94,27 @@ var = fn()
 
 print(var)
 ```
+
+## Multiple
+Multiple functions with the same name, but separate arguments or return value may exist.
+
+Functions may be defined with the same name, but having separate arguments or return values.
+These function definitions are separate entities, and will be selected based on usage.
+
+```
+def fn():
+	print(3)
+
+def fn(val):
+	print(7)
+```
+
+```
+def fn():
+	print(3)
+
+def fn(val):
+	return 3
+
+var = fn()
+```
