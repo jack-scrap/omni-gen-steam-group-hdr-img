@@ -39,7 +39,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			Crane* crane = craneMk(glm::vec3(entry["loc"][0], entry["loc"][1], entry["loc"][2]), glm::vec3(entry["rot"][0], entry["loc"][1], entry["loc"][2]));
 
 			vehicle.push_back(crane);
-			/* mesh.push_back(crane->_parent); */
+			mesh.push_back(crane->_parent);
 		}
 
 		if (entry["name"] == "truck") {
@@ -53,46 +53,50 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	// data
 	for (const auto& pair : serial["data"].items()) {
 		// 1D
-		/* char* init = (char*) malloc(0); */
-		/* unsigned int sz = 0; */
+		if (serial["data"]["state"][0].type() == nlohmann::json::value_t::number_unsigned) {
+			char* init = (char*) malloc(0);
+			unsigned int sz = 0;
 
-		/* for (const auto& item : serial["data"][pair.key()]) { */
-		/* 	if (item.type() == nlohmann::json::value_t::number_unsigned) { */
-		/* 		sz++; */
+			for (const auto& item : serial["data"][pair.key()]) {
+				if (item.type() == nlohmann::json::value_t::number_unsigned) {
+					sz++;
 
-		/* 		init = (char*) realloc(init, sz * sizeof (char)); */
-		/* 		init[sz - 1] = (char) ((int) item); */
-		/* 	} */
-		/* } */
-
-		/* data = arrMk(init, sz, pair.key()); */
-
-		// 2D
-		char* init = (char*) malloc(0);
-		unsigned int x = 0;
-		unsigned int y = 0;
-
-		unsigned int max = 0;
-		for (const auto& item : serial["data"][pair.key()]) {
-			x = 0;
-
-			for (const auto& byte : item) {
-				x++;
-
-				if (x > max) {
-					max = x;
+					init = (char*) realloc(init, sz * sizeof (char));
+					init[sz - 1] = (char) ((int) item);
 				}
-
-				unsigned int sz = ((y * max) + x);
-
-				init = (char*) realloc(init, sz * sizeof (char));
-				init[sz - 1] = (char) ((int) byte);
 			}
 
-			y++;
+			data = arrMk(init, sz, pair.key());
 		}
 
-		data = arrMk(init, x, y, pair.key());
+		// 2D
+		if (serial["data"]["state"][0].type() == nlohmann::json::value_t::array) {
+			char* init = (char*) malloc(0);
+			unsigned int x = 0;
+			unsigned int y = 0;
+
+			unsigned int max = 0;
+			for (const auto& item : serial["data"][pair.key()]) {
+				x = 0;
+
+				for (const auto& byte : item) {
+					x++;
+
+					if (x > max) {
+						max = x;
+					}
+
+					unsigned int sz = ((y * max) + x);
+
+					init = (char*) realloc(init, sz * sizeof (char));
+					init[sz - 1] = (char) ((int) byte);
+				}
+
+				y++;
+			}
+
+			data = arrMk(init, x, y, pair.key());
+		}
 	}
 
 	for (const auto& entry : serial["rhs"]) {
