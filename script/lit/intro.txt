@@ -1,0 +1,40 @@
+The following will run you through process of "literals"
+
+Literals are the fundamental piece, and will not be evaluated beyond their initial.
+
+# Numbers
+`3`
+
+## floating-point
+To give a number precision beyond an integer, add the dot operator.
+
+`3.7`
+
+# Arrays
+`[3, 7]`
+
+Every entry in a collection must be of the same type.
+
+# Characters
+Characters are single characters.
+
+`'a'`
+
+# Strings
+Characters are arrays of characters.
+
+This can be used to effectively create collections of text.
+
+`"Buffer, another buffer"`
+
+# Objects
+Objects are collections of data where each entry is a "key" and a "value".
+
+This can be used to effectively create identifiers.
+
+```
+{
+	asdf: 3,
+	hjkl: 7
+}
+```

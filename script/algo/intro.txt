@@ -1,0 +1,11 @@
+The following section will run you through the process of efficiently sorting data.
+
+# Algorithms
+## Bubble
+"Bubble Sort"
+
+## Insertion
+"Insertion Sort"
+
+## Big-O
+What is referred to as Big-O notation describes.

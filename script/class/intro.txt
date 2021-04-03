@@ -1,0 +1,47 @@
+# Objects
+Objects are variables that have properties.
+
+These properties can be of any type, and are eumerable.
+
+## Properties
+The `.` operator is used to access these properties.
+
+```
+;obj.property
+```
+
+# Classes
+Classes are templates for creating objects.
+
+This can be used to effectively create a new type.
+
+The following defines a class.
+
+```
+class Blueprint:
+	def __init__():
+		pass
+```
+
+The following creates an object that adheres to that class.
+
+```
+class Blueprint:
+	def __init__():
+		pass
+
+obj = Blueprint()
+```
+
+## Constructor
+The "constructor" is a function of special function that runs on creation of an object.
+
+It is defined as `__init__`
+
+```
+class Blueprint:
+	def __init__():
+		asdf = 3
+
+		pass
+```

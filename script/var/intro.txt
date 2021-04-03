@@ -1,0 +1,36 @@
+# Variables
+Variables hold data.
+
+This data is accessed by name, and can be manipulated.
+
+## Creation
+Creating and setting are done in one expression.
+
+The following creates a variable of the name `var`, and sets to an initial value.
+
+```
+var = 3
+```
+
+Manipulating looks the same.
+
+The data is not required to adhere to the same type that it had on creation.
+
+```
+var = 3
+var = "Text"
+```
+
+## Accessing
+Accessing simply requires the identifier.
+
+Observe how the output value is accessed the same as a literal.
+
+```
+print(3)
+```
+
+```
+asdf = 3
+print(asdf)
+```

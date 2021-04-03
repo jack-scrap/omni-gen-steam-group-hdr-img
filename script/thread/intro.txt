@@ -1,0 +1,17 @@
+The following section will walk you through the process of creating.
+
+Threads allow the simultaneous execution of commands.
+
+# Concurrency
+The process of creating a new thread.
+
+The thread simply receives a function.
+
+```
+TODO
+```
+
+# Errors
+Because the order of execution is now non-deterministic, the cannot be guaranteed at compile time.
+
+## Deadlock
