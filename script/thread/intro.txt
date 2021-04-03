@@ -1,17 +1,120 @@
-The following section will walk you through the process of creating.
+The following section will walk you through the process of creating and utilizing threads, and the process of guaranteeing proper execution order.
 
 Threads allow the simultaneous execution of commands.
 
-# Concurrency
-The process of creating a new thread.
+Because commands are no longer executed in order, performance gains can be met where processes are awaiting the completion of the previous ones.
 
-The thread simply receives a function.
+# Creation
+# Another thread
+Typically, the only "thread" is the main one.
+
+```
+def fn():
+    i = 0
+    while i < 10:
+        print(3)
+
+        i += 1
+
+thread = threading.Thread(target = fn)
+
+thread.start()
+```
+
+# Concurrency
+Below, it can be observed that.
+
+```
+import threading
+
+def fn():
+    i = 0
+    while i < 10:
+        print(3)
+
+        i += 1
+
+def other_fn():
+    i = 0
+    while i < 10:
+        print(7)
+
+        i += 1
+
+thread = threading.Thread(target = fn)
+other_thread = threading.Thread(target = other_fn)
+
+thread.start()
+other_thread.start()
+```
+
+Depending on run-time determinism, the output of the following process will change.
+
+## Lock
+"Locking" a thread halts execution on the present thread until the locked one has completed.
+
+```
+import threading
+
+def fn():
+    i = 0
+    while i < 1000:
+        print(3)
+
+        i += 1
+
+def other_fn():
+    i = 0
+    while i < 1000:
+        print("asdf" + str(3))
+
+        i += 1
+
+thread = threading.Thread(target = fn)
+other_thread = threading.Thread(target = other_fn)
+
+thread.start()
+thread.lock()
+
+other_thread.start()
+```
+
+The output of the secondary thread will not begin until the first has completed.
+
+# Mutual exclusion
+"Mutual exclusion" signals the availability of a block of code to be edited.
+
+This availability can be toggled on or off, and whilst on will prevent any other instances from executing it.
 
 ```
 TODO
 ```
 
+# Safety
+TODO
+
+## Race condition
+Where multiple processes are editing one piece of data, the general term "race condition" describes a problem where both processes attempt to access it at once.
+
+These processes cannot edit this data simultaneously, and doing so will terminate the proces.
+
+## Determinism
+Determinism describes an issue where the output of the program depends on certain processes running in a certain order.
+
+This may be unwanted behavior.
+
+In order to guarantee the proper output, the programmer must require that certain conditions are met before running these processes.
+
 # Errors
 Because the order of execution is now non-deterministic, the cannot be guaranteed at compile time.
 
+These errors should be resolved, should they be confirmed.
+
 ## Deadlock
+Deadlock occurs when one thread is awaiting the output of another before proceeding, and the other thread is simultaneously awaiting the output of the first.
+
+This produces a non-terminating loop.
+
+```
+TODO
+```
