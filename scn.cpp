@@ -71,18 +71,22 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		char* init = (char*) malloc(0);
 		unsigned int x = 0;
 		unsigned int y = 0;
-		unsigned int sz = 0;
 
+		unsigned int max = 0;
 		for (const auto& item : serial["data"][pair.key()]) {
 			x = 0;
 
 			for (const auto& byte : item) {
-				sz++;
+				x++;
+
+				if (x > max) {
+					max = x;
+				}
+
+				unsigned int sz = ((y * max) + x);
 
 				init = (char*) realloc(init, sz * sizeof (char));
 				init[sz - 1] = (char) ((int) byte);
-
-				x++;
 			}
 
 			y++;
