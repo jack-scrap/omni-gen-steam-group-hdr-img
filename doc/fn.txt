@@ -118,3 +118,36 @@ def fn(val):
 
 var = fn()
 ```
+
+# Recursion
+Recursion describes a function calling itself.
+
+With no kind of condition being evaluated, this process will never terminate.
+
+```
+def fn():
+	fn()
+```
+
+In order to terminate this process, the calling of the function must be dependant on some kind of state being edited by the loop.
+
+Here, this recursive function has effectively emulated a loop.
+
+```
+i = 0
+def asdf():
+	i += 1
+
+	if i < 3:
+		fn()
+```
+
+As soon as the function ends, any kind of variables declared in the function will be lost.
+
+With the usage of arguments, state can be effectively emulated.
+
+```
+def fn(i):
+	if i < 3:
+		fn(i + 1)
+```
