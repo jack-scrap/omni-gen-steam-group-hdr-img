@@ -1,7 +1,8 @@
-# Inheritance
-The
+Inheritance describes the process using processes to create other classes.
 
-Doing so can effectively asdf
+Doing so can effectively describe complex sets of data without re-using declarations.
+
+General groups can be composed from which more specific ones can be created.
 
 ```
 class Parent():
@@ -9,9 +10,6 @@ class Parent():
 
 	def fn():
 		print("Text")
-
-	def __init__(self):
-		pass
 
 class Child(Parent):
 	pass
@@ -22,43 +20,85 @@ Here, the properties have been automatically added.
 ## Parent property
 ```
 class Parent:
-    def __init__(self):
-        self.var = 3
-
-        pass
+	var = 3
 
 class Qwer(Parent):
-    def __init__(self):
-        Parent.__init__(self)
-
-        pass
+	...
 ```
 
 ## Multiple
 A child class can inherit from more than one parent.
 
 ```
-class Parent():
+class Parent:
 	var = 3
 
 	def fn():
 		print("Text")
-
-		def __init__(self):
-			pass
 	
-class OtherParent():
-	var = 3
+class OtherParent:
+	other_var = 3
 
-	def fn():
+	def other_fn():
 		print("Text")
-
-		def __init__(self):
-			pass
 
 class Child(Parent, OtherParent):
 	pass
 ```
+
+## Multi-level
+Multiple levels of inheritence can exist, and objects will continually inherit.
+
+```
+class GrandParent:
+	var = 3
+
+	def fn():
+		print("Text")
+
+class Parent(GrandParent):
+	other_var = 3
+
+class Child(Parent):
+	pass
+```
+
+The class `Child` contains all of the attributes of `GrandParent` and `Parent`.
+
+## Duplicate names
+The possibility exists that identifiers across classes may share a name.
+
+```
+class Parent:
+```
+
+In the case that multiple of these classes are used to create a new one, the first class provided will be searched, with the rest following should it not be found.
+
+```
+class Parent:
+	var = 3
+
+class OtherParent:
+	var = 7
+
+class Child(Parent, OtherParent):
+	...
+```
+
+The value of `var` resolves to the first variable, `3`.
+
+```
+class Parent:
+	var = 3
+
+class OtherParent:
+	other_var = 7
+
+class Child(Parent, OtherParent):
+	...
+```
+
+Having no duplicate variable names, the value of `var` resolves to `7`.
 
 ## Overriding
 Overriding will discard the parent and substitute it with one provided by the child.
@@ -78,25 +118,22 @@ Like the `self` variable assigned within classes, `super` can be used to access 
 
 ```
 class Parent:
-	def __init__(self):
-		self.var = 3
+	var = 3
 
 class Child(Parent):
 	print(super.var)
 ```
 
 ## Class methods
-Class functions allow for the creation of functions.
-
 This allows for scoping of functions to a specific location.
 
 `self` now refers to the class instead of the object.
 
 ```
 class Parent:
-    @classmethod
-    def fn(self):
-        print('text')
+	@classmethod
+	def fn(self):
+  	print('Text')
 ```
 
 ## Static methods
@@ -105,10 +142,10 @@ Static functions are simply functions created to be scoped to a specific locatio
 No knowledge of the class or object exist.
 
 ```
-class Parent:
+class Class:
 	@staticmethod
 	def fn():
-		print('text')
+		print('Text')
 
-Parent.fn()
+Class.fn()
 ```

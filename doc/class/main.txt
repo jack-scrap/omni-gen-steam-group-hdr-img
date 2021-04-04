@@ -7,7 +7,6 @@ The following defines a class.
 
 ```
 class Parent:
-	def __init__(self):
 		...
 ```
 
@@ -15,8 +14,7 @@ The following creates an object that adheres to that class.
 
 ```
 class Parent:
-	def __init__(self):
-		...
+	...
 
 obj = Parent()
 ```
@@ -28,8 +26,7 @@ It is defined as `__init__`, taking exactly one variable of the name `self`.
 
 ```
 class Parent:
-	def __init__(self):
-		...
+	...
 ```
 
 This function is created implicitly, and does not need to be specified should it be the same as the one provided.
@@ -57,8 +54,7 @@ Setting of these attributes will
 
 ```
 class Parent:
-	def __init__(self):
-		self.var = 3
+	var = 3
 
 obj = Parent()
 
