@@ -9,3 +9,28 @@ Arrays are sets of data.
 The `[]` operator, provided with a number will access the array at the specified location.
 
 `arr[3]`
+
+# Comprehension
+A special syntax known as "List comprehension" allows
+
+Instead of creation and editing of that data, complex sets of data can be represented as one expression.
+
+`[item for item in [3, 7, 12]]`
+`[3, 7, 12]`
+
+The previous simply returning the entire list, with the variable being the returned value.
+
+Further evaluation can be performed on the matched value.
+
+`[item + 3 for item in [3, 7, 12]]`
+`[6, 10, 15]`
+
+`[item for item in [3, 7, 12] if item > 3]`
+`[7, 12]`
+
+## else clause
+An else clause can also be provided.
+
+This conditional must proceed the list.
+
+`[asdf if asdf == 3 else 7 for asdf in [3, 7]]`

@@ -73,6 +73,28 @@ fn(7)
 
 ```
 
+## Named arguments
+On calling the function, identifiers can be provided.
+
+Doing so means that the provided values are no longer inferred based on their position and will simply be applied to the arguments given the identifiers.
+
+```
+def fn(var, other_var):
+	print('Text')
+
+fn(other_var = 7, var = 3)
+```
+
+However, any named arguments must follow any non-named ones.
+Preceeding the arguments with a named one means that the position of the following ones can no longer be inferred.
+
+```
+def fn(var, other_var):
+	print('Text')
+
+fn(3, var = 3)
+```
+
 # Return values
 In the process of terminating a function, a value can be given back.
 

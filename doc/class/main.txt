@@ -7,7 +7,7 @@ These properties can be of any type, and are eumerable.
 The `.` operator is used to access these properties.
 
 ```
-;obj.property
+obj.property
 ```
 
 Within the class itself, a special variable `self` refers to the current object.
