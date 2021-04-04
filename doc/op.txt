@@ -1,0 +1,45 @@
+The following will run you through general operators in Python.
+
+# Assignment
+The assignment operator `=` assigns the value on the right to the value on the left.
+
+`asdf = 3`
+
+# Logical
+Logical operators return a boolean input given other boolean inputs.
+
+## Not
+`not` returns the opposite.
+
+`not False`
+`True`
+
+## And
+`or` returns positive if both are positive.
+
+`True and True`
+`True`
+
+`False and True`
+`False`
+
+`True and False`
+`False`
+
+`False and False`
+`False`
+
+## Or
+`or` returns positive if either are positive.
+
+`True and True`
+`True`
+
+`False and True`
+`False`
+
+`True and False`
+`False`
+
+`False and False`
+`False`

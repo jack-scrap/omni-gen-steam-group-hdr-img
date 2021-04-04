@@ -1,0 +1,106 @@
+The following section will run you through the process of creating mathematical expressions in Python.
+
+Expressions are read left to right.
+
+`3 + 7`
+`10`
+
+# Operators
+The following "infix" operators take a left and right hand side operand.
+
+`+`
+`-`
+`*`
+`/`
+
+# Order of operations
+Expressions are not evaluated linearly, and certain operators take precedence over others.
+
+The acronym "PEMDAS" describes Python's evaluation order.
+
+1. Parenthesis
+2. Exponents
+3. Multiplication, division
+4. Addition, subtraction
+
+## Parenthesis
+To change the order of operations, brackets can surround expressions.
+
+Observe below how the initial, and the greater expression produces a different result.
+
+`3 + 7 * 12`
+`12 * 7`
+`84`
+`3 + 84`
+`87`
+
+`(3 + 7) * 12`
+`10 * 12`
+`120`
+
+# Exponent
+`**`
+
+`3**7`
+`2187`
+
+# Modulus
+The "modulus" opreators returns the remainder.
+
+`%`
+
+`7 % 3`
+`1`
+
+# Comparison
+Comparison operators produces a binary result should the statement be true.
+
+`3 < 7`
+`True`
+
+`3 == 7`
+`False`
+
+`==` - Equal to
+`!=` - Not equal to
+
+`<` - Less than
+`>` - Greater than
+
+`<=` - Less than or equal to
+`>=` - Greater than or equal to
+
+# Floor division
+When a integer is desired, "floor division" will eliminate precision beyond a whole number.
+
+`//`
+
+`7 / 3`
+`2.3...`
+
+`7 // 3`
+`2`
+
+# Increment
+Special versions of the mathematical operators with a trailing equals sign exist as shorthand for common expressions.
+
+- `+=`
+- `-=`
+- `*/`
+- `/=`
+- `%=`
+- `//=`
+- `**=`
+
+The following are equivalent
+`var = var + 3`
+`var += 3`
+
+# TODO
+&=
+|=
+^=
+
+# Bitshift
+>>=
+<<=

@@ -2,6 +2,10 @@ The following will run you through process of "literals"
 
 Literals are the fundamental piece, and will not be evaluated beyond their initial.
 
+# Booleans
+`False`
+`True`
+
 # Numbers
 `3`
 
