@@ -21,15 +21,15 @@ Here, the properties have been automatically added.
 
 ## Parent property
 ```
-class Asdf:
+class Parent:
     def __init__(self):
-        self.asdf = 3
+        self.var = 3
 
         pass
 
-class Qwer(Asdf):
+class Qwer(Parent):
     def __init__(self):
-        Asdf.__init__(self)
+        Parent.__init__(self)
 
         pass
 ```
@@ -64,6 +64,51 @@ class Child(Parent, OtherParent):
 Overriding will discard the parent and substitute it with one provided by the child.
 
 ```
+TODO
 ```
 
 ## Overloading
+
+```
+TODO
+```
+
+## Accessing parents
+Like the `self` variable assigned within classes, `super` can be used to access the parent.
+
+```
+class Parent:
+	def __init__(self):
+		self.var = 3
+
+class Child(Parent):
+	print(super.var)
+```
+
+## Class methods
+Class functions allow for the creation of functions.
+
+This allows for scoping of functions to a specific location.
+
+`self` now refers to the class instead of the object.
+
+```
+class Parent:
+    @classmethod
+    def fn(self):
+        print('text')
+```
+
+## Static methods
+Static functions are simply functions created to be scoped to a specific location.
+
+No knowledge of the class or object exist.
+
+```
+class Parent:
+	@staticmethod
+	def fn():
+		print('text')
+
+Parent.fn()
+```

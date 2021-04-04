@@ -9,7 +9,7 @@ i = 0
 i += 1
 print(i)
 
-print('asdf')
+print('Text')
 
 i += 1
 print(i)
@@ -28,7 +28,7 @@ def fn():
 
 fn()
 
-print('asdf')
+print('Text')
 
 fn()
 ```
@@ -157,7 +157,7 @@ Here, this recursive function has effectively emulated a loop.
 
 ```
 i = 0
-def asdf():
+def fn():
 	i += 1
 
 	if i < 3:

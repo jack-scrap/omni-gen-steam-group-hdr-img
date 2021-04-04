@@ -66,7 +66,7 @@ def fn():
 def other_fn():
     i = 0
     while i < 1000:
-        print("asdf" + str(3))
+        print("Text" + str(3))
 
         i += 1
 

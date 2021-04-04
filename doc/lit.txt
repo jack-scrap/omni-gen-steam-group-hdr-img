@@ -38,7 +38,7 @@ This can be used to effectively create identifiers.
 
 ```
 {
-	asdf: 3,
-	hjkl: 7
+	attr: 3,
+	other_attr: 7
 }
 ```

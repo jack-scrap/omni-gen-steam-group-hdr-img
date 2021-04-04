@@ -1,12 +1,12 @@
-The following section will walk you through arrays.
+The following section will walk you through lists.
 
-Arrays are sets of data.
+Lists are sets of data.
 
 # Creating
 `arr = [3, 7];`
 
 # Accessing
-The `[]` operator, provided with a number will access the array at the specified location.
+The `[]` operator, provided with a number will access the list at the specified location.
 
 `arr[3]`
 
@@ -33,4 +33,4 @@ An else clause can also be provided.
 
 This conditional must proceed the list.
 
-`[asdf if asdf == 3 else 7 for asdf in [3, 7]]`
+`[var if var == 3 else 7 for var in [3, 7]]`

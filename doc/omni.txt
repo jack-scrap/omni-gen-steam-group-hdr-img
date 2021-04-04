@@ -5,5 +5,11 @@
 
 # Vehicles
 ## Crane
+### Navigation
+zoom(d)
+pan(d)
+ped(d)
+
+grab()
 
 ## Truck

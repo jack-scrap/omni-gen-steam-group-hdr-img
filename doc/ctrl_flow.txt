@@ -6,7 +6,7 @@ Like functions, the blocks in conditionals have their scope.
 Variables can be defined, expressions can be evaluated and other statements can be nested.
 
 ```
-if 3 == 7
+if 3 == 7:
 	var = 3
 
 	if 3 == 12
@@ -62,7 +62,7 @@ This is useful for handling sets of data that are redundant, where blocks can be
 The general-purpose "while" loop executes a block of code while the condition remains true.
 
 ```
-while 3 < 7
+while 3 < 7:
 	...
 ```
 
@@ -74,7 +74,7 @@ An example of running this loop a determined number of times can be examplified 
 
 ```
 i = 0
-while i < 3
+while i < 3:
 	print(i)
 
 	i += 1
@@ -86,7 +86,7 @@ The `break` statement will terminate the loop, ignoring the rest of the current 
 
 ```
 i = 0
-while i < 3
+while i < 3:
 	break
 
 	i += 1
@@ -103,4 +103,22 @@ while i < 3:
 	continue
 
 	i += 1
+```
+
+# pass
+The `pass` keyword substitute a block of code where one is required, the syntax requiring some kind of statement.
+
+```
+if 3 == 7:
+	pass
+```
+
+This keyword is merely a placeholder.
+Unlike `break`, the following statements in the block will execute:
+
+```
+if 3 == 7:
+	pass
+
+	print('Text')
 ```

@@ -13,7 +13,7 @@ obj.property
 Within the class itself, a special variable `self` refers to the current object.
 
 ```
-class Blueprint:
+class Parent:
 	def __init__(self):
 		self.var = 3
 ```
@@ -26,7 +26,7 @@ This can be used to effectively create a new type.
 The following defines a class.
 
 ```
-class Blueprint:
+class Parent:
 	def __init__(self):
 		pass
 ```
@@ -34,11 +34,11 @@ class Blueprint:
 The following creates an object that adheres to that class.
 
 ```
-class Blueprint:
+class Parent:
 	def __init__(self):
 		pass
 
-obj = Blueprint()
+obj = Parent()
 ```
 
 ## Constructor
@@ -47,9 +47,9 @@ The "constructor" is a function of special function that runs on creation of an 
 It is defined as `__init__`
 
 ```
-class Blueprint:
+class Parent:
 	def __init__(self):
-		asdf = 3
+		var = 3
 
 		pass
 ```
