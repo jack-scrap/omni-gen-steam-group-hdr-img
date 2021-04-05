@@ -1,0 +1,35 @@
+The following section will run you through common cases when dealing with strings.
+
+Strings are arrays of individual characters.
+
+This provides a convenient way to dedicate storage to a sequence of text.
+
+`"Text"[2]`
+`3`
+
+# Multi-line
+Strings spanning multiple lines are created with.
+"""
+Text
+Other text
+"""
+
+# Case
+The following functions convert case.
+
+- `upper()`
+- `lower()`
+
+# Substring
+A substring is a potentially smaller segment given a range.
+
+`"Text"[0:2]`
+`"Tex"`
+
+# Splitting
+"Splitting" a string divides into smaller segments based on a "separator".
+
+For whitespace-separated sequences of characters.
+
+`"Text other text".split(' ')`
+`["Text", "other", 'text']`

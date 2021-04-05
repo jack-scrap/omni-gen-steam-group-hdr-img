@@ -117,7 +117,10 @@ var = fn()
 print(var)
 ```
 
-## Multiple
+## Non-existent return value
+Should no value be returned, the value `None` is returned.
+
+## Duplicate names
 Multiple functions with the same name, but separate arguments or return value may exist.
 
 Functions may be defined with the same name, but having separate arguments or return values.

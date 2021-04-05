@@ -2,11 +2,24 @@ Objects are variables that have properties.
 
 These properties can be of any type, and are eumerable.
 
+Most everything in the Python language is considered an object, can inherently has properties.
+
 ## Properties
 The `.` operator is used to access these properties.
 
+# Creating
 ```
-obj.property
+obj = {
+	attr: 3,
+	other_attr: 3
+}
 ```
 
-Within the class itself, a special variable `self` refers to the current object.
+```
+obj = {}
+obj.attr = 3
+obj.other_attr = 'Text'
+```
+
+# Accessing
+```obj.property```

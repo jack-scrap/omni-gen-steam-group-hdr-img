@@ -1,0 +1,41 @@
+The following section will run you through general workings of the Python 3 programming language.
+
+# Comments
+Code following the `#` character will eliminate characters from evaluation until the end of the line.
+
+```
+# Text
+```
+
+# Indentation
+Python uses indentation for code blocks.
+
+These indentations can be multiple.
+
+# Modules
+Modules are 
+
+These modules can be imported
+
+Global modules, or custom ones in the same directory.
+
+```
+import module
+
+print(module.var)
+```
+
+## Specific imports
+Specific functions or variables can be imported.
+
+```
+from module import var
+
+print(var)
+```
+
+## Local namespace
+```from module import *```
+
+# Dir
+`dir()`

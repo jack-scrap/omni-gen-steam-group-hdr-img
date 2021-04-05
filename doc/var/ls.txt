@@ -1,14 +1,47 @@
 The following section will walk you through lists.
 
-Lists are sets of data.
+Lists are sets of data, where each element is inherently tied to its position.
+
+Thse items may be of separate type, but are typically the same. Representing large groups of data all used for the same purpose.
 
 # Creating
-`arr = [3, 7];`
+`[]` Creates an array.
+
+To initialize an array, provide a list of items separated by a comma.
+
+`[3, 7, 12]`
 
 # Accessing
 The `[]` operator, provided with a number will access the list at the specified location.
 
-`arr[3]`
+This number begins at 0, and an index `[0]` will return the first item.
+
+```
+arr = [3, 7, 12]
+
+item = arr[0]
+```
+
+The special syntax `[-1]` will access the last element.
+
+## Range
+Where a typical scalar value would be provided index an array, the `:` operator provides a convenient method of taking a smaller section of an array.
+
+`[3, 7, 12][3:7, 12]`
+
+# Multiple dimensions
+Arrays may contain other arrays.
+
+```
+[
+	[3, 7, 12],
+	[12]
+]
+```
+
+Indexing works the same, in above case just requiring a second index operator to access an individual item.
+
+`arr[1][0]`
 
 # Comprehension
 A special syntax known as "List comprehension" allows
@@ -28,9 +61,24 @@ Further evaluation can be performed on the matched value.
 `[item for item in [3, 7, 12] if item > 3]`
 `[7, 12]`
 
-## else clause
+## else
 An else clause can also be provided.
+In this case, this conditional must proceed the list.
 
-This conditional must proceed the list.
+`[var if var == 3 else 7 for var in [3, 7, 12]]`
 
-`[var if var == 3 else 7 for var in [3, 7]]`
+# Existence
+The convenient `in` operator will return whether an item is present in a list.
+
+`3 in [3, 7, 12]`
+`True`
+
+# Functions
+Common functions provided by Python 3 are listed below.
+
+`None append(3)` - Add an element at the end of the list
+`item pop(ls)` - Remove the last element
+`i count(item)`
+`i len(ls)`
+`None remove()` - Remove first instance with provided values
+`i index(3)` - Retrieve index of first instance with provided values

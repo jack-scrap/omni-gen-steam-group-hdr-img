@@ -9,13 +9,13 @@ Literals are the fundamental piece, and will not be evaluated beyond their initi
 # Numbers
 `3`
 
-## floating-point
+## Decimal precision
 To give a number precision beyond an integer, add the dot operator.
 
 `3.7`
 
 # Arrays
-`[3, 7]`
+`[3, 7, 12]`
 
 Every entry in a collection must be of the same type.
 
@@ -29,16 +29,21 @@ Characters are arrays of characters.
 
 This can be used to effectively create collections of text.
 
-`"Buffer, another buffer"`
+`"Buffer, other buffer"`
 
-# Objects
+# Dictionaries
 Objects are collections of data where each entry is a "key" and a "value".
 
 This can be used to effectively create identifiers.
 
 ```
 {
-	attr: 3,
-	other_attr: 7
+	'attr': 3,
+	'other_attr': 7
 }
 ```
+
+# None
+The value `None` represents a non-existent value.
+
+This allows for the creation of variables without assigning a value.
