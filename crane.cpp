@@ -159,4 +159,6 @@ void craneGrab(Crane* crane) {
 			}
 		}
 	}
+
+	objAcc(crane->_parent, glm::mat4(1.0));
 }
