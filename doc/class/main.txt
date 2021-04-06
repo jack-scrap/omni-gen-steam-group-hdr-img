@@ -6,30 +6,53 @@ This can be used to effectively create a new type.
 The following defines a class.
 
 ```
-class Parent:
+class Blueprint:
 		...
 ```
 
 The following creates an object that adheres to that class.
 
 ```
-class Parent:
+class Blueprint:
 	...
 
-obj = Parent()
+obj = Blueprint()
 ```
 
 ## Constructor
-The "constructor" is a function of special function that runs on creation of an object.
+The "constructor" is a function of special usage that runs on creation of an object.
 
-It is defined as `__init__`, taking exactly one variable of the name `self`.
+It is defined as `__init__`, taking exactly one variable of the name `self` that is automatically provided.
+
+The return value is the newly created object.
 
 ```
-class Parent:
+class Blueprint:
 	...
+
+obj = Blueprint()
 ```
 
-This function is created implicitly, and does not need to be specified should it be the same as the one provided.
+This function is created implicitly, and does not need to be defined should it work the same.
+
+### Custom constructor
+Instead of the default constructor, one can be defined.
+
+```
+class Blueprint:
+	def __init__(self):
+		print('Text')
+	
+obj = Blueprint()
+```
+
+Custom arguments may be provided.
+
+```
+class Blueprint:
+	def __init__(self, arg):
+		print(arg)
+```
 
 ## Methods
 "Methods" are functions scoped to an object.
@@ -59,4 +82,56 @@ class Parent:
 obj = Parent()
 
 print(obj.var)
+```
+
+# Class methods
+It is not necessary for classes to create objects.
+
+"Class methods" describe the process of simply creating functions within the scope of a class definition.
+
+```
+class Group:
+	var = 3
+
+	@classmethod
+	def hjkl(self):
+		print(self.var)
+```
+
+# Static methods
+Static methods take the concept of class methods one step further.
+
+Variables and functions can be defined within a class definition, w
+
+```
+class Group:
+	var = 3
+```
+
+This simply scopes the defined va
+
+Accessing works the same as it would on an object.
+
+```
+print(Group.var)
+```
+
+## Methods
+Defining and utilizing functions where an object is not present works slightly differently.
+
+The `staticmethod` decorator must be provided proceeding the function.
+
+```
+class Group:
+	@staticmethod
+	def fn():
+		print('Text')
+```
+
+Note the lack of a `self` argument to refer an object that would be present.
+
+Accessing works the same.
+
+```
+Group.fn()
 ```

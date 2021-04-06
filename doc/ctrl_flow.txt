@@ -1,7 +1,7 @@
 The following section will run you through the order of execution in a program, referred to as "control-flow".
 
 # Scope
-Like functions, the blocks in conditionals have their scope.
+Like functions, the blocks in conditionals have scope.
 
 Variables can be defined, expressions can be evaluated and other statements can be nested.
 
@@ -87,12 +87,12 @@ The `break` statement will terminate the loop, ignoring the rest of the current 
 ```
 i = 0
 while i < 3:
-	break
-
 	i += 1
+
+	break
 ```
 
-Here, the loop simply terminates.
+Here, the first iteration will run until the `break` statement is executed, at which point the current iteration terminates and no future ones will execute.
 
 ## continue
 The `continue` will ignore the rest of the current iteration, and proceed to the next.

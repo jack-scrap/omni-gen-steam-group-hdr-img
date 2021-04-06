@@ -1,11 +1,14 @@
-Inheritance describes the process using processes to create other classes.
+"Inheritance" describes the process using processes to create other classes.
 
-Doing so can effectively describe complex sets of data without re-using declarations.
+Doing so can effectively describe complex sets of data without re-using code.
 
 General groups can be composed from which more specific ones can be created.
 
+# Creating
+The name of the parent class provided between will inherit all properties.
+
 ```
-class Parent():
+class Parent:
 	var = 3
 
 	def fn():
@@ -15,36 +18,7 @@ class Child(Parent):
 	pass
 ```
 
-Here, the properties have been automatically added.
-
-## Parent property
-```
-class Parent:
-	var = 3
-
-class Qwer(Parent):
-	...
-```
-
-## Multiple
-A child class can inherit from more than one parent.
-
-```
-class Parent:
-	var = 3
-
-	def fn():
-		print("Text")
-	
-class OtherParent:
-	other_var = 3
-
-	def other_fn():
-		print("Text")
-
-class Child(Parent, OtherParent):
-	pass
-```
+Here, the properties have been automatically added to the class `Child`.
 
 ## Multi-level
 Multiple levels of inheritence can exist, and objects will continually inherit.
@@ -63,14 +37,30 @@ class Child(Parent):
 	pass
 ```
 
+## Multiple
+	A child class can inherit from more than one parent.
+
+```
+class Parent:
+	var = 3
+
+	def fn():
+		print("Text")
+
+class OtherParent:
+	other_var = 3
+
+	def other_fn():
+		print("Text")
+
+class Child(Parent, OtherParent):
+	pass
+```
+
 The class `Child` contains all of the attributes of `GrandParent` and `Parent`.
 
 ## Duplicate names
 The possibility exists that identifiers across classes may share a name.
-
-```
-class Parent:
-```
 
 In the case that multiple of these classes are used to create a new one, the first class provided will be searched, with the rest following should it not be found.
 
