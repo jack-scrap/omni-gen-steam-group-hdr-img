@@ -1,0 +1,21 @@
+Input and output describe the process of interacting with the system through the Python 3 programming language.
+
+# File system
+Before performing operations, the `open()` function provided by Python will interface with the system to return a handle.
+
+## Reading
+Retrieving the text contents of a file is used with the `read()` function
+
+```
+handle = open('file.txt', 'r')
+
+buff = handle.read()
+```
+
+## Permissions
+TODO
+
+## Writing
+```
+buff = handle.read()
+```

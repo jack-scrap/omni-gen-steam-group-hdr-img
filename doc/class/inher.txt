@@ -15,7 +15,7 @@ class Parent:
 		print("Text")
 
 class Child(Parent):
-	pass
+	...
 ```
 
 Here, the properties have been automatically added to the class `Child`.
@@ -34,7 +34,7 @@ class Parent(GrandParent):
 	other_var = 3
 
 class Child(Parent):
-	pass
+	...
 ```
 
 ## Multiple
@@ -54,7 +54,7 @@ class OtherParent:
 		print("Text")
 
 class Child(Parent, OtherParent):
-	pass
+	...
 ```
 
 The class `Child` contains all of the attributes of `GrandParent` and `Parent`.

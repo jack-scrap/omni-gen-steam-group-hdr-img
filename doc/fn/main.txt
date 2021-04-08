@@ -1,4 +1,4 @@
-The following section will run you through the process of creating and using functions.
+The following will run you through the process of creating and using functions.
 
 # Usage
 The section of code displays where functionality is essentially re-used.
@@ -117,10 +117,30 @@ var = fn()
 print(var)
 ```
 
-## Non-existent return value
+## Default arguments
+"Default arguments" will auto-populate in the function with a given value if one is not provided when calling.
+
+```
+def fn(arg = 3):
+	print(arg)
+
+fn(3)
+fn()
+```
+
+Like named arguments, default arguments must follow non-default ones.
+No-longer being position dependant, the values can no longer be applied based on position.
+
+```
+def fn(arg, other_arg = 3):
+	print(arg)
+	print(other_arg)
+```
+
+# Non-existent return value
 Should no value be returned, the value `None` is returned.
 
-## Duplicate names
+# Duplicate names
 Multiple functions with the same name, but separate arguments or return value may exist.
 
 Functions may be defined with the same name, but having separate arguments or return values.

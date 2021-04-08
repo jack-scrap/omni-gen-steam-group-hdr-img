@@ -135,3 +135,26 @@ Accessing works the same.
 ```
 Group.fn()
 ```
+
+# Getters and setters
+The convention of "getters and getters" describe members created explicitly for the purpose of interacting with the class's attributes.
+
+Doing so allows a class to strictly operate on itself, with no interaction with the outside necessary.
+
+Getter:
+```
+class Blueprint:
+	var = 3
+
+  def getVar(self):
+		return self.var
+```
+
+Setter:
+```
+class Blueprint:
+	var = 3
+
+  def setVar(self, var):
+		self.var = var
+```

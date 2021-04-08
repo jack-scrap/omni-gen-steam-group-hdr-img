@@ -1,0 +1,27 @@
+Functions may be created without any kind of identifier, allowing them simply to be used for evaluation.
+
+These anonymous functions are referred to as "lambdas", and the process of doing so in Python
+
+`lambda arg: arg + 3`
+
+Following the `lambda` keyword, the names of the arguments proceed `:`, and the expression to evaluate follows.
+
+The names of the arguments proceed a colon:
+The expression which would typically be the function body follows it.
+
+Call by providing the typical list tuple.
+
+The following examplifies creation and usage of a function in one line.
+
+````
+val = (lambda arg: arg + 3)(7)
+
+print(val)
+````
+
+Because these functions have no identifiers, they immediately go out of scope.
+
+## Common usage
+Lambdas prove useful for list comprehension where an operation can be expressed as a single line.
+
+`ls = map(lambda arg : arg + 3)(3, 7, 12)`

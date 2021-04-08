@@ -1,8 +1,8 @@
-The following section will walk you through lists.
+The following will walk you through the process of creating, utilizing and modifying lists.
 
 Lists are sets of data, where each element is inherently tied to its position.
 
-Thse items may be of separate type, but are typically the same. Representing large groups of data all used for the same purpose.
+Thse items may be of separate type, but are typically the same. Representing large groups of data whose usage is for the same purpose.
 
 # Creating
 `[]` Creates an array.
@@ -27,7 +27,12 @@ The special syntax `[-1]` will access the last element.
 ## Range
 Where a typical scalar value would be provided index an array, the `:` operator provides a convenient method of taking a smaller section of an array.
 
-`[3, 7, 12][3:7, 12]`
+`[3, 7, 12][3:7]`
+
+### Stride
+A stride can be provided trailing the floor and the roof.
+
+`[3, 7, 12][3:7:12]`
 
 # Multiple dimensions
 Arrays may contain other arrays.

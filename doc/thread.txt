@@ -1,12 +1,11 @@
-The following section will walk you through the process of creating and utilizing threads, and the process of guaranteeing proper execution order.
+The following will walk you through the process of creating and utilizing threads, and the process of guaranteeing proper execution order.
 
 Threads allow the simultaneous execution of commands.
 
-Because commands are no longer executed in order, performance gains can be met where processes are awaiting the completion of the previous ones.
+Because commands are no longer executed in order, performance gains can be met where processes are no longer required to await the completion of the previous ones.
 
 # Creation
-# Another thread
-Typically, the only "thread" is the main one.
+The following spawns a thread.
 
 ```
 def fn():
@@ -21,8 +20,23 @@ thread = threading.Thread(target = fn)
 thread.start()
 ```
 
+Immediately, an error case arrises.
+
+Because the creation of the thread is the last statement, the program immediately terminates and eliminates any threads, likely before they have a chance to execute.
+
+In order to guarantee the completion of this thread, the process must await its completion.
+This is achieved with the `join` function.
+
+```
+...
+thread.start()
+thread.join()
+```
+
 # Concurrency
-Below, it can be observed that.
+Concurrency describes the process of multiple threads running at once.
+
+Below, it can be observed that
 
 ```
 import threading
@@ -49,6 +63,12 @@ other_thread.start()
 ```
 
 Depending on run-time determinism, the output of the following process will change.
+
+In order to make these threads
+
+```
+TODO
+```
 
 ## Lock
 "Locking" a thread halts execution on the present thread until the locked one has completed.
@@ -86,12 +106,71 @@ The output of the secondary thread will not begin until the first has completed.
 
 This availability can be toggled on or off, and whilst on will prevent any other instances from executing it.
 
+The `acquire()` and `release()` will signify availability to any other thread.
+
 ```
-TODO
+import threading
+
+i = 0
+
+lock = threading.Lock()
+
+def fn():
+    global i
+
+    while i < 10:
+        lock.acquire()
+
+        print(i)
+
+        i += 1
+
+        lock.release()
+
+def other_fn():
+    global i
+
+    while i < 10:
+        lock.acquire()
+
+        print(i)
+
+        i += 1
+
+        lock.release()
+
+thread = threading.Thread(target = fn)
+
+other_thread = threading.Thread(target = other_fn)
+
+thread.start()
+thread.join()
+
+other_thread.start()
+other_thread.join()
+```
+
+The previous will guarantee that no data races exist whilst the promin is deterministic.
+
+Adding a unique log to each unique iteration of the while loop will display which is being called.
+Repeated executions of this script should reveal that the deterministic script is guaranteed not to clash.
+
+# Sleeping
+Processes may halt a pre-determined amount of time.
+
+```
+import time
+
+time.sleep(3)
 ```
 
 # Safety
-TODO
+The existence of multiple threads means that errors can not be determined during script compilation.
+
+Both fundamental issues with the Python language and undesired effects can be created as a result.
+
+The following section will run over some of the co
+commonly found errors arrising as a byproduct of multi-threading.
 
 ## Race condition
 Where multiple processes are editing one piece of data, the general term "race condition" describes a problem where both processes attempt to access it at once.
@@ -111,10 +190,34 @@ Because the order of execution is now non-deterministic, the cannot be guarantee
 These errors should be resolved, should they be confirmed.
 
 ## Deadlock
+Deadlock is misuse of mutual exclusion where one thread is awaits the other, and vice-versa.
+
 Deadlock occurs when one thread is awaiting the output of another before proceeding, and the other thread is simultaneously awaiting the output of the first.
 
 This produces a non-terminating loop.
 
 ```
-TODO
+import threading
+
+i = 0
+
+lock = threading.Lock()
+other_lock = threading.Lock()
+
+def fn():
+    lock.acquire()
+    other_lock.acquire()
+
+def other_fn():
+    other_lock.acquire()
+    lock.acquire()
+
+thread = threading.Thread(target = fn)
+other_thread = threading.Thread(target = other_fn)
+
+thread.start()
+thread.join()
+
+other_thread.start()
+other_thread.join()
 ```

@@ -1,0 +1,29 @@
+The following will run you through the process of creating and using dictionaries.
+
+Like "lists", "dictionaries" are comma-separated sequences of items enclosed by braces `{}`.
+
+The items are pairs.
+
+These pairs are colon separated.
+
+However, the items are pairs, where a "key" is associated to a value.
+
+`key: 3`
+
+Keys may be of a scalar type (`int`, `float`, `char`, `string`), and also strings.
+
+Values may be scalar types or vector types (lists, other dictionaries).
+
+```
+dict = {
+	'key': 3,
+	'other_key': 'Text'
+}
+```
+
+# Accessing
+Accessing these works like the lists, providing the arbitrary value instead of the index.
+
+```
+print(dict['key'])
+```

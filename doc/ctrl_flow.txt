@@ -1,4 +1,4 @@
-The following section will run you through the order of execution in a program, referred to as "control-flow".
+The following will run you through the order of execution in a program, referred to as "control-flow".
 
 # Scope
 Like functions, the blocks in conditionals have scope.

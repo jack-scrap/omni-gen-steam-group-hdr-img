@@ -1,4 +1,4 @@
-The following section will run you through the process of creating mathematical expressions in Python.
+The following will run you through the process of creating mathematical expressions in Python.
 
 Expressions are read left to right.
 
