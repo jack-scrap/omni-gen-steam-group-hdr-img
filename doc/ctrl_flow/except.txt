@@ -1,0 +1,51 @@
+Exceptions are conditions that technically represent valid code structure, but are defined by the program to be logically impossible.
+
+# try / except
+"Try" and "except" blocks can be used to re-direct control flow depending on these logical requirements.
+
+Where values are provided at the time of program execution, this proves useful for running blocks under certain conditions that are not guaranteed to be safe, and continue execution of the program.
+
+```
+try:
+    obj.fn()
+
+except NameError:
+    print('Text')
+```
+
+Here, invalid code has been created.
+
+In defined by the program to be logically impossible.
+This references a variable that does not exist.
+
+One of Python's errors must be provided.
+
+In the case of a non-existent variable, `NameError` is appropriate.
+
+More can be provided.
+
+Several provided by the Python programming language are listed below.
+
+`BaseException`   - Base
+`ArithmeticError` - Math
+`IndexError`      - Accessing of list beyond its size
+...
+
+## finally
+Regardless of whether an exception is thrown, a `finally` block can be provided to execute regardless.
+
+```
+...
+
+finally:
+	print('Text')
+```
+
+# Semanticaly valid but
+Code can be semantically valid and pass execution, but other cases and logical requirements may still exist.
+
+An example is the arithmetic case of division by 0.
+
+`3 / 0`
+
+Though semantically valid, division by `0` is not possible, and an exception will be thrown in the program.
