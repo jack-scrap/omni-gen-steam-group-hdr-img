@@ -83,3 +83,32 @@ obj = Class()
 
 del asdf._asdf
 ```
+
+# Global
+Variables at the scope of the file.
+
+By default, identical identifiers in a new scope will simply create a new variable bound to the scope.
+
+The following simply defines a new variable with the same name as the global one.
+
+```
+var = 3
+
+def fn():
+	var = 7
+
+fn()
+```
+
+With the `global` keyword, this identifier can reference a global one.
+
+```
+var = 3
+
+def fn():
+	global var
+
+	var = 7
+
+fn()
+```
