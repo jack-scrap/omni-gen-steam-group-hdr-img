@@ -151,6 +151,8 @@ void craneGrab(Crane* crane) {
 				if (util::phys::aabb(crane->_op->_parent, data->_data[i]->_parent)) {
 					data->_data[i]->_data = crane->_op;
 
+					objAcc(data->_parent, glm::mat4(1.0));
+
 					crane->_op = nullptr;
 					slot = nullptr;
 
