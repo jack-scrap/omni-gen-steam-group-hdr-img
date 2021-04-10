@@ -1,19 +1,22 @@
-The following will run you through common cases when dealing with strings.
-
-Strings are arrays of individual characters.
+Strings are lists of individual characters.
 
 This provides a convenient way to dedicate storage to a sequence of text.
 
-`'Text'`
-`3`
+Placing a sequence of characters in '' signifies a string.
 
-Common operations on lists work the same.
+`'Text'`
+
+Indexing works the same.
 
 `'Text'[2]`
 `3`
 
+Commonly, lists operations work the same.
+
+`'Text'.count('t')`
+
 # Multi-line
-Strings spanning multiple lines are created with.
+Strings spanning multiple lines are created with triple quotes.
 
 ```
 str = """Text
@@ -30,11 +33,16 @@ str = (
 # Case
 The following functions convert case.
 
-- `upper()`
-- `lower()`
+`'Text'.upper()`
+`'TEXT'`
+
+`'Text'.lower()`
+`'text'`
 
 # Substring
-A "substring" is a potentially smaller segment given a range.
+A "substring" is a potentially smaller segment of a string.
+
+Taking a range, like a list will produce this substring.
 
 `'Text'[0:2]`
 `'Tex'`
@@ -42,19 +50,41 @@ A "substring" is a potentially smaller segment given a range.
 # Splitting
 "Splitting" a string divides into smaller segments based on a "separator".
 
-For whitespace-separated sequences of characters.
+For whitespace-separated sequences of characters, this operation will split a string into individual words.
+
+The `split()` function is provided to achieve this.
 
 `'Text other text'.split(' ')`
 `['Text', 'other', 'text']`
 
+# Joining
+"Joining" is the opposite of splitting, combining a list of strings into one continuous one.
+
+`['Text', 'other text'].join()`
+`'Text other text'`
+
+# Whitespace
+## Stripping
+"Stripping" removes any whitespace on the beginning and end of a string.
+
+This will produce a list of individual elements.
+
+`'Text other text   '.strip()`
+`'Text other text'`
+
+# Other
+## Replace
+`replace()` will replace a sub-string with another sub-string.
+
+`'Text other text'.replace('Text', 'Other text')`
+
 # Formatting
 Formatting describes the substitution of other values into a string.
 
-The function `format()` is provided.
 
 `'Text {} {}'.format(3, 'text')`
 
-Here, arguments are provided based on position.
+Like functions, the arguments are provided based on position.  `{}` being matched to represent the current iteration.
 
 ## Specific indices
 Indices may be specified to re-order the arguments may be specified to re-order the arguments.
@@ -62,6 +92,6 @@ Indices may be specified to re-order the arguments may be specified to re-order 
 `'Text {1} {0}'.format(3, 'text')`
 
 ## Named
-Named arguments may be provided.
+Named arguments may also be provided.
 
 'Text {arg} {other_arg}'.format(arg = 3, other_arg = 7)
