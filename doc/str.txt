@@ -4,14 +4,28 @@ Strings are arrays of individual characters.
 
 This provides a convenient way to dedicate storage to a sequence of text.
 
+`'Text'`
+`3`
+
+Common operations on lists work the same.
+
 `'Text'[2]`
 `3`
 
 # Multi-line
 Strings spanning multiple lines are created with.
 
-"Text"
-"Other text"
+```
+str = """Text
+	Other text"""
+```
+
+```
+str = (
+  	"Text"
+    "Other text"
+)
+```
 
 # Case
 The following functions convert case.
@@ -20,7 +34,7 @@ The following functions convert case.
 - `lower()`
 
 # Substring
-A substring is a potentially smaller segment given a range.
+A "substring" is a potentially smaller segment given a range.
 
 `'Text'[0:2]`
 `'Tex'`

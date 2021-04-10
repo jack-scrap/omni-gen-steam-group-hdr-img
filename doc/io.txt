@@ -1,21 +1,44 @@
-Input and output describe the process of interacting with the system through the Python 3 programming language.
+Input and output describe the process of interacting with the system through the programming language.
+
+# Printing
+## Input
+The `input()` function allows for input via the console.
+
+This will block until input has been provided.
+
+`val = input()`
+
+## Output
+`print(3)`
+
+The provided argument may be of any type, and will automatically be formatted into a printable string.
 
 # File system
-Before performing operations, the `open()` function provided by Python will interface with the system to return a handle.
+Before performing operations, the `open()` function will interface with the system to return a handle.
+
+`handle = open('file.txt')`
 
 ## Reading
-Retrieving the text contents of a file is used with the `read()` function
+Retrieving the text contents of a file is performed with the `read()` function.
 
-```
-handle = open('file.txt', 'r')
-
-buff = handle.read()
-```
-
-## Permissions
-TODO
+`buff = handle.read()`
 
 ## Writing
-```
-buff = handle.read()
-```
+`handle.write('Text')`
+
+## Permissions
+File permissions dictate the ability of the language to perform certain operations.
+
+This can ensure that unwnated operations are not performed.
+
+`r` - Read
+`w` - Write
+`x` - Execute
+
+These are provided in a continuous string.
+
+`rx-`
+
+The following will only allow read operations on the file handle.
+
+`open('file.txt', 'r--')`

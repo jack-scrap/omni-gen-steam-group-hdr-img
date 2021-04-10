@@ -1,49 +1,85 @@
 The following will run you through general workings of the Python 3 programming language.
 
 # Comments
+Comments allow for inline text to be written in code.
+
 Code following the `#` character will eliminate characters from evaluation until the end of the line.
 
 ```
 # Text
+# Other text
+
+var = 3
+
+def fn(): # Function
+	print('Text') # Call to output
 ```
 
 # Indentation
-Python uses indentation for code blocks.
+Python uses whitespace to signify code blocks.
 
-These indentations can be multiple.
+The following is not valid, considering the function body to be empty and the following lines to be separate statements.
+
+```
+def fn():
+print("Text")
+```
+
+Indented lines following statements warranting code blocks are considered to be in the block.
+
+The following is valid.
+
+```
+def fn():
+	print("Text")
+```
+
+This indentation may be of any width, but must be consistent within each block.
+
+Nested scopes may be of separate indentation with.
 
 # Modules
-Modules are files.
+"Modules" are external files containing Python code.
 
 These modules can be imported into other files for convenient re-use.
 
-Global modules installed on the system, or custom ones in the same directory can be imported with the `import` statement.
+`import module`
 
-```
-import module
-```
+By default, both global modules on the system and modules existing in the same directory as the script will be matched.
 
-Upon importing, variables and functions defined in the module can be accessed like objects.
+Should modules exist in a separate directory, the directory must be added with an editing of a `system` variable.
 
-```
-print(module.var)
-```
+`sys.path.append('dir')`
 
-Specific functions or variables can be imported.
+## Accessing
+Upon importing, the module acts like an object, allowing for variables and functions in the module to be accessed with the `.` operator.
 
-```
-from module import var
+`print(module.var)`
 
-print(module.var)
-```
+With a base `import` statement, all available identifiers are imported.
+Instead of this, specific functions or variables can be imported.
 
-The `*` can be provided
+`from module import var, fn`
+
+This will put any identifiers in the global namespace.
+
+`print(var)`
+
+## All identifiers
+`*` can be provided as a wildcard to match all identifiers.
+
+This will simply import the module, but attach it to the global namespace.
+
+`from module import *`
 
 # Renaming
 Both the imported module and the identifiers it contains can be re-named via the `as` keyword.
 
-```from module import *```
+`import module as other_module`
 
-## Local namespace
-# Dir
-`dir()`
+# Attributes
+The function `dir()` can be used to view all attributes on an object.
+
+This can be used to without consulting documentation.
+
+`dir(obj)`

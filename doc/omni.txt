@@ -6,10 +6,17 @@
 # Vehicles
 ## Crane
 ### Navigation
-zoom(d)
-pan(d)
-ped(d)
+`zoom(d)` - Move forward, back
+`pan(d)` - Translate head left and right
+`ped(d)` - Translate head up and down
 
-grab()
+`grab()` - Grab container
 
 ## Truck
+`zoom(d)` - Move forward, back
+
+`left(d)` - Turn left
+`right(d)` - Turn right
+
+## Ship
+`zoom(d)`
