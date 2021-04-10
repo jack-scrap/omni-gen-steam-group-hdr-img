@@ -158,3 +158,50 @@ class Blueprint:
   def setVar(self, var):
 		self.var = var
 ```
+
+## Decorator
+As of Python 3, special syntax exists to implement the functionality of getters and setters more inherently.
+
+The `property` decorator can be applied to functions to replace the default operations undergone when accessing and editing data.
+
+### Getter
+Providing `@property` above the name of a function that returns an attribute signifies it as a getter.
+
+Note that the function name must be separate from the variable.
+
+```
+@property
+def var(self):
+		return self._var
+```
+
+Calling:
+```
+obj = Blueprint()
+
+var = obj.var
+```
+
+On accessing this property, this getter will be called.
+
+This can be verified by adding additional functionality to the getter, and observing how the statements are called.
+
+```
+...
+@property
+def var(self):
+	print('Text')
+
+	return self._var
+
+var = obj._var
+```
+
+### Setter
+The following declares a setter.
+
+```
+@var.setter
+def var(self, var):
+		self._var = var
+```
