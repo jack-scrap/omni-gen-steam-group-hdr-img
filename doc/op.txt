@@ -43,3 +43,63 @@ Logical operators return a boolean input given other boolean inputs.
 
 `False and False`
 `False`
+
+# Bitwise
+Bitwise operations work on binary data.
+
+`|` - OR
+`&` - AND
+`^` - XOR (Exclusive OR)
+
+## AND
+Should both be true, the result will be true.
+
+`3` (`00000011`)
+`7` (`00000111`)
+
+`3 & 7`
+`00000011`
+
+## OR
+Should either be true, the result will be true.
+
+`3` (`00000011`)
+`7` (`00000111`)
+
+`3 | 7`
+`00000111`
+
+## XOR
+Should either be true but not both.
+
+`3` (`00000011`)
+`7` (`00000111`)
+
+`3 ^ 7`
+`0000001`
+
+# Complement
+"Bitwise complement" takes a single input, inverting the bits.
+
+`3` (`00000011`)
+
+`~3`
+`11111100`
+
+# Bitshift
+"Bitshifting" will "shift" the true bits a specified number.
+
+`00000011 << 3`
+`00011000`
+
+`00000011 >> 3`
+`00000000`
+
+## Assignment
+Equivalents assignment operators exist for for bitwise and bitshift operations.
+`>>=`
+`<<=`
+
+`&=`
+`|=`
+`^=`

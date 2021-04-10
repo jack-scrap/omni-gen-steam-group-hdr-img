@@ -95,12 +95,3 @@ Special versions of the mathematical operators with a trailing equals sign exist
 The following are equivalent
 `var = var + 3`
 `var += 3`
-
-# TODO
-&=
-|=
-^=
-
-# Bitshift
->>=
-<<=
