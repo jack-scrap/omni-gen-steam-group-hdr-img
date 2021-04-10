@@ -137,6 +137,9 @@ void craneGrab(Crane* crane) {
 					crane->_op = byte;
 					slot = byte->_parent;
 
+					slot->_model = glm::mat4(1.0);
+
+					data->_parent->_child[i]->_child[0] = nullptr;
 					data->_data[i]->_data = nullptr;
 
 					break;
@@ -150,11 +153,12 @@ void craneGrab(Crane* crane) {
 			if (!byte) {
 				if (util::phys::aabb(crane->_op->_parent, data->_data[i]->_parent)) {
 					data->_data[i]->_data = crane->_op;
+					data->_parent->_child[i]->_child[0] = crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)];
 
 					objAcc(data->_parent, glm::mat4(1.0));
 
 					crane->_op = nullptr;
-					slot = nullptr;
+					crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)] = nullptr;
 
 					break;
 				}
