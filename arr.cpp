@@ -50,13 +50,13 @@ Arr* arrMk(char* data, unsigned int sz, std::string name, glm::vec3 loc, glm::ve
 	}
 
 	// identifier
-	Str* id = strMk(name, loc + glm::vec3(0.0, 0.0, -layout::margin * 2));
+	Str* id = strMk(name, glm::vec3(0.0, 0.0, -layout::margin * 2));
 	child[noChild - 1] = id->_parent;
 
 	Border* parent = borderMk({
 		scale[X],
 		scale[Y]
-	}, child, noChild, glm::vec3(0.0, layout::margin, 0.0), rot);
+	}, child, noChild, loc + glm::vec3(0.0, layout::margin, 0.0), rot);
 
 	_->_parent = parent->_parent;
 
@@ -106,13 +106,13 @@ Arr* arrMk(char* data, unsigned int x, unsigned int y, std::string name, glm::ve
 	}
 
 	// identifier
-	Str* id = strMk(name, loc + glm::vec3(0.0, 0.0, -layout::margin * 2));
+	Str* id = strMk(name, glm::vec3(0.0, 0.0, -layout::margin * 2));
 	child[noChild - 1] = id->_parent;
 
 	Border* parent = borderMk({
 		scale[X],
 		scale[Y]
-	}, child, noChild, glm::vec3(0.0, layout::margin, 0.0), rot);
+	}, child, noChild, loc + glm::vec3(0.0, layout::margin, 0.0), rot);
 
 	_->_parent = parent->_parent;
 
