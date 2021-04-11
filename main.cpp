@@ -68,10 +68,15 @@ int main(int argc, char** argv) {
 		layout::view[X] + (state::ln * layout::dim[X]), layout::view[Y]
 	}, col[false]);
 
-	unsigned int stage = 0;
+	unsigned int stage;
 	unsigned int lvl;
 	if (argv[1]) {
-		lvl = atoi(argv[1]);
+		stage = atoi(argv[1]);
+	} else {
+		stage = 0;
+	}
+	if (argv[2]) {
+		lvl = atoi(argv[2]);
 	} else {
 		lvl = 0;
 	}
