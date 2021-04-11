@@ -11,6 +11,9 @@ namespace omni {
 		{
 			0,
 			"init"
+		}, {
+			1,
+			"ctrl_flow"
 		}
 	};
 
