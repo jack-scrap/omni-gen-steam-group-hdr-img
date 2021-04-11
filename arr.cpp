@@ -66,7 +66,7 @@ Arr* arrMk(char* data, unsigned int sz, std::string name, glm::vec3 loc, glm::ve
 Arr* arrMk(char* data, unsigned int x, unsigned int y, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	Arr* _ = (Arr*) malloc(sizeof (Arr));
 
-	_->_x = y;
+	_->_x = x;
 	_->_y = y;
 
 	_->_data = (Idx**) malloc(_->_y * _->_x * sizeof (Idx*));
@@ -110,9 +110,9 @@ Arr* arrMk(char* data, unsigned int x, unsigned int y, std::string name, glm::ve
 	child[noChild - 1] = id->_parent;
 
 	Border* parent = borderMk({
-			scale[X],
-			scale[Y]
-			}, child, noChild, glm::vec3(0.0, layout::margin, 0.0), rot);
+		scale[X],
+		scale[Y]
+	}, child, noChild, glm::vec3(0.0, layout::margin, 0.0), rot);
 
 	_->_parent = parent->_parent;
 
