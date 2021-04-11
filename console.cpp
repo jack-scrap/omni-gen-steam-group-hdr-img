@@ -37,7 +37,7 @@ void dispatch(Console* console, std::string name) {
 	if (eq) {
 		std::string log = "log/" + util::fs::base(name) + ".log";
 
-		console->_buff = util::log(console->_buff.size());
+		console->_buff = util::log(console->_buff.size(), console->_maxFs);
 
 		nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("player.json"));
 

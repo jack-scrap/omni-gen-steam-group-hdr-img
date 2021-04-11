@@ -79,7 +79,7 @@ namespace util {
 		std::map<std::string, int> parse(std::string name);
 	}
 
-	std::vector<std::string> log(unsigned int loc);
+	std::vector<std::string> log(unsigned int loc, unsigned int maxFs);
 
 	std::string now(std::string format);
 }

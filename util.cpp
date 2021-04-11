@@ -487,8 +487,10 @@ std::map<std::string, int> util::cfg::parse(std::string name) {
 	return _;
 }
 
-std::vector<std::string> util::log(unsigned int loc) {
+std::vector<std::string> util::log(unsigned int loc, unsigned int maxFs) {
 	std::vector<std::string> buff;
+
+	unsigned int maxNo = std::to_string(state::line).size();
 
 	std::string head = "Level complete";
 	buff.push_back(head);
@@ -502,7 +504,7 @@ std::vector<std::string> util::log(unsigned int loc) {
 	std::string key = "LOC: ";
 	std::string val = std::to_string(loc);
 
-	std::string pair = util::str::pad(key, state::ln - val.size());
+	std::string pair = util::str::pad(key, state::ln - (val.size() + maxFs + 1 + maxNo + 1));
 	pair += val;
 
 	buff.push_back(pair);
