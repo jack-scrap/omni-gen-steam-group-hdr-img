@@ -14,6 +14,9 @@ namespace omni {
 		}, {
 			1,
 			"ctrl_flow"
+		}, {
+			2,
+			"thread"
 		}
 	};
 

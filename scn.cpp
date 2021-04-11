@@ -121,10 +121,12 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	// bound
 	for (const auto& entry : serial["bound"].items()) {
 		if (entry.key() == "rng") {
-			for (const auto& _ : entry.value().items()) {
-				Lim* lim = limMk(glm::vec3(_.value()["loc"][0], _.value()["loc"][1], _.value()["loc"][2]), glm::vec3(_.value()["rot"][0], _.value()["rot"][1], _.value()["rot"][2]));
+			for (const auto& rng : entry.value()) {
+				for (const auto bound : rng) {
+					Lim* lim = limMk(glm::vec3(bound["loc"][0], bound["loc"][1], bound["loc"][2]), glm::vec3(bound["rot"][0], bound["rot"][1], bound["rot"][2]));
 
-				mesh.push_back(lim->_parent);
+					mesh.push_back(lim->_parent);
+				}
 			}
 		}
 	}
