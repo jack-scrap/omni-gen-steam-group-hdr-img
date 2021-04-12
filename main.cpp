@@ -93,19 +93,28 @@ int main(int argc, char** argv) {
 		glGenBuffers(1, &vbo);
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
-		GLfloat vtc[4 * 3 * 2] = {
+		GLfloat vtc[] = {
 			-0.26, -0.26,
-			-0.26, 0.16,
-			-0.16, 0.26,
 			-0.16, -0.26,
+			-0.26, 0.16,
+
+			-0.26, 0.16,
+			-0.16, -0.26,
+			-0.16, 0.26,
 
 			-0.16, -0.26,
 			0.16, -0.26,
-			0.16, 0.26,
 			-0.16, 0.26,
 
-			0.26, -0.16,
+			-0.16, 0.26,
+			0.16, -0.26,
+			0.16, 0.26,
+
 			0.26, 0.26,
+			0.16, 0.26,
+			0.26, -0.16,
+
+			0.26, -0.16,
 			0.16, 0.26,
 			0.16, -0.26
 		};
@@ -131,7 +140,7 @@ int main(int argc, char** argv) {
 
 		disp->clear();
 
-		glDrawArrays(GL_QUADS, 0, 4 * 3);
+		glDrawArrays(GL_TRIANGLES, 0, 3 * 2 * 3);
 
 		disp->update();
 
