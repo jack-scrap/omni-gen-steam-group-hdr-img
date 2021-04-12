@@ -1,4 +1,4 @@
-# Move both containers into the following indices
+# Move the containers in a checkerboard pattern
 
 from omni import *
 i = 0
