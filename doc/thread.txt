@@ -64,12 +64,6 @@ other_thread.start()
 
 Depending on run-time determinism, the output of the following process will change.
 
-In order to make these threads
-
-```
-TODO
-```
-
 ## Lock
 "Locking" a thread halts execution on the present thread until the locked one has completed.
 

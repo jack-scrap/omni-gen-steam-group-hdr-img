@@ -1,11 +1,11 @@
-"Inheritance" describes the process using processes to create other classes.
+"Inheritance" describes the process using classes to create other classes, automatically implementing properties from their parent.
 
 Doing so can effectively describe complex sets of data without re-using code.
 
 General groups can be composed from which more specific ones can be created.
 
 # Creating
-The name of the parent class provided between will inherit all properties.
+The name of the parent class provided between parantheses will inherit all properties.
 
 ```
 class Parent:
@@ -19,6 +19,12 @@ class Child(Parent):
 ```
 
 Here, the properties have been automatically added to the class `Child`.
+Creation and usage of a child object will examplify this.
+
+```
+obj = Child()
+print (child.var)
+```
 
 ## Multi-level
 Multiple levels of inheritence can exist, and objects will continually inherit.
@@ -37,8 +43,10 @@ class Child(Parent):
 	...
 ```
 
+The class `Child` contains all of the attributes of `GrandParent` and `Parent`.
+
 ## Multiple
-	A child class can inherit from more than one parent.
+A child class can inherit from more than one parent.
 
 ```
 class Parent:
@@ -57,12 +65,26 @@ class Child(Parent, OtherParent):
 	...
 ```
 
-The class `Child` contains all of the attributes of `GrandParent` and `Parent`.
-
 ## Duplicate names
-The possibility exists that identifiers across classes may share a name.
+Because classes provided separate scopes, the possibility exists that identifiers across classes may share a name.
 
-In the case that multiple of these classes are used to create a new one, the first class provided will be searched, with the rest following should it not be found.
+Given duplicate names in a parent and child class, the child function will be called by default.
+
+```
+class Parent:
+	def fn(self):
+		print('Text')
+
+class Child(Parent):
+	def fn(self):
+		print('Other text')
+
+obj = Child()
+
+obj.fn()
+```
+
+In the case of inheriting from multiple parents, the first class provided will be searched, with the rest following should it not be found.
 
 ```
 class Parent:
@@ -90,46 +112,55 @@ class Child(Parent, OtherParent):
 
 Having no duplicate variable names, the value of `var` resolves to `7`.
 
-## Overriding
-Overriding will discard the parent and substitute it with one provided by the child.
-
-```
-TODO
-```
-
-## Overloading
-
-```
-TODO
-```
-
 ## Accessing parents
-Like the `self` variable assigned within classes, `super` can be used to access the parent.
+Like the `self` variable assigned within classes, the `super` function can be used to access the parent.
 
 ```
 class Parent:
-	var = 3
+	def fn():
+		print('Text')
 
 class Child(Parent):
-	print(super.var)
+	super().fn()
+```
+
+Where duplicate function names exist, this can explicitly refer to the parent.
+
+```
+class Parent:
+    def fn(self):
+        print('Text')
+
+class Child(Parent):
+    def fn(self):
+        print('Other text')
+
+    def other_fn(self):
+        super().fn()
+
+obj = Child()
+obj.other_fn()
 ```
 
 ## Class methods
-This allows for scoping of functions to a specific location.
+Without creating an object, classes can simply be used to create functions, scoping data and functions to a specific location.
 
 `self` now refers to the class instead of the object.
 
 ```
 class Parent:
+	var = 3
+
 	@classmethod
 	def fn(self):
-  	print('Text')
+		print(self.var)
 ```
 
 ## Static methods
-Static functions are simply functions created to be scoped to a specific location.
+Like class methods, static methods don't require the creation of an object.
+Additionally, no knowledge of the class or object exist via the `self` variable.
 
-No knowledge of the class or object exist.
+Because of this, no local variables may be utilized.
 
 ```
 class Class:
@@ -139,3 +170,5 @@ class Class:
 
 Class.fn()
 ```
+
+This provides the ability to simply scope functions to a specific location.
