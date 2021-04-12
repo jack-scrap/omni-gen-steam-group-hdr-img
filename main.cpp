@@ -156,7 +156,7 @@ int main(int argc, char** argv) {
 
 		disp->clear();
 
-		glDrawArrays(GL_TRIANGLES, 0, 10 * 2 * 3);
+		glDrawArrays(GL_TRIANGLES, 0, ((2 + 3) * 2) * 2 * 3);
 
 		disp->update();
 
