@@ -510,8 +510,8 @@ void objAcc(Obj* obj, glm::mat4 prev) {
 }
 
 void objAnim(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
-	glm::vec3 locInc = loc / glm::vec3(state::fps);
-	glm::vec3 rotInc = rot / glm::vec3(state::fps);
+	glm::vec3 locInc = (loc / glm::vec3(state::fps)) * glm::vec3(state::speed);
+	glm::vec3 rotInc = (rot / glm::vec3(state::fps)) * glm::vec3(state::speed);
 
 	glm::vec3 locMax = glm::abs(loc);
 	glm::vec3 rotMax = glm::abs(rot);

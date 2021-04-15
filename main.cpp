@@ -41,6 +41,10 @@ int main(int argc, char** argv) {
 			boot = !val;
 		}
 
+		if (key == "speed") {
+			state::speed = val;
+		}
+
 		if (key == "wd") {
 			layout::view = glm::vec2(val, state::line * layout::dim[Y]);
 		}

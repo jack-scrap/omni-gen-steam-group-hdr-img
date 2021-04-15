@@ -20,3 +20,15 @@
 
 ## Ship
 `zoom(d)`
+
+# Data
+Data is provided
+
+`._sz`
+`._x`
+`._y`
+
+# Bounds
+Bounds are provided.
+
+These can be used to assert.

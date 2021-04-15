@@ -1,0 +1,9 @@
+Pathfinding describes the traversal of graphs.
+
+# A*
+F
+G
+H
+
+# Dijkstra
+Dijkra's algorithm will find the shortest path betweennodes.

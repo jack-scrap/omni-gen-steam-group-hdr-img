@@ -1,0 +1,23 @@
+Data structures
+
+Some are provided by the Python programming language, some are not.
+In the case that they aren't, one must be contrived given the tools in the language.
+
+# List
+TODO list is a grid
+
+# Linked list
+A "linked" list only has knowledge of the next.
+
+# Stack
+A "stack" is a list where operations are only permissible on the top element.
+
+Referred to as "FIFO" (First-in, first-out)
+
+Exactly two operations exist, "push" and "pop".
+
+# Queue
+TODO
+
+# Graph
+Disconnected "nodes".
