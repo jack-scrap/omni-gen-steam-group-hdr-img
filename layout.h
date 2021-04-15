@@ -25,6 +25,11 @@ namespace layout {
 			4
 		},
 
+		stride[2] = {
+			layout::idx[X] + (layout::offset * 2) + (layout::margin * 2 * 2),
+			layout::idx[Y] + (layout::offset * 2) + (layout::margin * 2 * 2)
+		},
+
 		glyph[2] = {
 			0.8,
 			1

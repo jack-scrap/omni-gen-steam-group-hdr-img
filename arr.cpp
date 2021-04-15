@@ -17,14 +17,9 @@ Arr* arrMk(char* data, unsigned int sz, std::string name, glm::vec3 loc, glm::ve
 
 	// layout
 	GLfloat
-		stride[2] = {
-			layout::idx[X] + (layout::offset * 2) + (layout::margin * 2 * 2),
-			layout::idx[Y] + (layout::offset * 2) + (layout::margin * 2 * 2)
-		},
-
 		scale[2] = {
-			(_->_y * layout::stroke) + (_->_x * stride[X]),
-			(_->_y * layout::stroke) + (_->_y * stride[Y])
+			(_->_y * layout::stroke) + (_->_x * layout::stride[X]),
+			(_->_y * layout::stroke) + (_->_y * layout::stride[Y])
 		};
 
 	// data
@@ -34,7 +29,7 @@ Arr* arrMk(char* data, unsigned int sz, std::string name, glm::vec3 loc, glm::ve
 	for (int j = 0; j < _->_y; j++) {
 		for (int i = 0; i < _->_x; i++) {
 			Idx* idx;
-			glm::vec3 offset = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2) + glm::vec3(i * stride[X], 0.0, j * stride[Y]);
+			glm::vec3 offset = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2) + glm::vec3(i * layout::stride[X], 0.0, j * layout::stride[Y]);
 			if (data[(j * _->_y) + i]) {
 				idx = idxMk(i, data[(j * _->_y) + i], offset);
 			} else {
@@ -73,14 +68,9 @@ Arr* arrMk(char* data, unsigned int x, unsigned int y, std::string name, glm::ve
 
 	// layout
 	GLfloat
-		stride[2] = {
-			layout::idx[X] + (layout::offset * 2) + (layout::margin * 2 * 2),
-			layout::idx[Y] + (layout::offset * 2) + (layout::margin * 2 * 2)
-		},
-
 		scale[2] = {
-			(_->_y * layout::stroke) + (_->_x * stride[X]),
-			(_->_y * layout::stroke) + (_->_y * stride[Y])
+			(_->_y * layout::stroke) + (_->_x * layout::stride[X]),
+			(_->_y * layout::stroke) + (_->_y * layout::stride[Y])
 		};
 
 	// data
@@ -90,7 +80,7 @@ Arr* arrMk(char* data, unsigned int x, unsigned int y, std::string name, glm::ve
 	for (int j = 0; j < _->_y; j++) {
 		for (int i = 0; i < _->_x; i++) {
 			Idx* idx;
-			glm::vec3 offset = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2) + glm::vec3(i * stride[X], 0.0, j * stride[Y]);
+			glm::vec3 offset = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2) + glm::vec3(i * layout::stride[X], 0.0, j * layout::stride[Y]);
 			if (data[(j * _->_y) + i]) {
 				idx = idxMk(i, data[(j * _->_y) + i], offset);
 			} else {
