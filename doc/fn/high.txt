@@ -1,0 +1,73 @@
+A "higher order" function refers to a function that itself utilizes a function as arguments or return values.
+
+After defining a function, this allows for extensibility beyond the default definition.
+
+# Arguments
+Functions are passed the same as arguments.
+
+```
+def fn():
+	print('Text')
+
+def higher(fn):
+	...
+```
+
+The function now being scoped to the other, calling works the same.
+
+```
+...
+
+def higher(fn):
+	fn()
+```
+
+## Callbacks
+A "callback" refers to a function defined explicitly for the purpose of being passed as an argument to another function, typically after the function body.
+
+```
+def fn():
+	print('Text')
+
+def higher(fn):
+	print('Text')
+
+	fn()
+```
+
+Where a detached thread exists, this provides a convenient method of guaranteeing
+
+```
+import threading
+
+def higher(fn):
+    fn()
+
+def fn():
+		print('Text')
+
+higher_thread = threading.Thread(target = higher, args = [fn])
+higher_thread.start()
+```
+
+No awaiting on the newly created thread has been done. However, the passed function will be called in the same body following the rest of the statements.
+
+# Return value
+functions can be generated
+
+## Generating functions
+Functions can be generated based on certain state.
+
+```
+def fn():
+	def other_fn():
+		print('Text')
+
+	return other_fn
+
+other_fn = fn()
+```
+
+```
+TODO
+```
