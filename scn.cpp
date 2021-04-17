@@ -37,14 +37,14 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 	for (const auto& entry : serial["vehicle"]) {
 		if (entry["name"] == "crane") {
-			Crane* crane = craneMk(glm::vec3(entry["loc"][0], entry["loc"][1], entry["loc"][2]), glm::vec3(entry["rot"][0], entry["rot"][1], entry["rot"][2]));
+			Crane* crane = craneMk(glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]));
 
 			vehicle.push_back(crane);
 			mesh.push_back(crane->_parent);
 		}
 
 		if (entry["name"] == "truck") {
-			Truck* truck = truckMk(glm::vec3(entry["loc"][0], entry["loc"][1], entry["loc"][2]), glm::vec3(entry["rot"][0], entry["rot"][1], entry["rot"][2]));
+			Truck* truck = truckMk(glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]));
 
 			vehicle.push_back(truck);
 			mesh.push_back(truck->_parent);
@@ -53,11 +53,11 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				0.0, 0.0, 0.0
 			};
 
-			GLushort idx[1] = {
+			GLushort idx[Y] = {
 				0
 			};
 
-			Obj* bed = objMk(vtx, 1, idx, 1, "bevel/main", "bed", "dir", false, glm::vec3(entry["loc"][0], entry["loc"][1], entry["loc"][2]) + glm::vec3(2.0, 1.0 + 0.8, 0.0), glm::vec3(entry["rot"][0], entry["rot"][1], entry["rot"][2]) + glm::vec3(0.0, M_PI / 2, 0.0));
+			Obj* bed = objMk(vtx, 1, idx, 1, "bevel/main", "bed", "dir", false, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]) + glm::vec3(2.0, 1.0 + 0.8, 0.0), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]) + glm::vec3(0.0, M_PI / 2, 0.0));
 
 			pt.push_back(bed);
 		}
@@ -126,7 +126,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 	// object
 	for (const auto& entry : serial["obj"]) {
-		Obj* obj = objMk(entry["name"], "obj", "dir", true, glm::vec3(entry["loc"][0], entry["loc"][1], entry["loc"][2]), glm::vec3(entry["rot"][0], entry["rot"][1], entry["rot"][2]));
+		Obj* obj = objMk(entry["name"], "obj", "dir", true, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]));
 
 		mesh.push_back(obj);
 	}
@@ -136,7 +136,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		if (entry.key() == "rng") {
 			for (const auto& rng : entry.value()) {
 				for (const auto bound : rng) {
-					Lim* lim = limMk(glm::vec3(bound["loc"][0], bound["loc"][1], bound["loc"][2]), glm::vec3(bound["rot"][0], bound["rot"][1], bound["rot"][2]));
+					Lim* lim = limMk(glm::vec3(bound["loc"][X], bound["loc"][Y], bound["loc"][Z]), glm::vec3(bound["rot"][X], bound["rot"][Y], bound["rot"][Z]));
 
 					mesh.push_back(lim->_parent);
 				}
@@ -144,8 +144,8 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		}
 
 		if (entry.key() == "cone") {
-			for (const auto& asdf : entry.value()) {
-				Cone* cone = coneMk(glm::vec3(asdf[0], asdf[1], asdf[2]));
+			for (const auto& entry : entry.value()) {
+				Cone* cone = coneMk(glm::vec3(entry[X], entry[Y], entry[Z]));
 
 				mesh.push_back(cone->_parent);
 
@@ -157,7 +157,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					0
 				};
 
-				pt.push_back(objMk(vtx, 3, idx, 1, "bevel/main", "bevel/main", "alert", true, glm::vec3(asdf[0], asdf[1], asdf[2]) + glm::vec3(0.0, 1.408, 0.0)));
+				pt.push_back(objMk(vtx, 3, idx, 1, "bevel/main", "bevel/main", "alert", true, glm::vec3(entry[X], entry[Y], entry[Z]) + glm::vec3(0.0, 1.408, 0.0)));
 			}
 		}
 	}
