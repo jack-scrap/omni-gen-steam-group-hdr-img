@@ -5,7 +5,7 @@ CXXFLAGS = -std=c++14
 
 HDR = cam col math phys
 
-STATIC = main disp util mesh console str border node cont idx arr lim state layout omni
+STATIC = main disp util mesh console str border node cont idx arr lim cone state layout omni
 DYNA = scn vec obj truck crane pt prog bound
 
 DEP_HDR = $(patsubst %, %.h, $(HDR))
