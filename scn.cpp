@@ -48,6 +48,18 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 			vehicle.push_back(truck);
 			mesh.push_back(truck->_parent);
+
+			GLfloat vtx[3] = {
+				0.0, 0.0, 0.0
+			};
+
+			GLushort idx[1] = {
+				0
+			};
+
+			Obj* bed = objMk(vtx, 1, idx, 1, "bevel/main", "bed", "dir", false, glm::vec3(entry["loc"][0], entry["loc"][1], entry["loc"][2]) + glm::vec3(2.0, 1.0 + 0.8, 0.0), glm::vec3(entry["rot"][0], entry["rot"][1], entry["rot"][2]) + glm::vec3(0.0, M_PI / 2, 0.0));
+
+			pt.push_back(bed);
 		}
 	}
 

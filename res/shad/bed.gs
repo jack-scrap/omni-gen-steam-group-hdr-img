@@ -4,6 +4,8 @@ layout (points) in;
 
 layout (triangle_strip, max_vertices = 32) out;
 
+out vec3 _pos;
+
 uniform mat4
 	proj,
 	view,
@@ -73,6 +75,7 @@ void main() {
 					gl_in[0].gl_Position.xyz + quad[idc[(q * 2 * 2) + i]] + vec3(0.0, y * thick, 0.0),
 					1.0
 				);
+				_pos = gl_Position.xyz;
 				EmitVertex();   
 			}
 
@@ -88,6 +91,7 @@ void main() {
 					gl_in[0].gl_Position.xyz + quad[idc[(q * 2 * 2) + i]] + vec3(0.0, y * thick, 0.0),
 					1.0
 				);
+				_pos = gl_Position.xyz;
 				EmitVertex();   
 			}
 		}
