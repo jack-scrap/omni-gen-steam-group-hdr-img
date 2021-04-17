@@ -130,21 +130,25 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				}
 			}
 		}
+
+		if (entry.key() == "cone") {
+			for (const auto& asdf : entry.value()) {
+				Cone* cone = coneMk(glm::vec3(asdf[0], asdf[1], asdf[2]));
+
+				mesh.push_back(cone->_parent);
+
+				GLfloat vtx[3] = {
+					0.0, 0.0, 0.0
+				};
+
+				GLushort idx[1] = {
+					0
+				};
+
+				pt.push_back(objMk(vtx, 3, idx, 1, "bevel/main", "bevel/main", "alert", true, glm::vec3(asdf[0], asdf[1], asdf[2]) + glm::vec3(0.0, 1.408, 0.0)));
+			}
+		}
 	}
-
-	Cone* cone = coneMk();
-
-	mesh.push_back(cone->_parent);
-
-	GLfloat vtx[3] = {
-		0.0, 0.0, 0.0
-	};
-
-	GLushort idx[1] = {
-		0
-	};
-
-	pt.push_back(objMk(vtx, 3, idx, 1, "bevel/main", "bevel/main", "alert", true, glm::vec3(0.0, 1.408, 0.0)));
 
 	mesh.push_back(data->_parent);
 }

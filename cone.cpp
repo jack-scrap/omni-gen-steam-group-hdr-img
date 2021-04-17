@@ -4,7 +4,7 @@
 Cone* coneMk(glm::vec3 loc, glm::vec3 rot) {
 	Cone* _ = (Cone*) malloc(sizeof (Cone));
 
-	_->_parent = objMk("cone", "obj", "dir", true);
+	_->_parent = objMk("cone", "obj", "dir", true, loc, rot);
 
 	return _;
 }
