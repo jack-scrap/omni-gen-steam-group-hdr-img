@@ -253,28 +253,22 @@ void util::mesh::bound(Obj** obj, unsigned int noObj, GLfloat rng[3][2], glm::ma
 	}
 }
 
-std::vector<GLfloat> util::mesh::rect::pos(glm::vec2 sz, bool norm) {
+std::vector<GLfloat> util::mesh::rect::pos(glm::vec2 sz, unsigned int up, bool norm) {
 	std::vector<GLfloat> _;
 
 	for (int y = 0; y < 2; y++) {
 		for (int x = 0; x < 2; x++) {
 			_.push_back((x ? 1 : (norm ? -1 : 0)) * sz[X]);
-			_.push_back((y ? 1 : (norm ? -1 : 0)) * sz[Y]);
-			_.push_back(0.0);
-		}
-	}
 
-	return _;
-}
+			if (up == Y) {
+				_.push_back((y ? 1 : (norm ? -1 : 0)) * sz[Y]);
+				_.push_back(0.0);
+			}
 
-std::vector<GLfloat> util::mesh::rect::pos1(glm::vec2 sz) {
-	std::vector<GLfloat> _;
-
-	for (int y = 0; y < 2; y++) {
-		for (int x = 0; x < 2; x++) {
-			_.push_back(x * sz[X]);
-			_.push_back(0.0);
-			_.push_back(y * sz[Y]);
+			if (up == Z) {
+				_.push_back(0.0);
+				_.push_back((y ? 1 : (norm ? -1 : 0)) * sz[Y]);
+			}
 		}
 	}
 
