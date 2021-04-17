@@ -6,22 +6,6 @@
 #include "pt.h"
 #include "scn.h"
 
-Pt* ptMk(glm::vec3 loc, glm::vec3 rot) {
-	Pt* _ = (Pt*) malloc(sizeof (Pt));
-
-	GLfloat vtc[3] = {
-		0.0, 0.0, 0.0
-	};
-
-	GLushort idc[1] = {
-		0
-	};
-
-	_->_parent = objMk(vtc, sizeof vtc / sizeof *vtc, idc, sizeof idc / sizeof *idc, "tex", "bed", "tex", false, loc, rot);
-
-	return _;
-}
-
 void ptDraw(Obj* obj) {
 	obj->_view = glm::lookAt(cam._pos, cam._pos + glm::vec3(10000.0, -10000.0, -10000.0), glm::vec3(0, 1, 0));
 	obj->_view = glm::scale(obj->_view, cam._scale);
