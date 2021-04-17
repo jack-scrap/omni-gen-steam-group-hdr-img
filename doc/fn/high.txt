@@ -67,7 +67,3 @@ def fn():
 
 other_fn = fn()
 ```
-
-```
-TODO
-```
