@@ -227,6 +227,28 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 	glUniform1ui(_->_uni[T], _->_t);
 
+	// texture
+	int
+		wd,
+		ht,
+		chan;
+	GLubyte* data = stbi_load("res/dirt.jpg", &wd, &ht, &chan, 0); 
+
+	if (data) {
+		glGenTextures(1, &_->_tex);
+		glBindTexture(GL_TEXTURE_2D, _->_tex);
+
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, wd, ht, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	} else {
+		std::cout << "Texture error: Failed to load" << std::endl;
+	}
+
+	_->_prog.unUse();
+	glBindVertexArray(0);
+
 	// children
 	objAcc(_, glm::mat4(1.0));
 
@@ -362,45 +384,6 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm
 	glUniform1ui(_->_uni[ACTIVE], _->_active);
 
 	glUniform1ui(_->_uni[T], _->_t);
-
-	// texture
-	glGenTextures(1, &_->_tex);
-	glBindTexture(GL_TEXTURE_2D, _->_tex);
-
-	// framebuffer
-	GLuint fbo;
-	glGenFramebuffers(1, &fbo);
-	
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, disp->_res[X], disp->_res[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, (GLvoid*) 0);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	// renderbuffer (stencil)
-	GLuint rbo;
-	glGenRenderbuffers(1, &rbo);
-	glBindRenderbuffer(GL_RENDERBUFFER, rbo);
-
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_STENCIL_INDEX8, 800, 600);
-
-	// attach texture, renderbuffer
-	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _->_tex, 0);
-
-	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-		std::cout << "Error: Framebuffer not complete" << std::endl;
-	}
-
-	disp->clear();
-
-	Obj* glyph = objMk("glyph/" + std::to_string(0), "obj", "solid", true, nullptr, 0);
-
-	objDraw(glyph);
-
-	disp->update();
-
-	// bind default framebuffer, draw plane with attached framebuffer's color
-	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 
 	_->_prog.unUse();
 	glBindVertexArray(0);
@@ -573,7 +556,7 @@ void objDraw(Obj* obj) {
 	glBindVertexArray(obj->_mesh->_id[VAO]);
 	obj->_prog.use();
 
-	glBindTexture(GL_TEXTURE_2D, obj->_tex);
+	/* glBindTexture(GL_TEXTURE_2D, obj->_tex); */
 
 	glUniformMatrix4fv(obj->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(obj->_acc));
 	glUniformMatrix4fv(obj->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(obj->_view));
