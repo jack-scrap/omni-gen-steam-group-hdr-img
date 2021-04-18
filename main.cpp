@@ -134,13 +134,13 @@ int main(int argc, char** argv) {
 		Prog prog("logo", "solid");
 
 		/// attribute
-		GLint attrPos = glGetAttribLocation(prog.id, "pos");
+		GLint attrPos = glGetAttribLocation(prog._id, "pos");
 		glVertexAttribPointer(attrPos, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 		glEnableVertexAttribArray(attrPos);
 
 		/// uniform
-		GLint uniActive = glGetUniformLocation(prog.id, "active");
-		GLint uniRes = glGetUniformLocation(prog.id, "res");
+		GLint uniActive = glGetUniformLocation(prog._id, "active");
+		GLint uniRes = glGetUniformLocation(prog._id, "res");
 
 		// initialize
 		prog.use();

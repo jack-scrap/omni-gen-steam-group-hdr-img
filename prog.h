@@ -14,7 +14,7 @@ class Shad {
 
 class Prog {
 	public:
-		GLuint id;
+		GLuint _id;
 
 		Prog(std::string nameVtx, std::string nameFrag);
 

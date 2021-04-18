@@ -111,12 +111,12 @@ Console::Console(std::string name, std::vector<std::string> buff) :
 
 		// attribute
 		glBindBuffer(GL_ARRAY_BUFFER, _id[VBO]);
-		_attr[POS] = glGetAttribLocation(_prog.id, "pos");
+		_attr[POS] = glGetAttribLocation(_prog._id, "pos");
 		glVertexAttribPointer(_attr[POS], 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 		glEnableVertexAttribArray(_attr[POS]);
 
 		glBindBuffer(GL_ARRAY_BUFFER, _id[STBO]);
-		_attr[ST] = glGetAttribLocation(_prog.id, "st");
+		_attr[ST] = glGetAttribLocation(_prog._id, "st");
 		glVertexAttribPointer(_attr[ST], 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 		glEnableVertexAttribArray(_attr[ST]);
 

@@ -53,10 +53,10 @@ Prog::Prog(std::string nameVtx, std::string nameFrag) {
 		frag(nameFrag, 1);
 
 	// program
-	id = glCreateProgram();
-	glAttachShader(id, vtx._id);
-	glAttachShader(id, frag._id);
-	glLinkProgram(id);
+	_id = glCreateProgram();
+	glAttachShader(_id, vtx._id);
+	glAttachShader(_id, frag._id);
+	glLinkProgram(_id);
 }
 
 Prog::Prog(std::string nameVtx, std::string nameGeom, std::string nameFrag) {
@@ -67,15 +67,15 @@ Prog::Prog(std::string nameVtx, std::string nameGeom, std::string nameFrag) {
 		frag(nameFrag, 1);
 
 	// program
-	id = glCreateProgram();
-	glAttachShader(id, vtx._id);
-	glAttachShader(id, geom._id);
-	glAttachShader(id, frag._id);
-	glLinkProgram(id);
+	_id = glCreateProgram();
+	glAttachShader(_id, vtx._id);
+	glAttachShader(_id, geom._id);
+	glAttachShader(_id, frag._id);
+	glLinkProgram(_id);
 }
 
 void Prog::use() {
-	glUseProgram(id);
+	glUseProgram(_id);
 }
 
 void Prog::unUse() {
