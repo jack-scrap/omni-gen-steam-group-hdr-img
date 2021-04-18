@@ -393,6 +393,10 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm
 
 	disp->clear();
 
+	Obj* glyph = objMk("glyph/" + std::to_string(0), "obj", "solid", true, nullptr, 0);
+
+	objDraw(glyph);
+
 	disp->update();
 
 	// bind default framebuffer, draw plane with attached framebuffer's color
