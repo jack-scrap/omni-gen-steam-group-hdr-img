@@ -61,11 +61,11 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				objMk("glyph/" + std::to_string(0), "obj", "solid", true, glm::vec3(0.0, layout::pad, -layout::idx[X]))
 			};
 
-			/* Obj* bed = objMk(vtx, 1, idx, 1, "bevel/main", "bed", "dir", false, child, 1, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]) + glm::vec3(2.0, 1.0 + 0.8, 0.0), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]) + glm::vec3(0.0, M_PI / 2, 0.0)); */
-			Obj* outer = objMk(vtx, 1, idx, 1, "bevel/main", "outer", "dir", true, child, 1, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]) + glm::vec3(2.0, 1.0 + 0.8, 0.0), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]) + glm::vec3(0.0, M_PI / 2, 0.0));
+			Obj* bed = objMk(vtx, 1, idx, 1, "bevel/main", "bed", "dir", false, child, 1, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]) + glm::vec3(2.0, 1.0 + 0.8, 0.0), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]) + glm::vec3(0.0, M_PI / 2, 0.0));
+			/* Obj* outer = objMk(vtx, 1, idx, 1, "bevel/main", "outer", "dir", true, child, 1, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]) + glm::vec3(2.0, 1.0 + 0.8, 0.0), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]) + glm::vec3(0.0, M_PI / 2, 0.0)); */
 
-			/* pt.push_back(bed); */
-			pt.push_back(outer);
+			pt.push_back(bed);
+			/* pt.push_back(outer); */
 		}
 	}
 
