@@ -18,6 +18,9 @@
 #include "state.h"
 #include "phys.h"
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+
 Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string vtx, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
@@ -385,6 +388,43 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm
 
 	glUniform1ui(_->_uni[T], _->_t);
 
+	// texture
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
+
+	int
+		wd,
+		ht,
+		chan;
+	unsigned char* data = stbi_load("res/dirt.jpg", &wd, &ht, &chan, 0); 
+
+	if (data) {
+		glGenTextures(1, &_->_tex);
+		glBindTexture(GL_TEXTURE_2D, _->_tex);
+
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, wd, ht, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	} else {
+		std::cout << "Error: Texture failed to load" << std::endl;
+	}
+
+	// coordinate
+	GLuint stbo;
+	glGenBuffers(1, &stbo);
+	glBindBuffer(GL_ARRAY_BUFFER, stbo);
+
+	GLfloat st[] = {
+		0.0, 0.0,
+		1.0, 0.0,
+		1.0, 1.0,
+		0.0, 0.0
+	};
+	glBufferData(GL_ARRAY_BUFFER, sizeof st, st, GL_STATIC_DRAW);
+
+	GLint stAttr = glGetAttribLocation(_->_prog.id, "st");
+	glVertexAttribPointer(stAttr, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+	glEnableVertexAttribArray(stAttr);
+
 	_->_prog.unUse();
 	glBindVertexArray(0);
 
@@ -555,6 +595,8 @@ void objDraw(Obj* obj) {
 
 	glBindVertexArray(obj->_mesh->_id[VAO]);
 	obj->_prog.use();
+
+	glBindTexture(GL_TEXTURE_2D, obj->_tex);
 
 	glUniformMatrix4fv(obj->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(obj->_acc));
 	glUniformMatrix4fv(obj->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(obj->_view));
