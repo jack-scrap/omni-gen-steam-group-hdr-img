@@ -40,4 +40,22 @@ void main() {
 
 		EndPrimitive();
 	}
+
+	for (int b = 0; b < 2; b++) {
+		for (int x = 0; x < 2; x++) {
+			gl_Position = proj * view * model * vec4(
+				gl_in[0].gl_Position.xyz + vec3(
+					(bool(x) ? 1 : -1) * ((sz.x / 2) + pad),
+					0.0,
+					sz.y - (b * pad)
+				),
+				1.0
+			);
+			_pos = gl_Position.xyz;
+
+			EmitVertex();
+		}
+	}
+
+	EndPrimitive();
 }
