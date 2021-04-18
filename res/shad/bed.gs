@@ -5,6 +5,7 @@ layout (points) in;
 layout (triangle_strip, max_vertices = 8) out;
 
 out vec3 _pos;
+out vec2 _st;
 
 uniform mat4
 	model,
@@ -33,6 +34,7 @@ void main() {
 					1.0
 				);
 				_pos = gl_Position.xyz;
+				_st = vec2(x, z);
 
 				EmitVertex();   
 			}
