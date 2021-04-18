@@ -2,7 +2,7 @@
 
 layout (points) in;
 
-layout (triangle_strip, max_vertices = 32) out;
+layout (triangle_strip, max_vertices = 8) out;
 
 out vec3 _pos;
 

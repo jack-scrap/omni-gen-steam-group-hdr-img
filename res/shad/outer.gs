@@ -2,7 +2,7 @@
 
 layout (points) in;
 
-layout (triangle_strip, max_vertices = 32) out;
+layout (triangle_strip, max_vertices = 100) out;
 
 out vec3 _pos;
 
@@ -18,34 +18,16 @@ vec2 sz = vec2(
 
 float thick = 0.2 * 2;
 
+float pad = 0.16 * 2;
+
 void main() {
-	for (int x = 0; x < 2; x++) {
-		for (int y = 0; y < 2; y++) {
-			for (int z = 0; z < 2; z++) {
-				gl_Position = proj * view * model * vec4(
-					gl_in[0].gl_Position.xyz + vec3(
-						bool(x) ? 1 : -1,
-						y * thick,
-						z * sz.y
-					),
-					1.0
-				);
-				_pos = gl_Position.xyz;
-
-				EmitVertex();
-			}
-		}
-
-		EndPrimitive();
-	}
-
-	for (int y = 0; y < 2; y++) {
-		for (int x = 0; x < 2; x++) {
+	for (int b = 0; b < 2; b++) {
+		for (int z = 0; z < 2; z++) {
 			gl_Position = proj * view * model * vec4(
 				gl_in[0].gl_Position.xyz + vec3(
-					bool(x) ? 1 : -1,
-					y * thick,
-					sz.y
+					(sz.x / 2) + (b * pad),
+					0.0,
+					(z * sz.y) - (int(bool(b) && bool(z)) * pad)
 				),
 				1.0
 			);
@@ -54,4 +36,6 @@ void main() {
 			EmitVertex();
 		}
 	}
+
+	EndPrimitive();
 }
