@@ -373,11 +373,6 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm
 	if (data) {
 		glGenTextures(1, &_->_tex);
 		glBindTexture(GL_TEXTURE_2D, _->_tex);
-
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, wd, ht, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-		glGenerateMipmap(GL_TEXTURE_2D);
-	} else {
-		std::cout << "Error: Texture failed to load" << std::endl;
 	}
 
 	// coordinate
@@ -396,6 +391,39 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm
 	GLint stAttr = glGetAttribLocation(_->_prog._id, "st");
 	glVertexAttribPointer(stAttr, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 	glEnableVertexAttribArray(stAttr);
+
+	// framebuffer
+	GLuint fbo;
+	glGenFramebuffers(1, &fbo);
+	
+	glBindTexture(GL_TEXTURE_2D, _->_tex);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, disp->_res[X], disp->_res[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, (GLvoid*) 0);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	// renderbuffer (stencil)
+	GLuint rbo;
+	glGenRenderbuffers(1, &rbo);
+	glBindRenderbuffer(GL_RENDERBUFFER, rbo);
+
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_STENCIL_INDEX8, 800, 600);
+
+	// attach texture, renderbuffer
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _->_tex, 0);
+
+	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+		std::cout << "Error: Framebuffer not complete" << std::endl;
+	}
+
+	disp->clear();
+
+	disp->update();
+
+	// bind default framebuffer, draw plane with attached framebuffer's color
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 
 	_->_prog.unUse();
 	glBindVertexArray(0);
