@@ -33,7 +33,9 @@ void main() {
 					),
 					1.0
 				);
-				_pos = gl_Position.xyz;
+				if (!bool(y)) {
+					_pos = gl_Position.xyz;
+				}
 				_st = vec2(x, z);
 
 				EmitVertex();   
