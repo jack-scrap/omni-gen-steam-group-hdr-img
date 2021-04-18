@@ -16,19 +16,39 @@ vec2 sz = vec2(
 	-4
 );
 
-float thick = 0.2 * 2;
+float thick = -(0.2 * 2);
 
 float pad = 0.16 * 2;
 
 void main() {
-	for (int x = 0; x < 2; x++) {
+	for (int y = 0; y < 2; y++) {
+		for (int x = 0; x < 2; x++) {
+			for (int b = 0; b < 2; b++) {
+				for (int z = 0; z < 2; z++) {
+					gl_Position = proj * view * model * vec4(
+						gl_in[0].gl_Position.xyz + vec3(
+							(bool(x) ? 1 : -1) * ((sz.x / 2) + (b * pad)),
+							y * thick,
+							(z * sz.y) - (int(bool(b) && bool(z)) * pad)
+						),
+						1.0
+					);
+					_pos = gl_Position.xyz;
+
+					EmitVertex();
+				}
+			}
+
+			EndPrimitive();
+		}
+
 		for (int b = 0; b < 2; b++) {
-			for (int z = 0; z < 2; z++) {
+			for (int x = 0; x < 2; x++) {
 				gl_Position = proj * view * model * vec4(
 					gl_in[0].gl_Position.xyz + vec3(
-						(bool(x) ? 1 : -1) * ((sz.x / 2) + (b * pad)),
-						0.0,
-						(z * sz.y) - (int(bool(b) && bool(z)) * pad)
+						(bool(x) ? 1 : -1) * ((sz.x / 2) + pad),
+						y * thick,
+						sz.y - (b * pad)
 					),
 					1.0
 				);
@@ -40,22 +60,4 @@ void main() {
 
 		EndPrimitive();
 	}
-
-	for (int b = 0; b < 2; b++) {
-		for (int x = 0; x < 2; x++) {
-			gl_Position = proj * view * model * vec4(
-				gl_in[0].gl_Position.xyz + vec3(
-					(bool(x) ? 1 : -1) * ((sz.x / 2) + pad),
-					0.0,
-					sz.y - (b * pad)
-				),
-				1.0
-			);
-			_pos = gl_Position.xyz;
-
-			EmitVertex();
-		}
-	}
-
-	EndPrimitive();
 }
