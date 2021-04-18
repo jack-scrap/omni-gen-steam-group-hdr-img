@@ -7,9 +7,9 @@ layout (triangle_strip, max_vertices = 32) out;
 out vec3 _pos;
 
 uniform mat4
-	proj,
+	model,
 	view,
-	model;
+	proj;
 
 vec2 sz = vec2(
 	2,
