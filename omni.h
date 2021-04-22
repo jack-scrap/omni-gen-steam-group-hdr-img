@@ -17,6 +17,9 @@ namespace omni {
 		}, {
 			2,
 			"thread"
+		}, {
+			3,
+			"path"
 		}
 	};
 
