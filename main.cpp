@@ -169,6 +169,9 @@ int main(int argc, char** argv) {
 					case SDLK_F1:
 						console->_mode = Console::FS;
 
+						console->_idx[X] = 0;
+						console->_idx[Y] = 1 + console->_l;
+
 						console->render();
 
 						break;
@@ -229,6 +232,9 @@ int main(int argc, char** argv) {
 								break;
 						}
 
+						console->_idx[X] = 0;
+						console->_idx[Y] = 1 + console->_l;
+
 						for (int l = 0; l < console->_tree.size(); l++) {
 							for (int i = 0; i < console->_maxFs; i++) {
 								console->_hl[((1 + l) * state::ln) + i] = false;
@@ -238,6 +244,8 @@ int main(int argc, char** argv) {
 						for (int i = 0; i < console->_maxFs; i++) {
 							console->_hl[((1 + console->_l) * state::ln) + i] = true;
 						}
+
+						console->render();
 
 						break;
 
