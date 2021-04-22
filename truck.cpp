@@ -5,6 +5,7 @@
 #include "truck.h"
 #include "scn.h"
 #include "state.h"
+#include "omni.h"
 
 Truck* truckMk(glm::vec3 loc, glm::vec3 rot) {
 	Truck* _ = (Truck*) malloc(sizeof (Truck));
@@ -33,8 +34,17 @@ Truck* truckMk(glm::vec3 loc, glm::vec3 rot) {
 }
 
 void truckTurn(Truck* truck, float delta) {
-	for (int z = 0; z < 2; z++) {
-		objAnim(truck->_parent->_child[z * 2], glm::vec3(0.0), glm::vec3(0.0, delta, 0.0));
+	if (
+		truck->_rot + delta > truck->_rngWheel[MIN] &&
+		truck->_rot + delta < truck->_rngWheel[MAX]
+	) {
+		truck->_rot += delta;
+
+		for (int z = 0; z < 2; z++) {
+			objAnim(truck->_parent->_child[z * 2], glm::vec3(0.0), glm::vec3(0.0, delta, 0.0));
+		}
+	} else {
+		omni::err("Cannot turn truck; rotation of wheels exceeds range");
 	}
 }
 

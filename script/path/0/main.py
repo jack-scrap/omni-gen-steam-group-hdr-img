@@ -2,4 +2,4 @@
 
 from omni import *
 
-truck.turn(3)
+truck.turn(0.3)
