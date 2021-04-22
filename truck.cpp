@@ -32,6 +32,16 @@ Truck* truckMk(glm::vec3 loc, glm::vec3 rot) {
 	return _;
 }
 
-void truckZoom(Truck* truck, glm::vec3 loc) {
+void truckTurn(Truck* truck, float delta) {
+	objAnim(truck->_parent, glm::vec3(0.0), glm::vec3(0.0, M_PI, 0.0));
+}
+
+void truckZoom(Truck* truck, float delta) {
+	glm::vec3 loc = glm::vec3(
+		delta,
+		0.0,
+		0.0
+	);
+
 	objAnim(truck->_parent, loc, glm::vec3(0.0));
 }

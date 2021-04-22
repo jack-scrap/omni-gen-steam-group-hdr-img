@@ -15,17 +15,26 @@ class Obj(Structure):
 		self._loc = self._ptr.contents._loc
 
 class Truck(Obj):
-	def zoom(self, loc):
-		for i in range(3):
-			self._loc[i] = loc[i]
+	def turn(self, delta):
+            truckTurn(self._ptr, delta)
 
-			truckZoom(self._ptr, self._loc)
+	def zoom(self, delta):
+            self._loc[0] += delta
+
+            truckZoom(self._ptr, delta)
+
+truckTurn = truck.truckTurn
+truckTurn.restype = c_void_p
+truckTurn.argtypes = [
+        POINTER(Truck),
+        c_float
+]
 
 truckZoom = truck.truckZoom
 truckZoom.restype = c_void_p
 truckZoom.argtypes = [
 	POINTER(Truck),
-	c_float * 3
+	c_float
 ]
 
 class Crane(Obj):
@@ -70,9 +79,9 @@ craneGrab.argtypes = None
 
 
 vehicleGet = scn.vehicleGet
-vehicleGet.restype = POINTER(POINTER(Crane))
+vehicleGet.restype = POINTER(POINTER(Truck))
 vehicleGet.argtypes = None
 
 vehicle = vehicleGet()
 
-crane = Crane(vehicle[0])
+truck = Truck(vehicle[0])
