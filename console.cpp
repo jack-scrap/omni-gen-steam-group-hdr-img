@@ -130,7 +130,6 @@ Console::Console(std::string name, std::vector<std::string> buff) :
 
 		// OpenGL
 		glGenTextures(1, &_tex);
-		glBindTexture(GL_TEXTURE_2D, _tex);
 
 		render();
 

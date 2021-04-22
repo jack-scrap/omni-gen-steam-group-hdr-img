@@ -47,8 +47,6 @@ void Disp::update() {
 }
 
 void Disp::draw() {
-	console->render();
-
 	clear();
 
 	glEnable(GL_DEPTH_TEST);
