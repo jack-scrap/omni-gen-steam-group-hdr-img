@@ -7,7 +7,8 @@ scn = CDLL('libscn.so')
 
 class Obj(Structure):
 	_fields_ = [
-		("_loc", c_float * 3)
+		("_loc", c_float * 3),
+                ("_rot", c_float * 3)
 	]
 
 	def __init__(self, ptr):
@@ -16,7 +17,9 @@ class Obj(Structure):
 
 class Truck(Obj):
 	def turn(self, delta):
-            truckTurn(self._ptr, delta)
+            self._rot[1] += delta
+
+            truckTurn(self._ptr, self._rot[1])
 
 	def zoom(self, delta):
             self._loc[0] += delta
