@@ -9,6 +9,7 @@
 #include "scn.h"
 #include "math.h"
 #include "state.h"
+#include "omni.h"
 
 Crane* craneMk(glm::vec3 loc, glm::vec3 rot) {
 	Crane* _ = (Crane*) malloc(sizeof (Crane));
@@ -99,6 +100,8 @@ void cranePan(Crane* crane, float delta) {
 		loc[Z] < crane->_rngHead[MAX]
 	) {
 		objTrans(targ, glm::vec3(0.0, 0.0, delta), glm::vec3(0.0, 0.0, 0.0));
+	} else {
+		omni::err("Cannot move crane head; translation exceeds range");
 	}
 }
 
@@ -119,6 +122,8 @@ void cranePed(Crane* crane, float delta) {
 		);
 
 		objTrans(targ, loc, glm::vec3(0.0));
+	} else {
+		omni::err("Cannot move crane claw; translation exceeds range");
 	}
 }
 
@@ -144,6 +149,8 @@ void craneGrab(Crane* crane) {
 
 					break;
 				}
+			} else {
+				omni::err("Cannot grab; no applicable data");
 			}
 		}
 	} else {
