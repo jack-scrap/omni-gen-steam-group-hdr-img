@@ -18,8 +18,6 @@ class Console {
 
 		Prog _prog;
 
-		const std::string _ps1 = "[] ";
-
 		TTF_Font* font;
 
 		SDL_Surface
@@ -79,6 +77,8 @@ class Console {
 			_maxNo = 0;
 
 		bool* _hl;
+
+		const std::string _ps1 = "[] ";
 
 		Console(std::string name, std::vector<std::string> buff);
 

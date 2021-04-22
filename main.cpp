@@ -176,12 +176,18 @@ int main(int argc, char** argv) {
 					case SDLK_F2:
 						console->_mode = Console::EDITOR;
 
+						console->_idx[X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff.back().size();
+						console->_idx[Y] = console->_buff.size();
+
 						console->render();
 
 						break;
 
 					case SDLK_F3:
 						console->_mode = Console::PROMPT;
+
+						console->_idx[X] = (console->_ps1 + console->_prompt).size();
+						console->_idx[Y] = state::line - 1;
 
 						console->render();
 
@@ -232,9 +238,6 @@ int main(int argc, char** argv) {
 						for (int i = 0; i < console->_maxFs; i++) {
 							console->_hl[((1 + console->_l) * state::ln) + i] = true;
 						}
-
-						console->_idx[X] = std::to_string(console->_buff.size()).size() + 1;
-						console->_idx[Y] = 1 + console->_l;
 
 						break;
 

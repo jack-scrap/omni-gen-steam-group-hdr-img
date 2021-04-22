@@ -315,15 +315,19 @@ void Console::push(char c) {
 				_buff.back().push_back(c);
 			}
 
+			_idx[X] = _maxFs + 1 + _maxNo + 1 + _buff.back().size();
+			_idx[Y] = _buff.size();
+
 			break;
 
 		case PROMPT:
 			_prompt.push_back(c);
 
+			_idx[X] = _ps1.size() + _prompt.size();
+			_idx[Y] = state::line - 1;
+
 			break;
 	}
-
-	_idx[X]++;
 
 	render();
 }
@@ -402,6 +406,9 @@ void Console::exec() {
 
 		_prompt.clear();
 
+		_idx[X] = (_ps1 + _prompt).size();
+		_idx[Y] = state::line - 1;
+
 		render();
 	}
 }
@@ -419,12 +426,18 @@ void Console::pop() {
 				}
 			}
 
+			_idx[X] = _maxFs + 1 + _maxNo + 1 + _buff.back().size();
+			_idx[Y] = _buff.size();
+
 			break;
 
 		case PROMPT:
 			if (!_prompt.empty()) {
 				_prompt.pop_back();
 			}
+
+			_idx[X] = (_ps1 + _prompt).size();
+			_idx[Y] = state::line - 1;
 
 			break;
 	}
