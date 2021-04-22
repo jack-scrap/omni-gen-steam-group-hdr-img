@@ -20,6 +20,12 @@ Arr* data;
 std::vector<char> rhs;
 bool eq = false;
 
+Attr attr;
+
+void* attrGet() {
+	return &attr;
+}
+
 void scn::init(unsigned int stage, unsigned int lvl) {
 	nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("lvl/" + omni::stage[stage] + "/" + std::to_string(lvl) + ".json"));
 
@@ -116,6 +122,10 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			}
 
 			data = arrMk(init, sz, pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2))));
+			attr = {
+				data->_x,
+				data->_y
+			};
 		}
 
 		// 2D
@@ -208,3 +218,7 @@ extern "C" void** vehicleGet() {
 
 std::vector<Obj*> mesh;
 std::vector<Obj*> pt;
+
+extern "C" void* dataGet() {
+	return data;
+}

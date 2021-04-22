@@ -88,3 +88,19 @@ vehicleGet.argtypes = None
 vehicle = vehicleGet()
 
 truck = Truck(vehicle[0])
+
+
+class Attr(Structure):
+	_fields_ = [
+		("_x", c_int),
+                ("_y", c_int)
+	]
+
+attrGet = scn.attrGet
+attrGet.restype = POINTER(Attr)
+attrGet.argtypes = None
+
+attr = attrGet()
+
+print(attr.contents._x)
+print(attr.contents._y)

@@ -32,3 +32,14 @@ extern std::vector<Obj*> pt;
 namespace scn {
 	void init(unsigned int stage, unsigned int lvl);
 }
+
+extern "C" void* dataGet();
+
+typedef struct Attr {
+	int _x;
+	int _y;
+} Attr;
+
+extern "C" Attr attr;
+
+extern "C" void* attrGet();
