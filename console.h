@@ -69,7 +69,6 @@ class Console {
 
 		std::string _prompt;
 
-		/* char _scr[state::line][state::ln]; */
 		char* _scr;
 
 		unsigned int
