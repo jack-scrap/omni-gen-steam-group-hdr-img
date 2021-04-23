@@ -139,26 +139,6 @@ Console::Console(std::string name, std::vector<std::string> buff) :
 		// path
 		PyObject* path = PySys_GetObject("path");
 		PyList_Append(path, PyUnicode_FromString("."));
-
-		switch (_mode) {
-			case FS:
-				_idx[X] = 0;
-				_idx[Y] = 1 + _l;
-
-				break;
-
-			case EDITOR:
-				_idx[X] = _maxFs + 1 + _maxNo + 1 + _buff[_buff.size() - 1].size();
-				_idx[Y] = 1 + _buff.size() - 1;
-
-				break;
-
-			case PROMPT:
-				_idx[X] = (_ps1 + _prompt).size();
-				_idx[Y] = state::line - 1;
-
-				break;
-		}
 	}
 
 void Console::render() {
@@ -295,6 +275,26 @@ void Console::render() {
 	}
 
 	// index
+	switch (_mode) {
+		case FS:
+			_idx[X] = 0;
+			_idx[Y] = 1 + _l;
+
+			break;
+
+		case EDITOR:
+			_idx[X] = _maxFs + 1 + _maxNo + 1 + _buff.back().size();
+			_idx[Y] = 1 + _buff.size() - 1;
+
+			break;
+
+		case PROMPT:
+			_idx[X] = (_ps1 + _prompt).size();
+			_idx[Y] = state::line - 1;
+
+			break;
+	}
+
 	if (
 		_idx[X] < state::ln &&
 		_idx[Y] < state::line
