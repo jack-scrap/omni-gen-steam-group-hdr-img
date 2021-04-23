@@ -36,6 +36,7 @@ namespace scn {
 extern "C" void* dataGet();
 
 typedef struct Attr {
+	char* _ptr;
 	int _x;
 	int _y;
 

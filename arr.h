@@ -9,6 +9,7 @@
 typedef struct {
 	Obj* _parent;
 
+	char* _ptr;
 	unsigned int
 		_depth,
 
