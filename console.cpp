@@ -278,6 +278,7 @@ void Console::render() {
 		_scr[((state::line - 1) * state::ln) + i] = strPadded[i];
 	}
 
+	glActiveTexture(_tex);
 	glBindTexture(GL_TEXTURE_2D, _tex);
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _canv->w, _canv->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, _canv->pixels);
@@ -449,6 +450,7 @@ void Console::draw() {
 	glBindVertexArray(_id[VAO]);
 	_prog.use();
 
+	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, _tex);
 
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 2 * 2 * 3);
