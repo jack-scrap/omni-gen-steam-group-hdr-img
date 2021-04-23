@@ -17,8 +17,8 @@
 #include "omni.h"
 
 Arr* data;
+unsigned int sz;
 char* rhs;
-unsigned int rhsSz;
 bool eq = false;
 
 Attr attr;
@@ -161,7 +161,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			}
 
 			data = arrMk(init, x, y, pair.key(), glm::vec3(0.0, 0.0, -(((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2)) * y)));
-			rhsSz = x * y;
+			sz = x * y;
 		}
 	}
 
@@ -169,18 +169,18 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		rhs = (char*) malloc(0);
 
 		if (entry.type() == nlohmann::json::value_t::number_unsigned) {
-			rhsSz++;
+			sz++;
 
-			rhs = (char*) realloc(rhs, rhsSz);
-			rhs[rhsSz - 1] = (char) ((int) entry);
+			rhs = (char*) realloc(rhs, sz);
+			rhs[sz - 1] = (char) ((int) entry);
 		}
 
 		if (entry.type() == nlohmann::json::value_t::array) {
 			for (const auto& byte : entry) {
-				rhsSz++;
+				sz++;
 
-				rhs = (char*) realloc(rhs, rhsSz);
-				rhs[rhsSz - 1] = (char) ((int) entry);
+				rhs = (char*) realloc(rhs, sz);
+				rhs[sz - 1] = (char) ((int) entry);
 			}
 		}
 	}

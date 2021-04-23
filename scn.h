@@ -19,8 +19,8 @@ extern Disp* disp;
 extern Console* console;
 
 extern Arr* data;
+extern unsigned int sz;
 extern char* rhs;
-extern unsigned int rhsSz;
 extern bool eq;
 
 extern std::vector<void*> vehicle;
