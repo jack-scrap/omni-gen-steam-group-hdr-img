@@ -24,15 +24,17 @@ This allows for complete freedom of movement without being restricted to an axis
 `zoom(d)`
 
 # Data
-Data is provided
+Data can be accessed.
+
+Both initial and the desired state is provided.
 
 `.data`
 
-`._loc`
 `._sz`
 `._x`
 `._y`
 `._z`
+`._loc`
 
 # Bounds
 Bounds are provided.

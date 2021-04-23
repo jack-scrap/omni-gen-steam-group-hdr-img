@@ -5,6 +5,20 @@ truck = CDLL('libtruck.so')
 crane = CDLL('libcrane.so')
 scn = CDLL('libscn.so')
 
+class Attr(Structure):
+        _fields_ = [
+                ("_ptr", POINTER(c_char)),
+                ("_x", c_int),
+                ("_y", c_int),
+                ("_loc", c_float * 3)
+        ]
+
+attrGet = scn.attrGet
+attrGet.restype = POINTER(Attr)
+attrGet.argtypes = None
+
+data = attrGet()
+
 class Obj(Structure):
 	_fields_ = [
 		("_loc", c_float * 3),
@@ -88,18 +102,3 @@ vehicleGet.argtypes = None
 vehicle = vehicleGet()
 
 truck = Truck(vehicle[0])
-
-
-class Attr(Structure):
-	_fields_ = [
-		("_ptr", POINTER(c_char)),
-		("_x", c_int),
-                ("_y", c_int),
-                ("_loc", c_float * 3)
-	]
-
-attrGet = scn.attrGet
-attrGet.restype = POINTER(Attr)
-attrGet.argtypes = None
-
-attr = attrGet()
