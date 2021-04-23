@@ -19,7 +19,7 @@ extern Disp* disp;
 extern Console* console;
 
 extern Arr* data;
-extern std::vector<char> rhs;
+extern char* rhs;
 extern bool eq;
 
 extern std::vector<void*> vehicle;

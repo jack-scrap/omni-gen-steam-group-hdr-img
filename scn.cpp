@@ -17,7 +17,7 @@
 #include "omni.h"
 
 Arr* data;
-std::vector<char> rhs;
+char* rhs;
 bool eq = false;
 
 Attr attr;
@@ -164,13 +164,17 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	for (const auto& entry : serial["rhs"]) {
+		rhs = (char*) malloc(0);
+
 		if (entry.type() == nlohmann::json::value_t::number_unsigned) {
-			rhs.push_back((char) ((int) entry));
+			rhs = (char*) realloc(rhs, (sizeof rhs / sizeof *rhs) + 1);
+			rhs[(sizeof rhs / sizeof *rhs) - 1] = (char) ((int) entry);
 		}
 
 		if (entry.type() == nlohmann::json::value_t::array) {
 			for (const auto& byte : entry) {
-				rhs.push_back((char) ((int) byte));
+				rhs = (char*) realloc(rhs, (sizeof rhs / sizeof *rhs) + 1);
+				rhs[(sizeof rhs / sizeof *rhs) - 1] = (char) ((int) entry);
 			}
 		}
 	}
