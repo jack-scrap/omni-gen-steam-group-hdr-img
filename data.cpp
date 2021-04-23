@@ -1,14 +1,14 @@
 #include <cstdlib>
 
-#include "arr.h"
+#include "data.h"
 #include "border.h"
 #include "state.h"
 #include "layout.h"
 #include "idx.h"
 #include "str.h"
 
-Arr* arrMk(char* data, unsigned int sz, std::string name, glm::vec3 loc, glm::vec3 rot) {
-	Arr* _ = (Arr*) malloc(sizeof (Arr));
+Data* dataMk(char* data, unsigned int sz, std::string name, glm::vec3 loc, glm::vec3 rot) {
+	Data* _ = (Data*) malloc(sizeof (Data));
 
 	_->_ptr = data;
 	_->_x = sz;
@@ -62,8 +62,8 @@ Arr* arrMk(char* data, unsigned int sz, std::string name, glm::vec3 loc, glm::ve
 	return _;
 }
 
-Arr* arrMk(char* data, unsigned int x, unsigned int y, std::string name, glm::vec3 loc, glm::vec3 rot) {
-	Arr* _ = (Arr*) malloc(sizeof (Arr));
+Data* dataMk(char* data, unsigned int x, unsigned int y, std::string name, glm::vec3 loc, glm::vec3 rot) {
+	Data* _ = (Data*) malloc(sizeof (Data));
 
 	_->_ptr = data;
 	_->_x = x;
@@ -117,8 +117,8 @@ Arr* arrMk(char* data, unsigned int x, unsigned int y, std::string name, glm::ve
 	return _;
 }
 
-Arr* arrMk(char* data, unsigned int x, unsigned int y, unsigned int z, std::string name, glm::vec3 loc, glm::vec3 rot) {
-	Arr* _ = (Arr*) malloc(sizeof (Arr));
+Data* dataMk(char* data, unsigned int x, unsigned int y, unsigned int z, std::string name, glm::vec3 loc, glm::vec3 rot) {
+	Data* _ = (Data*) malloc(sizeof (Data));
 
 	_->_ptr = data;
 	_->_x = x;

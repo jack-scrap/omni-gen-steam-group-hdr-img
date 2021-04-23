@@ -10,7 +10,7 @@
 #include "console.h"
 #include "bound.h"
 #include "vec.h"
-#include "arr.h"
+#include "data.h"
 
 extern Cam cam;
 
@@ -18,7 +18,7 @@ extern Disp* disp;
 
 extern Console* console;
 
-extern Arr* data;
+extern Data* data;
 extern unsigned int sz;
 extern char* rhs;
 extern bool eq;

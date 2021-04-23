@@ -11,12 +11,12 @@
 #include "col.h"
 #include "crane.h"
 #include "node.h"
-#include "arr.h"
+#include "data.h"
 #include "lim.h"
 #include "cone.h"
 #include "omni.h"
 
-Arr* data;
+Data* data;
 unsigned int sz;
 char* rhs;
 bool eq = false;
@@ -122,7 +122,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				}
 			}
 
-			data = arrMk(init, sz, pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2))));
+			data = dataMk(init, sz, pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2))));
 			attr = {
 				init,
 				data->_x,
@@ -160,7 +160,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				y++;
 			}
 
-			data = arrMk(init, x, y, pair.key(), glm::vec3(0.0, 0.0, -(((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2)) * y)));
+			data = dataMk(init, x, y, pair.key(), glm::vec3(0.0, 0.0, -(((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2)) * y)));
 			sz = x * y;
 		}
 	}
