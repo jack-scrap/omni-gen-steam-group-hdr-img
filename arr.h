@@ -15,6 +15,8 @@ typedef struct {
 		_x,
 		_y;
 
+	float _loc[3];
+
 	Idx** _data;
 } Arr;
 

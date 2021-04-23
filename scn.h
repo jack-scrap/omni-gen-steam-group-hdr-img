@@ -38,6 +38,8 @@ extern "C" void* dataGet();
 typedef struct Attr {
 	int _x;
 	int _y;
+
+	float _loc[3];
 } Attr;
 
 extern "C" Attr attr;

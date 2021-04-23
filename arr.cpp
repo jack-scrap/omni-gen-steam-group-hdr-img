@@ -13,6 +13,10 @@ Arr* arrMk(char* data, unsigned int sz, std::string name, glm::vec3 loc, glm::ve
 	_->_x = sz;
 	_->_y = 1;
 
+	for (int i = 0; i < 3; i++) {
+		_->_loc[i] = loc[i];
+	}
+
 	_->_data = (Idx**) malloc(_->_y * _->_x * sizeof (Idx*));
 
 	// layout
@@ -63,6 +67,10 @@ Arr* arrMk(char* data, unsigned int x, unsigned int y, std::string name, glm::ve
 
 	_->_x = x;
 	_->_y = y;
+
+	for (int i = 0; i < 3; i++) {
+		_->_loc[i] = loc[i];
+	}
 
 	_->_data = (Idx**) malloc(_->_y * _->_x * sizeof (Idx*));
 

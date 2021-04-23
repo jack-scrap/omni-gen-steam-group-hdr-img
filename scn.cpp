@@ -124,7 +124,11 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			data = arrMk(init, sz, pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2))));
 			attr = {
 				data->_x,
-				data->_y
+				data->_y, {
+					data->_loc[0],
+					data->_loc[1],
+					data->_loc[2]
+				}
 			};
 		}
 

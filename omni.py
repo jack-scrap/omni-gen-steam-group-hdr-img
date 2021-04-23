@@ -93,7 +93,8 @@ truck = Truck(vehicle[0])
 class Attr(Structure):
 	_fields_ = [
 		("_x", c_int),
-                ("_y", c_int)
+                ("_y", c_int),
+                ("_loc", c_float * 3)
 	]
 
 attrGet = scn.attrGet
@@ -104,3 +105,5 @@ attr = attrGet()
 
 print(attr.contents._x)
 print(attr.contents._y)
+for i in range(3):
+    print(attr.contents._loc[i])
