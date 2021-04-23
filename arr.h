@@ -14,7 +14,8 @@ typedef struct {
 		_depth,
 
 		_x,
-		_y;
+		_y,
+		_z;
 
 	float _loc[3];
 
@@ -24,3 +25,5 @@ typedef struct {
 Arr* arrMk(char* data, unsigned int sz, std::string name = "", glm::vec3 loc = glm::vec3(0.0, 0.0, 0.0), glm::vec3 rot = glm::vec3(0.0, 0.0, 0.0));
 
 Arr* arrMk(char* data, unsigned int x, unsigned int y, std::string name = "", glm::vec3 loc = glm::vec3(0.0, 0.0, 0.0), glm::vec3 rot = glm::vec3(0.0, 0.0, 0.0));
+
+Arr* arrMk(char* data, unsigned int x, unsigned int y, unsigned int z, std::string name = "", glm::vec3 loc = glm::vec3(0.0, 0.0, 0.0), glm::vec3 rot = glm::vec3(0.0, 0.0, 0.0));
