@@ -183,10 +183,10 @@ void Console::render() {
 	_maxNo = std::to_string(_buff.size()).size();
 
 	unsigned int roof;
-	if (_buff.size() < state::line - 2) {
+	if (_buff.size() < state::line - 1 - 1) {
 		roof = _buff.size();
 	} else {
-		roof = state::line - 2;
+		roof = state::line - 1 - 1;
 	}
 
 	for (int l = 0; l < state::line - 1 - 1; l++) {
