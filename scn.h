@@ -36,8 +36,8 @@ namespace scn {
 
 typedef struct Attr {
 	char* _ptr;
-	int _x;
-	int _y;
+	unsigned int _x;
+	unsigned int _y;
 
 	float _loc[3];
 } Attr;
