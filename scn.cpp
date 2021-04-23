@@ -18,6 +18,7 @@
 
 Arr* data;
 char* rhs;
+unsigned int rhsSz;
 bool eq = false;
 
 Attr attr;
@@ -160,6 +161,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			}
 
 			data = arrMk(init, x, y, pair.key(), glm::vec3(0.0, 0.0, -(((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2)) * y)));
+			rhsSz = x * y;
 		}
 	}
 
@@ -167,14 +169,18 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		rhs = (char*) malloc(0);
 
 		if (entry.type() == nlohmann::json::value_t::number_unsigned) {
-			rhs = (char*) realloc(rhs, (sizeof rhs / sizeof *rhs) + 1);
-			rhs[(sizeof rhs / sizeof *rhs) - 1] = (char) ((int) entry);
+			rhsSz++;
+
+			rhs = (char*) realloc(rhs, rhsSz);
+			rhs[rhsSz - 1] = (char) ((int) entry);
 		}
 
 		if (entry.type() == nlohmann::json::value_t::array) {
 			for (const auto& byte : entry) {
-				rhs = (char*) realloc(rhs, (sizeof rhs / sizeof *rhs) + 1);
-				rhs[(sizeof rhs / sizeof *rhs) - 1] = (char) ((int) entry);
+				rhsSz++;
+
+				rhs = (char*) realloc(rhs, rhsSz);
+				rhs[rhsSz - 1] = (char) ((int) entry);
 			}
 		}
 	}
@@ -230,4 +236,8 @@ std::vector<Obj*> pt;
 
 extern "C" void* dataGet() {
 	return data;
+}
+
+extern "C" void* rhsGet() {
+	return rhs;
 }

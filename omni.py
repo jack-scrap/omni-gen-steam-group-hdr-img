@@ -19,6 +19,12 @@ attrGet.argtypes = None
 
 data = attrGet()
 
+rhsGet = scn.rhsGet
+rhsGet.restype = POINTER(c_char)
+rhsGet.argtypes = None
+
+rhs = rhsGet()
+
 class Obj(Structure):
 	_fields_ = [
 		("_loc", c_float * 3),

@@ -20,6 +20,7 @@ extern Console* console;
 
 extern Arr* data;
 extern char* rhs;
+extern unsigned int rhsSz;
 extern bool eq;
 
 extern std::vector<void*> vehicle;
@@ -46,3 +47,5 @@ typedef struct Attr {
 extern "C" Attr attr;
 
 extern "C" void* attrGet();
+
+extern "C" void* rhsGet();
