@@ -21,11 +21,10 @@ Arr* arrMk(char* data, unsigned int sz, std::string name, glm::vec3 loc, glm::ve
 	_->_data = (Idx**) malloc(_->_y * _->_x * sizeof (Idx*));
 
 	// layout
-	GLfloat
-		scale[2] = {
-			(_->_y * layout::stroke) + (_->_x * layout::stride[X]),
-			(_->_y * layout::stroke) + (_->_y * layout::stride[Y])
-		};
+	GLfloat scale[2] = {
+		(_->_y * layout::stroke) + (_->_x * layout::stride[X]),
+		(_->_y * layout::stroke) + (_->_y * layout::stride[Y])
+	};
 
 	// data
 	Obj** child = (Obj**) malloc(0);
@@ -77,11 +76,10 @@ Arr* arrMk(char* data, unsigned int x, unsigned int y, std::string name, glm::ve
 	_->_data = (Idx**) malloc(_->_y * _->_x * sizeof (Idx*));
 
 	// layout
-	GLfloat
-		scale[2] = {
-			(_->_y * layout::stroke) + (_->_x * layout::stride[X]),
-			(_->_y * layout::stroke) + (_->_y * layout::stride[Y])
-		};
+	GLfloat scale[2] = {
+		(_->_y * layout::stroke) + (_->_x * layout::stride[X]),
+		(_->_y * layout::stroke) + (_->_y * layout::stride[Y])
+	};
 
 	// data
 	Obj** child = (Obj**) malloc(0);
