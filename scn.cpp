@@ -234,10 +234,6 @@ extern "C" void** vehicleGet() {
 std::vector<Obj*> mesh;
 std::vector<Obj*> pt;
 
-extern "C" void* dataGet() {
-	return data;
-}
-
 extern "C" void* rhsGet() {
 	return rhs;
 }

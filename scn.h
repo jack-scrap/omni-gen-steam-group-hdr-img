@@ -34,8 +34,6 @@ namespace scn {
 	void init(unsigned int stage, unsigned int lvl);
 }
 
-extern "C" void* dataGet();
-
 typedef struct Attr {
 	char* _ptr;
 	int _x;
