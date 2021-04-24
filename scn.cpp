@@ -176,10 +176,25 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	for (const auto& entry : serial["bound"].items()) {
 		if (entry.key() == "rng") {
 			for (const auto& rng : entry.value()) {
-				for (const auto bound : rng) {
-					Lim* lim = limMk(glm::vec3(bound["loc"][X], bound["loc"][Y], bound["loc"][Z]), glm::vec3(bound["rot"][X], bound["rot"][Y], bound["rot"][Z]));
+				for (const auto& bound : rng) {
+					for (auto it = bound.begin(); it != bound.end(); ++it) {
+						glm::vec3 loc;
+						if (it.key() == "X") {
+							loc[0] = it.value();
+						}
 
-					mesh.push_back(lim->_parent);
+						if (it.key() == "Y") {
+							loc[1] = it.value();
+						}
+
+						if (it.key() == "Z") {
+							loc[2] = it.value();
+						}
+
+						Lim* lim = limMk(loc);
+
+						mesh.push_back(lim->_parent);
+					}
 				}
 			}
 		}
