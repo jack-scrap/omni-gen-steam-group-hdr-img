@@ -1,6 +1,4 @@
-The following will run you through process of "literals"
-
-Literals are the fundamental piece, and will not be evaluated beyond their initial.
+Literals are the fundamental pieces of data, and will not be evaluated beyond their actual representation.
 
 # Booleans
 `False`
@@ -16,26 +14,22 @@ These numbers are decimal (base-10) format.
 Unless this number is `0`, the first digit in the sequence must not be 0.
 
 ## Decimal precision
-To give a number precision beyond an integer, add the dot operator.
+To give a number precision beyond an integer, place decimals after the `.` operator.
 
-`3.7`
+`3.712`
 
-# Arrays
+# Lists
 `[3, 7, 12]`
 
 Every entry in a collection must be of the same type.
 
 # Strings
-Characters are lists of characters.
-
 This can be used to effectively create collections of text.
 
 `"Buffer, other buffer"`
 
 # Dictionaries
 Like lists, braces in enclosed by braces ('{}'), and items are comma-separated.
-
-These items are pairs.
 
 Pairs are separated by `:`, keys proceeding and values following.
 
@@ -51,17 +45,20 @@ The value `None` represents a non-existent value.
 
 This allows for the creation of variables without assigning a value.
 
-# Hexadecimal
+# Separate formats
+Besides decimal, other numeric formats are provided.
+
+## Hexadecimal
 Being base-16, this proves useful for sets of data scaling by powers of 2.
 
 `0x3`
 
-# Octal
+## Octal
 Numbers beginning with `0` are treated as octal numbers.
 
 `03`
 
-# Binary
+## Binary
 Numbers beginning with `0b` are treated as binary numbers.
 
 `0b3`

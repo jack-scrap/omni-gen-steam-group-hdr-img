@@ -6,12 +6,16 @@ Expressions are read left to right.
 `10`
 
 # Operators
-The following "infix" operators take a left and right hand side operand.
+The following "infix" operators take a numeric left and right hand side operand.
 
 `+`
 `-`
 `*`
 `/`
+
+An example expression is below.
+
+`3 + 7`
 
 # Order of operations
 Expressions are not evaluated linearly, and certain operators take precedence over others.
@@ -23,10 +27,14 @@ The acronym "PEMDAS" describes Python's evaluation order.
 3. Multiplication, division
 4. Addition, subtraction
 
-## Parenthesis
-To change the order of operations, brackets can surround expressions.
+`3 + 7 * 12`
 
-Observe below how the initial, and the greater expression produces a different result.
+Despite the `+` operator proceeding, the `*` operator takes precedence.
+
+## Parenthesis
+To change the order of operations, brackets can surround expressions to make the contained expression take precedence.
+
+Observe below how the following expression produces a different result given the different order of execution.
 
 `3 + 7 * 12`
 `12 * 7`
@@ -82,7 +90,7 @@ When a integer is desired, "floor division" will eliminate precision beyond a wh
 `2`
 
 # Increment
-Special versions of the mathematical operators with a trailing equals sign exist as shorthand for common expressions.
+Special versions of the mathematical operators with a trailing equals sign exist.
 
 - `+=`
 - `-=`
@@ -92,6 +100,9 @@ Special versions of the mathematical operators with a trailing equals sign exist
 - `//=`
 - `**=`
 
-The following are equivalent
+This is a shorthand for the common expression where a variable has its value updated, having its initial value accessed and updated accordingly.
+
+The following are equivalent.
+
 `var = var + 3`
 `var += 3`

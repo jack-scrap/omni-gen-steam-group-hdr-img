@@ -4,24 +4,24 @@
 [F3] Prompt
 
 ## File Browser
-[Down Arrow] -           Next entry
-[Up Arrow] -             Previous entry
-[Enter (Directory)] -    Change current directory
-[Enter (File)] -         Open in editor
+[Down Arrow] -             Next entry
+[Up Arrow] -               Previous entry
+[Enter *directory*] -      Change current directory
+[Enter *file*] -           Open in editor
 
 ## Editor
-[Enter] -                New line
+[Enter] -                  New line
 
 ## Prompt
-*command* *argument* ...
+`*command* *argument* ...`
 
-[Enter] -                Run
+[Enter] -                  Run
 
 # Display
-[Left Mouse Button] -    Pan camera
-[Scroll Wheel] -         Zoom
+[Left Mouse Button] -      Pan camera
+[Scroll Wheel] -           Zoom
 
 # Command
-save -                   Write buffer to disk
-open -                   Open in editor
-run -                    Execute
+`save` -                   Write buffer to disk
+`open` -                   Open in editor
+`run` -                    Execute

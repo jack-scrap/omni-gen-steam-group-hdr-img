@@ -1,5 +1,9 @@
 The following will run you through general operators in Python.
 
+TODO: infix
+TODO: postfix
+TODO: prefix
+
 # Assignment
 The assignment operator, `=` assigns the value on the right to the value on the left.
 
