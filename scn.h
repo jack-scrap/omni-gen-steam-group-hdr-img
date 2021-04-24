@@ -30,10 +30,6 @@ extern "C" void** vehicleGet();
 extern std::vector<Obj*> mesh;
 extern std::vector<Obj*> pt;
 
-namespace scn {
-	void init(unsigned int stage, unsigned int lvl);
-}
-
 typedef struct Attr {
 	char* _ptr;
 	unsigned int _x;
@@ -47,3 +43,7 @@ extern "C" Attr attr;
 extern "C" void* attrGet();
 
 extern "C" void* rhsGet();
+
+namespace scn {
+	void init(unsigned int stage, unsigned int lvl);
+}

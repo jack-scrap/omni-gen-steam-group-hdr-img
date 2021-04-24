@@ -27,6 +27,18 @@ void* attrGet() {
 	return &attr;
 }
 
+std::vector<void*> vehicle;
+extern "C" void** vehicleGet() {
+	return &vehicle[0];
+}
+
+std::vector<Obj*> mesh;
+std::vector<Obj*> pt;
+
+extern "C" void* rhsGet() {
+	return rhs;
+}
+
 void scn::init(unsigned int stage, unsigned int lvl) {
 	nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("lvl/" + omni::stage[stage] + "/" + std::to_string(lvl) + ".json"));
 
@@ -226,16 +238,4 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	mesh.push_back(data->_parent);
-}
-
-std::vector<void*> vehicle;
-extern "C" void** vehicleGet() {
-	return &vehicle[0];
-}
-
-std::vector<Obj*> mesh;
-std::vector<Obj*> pt;
-
-extern "C" void* rhsGet() {
-	return rhs;
 }
