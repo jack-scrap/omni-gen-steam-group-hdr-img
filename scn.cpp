@@ -27,12 +27,6 @@ unsigned int r;
 float* coneRng;
 unsigned int c = 0;
 
-Attr attr;
-
-void* attrGet() {
-	return &attr;
-}
-
 extern "C" void* boundRngGet() {
 	return boundRng;
 }
@@ -51,6 +45,10 @@ std::vector<Obj*> pt;
 
 extern "C" void* rhsGet() {
 	return rhs;
+}
+
+extern "C" void* dataGet() {
+	return data;
 }
 
 void scn::init(unsigned int stage, unsigned int lvl) {
@@ -116,15 +114,6 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				}
 
 				data = dataMk(init, sz, pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2))));
-				attr = {
-					init,
-					data->_x,
-					data->_y, {
-						data->_loc[0],
-						data->_loc[1],
-						data->_loc[2]
-					}
-				};
 			}
 
 			// 2D

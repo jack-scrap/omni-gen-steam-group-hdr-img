@@ -6,19 +6,21 @@ crane = CDLL('libcrane.so')
 scn = CDLL('libscn.so')
 
 # data
-class Attr(Structure):
-        _fields_ = [
-                ("_ptr", POINTER(c_char)),
-                ("_x", c_int),
-                ("_y", c_int),
-                ("_loc", c_float * 3)
-        ]
+class Data(Structure):
+    _fields_ = [
+        ("_parent", c_ulong),
+        ("_ptr", c_ulong),
+        ("_depth", c_uint),
+        ("_x", c_uint),
+        ("_y", c_uint),
+        ("_z", c_uint)
+    ]
 
-attrGet = scn.attrGet
-attrGet.restype = POINTER(Attr)
-attrGet.argtypes = None
+dataGet = scn.dataGet
+dataGet.restype = POINTER(Data)
+dataGet.argtypes = None
 
-data = attrGet()
+data = dataGet()
 
 rhsGet = scn.rhsGet
 rhsGet.restype = POINTER(c_char)
