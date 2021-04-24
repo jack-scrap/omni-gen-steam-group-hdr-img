@@ -21,10 +21,17 @@ unsigned int sz;
 char* rhs;
 bool eq = false;
 
+float* boundRng;
+unsigned int r;
+
 Attr attr;
 
 void* attrGet() {
 	return &attr;
+}
+
+extern "C" void* boundRngGet() {
+	return boundRng;
 }
 
 std::vector<void*> vehicle;
@@ -173,6 +180,8 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	// bound
+	boundRng = (float*) malloc(0);
+
 	for (const auto& entry : serial["bound"].items()) {
 		if (entry.key() == "rng") {
 			for (const auto& rng : entry.value()) {
@@ -181,10 +190,20 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 						glm::vec3 loc = glm::vec3(0.0);
 						glm::vec3 rot = glm::vec3(0.0);
 						if (it.key() == "X") {
+							r++;
+
+							boundRng = (float*) realloc(boundRng, r * sizeof (float));
+							boundRng[r - 1] = it.value();
+
 							loc[X] = it.value();
 						}
 
 						if (it.key() == "Z") {
+							r++;
+
+							boundRng = (float*) realloc(boundRng, r * sizeof (float));
+							boundRng[r - 1] = it.value();
+
 							loc[Z] = it.value();
 						}
 

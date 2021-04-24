@@ -23,6 +23,10 @@ extern unsigned int sz;
 extern char* rhs;
 extern bool eq;
 
+extern float* boundRng;
+
+extern "C" void* boundRngGet();
+
 extern std::vector<void*> vehicle;
 
 extern "C" void** vehicleGet();

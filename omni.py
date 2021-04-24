@@ -26,6 +26,13 @@ rhsGet.argtypes = None
 
 rhs = rhsGet()
 
+# bound
+boundRngGet = scn.boundRngGet
+boundRngGet.restype = POINTER(c_float)
+boundRngGet.argtypes = None
+
+boundRng = boundRngGet()
+
 # vehicle
 class Obj(Structure):
 	_fields_ = [
