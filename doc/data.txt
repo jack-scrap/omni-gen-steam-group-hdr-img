@@ -1,23 +1,94 @@
-Data structures
+Data structures are contrived.
 
-Some are provided by the Python programming language, some are not.
-In the case that they aren't, one must be contrived given the tools in the language.
+Interfaces to create basic data structures are provided by the Python programming language.
+Examples are arrays (`[3, 7, 12]`), dictionaries (`{key: value}`) and strings (`"Text"`).
+
+The following section will go over the contriving of more complex data structures given tools in the language.
 
 # List
-TODO list is a grid
+## Linked list
+A "linked" list describes a list where the individual items have a value, and knowledge of the next node.
 
-# Linked list
-A "linked" list only has knowledge of the next.
+This allows for creation of a list where the individual items are inherently disconnected.
 
-# Stack
+```
+class Node:
+    def __init__(self, val, next):
+        self._var = val
+
+        self._next = next
+
+    def disp(self):
+        print(self._var)
+
+        if self._next:
+            self._next.print_var()
+
+other_node = Node(7, None)
+node = Node(3, other_node)
+
+node.print_var()
+```
+
+The previous will continually print values.
+
+In order to signal the end and terminate the list, `None` can simply be provided.
+
+## Stack
 A "stack" is a list where operations are only permissible on the top element.
 
 Referred to as "FIFO" (First-in, first-out)
 
 Exactly two operations exist, "push" and "pop".
 
+A stack simply being a list, exclusive usage of the `push` and `pop` functions effectively creates a stack.
+
+```
+ls = [3, 7, 12]
+
+ls.pop()
+
+ls.push(3)
+```
+
 # Queue
-TODO
+A queue list a list, "FILO (First-in, last-out)".
+
+Adding data involves adding it to the end of the list, and removing data involves adding it to the begnning of the list.
+
+This is useful for keeping track of data that is dependant on the time at which they were created.
+
+```
+ls = [3, 7, 12]
+
+ls.pop(0)
+
+ls.push(3)
+```
 
 # Graph
-Disconnected "nodes".
+A graph is a node-based data structure where the nodes may have any number of connections to other nodes.
+
+No "order" exists, and any node may be connected to any number of other nodes.
+
+```
+class Node:
+    def __init__(self, val, next):
+        self._var = val
+
+        self._next = next
+
+    def disp(self):
+        print(self._var)
+
+        for node in self._next:
+            node.print_var()
+
+node = Node(3, [])
+other_node = Node(7, [node])
+another_node = Node(12, [node])
+
+another_node.print_var()
+```
+
+With no inherent order, cyclical lists may be created.

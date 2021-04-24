@@ -27,7 +27,7 @@ if 3 == 7:
 ```
 
 ## elif
-The `elif` statements are additional statements following the first.
+The `elif` statements are additional conditions following the first.
 
 ```
 if 3 == 7:
@@ -80,7 +80,6 @@ while i < 3:
 	i += 1
 ```
 
-# Statements
 ## Short-circuiting
 The `break` statement will terminate the loop, ignoring the rest of the current iteration and all future ones.
 
@@ -95,14 +94,14 @@ while i < 3:
 Here, the first iteration will run until the `break` statement is executed, at which point the current iteration terminates and no future ones will execute.
 
 ## continue
-The `continue` will ignore the rest of the current iteration, and proceed to the next.
+The `continue` statement will ignore the rest of the current iteration, and proceed to the next.
 
 ```
 i = 0 
 while i < 3:
-	continue
-
 	i += 1
+
+	continue
 ```
 
 # pass

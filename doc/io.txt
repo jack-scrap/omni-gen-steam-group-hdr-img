@@ -27,15 +27,18 @@ Retrieving the text contents of a file is performed with the `read()` function.
 `handle.write('Text')`
 
 ## Permissions
-File permissions dictate the ability of the language to perform certain operations.
+File permissions dictate the ability to perform certain operations.
 
-This can ensure that unwnated operations are not performed.
+This can ensure that only the intended operations are not performed.
 
 `r` - Read
 `w` - Write
 `x` - Execute
 
-These are provided in a continuous string.
+These are formatted into a continuous string.
+
+Should the permission be off, `-` will be provided.
+Should the permission be on, the respective character will be provided.
 
 `rx-`
 
