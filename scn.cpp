@@ -178,13 +178,9 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			for (const auto& rng : entry.value()) {
 				for (const auto& bound : rng) {
 					for (auto it = bound.begin(); it != bound.end(); ++it) {
-						glm::vec3 loc;
+						glm::vec3 loc = glm::vec3(0.0);
 						if (it.key() == "X") {
 							loc[0] = it.value();
-						}
-
-						if (it.key() == "Y") {
-							loc[1] = it.value();
 						}
 
 						if (it.key() == "Z") {
