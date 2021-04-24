@@ -21,7 +21,7 @@ unsigned int sz;
 char* rhs;
 bool eq = false;
 
-float* boundRng;
+End* boundRng;
 unsigned int r;
 
 Attr attr;
@@ -180,7 +180,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	// bound
-	boundRng = (float*) malloc(0);
+	boundRng = (End*) malloc(0);
 
 	for (const auto& entry : serial["bound"].items()) {
 		if (entry.key() == "rng") {
@@ -192,8 +192,12 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 						if (it.key() == "X") {
 							r++;
 
-							boundRng = (float*) realloc(boundRng, r * sizeof (float));
-							boundRng[r - 1] = it.value();
+							boundRng = (End*) realloc(boundRng, r * sizeof (End));
+
+							boundRng[r - 1] = {
+								X,
+								it.value()
+							};
 
 							loc[X] = it.value();
 						}
@@ -201,8 +205,12 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 						if (it.key() == "Z") {
 							r++;
 
-							boundRng = (float*) realloc(boundRng, r * sizeof (float));
-							boundRng[r - 1] = it.value();
+							boundRng = (End*) realloc(boundRng, r * sizeof (End));
+
+							boundRng[r - 1] = {
+								Z,
+								it.value()
+							};
 
 							loc[Z] = it.value();
 						}

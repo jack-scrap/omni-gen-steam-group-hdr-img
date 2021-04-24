@@ -23,7 +23,13 @@ extern unsigned int sz;
 extern char* rhs;
 extern bool eq;
 
-extern float* boundRng;
+typedef struct End {
+	unsigned int _axis;
+
+	float _val;
+} End;
+
+extern End* boundRng;
 
 extern "C" void* boundRngGet();
 

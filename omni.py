@@ -27,8 +27,14 @@ rhsGet.argtypes = None
 rhs = rhsGet()
 
 # bound
+class End(Structure):
+    _fields_ = [
+        ("_axis", c_uint),
+        ("_val", c_float)
+    ]
+
 boundRngGet = scn.boundRngGet
-boundRngGet.restype = POINTER(c_float)
+boundRngGet.restype = POINTER(End)
 boundRngGet.argtypes = None
 
 boundRng = boundRngGet()
