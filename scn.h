@@ -32,7 +32,12 @@ typedef struct End {
 extern End* boundRng;
 extern "C" unsigned int r;
 
+extern "C" float* coneRng;
+extern "C" unsigned int c;
+
 extern "C" void* boundRngGet();
+
+extern "C" void* coneRngGet();
 
 extern std::vector<void*> vehicle;
 

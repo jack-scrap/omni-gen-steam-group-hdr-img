@@ -24,6 +24,9 @@ bool eq = false;
 End* boundRng;
 unsigned int r;
 
+float* coneRng;
+unsigned int c = 0;
+
 Attr attr;
 
 void* attrGet() {
@@ -32,6 +35,10 @@ void* attrGet() {
 
 extern "C" void* boundRngGet() {
 	return boundRng;
+}
+
+extern "C" void* coneRngGet() {
+	return coneRng;
 }
 
 std::vector<void*> vehicle;
@@ -181,6 +188,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 	// bound
 	boundRng = (End*) malloc(0);
+	coneRng = (float*) malloc(0);
 
 	for (const auto& entry : serial["bound"].items()) {
 		if (entry.key() == "rng") {
@@ -225,6 +233,13 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 		if (entry.key() == "cone") {
 			for (const auto& entry : entry.value()) {
+				c++;
+
+				coneRng = (float*) realloc(coneRng, c * 3 * sizeof (float));
+				for (int i = 0; i < 3; i++) {
+					coneRng[(c * 3) - 3 + i] = entry[i];
+				}
+
 				Cone* cone = coneMk(glm::vec3(entry[X], entry[Y], entry[Z]));
 
 				mesh.push_back(cone->_parent);

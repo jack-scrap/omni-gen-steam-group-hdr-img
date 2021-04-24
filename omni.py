@@ -39,6 +39,12 @@ boundRngGet.argtypes = None
 
 boundRng = boundRngGet()
 
+coneRngGet = scn.coneRngGet
+coneRngGet.restype = POINTER(c_float)
+coneRngGet.argtypes = None
+
+coneRng = coneRngGet()
+
 # vehicle
 class Obj(Structure):
 	_fields_ = [
