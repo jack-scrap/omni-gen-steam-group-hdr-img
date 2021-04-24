@@ -179,6 +179,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				for (const auto& bound : rng) {
 					for (auto it = bound.begin(); it != bound.end(); ++it) {
 						glm::vec3 loc = glm::vec3(0.0);
+						glm::vec3 rot = glm::vec3(0.0);
 						if (it.key() == "X") {
 							loc[X] = it.value();
 						}
@@ -187,7 +188,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 							loc[Z] = it.value();
 						}
 
-						Lim* lim = limMk(loc);
+						Lim* lim = limMk(loc, rot);
 
 						mesh.push_back(lim->_parent);
 					}
