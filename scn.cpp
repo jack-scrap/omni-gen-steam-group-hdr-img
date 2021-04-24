@@ -180,11 +180,11 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					for (auto it = bound.begin(); it != bound.end(); ++it) {
 						glm::vec3 loc = glm::vec3(0.0);
 						if (it.key() == "X") {
-							loc[0] = it.value();
+							loc[X] = it.value();
 						}
 
 						if (it.key() == "Z") {
-							loc[2] = it.value();
+							loc[Z] = it.value();
 						}
 
 						Lim* lim = limMk(loc);
