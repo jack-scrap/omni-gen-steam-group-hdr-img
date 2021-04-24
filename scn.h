@@ -30,6 +30,7 @@ typedef struct End {
 } End;
 
 extern End* boundRng;
+extern "C" unsigned int r;
 
 extern "C" void* boundRngGet();
 
