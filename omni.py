@@ -5,6 +5,7 @@ truck = CDLL('libtruck.so')
 crane = CDLL('libcrane.so')
 scn = CDLL('libscn.so')
 
+# data
 class Attr(Structure):
         _fields_ = [
                 ("_ptr", POINTER(c_char)),
@@ -25,6 +26,7 @@ rhsGet.argtypes = None
 
 rhs = rhsGet()
 
+# vehicle
 class Obj(Structure):
 	_fields_ = [
 		("_loc", c_float * 3),
