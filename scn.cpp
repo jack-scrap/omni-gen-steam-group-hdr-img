@@ -107,61 +107,63 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	// data
-	for (const auto& pair : serial["data"].items()) {
-		// 1D
-		if (serial["data"]["state"][0].type() == nlohmann::json::value_t::number_unsigned) {
-			char* init = (char*) malloc(0);
-			unsigned int sz = 0;
+	if (serial["data"]["state"].type() == nlohmann::json::value_t::array) {
+		for (const auto& pair : serial["data"].items()) {
+			// 1D
+			if (serial["data"]["state"][0].type() == nlohmann::json::value_t::number_unsigned) {
+				char* init = (char*) malloc(0);
+				unsigned int sz = 0;
 
-			for (const auto& item : serial["data"][pair.key()]) {
-				if (item.type() == nlohmann::json::value_t::number_unsigned) {
-					sz++;
+				for (const auto& item : serial["data"][pair.key()]) {
+					if (item.type() == nlohmann::json::value_t::number_unsigned) {
+						sz++;
 
-					init = (char*) realloc(init, sz * sizeof (char));
-					init[sz - 1] = (char) ((int) item);
+						init = (char*) realloc(init, sz * sizeof (char));
+						init[sz - 1] = (char) ((int) item);
+					}
 				}
+
+				data = dataMk(init, sz, pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2))));
+				attr = {
+					init,
+					data->_x,
+					data->_y, {
+						data->_loc[0],
+						data->_loc[1],
+						data->_loc[2]
+					}
+				};
 			}
 
-			data = dataMk(init, sz, pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2))));
-			attr = {
-				init,
-				data->_x,
-				data->_y, {
-					data->_loc[0],
-					data->_loc[1],
-					data->_loc[2]
-				}
-			};
-		}
+			// 2D
+			if (serial["data"]["state"][0].type() == nlohmann::json::value_t::array) {
+				char* init = (char*) malloc(0);
+				unsigned int x = 0;
+				unsigned int y = 0;
 
-		// 2D
-		if (serial["data"]["state"][0].type() == nlohmann::json::value_t::array) {
-			char* init = (char*) malloc(0);
-			unsigned int x = 0;
-			unsigned int y = 0;
+				unsigned int max = 0;
+				for (const auto& item : serial["data"][pair.key()]) {
+					x = 0;
 
-			unsigned int max = 0;
-			for (const auto& item : serial["data"][pair.key()]) {
-				x = 0;
+					for (const auto& byte : item) {
+						x++;
 
-				for (const auto& byte : item) {
-					x++;
+						if (x > max) {
+							max = x;
+						}
 
-					if (x > max) {
-						max = x;
+						unsigned int sz = ((y * max) + x);
+
+						init = (char*) realloc(init, sz * sizeof (char));
+						init[sz - 1] = (char) ((int) byte);
 					}
 
-					unsigned int sz = ((y * max) + x);
-
-					init = (char*) realloc(init, sz * sizeof (char));
-					init[sz - 1] = (char) ((int) byte);
+					y++;
 				}
 
-				y++;
+				data = dataMk(init, x, y, pair.key(), glm::vec3(0.0, 0.0, -(((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2)) * y)));
+				sz = x * y;
 			}
-
-			data = dataMk(init, x, y, pair.key(), glm::vec3(0.0, 0.0, -(((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2)) * y)));
-			sz = x * y;
 		}
 	}
 
