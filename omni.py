@@ -9,12 +9,12 @@ _scn = CDLL('libscn.so')
 # data
 class _Data(Structure):
     _fields_ = [
-        ("_parent", c_ulong),
-        ("_ptr", c_ulong),
-        ("_depth", c_uint),
-        ("_x", c_uint),
-        ("_y", c_uint),
-        ("_z", c_uint)
+        ('_parent', c_ulong),
+        ('_ptr', c_ulong),
+        ('_depth', c_uint),
+        ('_x', c_uint),
+        ('_y', c_uint),
+        ('_z', c_uint)
     ]
 
 _dataGet = _scn.dataGet
@@ -32,8 +32,8 @@ rhs = _rhsGet()
 # bound
 class _Lim(Structure):
     _fields_ = [
-        ("_axis", c_uint),
-        ("_val", c_float)
+        ('_axis', c_uint),
+        ('_val', c_float)
     ]
 
 _boundRngGet = _scn.boundRngGet
