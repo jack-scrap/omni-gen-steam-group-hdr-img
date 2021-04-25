@@ -30,23 +30,24 @@ rhsGet.argtypes = None
 rhs = rhsGet()
 
 # bound
-class End(Structure):
+class Lim(Structure):
     _fields_ = [
         ("_axis", c_uint),
         ("_val", c_float)
     ]
 
 boundRngGet = scn.boundRngGet
-boundRngGet.restype = POINTER(End)
+boundRngGet.restype = POINTER(Lim)
 boundRngGet.argtypes = None
-
-boundRng = boundRngGet()
 
 coneRngGet = scn.coneRngGet
 coneRngGet.restype = POINTER(c_float)
 coneRngGet.argtypes = None
 
-coneRng = coneRngGet()
+bound = {
+    'rng': boundRngGet(),
+    'cone': coneRngGet()
+}
 
 # vehicle
 class Obj(Structure):
