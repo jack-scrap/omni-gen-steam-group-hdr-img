@@ -94,7 +94,7 @@ _craneGrab.argtypes = None
 
 class _Truck(_Obj):
     def turn(self, delta):
-        _truckTurn(self._ptr, self._rot[1])
+        _truckTurn(self._ptr, delta)
 
     def zoom(self, delta):
         _truckZoom(self._ptr, delta)
