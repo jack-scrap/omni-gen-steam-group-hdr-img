@@ -3,7 +3,7 @@ from ctypes import *
 obj = CDLL('libobj.so')
 truck = CDLL('libtruck.so')
 crane = CDLL('libcrane.so')
-cargoShip = CDLL('libcargo_ship.so')
+cargo_ship = CDLL('libcargo_ship.so')
 scn = CDLL('libscn.so')
 
 # data
@@ -130,13 +130,12 @@ class CargoShip(Obj):
 
         cargoShipZoom(self._ptr, delta)
 
-cargoShipZoom = cargoShip.cargoShipZoom
+cargoShipZoom = cargo_ship.cargoShipZoom
 cargoShipZoom.restype = c_void_p
 cargoShipZoom.argtypes = [
         POINTER(CargoShip),
         c_float
 ]
-
 
 vehicleGet = scn.vehicleGet
 vehicleGet.restype = POINTER(POINTER(Truck))
