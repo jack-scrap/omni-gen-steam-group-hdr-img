@@ -38,7 +38,7 @@ ro:
 
 mk_stage:
 	for DIR in $(STAGE) ; do \
-		mkdir lvl/$$DIR ; \
+		mkdir -p lvl/$$DIR ; \
 	done
 
 clean:
