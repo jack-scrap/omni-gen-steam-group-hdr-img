@@ -93,6 +93,11 @@ _craneGrab.restype = c_void_p
 _craneGrab.argtypes = None
 
 class _Truck(_Obj):
+    _fields_ = [
+        ('_parent', c_ulong),
+        ('_ang', c_float)
+    ]
+
     def turn(self, delta):
         _truckTurn(self._ptr, delta)
 
