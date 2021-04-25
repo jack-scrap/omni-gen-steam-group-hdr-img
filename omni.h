@@ -20,6 +20,9 @@ namespace omni {
 		}, {
 			3,
 			"path"
+		}, {
+			4,
+			"matrix"
 		}
 	};
 

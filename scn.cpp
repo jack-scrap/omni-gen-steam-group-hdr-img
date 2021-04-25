@@ -14,6 +14,7 @@
 #include "data.h"
 #include "lim.h"
 #include "cone.h"
+#include "cargo_ship.h"
 #include "omni.h"
 
 Data* data;
@@ -72,6 +73,13 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 			vehicle.push_back(crane);
 			mesh.push_back(crane->_parent);
+		}
+
+		if (entry["name"] == "cargo_ship") {
+			CargoShip* cargoShip = cargoShipMk(glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]));
+
+			vehicle.push_back(cargoShip);
+			mesh.push_back(cargoShip->_parent);
 		}
 
 		if (entry["name"] == "truck") {
