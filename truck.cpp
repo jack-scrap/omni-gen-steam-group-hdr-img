@@ -10,6 +10,8 @@
 Truck* truckMk(glm::vec3 loc, glm::vec3 rot) {
 	Truck* _ = (Truck*) malloc(sizeof (Truck));
 
+	_->_ang = 0.0;
+
 	Obj* child[(2 * 2) + 1];
 	int i = 0;
 	for (int z = 0; z < 2; z++) {
