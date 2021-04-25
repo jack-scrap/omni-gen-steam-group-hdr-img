@@ -1,13 +1,13 @@
 from ctypes import *
 
-obj = CDLL('libobj.so')
-truck = CDLL('libtruck.so')
-crane = CDLL('libcrane.so')
-cargo_ship = CDLL('libcargo_ship.so')
-scn = CDLL('libscn.so')
+_obj = CDLL('libobj.so')
+_truck = CDLL('libtruck.so')
+_crane = CDLL('libcrane.so')
+_cargo_ship = CDLL('libcargo_ship.so')
+_scn = CDLL('libscn.so')
 
 # data
-class Data(Structure):
+class _Data(Structure):
     _fields_ = [
         ("_parent", c_ulong),
         ("_ptr", c_ulong),
@@ -17,40 +17,40 @@ class Data(Structure):
         ("_z", c_uint)
     ]
 
-dataGet = scn.dataGet
-dataGet.restype = POINTER(Data)
-dataGet.argtypes = None
+_dataGet = _scn.dataGet
+_dataGet.restype = POINTER(_Data)
+_dataGet.argtypes = None
 
-data = dataGet()
+data = _dataGet()
 
-rhsGet = scn.rhsGet
-rhsGet.restype = POINTER(c_char)
-rhsGet.argtypes = None
+_rhsGet = _scn.rhsGet
+_rhsGet.restype = POINTER(c_char)
+_rhsGet.argtypes = None
 
-rhs = rhsGet()
+rhs = _rhsGet()
 
 # bound
-class Lim(Structure):
+class _Lim(Structure):
     _fields_ = [
         ("_axis", c_uint),
         ("_val", c_float)
     ]
 
-boundRngGet = scn.boundRngGet
-boundRngGet.restype = POINTER(Lim)
-boundRngGet.argtypes = None
+_boundRngGet = _scn.boundRngGet
+_boundRngGet.restype = POINTER(_Lim)
+_boundRngGet.argtypes = None
 
-coneRngGet = scn.coneRngGet
-coneRngGet.restype = POINTER(c_float)
-coneRngGet.argtypes = None
+_coneRngGet = _scn.coneRngGet
+_coneRngGet.restype = POINTER(c_float)
+_coneRngGet.argtypes = None
 
 bound = {
-    'rng': boundRngGet(),
-    'cone': coneRngGet()
+    'rng': _boundRngGet(),
+    'cone': _coneRngGet()
 }
 
 # vehicle
-class Obj(Structure):
+class _Obj(Structure):
 	_fields_ = [
 		("_loc", c_float * 3),
                 ("_rot", c_float * 3)
@@ -60,88 +60,88 @@ class Obj(Structure):
 		self._ptr = ptr
 		self._loc = self._ptr.contents._loc
 
-class Crane(Obj):
+class Crane(_Obj):
 	def zoom(self, delta):
 		self._loc[0] += delta
 
-		craneZoom(self._ptr, delta)
+		_craneZoom(self._ptr, delta)
 
 	def pan(self, delta):
-		cranePan(self._ptr, delta)
+		_cranePan(self._ptr, delta)
 
 	def ped(self, delta):
-		cranePed(self._ptr, delta)
+		_cranePed(self._ptr, delta)
 
 	def grab(self):
-		craneGrab(self._ptr)
+		_craneGrab(self._ptr)
 
-craneZoom = crane.craneZoom
-craneZoom.restype = c_void_p
-craneZoom.argtypes = [
+_craneZoom = _crane.craneZoom
+_craneZoom.restype = c_void_p
+_craneZoom.argtypes = [
 	POINTER(Crane),
 	c_float
 ]
 
-cranePan = crane.cranePan
-cranePan.restype = c_void_p
-cranePan.argtypes = [
+_cranePan = _crane.cranePan
+_cranePan.restype = c_void_p
+_cranePan.argtypes = [
 	POINTER(Crane),
 	c_float
 ]
 
-cranePed = crane.cranePed
-cranePed.restype = c_void_p
-cranePed.argtypes = [
+_cranePed = _crane.cranePed
+_cranePed.restype = c_void_p
+_cranePed.argtypes = [
 	POINTER(Crane),
 	c_float
 ]
 
-craneGrab = crane.craneGrab
-craneGrab.restype = c_void_p
-craneGrab.argtypes = None
+_craneGrab = _crane.craneGrab
+_craneGrab.restype = c_void_p
+_craneGrab.argtypes = None
 
-class Truck(Obj):
+class _Truck(_Obj):
     def turn(self, delta):
         self._rot[1] += delta
 
-        truckTurn(self._ptr, self._rot[1])
+        _truckTurn(self._ptr, self._rot[1])
 
     def zoom(self, delta):
         self._loc[0] += delta
 
-        truckZoom(self._ptr, delta)
+        _truckZoom(self._ptr, delta)
 
-truckTurn = truck.truckTurn
-truckTurn.restype = c_void_p
-truckTurn.argtypes = [
-        POINTER(Truck),
+_truckTurn = _truck.truckTurn
+_truckTurn.restype = c_void_p
+_truckTurn.argtypes = [
+        POINTER(_Truck),
         c_float
 ]
 
-truckZoom = truck.truckZoom
-truckZoom.restype = c_void_p
-truckZoom.argtypes = [
-        POINTER(Truck),
+_truckZoom = _truck.truckZoom
+_truckZoom.restype = c_void_p
+_truckZoom.argtypes = [
+        POINTER(_Truck),
         c_float
 ]
 
-class CargoShip(Obj):
+class _CargoShip(_Obj):
     def zoom(self, delta):
         self._loc[0] += delta
 
-        cargoShipZoom(self._ptr, delta)
+        _cargoShipZoom(self._ptr, delta)
 
-cargoShipZoom = cargo_ship.cargoShipZoom
-cargoShipZoom.restype = c_void_p
-cargoShipZoom.argtypes = [
-        POINTER(CargoShip),
+_cargoShipZoom = _cargo_ship.cargoShipZoom
+_cargoShipZoom.restype = c_void_p
+_cargoShipZoom.argtypes = [
+        POINTER(_CargoShip),
         c_float
 ]
 
-vehicleGet = scn.vehicleGet
-vehicleGet.restype = POINTER(POINTER(Truck))
-vehicleGet.argtypes = None
+_vehicleGet = _scn.vehicleGet
+_vehicleGet.restype = POINTER(POINTER(_Truck))
+_vehicleGet.argtypes = None
 
-vehicle = vehicleGet()
+_vehicle = _vehicleGet()
 
-truck = Truck(vehicle[0])
+truck = _Truck(_vehicle[0])
