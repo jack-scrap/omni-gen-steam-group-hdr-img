@@ -101,6 +101,8 @@ class _Truck(_Obj):
     def turn(self, delta):
         _truckTurn(self._ptr, delta)
 
+        self._ang = self._ptr.contents._ang
+
     def zoom(self, delta):
         _truckZoom(self._ptr, delta)
 
