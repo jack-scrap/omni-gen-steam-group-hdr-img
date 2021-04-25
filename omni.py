@@ -139,9 +139,9 @@ cargoShipZoom.argtypes = [
 
 
 vehicleGet = scn.vehicleGet
-vehicleGet.restype = POINTER(POINTER(CargoShip))
+vehicleGet.restype = POINTER(POINTER(Truck))
 vehicleGet.argtypes = None
 
 vehicle = vehicleGet()
 
-cargoShip = CargoShip(vehicle[0])
+truck = Truck(vehicle[0])

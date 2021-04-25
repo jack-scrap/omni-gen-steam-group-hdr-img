@@ -35,10 +35,10 @@ Truck* truckMk(glm::vec3 loc, glm::vec3 rot) {
 
 void truckTurn(Truck* truck, float delta) {
 	if (
-		truck->_rot + delta > truck->_rngWheel[MIN] &&
-		truck->_rot + delta < truck->_rngWheel[MAX]
+		truck->_ang + delta > truck->_rngWheel[MIN] &&
+		truck->_ang + delta < truck->_rngWheel[MAX]
 	) {
-		truck->_rot += delta;
+		truck->_ang += delta;
 
 		for (int z = 0; z < 2; z++) {
 			objAnim(truck->_parent->_child[z * 2], glm::vec3(0.0), glm::vec3(0.0, delta, 0.0));
