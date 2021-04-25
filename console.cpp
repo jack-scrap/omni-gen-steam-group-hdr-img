@@ -57,7 +57,7 @@ void dispatch(Console* console, std::string name) {
 }
 
 Console::Console(std::string name, std::vector<std::string> buff) :
-	_tree(util::fs::ls("script")),
+	_tree(util::fs::ls(".")),
 	_mode(EDITOR),
 	_prog("text", "text") {
 		if (buff.size()) {
