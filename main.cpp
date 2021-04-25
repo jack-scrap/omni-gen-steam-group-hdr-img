@@ -148,13 +148,16 @@ int main(int argc, char** argv) {
 		glUniform1ui(uniActive, true);
 		glUniform2fv(uniRes, 1, glm::value_ptr(disp->_res));
 
+		prog.unUse();
+
+		// draw
 		disp->clear();
 
-		glDrawArrays(
-			GL_QUADS,
-			0,
-			((2 + 3) * 2) * 2 * 3
-		);
+		prog.use();
+
+		glDrawArrays(GL_QUADS, 0, ((2 + 3) * 2) * 2 * 3);
+
+		prog.unUse();
 
 		disp->update();
 
