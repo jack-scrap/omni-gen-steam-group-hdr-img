@@ -58,31 +58,6 @@ class Obj(Structure):
 		self._ptr = ptr
 		self._loc = self._ptr.contents._loc
 
-class Truck(Obj):
-	def turn(self, delta):
-            self._rot[1] += delta
-
-            truckTurn(self._ptr, self._rot[1])
-
-	def zoom(self, delta):
-            self._loc[0] += delta
-
-            truckZoom(self._ptr, delta)
-
-truckTurn = truck.truckTurn
-truckTurn.restype = c_void_p
-truckTurn.argtypes = [
-        POINTER(Truck),
-        c_float
-]
-
-truckZoom = truck.truckZoom
-truckZoom.restype = c_void_p
-truckZoom.argtypes = [
-	POINTER(Truck),
-	c_float
-]
-
 class Crane(Obj):
 	def zoom(self, delta):
 		self._loc[0] += delta
@@ -122,6 +97,31 @@ cranePed.argtypes = [
 craneGrab = crane.craneGrab
 craneGrab.restype = c_void_p
 craneGrab.argtypes = None
+
+class Truck(Obj):
+    def turn(self, delta):
+        self._rot[1] += delta
+
+            truckTurn(self._ptr, self._rot[1])
+
+        def zoom(self, delta):
+            self._loc[0] += delta
+
+            truckZoom(self._ptr, delta)
+
+truckTurn = truck.truckTurn
+truckTurn.restype = c_void_p
+truckTurn.argtypes = [
+        POINTER(Truck),
+        c_float
+]
+
+truckZoom = truck.truckZoom
+truckZoom.restype = c_void_p
+truckZoom.argtypes = [
+        POINTER(Truck),
+        c_float
+]
 
 
 vehicleGet = scn.vehicleGet
