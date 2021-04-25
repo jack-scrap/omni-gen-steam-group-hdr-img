@@ -95,7 +95,7 @@ std::vector<std::map<std::string, std::string>> util::fs::ls(std::string name) {
 					}
 				});
 			} else {
-				if (name != "") {
+				if (name != ".") {
 					tree.push_back({
 						{
 							"name",
