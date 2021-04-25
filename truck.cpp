@@ -49,11 +49,7 @@ void truckTurn(Truck* truck, float delta) {
 }
 
 void truckZoom(Truck* truck, float delta) {
-	glm::vec3 loc = glm::vec3(
-		delta,
-		0.0,
-		0.0
-	);
+	glm::vec3 loc = glm::vec3(delta, 0.0, 0.0);
 
 	objAnim(truck->_parent, loc, glm::vec3(0.0));
 }

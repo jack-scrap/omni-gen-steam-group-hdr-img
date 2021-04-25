@@ -81,11 +81,7 @@ void craneAnim(Crane* crane, glm::vec3 loc) {
 }
 
 void craneZoom(Crane* crane, float delta) {
-	glm::vec3 loc = glm::vec3(
-		delta,
-		0.0,
-		0.0
-	);
+	glm::vec3 loc = glm::vec3(delta, 0.0, 0.0);
 	craneAnim(crane, loc);
 }
 
