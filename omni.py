@@ -51,19 +51,11 @@ bound = {
 
 # vehicle
 class _Obj(Structure):
-	_fields_ = [
-		("_loc", c_float * 3),
-                ("_rot", c_float * 3)
-	]
-
 	def __init__(self, ptr):
 		self._ptr = ptr
-		self._loc = self._ptr.contents._loc
 
 class Crane(_Obj):
 	def zoom(self, delta):
-		self._loc[0] += delta
-
 		_craneZoom(self._ptr, delta)
 
 	def pan(self, delta):
@@ -102,13 +94,9 @@ _craneGrab.argtypes = None
 
 class _Truck(_Obj):
     def turn(self, delta):
-        self._rot[1] += delta
-
         _truckTurn(self._ptr, self._rot[1])
 
     def zoom(self, delta):
-        self._loc[0] += delta
-
         _truckZoom(self._ptr, delta)
 
 _truckTurn = _truck.truckTurn
@@ -127,8 +115,6 @@ _truckZoom.argtypes = [
 
 class _CargoShip(_Obj):
     def zoom(self, delta):
-        self._loc[0] += delta
-
         _cargoShipZoom(self._ptr, delta)
 
 _cargoShipZoom = _cargo_ship.cargoShipZoom
