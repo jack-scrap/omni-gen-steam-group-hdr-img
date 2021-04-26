@@ -27,7 +27,7 @@ Truck* truckMk(glm::vec3 loc, glm::vec3 rot) {
 		}
 	}
 
-	child[2 * 2] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-3.84 - (0.32 * 2), 0.0, 0.0), rot);
+	child[2 * 2] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-3.84 - (0.32 * 2) - 0.32, 0.0, 0.0), rot);
 
 	i++;
 
@@ -60,7 +60,7 @@ Truck* truckMk(char* data, glm::vec3 loc, glm::vec3 rot) {
 		}
 	}
 
-	child[2 * 2] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-3.84 - (0.32 * 2), 0.0, 0.0), rot);
+	child[2 * 2] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-3.84 - (0.32 * 2) - 0.32, 0.0, 0.0), rot);
 
 	i++;
 

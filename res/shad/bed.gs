@@ -12,9 +12,13 @@ uniform mat4
 	view,
 	proj;
 
+float
+	pad = 0.16,
+	stroke = pad * 2;
+
 vec2 sz = vec2(
-	2,
-	-4
+	2 + stroke,
+	-(4 + stroke)
 );
 
 float
