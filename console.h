@@ -62,6 +62,8 @@ class Console {
 
 		std::string _modeStr;
 
+		std::string _cwd;
+
 		std::vector<std::map<std::string, std::string>> _tree;
 
 		std::vector<std::string> _buff;
@@ -79,7 +81,7 @@ class Console {
 
 		const std::string _ps1 = "[] ";
 
-		Console(std::string name, std::vector<std::string> buff);
+		Console(std::string cwd, std::string name, std::vector<std::string> buff);
 
 		void render();
 

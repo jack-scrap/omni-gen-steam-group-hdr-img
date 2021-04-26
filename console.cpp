@@ -56,8 +56,9 @@ void dispatch(Console* console, std::string name) {
 	}
 }
 
-Console::Console(std::string name, std::vector<std::string> buff) :
-	_tree(util::fs::ls(".")),
+Console::Console(std::string cwd, std::string name, std::vector<std::string> buff) :
+	_cwd(cwd),
+	_tree(util::fs::ls(cwd)),
 	_mode(EDITOR),
 	_prog("text", "text") {
 		if (buff.size()) {

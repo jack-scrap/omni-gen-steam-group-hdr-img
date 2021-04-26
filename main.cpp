@@ -85,7 +85,7 @@ int main(int argc, char** argv) {
 		lvl = 0;
 	}
 	std::string name = "script/" + omni::stage[stage] + "/" + std::to_string(lvl) + "/main.py";
-	console = new Console(name, util::fs::rd<std::vector<std::string>>(name));
+	console = new Console(".", name, util::fs::rd<std::vector<std::string>>(name));
 	scn::init(stage, lvl);
 
 	if (boot) {
