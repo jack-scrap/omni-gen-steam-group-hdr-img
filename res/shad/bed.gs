@@ -27,7 +27,7 @@ void main() {
 			for (int x = 0; x < 2; x++) {
 				gl_Position = proj * view * model * vec4(
 					gl_in[0].gl_Position.xyz + vec3(
-						bool(x) ? 1 : -1,
+						(bool(x) ? 1 : -1) * (sz.x / 2),
 						y * thick,
 						z * sz.y
 					),
