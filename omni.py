@@ -95,6 +95,7 @@ _craneGrab.argtypes = None
 class _Truck(_Obj):
     _fields_ = [
         ('_parent', c_ulong),
+        ('_ptr', c_ulong),
         ('_ang', c_float)
     ]
 

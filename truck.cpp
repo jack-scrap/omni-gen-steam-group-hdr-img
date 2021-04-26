@@ -10,6 +10,7 @@
 Truck* truckMk(glm::vec3 loc, glm::vec3 rot) {
 	Truck* _ = (Truck*) malloc(sizeof (Truck));
 
+	_->_ptr = nullptr;
 	_->_ang = 0.0;
 
 	Obj* child[(2 * 2) + 1];
@@ -27,6 +28,43 @@ Truck* truckMk(glm::vec3 loc, glm::vec3 rot) {
 	}
 
 	child[2 * 2] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-3.84 - (0.32 * 2), 0.0, 0.0), rot);
+
+	i++;
+
+	child[(2 * 2) + 1] = nullptr;
+
+	i++;
+
+	_->_parent = objMk("truck/front", "obj", "dir", true, child, sizeof child / sizeof *child, loc + glm::vec3(2.4, 1.3, 0.0), rot);
+
+	return _;
+}
+
+Truck* truckMk(char* data, glm::vec3 loc, glm::vec3 rot) {
+	Truck* _ = (Truck*) malloc(sizeof (Truck));
+
+	_->_ptr = data;
+	_->_ang = 0.0;
+
+	Obj* child[(2 * 2) + 1 + 1];
+	int i = 0;
+	for (int z = 0; z < 2; z++) {
+		for (int x = 0; x < 2; x++) {
+			Obj* rim[] = {
+				objMk("rim", "obj", "dir", true)
+			};
+
+			child[i] = objMk("wheel", "obj", "dir", false, rim, sizeof rim / sizeof *rim, glm::vec3(x * -2.6, -1, z ? 1 : -1), glm::vec3(0.0, z * M_PI, 0.0));
+
+			i++;
+		}
+	}
+
+	child[2 * 2] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-3.84 - (0.32 * 2), 0.0, 0.0), rot);
+
+	i++;
+
+	child[(2 * 2) + 1] = objMk("container_2x4", "obj", "dir", true, glm::vec3(-((4.0 / 2) + 0.42), (2.0 / 2) + 0.5, 0.0), glm::vec3(0.0, M_PI / 2, 0.0));
 
 	i++;
 

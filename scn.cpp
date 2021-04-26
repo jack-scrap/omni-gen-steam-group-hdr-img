@@ -83,7 +83,13 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		}
 
 		if (entry["name"] == "truck") {
-			Truck* truck = truckMk(glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]));
+			char* init = (char*) malloc(0);
+
+			init = (char*) realloc(init, sizeof (char));
+
+			init[0] = 'a';
+
+			Truck* truck = truckMk(init, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]));
 
 			vehicle.push_back(truck);
 			mesh.push_back(truck->_parent);
