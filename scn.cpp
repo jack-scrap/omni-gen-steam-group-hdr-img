@@ -102,7 +102,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				0.0, 0.0, 0.0
 			};
 
-			GLushort idx[Y] = {
+			GLushort idx[1] = {
 				0
 			};
 
