@@ -15,7 +15,9 @@ Truck* truckMk(glm::vec3 loc, glm::vec3 rot) {
 
 	_->_ang = 0.0;
 
-	Obj* child[(2 * 2) + 1 + 1];
+	unsigned int w = 2 + sz;
+
+	Obj* child[(w * 2) + 1 + 1];
 	int i = 0;
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < 2; x++) {
@@ -29,9 +31,9 @@ Truck* truckMk(glm::vec3 loc, glm::vec3 rot) {
 		}
 	}
 
-	child[2 * 2] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-(2 * 4.0) - (layout::stroke) - (layout::stroke * 2), 0.0, 0.0), rot);
+	child[w * 2] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-(2 * 4.0) - (layout::stroke) - (layout::stroke * 2), 0.0, 0.0), rot);
 
-	child[(2 * 2) + 1] = nullptr;
+	child[(w * 2) + 1] = nullptr;
 
 	_->_parent = objMk("truck/front", "obj", "dir", true, child, sizeof child / sizeof *child, loc + glm::vec3(2.4, 1.3, 0.0), rot);
 
@@ -46,10 +48,12 @@ Truck* truckMk(char* data, unsigned int sz, glm::vec3 loc, glm::vec3 rot) {
 
 	_->_ang = 0.0;
 
-	Obj* child[(2 * 2) + sz + 1];
+	unsigned int w = 2 + sz;
+
+	Obj* child[(w * 2) + sz + 1];
 	int i = 0;
 	for (int z = 0; z < 2; z++) {
-		for (int x = 0; x < 2; x++) {
+		for (int x = 0; x < w; x++) {
 			Obj* rim[] = {
 				objMk("rim", "obj", "dir", true)
 			};
@@ -60,10 +64,10 @@ Truck* truckMk(char* data, unsigned int sz, glm::vec3 loc, glm::vec3 rot) {
 		}
 	}
 
-	child[2 * 2] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-(2 * 4.0) - (layout::stroke) - (layout::stroke * 2), 0.0, 0.0), rot);
+	child[w * 2] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-(2 * 4.0) - (layout::stroke) - (layout::stroke * 2), 0.0, 0.0), rot);
 
 	for (int i = 0; i < sz; i++) {
-		child[(2 * 2) + 1 + i] = objMk("container_2x4", "obj", "dir", true, glm::vec3(-((i * (layout::idx[Y] + (layout::pad * 2))) + (layout::idx[Y] / 2) + 0.42), ((2.0 / 2) + 0.5), 0.0), glm::vec3(0.0, M_PI / 2, 0.0));
+		child[(w * 2) + 1 + i] = objMk("container_2x4", "obj", "dir", true, glm::vec3(-((i * (layout::idx[Y] + (layout::pad * 2))) + (layout::idx[Y] / 2) + 0.42), ((2.0 / 2) + 0.5), 0.0), glm::vec3(0.0, M_PI / 2, 0.0));
 	}
 
 	_->_parent = objMk("truck/front", "obj", "dir", true, child, sizeof child / sizeof *child, loc + glm::vec3(2.4, 1.3, 0.0), rot);
