@@ -21,7 +21,7 @@ typedef struct Truck {
 
 Truck* truckMk(glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0, 0.0, 0.0));
 
-Truck* truckMk(char* data, unsigned int ptr, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0, 0.0, 0.0));
+Truck* truckMk(char* data, unsigned int sz, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0, 0.0, 0.0));
 
 extern "C" void truckTurn(Truck* truck, float delta);
 
