@@ -1,4 +1,4 @@
-Data structures are contrived.
+Data structures are
 
 Interfaces to create basic data structures are provided by the Python programming language.
 Examples are arrays (`[3, 7, 12]`), dictionaries (`{key: value}`) and strings (`"Text"`).
@@ -18,30 +18,39 @@ class Node:
 
         self._next = next
 
-    def disp(self):
-        print(self._var)
-
-        if self._next:
-            self._next.print_var()
-
 other_node = Node(7, None)
 node = Node(3, other_node)
-
-node.print_var()
 ```
 
 The previous will continually print values.
 
 In order to signal the end and terminate the list, `None` can simply be provided.
 
+### Traversal
+Traversal describes the operations
+
+```
+def disp(self):
+	print(self._var)
+
+	if self._next:
+self._next.print_var()
+
+node.print_var()
+```
+
+### Insertion
+
+### Deletion
+
 ## Stack
 A "stack" is a list where operations are only permissible on the top element.
 
-Referred to as "FIFO" (First-in, first-out)
+Referred to as "FIFO" (First-in, first-out), this structure is useful for scenarios where the most recently item added should take precedence.
 
 Exactly two operations exist, "push" and "pop".
 
-A stack simply being a list, exclusive usage of the `push` and `pop` functions effectively creates a stack.
+A stack simply being a list, exclusive usage of the provided `push` and `pop` functions effectively creates a stack.
 
 ```
 ls = [3, 7, 12]
@@ -50,6 +59,22 @@ ls.pop()
 
 ls.push(3)
 ```
+
+### Pushing
+Pushing adds an item the top of the list.
+
+`ls.push(3)`
+
+This newly added item has the most precedence.
+
+### Popping
+Popping removes the item at the top of the list.
+
+`ls.pop()`
+
+Can be used
+
+Once
 
 # Queue
 A queue list a list, "FILO (First-in, last-out)".
@@ -66,7 +91,105 @@ ls.pop(0)
 ls.push(3)
 ```
 
-# Graph
+### Pushing
+`ls.push(3)`
+
+### Popping
+Providing an index to the `pop()` function can remove an item and re-structure the array, with all remaining items being sequentially indexed.
+
+Passing the initial index, `0` will result in elimination of the first item and give the second item the highest priority.
+
+`ls.pop(0)`
+
+# Node
+A "node" is a structure that contains data and references to other nodes.
+
+This is useful for cases where knowledge of a single node is only required at any time.
+
+```
+class Node:
+    def __init__(self, val, next):
+        self._var = val
+        self._next = next
+```
+
+This inherently creates a non-terminating process, where an operation constantly spawns a new operation.
+The above case constantly requiring another node to be constructed.
+
+However, by providing a non-node value, this sequence will be terminated.
+Providing `None` can effectively represent the end of a sequence.
+
+```
+class Node:
+    def __init__(self, val, next):
+        self._var = val
+        self._next = next
+
+node = Node(3, None)
+other_node(7, node)
+```
+
+## Self-reference
+Should a node reference itself, a non-terminating loop will be created.
+
+```
+class Node:
+		def __init__(self, val, next):
+				self._var = val
+				self._next = next
+
+node = Node(3, node)
+```
+
+## Traversal
+"Traversal" describes operating on a node's data, and then operating on its children.
+
+```
+class Node:
+		def __init__(self, val, next):
+				self._var = val
+				self._next = next
+
+		def fn():
+				print(self._var)
+
+				if __self__:
+					self._next.fn()
+
+node = Node(3, None)
+other_node = Node(7, node)
+```
+
+## Tree
+Nodes in a "tree" may contain other independant nodes, but may not contain references to existing nodes.
+
+The result is a "descending" data structure.
+
+```
+class Node:
+    def __init__(self, val, next):
+        self._var = val
+        self._next = next
+
+    def disp(self):
+        print(self._var)
+
+        for _ in self._next:
+            _.disp()
+
+lower_branch = Node(3, [])
+
+branch = Node(7, [lower_branch])
+other_branch = Node(12, [])
+
+tree = Node(3, [branch, other_branch])
+
+tree.disp()
+```
+
+Created nodes the potential to have knowledge, but have no knowledge of nodes in other "branches".
+
+## Graph
 A graph is a node-based data structure where the nodes may have any number of connections to other nodes.
 
 No "order" exists, and any node may be connected to any number of other nodes.
