@@ -22,7 +22,7 @@ vec2 idx = vec2(
 
 float thick = -(0.2 * 2);
 
-unsigned int sz = 2;
+uniform unsigned int sz;
 
 void main() {
 	for (int y = 0; y < 2; y++) {

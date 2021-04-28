@@ -25,7 +25,7 @@ float
 	fac = 0.1 * 2,
 	thick = -0.2 * 2;
 
-unsigned int sz = 2;
+uniform unsigned int sz;
 
 void main() {
 	for (int y = 0; y < 2; y++) {

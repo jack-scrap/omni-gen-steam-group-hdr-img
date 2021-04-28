@@ -64,7 +64,7 @@ Truck* truckMk(char* data, unsigned int sz, glm::vec3 loc, glm::vec3 rot) {
 		}
 	}
 
-	child[w * 2] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-(2 * 4.0) - (layout::stroke) - (layout::stroke * 2), 0.0, 0.0), rot);
+	child[w * 2] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-(sz * 4.0) - (layout::stroke) - (layout::stroke * 2), 0.0, 0.0), rot);
 
 	for (int i = 0; i < sz; i++) {
 		child[(w * 2) + 1 + i] = objMk("container_2x4", "obj", "dir", true, glm::vec3(-((i * (layout::idx[Y] + (layout::pad * 2))) + (layout::idx[Y] / 2) + 0.42), ((2.0 / 2) + 0.5), 0.0), glm::vec3(0.0, M_PI / 2, 0.0));
