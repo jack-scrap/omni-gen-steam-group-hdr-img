@@ -25,6 +25,8 @@ float
 	fac = 0.1 * 2,
 	thick = -0.2 * 2;
 
+unsigned int sz = 2;
+
 void main() {
 	for (int y = 0; y < 2; y++) {
 		for (int z = 0; z < 2; z++) {
@@ -33,7 +35,7 @@ void main() {
 					gl_in[0].gl_Position.xyz + vec3(
 						(bool(x) ? 1 : -1) * (cont.x / 2),
 						y * thick,
-						z * -cont.y
+						z * sz * -cont.y
 					),
 					1.0
 				);
