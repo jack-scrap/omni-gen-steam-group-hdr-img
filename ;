@@ -1,4 +1,4 @@
-Data structures describe collections of smaller pieces of data, and the relationship between them.
+Data structures are
 
 Interfaces to create basic data structures are provided by the Python programming language.
 Examples are lists (`[3, 7, 12]`), dictionaries (`{key: value}`) and strings (`"Text"`).
@@ -18,18 +18,17 @@ A stack simply being a list, exclusive usage of the provided `push` and `pop` fu
 ```
 ls = [3, 7, 12]
 
-ls.append(3)
-ls.append(7)
-
 ls.pop()
+
+ls.push(3)
 ```
 
 ### Pushing
 Pushing adds an item the top of the list.
 
-`ls.append(3)`
+`ls.push(3)`
 
-This newly added item has the highest precedence, and will be used when operating on the list.
+This newly added item has the highest precedence, and operating on the list will use this new item.
 
 ### Popping
 Popping removes the topmost element from the list.
@@ -39,33 +38,31 @@ Popping removes the topmost element from the list.
 Once the desired operation has been executed, this topmost item is no longer of use.
 
 # Queue
-A "queue" is a list where pushing adds to the end of the list, and popping removes from the beginning.
-
-Referred to as "FILO" (First-in, last-out), this structure is useful for scenarios where the most recently item added should take precedence.
+A queue is a list, "FILO (First-in, last-out)".
 
 Adding data involves adding it to the end of the list, and removing data involves removing the beginning of the list.
 
-This is useful for operating on data that is dependant on the time at which they were created.
+This is useful for operating on data that is dependant on the time at which it was added.
 
 ```
 ls = [3, 7, 12]
 
 ls.pop(0)
 
-ls.append(3)
+ls.push(3)
 ```
 
 ### Pushing
-"Pushing" adds an item to the back of the list.
+The push function adds an item to the back of the list.
 
-`ls.append(3)`
+`ls.push(3)`
 
-This item has the least precedence possible, all previously existing items needing to be operated on previously.
+This item has the least precedence possible, all previously existing items
 
 ### Popping
 Providing an index to the `pop()` function can remove an item at an index besides the last and re-structure the list, with all remaining items being sequentially indexed.
 
-Passing the initial index, `0` will result in elimination of the first item, the second item now having the highest priority.
+Passing the initial index, `0` will result in elimination of the first item and give the second item the highest priority.
 
 `ls.pop(0)`
 
@@ -98,7 +95,7 @@ other_node(7, node)
 ```
 
 ## Self-reference
-Should a node reference itself, a non-terminating process will be created.
+Should a node reference itself, a non-terminating loop will be created.
 
 ```
 class Node:
@@ -110,9 +107,7 @@ node = Node(3, node)
 ```
 
 ## Traversal
-"Traversal" describes operating on a node's data, and then operating on its references.
-
-The following prints the entire content of the data structure.
+"Traversal" describes operating on a node's data, and then operating on its children.
 
 ```
 class Node:
@@ -123,53 +118,25 @@ class Node:
 		def fn():
 				print(self._var)
 
-				self._next()
-```
-
-The case of infinite recursion exists, where the function is constantly required to run a new function.
-
-To terminate this sequence, a conditional check must be implemented.
-
-Setting the final node's attribute to `None` and ensuring that the reference is a node before operating will create a finite process.
-
-```
-			...
-
-			if self._next:
-				self._next.fn()
+				if __self__:
+					self._next.fn()
 
 node = Node(3, None)
 other_node = Node(7, node)
 ```
 
 ### Insertion
-"Insertion" describes adding of a node to another node.
-
-```
-node = Node(3, [])
-
-other_node = Node(7, [])
-
-node._next.append(other_node)
-```
+"Insertion" adds a node at a certain location.
 
 ### Deletion
 "Deletion" describes removal of a node.
 
-With removal of a node, all its reference will be removed.
+With removal of a node, all connections will be lost.
 
 Should no links to these children exist elsewhere, these nodes will be permanently lost.
 
-```
-node = Node(3, [])
-
-other_node = Node(7, [node])
-
-other_node.pop()
-```
-
 ## Linked list
-A "linked" list describes a list where nodes have exactly one reference.
+A "linked" list describes a list where the individual items have a value, and knowledge of the next node.
 
 This allows for creation of a list where the individual items are inherently disconnected.
 
@@ -180,9 +147,16 @@ class Node:
 
 		self._next = next
 
-other_node = Node(7, None)
+	other_node = Node(7, None)
 node = Node(3, other_node)
 	```
+
+	The previous will continually print values.
+
+	In order to signal the end and terminate the list, `None` can simply be provided.
+
+### Traversal
+	Traversal describes the operations
 
 ## Tree
 Nodes in a "tree" may contain other independant nodes, but may not contain references to existing nodes.
@@ -213,14 +187,8 @@ tree.disp()
 
 Created nodes the potential to have knowledge, but have no knowledge of nodes in other "branches".
 
-### Depth
-The "depth" of a tree is the number of connections between the root and the end of the longest chain.
-
-### Breadth
-The "breadth" of a tree is the maximum number of nodes simultaneously existing at a particular level.
-
 ## Graph
-A graph is a node-based data structure where nodes may have any number of connections to other nodes.
+A graph is a node-based data structure where the nodes may have any number of connections to other nodes.
 
 No "order" exists, and any node may be connected to any number of other nodes.
 
