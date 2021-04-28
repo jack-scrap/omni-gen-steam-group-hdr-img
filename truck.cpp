@@ -15,7 +15,7 @@ Truck* truckMk(glm::vec3 loc, glm::vec3 rot) {
 
 	_->_ang = 0.0;
 
-	unsigned int w = 2 + sz;
+	unsigned int w = sz * 2;
 
 	Obj* child[(w * 2) + 1 + 1];
 	int i = 0;
@@ -48,7 +48,7 @@ Truck* truckMk(char* data, unsigned int sz, glm::vec3 loc, glm::vec3 rot) {
 
 	_->_ang = 0.0;
 
-	unsigned int w = 2 + sz;
+	unsigned int w = sz * 2;
 
 	Obj* child[(w * 2) + sz + 1];
 	int i = 0;
