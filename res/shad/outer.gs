@@ -17,7 +17,7 @@ float
 
 vec2 cont = vec2(
 	2 + stroke,
-	-(4 + stroke)
+	4 + stroke
 );
 
 float thick = -(0.2 * 2);
@@ -31,7 +31,7 @@ void main() {
 						gl_in[0].gl_Position.xyz + vec3(
 							(bool(x) ? 1 : -1) * ((cont.x / 2) + (b * stroke)),
 							y * thick,
-							(z * cont.y) - (int(bool(b) && bool(z)) * stroke)
+							(z * -cont.y) - (int(bool(b) && bool(z)) * stroke)
 						),
 						1.0
 					);
@@ -50,7 +50,7 @@ void main() {
 					gl_in[0].gl_Position.xyz + vec3(
 						(bool(x) ? 1 : -1) * ((cont.x / 2) + stroke),
 						y * thick,
-						cont.y - (b * stroke)
+						-cont.y - (b * stroke)
 					),
 					1.0
 				);
@@ -70,7 +70,7 @@ void main() {
 					gl_in[0].gl_Position.xyz + vec3(
 						(bool(x) ? 1 : -1) * ((cont.x / 2) + stroke),
 						y * thick,
-						z * (cont.y - stroke)
+						z * (-cont.y - stroke)
 					),
 					1.0
 				);
@@ -89,7 +89,7 @@ void main() {
 				gl_in[0].gl_Position.xyz + vec3(
 					(bool(x) ? 1 : -1) * ((cont.x / 2) + stroke),
 					y * thick,
-					cont.y - stroke
+					-cont.y - stroke
 				),
 				1.0
 			);

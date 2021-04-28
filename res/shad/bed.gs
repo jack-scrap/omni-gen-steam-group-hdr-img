@@ -18,7 +18,7 @@ float
 
 vec2 cont = vec2(
 	2 + stroke,
-	-(4 + stroke)
+	4 + stroke
 );
 
 float
@@ -33,7 +33,7 @@ void main() {
 					gl_in[0].gl_Position.xyz + vec3(
 						(bool(x) ? 1 : -1) * (cont.x / 2),
 						y * thick,
-						z * cont.y
+						z * -cont.y
 					),
 					1.0
 				);
