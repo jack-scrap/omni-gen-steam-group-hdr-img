@@ -15,7 +15,7 @@ float
 	pad = 0.16,
 	stroke = pad * 2;
 
-vec2 cont = vec2(
+vec2 idx = vec2(
 	2 + stroke,
 	4 + stroke
 );
@@ -31,9 +31,9 @@ void main() {
 				for (int z = 0; z < 2; z++) {
 					gl_Position = proj * view * model * vec4(
 						gl_in[0].gl_Position.xyz + vec3(
-							(bool(x) ? 1 : -1) * ((cont.x / 2) + (b * stroke)),
+							(bool(x) ? 1 : -1) * ((idx.x / 2) + (b * stroke)),
 							y * thick,
-							(z * sz * -cont.y) - (int(bool(b) && bool(z)) * stroke)
+							(z * sz * -idx.y) - (int(bool(b) && bool(z)) * stroke)
 						),
 						1.0
 					);
@@ -50,9 +50,9 @@ void main() {
 			for (int x = 0; x < 2; x++) {
 				gl_Position = proj * view * model * vec4(
 					gl_in[0].gl_Position.xyz + vec3(
-						(bool(x) ? 1 : -1) * ((cont.x / 2) + stroke),
+						(bool(x) ? 1 : -1) * ((idx.x / 2) + stroke),
 						y * thick,
-						(sz * -cont.y) - (b * stroke)
+						(sz * -idx.y) - (b * stroke)
 					),
 					1.0
 				);
@@ -70,9 +70,9 @@ void main() {
 			for (int z = 0; z < 2; z++) {
 				gl_Position = proj * view * model * vec4(
 					gl_in[0].gl_Position.xyz + vec3(
-						(bool(x) ? 1 : -1) * ((cont.x / 2) + stroke),
+						(bool(x) ? 1 : -1) * ((idx.x / 2) + stroke),
 						y * thick,
-						z * -((sz * cont.y) + stroke)
+						z * -((sz * idx.y) + stroke)
 					),
 					1.0
 				);
@@ -89,9 +89,9 @@ void main() {
 		for (int x = 0; x < 2; x++) {
 			gl_Position = proj * view * model * vec4(
 				gl_in[0].gl_Position.xyz + vec3(
-					(bool(x) ? 1 : -1) * ((cont.x / 2) + stroke),
+					(bool(x) ? 1 : -1) * ((idx.x / 2) + stroke),
 					y * thick,
-					(sz * -cont.y) - stroke
+					(sz * -idx.y) - stroke
 				),
 				1.0
 			);

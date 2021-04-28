@@ -16,7 +16,7 @@ float
 	pad = 0.16,
 	stroke = pad * 2;
 
-vec2 cont = vec2(
+vec2 idx = vec2(
 	2 + stroke,
 	4 + stroke
 );
@@ -33,9 +33,9 @@ void main() {
 			for (int x = 0; x < 2; x++) {
 				gl_Position = proj * view * model * vec4(
 					gl_in[0].gl_Position.xyz + vec3(
-						(bool(x) ? 1 : -1) * (cont.x / 2),
+						(bool(x) ? 1 : -1) * (idx.x / 2),
 						y * thick,
-						z * sz * -cont.y
+						z * sz * -idx.y
 					),
 					1.0
 				);
