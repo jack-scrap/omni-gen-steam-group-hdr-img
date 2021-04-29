@@ -49,7 +49,7 @@ Data* dataMk(char* data, unsigned int sz, std::string name, glm::vec3 loc, glm::
 	}
 
 	// identifier
-	Str* id = strMk(name, glm::vec3(0.0, 0.0, -layout::margin * 2));
+	Str* id = strMk(name, glm::vec3(0.0, 0.0, -(layout::margin * 2)));
 	child[noChild - 1] = id->_parent;
 
 	Border* parent = borderMk({
@@ -104,7 +104,7 @@ Data* dataMk(char* data, unsigned int x, unsigned int y, std::string name, glm::
 	}
 
 	// identifier
-	Str* id = strMk(name, glm::vec3(0.0, 0.0, -layout::margin * 2));
+	Str* id = strMk(name, glm::vec3(0.0, 0.0, -(layout::margin * 2)));
 	child[noChild - 1] = id->_parent;
 
 	Border* parent = borderMk({
@@ -163,7 +163,7 @@ Data* dataMk(char* data, unsigned int x, unsigned int y, unsigned int z, std::st
 	}
 
 	// identifier
-	Str* id = strMk(name, glm::vec3(0.0, 0.0, -layout::margin * 2));
+	Str* id = strMk(name, glm::vec3(0.0, 0.0, -(layout::margin * 2)));
 	child[noChild - 1] = id->_parent;
 
 	Border* parent = borderMk({

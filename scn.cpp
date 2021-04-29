@@ -154,20 +154,50 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				// 3D
 				if (serial["data"]["state"][0][0].type() == nlohmann::json::value_t::array) {
 					char* init = (char*) malloc(0);
-					unsigned int sz = 0;
+					unsigned int bound[3] = {
+						0, 0, 0
+					};
+
+					for (const auto& item : serial["data"][pair.key()][0][0]) {
+						bound[X]++;
+					}
+
+					for (const auto& item : serial["data"][pair.key()][0]) {
+						bound[Y]++;
+					}
 
 					for (const auto& item : serial["data"][pair.key()]) {
-						for (const auto& arr : item) {
-							for (const auto& byte : arr) {
+						bound[Z]++;
+					}
+
+					/* for (const auto& item : serial["data"][pair.key()]) { */
+					/* 	for (const auto& arr : item) { */
+					/* 		y++; */
+
+					/* 		init = (char*) realloc(init, y * max * sizeof (char)); */
+
+					/* 		x = 0; */
+					/* 		for (const auto& byte : arr) { */
+					/* 			x++; */
+
+					/* 			init[((y - 1) * max) + x] = 'a'; */
+					/* 		} */
+					/* 	} */
+					/* } */
+
+					unsigned int sz = 0;
+					for (int z = 0; z < 2; z++) {
+						for (int y = 0; y < 2; y++) {
+							for (int x = 0; x < 2; x++) {
 								sz++;
 
 								init = (char*) realloc(init, sz * sizeof (char));
-								init[sz - 1] = (char) ((int) byte);
+								init[sz - 1] = 'a';
 							}
 						}
 					}
 
-					data = dataMk(init, sz, pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2))));
+					data = dataMk(init, bound[X], bound[Y], bound[Z], pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2))));
 				}
 			}
 		}
