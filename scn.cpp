@@ -44,12 +44,12 @@ extern "C" void** vehicleGet() {
 std::vector<Obj*> mesh;
 std::vector<Obj*> pt;
 
-extern "C" void* rhsGet() {
-	return rhs;
-}
-
 extern "C" void* dataGet() {
 	return data;
+}
+
+extern "C" void* rhsGet() {
+	return rhs;
 }
 
 void scn::init(unsigned int stage, unsigned int lvl) {
@@ -112,13 +112,13 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 	// data
 	if (serial["data"]["state"].type() == nlohmann::json::value_t::array) {
-		for (const auto& pair : serial["data"].items()) {
+		for (const auto& map : serial["data"].items()) {
 			// 1D
 			if (serial["data"]["state"][0].type() == nlohmann::json::value_t::number_unsigned) {
 				char* init = (char*) malloc(0);
 				unsigned int sz = 0;
 
-				for (const auto& item : serial["data"][pair.key()]) {
+				for (const auto& item : serial["data"][map.key()]) {
 					if (item.type() == nlohmann::json::value_t::number_unsigned) {
 						sz++;
 
@@ -127,7 +127,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					}
 				}
 
-				data = dataMk(init, sz, pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2))));
+				data = dataMk(init, sz, map.key(), glm::vec3(0.0, 0.0, -((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2))));
 			}
 
 			if (serial["data"]["state"][0].type() == nlohmann::json::value_t::array) {
@@ -138,7 +138,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					unsigned int y = 0;
 
 					unsigned int max = 0;
-					for (const auto& item : serial["data"][pair.key()]) {
+					for (const auto& item : serial["data"][map.key()]) {
 						x = 0;
 
 						for (const auto& byte : item) {
@@ -157,7 +157,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 						y++;
 					}
 
-					data = dataMk(init, x, y, pair.key(), glm::vec3(0.0, 0.0, -(((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2)) * y)));
+					data = dataMk(init, x, y, map.key(), glm::vec3(0.0, 0.0, -(((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2)) * y)));
 					sz = x * y;
 				}
 
@@ -168,15 +168,15 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 						0, 0, 0
 					};
 
-					for (const auto& item : serial["data"][pair.key()][0][0]) {
+					for (const auto& byte : serial["data"][map.key()][0][0]) {
 						bound[X]++;
 					}
 
-					for (const auto& item : serial["data"][pair.key()][0]) {
+					for (const auto& arr : serial["data"][map.key()][0]) {
 						bound[Y]++;
 					}
 
-					for (const auto& item : serial["data"][pair.key()]) {
+					for (const auto& matr : serial["data"][map.key()]) {
 						bound[Z]++;
 					}
 
@@ -192,28 +192,28 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 						}
 					}
 
-					data = dataMk(init, bound[X], bound[Y], bound[Z], pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2))));
+					data = dataMk(init, bound[X], bound[Y], bound[Z], map.key(), glm::vec3(0.0, 0.0, -((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2))));
 				}
 			}
 		}
 	}
 
-	for (const auto& entry : serial["rhs"]) {
+	for (const auto& data : serial["rhs"]) {
 		rhs = (char*) malloc(0);
 
-		if (entry.type() == nlohmann::json::value_t::number_unsigned) {
+		if (data.type() == nlohmann::json::value_t::number_unsigned) {
 			sz++;
 
 			rhs = (char*) realloc(rhs, sz);
-			rhs[sz - 1] = (char) ((int) entry);
+			rhs[sz - 1] = (char) ((int) data);
 		}
 
-		if (entry.type() == nlohmann::json::value_t::array) {
-			for (const auto& byte : entry) {
+		if (data.type() == nlohmann::json::value_t::array) {
+			for (const auto& byte : data) {
 				sz++;
 
 				rhs = (char*) realloc(rhs, sz);
-				rhs[sz - 1] = (char) ((int) entry);
+				rhs[sz - 1] = (char) ((int) data);
 			}
 		}
 	}
@@ -273,15 +273,15 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		}
 
 		if (entry.key() == "cone") {
-			for (const auto& entry : entry.value()) {
+			for (const auto& axis : entry.value()) {
 				c++;
 
 				coneRng = (float*) realloc(coneRng, c * 3 * sizeof (float));
 				for (int i = 0; i < 3; i++) {
-					coneRng[(c * 3) - 3 + i] = entry[i];
+					coneRng[(c * 3) - 3 + i] = axis[i];
 				}
 
-				Cone* cone = coneMk(glm::vec3(entry[X], entry[Y], entry[Z]));
+				Cone* cone = coneMk(glm::vec3(axis[X], axis[Y], axis[Z]));
 
 				mesh.push_back(cone->_parent);
 
@@ -293,7 +293,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					0
 				};
 
-				pt.push_back(objMk(vtx, 3, idx, 1, "bevel/main", "bevel/main", "alert", true, glm::vec3(entry[X], entry[Y], entry[Z]) + glm::vec3(0.0, 1.408, 0.0)));
+				pt.push_back(objMk(vtx, 3, idx, 1, "bevel/main", "bevel/main", "alert", true, glm::vec3(axis[X], axis[Y], axis[Z]) + glm::vec3(0.0, 1.408, 0.0)));
 			}
 		}
 	}

@@ -46,9 +46,9 @@ extern "C" void** vehicleGet();
 extern std::vector<Obj*> mesh;
 extern std::vector<Obj*> pt;
 
-extern "C" void* rhsGet();
-
 extern "C" void* dataGet();
+
+extern "C" void* rhsGet();
 
 namespace scn {
 	void init(unsigned int stage, unsigned int lvl);
