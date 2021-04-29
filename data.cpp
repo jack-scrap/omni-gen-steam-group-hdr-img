@@ -18,7 +18,7 @@ Data* dataMk(char* data, unsigned int sz, std::string name, glm::vec3 loc, glm::
 		_->_loc[i] = loc[i];
 	}
 
-	_->_data = (Idx**) malloc(_->_y * _->_x * sizeof (Idx*));
+	_->_data = (Idx**) malloc(_->_x * _->_y * sizeof (Idx*));
 
 	// layout
 	GLfloat scale[2] = {
@@ -129,7 +129,7 @@ Data* dataMk(char* data, unsigned int x, unsigned int y, unsigned int z, std::st
 		_->_loc[i] = loc[i];
 	}
 
-	_->_data = (Idx**) malloc(_->_z * _->_y * _->_x * sizeof (Idx*));
+	_->_data = (Idx**) malloc(_->_x * _->_y * _->_z * sizeof (Idx*));
 
 	// layout
 	GLfloat scale[3] = {
