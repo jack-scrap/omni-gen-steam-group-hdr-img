@@ -76,7 +76,17 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		}
 
 		if (entry["name"] == "cargo_ship") {
-			CargoShip* cargoShip = cargoShipMk(glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]));
+			char* init = (char*) malloc(0);
+			unsigned int sz = 0;
+
+			for (const auto& byte : entry["data"]) {
+				sz++;
+
+				init = (char*) realloc(init, sz * sizeof (char));
+				init[sz - 1] = (char) ((int) byte);
+			}
+
+			CargoShip* cargoShip = cargoShipMk(init, sz, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]));
 
 			vehicle.push_back(cargoShip);
 			mesh.push_back(cargoShip->_parent);

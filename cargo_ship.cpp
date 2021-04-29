@@ -3,11 +3,19 @@
 #include <glm/glm.hpp>
 
 #include "cargo_ship.h"
+#include "layout.h"
+#include "data.h"
 
-CargoShip* cargoShipMk(glm::vec3 loc, glm::vec3 rot) {
+CargoShip* cargoShipMk(char* init, unsigned int sz, glm::vec3 loc, glm::vec3 rot) {
 	CargoShip* _ = (CargoShip*) malloc(sizeof (CargoShip));
 
-	_->_parent = objMk("cargo_ship", "obj", "dir", true, loc, rot);
+	Data* data = dataMk(init, sz, "state", glm::vec3(-(layout::stride[Y] * sz), 1.0, layout::stride[X]));
+
+	Obj* child[] = {
+		data->_parent
+	};
+
+	_->_parent = objMk("cargo_ship", "obj", "dir", true, child, sizeof child / sizeof *child, loc + glm::vec3(0.0, 10.0, 0.0), rot);
 
 	return _;
 }
