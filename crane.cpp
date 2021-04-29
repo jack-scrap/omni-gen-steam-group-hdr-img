@@ -14,6 +14,8 @@
 Crane* craneMk(glm::vec3 loc, glm::vec3 rot) {
 	Crane* _ = (Crane*) malloc(sizeof (Crane));
 
+	_->_op = nullptr;
+
 	// wheel
 	Obj* child[(2 * 2 * 2 * 2) + 1 + (2 * 2) + 1];
 	int i = 0;
@@ -60,8 +62,6 @@ Crane* craneMk(glm::vec3 loc, glm::vec3 rot) {
 	}
 
 	child[(2 * 2 * 2 * 2) + 1 + (2 * 2)] = nullptr;
-
-	_->_op = nullptr;
 
 	_->_parent = objMk("crane/body", "obj", "dir", true, child, sizeof child / sizeof *child, loc, rot);
 
@@ -111,11 +111,7 @@ void cranePed(Crane* crane, float delta) {
 		loc[Y] > crane->_rngClaw[MIN] &&
 		loc[Y] < crane->_rngClaw[MAX]
 	) {
-		glm::vec3 loc = glm::vec3(
-			0.0,
-			delta,
-			0.0
-		);
+		glm::vec3 loc = glm::vec3(0.0, delta, 0.0);
 
 		objTrans(targ, loc, glm::vec3(0.0));
 	} else {
