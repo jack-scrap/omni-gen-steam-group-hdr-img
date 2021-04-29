@@ -34,9 +34,9 @@ int main(int argc, char** argv) {
 	bool boot;
 
 	// initialize
-	std::map<std::string, int> data = util::cfg::parse("cfg/init.cfg");
+	std::map<std::string, int> setting = util::cfg::parse("cfg/init.cfg");
 
-	for (const auto& [key, val] : data) {
+	for (const auto& [key, val] : setting) {
 		if (key == "skip_boot") {
 			boot = !val;
 		}
