@@ -1,4 +1,6 @@
-The following will run you through the process of efficiently sorting data.
+Algorithms are processes designed to run as efficiently as possible.
+
+By examining sets of data and re-structuring accordingly, operations can eliminate unecessary computations.
 
 # Algorithms
 ## Bubble
@@ -24,13 +26,40 @@ The following will run you through the process of efficiently sorting data.
 ## Insertion
 "Insertion Sort"
 
-## Big-O
-What is referred to as "Big-O" notation describes the effectiveness of an algorithm as it scales over large sets of data.
+Dividing a set of data into a sort portion into an unsorted portion, the algorithm continually proceeds until it encounters a larger item.
 
-O(1)          - constant
-O(n)          - linear
-O(n^2)        - quadratic
-O(n^c)        - polynomial
-O(c^n)        - exponential
-O(log(n))     - logarithmic
-O((loG(n))^c) - polylogarithmic
+`[3] [7]`
+
+Upon encountering a larger item, this item will be added to the sorted portion.
+
+## Selection sort
+Continually proceed until it finds a minimum.
+
+Divide into sorted and unsorted position.
+
+Initially, the first minimum is first item.
+
+## Merge
+"Merge Sort" continually divides data in half.
+
+`[3, 7, 12, 3]`
+`[3, 7]`, `[12, 3]`
+`[3]`, `[7]`, `[12]`, `[3]`
+
+Once sorted, these are combined into a larger set.
+
+This will continue into the greater array has been sorted.
+
+## Quick
+"Quick sort" divid
+
+## Big-O
+What is referred to as "Big-O" notation describes the effectiveness of an algorithm as the input data set scales in size.
+
+O(1)          - Constant
+O(n)          - Linear
+O(n^2)        - Quadratic
+O(n^c)        - Polynomial
+O(c^n)        - Exponential
+O(log(n))     - Logarithmic
+O((loG(n))^c) - Polylogarithmic
