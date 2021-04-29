@@ -135,7 +135,7 @@ Data* dataMk(char* data, unsigned int x, unsigned int y, unsigned int z, std::st
 	GLfloat scale[3] = {
 		(_->_y * layout::stroke) + (_->_x * layout::stride[X]),
 		(_->_y * layout::stroke) + (_->_y * layout::stride[Y]),
-		(_->_z * layout::stroke) + (_->_z * layout::stride[Z])
+		4.0 / 2
 	};
 
 	// data

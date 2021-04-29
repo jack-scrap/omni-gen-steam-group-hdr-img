@@ -170,21 +170,6 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 						bound[Z]++;
 					}
 
-					/* for (const auto& item : serial["data"][pair.key()]) { */
-					/* 	for (const auto& arr : item) { */
-					/* 		y++; */
-
-					/* 		init = (char*) realloc(init, y * max * sizeof (char)); */
-
-					/* 		x = 0; */
-					/* 		for (const auto& byte : arr) { */
-					/* 			x++; */
-
-					/* 			init[((y - 1) * max) + x] = 'a'; */
-					/* 		} */
-					/* 	} */
-					/* } */
-
 					unsigned int sz = 0;
 					for (int z = 0; z < 2; z++) {
 						for (int y = 0; y < 2; y++) {
