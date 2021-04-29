@@ -88,8 +88,8 @@ void craneZoom(Crane* crane, float delta) {
 void cranePan(Crane* crane, float delta) {
 	Obj* targ = crane->_parent->_child[2 * 2 * 2 * 2];
 
-	glm::mat4 d = glm::translate(glm::mat4(1.0), glm::vec3(0.0, 0.0, delta));
-	glm::vec3 loc = glm::vec3(targ->_model * d * glm::vec4(glm::vec3(0.0), 1.0));
+	glm::mat4 trans = glm::translate(glm::mat4(1.0), glm::vec3(0.0, 0.0, delta));
+	glm::vec3 loc = glm::vec3(targ->_model * trans * glm::vec4(glm::vec3(0.0), 1.0));
 
 	if (
 		loc[Z] > crane->_rngHead[MIN] &&
@@ -104,8 +104,8 @@ void cranePan(Crane* crane, float delta) {
 void cranePed(Crane* crane, float delta) {
 	Obj*& targ = crane->_parent->_child[2 * 2 * 2 * 2]->_child[0];
 
-	glm::mat4 d = glm::translate(glm::mat4(1.0), glm::vec3(0.0, delta, 0.0));
-	glm::vec3 loc = glm::vec3(targ->_acc * d * glm::vec4(glm::vec3(0.0), 1.0));
+	glm::mat4 model = glm::translate(glm::mat4(1.0), glm::vec3(0.0, delta, 0.0));
+	glm::vec3 loc = glm::vec3(targ->_acc * model * glm::vec4(glm::vec3(0.0), 1.0));
 
 	if (
 		loc[Y] > crane->_rngClaw[MIN] &&
