@@ -2,7 +2,7 @@
 #include "util.h"
 #include "math.h"
 
-Bound* boundMk(Obj** obj, unsigned int noObj) {
+Bound* boundMk(Obj** obj, unsigned int sz) {
 	Bound* _ = (Bound*) malloc(sizeof (Bound));
 
 	GLfloat vtc[2 * 2 * 2 * 3];
@@ -15,7 +15,7 @@ Bound* boundMk(Obj** obj, unsigned int noObj) {
 		}
 	}
 
-	util::mesh::bound(obj, noObj, rng, glm::mat4(1.0));
+	util::mesh::bound(obj, sz, rng, glm::mat4(1.0));
 
 	// generate
 	int i = 0;
