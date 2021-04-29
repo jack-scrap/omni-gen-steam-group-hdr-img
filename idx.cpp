@@ -20,7 +20,7 @@ Idx* idxMk(unsigned int i, glm::vec3 loc, glm::vec3 rot) {
 	};
 
 	Border* border = borderMk({
-		layout::idx[X] + (layout::margin * 2 * 2), layout::idx[Y] + (layout::margin * 2 * 2)
+		layout::idx[X] + (layout::margin * 2 * 2), layout::idx[Y] + (layout::pad * 2 * 2)
 	}, child, sizeof child / sizeof *child,
 	loc, rot);
 	_->_parent = border->_parent;
@@ -40,7 +40,7 @@ Idx* idxMk(unsigned int i, char c, glm::vec3 loc, glm::vec3 rot) {
 	_->_data = cont;
 
 	Border* border = borderMk({
-		layout::idx[X] + (layout::margin * 2 * 2), layout::idx[Y] + (layout::margin * 2 * 2)
+		layout::idx[X] + (layout::margin * 2 * 2), layout::idx[Y] + (layout::pad * 2 * 2)
 	}, child, 1, loc, rot);
 	_->_parent = border->_parent;
 
