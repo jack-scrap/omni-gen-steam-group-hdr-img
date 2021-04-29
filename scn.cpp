@@ -278,7 +278,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 				coneRng = (float*) realloc(coneRng, c * 3 * sizeof (float));
 				for (int i = 0; i < 3; i++) {
-					coneRng[(c * 3) - 3 + i] = entry[i];
+					coneRng[((c - 1) * 3) + i] = entry[i];
 				}
 
 				Cone* cone = coneMk(glm::vec3(entry[X], entry[Y], entry[Z]));
