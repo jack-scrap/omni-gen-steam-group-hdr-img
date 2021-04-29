@@ -284,16 +284,6 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				Cone* cone = coneMk(glm::vec3(entry[X], entry[Y], entry[Z]));
 
 				mesh.push_back(cone->_parent);
-
-				GLfloat vtx[3] = {
-					0.0, 0.0, 0.0
-				};
-
-				GLushort idx[1] = {
-					0
-				};
-
-				pt.push_back(objMk(vtx, 3, idx, 1, "bevel/main", "bevel/main", "alert", true, glm::vec3(entry[X], entry[Y], entry[Z]) + glm::vec3(0.0, 1.408, 0.0)));
 			}
 		}
 	}
