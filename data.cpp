@@ -73,7 +73,7 @@ Data* dataMk(char* data, unsigned int x, unsigned int y, std::string name, glm::
 		_->_loc[i] = loc[i];
 	}
 
-	_->_data = (Idx**) malloc(_->_y * _->_x * sizeof (Idx*));
+	_->_data = (Idx**) malloc(_->_x * _->_y * sizeof (Idx*));
 
 	// layout
 	GLfloat scale[2] = {
