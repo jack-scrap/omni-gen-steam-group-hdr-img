@@ -167,9 +167,9 @@ Data* dataMk(char* data, unsigned int x, unsigned int y, unsigned int z, std::st
 	child[noChild - 1] = id->_parent;
 
 	Border* parent = borderMk({
-			scale[X],
-			scale[Y]
-			}, child, noChild, loc + glm::vec3(0.0, 0.0, 0.0), rot);
+		scale[X],
+		scale[Y]
+	}, child, noChild, loc + glm::vec3(0.0, 0.0, 0.0), rot);
 
 	_->_parent = parent->_parent;
 
