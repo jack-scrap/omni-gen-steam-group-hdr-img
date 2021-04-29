@@ -75,7 +75,8 @@ namespace util {
 
 		bool no(std::string buff);
 
-		std::map<std::string, int> parse(std::string name);
+		template <typename T>
+		std::map<std::string, T> parse(std::string name);
 	}
 
 	std::vector<std::string> log(unsigned int loc, unsigned int maxFs);

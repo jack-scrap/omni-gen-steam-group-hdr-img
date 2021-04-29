@@ -411,7 +411,12 @@ bool util::cfg::no(std::string buff) {
 	return _;
 }
 
-std::map<std::string, int> util::cfg::parse(std::string name) {
+template <typename T>
+std::map<std::string, T> util::cfg::parse(std::string name) {
+}
+
+template <>
+std::map<std::string, int> util::cfg::parse<int>(std::string name) {
 	std::map<std::string, int> _;
 
 	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(name);
