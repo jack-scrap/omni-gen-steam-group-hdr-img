@@ -273,15 +273,15 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		}
 
 		if (entry.key() == "cone") {
-			for (const auto& axis : entry.value()) {
+			for (const auto& entry : entry.value()) {
 				c++;
 
 				coneRng = (float*) realloc(coneRng, c * 3 * sizeof (float));
 				for (int i = 0; i < 3; i++) {
-					coneRng[(c * 3) - 3 + i] = axis[i];
+					coneRng[(c * 3) - 3 + i] = entry[i];
 				}
 
-				Cone* cone = coneMk(glm::vec3(axis[X], axis[Y], axis[Z]));
+				Cone* cone = coneMk(glm::vec3(entry[X], entry[Y], entry[Z]));
 
 				mesh.push_back(cone->_parent);
 
@@ -293,7 +293,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					0
 				};
 
-				pt.push_back(objMk(vtx, 3, idx, 1, "bevel/main", "bevel/main", "alert", true, glm::vec3(axis[X], axis[Y], axis[Z]) + glm::vec3(0.0, 1.408, 0.0)));
+				pt.push_back(objMk(vtx, 3, idx, 1, "bevel/main", "bevel/main", "alert", true, glm::vec3(entry[X], entry[Y], entry[Z]) + glm::vec3(0.0, 1.408, 0.0)));
 			}
 		}
 	}
