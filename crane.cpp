@@ -16,6 +16,10 @@ Crane* craneMk(glm::vec3 loc, glm::vec3 rot) {
 
 	_->_op = nullptr;
 
+	for (int i = 0; i < 3; i++) {
+		_->_loc[i] = loc[i];
+	}
+
 	// wheel
 	Obj* child[(2 * 2 * 2 * 2) + 1 + (2 * 2) + 1];
 	int i = 0;
@@ -81,19 +85,19 @@ void craneAnim(Crane* crane, glm::vec3 loc) {
 }
 
 void craneZoom(Crane* crane, float delta) {
-	glm::vec3 loc = glm::vec3(delta, 0.0, 0.0);
-	craneAnim(crane, loc);
+	glm::vec3 dest = glm::vec3(delta, 0.0, 0.0);
+	craneAnim(crane, dest);
 }
 
 void cranePan(Crane* crane, float delta) {
 	Obj* targ = crane->_parent->_child[2 * 2 * 2 * 2];
 
 	glm::mat4 trans = glm::translate(glm::mat4(1.0), glm::vec3(0.0, 0.0, delta));
-	glm::vec3 loc = glm::vec3(targ->_model * trans * glm::vec4(glm::vec3(0.0), 1.0));
+	glm::vec3 dest = glm::vec3(targ->_model * trans * glm::vec4(glm::vec3(0.0), 1.0));
 
 	if (
-		loc[Z] > crane->_rngHead[MIN] &&
-		loc[Z] < crane->_rngHead[MAX]
+		dest[Z] > crane->_rngHead[MIN] &&
+		dest[Z] < crane->_rngHead[MAX]
 	) {
 		objTrans(targ, glm::vec3(0.0, 0.0, delta), glm::vec3(0.0, 0.0, 0.0));
 	} else {
@@ -105,11 +109,11 @@ void cranePed(Crane* crane, float delta) {
 	Obj*& targ = crane->_parent->_child[2 * 2 * 2 * 2]->_child[0];
 
 	glm::mat4 model = glm::translate(glm::mat4(1.0), glm::vec3(0.0, delta, 0.0));
-	glm::vec3 loc = glm::vec3(targ->_acc * model * glm::vec4(glm::vec3(0.0), 1.0));
+	glm::vec3 dest = glm::vec3(targ->_acc * model * glm::vec4(glm::vec3(0.0), 1.0));
 
 	if (
-		loc[Y] > crane->_rngClaw[MIN] &&
-		loc[Y] < crane->_rngClaw[MAX]
+		dest[Y] > crane->_rngClaw[MIN] &&
+		dest[Y] < crane->_rngClaw[MAX]
 	) {
 		glm::vec3 loc = glm::vec3(0.0, delta, 0.0);
 
