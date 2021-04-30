@@ -278,10 +278,16 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 				coneRng = (float*) realloc(coneRng, c * 3 * sizeof (float));
 				for (int i = 0; i < 3; i++) {
-					coneRng[((c - 1) * 3) + i] = entry[i];
+					coneRng[((c - 1) * 3) + i] = entry["loc"][i];
 				}
 
-				Cone* cone = coneMk(glm::vec3(entry[X], entry[Y], entry[Z]));
+				GLfloat bound[2][2];
+				for (int y = 0; y < 2; y++) {
+					for (int x = 0; x < 2; x++) {
+						bound[x][y] = (x ? 1 : -1) * 1.0;
+					}
+				}
+				Cone* cone = coneMk(bound, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]));
 
 				mesh.push_back(cone->_parent);
 			}
