@@ -45,25 +45,25 @@ Border* borderMk(glm::vec2 sz, glm::vec3 loc, glm::vec3 rot) {
 		rect[2 * 2 * 2 * 2];
 
 	// rect
-	int cnt = 0;
+	int c = 0;
 	for (int q = 0; q < 2; q++) {
 		i = 0;
 
 		for (int y = 0; y < 2; y++) {
 			for (int x = 0; x < 2; x++) {
-				rect[cnt] = (q * 2) + (y * 2) + i;
+				rect[c] = (q * 2) + (y * 2) + i;
 
 				i++;
-				cnt++;
+				c++;
 			}
 		}
 	}
 
 	for (int start = 0; start < 2; start++) {
 		for (int i = 0; i < 2 * 2; i++) {
-			rect[cnt] = start + (i * 2);
+			rect[c] = start + (i * 2);
 
-			cnt++;
+			c++;
 		}
 	}
 
@@ -131,25 +131,25 @@ Border* borderMk(glm::vec2 sz, Obj** child, unsigned int noChild, glm::vec3 loc,
 		rect[2 * 2 * 2 * 2];
 
 		// rect
-		int cnt = 0;
+		int c = 0;
 		for (int q = 0; q < 2; q++) {
 			i = 0;
 
 			for (int y = 0; y < 2; y++) {
 				for (int x = 0; x < 2; x++) {
-					rect[cnt] = (q * 2) + (y * 2) + i;
+					rect[c] = (q * 2) + (y * 2) + i;
 
 					i++;
-					cnt++;
+					c++;
 				}
 			}
 		}
 
 		for (int start = 0; start < 2; start++) {
 			for (int i = 0; i < 2 * 2; i++) {
-				rect[cnt] = start + (i * 2);
+				rect[c] = start + (i * 2);
 
-				cnt++;
+				c++;
 			}
 		}
 
