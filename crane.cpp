@@ -16,10 +16,6 @@ Crane* craneMk(glm::vec3 loc, glm::vec3 rot) {
 
 	_->_op = nullptr;
 
-	for (int i = 0; i < 3; i++) {
-		_->_loc[i] = loc[i];
-	}
-
 	// wheel
 	Obj* child[(2 * 2 * 2 * 2) + 1 + (2 * 2) + 1];
 	int i = 0;
@@ -69,6 +65,11 @@ Crane* craneMk(glm::vec3 loc, glm::vec3 rot) {
 
 	_->_parent = objMk("crane/body", "obj", "dir", true, child, sizeof child / sizeof *child, loc, rot);
 
+	glm::vec3 origin = _->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	for (int i = 0; i < 3; i++) {
+		_->_loc[i] = origin[i];
+	}
+
 	return _;
 }
 
@@ -88,9 +89,9 @@ void craneZoom(Crane* crane, float delta) {
 	glm::vec3 dest = glm::vec3(delta, 0.0, 0.0);
 	craneAnim(crane, dest);
 
-	glm::vec3 loc = crane->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 origin = crane->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int i = 0; i < 3; i++) {
-		crane->_loc[i] = loc[i];
+		crane->_loc[i] = origin[i];
 	}
 }
 
@@ -109,9 +110,9 @@ void cranePan(Crane* crane, float delta) {
 		omni::err("Cannot move crane head; translation exceeds range");
 	}
 
-	glm::vec3 loc = crane->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 origin = crane->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int i = 0; i < 3; i++) {
-		crane->_loc[i] = loc[i];
+		crane->_loc[i] = origin[i];
 	}
 }
 
@@ -125,16 +126,16 @@ void cranePed(Crane* crane, float delta) {
 		dest[Y] > crane->_rngClaw[MIN] &&
 		dest[Y] < crane->_rngClaw[MAX]
 	) {
-		glm::vec3 loc = glm::vec3(0.0, delta, 0.0);
+		glm::vec3 origin = glm::vec3(0.0, delta, 0.0);
 
-		objTrans(targ, loc, glm::vec3(0.0));
+		objTrans(targ, origin, glm::vec3(0.0));
 	} else {
 		omni::err("Cannot move crane claw; translation exceeds range");
 	}
 
-	glm::vec3 loc = crane->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 origin = crane->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int i = 0; i < 3; i++) {
-		crane->_loc[i] = loc[i];
+		crane->_loc[i] = origin[i];
 	}
 }
 
