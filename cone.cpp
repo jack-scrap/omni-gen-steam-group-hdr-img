@@ -5,15 +5,7 @@
 Cone* coneMk(glm::vec3 loc, glm::vec3 rot) {
 	Cone* _ = (Cone*) malloc(sizeof (Cone));
 
-	GLfloat vtx[3] = {
-		0.0, 0.0, 0.0
-	};
-
-	GLushort idx[1] = {
-		0
-	};
-
-	Obj* bound = objMk(vtx, 3, idx, 1, "bevel/main", "bevel/main", "alert", true, glm::vec3(0.0, 1.408, 0.0));
+	Obj* bound = objMk(_->_vtx, 3, _->_idx, 1, "bevel/main", "bevel/main", "alert", true, glm::vec3(0.0, 1.408, 0.0));
 
 	Obj* child[] = {
 		bound
