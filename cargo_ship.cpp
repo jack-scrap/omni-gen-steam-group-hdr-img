@@ -6,10 +6,10 @@
 #include "layout.h"
 #include "data.h"
 
-CargoShip* cargoShipMk(char* init, unsigned int sz, glm::vec3 loc, glm::vec3 rot) {
+CargoShip* cargoShipMk(char* data, unsigned int sz, glm::vec3 loc, glm::vec3 rot) {
 	CargoShip* _ = (CargoShip*) malloc(sizeof (CargoShip));
 
-	Data* data = dataMk(init, sz, "state", glm::vec3(-(layout::stride[Y] * sz), 1.0, layout::stride[X]));
+	Data* data = dataMk(data, sz, "state", glm::vec3(-(layout::stride[Y] * sz), 1.0, layout::stride[X]));
 
 	Obj* child[] = {
 		data->_parent
