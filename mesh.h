@@ -6,6 +6,7 @@ enum id {
 	VAO,
 	VBO,
 	STBO,
+
 	IBO
 };
 
