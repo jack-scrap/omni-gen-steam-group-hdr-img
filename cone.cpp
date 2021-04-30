@@ -5,6 +5,10 @@
 Cone* coneMk(GLfloat init[2][2], glm::vec3 loc, glm::vec3 rot) {
 	Cone* _ = (Cone*) malloc(sizeof (Cone));
 	
+	for (int i = 0; i < 3; i++) {
+		_->_loc[i] = loc[i];
+	}
+
 	for (int y = 0; y < 2; y++) {
 		for (int x = 0; x < 2; x++) {
 			_->_bound[x][y] = init[x][y];

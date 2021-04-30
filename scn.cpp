@@ -25,14 +25,14 @@ bool eq = false;
 End* boundRng;
 unsigned int r;
 
-float* coneRng;
+void** coneRng;
 unsigned int c = 0;
 
 extern "C" void* boundRngGet() {
 	return boundRng;
 }
 
-extern "C" void* coneRngGet() {
+extern "C" void** coneRngGet() {
 	return coneRng;
 }
 
@@ -227,7 +227,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 	// bound
 	boundRng = (End*) malloc(0);
-	coneRng = (float*) malloc(0);
+	coneRng = (void**) malloc(0);
 
 	for (const auto& entry : serial["bound"].items()) {
 		if (entry.key() == "rng") {
@@ -274,13 +274,6 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 		if (entry.key() == "cone") {
 			for (const auto& entry : entry.value()) {
-				c++;
-
-				coneRng = (float*) realloc(coneRng, c * 3 * sizeof (float));
-				for (int i = 0; i < 3; i++) {
-					coneRng[((c - 1) * 3) + i] = entry["loc"][i];
-				}
-
 				GLfloat bound[2][2];
 				for (int y = 0; y < 2; y++) {
 					for (int x = 0; x < 2; x++) {
@@ -288,6 +281,13 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					}
 				}
 				Cone* cone = coneMk(bound, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]));
+
+				c++;
+
+				coneRng = (void**) realloc(coneRng, c * 3 * sizeof (float));
+				for (int i = 0; i < 3; i++) {
+					coneRng[((c - 1) * 3) + i] = cone;
+				}
 
 				mesh.push_back(cone->_parent);
 			}

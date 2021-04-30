@@ -40,8 +40,17 @@ _boundRngGet = _scn.boundRngGet
 _boundRngGet.restype = POINTER(_Lim)
 _boundRngGet.argtypes = None
 
+class _Cone(Structure):
+    _fields_ = [
+        ('_parent', c_ulong),
+        ('_vtx', c_float * 3),
+        ('_idx', c_ushort),
+        ('_loc', c_float * 3),
+        ('_bound', c_float * 2 * 2)
+    ]
+
 _coneRngGet = _scn.coneRngGet
-_coneRngGet.restype = POINTER(c_float)
+_coneRngGet.restype = POINTER(POINTER(_Cone))
 _coneRngGet.argtypes = None
 
 bound = {

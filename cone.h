@@ -16,6 +16,7 @@ typedef struct {
 		0
 	};
 
+	GLfloat _loc[3];
 	GLfloat _bound[2][2];
 } Cone;
 
