@@ -2,7 +2,7 @@
 
 #include "obj.h"
 
-typedef struct Cone {
+typedef struct {
 	Obj* _parent;
 
 	GLfloat _vtx[3] = {
