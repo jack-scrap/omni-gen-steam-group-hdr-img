@@ -11,11 +11,13 @@
 
 ## Editor
 [Enter] -                  New line
+[Backspace] -              Delete
 
 ## Prompt
 `*command* *argument* ...`
 
 [Enter] -                  Run
+[Backspace] -              Delete
 
 # Display
 [Left Mouse Button] -      Pan camera

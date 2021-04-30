@@ -24,12 +24,10 @@ To give a number precision beyond an integer, place decimals after the `.` opera
 Every entry in a collection must be of the same type.
 
 # Strings
-This can be used to effectively create collections of text.
-
-`"Buffer, other buffer"`
+`"Text, other text"`
 
 # Dictionaries
-Like lists, braces in enclosed by braces ('{}'), and items are comma-separated.
+Like lists, braces in enclosed by braces (`{}`), and items are comma-separated.
 
 Pairs are separated by `:`, keys proceeding and values following.
 

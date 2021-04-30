@@ -1,4 +1,4 @@
-Strings are lists of individual characters.
+Strings are lists of individual "characters".
 
 This provides a convenient way to dedicate storage to a sequence of text.
 
@@ -48,7 +48,7 @@ Taking a range, like a list will produce this substring.
 `'Tex'`
 
 # Splitting
-"Splitting" a string divides into smaller segments based on a "separator".
+"Splitting" a string divides into smaller segments based on a single character, referred to as a "separator".
 
 For whitespace-separated sequences of characters, this operation will split a string into individual words.
 
@@ -80,7 +80,6 @@ This will produce a list of individual elements.
 
 # Formatting
 Formatting describes the substitution of other values into a string.
-
 
 `'Text {} {}'.format(3, 'text')`
 

@@ -1,3 +1,9 @@
 Hello.
 
-This guide will run you through the basics of the Python 3 programming language.
+This guide will run you through Omni corporation.
+
+Are you familiar with the Python 3 programming language?
+
+If not, read `py.txt`.
+
+If so, proceed.

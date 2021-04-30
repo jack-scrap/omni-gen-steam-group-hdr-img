@@ -1,6 +1,6 @@
-The following will walk you through the process of creating and utilizing threads, and the process of guaranteeing proper execution order.
-
 Threads allow the simultaneous execution of commands.
+
+The following will walk you through the process of creating and utilizing threads, and the process of guaranteeing proper execution order.
 
 Because commands are no longer executed in order, performance gains can be met where processes are no longer required to await the completion of the previous ones.
 
@@ -29,14 +29,13 @@ This is achieved with the `join` function.
 
 ```
 ...
+
 thread.start()
 thread.join()
 ```
 
 # Concurrency
 Concurrency describes the process of multiple threads running at once.
-
-Below, it can be observed that
 
 ```
 import threading
@@ -62,7 +61,7 @@ thread.start()
 other_thread.start()
 ```
 
-Depending on run-time determinism, the output of the following process will change.
+Depending on determinism during the execution of the program, the output of the processes will change.
 
 ## Lock
 "Locking" a thread halts execution on the present thread until the locked one has completed.
@@ -100,7 +99,7 @@ The output of the secondary thread will not begin until the first has completed.
 
 This availability can be toggled on or off, and whilst on will prevent any other instances from executing it.
 
-The `acquire()` and `release()` will signify availability to any other thread.
+The provided `acquire()` and `release()` functions will signify availability to any other thread.
 
 ```
 import threading
@@ -163,7 +162,7 @@ The existence of multiple threads means that errors can not be determined during
 
 Both fundamental issues with the Python language and undesired effects can be created as a result.
 
-The following section will run over some of the co
+The following section will run over some of the 
 commonly found errors arrising as a byproduct of multi-threading.
 
 ## Race condition

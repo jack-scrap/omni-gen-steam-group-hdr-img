@@ -4,7 +4,7 @@ Input and output describe the process of interacting with the system through the
 ## Input
 The `input()` function allows for input via the console.
 
-This will block until input has been provided.
+The process will be blocked until input has been provided.
 
 `val = input()`
 
