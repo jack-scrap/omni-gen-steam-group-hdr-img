@@ -3,6 +3,8 @@
 #include "obj.h"
 
 typedef struct {
+	GLfloat _loc[3];
+
 	Obj* _parent;
 } CargoShip;
 

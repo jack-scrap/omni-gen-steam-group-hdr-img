@@ -150,8 +150,15 @@ _truckZoom.argtypes = [
 ]
 
 class _CargoShip(_Obj):
+	_fields_ = [
+		('_loc', c_float * 3)
+	]
+
 	def zoom(self, delta):
 		_cargoShipZoom(self._ptr, delta)
+
+		for i in range(3):
+		    self._loc[i] = self._ptr.contents._loc[i]
 
 _cargoShipZoom = _cargo_ship.cargoShipZoom
 _cargoShipZoom.restype = c_void_p
@@ -161,9 +168,9 @@ _cargoShipZoom.argtypes = [
 ]
 
 _vehicleGet = _scn.vehicleGet
-_vehicleGet.restype = POINTER(POINTER(_Truck))
+_vehicleGet.restype = POINTER(POINTER(_CargoShip))
 _vehicleGet.argtypes = None
 
 _vehicle = _vehicleGet()
 
-truck = _Truck(_vehicle[0])
+cargoShip = _CargoShip(_vehicle[0])
