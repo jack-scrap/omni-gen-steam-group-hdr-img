@@ -116,9 +116,9 @@ _craneGrab.argtypes = None
 
 class _Truck(_Obj):
 	_fields_ = [
-		('_parent', c_ulong),
-		('_data', c_ulong),
-		('_ang', c_float)
+		('_loc', c_float * 3),
+		('_ang', c_float),
+		('_data', c_ulong)
 	]
 
 	def turn(self, delta):
@@ -126,7 +126,13 @@ class _Truck(_Obj):
 
 		self._ang = self._data.contents._ang
 
+		for i in range(3):
+		    self._loc[i] = self._ptr.contents._loc[i]
+
 	def zoom(self, delta):
+		for i in range(3):
+		    self._loc[i] = self._ptr.contents._loc[i]
+
 		_truckZoom(self._ptr, delta)
 
 _truckTurn = _truck.truckTurn
@@ -155,9 +161,9 @@ _cargoShipZoom.argtypes = [
 ]
 
 _vehicleGet = _scn.vehicleGet
-_vehicleGet.restype = POINTER(POINTER(_Crane))
+_vehicleGet.restype = POINTER(POINTER(_Truck))
 _vehicleGet.argtypes = None
 
 _vehicle = _vehicleGet()
 
-crane = _Crane(_vehicle[0])
+truck = _Truck(_vehicle[0])

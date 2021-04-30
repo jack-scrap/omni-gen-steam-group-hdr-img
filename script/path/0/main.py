@@ -1,3 +1,3 @@
 from omni import *
 
-crane.zoom(3)
+truck.zoom(3)

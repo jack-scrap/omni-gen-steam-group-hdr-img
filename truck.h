@@ -6,12 +6,14 @@
 #include "pt.h"
 
 typedef struct Truck {
-	Obj* _parent;
+	GLfloat _loc[3];
+
+	float _ang;
 
 	char* _ptr;
 	unsigned int _sz;
 
-	float _ang;
+	Obj* _parent;
 
 	static constexpr GLfloat _rngWheel[2] = {
 		-(M_PI / 2),
