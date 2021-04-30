@@ -12,9 +12,9 @@
 #include "vec.h"
 #include "data.h"
 
-extern Cam cam;
-
 extern Disp* disp;
+
+extern Cam cam;
 
 extern Console* console;
 
