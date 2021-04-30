@@ -10,8 +10,6 @@ typedef struct Crane {
 
 	Cont* _op;
 
-	static constexpr GLfloat _speed = 0.1;
-
 	static constexpr GLfloat _rngHead[2] = {
 		-3.0,
 		3.0
@@ -20,6 +18,8 @@ typedef struct Crane {
 		0.0,
 		13.8
 	};
+
+	static constexpr GLfloat _speed = 0.1;
 } Crane;
 
 Crane* craneMk(glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
