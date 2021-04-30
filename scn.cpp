@@ -284,7 +284,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				GLfloat bound[2][2];
 				for (int y = 0; y < 2; y++) {
 					for (int x = 0; x < 2; x++) {
-						bound[x][y] = (x ? 1 : -1) * 1.0;
+						bound[x][y] = entry["bound"][x][y];
 					}
 				}
 				Cone* cone = coneMk(bound, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]));
