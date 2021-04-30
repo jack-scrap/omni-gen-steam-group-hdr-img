@@ -6,6 +6,8 @@
 #include "cont.h"
 
 typedef struct Crane {
+	GLfloat _loc[3];
+
 	Obj* _parent;
 
 	Cont* _op;

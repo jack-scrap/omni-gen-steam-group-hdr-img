@@ -87,6 +87,11 @@ void craneAnim(Crane* crane, glm::vec3 loc) {
 void craneZoom(Crane* crane, float delta) {
 	glm::vec3 dest = glm::vec3(delta, 0.0, 0.0);
 	craneAnim(crane, dest);
+
+	glm::vec3 loc = crane->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	for (int i = 0; i < 3; i++) {
+		crane->_loc[i] = loc[i];
+	}
 }
 
 void cranePan(Crane* crane, float delta) {
@@ -102,6 +107,11 @@ void cranePan(Crane* crane, float delta) {
 		objTrans(targ, glm::vec3(0.0, 0.0, delta), glm::vec3(0.0, 0.0, 0.0));
 	} else {
 		omni::err("Cannot move crane head; translation exceeds range");
+	}
+
+	glm::vec3 loc = crane->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	for (int i = 0; i < 3; i++) {
+		crane->_loc[i] = loc[i];
 	}
 }
 
@@ -120,6 +130,11 @@ void cranePed(Crane* crane, float delta) {
 		objTrans(targ, loc, glm::vec3(0.0));
 	} else {
 		omni::err("Cannot move crane claw; translation exceeds range");
+	}
+
+	glm::vec3 loc = crane->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	for (int i = 0; i < 3; i++) {
+		crane->_loc[i] = loc[i];
 	}
 }
 
