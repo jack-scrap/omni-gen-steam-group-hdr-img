@@ -63,7 +63,7 @@ class _Obj(Structure):
 	def __init__(self, ptr):
 		self._ptr = ptr
 
-class Crane(_Obj):
+class _Crane(_Obj):
 	def zoom(self, delta):
 		_craneZoom(self._ptr, delta)
 
@@ -79,21 +79,21 @@ class Crane(_Obj):
 _craneZoom = _crane.craneZoom
 _craneZoom.restype = c_void_p
 _craneZoom.argtypes = [
-	POINTER(Crane),
+	POINTER(_Crane),
 	c_float
 ]
 
 _cranePan = _crane.cranePan
 _cranePan.restype = c_void_p
 _cranePan.argtypes = [
-	POINTER(Crane),
+	POINTER(_Crane),
 	c_float
 ]
 
 _cranePed = _crane.cranePed
 _cranePed.restype = c_void_p
 _cranePed.argtypes = [
-	POINTER(Crane),
+	POINTER(_Crane),
 	c_float
 ]
 
