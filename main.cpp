@@ -457,7 +457,7 @@ int main(int argc, char** argv) {
 
 										break;
 
-									// cursor
+									// index
 									case SDLK_LEFT:
 										if (console->_idx[X] > console->_maxFs + 1 + console->_maxNo + 1) {
 											console->_idx[X]--;
@@ -468,8 +468,28 @@ int main(int argc, char** argv) {
 										break;
 
 									case SDLK_RIGHT:
-										if (console->_idx[X] < console->_maxFs + 1 + console->_maxNo + 1 + console->_buff.back().size()) {
+										if (console->_idx[X] < console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[Y] - 1].size()) {
 											console->_idx[X]++;
+
+											console->render();
+										}
+
+										break;
+
+									case SDLK_DOWN:
+										if (console->_idx[Y] < console->_buff.size()) {
+											console->_idx[Y]++;
+											console->_idx[X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[Y] - 1].size();
+
+											console->render();
+										}
+
+										break;
+
+									case SDLK_UP:
+										if (console->_idx[Y] > 1) {
+											console->_idx[Y]--;
+											console->_idx[X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[Y] - 1].size();
 
 											console->render();
 										}
