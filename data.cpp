@@ -110,7 +110,7 @@ Data* dataMk(char* data, unsigned int x, unsigned int y, std::string name, glm::
 	Border* parent = borderMk({
 		scale[X],
 		scale[Y]
-	}, child, noChild, loc + glm::vec3(0.0, 0.0, 0.0), rot);
+	}, child, noChild, loc + glm::vec3(0.0), rot);
 
 	_->_parent = parent->_parent;
 
@@ -169,7 +169,7 @@ Data* dataMk(char* data, unsigned int x, unsigned int y, unsigned int z, std::st
 	Border* parent = borderMk({
 		scale[X],
 		scale[Y]
-	}, child, noChild, loc + glm::vec3(0.0, 0.0, 0.0), rot);
+	}, child, noChild, loc + glm::vec3(0.0), rot);
 
 	_->_parent = parent->_parent;
 
