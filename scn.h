@@ -21,7 +21,7 @@ extern Console* console;
 
 extern Data* data;
 extern unsigned int sz;
-extern char* rhs;
+extern char* goal;
 extern bool eq;
 
 typedef struct End {
@@ -49,7 +49,7 @@ extern std::vector<Obj*> pt;
 
 extern "C" void* dataGet();
 
-extern "C" void* rhsGet();
+extern "C" void* goalGet();
 
 namespace scn {
 	void init(unsigned int stage, unsigned int lvl);

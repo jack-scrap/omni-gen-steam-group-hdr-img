@@ -19,7 +19,7 @@
 
 Data* data;
 unsigned int sz;
-char* rhs;
+char* goal;
 bool eq = false;
 
 End* boundRng;
@@ -48,8 +48,8 @@ extern "C" void* dataGet() {
 	return data;
 }
 
-extern "C" void* rhsGet() {
-	return rhs;
+extern "C" void* goalGet() {
+	return goal;
 }
 
 void scn::init(unsigned int stage, unsigned int lvl) {
@@ -198,22 +198,22 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		}
 	}
 
-	for (const auto& data : serial["rhs"]) {
-		rhs = (char*) malloc(0);
+	for (const auto& data : serial["goal"]) {
+		goal = (char*) malloc(0);
 
 		if (data.type() == nlohmann::json::value_t::number_unsigned) {
 			sz++;
 
-			rhs = (char*) realloc(rhs, sz);
-			rhs[sz - 1] = (char) ((int) data);
+			goal = (char*) realloc(goal, sz);
+			goal[sz - 1] = (char) ((int) data);
 		}
 
 		if (data.type() == nlohmann::json::value_t::array) {
 			for (const auto& byte : data) {
 				sz++;
 
-				rhs = (char*) realloc(rhs, sz);
-				rhs[sz - 1] = (char) ((int) data);
+				goal = (char*) realloc(goal, sz);
+				goal[sz - 1] = (char) ((int) data);
 			}
 		}
 	}

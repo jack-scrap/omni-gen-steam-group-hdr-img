@@ -28,11 +28,11 @@ _dataGet.argtypes = None
 
 data = _dataGet()
 
-_rhsGet = _scn.rhsGet
-_rhsGet.restype = POINTER(c_char)
-_rhsGet.argtypes = None
+_goalGet = _scn.goalGet
+_goalGet.restype = POINTER(c_char)
+_goalGet.argtypes = None
 
-rhs = _rhsGet()
+goal = _goalGet()
 
 # bound
 class _Lim(Structure):
