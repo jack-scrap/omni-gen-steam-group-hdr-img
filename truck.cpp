@@ -31,14 +31,7 @@ Truck* truckMk(glm::vec3 loc, glm::vec3 rot) {
 		}
 	}
 
-	child[w * 2] = objMk(
-		"truck/tail",
-		"obj",
-		"dir",
-		true,
-		glm::vec3(-(2 * 4.0) - (layout::stroke) - (layout::stroke * 2), 0.0, 0.0),
-		rot
-	);
+	child[w * 2] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-(2 * 4.0) - (layout::stroke) - (layout::stroke * 2), 0.0, 0.0), rot);
 
 	child[(w * 2) + 1] = nullptr;
 
