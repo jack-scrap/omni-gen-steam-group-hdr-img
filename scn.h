@@ -12,6 +12,7 @@
 #include "vec.h"
 #include "data.h"
 #include "cone.h"
+#include "lim.h"
 
 extern Disp* disp;
 
@@ -24,12 +25,7 @@ extern unsigned int sz;
 extern char* goal;
 extern bool eq;
 
-typedef struct End {
-	unsigned int _axis;
-	float _val;
-} End;
-
-extern End* boundRng;
+extern Lim* boundRng;
 extern "C" unsigned int r;
 
 extern "C" void** coneRng;

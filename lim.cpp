@@ -4,8 +4,11 @@
 #include "util.h"
 #include "layout.h"
 
-Lim* limMk(glm::vec3 loc, glm::vec3 rot) {
+Lim* limMk(unsigned int axis, GLfloat val, glm::vec3 loc, glm::vec3 rot) {
 	Lim* _ = (Lim*) malloc(sizeof (Lim));
+
+	_->_axis = axis;
+	_->_val = val;
 
 	std::vector<GLfloat> vtc = util::mesh::rect::pos(glm::vec2(
 		layout::pad,

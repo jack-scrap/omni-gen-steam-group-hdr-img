@@ -22,7 +22,7 @@ unsigned int sz;
 char* goal;
 bool eq = false;
 
-End* boundRng;
+Lim* boundRng;
 unsigned int r;
 
 void** coneRng;
@@ -226,7 +226,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	// bound
-	boundRng = (End*) malloc(0);
+	boundRng = (Lim*) malloc(0);
 	coneRng = (void**) malloc(0);
 
 	for (const auto& entry : serial["bound"].items()) {
@@ -234,18 +234,20 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			for (const auto& rng : entry.value()) {
 				for (const auto& bound : rng) {
 					for (auto it = bound.begin(); it != bound.end(); ++it) {
+						unsigned int axis;
 						glm::vec3 loc = glm::vec3(0.0);
 						glm::vec3 rot = glm::vec3(M_PI / 2, 0.0, 0.0);
 						if (it.key() == "X") {
 							r++;
 
-							boundRng = (End*) realloc(boundRng, r * sizeof (End));
+							boundRng = (Lim*) realloc(boundRng, r * sizeof (Lim));
 
 							boundRng[r - 1] = {
 								X,
 								it.value()
 							};
 
+							axis = 0;
 							loc[X] = it.value();
 							rot[Y] = 0.0;
 						}
@@ -253,18 +255,19 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 						if (it.key() == "Z") {
 							r++;
 
-							boundRng = (End*) realloc(boundRng, r * sizeof (End));
+							boundRng = (Lim*) realloc(boundRng, r * sizeof (Lim));
 
 							boundRng[r - 1] = {
 								Z,
 								it.value()
 							};
 
+							axis = 2;
 							loc[Z] = it.value();
 							rot[Y] = M_PI / 2;
 						}
 
-						Lim* lim = limMk(loc, rot);
+						Lim* lim = limMk(axis, it.value(), loc, rot);
 
 						mesh.push_back(lim->_parent);
 					}
