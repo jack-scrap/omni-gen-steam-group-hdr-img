@@ -13,4 +13,4 @@ typedef struct {
 
 CargoShip* cargoShipMk(char* init, unsigned int sz, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0, 0.0, 0.0));
 
-extern "C" void cargoShipZoom(CargoShip* cargoShip, float delta);
+extern "C" void cargoShipMv(CargoShip* cargoShip, float delta);

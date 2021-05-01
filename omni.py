@@ -161,14 +161,14 @@ class _CargoShip(_Obj):
 	]
 
 	def zoom(self, delta):
-		_cargoShipZoom(self._ptr, delta)
+		_cargoShipMv(self._ptr, delta)
 
 		for i in range(3):
 		    self._loc[i] = self._ptr.contents._loc[i]
 
-_cargoShipZoom = _cargo_ship.cargoShipZoom
-_cargoShipZoom.restype = c_void_p
-_cargoShipZoom.argtypes = [
+_cargoShipMv = _cargo_ship.cargoShipMv
+_cargoShipMv.restype = c_void_p
+_cargoShipMv.argtypes = [
 		POINTER(_CargoShip),
 		c_float
 ]

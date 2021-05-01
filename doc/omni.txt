@@ -29,7 +29,9 @@ Both initial and the desired state is provided.
 
 `.data`
 
-`._sz`
+`._depth`
+
+`._ptr`
 `._x`
 `._y`
 `._z`
