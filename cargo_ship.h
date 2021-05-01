@@ -1,8 +1,11 @@
 #pragma once
 
 #include "obj.h"
+#include "data.h"
 
 typedef struct {
+	Data* _data;
+
 	GLfloat _loc[3];
 
 	Obj* _parent;

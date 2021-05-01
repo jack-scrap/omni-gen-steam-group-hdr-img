@@ -9,10 +9,10 @@
 CargoShip* cargoShipMk(char* init, unsigned int sz, glm::vec3 loc, glm::vec3 rot) {
 	CargoShip* _ = (CargoShip*) malloc(sizeof (CargoShip));
 
-	Data* data = dataMk(init, sz, "state", glm::vec3(-(layout::stride[Y] * sz), 1.0, layout::stride[X]));
+	_->_data = dataMk(init, sz, "state", glm::vec3(-(layout::stride[Y] * sz), 1.0, layout::stride[X]));
 
 	Obj* child[] = {
-		data->_parent
+		_->_data->_parent
 	};
 
 	_->_parent = objMk("cargo_ship", "obj", "dir", true, child, sizeof child / sizeof *child, loc + glm::vec3(0.0, 10.0, 0.0), rot);

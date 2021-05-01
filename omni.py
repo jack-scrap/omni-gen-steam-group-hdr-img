@@ -18,7 +18,8 @@ class _Data(Structure):
 		('_depth', c_uint),
 		('_x', c_uint),
 		('_y', c_uint),
-		('_z', c_uint)
+		('_z', c_uint),
+		('_loc', c_float * 3),
 	]
 
 _dataGet = _scn.dataGet
@@ -123,9 +124,9 @@ _craneGrab.argtypes = None
 
 class _Truck(_Obj):
 	_fields_ = [
+		('_data', POINTER(_Data)),
 		('_loc', c_float * 3),
 		('_ang', c_float),
-		('_data', c_ulong)
 	]
 
 	def turn(self, delta):
@@ -158,6 +159,7 @@ _truckZoom.argtypes = [
 
 class _CargoShip(_Obj):
 	_fields_ = [
+		('_data', POINTER(_Data)),
 		('_loc', c_float * 3)
 	]
 
@@ -175,9 +177,9 @@ _cargoShipZoom.argtypes = [
 ]
 
 _vehicleGet = _scn.vehicleGet
-_vehicleGet.restype = POINTER(POINTER(_Crane))
+_vehicleGet.restype = POINTER(POINTER(_Truck))
 _vehicleGet.argtypes = None
 
 _vehicle = _vehicleGet()
 
-crane = _Crane(_vehicle[0])
+truck = _Truck(_vehicle[0])
