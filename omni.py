@@ -7,6 +7,11 @@ _cargo_ship = CDLL('libcargo_ship.so')
 _scn = CDLL('libscn.so')
 
 # data
+class _Cont(Structure):
+	_fields_ = [
+		('_c', c_char)
+	]
+
 class _Data(Structure):
 	_fields_ = [
 		('_parent', c_ulong),
@@ -65,6 +70,7 @@ class _Obj(Structure):
 
 class _Crane(_Obj):
 	_fields_ = [
+		('_op', POINTER(_Cont)),
 		('_loc', c_float * 3)
 	]
 
@@ -88,6 +94,8 @@ class _Crane(_Obj):
 
 	def grab(self):
 		_craneGrab(self._ptr)
+
+		self._op = self._ptr.contents._op
 
 _craneZoom = _crane.craneZoom
 _craneZoom.restype = c_void_p
@@ -168,9 +176,9 @@ _cargoShipZoom.argtypes = [
 ]
 
 _vehicleGet = _scn.vehicleGet
-_vehicleGet.restype = POINTER(POINTER(_CargoShip))
+_vehicleGet.restype = POINTER(POINTER(_Crane))
 _vehicleGet.argtypes = None
 
 _vehicle = _vehicleGet()
 
-cargoShip = _CargoShip(_vehicle[0])
+crane = _Crane(_vehicle[0])

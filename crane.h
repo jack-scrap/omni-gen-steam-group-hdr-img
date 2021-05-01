@@ -6,11 +6,10 @@
 #include "cont.h"
 
 typedef struct Crane {
+	Cont* _op;
 	GLfloat _loc[3];
 
 	Obj* _parent;
-
-	Cont* _op;
 
 	static constexpr GLfloat _rngHead[2] = {
 		-3.0,
