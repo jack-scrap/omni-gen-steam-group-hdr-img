@@ -14,7 +14,6 @@ class _Cont(Structure):
 
 class _Data(Structure):
 	_fields_ = [
-		('_parent', c_ulong),
 		('_ptr', c_ulong),
 		('_depth', c_uint),
 		('_x', c_uint),

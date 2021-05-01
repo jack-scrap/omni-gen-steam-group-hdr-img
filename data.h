@@ -7,8 +7,6 @@
 #include "idx.h"
 
 typedef struct {
-	Obj* _parent;
-
 	char* _ptr;
 	unsigned int
 		_depth,
@@ -18,6 +16,8 @@ typedef struct {
 		_z;
 
 	float _loc[3];
+
+	Obj* _parent;
 
 	Idx** _data;
 } Data;
