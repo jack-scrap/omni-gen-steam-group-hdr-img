@@ -47,11 +47,8 @@ _boundRngGet.argtypes = None
 
 class _Cone(Structure):
 	_fields_ = [
-		('_parent', c_ulong),
-		('_vtx', c_float * 3),
-		('_idx', c_ushort),
-		('_loc', c_float * 3),
-		('_bound', c_float * 2 * 2)
+		('_bound', c_float * 2 * 2),
+		('_loc', c_float * 3)
 	]
 
 _coneRngGet = _scn.coneRngGet
