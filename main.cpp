@@ -457,9 +457,12 @@ int main(int argc, char** argv) {
 
 										break;
 
+									// cursor
 									case SDLK_LEFT:
 										if (console->_idx[X] > console->_maxFs + 1 + console->_maxNo + 1) {
 											console->_idx[X]--;
+
+											console->render();
 										}
 
 										break;
@@ -467,6 +470,8 @@ int main(int argc, char** argv) {
 									case SDLK_RIGHT:
 										if (console->_idx[X] < console->_maxFs + 1 + console->_maxNo + 1 + console->_buff.back().size()) {
 											console->_idx[X]++;
+
+											console->render();
 										}
 
 										break;
