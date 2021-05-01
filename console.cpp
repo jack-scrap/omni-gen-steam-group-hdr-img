@@ -94,6 +94,35 @@ Console::Console(std::string cwd, std::string name, std::vector<std::string> buf
 		// file system
 		std::sort(_tree.begin(), _tree.end());
 
+		for (std::map<std::string, std::string> _ : _tree) {
+			if (_["name"].size() > _maxFs) {
+				_maxFs = _["name"].size();
+			}
+		}
+
+		_maxNo = std::to_string(_buff.size()).size();
+
+		// index
+		switch (_mode) {
+			case FS:
+				_idx[X] = 0;
+				_idx[Y] = 1 + _l;
+
+				break;
+
+			case EDITOR:
+				_idx[X] = _maxFs + 1 + _maxNo + 1 + _buff.back().size();
+				_idx[Y] = 1 + _buff.size() - 1;
+
+				break;
+
+			case PROMPT:
+				_idx[X] = (_ps1 + _prompt).size();
+				_idx[Y] = state::line - 1;
+
+				break;
+		}
+
 		/* data */
 		glGenVertexArrays(1, &_id[VAO]);
 		glBindVertexArray(_id[VAO]);
@@ -273,27 +302,6 @@ void Console::render() {
 				glTexSubImage2D(GL_TEXTURE_2D, 0, i * layout::dim[X], l * layout::dim[Y], layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, surf->pixels);
 			}
 		}
-	}
-
-	// index
-	switch (_mode) {
-		case FS:
-			_idx[X] = 0;
-			_idx[Y] = 1 + _l;
-
-			break;
-
-		case EDITOR:
-			_idx[X] = _maxFs + 1 + _maxNo + 1 + _buff.back().size();
-			_idx[Y] = 1 + _buff.size() - 1;
-
-			break;
-
-		case PROMPT:
-			_idx[X] = (_ps1 + _prompt).size();
-			_idx[Y] = state::line - 1;
-
-			break;
 	}
 
 	if (
