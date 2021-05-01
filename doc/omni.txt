@@ -6,22 +6,21 @@
 # Vehicles
 ## Crane
 ### Navigation
-`zoom(d)` - Move forward, back
-`pan(d)` - Translate head left and right
-`ped(d)` - Translate head up and down
+`zoom(delta)` - Move forward, back
+`pan(delta)` - Translate head left and right
+`ped(delta)` - Translate head up and down
 
 `grab()` - Grab container
 
 ## Truck
 This allows for complete freedom of movement without being restricted to an axis.
 
-`mv(d)` - Move forward, back
+`mv(delta)` - Move forward, back
 
-`left(d)` - Turn left
-`right(d)` - Turn right
+`turn(delta)` - Turn left, right
 
 ## Ship
-`zoom(d)`
+`zoom(delta)`
 
 # Data
 Data can be accessed.
