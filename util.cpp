@@ -360,6 +360,22 @@ bool util::phys::aabb(Obj* p, Obj* q) {
 	return _;
 }
 
+bool util::phys::aabbGround(Obj* obj) {
+	bool _ = false;
+
+	for (int i = 0; i < 2 * 2 * 2 * 3; i += 3) {
+		glm::vec3 vtx = glm::vec3(obj->_acc * glm::vec4(glm::vec3(obj->_bound[i], obj->_bound[i + 1], obj->_bound[i + 2]), 1.0));
+
+		if (vtx[Y] <= 0.0) {
+			_ = true;
+
+			break;
+		}
+	}
+
+	return _;
+}
+
 std::string util::cfg::key(std::string buff) {
 	std::string _;
 

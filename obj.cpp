@@ -3,6 +3,7 @@
 #include <thread>
 #include <chrono>
 #include <vector>
+#include <cmath>
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -547,6 +548,12 @@ void objTrans(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
 }
 
 void objA(Obj* obj) {
+	int i = 0;
+	while (!util::phys::aabbGround(obj)) {
+		objTrans(obj, glm::vec3(0.0, -(pow(i, 2) * phys::g), 0.0), glm::vec3(0.0));
+
+		i++;
+	}
 }
 
 void objDraw(Obj* obj) {
