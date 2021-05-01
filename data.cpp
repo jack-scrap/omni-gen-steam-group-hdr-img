@@ -49,8 +49,12 @@ Data* dataMk(char* data, unsigned int sz, std::string name, glm::vec3 loc, glm::
 	}
 
 	// identifier
-	Str* id = strMk(name, glm::vec3(0.0, 0.0, -(layout::margin * 2)));
-	child[noChild - 1] = id->_parent;
+	if (!name.empty()) {
+		Str* id = strMk(name, glm::vec3(0.0, 0.0, -(layout::margin * 2)));
+		child[noChild - 1] = id->_parent;
+	} else {
+		child[noChild - 1] = nullptr;
+	}
 
 	Border* parent = borderMk({
 		scale[X],
