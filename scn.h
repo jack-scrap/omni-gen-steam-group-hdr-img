@@ -26,7 +26,6 @@ extern bool eq;
 
 typedef struct End {
 	unsigned int _axis;
-
 	float _val;
 } End;
 
