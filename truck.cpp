@@ -82,15 +82,7 @@ Truck* truckMk(char* data, unsigned int sz, glm::vec3 loc, glm::vec3 rot) {
 		child[(w * 2) + 1 + i] = objMk("container_2x4", "obj", "dir", true, glm::vec3(-((i * (layout::idx[Y] + (layout::pad * 2))) + (layout::idx[Y] / 2) + 0.42), ((2.0 / 2) + 0.5), 0.0), glm::vec3(0.0, M_PI / 2, 0.0));
 	}
 
-	GLfloat vtx[3] = {
-		0.0, 0.0, 0.0
-	};
-
-	GLushort idx[1] = {
-		0
-	};
-
-	Obj* bed = objMk(vtx, 1, idx, 1, "bevel/main", "bed", "tex", false, glm::vec3(0.0), glm::vec3(0.0, M_PI / 2, 0.0));
+	Obj* bed = objMk(_->_vtx, 1, _->_idx, 1, "bevel/main", "bed", "tex", false, glm::vec3(0.0), glm::vec3(0.0, M_PI / 2, 0.0));
 
 	bed->_prog.use();
 
@@ -100,7 +92,7 @@ Truck* truckMk(char* data, unsigned int sz, glm::vec3 loc, glm::vec3 rot) {
 
 	bed->_prog.unUse();
 
-	Obj* outer = objMk(vtx, 1, idx, 1, "bevel/main", "outer", "dir", true, glm::vec3(0.0), glm::vec3(0.0, M_PI / 2, 0.0));
+	Obj* outer = objMk(_->_vtx, 1, _->_idx, 1, "bevel/main", "outer", "dir", true, glm::vec3(0.0), glm::vec3(0.0, M_PI / 2, 0.0));
 
 	outer->_prog.use();
 

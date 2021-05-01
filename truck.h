@@ -15,6 +15,14 @@ typedef struct Truck {
 
 	Obj* _parent;
 
+	GLfloat _vtx[3] = {
+		0.0, 0.0, 0.0
+	};
+
+	GLushort _idx[1] = {
+		0
+	};
+
 	static constexpr GLfloat _rngWheel[2] = {
 		-(M_PI / 2),
 		M_PI / 2
