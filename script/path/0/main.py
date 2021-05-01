@@ -1,3 +1,3 @@
 from omni import *
 
-truck.zoom(3)
+truck.mv(3)

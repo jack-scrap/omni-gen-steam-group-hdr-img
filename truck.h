@@ -38,4 +38,4 @@ Truck* truckMk(char* data, unsigned int sz, glm::vec3 loc = glm::vec3(0.0), glm:
 
 extern "C" void truckTurn(Truck* truck, float delta);
 
-extern "C" void truckZoom(Truck* truck, float delta);
+extern "C" void truckMv(Truck* truck, float delta);

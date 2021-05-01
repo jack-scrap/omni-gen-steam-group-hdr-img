@@ -15,7 +15,7 @@
 ## Truck
 This allows for complete freedom of movement without being restricted to an axis.
 
-`zoom(d)` - Move forward, back
+`mv(d)` - Move forward, back
 
 `left(d)` - Turn left
 `right(d)` - Turn right

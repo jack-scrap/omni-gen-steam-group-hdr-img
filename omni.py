@@ -134,11 +134,11 @@ class _Truck(_Obj):
 		for i in range(3):
 		    self._loc[i] = self._ptr.contents._loc[i]
 
-	def zoom(self, delta):
+	def mv(self, delta):
 		for i in range(3):
 		    self._loc[i] = self._ptr.contents._loc[i]
 
-		_truckZoom(self._ptr, delta)
+		_truckMv(self._ptr, delta)
 
 _truckTurn = _truck.truckTurn
 _truckTurn.restype = c_void_p
@@ -147,9 +147,9 @@ _truckTurn.argtypes = [
 		c_float
 ]
 
-_truckZoom = _truck.truckZoom
-_truckZoom.restype = c_void_p
-_truckZoom.argtypes = [
+_truckMv = _truck.truckMv
+_truckMv.restype = c_void_p
+_truckMv.argtypes = [
 		POINTER(_Truck),
 		c_float
 ]
