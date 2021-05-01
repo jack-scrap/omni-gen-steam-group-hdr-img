@@ -72,7 +72,18 @@ This will simply import the module, but attach it to the global namespace.
 
 `from module import *`
 
-# Renaming
+## Package
+Packages are greater collections of modules.
+
+A directory containing the file `__init__.py` will treat the directory all contained Python modules as a package.
+
+`import module.package, module.other_package`
+
+On importing, code contained in `__init__.py` will be executed.
+
+The contents of this file may be empty, but the file must be present.
+
+## Renaming
 Both the imported module and the identifiers it contains can be re-named via the `as` keyword.
 
 `import module as other_module`
