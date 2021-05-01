@@ -55,7 +55,7 @@ Truck* truckMk(char* data, unsigned int sz, glm::vec3 loc, glm::vec3 rot) {
 
 	unsigned int w = sz * 2;
 
-	Obj* child[(w * 2) + sz + 1 + 2];
+	Obj* child[(w * 2) + 1 + 2];
 	int i = 0;
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < w; x++) {
@@ -70,10 +70,6 @@ Truck* truckMk(char* data, unsigned int sz, glm::vec3 loc, glm::vec3 rot) {
 	}
 
 	child[w * 2] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-(sz * 4.0) - (layout::stroke) - (layout::stroke * 2), 0.0, 0.0), rot);
-
-	for (int i = 0; i < sz; i++) {
-		child[(w * 2) + 1 + i] = objMk("container_2x4", "obj", "dir", true, glm::vec3(-((i * (layout::idx[Y] + (layout::pad * 2))) + (layout::idx[Y] / 2) + 0.42), ((2.0 / 2) + 0.5), 0.0), glm::vec3(0.0, M_PI / 2, 0.0));
-	}
 
 	Obj* bed = objMk(_->_vtx, 1, _->_idx, 1, "bevel/main", "bed", "tex", false, glm::vec3(0.0), glm::vec3(0.0, M_PI / 2, 0.0));
 
@@ -98,8 +94,12 @@ Truck* truckMk(char* data, unsigned int sz, glm::vec3 loc, glm::vec3 rot) {
 	pt.push_back(bed);
 	pt.push_back(outer);
 
-	child[(w * 2) + sz + 1] = bed;
-	child[(w * 2) + sz + 1 + 1] = outer;
+	child[(w * 2) + 1] = bed;
+	child[(w * 2) + 1 + 1] = outer;
+
+	_->_data = dataMk(data, sz, "state", glm::vec3(0.0, 0.0, -((layout::idx[X] / 2) + (layout::stroke * 2) + (layout::margin * 2 * 2))), glm::vec3(0.0, -M_PI / 2, 0.0));
+
+	child[(w * 2) + 1 + 1] = _->_data->_parent;
 
 	_->_parent = objMk("truck/front", "obj", "dir", true, child, sizeof child / sizeof *child, loc + glm::vec3(2.4, 1.3, 0.0), rot);
 

@@ -4,6 +4,7 @@
 
 #include "obj.h"
 #include "pt.h"
+#include "data.h"
 
 typedef struct Truck {
 	GLfloat _loc[3];
@@ -27,6 +28,8 @@ typedef struct Truck {
 		-(M_PI / 2),
 		M_PI / 2
 	};
+
+	Data* _data;
 } Truck;
 
 Truck* truckMk(glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0, 0.0, 0.0));
