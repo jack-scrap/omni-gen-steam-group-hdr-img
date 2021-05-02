@@ -7,6 +7,16 @@
 #include "idx.h"
 #include "str.h"
 
+Var* varMk(char* name, unsigned int szName, void* ptr) {
+	Var* _ = (Var*) malloc(sizeof (Var));
+
+	_->_name = name;
+	_->_szName = szName;
+	_->_ptr = ptr;
+
+	return _;
+}
+
 Data* dataMk(char* data, unsigned int sz, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	Data* _ = (Data*) malloc(sizeof (Data));
 

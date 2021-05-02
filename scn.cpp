@@ -28,16 +28,6 @@ unsigned int r;
 void** coneRng;
 unsigned int c = 0;
 
-Var* varMk(char* name, unsigned int szName, void* ptr) {
-	Var* _ = (Var*) malloc(sizeof (Var));
-
-	_->_name = name;
-	_->_szName = szName;
-	_->_ptr = ptr;
-
-	return _;
-}
-
 extern "C" void* boundRngGet() {
 	return boundRng;
 }

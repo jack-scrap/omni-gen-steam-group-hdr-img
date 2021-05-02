@@ -14,15 +14,6 @@
 #include "cone.h"
 #include "lim.h"
 
-typedef struct Var {
-	char* _name;
-	unsigned int _szName;
-
-	void* _ptr;
-};
-
-Var* varMk(char* name, unsigned int szName, void* ptr);
-
 extern Disp* disp;
 
 extern Cam cam;
