@@ -91,7 +91,6 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 			for (const auto& byte : entry["data"]) {
 				sz++;
-
 				init = (char*) realloc(init, sz * sizeof (char));
 				init[sz - 1] = (char) ((int) byte);
 			}
@@ -105,10 +104,8 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		if (entry["name"] == "truck") {
 			char* init = (char*) malloc(0);
 			unsigned int sz = 0;
-
 			for (const auto& _ : entry["data"]) {
 				sz++;
-
 				init = (char*) realloc(init, sz * sizeof (char));
 				init[sz - 1] = (char) ((int) _);
 			}
@@ -146,9 +143,8 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					name[i] = map.key()[i];
 				}
 
-				Var* var = varMk(name, map.key().size(), val);
-
 				sz++;
+				Var* var = varMk(name, map.key().size(), val);
 				data[sz - 1] = var;
 			}
 
@@ -204,7 +200,6 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 						for (int y = 0; y < 2; y++) {
 							for (int x = 0; x < 2; x++) {
 								sz++;
-
 								init = (char*) realloc(init, sz * sizeof (char));
 								init[sz - 1] = 'a';
 							}
@@ -220,7 +215,6 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 		if (data.type() == nlohmann::json::value_t::number_unsigned) {
 			sz++;
-
 			goal = (char*) realloc(goal, sz);
 			goal[sz - 1] = (char) ((int) data);
 		}
@@ -228,7 +222,6 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		if (data.type() == nlohmann::json::value_t::array) {
 			for (const auto& byte : data) {
 				sz++;
-
 				goal = (char*) realloc(goal, sz);
 				goal[sz - 1] = (char) ((int) data);
 			}
