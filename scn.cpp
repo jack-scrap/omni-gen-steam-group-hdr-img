@@ -65,18 +65,17 @@ extern "C" void* goalGet() {
 void scn::init(unsigned int stage, unsigned int lvl) {
 	nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("lvl/" + omni::stage[stage] + "/" + std::to_string(lvl) + ".json"));
 
-	// vehicles
 	for (void* _ : vehicle) {
 		free(_);
 	}
 	vehicle.clear();
 
-	// drawable objects
 	for (void* _ : mesh) {
 		free(_);
 	}
 	mesh.clear();
 
+	// vehicle
 	for (const auto& entry : serial["vehicle"]) {
 		if (entry["name"] == "crane") {
 			Crane* crane = craneMk(glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]));
