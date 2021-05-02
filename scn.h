@@ -14,13 +14,22 @@
 #include "cone.h"
 #include "lim.h"
 
+typedef struct Var {
+	char* _name;
+	unsigned int _szName;
+
+	void* _ptr;
+};
+
+Var* varMk(char* name, unsigned int szName, void* ptr);
+
 extern Disp* disp;
 
 extern Cam cam;
 
 extern Console* console;
 
-extern Data* data;
+extern void** data;
 extern unsigned int sz;
 extern char* goal;
 extern bool eq;
@@ -42,7 +51,7 @@ extern "C" void** vehicleGet();
 extern std::vector<Obj*> mesh;
 extern std::vector<Obj*> pt;
 
-extern "C" void* dataGet();
+extern "C" void** dataGet();
 
 extern "C" void* goalGet();
 

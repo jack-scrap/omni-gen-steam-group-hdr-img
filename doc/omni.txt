@@ -27,6 +27,11 @@ Data can be accessed.
 
 Both initial and the desired state is provided.
 
+Data sets can be accessed by key.
+
+`.data`
+`.other_data`
+
 `.data`
 
 `._depth`

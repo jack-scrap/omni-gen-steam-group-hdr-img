@@ -145,47 +145,5 @@ void craneGrab(Crane* crane) {
 
 	Obj*& slot = crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)];
 
-	if (!crane->_op) {
-		for (int i = 0; i < data->_x; i++) {
-			Cont*& byte = data->_data[i]->_data;
-
-			if (byte) {
-				if (util::phys::aabb(claw, data->_data[i]->_data->_parent)) {
-					crane->_op = byte;
-					slot = byte->_parent;
-
-					slot->_model = glm::mat4(1.0);
-
-					data->_parent->_child[i]->_child[0] = nullptr;
-					data->_data[i]->_data = nullptr;
-
-					break;
-				}
-			} else {
-				omni::err("Cannot grab; no applicable data");
-			}
-		}
-	} else {
-		for (int i = 0; i < data->_x; i++) {
-			Cont*& byte = data->_data[i]->_data;
-
-			if (!byte) {
-				if (util::phys::aabb(crane->_op->_parent, data->_data[i]->_parent)) {
-					data->_data[i]->_data = crane->_op;
-					data->_parent->_child[i]->_child[0] = crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)];
-
-					data->_parent->_child[i]->_child[0]->_model = glm::translate(glm::mat4(1.0), glm::vec3((layout::idx[X] / 2) + (layout::pad * 2 * 2), 2.0 / 2, (layout::idx[Y] / 2) + (layout::pad * 2 * 2)));
-
-					objAcc(data->_parent, glm::mat4(1.0));
-
-					crane->_op = nullptr;
-					crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)] = nullptr;
-
-					break;
-				}
-			}
-		}
-	}
-
 	objAcc(crane->_parent, glm::mat4(1.0));
 }

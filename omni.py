@@ -22,8 +22,15 @@ class _Data(Structure):
 		('_loc', c_float * 3),
 	]
 
+class _Var(Structure):
+    _fields_ = [
+	    ('_name', POINTER(c_char)),
+	    ('_szName', c_uint),
+	    ('_ptr', POINTER(_Data))
+    ]
+
 _dataGet = _scn.dataGet
-_dataGet.restype = POINTER(_Data)
+_dataGet.restype = POINTER(POINTER(_Var))
 _dataGet.argtypes = None
 
 data = _dataGet()

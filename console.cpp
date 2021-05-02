@@ -18,21 +18,7 @@ void dispatch(Console* console, std::string name) {
 
 	PyRun_SimpleString(util::str::join(buff).c_str());
 
-	char state[data->_x];
-	for (int i = 0; i < data->_x; i++) {
-		if (data->_data[i]->_data) {
-			state[i] = data->_data[i]->_data->_c;
-		} else {
-			state[i] = 0;
-		}
-	}
-
-	eq = true;
-	for (int i = 0; i < data->_x; i++) {
-		if (state[i] != goal[i]) {
-			eq = false;
-		}
-	}
+	bool eq = false;
 
 	if (eq) {
 		std::string log = "log/" + util::fs::base(name) + ".log";

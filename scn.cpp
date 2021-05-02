@@ -17,7 +17,7 @@
 #include "cargo_ship.h"
 #include "omni.h"
 
-Data* data;
+void** data;
 unsigned int sz;
 char* goal;
 bool eq = false;
@@ -27,6 +27,16 @@ unsigned int r;
 
 void** coneRng;
 unsigned int c = 0;
+
+Var* varMk(char* name, unsigned int szName, void* ptr) {
+	Var* _ = (Var*) malloc(sizeof (Var));
+
+	_->_name = name;
+	_->_szName = szName;
+	_->_ptr = ptr;
+
+	return _;
+}
 
 extern "C" void* boundRngGet() {
 	return boundRng;
@@ -44,7 +54,7 @@ extern "C" void** vehicleGet() {
 std::vector<Obj*> mesh;
 std::vector<Obj*> pt;
 
-extern "C" void* dataGet() {
+extern "C" void** dataGet() {
 	return data;
 }
 
@@ -111,23 +121,35 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	// data
+	data = (void**) malloc(0);
+
 	if (serial["data"]["state"].type() == nlohmann::json::value_t::array) {
 		for (const auto& map : serial["data"].items()) {
 			// 1D
 			if (serial["data"]["state"][0].type() == nlohmann::json::value_t::number_unsigned) {
 				char* init = (char*) malloc(0);
-				unsigned int sz = 0;
 
+				unsigned int s = 0;
 				for (const auto& item : serial["data"][map.key()]) {
 					if (item.type() == nlohmann::json::value_t::number_unsigned) {
-						sz++;
-
-						init = (char*) realloc(init, sz * sizeof (char));
-						init[sz - 1] = (char) ((int) item);
+						s++;
+						init = (char*) realloc(init, s * sizeof (char));
+						init[s - 1] = (char) ((int) item);
 					}
 				}
 
-				data = dataMk(init, sz, map.key(), glm::vec3(0.0, 0.0, -((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2))));
+				Data* val = dataMk(init, s, map.key(), glm::vec3(0.0, 0.0, -((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2))));
+
+				char* name = (char*) malloc(0);
+				name = (char*) realloc(name, map.key().size() * sizeof (char));
+				for (int i = 0; i < map.key().size(); i++) {
+					name[i] = map.key()[i];
+				}
+
+				Var* var = varMk(name, map.key().size(), val);
+
+				sz++;
+				data[sz - 1] = var;
 			}
 
 			if (serial["data"]["state"][0].type() == nlohmann::json::value_t::array) {
@@ -156,9 +178,6 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 						y++;
 					}
-
-					data = dataMk(init, x, y, map.key(), glm::vec3(0.0, 0.0, -(((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2)) * y)));
-					sz = x * y;
 				}
 
 				// 3D
@@ -191,8 +210,6 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 							}
 						}
 					}
-
-					data = dataMk(init, bound[X], bound[Y], bound[Z], map.key(), glm::vec3(0.0, 0.0, -((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2))));
 				}
 			}
 		}
@@ -296,6 +313,4 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			}
 		}
 	}
-
-	mesh.push_back(data->_parent);
 }
