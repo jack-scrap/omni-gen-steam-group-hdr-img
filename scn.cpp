@@ -153,28 +153,25 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				// 2D
 				if (serial["data"]["state"][0][0].type() == nlohmann::json::value_t::number_unsigned) {
 					char* init = (char*) malloc(0);
-					unsigned int x = 0;
-					unsigned int y = 0;
 
-					unsigned int max = 0;
-					for (const auto& item : serial["data"][map.key()]) {
-						x = 0;
+					unsigned int x = 2;
+					unsigned int y = 2;
 
-						for (const auto& byte : item) {
-							x++;
+					init = (char*) realloc(init, x * y * sizeof (char));
 
-							if (x > max) {
-								max = x;
-							}
+					Data* val = dataMk(init, x, y, map.key(), glm::vec3(0.0, 0.0, -((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2))));
 
-							unsigned int sz = ((y * max) + x);
-
-							init = (char*) realloc(init, sz * sizeof (char));
-							init[sz - 1] = (char) ((int) byte);
-						}
-
-						y++;
+					char* name = (char*) malloc(0);
+					name = (char*) realloc(name, map.key().size() * sizeof (char));
+					for (int i = 0; i < map.key().size(); i++) {
+						name[i] = map.key()[i];
 					}
+
+					sz++;
+					Var* var = varMk(name, map.key().size(), val);
+					data[sz - 1] = var;
+
+					mesh.push_back(((Data*) (((Var*) data[sz - 1])->_ptr))->_parent);
 				}
 
 				// 3D
