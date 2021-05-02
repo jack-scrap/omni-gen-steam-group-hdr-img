@@ -125,16 +125,16 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			if (serial["data"]["state"][0].type() == nlohmann::json::value_t::number_unsigned) {
 				char* init = (char*) malloc(0);
 
-				unsigned int s = 0;
+				unsigned int x = 0;
 				for (const auto& item : serial["data"][map.key()]) {
 					if (item.type() == nlohmann::json::value_t::number_unsigned) {
-						s++;
-						init = (char*) realloc(init, s * sizeof (char));
-						init[s - 1] = (char) ((int) item);
+						x++;
+						init = (char*) realloc(init, x * sizeof (char));
+						init[x - 1] = (char) ((int) item);
 					}
 				}
 
-				Data* val = dataMk(init, s, map.key(), glm::vec3(0.0, 0.0, -((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2))));
+				Data* val = dataMk(init, x, map.key(), glm::vec3(0.0, 0.0, -((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2))));
 
 				char* name = (char*) malloc(0);
 				name = (char*) realloc(name, map.key().size() * sizeof (char));
