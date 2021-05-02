@@ -145,6 +145,8 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				sz++;
 				Var* var = varMk(name, map.key().size(), val);
 				data[sz - 1] = var;
+
+				mesh.push_back(((Data*) (((Var*) data[sz - 1])->_ptr))->_parent);
 			}
 
 			if (serial["data"]["state"][0].type() == nlohmann::json::value_t::array) {
