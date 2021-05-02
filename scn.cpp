@@ -292,6 +292,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 						bound[x][y] = entry["bound"][x][y];
 					}
 				}
+
 				Cone* cone = coneMk(bound, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]));
 
 				c++;
