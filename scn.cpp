@@ -144,8 +144,30 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				if (serial["data"]["state"][0][0].type() == nlohmann::json::value_t::number_unsigned) {
 					char* init = (char*) malloc(0);
 
-					unsigned int x = 2;
-					unsigned int y = 2;
+					unsigned int x = 0;
+					unsigned int y = 0;
+					for (const auto& arr : serial["data"][map.key()]) {
+						x = 0;
+
+						y++;
+
+						if (arr.type() == nlohmann::json::value_t::array) {
+							for (const auto& scal : arr) {
+								x++;
+							}	
+						}
+					}
+
+					init = (char*) realloc(init, x * y * sizeof (char));
+
+					unsigned int sz = 0;
+					for (const auto& arr : serial["data"][map.key()]) {
+						for (const auto& scal : arr) {
+							init[sz] = (char) ((int) scal);
+
+							sz++;
+						}	
+					}
 
 					init = (char*) realloc(init, x * y * sizeof (char));
 
