@@ -110,8 +110,27 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		}
 	}
 
-	// data
+	/* data */
 	data = (void**) malloc(0);
+
+	// scalar
+	if (serial["data"]["state"].type() == nlohmann::json::value_t::number_unsigned) {
+		Idx* idx = idxMk(0, (char) ((int) serial["data"]["state"]));
+
+		for (const auto& map : serial["data"].items()) {
+			char* name = (char*) malloc(0);
+			name = (char*) realloc(name, map.key().size() * sizeof (char));
+			for (int i = 0; i < map.key().size(); i++) {
+				name[i] = map.key()[i];
+			}
+
+			s++;
+			Var* var = varMk(name, map.key().size(), idx);
+			data[s - 1] = var;
+
+			mesh.push_back(idx->_parent);
+		}
+	}
 
 	// array
 	if (serial["data"]["state"].type() == nlohmann::json::value_t::array) {
