@@ -37,8 +37,17 @@ _szGet = _scn.szGet
 _szGet.restype = c_uint
 _szGet.argtypes = None
 
-data = _dataGet()
-sz = _szGet()
+_data = _dataGet()
+_sz = _szGet()
+
+data = {}
+for i in range(_sz):
+	name = ''
+
+	for c in range(_data[i].contents._szName):
+		name += _data[i].contents._name[c].decode("utf-8")
+
+	data[name] = _data[i].contents._ptr
 
 _goalGet = _scn.goalGet
 _goalGet.restype = POINTER(c_char)
