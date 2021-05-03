@@ -12,16 +12,19 @@ namespace omni {
 			0,
 			"init"
 		}, {
-			1,
-			"ctrl_flow"
+			0,
+			"array"
 		}, {
 			2,
-			"thread"
+			"ctrl_flow"
 		}, {
 			3,
-			"path"
+			"thread"
 		}, {
 			4,
+			"path"
+		}, {
+			5,
 			"matrix"
 		}
 	};
