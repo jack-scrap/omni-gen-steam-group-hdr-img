@@ -113,6 +113,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	// data
 	data = (void**) malloc(0);
 
+	// array
 	if (serial["data"]["state"].type() == nlohmann::json::value_t::array) {
 		for (const auto& map : serial["data"].items()) {
 			// 1D
