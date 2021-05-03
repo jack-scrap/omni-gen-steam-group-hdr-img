@@ -33,7 +33,12 @@ _dataGet = _scn.dataGet
 _dataGet.restype = POINTER(POINTER(_Var))
 _dataGet.argtypes = None
 
+_szGet = _scn.szGet
+_szGet.restype = c_uint
+_szGet.argtypes = None
+
 data = _dataGet()
+sz = _szGet()
 
 _goalGet = _scn.goalGet
 _goalGet.restype = POINTER(c_char)
@@ -181,9 +186,9 @@ _cargoShipMv.argtypes = [
 ]
 
 _vehicleGet = _scn.vehicleGet
-_vehicleGet.restype = POINTER(POINTER(_Truck))
+_vehicleGet.restype = POINTER(POINTER(_CargoShip))
 _vehicleGet.argtypes = None
 
 _vehicle = _vehicleGet()
 
-truck = _Truck(_vehicle[0])
+cargoShip = _CargoShip(_vehicle[0])

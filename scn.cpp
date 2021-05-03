@@ -18,9 +18,13 @@
 #include "omni.h"
 
 void** data;
-unsigned int sz;
+unsigned int s;
 char* goal;
 bool eq = false;
+
+unsigned int szGet() {
+	return s;
+}
 
 Lim* boundRng;
 unsigned int r;
@@ -132,11 +136,11 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					name[i] = map.key()[i];
 				}
 
-				sz++;
+				s++;
 				Var* var = varMk(name, map.key().size(), val);
-				data[sz - 1] = var;
+				data[s - 1] = var;
 
-				mesh.push_back(((Data*) (((Var*) data[sz - 1])->_ptr))->_parent);
+				mesh.push_back(((Data*) (((Var*) data[s - 1])->_ptr))->_parent);
 			}
 
 			if (serial["data"]["state"][0].type() == nlohmann::json::value_t::array) {
@@ -179,11 +183,11 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 						name[i] = map.key()[i];
 					}
 
-					sz++;
+					s++;
 					Var* var = varMk(name, map.key().size(), val);
-					data[sz - 1] = var;
+					data[s - 1] = var;
 
-					mesh.push_back(((Data*) (((Var*) data[sz - 1])->_ptr))->_parent);
+					mesh.push_back(((Data*) (((Var*) data[s - 1])->_ptr))->_parent);
 				}
 
 				// 3D
