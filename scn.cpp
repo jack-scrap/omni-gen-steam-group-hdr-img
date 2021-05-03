@@ -220,20 +220,22 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		}
 	}
 
-	for (const auto& data : serial["goal"]) {
-		goal = (char*) malloc(0);
+	// goal
+	goal = (char*) malloc(0);
 
+	unsigned int i = 0;
+	for (const auto& data : serial["goal"]) {
 		if (data.type() == nlohmann::json::value_t::number_unsigned) {
-			sz++;
-			goal = (char*) realloc(goal, sz);
-			goal[sz - 1] = (char) ((int) data);
+			goal[i] = (char) ((int) data);
+
+			i++;
 		}
 
 		if (data.type() == nlohmann::json::value_t::array) {
 			for (const auto& byte : data) {
-				sz++;
-				goal = (char*) realloc(goal, sz);
-				goal[sz - 1] = (char) ((int) data);
+				goal[i] = (char) ((int) data);
+
+				i++;
 			}
 		}
 	}
