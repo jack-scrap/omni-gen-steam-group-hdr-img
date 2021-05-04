@@ -7,11 +7,11 @@
 #include "idx.h"
 #include "str.h"
 
-Var* varMk(char* name, unsigned int szName, void* ptr) {
+Var* varMk(char* id, unsigned int szId, void* ptr) {
 	Var* _ = (Var*) malloc(sizeof (Var));
 
-	_->_name = name;
-	_->_szName = szName;
+	_->_id = id;
+	_->_szId = szId;
 	_->_ptr = ptr;
 
 	return _;

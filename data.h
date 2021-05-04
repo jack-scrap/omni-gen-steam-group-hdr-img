@@ -7,8 +7,8 @@
 #include "idx.h"
 
 typedef struct Var {
-	char* _name;
-	unsigned int _szName;
+	char* _id;
+	unsigned int _szId;
 
 	void* _ptr;
 };

@@ -24,8 +24,8 @@ class _Data(Structure):
 
 class _Var(Structure):
     _fields_ = [
-	    ('_name', POINTER(c_char)),
-	    ('_szName', c_uint),
+	    ('_id', POINTER(c_char)),
+	    ('_szId', c_uint),
 	    ('_ptr', POINTER(_Data))
     ]
 
@@ -42,12 +42,12 @@ _sz = _szGet()
 
 data = {}
 for i in range(_sz):
-	name = ''
+	id = ''
 
-	for c in range(_data[i].contents._szName):
-		name += _data[i].contents._name[c].decode("utf-8")
+	for c in range(_data[i].contents._szId):
+		id += _data[i].contents._id[c].decode("utf-8")
 
-	data[name] = _data[i].contents._ptr
+	data[id] = _data[i].contents._ptr
 
 _goalGet = _scn.goalGet
 _goalGet.restype = POINTER(c_char)
