@@ -4,7 +4,7 @@
 #include "data.h"
 
 typedef struct {
-	Data* _data;
+	Arr* _data;
 
 	GLfloat _loc[3];
 

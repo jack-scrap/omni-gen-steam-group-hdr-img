@@ -9,7 +9,7 @@
 CargoShip* cargoShipMk(char* init, unsigned int sz, glm::vec3 loc, glm::vec3 rot) {
 	CargoShip* _ = (CargoShip*) malloc(sizeof (CargoShip));
 
-	_->_data = dataMk(init, sz, "state", glm::vec3(-(layout::stride[Y] * sz), 1.0, layout::stride[X]));
+	_->_data = arrMk(init, sz, "state", glm::vec3(-(layout::stride[Y] * sz), 1.0, layout::stride[X]));
 
 	Obj* child[] = {
 		_->_data->_parent

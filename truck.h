@@ -7,7 +7,7 @@
 #include "data.h"
 
 typedef struct Truck {
-	Data* _data;
+	Arr* _data;
 
 	GLfloat _loc[3];
 

@@ -16,8 +16,8 @@ Var* varMk(char* id, void* ptr) {
 	return _;
 }
 
-Data* dataMk(char* init, unsigned int sz, std::string name, glm::vec3 loc, glm::vec3 rot) {
-	Data* _ = (Data*) malloc(sizeof (Data));
+Arr* arrMk(char* init, unsigned int sz, std::string name, glm::vec3 loc, glm::vec3 rot) {
+	Arr* _ = (Arr*) malloc(sizeof (Arr));
 
 	_->_ptr = init;
 	_->_x = sz;
@@ -75,8 +75,8 @@ Data* dataMk(char* init, unsigned int sz, std::string name, glm::vec3 loc, glm::
 	return _;
 }
 
-Data* dataMk(char* init, unsigned int x, unsigned int y, std::string name, glm::vec3 loc, glm::vec3 rot) {
-	Data* _ = (Data*) malloc(sizeof (Data));
+Arr* arrMk(char* init, unsigned int x, unsigned int y, std::string name, glm::vec3 loc, glm::vec3 rot) {
+	Arr* _ = (Arr*) malloc(sizeof (Arr));
 
 	_->_ptr = init;
 	_->_x = x;
@@ -130,8 +130,8 @@ Data* dataMk(char* init, unsigned int x, unsigned int y, std::string name, glm::
 	return _;
 }
 
-Data* dataMk(char* init, unsigned int x, unsigned int y, unsigned int z, std::string name, glm::vec3 loc, glm::vec3 rot) {
-	Data* _ = (Data*) malloc(sizeof (Data));
+Arr* arrMk(char* init, unsigned int x, unsigned int y, unsigned int z, std::string name, glm::vec3 loc, glm::vec3 rot) {
+	Arr* _ = (Arr*) malloc(sizeof (Arr));
 
 	_->_ptr = init;
 	_->_x = x;

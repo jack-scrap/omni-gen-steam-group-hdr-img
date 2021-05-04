@@ -149,7 +149,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					}
 				}
 
-				Data* val = dataMk(init, x, map.key(), glm::vec3(0.0, 0.0, -((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2))));
+				Arr* val = arrMk(init, x, map.key(), glm::vec3(0.0, 0.0, -((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2))));
 
 				char* id = (char*) malloc(0);
 				id = (char*) realloc(id, (map.key().size() + 1) * sizeof (char));
@@ -162,7 +162,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				Var* var = varMk(id, val);
 				data[s - 1] = var;
 
-				mesh.push_back(((Data*) (((Var*) data[s - 1])->_ptr))->_parent);
+				mesh.push_back(((Arr*) (((Var*) data[s - 1])->_ptr))->_parent);
 			}
 
 			if (serial["data"]["state"][0].type() == nlohmann::json::value_t::array) {
@@ -197,7 +197,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 					init = (char*) realloc(init, x * y * sizeof (char));
 
-					Data* val = dataMk(init, x, y, map.key(), glm::vec3(0.0, 0.0, -((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2))));
+					Arr* val = arrMk(init, x, y, map.key(), glm::vec3(0.0, 0.0, -((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2))));
 
 					char* id = (char*) malloc(0);
 					id = (char*) realloc(id, (map.key().size() + 1) * sizeof (char));
@@ -210,7 +210,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					Var* var = varMk(id, val);
 					data[s - 1] = var;
 
-					mesh.push_back(((Data*) (((Var*) data[s - 1])->_ptr))->_parent);
+					mesh.push_back(((Arr*) (((Var*) data[s - 1])->_ptr))->_parent);
 				}
 
 				// 3D
