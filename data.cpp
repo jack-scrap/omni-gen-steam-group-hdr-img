@@ -16,10 +16,10 @@ Var* varMk(char* id, void* ptr) {
 	return _;
 }
 
-Data* dataMk(char* data, unsigned int sz, std::string name, glm::vec3 loc, glm::vec3 rot) {
+Data* dataMk(char* init, unsigned int sz, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	Data* _ = (Data*) malloc(sizeof (Data));
 
-	_->_ptr = data;
+	_->_ptr = init;
 	_->_x = sz;
 	_->_y = 1;
 
@@ -43,8 +43,8 @@ Data* dataMk(char* data, unsigned int sz, std::string name, glm::vec3 loc, glm::
 		for (int i = 0; i < _->_x; i++) {
 			Idx* idx;
 			glm::vec3 offset = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2) + glm::vec3(i * layout::stride[X], 0.0, j * layout::stride[Y]);
-			if (data[(j * _->_y) + i]) {
-				idx = idxMk(i, data[(j * _->_y) + i], "", offset);
+			if (init[(j * _->_y) + i]) {
+				idx = idxMk(i, init[(j * _->_y) + i], "", offset);
 			} else {
 				idx = idxMk((j * _->_y) + i, "", offset);
 			}
@@ -75,10 +75,10 @@ Data* dataMk(char* data, unsigned int sz, std::string name, glm::vec3 loc, glm::
 	return _;
 }
 
-Data* dataMk(char* data, unsigned int x, unsigned int y, std::string name, glm::vec3 loc, glm::vec3 rot) {
+Data* dataMk(char* init, unsigned int x, unsigned int y, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	Data* _ = (Data*) malloc(sizeof (Data));
 
-	_->_ptr = data;
+	_->_ptr = init;
 	_->_x = x;
 	_->_y = y;
 
@@ -102,8 +102,8 @@ Data* dataMk(char* data, unsigned int x, unsigned int y, std::string name, glm::
 		for (int i = 0; i < _->_x; i++) {
 			Idx* idx;
 			glm::vec3 offset = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2) + glm::vec3(i * layout::stride[X], 0.0, j * layout::stride[Y]);
-			if (data[(j * _->_y) + i]) {
-				idx = idxMk(i, data[(j * _->_y) + i], "", offset);
+			if (init[(j * _->_y) + i]) {
+				idx = idxMk(i, init[(j * _->_y) + i], "", offset);
 			} else {
 				idx = idxMk((j * _->_y) + i, "", offset);
 			}
@@ -130,10 +130,10 @@ Data* dataMk(char* data, unsigned int x, unsigned int y, std::string name, glm::
 	return _;
 }
 
-Data* dataMk(char* data, unsigned int x, unsigned int y, unsigned int z, std::string name, glm::vec3 loc, glm::vec3 rot) {
+Data* dataMk(char* init, unsigned int x, unsigned int y, unsigned int z, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	Data* _ = (Data*) malloc(sizeof (Data));
 
-	_->_ptr = data;
+	_->_ptr = init;
 	_->_x = x;
 	_->_y = y;
 	_->_z = z;
@@ -160,8 +160,8 @@ Data* dataMk(char* data, unsigned int x, unsigned int y, unsigned int z, std::st
 			for (int i = 0; i < _->_x; i++) {
 				Idx* idx;
 				glm::vec3 offset = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2) + glm::vec3(i * layout::stride[X], 0.0, j * layout::stride[Y]);
-				if (data[(k * (j * _->_y)) + i]) {
-					idx = idxMk(i, data[(k * (j * _->_y)) + i], "", offset);
+				if (init[(k * (j * _->_y)) + i]) {
+					idx = idxMk(i, init[(k * (j * _->_y)) + i], "", offset);
 				} else {
 					idx = idxMk((k * (j * _->_y)) + i, "", offset);
 				}
