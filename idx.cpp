@@ -64,3 +64,8 @@ Idx* idxMk(unsigned int i, char c, std::string name, glm::vec3 loc, glm::vec3 ro
 
 	return _;
 }
+
+void idxInsert(Idx* idx, Cont* byte) {
+	idx->_data = byte;
+	idx->_parent->_child[idx->_parent->_noChild - 1] = idx->_data->_parent;
+}
