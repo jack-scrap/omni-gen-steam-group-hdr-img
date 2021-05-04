@@ -41,6 +41,7 @@ extern "C" void** coneRngGet() {
 }
 
 std::vector<void*> vehicle;
+
 extern "C" void** vehicleGet() {
 	return &vehicle[0];
 }
