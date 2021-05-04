@@ -20,12 +20,6 @@ Arr* arrMk(char* init, unsigned int sz, std::string name, glm::vec3 loc, glm::ve
 
 	_->_data = (Idx**) malloc(_->_x * _->_y * sizeof (Idx*));
 
-	// layout
-	GLfloat scale[2] = {
-		(_->_y * layout::stroke) + (_->_x * layout::stride[X]),
-		(_->_y * layout::stroke) + (_->_y * layout::stride[Y])
-	};
-
 	// data
 	Obj** child = (Obj**) malloc(0);
 	unsigned int noChild = 1;
@@ -56,6 +50,12 @@ Arr* arrMk(char* init, unsigned int sz, std::string name, glm::vec3 loc, glm::ve
 		child[noChild - 1] = nullptr;
 	}
 
+	// scope
+	GLfloat scale[2] = {
+		(_->_y * layout::stroke) + (_->_x * layout::stride[X]),
+		(_->_y * layout::stroke) + (_->_y * layout::stride[Y])
+	};
+
 	Border* scope = borderMk({
 		scale[X],
 		scale[Y]
@@ -78,12 +78,6 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, std::string name, glm::ve
 	}
 
 	_->_data = (Idx**) malloc(_->_x * _->_y * sizeof (Idx*));
-
-	// layout
-	GLfloat scale[2] = {
-		(_->_y * layout::stroke) + (_->_x * layout::stride[X]),
-		(_->_y * layout::stroke) + (_->_y * layout::stride[Y])
-	};
 
 	// data
 	Obj** child = (Obj**) malloc(0);
@@ -111,6 +105,12 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, std::string name, glm::ve
 	Str* id = strMk(name, glm::vec3(0.0, 0.0, -(layout::margin * 2)));
 	child[noChild - 1] = id->_parent;
 
+	// scale
+	GLfloat scale[2] = {
+		(_->_y * layout::stroke) + (_->_x * layout::stride[X]),
+		(_->_y * layout::stroke) + (_->_y * layout::stride[Y])
+	};
+
 	Border* scope = borderMk({
 		scale[X],
 		scale[Y]
@@ -134,13 +134,6 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, unsigned int z, std::stri
 	}
 
 	_->_data = (Idx**) malloc(_->_x * _->_y * _->_z * sizeof (Idx*));
-
-	// layout
-	GLfloat scale[3] = {
-		(_->_y * layout::stroke) + (_->_x * layout::stride[X]),
-		(_->_y * layout::stroke) + (_->_y * layout::stride[Y]),
-		4.0 / 2
-	};
 
 	// data
 	Obj** child = (Obj**) malloc(0);
@@ -169,6 +162,12 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, unsigned int z, std::stri
 	// identifier
 	Str* id = strMk(name, glm::vec3(0.0, 0.0, -(layout::margin * 2)));
 	child[noChild - 1] = id->_parent;
+
+	// scope
+	GLfloat scale[2] = {
+		(_->_y * layout::stroke) + (_->_x * layout::stride[X]),
+		(_->_y * layout::stroke) + (_->_y * layout::stride[Y])
+	};
 
 	Border* scope = borderMk({
 		scale[X],
