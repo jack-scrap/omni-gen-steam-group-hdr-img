@@ -56,12 +56,12 @@ Arr* arrMk(char* init, unsigned int sz, std::string name, glm::vec3 loc, glm::ve
 		child[noChild - 1] = nullptr;
 	}
 
-	Border* parent = borderMk({
+	Border* scope = borderMk({
 		scale[X],
 		scale[Y]
 	}, child, noChild, loc + glm::vec3(0.0), rot);
 
-	_->_parent = parent->_parent;
+	_->_parent = scope->_parent;
 
 	return _;
 }
@@ -111,12 +111,12 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, std::string name, glm::ve
 	Str* id = strMk(name, glm::vec3(0.0, 0.0, -(layout::margin * 2)));
 	child[noChild - 1] = id->_parent;
 
-	Border* parent = borderMk({
+	Border* scope = borderMk({
 		scale[X],
 		scale[Y]
 	}, child, noChild, loc + glm::vec3(0.0), rot);
 
-	_->_parent = parent->_parent;
+	_->_parent = scope->_parent;
 
 	return _;
 }
@@ -170,12 +170,12 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, unsigned int z, std::stri
 	Str* id = strMk(name, glm::vec3(0.0, 0.0, -(layout::margin * 2)));
 	child[noChild - 1] = id->_parent;
 
-	Border* parent = borderMk({
+	Border* scope = borderMk({
 		scale[X],
 		scale[Y]
 	}, child, noChild, loc + glm::vec3(0.0), rot);
 
-	_->_parent = parent->_parent;
+	_->_parent = scope->_parent;
 
 	return _;
 }
