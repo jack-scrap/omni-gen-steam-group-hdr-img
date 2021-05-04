@@ -196,10 +196,38 @@ _cargoShipMv.argtypes = [
 		c_float
 ]
 
-_vehicleGet = _scn.vehicleGet
-_vehicleGet.restype = POINTER(POINTER(_CargoShip))
-_vehicleGet.argtypes = None
+_craneGet = _scn.craneGet
+_craneGet.restype = POINTER(POINTER(_Crane))
+_craneGet.argtypes = None
 
-_vehicle = _vehicleGet()
+_noCraneGet = _scn.noCraneGet
+_noCraneGet.restype = c_uint
+_noCraneGet.argtypes = None
 
-cargoShip = _CargoShip(_vehicle[0])
+crane = []
+for i in range(_noCraneGet()):
+    crane.append(_Crane(_craneGet()[i]))
+
+_truckGet = _scn.truckGet
+_truckGet.restype = POINTER(POINTER(_Truck))
+_truckGet.argtypes = None
+
+_noTruckGet = _scn.noTruckGet
+_noTruckGet.restype = c_uint
+_noTruckGet.argtypes = None
+
+truck = []
+for i in range(_noTruckGet()):
+    truck.append(_Truck(_truckGet()[i]))
+
+_cargoShipGet = _scn.cargoShipGet
+_cargoShipGet.restype = POINTER(POINTER(_CargoShip))
+_cargoShipGet.argtypes = None
+
+_noCargoShipGet = _scn.noCargoShipGet
+_noCargoShipGet.restype = c_uint
+_noCargoShipGet.argtypes = None
+
+cargoShip = []
+for i in range(_noCargoShipGet()):
+    cargoShip.append(_CargoShip(_cargoShipGet()[i]))

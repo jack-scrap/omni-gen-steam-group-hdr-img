@@ -5,6 +5,7 @@
 #include "obj.h"
 #include "truck.h"
 #include "crane.h"
+#include "cargo_ship.h"
 #include "pt.h"
 #include "cam.h"
 #include "console.h"
@@ -38,9 +39,25 @@ extern "C" void* boundRngGet();
 
 extern "C" void** coneRngGet();
 
-extern std::vector<void*> vehicle;
+extern std::vector<Crane*> crane;
+extern std::vector<Truck*> truck;
+extern std::vector<CargoShip*> cargoShip;
 
-extern "C" void** vehicleGet();
+extern "C" unsigned int noCrane;
+extern "C" unsigned int noTruck;
+extern "C" unsigned int noCargoShip;
+
+extern "C" Crane** craneGet();
+
+extern "C" Truck** truckGet();
+
+extern "C" CargoShip** cargoShipGet();
+
+extern "C" unsigned int noCraneGet();
+
+extern "C" unsigned int noTruckGet();
+
+extern "C" unsigned int noCargoShipGet();
 
 extern std::vector<Obj*> mesh;
 extern std::vector<Obj*> pt;
