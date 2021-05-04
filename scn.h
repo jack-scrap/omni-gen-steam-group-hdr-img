@@ -9,8 +9,9 @@
 #include "cam.h"
 #include "console.h"
 #include "bound.h"
+#include "var.h"
 #include "vec.h"
-#include "data.h"
+#include "arr.h"
 #include "cone.h"
 #include "lim.h"
 

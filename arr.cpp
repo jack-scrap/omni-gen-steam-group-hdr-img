@@ -1,20 +1,11 @@
 #include <cstdlib>
 
-#include "data.h"
+#include "arr.h"
 #include "border.h"
 #include "state.h"
 #include "layout.h"
 #include "idx.h"
 #include "str.h"
-
-Var* varMk(char* id, void* ptr) {
-	Var* _ = (Var*) malloc(sizeof (Var));
-
-	_->_id = id;
-	_->_ptr = ptr;
-
-	return _;
-}
 
 Arr* arrMk(char* init, unsigned int sz, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	Arr* _ = (Arr*) malloc(sizeof (Arr));

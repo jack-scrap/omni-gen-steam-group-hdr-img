@@ -1,7 +1,7 @@
 #pragma once
 
 #include "obj.h"
-#include "data.h"
+#include "arr.h"
 
 typedef struct {
 	Arr* _data;

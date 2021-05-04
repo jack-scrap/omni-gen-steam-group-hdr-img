@@ -6,12 +6,6 @@
 #include "node.h"
 #include "idx.h"
 
-typedef struct Var {
-	char* _id;
-
-	void* _ptr;
-};
-
 typedef struct {
 	char* _ptr;
 	unsigned int
@@ -27,8 +21,6 @@ typedef struct {
 
 	Idx** _data;
 } Arr;
-
-Var* varMk(char* name, void* ptr);
 
 Arr* arrMk(char* init, unsigned int sz, std::string name = "", glm::vec3 loc = glm::vec3(0.0, 0.0, 0.0), glm::vec3 rot = glm::vec3(0.0, 0.0, 0.0));
 

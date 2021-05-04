@@ -4,7 +4,7 @@
 
 #include "cargo_ship.h"
 #include "layout.h"
-#include "data.h"
+#include "arr.h"
 
 CargoShip* cargoShipMk(char* init, unsigned int sz, glm::vec3 loc, glm::vec3 rot) {
 	CargoShip* _ = (CargoShip*) malloc(sizeof (CargoShip));
