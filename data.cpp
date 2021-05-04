@@ -44,9 +44,9 @@ Data* dataMk(char* data, unsigned int sz, std::string name, glm::vec3 loc, glm::
 			Idx* idx;
 			glm::vec3 offset = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2) + glm::vec3(i * layout::stride[X], 0.0, j * layout::stride[Y]);
 			if (data[(j * _->_y) + i]) {
-				idx = idxMk(i, data[(j * _->_y) + i], offset);
+				idx = idxMk(i, data[(j * _->_y) + i], "", offset);
 			} else {
-				idx = idxMk((j * _->_y) + i, offset);
+				idx = idxMk((j * _->_y) + i, "", offset);
 			}
 
 			_->_data[(j * _->_y) + i] = idx;
@@ -103,9 +103,9 @@ Data* dataMk(char* data, unsigned int x, unsigned int y, std::string name, glm::
 			Idx* idx;
 			glm::vec3 offset = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2) + glm::vec3(i * layout::stride[X], 0.0, j * layout::stride[Y]);
 			if (data[(j * _->_y) + i]) {
-				idx = idxMk(i, data[(j * _->_y) + i], offset);
+				idx = idxMk(i, data[(j * _->_y) + i], "", offset);
 			} else {
-				idx = idxMk((j * _->_y) + i, offset);
+				idx = idxMk((j * _->_y) + i, "", offset);
 			}
 
 			_->_data[(j * _->_y) + i] = idx;
@@ -161,9 +161,9 @@ Data* dataMk(char* data, unsigned int x, unsigned int y, unsigned int z, std::st
 				Idx* idx;
 				glm::vec3 offset = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2) + glm::vec3(i * layout::stride[X], 0.0, j * layout::stride[Y]);
 				if (data[(k * (j * _->_y)) + i]) {
-					idx = idxMk(i, data[(k * (j * _->_y)) + i], offset);
+					idx = idxMk(i, data[(k * (j * _->_y)) + i], "", offset);
 				} else {
-					idx = idxMk((k * (j * _->_y)) + i, offset);
+					idx = idxMk((k * (j * _->_y)) + i, "", offset);
 				}
 
 				_->_data[(k * (j * _->_y)) + i] = idx;

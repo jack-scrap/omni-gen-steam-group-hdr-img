@@ -3,8 +3,9 @@
 
 #include "idx.h"
 #include "layout.h"
+#include "str.h"
 
-Idx* idxMk(unsigned int i, glm::vec3 loc, glm::vec3 rot) {
+Idx* idxMk(unsigned int i, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	Idx* _ = (Idx*) malloc(sizeof (Idx));
 
 	_->_data = nullptr;
@@ -15,10 +16,19 @@ Idx* idxMk(unsigned int i, glm::vec3 loc, glm::vec3 rot) {
 		(layout::stroke * 2) + (layout::idx[Y] / 2)
 	), rot);
 
-	Obj* child[] = {
+	Obj* child[2] = {
 		no
 	};
 
+	// identifier
+	if (!name.empty()) {
+		Str* id = strMk(name, glm::vec3(0.0, 0.0, -(layout::margin * 2)));
+		child[1] = id->_parent;
+	} else {
+		child[1] = nullptr;
+	}
+
+	// scope
 	Border* border = borderMk({
 		layout::idx[X] + (layout::margin * 2 * 2), layout::idx[Y] + (layout::pad * 2 * 2)
 	}, child, sizeof child / sizeof *child,
@@ -28,20 +38,29 @@ Idx* idxMk(unsigned int i, glm::vec3 loc, glm::vec3 rot) {
 	return _;
 }
 
-Idx* idxMk(unsigned int i, char c, glm::vec3 loc, glm::vec3 rot) {
+Idx* idxMk(unsigned int i, char c, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	Idx* _ = (Idx*) malloc(sizeof (Idx));
+
+	Obj* child[1 + 1];
 
 	Cont* byte = contMk(c, glm::vec3((layout::stroke * 2) + (2.0 / 2), 1.0, (layout::stroke * 2) + (4.0 / 2)));
 
-	Obj* child[1] = {
-		byte->_parent
-	};
+	child[0] = byte->_parent;
+
+	// identifier
+	if (!name.empty()) {
+		Str* id = strMk(name, glm::vec3(0.0, 0.0, -(layout::margin * 2)));
+		child[1] = id->_parent;
+	} else {
+		child[1] = nullptr;
+	}
 
 	_->_data = byte;
 
+	// scope
 	Border* border = borderMk({
 		layout::idx[X] + (layout::margin * 2 * 2), layout::idx[Y] + (layout::pad * 2 * 2)
-	}, child, 1, loc, rot);
+	}, child, sizeof child / sizeof *child, loc, rot);
 	_->_parent = border->_parent;
 
 	return _;

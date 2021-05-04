@@ -11,6 +11,6 @@ typedef struct {
 	Cont* _data;
 } Idx;
 
-Idx* idxMk(unsigned int i, glm::vec3 loc = glm::vec3(0.0, 0.0, 0.0), glm::vec3 rot = glm::vec3(0.0, 0.0, 0.0));
+Idx* idxMk(unsigned int i, std::string name = "", glm::vec3 loc = glm::vec3(0.0, 0.0, 0.0), glm::vec3 rot = glm::vec3(0.0, 0.0, 0.0));
 
-Idx* idxMk(unsigned int i, char c, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
+Idx* idxMk(unsigned int i, char c, std::string name = "", glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
