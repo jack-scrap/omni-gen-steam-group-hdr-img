@@ -20,9 +20,10 @@ namespace layout {
 
 		offset = stroke + margin,
 
-		idx[2] = {
+		idx[3] = {
 			2,
-			4
+			4,
+			2
 		},
 
 		stride[2] = {
