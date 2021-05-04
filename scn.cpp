@@ -115,7 +115,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 	// scalar
 	if (serial["data"]["state"].type() == nlohmann::json::value_t::number_unsigned) {
-		Idx* idx = idxMk(0, (char) ((int) serial["data"]["state"]));
+		Idx* val = idxMk(0, (char) ((int) serial["data"]["state"]));
 
 		for (const auto& map : serial["data"].items()) {
 			char* name = (char*) malloc(0);
@@ -125,10 +125,10 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			}
 
 			s++;
-			Var* var = varMk(name, map.key().size(), idx);
+			Var* var = varMk(name, map.key().size(), val);
 			data[s - 1] = var;
 
-			mesh.push_back(idx->_parent);
+			mesh.push_back(val->_parent);
 		}
 	}
 
