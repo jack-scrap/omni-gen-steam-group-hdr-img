@@ -69,3 +69,12 @@ void idxInsert(Idx* idx, Cont* byte) {
 	idx->_data = byte;
 	idx->_parent->_child[idx->_parent->_noChild - 1] = idx->_data->_parent;
 }
+
+Cont* idxPop(Idx* idx) {
+	Cont* byte = idx->_data;
+
+	idx->_data = nullptr;
+	idx->_parent->_child[idx->_parent->_noChild - 1] = idx->_data->_parent;
+
+	return byte;
+}
