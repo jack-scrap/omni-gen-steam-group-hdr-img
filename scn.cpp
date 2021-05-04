@@ -118,15 +118,15 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		Idx* val = idxMk(0, (char) ((int) serial["data"]["state"]));
 
 		for (const auto& map : serial["data"].items()) {
-			char* name = (char*) malloc(0);
-			name = (char*) realloc(name, (map.key().size() + 1) * sizeof (char));
+			char* id = (char*) malloc(0);
+			id = (char*) realloc(id, (map.key().size() + 1) * sizeof (char));
 			for (int i = 0; i < map.key().size(); i++) {
-				name[i] = map.key()[i];
+				id[i] = map.key()[i];
 			}
-			name[map.key().size()] = '\0';
+			id[map.key().size()] = '\0';
 
 			s++;
-			Var* var = varMk(name, val);
+			Var* var = varMk(id, val);
 			data[s - 1] = var;
 
 			mesh.push_back(val->_parent);
@@ -151,15 +151,15 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 				Data* val = dataMk(init, x, map.key(), glm::vec3(0.0, 0.0, -((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2))));
 
-				char* name = (char*) malloc(0);
-				name = (char*) realloc(name, (map.key().size() + 1) * sizeof (char));
+				char* id = (char*) malloc(0);
+				id = (char*) realloc(id, (map.key().size() + 1) * sizeof (char));
 				for (int i = 0; i < map.key().size(); i++) {
-					name[i] = map.key()[i];
+					id[i] = map.key()[i];
 				}
-				name[map.key().size()] = '\0';
+				id[map.key().size()] = '\0';
 
 				s++;
-				Var* var = varMk(name, val);
+				Var* var = varMk(id, val);
 				data[s - 1] = var;
 
 				mesh.push_back(((Data*) (((Var*) data[s - 1])->_ptr))->_parent);
@@ -199,15 +199,15 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 					Data* val = dataMk(init, x, y, map.key(), glm::vec3(0.0, 0.0, -((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2))));
 
-					char* name = (char*) malloc(0);
-					name = (char*) realloc(name, (map.key().size() + 1) * sizeof (char));
+					char* id = (char*) malloc(0);
+					id = (char*) realloc(id, (map.key().size() + 1) * sizeof (char));
 					for (int i = 0; i < map.key().size(); i++) {
-						name[i] = map.key()[i];
+						id[i] = map.key()[i];
 					}
-					name[map.key().size()] = '\0';
+					id[map.key().size()] = '\0';
 
 					s++;
-					Var* var = varMk(name, val);
+					Var* var = varMk(id, val);
 					data[s - 1] = var;
 
 					mesh.push_back(((Data*) (((Var*) data[s - 1])->_ptr))->_parent);
