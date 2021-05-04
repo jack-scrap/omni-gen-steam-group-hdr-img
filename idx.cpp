@@ -31,13 +31,13 @@ Idx* idxMk(unsigned int i, glm::vec3 loc, glm::vec3 rot) {
 Idx* idxMk(unsigned int i, char c, glm::vec3 loc, glm::vec3 rot) {
 	Idx* _ = (Idx*) malloc(sizeof (Idx));
 
-	Cont* cont = contMk(c, glm::vec3((layout::stroke * 2) + (2.0 / 2), 1.0, (layout::stroke * 2) + (4.0 / 2)));
+	Cont* byte = contMk(c, glm::vec3((layout::stroke * 2) + (2.0 / 2), 1.0, (layout::stroke * 2) + (4.0 / 2)));
 
 	Obj* child[1] = {
-		cont->_parent
+		byte->_parent
 	};
 
-	_->_data = cont;
+	_->_data = byte;
 
 	Border* border = borderMk({
 		layout::idx[X] + (layout::margin * 2 * 2), layout::idx[Y] + (layout::pad * 2 * 2)
