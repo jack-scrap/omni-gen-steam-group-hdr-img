@@ -59,7 +59,7 @@ Arr* arrMk(char* init, unsigned int sz, std::string name, glm::vec3 loc, glm::ve
 	Border* parent = borderMk({
 		scale[X],
 		scale[Y]
-	}, child, noChild, loc + glm::vec3(0.0, 0.0, 0.0), rot);
+	}, child, noChild, loc + glm::vec3(0.0), rot);
 
 	_->_parent = parent->_parent;
 
