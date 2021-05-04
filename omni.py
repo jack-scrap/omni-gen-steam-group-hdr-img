@@ -25,7 +25,6 @@ class _Data(Structure):
 class _Var(Structure):
     _fields_ = [
 	    ('_id', POINTER(c_char)),
-	    ('_szId', c_uint),
 	    ('_ptr', POINTER(_Data))
     ]
 
@@ -44,8 +43,11 @@ data = {}
 for i in range(_sz):
 	id = ''
 
-	for c in range(_data[i].contents._szId):
+	c = 0
+	while _data[i].contents._id[c] != b'\0':
 		id += _data[i].contents._id[c].decode("utf-8")
+
+		c += 1
 
 	data[id] = _data[i].contents._ptr
 

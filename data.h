@@ -8,7 +8,6 @@
 
 typedef struct Var {
 	char* _id;
-	unsigned int _szId;
 
 	void* _ptr;
 };
@@ -29,7 +28,7 @@ typedef struct {
 	Idx** _data;
 } Data;
 
-Var* varMk(char* name, unsigned int szName, void* ptr);
+Var* varMk(char* name, void* ptr);
 
 Data* dataMk(char* data, unsigned int sz, std::string name = "", glm::vec3 loc = glm::vec3(0.0, 0.0, 0.0), glm::vec3 rot = glm::vec3(0.0, 0.0, 0.0));
 
