@@ -277,6 +277,43 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		}
 	}
 
+	// dictionary
+	if (serial["data"]["state"].type() == nlohmann::json::value_t::object) {
+		Var** init = (Var**) malloc(0);
+		unsigned int sz = 0;
+
+		for (const auto& map : serial["data"]["state"].items()) {
+			char* id = (char*) malloc(0);
+			id = (char*) realloc(id, map.key().size() * sizeof (char));
+			for (int i = 0; i < map.key().size(); i++) {
+				id[i] = map.key()[i];
+			}
+
+			char* val = (char*) malloc(0);
+			unsigned int v = 0;
+
+			// scalar
+			if (map.value().type() == nlohmann::json::value_t::number_unsigned) {
+				v++;
+				val = (char*) realloc(val, v * sizeof (char));
+				val[v - 1] = (char) ((int) map.value());
+			}
+
+			// array
+			if (map.value().type() == nlohmann::json::value_t::array) {
+				for (int i = 0; i < map.value().size(); i++) {
+					v++;
+					val = (char*) realloc(val, v * sizeof (char));
+					val[v - 1] = (char) ((int) map.value()[i]);
+				}
+			}
+
+			sz++;
+			init = (Var**) realloc(init, sz * sizeof (long long));
+			init[0] = varMk(id, 0);
+		}
+	}
+
 	// goal
 	goal = (char*) malloc(0);
 
