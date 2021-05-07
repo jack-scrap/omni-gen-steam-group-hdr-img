@@ -19,6 +19,10 @@ std::string util::fs::rd<std::string>(std::string name) {
 	std::ifstream in;
 	in.open(name);
 
+	if (in.fail()) {
+		omni::err("Couldn't open " + name + "; file not found");
+	}
+
 	std::string cont;
 	for (std::string l; std::getline(in, l);) {
 		cont += l + "\n";
@@ -33,6 +37,10 @@ template <>
 std::vector<std::string> util::fs::rd<std::vector<std::string>>(std::string name) {
 	std::ifstream in;
 	in.open("./" + name);
+
+	if (in.fail()) {
+		omni::err("Couldn't open " + name + "; file not found");
+	}
 
 	std::vector<std::string> cont;
 	for (std::string l; std::getline(in, l);) {
