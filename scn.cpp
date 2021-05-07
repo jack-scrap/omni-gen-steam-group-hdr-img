@@ -86,10 +86,21 @@ extern "C" void* goalGet() {
 void scn::init(unsigned int stage, unsigned int lvl) {
 	nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("lvl/" + omni::stage[stage] + "/" + std::to_string(lvl) + ".json"));
 
+
+	for (void* _ : crane) {
+		free(_);
+	}
+	crane.clear();
+
 	for (void* _ : truck) {
 		free(_);
 	}
 	truck.clear();
+
+	for (void* _ : cargoShip) {
+		free(_);
+	}
+	cargoShip.clear();
 
 	for (void* _ : mesh) {
 		free(_);
