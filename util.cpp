@@ -20,7 +20,7 @@ std::string util::fs::rd<std::string>(std::string name) {
 	in.open(name);
 
 	if (in.fail()) {
-		omni::err("Couldn't open " + name + "; file not found");
+		omni::err("Could not open " + name + "; file not found");
 	}
 
 	std::string cont;
@@ -56,7 +56,7 @@ void util::fs::write(std::string name, std::vector<std::string> buff) {
 	bool w = util::fs::w(name);
 
 	if (!w) {
-		omni::err("File read-only");
+		omni::err("Could not write " + name + "; file read-only");
 
 		return;
 	}
