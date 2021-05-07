@@ -121,15 +121,14 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 		if (entry["name"] == "cargo_ship") {
 			char* init = (char*) malloc(entry["data"].size() * sizeof (char));
-
-			unsigned int no = 0;
+			unsigned int i = 0;
 			for (const auto& byte : entry["data"]) {
-				init[no] = (char) ((int) byte);
+				init[i] = (char) ((int) byte);
 
-				no++;
+				i++;
 			}
 
-			CargoShip* _ = cargoShipMk(init, no, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]));
+			CargoShip* _ = cargoShipMk(init, i, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]));
 
 			cargoShip.push_back(_);
 			noCargoShip++;
@@ -138,15 +137,14 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 		if (entry["name"] == "truck") {
 			char* init = (char*) malloc(entry["data"].size() * sizeof (char));
-
-			unsigned int no = 0;
+			unsigned int i = 0;
 			for (const auto& _ : entry["data"]) {
-				init[no] = (char) ((int) _);
+				init[i] = (char) ((int) _);
 
-				no++;
+				i++;
 			}
 
-			Truck* _ = truckMk(init, no, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]));
+			Truck* _ = truckMk(init, i, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]));
 
 			truck.push_back(_);
 			noTruck++;
