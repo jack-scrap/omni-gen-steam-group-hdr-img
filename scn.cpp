@@ -371,19 +371,19 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	// goal
 	goal = (char*) malloc(0);
 
-	unsigned int i = 0;
+	unsigned int g = 0;
 	for (const auto& data : serial["goal"]) {
 		if (data.type() == nlohmann::json::value_t::number_unsigned) {
-			goal[i] = (char) ((int) data);
-
-			i++;
+			g++;
+			goal = (char*) realloc(goal, g * sizeof (char));
+			goal[g] = (char) ((int) data);
 		}
 
 		if (data.type() == nlohmann::json::value_t::array) {
 			for (const auto& byte : data) {
-				goal[i] = (char) ((int) data);
-
-				i++;
+				g++;
+				goal = (char*) realloc(goal, g * sizeof (char));
+				goal[g] = (char) ((int) byte);
 			}
 		}
 	}
