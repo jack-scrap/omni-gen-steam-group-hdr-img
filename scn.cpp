@@ -336,17 +336,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 	// object
 	for (const auto& entry : serial["obj"]) {
-		GLfloat vtc[3 * 3] = {
-			0.0, 0.0, 0.0,
-			10.0, 0.0, 0.0,
-			0.0, 0.0, 10.0
-		};
-		
-		GLushort idc[3] = {
-			0, 1, 2
-		};
-
-		Obj* obj = objMk(vtc, sizeof vtc / sizeof *vtc, idc, sizeof idc / sizeof *idc, "obj", "extrude", "dir", true);
+		Obj* obj = objMk(entry["name"], "obj", "dir", true, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]));
 
 		mesh.push_back(obj);
 	}
