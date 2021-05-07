@@ -20,7 +20,7 @@
 
 void** data;
 unsigned int noData;
-char* goal;
+void** goal;
 bool eq = false;
 
 unsigned int noDataGet() {
@@ -81,7 +81,7 @@ extern "C" void** dataGet() {
 	return data;
 }
 
-extern "C" void* goalGet() {
+extern "C" void** goalGet() {
 	return goal;
 }
 
@@ -368,22 +368,36 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		}
 	}
 
-	// goal
-	goal = (char*) malloc(0);
+	/* goal */
+	goal = (void**) malloc(0);
 
 	unsigned int g = 0;
-	for (const auto& data : serial["goal"]) {
-		if (data.type() == nlohmann::json::value_t::number_unsigned) {
+	for (const auto& pair : serial["goal"].items()) {
+		// scalar
+		if (pair.value().type() == nlohmann::json::value_t::number_unsigned) {
 			g++;
-			goal = (char*) realloc(goal, g * sizeof (char));
-			goal[g] = (char) ((int) data);
+			goal = (void**) realloc(goal, g * sizeof (void*));
+			goal[g - 1] = idxMk(0, (char) ((int) serial["goal"]), pair.key());
 		}
 
-		if (data.type() == nlohmann::json::value_t::array) {
-			for (const auto& byte : data) {
+		// array
+		if (pair.value().type() == nlohmann::json::value_t::array) {
+			const auto cont = pair.value();
+
+			// 1D
+			if (cont[0].type() == nlohmann::json::value_t::number_unsigned) {
+				char* init = (char*) malloc(0);
+				unsigned int c = 0;
+
+				for (const auto& byte : cont) {
+					c++;
+					init = (char*) realloc(init, c * sizeof (void*));
+					init[c - 1] = (char) ((int) byte);
+				}
+
 				g++;
-				goal = (char*) realloc(goal, g * sizeof (char));
-				goal[g] = (char) ((int) byte);
+				goal = (void**) realloc(goal, g * sizeof (void*));
+				goal[g - 1] = arrMk(init, c, "");
 			}
 		}
 	}

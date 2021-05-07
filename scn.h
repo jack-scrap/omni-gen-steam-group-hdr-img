@@ -22,7 +22,7 @@ extern Console* console;
 
 extern void** data;
 extern unsigned int noData;
-extern char* goal;
+extern void** goal;
 extern bool eq;
 
 extern "C" unsigned int noDataGet();
@@ -63,7 +63,7 @@ extern std::vector<Obj*> pt;
 
 extern "C" void** dataGet();
 
-extern "C" void* goalGet();
+extern "C" void** goalGet();
 
 namespace scn {
 	void init(unsigned int stage, unsigned int lvl);
