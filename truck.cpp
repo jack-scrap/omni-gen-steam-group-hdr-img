@@ -81,7 +81,7 @@ Truck* truckMk(char* data, unsigned int no, glm::vec3 loc, glm::vec3 rot) {
 
 	bed->_prog.unUse();
 
-	Obj* outer = objMk(_->_vtx, 1, _->_idx, 1, "bevel/main", "outer", "dir", true, glm::vec3(0.0), glm::vec3(0.0, M_PI / 2, 0.0));
+	Obj* outer = ptMk(_->_vtx, glm::vec3(0.0), glm::vec3(0.0, M_PI / 2, 0.0));
 
 	outer->_prog.use();
 
