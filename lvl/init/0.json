@@ -2,9 +2,9 @@
   "data": {
     "state": 97
   },
-  "goal": [
-    97
-  ],
+  "goal": {
+		"state": 97
+	},
   "vehicle": [
     {
       "name": "crane",

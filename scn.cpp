@@ -377,7 +377,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		if (pair.value().type() == nlohmann::json::value_t::number_unsigned) {
 			g++;
 			goal = (void**) realloc(goal, g * sizeof (void*));
-			goal[g - 1] = idxMk(0, (char) ((int) serial["goal"]), pair.key());
+			goal[g - 1] = idxMk(0, (char) ((int) pair.value()), pair.key());
 		}
 
 		// array
@@ -397,7 +397,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 				g++;
 				goal = (void**) realloc(goal, g * sizeof (void*));
-				goal[g - 1] = arrMk(init, c, "");
+				goal[g - 1] = arrMk(init, c, pair.key());
 			}
 		}
 	}
