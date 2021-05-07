@@ -85,9 +85,9 @@ Truck* truckMk(char* data, unsigned int no, glm::vec3 loc, glm::vec3 rot) {
 
 	outer->_prog.use();
 
-	GLuint uniSzouter = glGetUniformLocation(outer->_prog._id, "sz");
+	GLuint uniSzOuter = glGetUniformLocation(outer->_prog._id, "sz");
 
-	glUniform1ui(uniSzouter, no);
+	glUniform1ui(uniSzOuter, no);
 
 	outer->_prog.unUse();
 
