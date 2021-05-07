@@ -73,6 +73,7 @@ extern "C" unsigned int noCargoShipGet() {
 }
 
 std::vector<Obj*> mesh;
+std::vector<Obj*> line;
 std::vector<Obj*> pt;
 
 extern "C" void** dataGet() {
@@ -150,6 +151,18 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			mesh.push_back(_->_parent);
 		}
 	}
+
+	// path
+	GLfloat vtc[2 * 3] = {
+		0.0, 0.0, 0.0,
+		10.0, 30.0, 50.0
+	};
+
+	GLushort idc[2] = {
+		0, 1
+	};
+
+	line.push_back(objMk(vtc, 2 * 3, idc, 2, "obj", "solid", true));
 
 	/* data */
 	data = (void**) malloc(0);

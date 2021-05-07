@@ -4,6 +4,7 @@
 #include "disp.h"
 #include "math.h"
 #include "scn.h"
+#include "line.h"
 
 Disp::Disp(const char* title, glm::vec2 res, glm::vec3 bg) :
 	_res(res) {
@@ -33,6 +34,8 @@ Disp::Disp(const char* title, glm::vec2 res, glm::vec3 bg) :
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+		glLineWidth(10 * 2);
+
 		_open = true;
 	}
 
@@ -53,6 +56,10 @@ void Disp::draw() {
 
 	for (Obj* _ : mesh) {
 		objDraw(_);
+	}
+
+	for (Obj* _ : line) {
+		lineDraw(_);
 	}
 
 	for (Obj* _ : pt) {
