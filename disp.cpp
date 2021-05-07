@@ -34,8 +34,6 @@ Disp::Disp(const char* title, glm::vec2 res, glm::vec3 bg) :
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-		glLineWidth(10 * 2);
-
 		_open = true;
 	}
 

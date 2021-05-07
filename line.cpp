@@ -11,7 +11,7 @@ Obj* lineMk(GLfloat* vtc, glm::vec3 loc, glm::vec3 rot) {
 		0, 1
 	};
 
-	return objMk(vtc, 2 * 3, idc, 2, "obj", "solid", true, loc, rot);
+	return objMk(vtc, 2 * 3, idc, 2, "obj", "road", "solid", true, loc, rot);
 }
 
 void lineDraw(Obj* line) {
