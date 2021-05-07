@@ -153,11 +153,14 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	// path
-	for (int i = 0; i < serial["path"].size() - 1; i++) {
+	for (int i = 0; i < serial["path"]["link"].size() - 1; i++) {
+		GLushort a = serial["path"]["link"][i];
+		GLushort b = serial["path"]["link"][i + 1];
+
 		GLfloat vtc[2 * 3];
 		for (int p = 0; p < 2; p++) {
 			for (int a = 0; a < 3; a++) {
-				vtc[(p * 3) + a] = serial["path"][i + p][a];
+				vtc[(p * 3) + a] = serial["path"]["node"][i + p][a];
 			}
 		}
 
