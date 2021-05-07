@@ -11,7 +11,7 @@ Truck* truckMk(glm::vec3 loc, glm::vec3 rot) {
 	Truck* _ = (Truck*) malloc(sizeof (Truck));
 
 	_->_ptr = nullptr;
-	_->_sz = 0;
+	_->_no = 0;
 
 	_->_ang = 0.0;
 
@@ -45,11 +45,11 @@ Truck* truckMk(glm::vec3 loc, glm::vec3 rot) {
 	return _;
 }
 
-Truck* truckMk(char* data, unsigned int sz, glm::vec3 loc, glm::vec3 rot) {
+Truck* truckMk(char* data, unsigned int no, glm::vec3 loc, glm::vec3 rot) {
 	Truck* _ = (Truck*) malloc(sizeof (Truck));
 
 	_->_ptr = data;
-	_->_sz = s;
+	_->_no = s;
 
 	_->_ang = 0.0;
 
@@ -69,7 +69,7 @@ Truck* truckMk(char* data, unsigned int sz, glm::vec3 loc, glm::vec3 rot) {
 		}
 	}
 
-	child[w * 2] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-(sz * 4.0) - (layout::stroke) - (layout::stroke * 2), 0.0, 0.0), rot);
+	child[w * 2] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-(no * 4.0) - (layout::stroke) - (layout::stroke * 2), 0.0, 0.0), rot);
 
 	Obj* bed = ptMk(_->_vtx, glm::vec3(0.0), glm::vec3(0.0, M_PI / 2, 0.0));
 
@@ -77,7 +77,7 @@ Truck* truckMk(char* data, unsigned int sz, glm::vec3 loc, glm::vec3 rot) {
 
 	GLuint uniSzBed = glGetUniformLocation(bed->_prog._id, "sz");
 
-	glUniform1ui(uniSzBed, sz);
+	glUniform1ui(uniSzBed, no);
 
 	bed->_prog.unUse();
 
@@ -87,7 +87,7 @@ Truck* truckMk(char* data, unsigned int sz, glm::vec3 loc, glm::vec3 rot) {
 
 	GLuint uniSzouter = glGetUniformLocation(outer->_prog._id, "sz");
 
-	glUniform1ui(uniSzouter, sz);
+	glUniform1ui(uniSzouter, no);
 
 	outer->_prog.unUse();
 
@@ -97,7 +97,7 @@ Truck* truckMk(char* data, unsigned int sz, glm::vec3 loc, glm::vec3 rot) {
 	child[(w * 2) + 1] = bed;
 	child[(w * 2) + 1 + 1] = outer;
 
-	_->_data = arrMk(data, sz, "", glm::vec3(0.0, 0.0, -((layout::idx[X] / 2) + (layout::stroke * 2) + (layout::margin * 2 * 2))), glm::vec3(0.0, -M_PI / 2, 0.0));
+	_->_data = arrMk(data, no, "", glm::vec3(0.0, 0.0, -((layout::idx[X] / 2) + (layout::stroke * 2) + (layout::margin * 2 * 2))), glm::vec3(0.0, -M_PI / 2, 0.0));
 
 	child[(w * 2) + 1 + 1] = _->_data->_parent;
 

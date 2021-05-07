@@ -5,7 +5,7 @@
 #include "layout.h"
 #include "border.h"
 
-Dict* dictMk(void* data, unsigned int sz, std::string name, glm::vec3 loc, glm::vec3 rot) {
+Dict* dictMk(void* data, unsigned int no, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	Dict* _ = (Dict*) malloc(sizeof (Dict));
 
 	Obj* child[1];

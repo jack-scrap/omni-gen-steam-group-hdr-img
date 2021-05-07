@@ -7,16 +7,16 @@
 
 typedef struct Node {
 	char* _data;
-	int _sz;
+	int _no;
 
 	Node** _child;
 	unsigned int _noChild;
 } Node;
 
-Node* nodeMk(char* data, int sz);
+Node* nodeMk(char* data, int no);
 
-Node* nodeMk(char* data, int sz, Node** child, unsigned int noChild);
+Node* nodeMk(char* data, int no, Node** child, unsigned int noChild);
 
 void nodeDepth(Node* node, unsigned int* depth);
 
-void nodeMax(Node* node, unsigned int* sz);
+void nodeMax(Node* node, unsigned int* no);

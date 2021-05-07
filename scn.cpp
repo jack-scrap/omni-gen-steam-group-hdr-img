@@ -121,15 +121,15 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 		if (entry["name"] == "cargo_ship") {
 			char* init = (char*) malloc(0);
-			unsigned int sz = 0;
+			unsigned int no = 0;
 
 			for (const auto& byte : entry["data"]) {
-				sz++;
-				init = (char*) realloc(init, sz * sizeof (char));
-				init[sz - 1] = (char) ((int) byte);
+				no++;
+				init = (char*) realloc(init, no * sizeof (char));
+				init[no - 1] = (char) ((int) byte);
 			}
 
-			CargoShip* _ = cargoShipMk(init, sz, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]));
+			CargoShip* _ = cargoShipMk(init, no, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]));
 
 			cargoShip.push_back(_);
 			noCargoShip++;
@@ -138,14 +138,14 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 		if (entry["name"] == "truck") {
 			char* init = (char*) malloc(0);
-			unsigned int sz = 0;
+			unsigned int no = 0;
 			for (const auto& _ : entry["data"]) {
-				sz++;
-				init = (char*) realloc(init, sz * sizeof (char));
-				init[sz - 1] = (char) ((int) _);
+				no++;
+				init = (char*) realloc(init, no * sizeof (char));
+				init[no - 1] = (char) ((int) _);
 			}
 
-			Truck* _ = truckMk(init, sz, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]));
+			Truck* _ = truckMk(init, no, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]));
 
 			truck.push_back(_);
 			noTruck++;
@@ -269,12 +269,12 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 						init = (char*) realloc(init, x * y * sizeof (char));
 
-						unsigned int sz = 0;
+						unsigned int no = 0;
 						for (const auto& arr : serial["data"][pair.key()]) {
 							for (const auto& scal : arr) {
-								init[sz] = (char) ((int) scal);
+								init[no] = (char) ((int) scal);
 
-								sz++;
+								no++;
 							}	
 						}
 
@@ -315,13 +315,13 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 							bound[Z]++;
 						}
 
-						unsigned int sz = 0;
+						unsigned int no = 0;
 						for (int z = 0; z < 2; z++) {
 							for (int y = 0; y < 2; y++) {
 								for (int x = 0; x < 2; x++) {
-									sz++;
-									init = (char*) realloc(init, sz * sizeof (char));
-									init[sz - 1] = 'a';
+									no++;
+									init = (char*) realloc(init, no * sizeof (char));
+									init[no - 1] = 'a';
 								}
 							}
 						}
@@ -333,7 +333,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		// dictionary
 		if (serial["data"][pair.key()].type() == nlohmann::json::value_t::object) {
 			Var** init = (Var**) malloc(0);
-			unsigned int sz = 0;
+			unsigned int no = 0;
 
 			for (const auto& pair : serial["data"][pair.key()].items()) {
 				char* id = (char*) malloc(0);
@@ -361,8 +361,8 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					}
 				}
 
-				sz++;
-				init = (Var**) realloc(init, sz * sizeof (long long));
+				no++;
+				init = (Var**) realloc(init, no * sizeof (long long));
 				init[0] = varMk(id, 0);
 			}
 		}

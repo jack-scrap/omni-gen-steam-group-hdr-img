@@ -3,22 +3,22 @@
 
 #include "node.h"
 
-Node* nodeMk(char* data, int sz) {
+Node* nodeMk(char* data, int no) {
 	Node* _ = (Node*) malloc(sizeof (Node));
 
 	_->_data = data;
-	_->_sz = sz;
+	_->_no = no;
 	_->_child = nullptr;
 	_->_noChild = 0;
 
 	return _;
 }
 
-Node* nodeMk(char* data, int sz, Node** child, unsigned int noChild) {
+Node* nodeMk(char* data, int no, Node** child, unsigned int noChild) {
 	Node* _ = (Node*) malloc(sizeof (Node));
 
 	_->_data = data;
-	_->_sz = sz;
+	_->_no = no;
 	_->_child = child;
 	_->_noChild = noChild;
 
@@ -35,14 +35,14 @@ void nodeDepth(Node* node, unsigned int* depth) {
 	}
 }
 
-void nodeMax(Node* node, unsigned int* sz) {
-	if (node->_sz > *sz) {
-		*sz = node->_sz;
+void nodeMax(Node* node, unsigned int* no) {
+	if (node->_no > *no) {
+		*no = node->_no;
 	}
 
 	for (int i = 0; i < node->_noChild; i++) {
-		if (node->_child[i]->_sz > *sz) {
-			*sz = node->_child[i]->_sz;
+		if (node->_child[i]->_no > *no) {
+			*no = node->_child[i]->_no;
 		}
 	}
 }
