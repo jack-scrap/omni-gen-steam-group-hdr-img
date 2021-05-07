@@ -68,6 +68,8 @@ Idx* idxMk(unsigned int i, char c, std::string name, glm::vec3 loc, glm::vec3 ro
 void idxInsert(Idx* idx, Cont* byte) {
 	idx->_data = byte;
 	idx->_parent->_child[idx->_parent->_noChild - 1] = idx->_data->_parent;
+
+	objAcc(idx->_parent, glm::mat4(1.0));
 }
 
 Cont* idxPop(Idx* idx) {
