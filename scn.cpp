@@ -155,9 +155,6 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	// path
 	for (const auto& strip : serial["path"]["link"]) {
 		for (int i = 0; i < strip.size() - 1; i++) {
-			GLushort a = strip[i];
-			GLushort b = strip[i + 1];
-
 			GLfloat vtc[2 * 3];
 			for (int p = 0; p < 2; p++) {
 				for (int a = 0; a < 3; a++) {
