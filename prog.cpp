@@ -31,12 +31,12 @@ Shad::Shad(std::string name, unsigned int stage) {
 	std::string buff = util::fs::rd<std::string>("res/shad/" + name + "." + ext);
 	const char* src = buff.c_str();
 
-	GLint succ;
-	char err[] = "";
-
 	_id = glCreateShader(type);
 	glShaderSource(_id, 1, &src, NULL);
 	glCompileShader(_id);
+
+	GLint succ;
+	char err[] = "";
 
 	glGetShaderiv(_id, GL_COMPILE_STATUS, &succ);
 	if (!succ) {
