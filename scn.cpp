@@ -201,8 +201,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			Idx* val = idxMk(0, (char) ((int) serial["data"][pair.key()]));
 
 			for (const auto& pair : serial["data"].items()) {
-				char* id = (char*) malloc(0);
-				id = (char*) realloc(id, (pair.key().size() + 1) * sizeof (char));
+				char* id = (char*) malloc((pair.key().size() + 1) * sizeof (char));
 				for (int i = 0; i < pair.key().size(); i++) {
 					id[i] = pair.key()[i];
 				}
@@ -221,21 +220,19 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			for (const auto& pair : serial["data"].items()) {
 				// 1D
 				if (serial["data"][pair.key()][0].type() == nlohmann::json::value_t::number_unsigned) {
-					char* init = (char*) malloc(0);
-
 					unsigned int x = 0;
+					char* init = (char*) malloc(x * sizeof (char));
 					for (const auto& item : serial["data"][pair.key()]) {
 						if (item.type() == nlohmann::json::value_t::number_unsigned) {
+							init[x] = (char) ((int) item);
+
 							x++;
-							init = (char*) realloc(init, x * sizeof (char));
-							init[x - 1] = (char) ((int) item);
 						}
 					}
 
 					Arr* val = arrMk(init, x, pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2))));
 
-					char* id = (char*) malloc(0);
-					id = (char*) realloc(id, (pair.key().size() + 1) * sizeof (char));
+					char* id = (char*) malloc((pair.key().size() + 1) * sizeof (char));
 					for (int i = 0; i < pair.key().size(); i++) {
 						id[i] = pair.key()[i];
 					}
@@ -251,7 +248,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				if (serial["data"][pair.key()][0].type() == nlohmann::json::value_t::array) {
 					// 2D
 					if (serial["data"][pair.key()][0][0].type() == nlohmann::json::value_t::number_unsigned) {
-						char* init = (char*) malloc(0);
+						char* init = (char*) malloc(serial["data"][pair.key()].size() * serial["data"][pair.key()][0].size() * sizeof (char));
 
 						unsigned int x = 0;
 						unsigned int y = 0;
@@ -267,8 +264,6 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 							}
 						}
 
-						init = (char*) realloc(init, x * y * sizeof (char));
-
 						unsigned int no = 0;
 						for (const auto& arr : serial["data"][pair.key()]) {
 							for (const auto& scal : arr) {
@@ -282,8 +277,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 						Arr* val = arrMk(init, x, y, pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2))));
 
-						char* id = (char*) malloc(0);
-						id = (char*) realloc(id, (pair.key().size() + 1) * sizeof (char));
+						char* id = (char*) malloc((pair.key().size() + 1) * sizeof (char));
 						for (int i = 0; i < pair.key().size(); i++) {
 							id[i] = pair.key()[i];
 						}
@@ -298,7 +292,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 					// 3D
 					if (serial["data"][pair.key()][0][0].type() == nlohmann::json::value_t::array) {
-						char* init = (char*) malloc(0);
+						char* init = (char*) malloc(2 * 2 * 2 * sizeof (char));
 						unsigned int bound[3] = {
 							0, 0, 0
 						};
@@ -319,9 +313,9 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 						for (int z = 0; z < 2; z++) {
 							for (int y = 0; y < 2; y++) {
 								for (int x = 0; x < 2; x++) {
+									init[no] = 'a';
+
 									no++;
-									init = (char*) realloc(init, no * sizeof (char));
-									init[no - 1] = 'a';
 								}
 							}
 						}
@@ -336,8 +330,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			unsigned int no = 0;
 
 			for (const auto& pair : serial["data"][pair.key()].items()) {
-				char* id = (char*) malloc(0);
-				id = (char*) realloc(id, pair.key().size() * sizeof (char));
+				char* id = (char*) malloc(pair.key().size() * sizeof (char));
 				for (int i = 0; i < pair.key().size(); i++) {
 					id[i] = pair.key()[i];
 				}
@@ -369,14 +362,12 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	/* goal */
-	goal = (void**) malloc(0);
-
 	unsigned int g = 0;
 	for (const auto& pair : serial["goal"].items()) {
 		// scalar
 		if (pair.value().type() == nlohmann::json::value_t::number_unsigned) {
 			g++;
-			goal = (void**) realloc(goal, g * sizeof (void*));
+			goal = (void**) malloc(g * sizeof (void*));
 			goal[g - 1] = idxMk(0, (char) ((int) pair.value()), pair.key());
 		}
 
@@ -386,18 +377,14 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 			// 1D
 			if (cont[0].type() == nlohmann::json::value_t::number_unsigned) {
-				char* init = (char*) malloc(0);
-				unsigned int c = 0;
-
-				for (const auto& byte : cont) {
-					c++;
-					init = (char*) realloc(init, c * sizeof (void*));
-					init[c - 1] = (char) ((int) byte);
+				char* init = (char*) malloc(cont.size() * sizeof (char*));
+				for (int i = 0; i < cont.size(); i++) {
+					init[i] = (char) ((int) cont[i]);
 				}
 
 				g++;
 				goal = (void**) realloc(goal, g * sizeof (void*));
-				goal[g - 1] = arrMk(init, c, pair.key());
+				goal[g - 1] = arrMk(init, cont.size(), pair.key());
 			}
 		}
 	}
