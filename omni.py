@@ -206,9 +206,16 @@ _noCraneGet = _scn.noCraneGet
 _noCraneGet.restype = c_uint
 _noCraneGet.argtypes = None
 
-crane = []
-for i in range(_noCraneGet()):
-    crane.append(_Crane(_craneGet()[i]))
+crane = None
+if _noCraneGet():
+    if _noCraneGet() > 1:
+	    crane = []
+
+	    for i in range(_noCraneGet()):
+		    crane.append(_Crane(_craneGet()[i]))
+
+    else:
+	    crane = _Crane(_craneGet()[0])
 
 _truckGet = _scn.truckGet
 _truckGet.restype = POINTER(POINTER(_Truck))
@@ -218,9 +225,15 @@ _noTruckGet = _scn.noTruckGet
 _noTruckGet.restype = c_uint
 _noTruckGet.argtypes = None
 
-truck = []
-for i in range(_noTruckGet()):
-    truck.append(_Truck(_truckGet()[i]))
+truck = None
+if _noTruckGet():
+    if _noTruckGet() > 1:
+	    truck = []
+
+	    for i in range(_noTruckGet()):
+		    truck.append(_Truck(_truckGet()[i]))
+    else:
+	    truck = _Truck(_truckGet()[0])
 
 _cargoShipGet = _scn.cargoShipGet
 _cargoShipGet.restype = POINTER(POINTER(_CargoShip))
@@ -230,6 +243,13 @@ _noCargoShipGet = _scn.noCargoShipGet
 _noCargoShipGet.restype = c_uint
 _noCargoShipGet.argtypes = None
 
-cargoShip = []
-for i in range(_noCargoShipGet()):
-    cargoShip.append(_CargoShip(_cargoShipGet()[i]))
+cargoShip = None
+if _noCargoShipGet():
+    if _noCargoShipGet() > 1:
+	    cargoShip = []
+
+	    for i in range(_noCargoShipGet()):
+		    cargoShip.append(_CargoShip(_cargoShipGet()[i]))
+	
+    else:
+	    cargoShip = _CargoShip(_cargoShipGet()[0])
