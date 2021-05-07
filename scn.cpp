@@ -16,6 +16,7 @@
 #include "cone.h"
 #include "cargo_ship.h"
 #include "omni.h"
+#include "line.h"
 
 void** data;
 unsigned int s;
@@ -168,11 +169,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					}
 				}
 
-				GLushort idc[2] = {
-					0, 1
-				};
-
-				line.push_back(objMk(vtc, 2 * 3, idc, 2, "obj", "solid", true));
+				line.push_back(lineMk(vtc));
 			}
 
 			if (strip[1].type() == nlohmann::json::value_t::array) {
@@ -189,11 +186,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 						}
 					}
 
-					GLushort idc[2] = {
-						0, 1
-					};
-
-					line.push_back(objMk(vtc, 2 * 3, idc, 2, "obj", "solid", true));
+					line.push_back(lineMk(vtc));
 				}
 			}
 		}
