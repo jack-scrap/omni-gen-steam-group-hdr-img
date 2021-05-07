@@ -450,7 +450,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				GLfloat bound[2][2];
 				for (int y = 0; y < 2; y++) {
 					for (int x = 0; x < 2; x++) {
-						bound[x][y] = entry["bound"][x][y];
+						bound[y][x] = entry["bound"][y][x];
 					}
 				}
 
