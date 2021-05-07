@@ -1,6 +1,6 @@
 Hello.
 
-This guide will run you through Omni corporation.
+This guide will run you through programming for Omni corporation.
 
 Are you familiar with the Python 3 programming language?
 

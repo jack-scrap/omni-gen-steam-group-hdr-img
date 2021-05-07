@@ -93,7 +93,7 @@ class _Crane(_Obj):
 		('_op', POINTER(_Cont)),
 		('_loc', c_float * 3),
 		('_rngHead', c_float * 2),
-		('_rngClaw', c_float * 2)
+		('_rngClaw', c_float * 2),
 	]
 
 	def zoom(self, delta):
