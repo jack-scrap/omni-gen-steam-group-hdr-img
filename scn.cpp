@@ -454,16 +454,15 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					}
 				}
 
-				Cone* cone = coneMk(bound, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]));
+				Cone* _ = coneMk(bound, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]));
 
 				c++;
-
 				coneRng = (void**) realloc(coneRng, c * 3 * sizeof (float));
 				for (int i = 0; i < 3; i++) {
-					coneRng[((c - 1) * 3) + i] = cone;
+					coneRng[((c - 1) * 3) + i] = _;
 				}
 
-				mesh.push_back(cone->_parent);
+				mesh.push_back(_->_parent);
 			}
 		}
 	}
