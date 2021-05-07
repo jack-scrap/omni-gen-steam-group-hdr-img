@@ -155,23 +155,47 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	// path
 	for (const auto& strip : serial["path"]["link"]) {
 		for (int i = 0; i < strip.size() - 1; i++) {
-			GLushort pt[2] = {
-				strip[i],
-				strip[i + 1]
-			};
+			if (strip[1].type() == nlohmann::json::value_t::number_unsigned) {
+				GLushort pt[2] = {
+					strip[i],
+					strip[i + 1]
+				};
 
-			GLfloat vtc[2 * 3];
-			for (int p = 0; p < 2; p++) {
-				for (int a = 0; a < 3; a++) {
-					vtc[(p * 3) + a] = serial["path"]["node"][pt[p]][a];
+				GLfloat vtc[2 * 3];
+				for (int p = 0; p < 2; p++) {
+					for (int a = 0; a < 3; a++) {
+						vtc[(p * 3) + a] = serial["path"]["node"][pt[p]][a];
+					}
 				}
+
+				GLushort idc[2] = {
+					0, 1
+				};
+
+				line.push_back(objMk(vtc, 2 * 3, idc, 2, "obj", "solid", true));
 			}
 
-			GLushort idc[2] = {
-				0, 1
-			};
+			if (strip[1].type() == nlohmann::json::value_t::array) {
+				for (const auto& no : strip[1]) {
+					GLushort pt[2] = {
+						strip[i],
+						no
+					};
 
-			line.push_back(objMk(vtc, 2 * 3, idc, 2, "obj", "solid", true));
+					GLfloat vtc[2 * 3];
+					for (int p = 0; p < 2; p++) {
+						for (int a = 0; a < 3; a++) {
+							vtc[(p * 3) + a] = serial["path"]["node"][pt[p]][a];
+						}
+					}
+
+					GLushort idc[2] = {
+						0, 1
+					};
+
+					line.push_back(objMk(vtc, 2 * 3, idc, 2, "obj", "solid", true));
+				}
+			}
 		}
 	}
 
