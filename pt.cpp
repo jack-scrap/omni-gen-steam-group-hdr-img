@@ -6,12 +6,12 @@
 #include "pt.h"
 #include "scn.h"
 
-Obj* ptMk(GLfloat* vtx, glm::vec3 loc, glm::vec3 rot) {
+Obj* ptMk(GLfloat* vtx, std::string nameVtx, std::string nameGeom, std::string nameFrag, glm::vec3 loc, glm::vec3 rot) {
 	GLushort idx[1] = {
 		0
 	};
 
-	return objMk(vtx, 3, idx, 1, "bevel/main", "bevel/main", "alert", true, glm::vec3(0.0, 1.408, 0.0));
+	return objMk(vtx, 3, idx, 1, nameVtx, nameGeom, nameFrag, true, loc, rot);
 }
 
 void ptDraw(Obj* obj) {

@@ -71,7 +71,7 @@ Truck* truckMk(char* data, unsigned int no, glm::vec3 loc, glm::vec3 rot) {
 
 	child[w * 2] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-(no * 4.0) - (layout::stroke) - (layout::stroke * 2), 0.0, 0.0), rot);
 
-	Obj* bed = ptMk(_->_vtx, glm::vec3(0.0), glm::vec3(0.0, M_PI / 2, 0.0));
+	Obj* bed = ptMk(_->_vtx, "bevel/main", "bed", "tex", glm::vec3(0.0), glm::vec3(0.0, M_PI / 2, 0.0));
 
 	bed->_prog.use();
 
@@ -81,7 +81,7 @@ Truck* truckMk(char* data, unsigned int no, glm::vec3 loc, glm::vec3 rot) {
 
 	bed->_prog.unUse();
 
-	Obj* outer = ptMk(_->_vtx, glm::vec3(0.0), glm::vec3(0.0, M_PI / 2, 0.0));
+	Obj* outer = ptMk(_->_vtx, "bevel/main", "outer", "tex", glm::vec3(0.0), glm::vec3(0.0, M_PI / 2, 0.0));
 
 	outer->_prog.use();
 
