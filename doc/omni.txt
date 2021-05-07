@@ -6,18 +6,18 @@
 # Vehicles
 ## Crane
 ### Navigation
-`zoom(delta)` - Move forward, back
-`pan(delta)` - Translate head left and right
-`ped(delta)` - Translate head up and down
+`.zoom(delta)` - Move forward, back
+`.pan(delta)` - Translate head left and right
+`.ped(delta)` - Translate head up and down
 
-`grab()` - Grab container
+`.grab()` - Grab container
 
 ## Truck
 This allows for complete freedom of movement without being restricted to an axis.
 
-`mv(delta)` - Move forward, back
+`.mv(delta)` - Move forward, back
 
-`turn(delta)` - Turn left, right
+`.turn(delta)` - Turn left, right
 
 ## Ship
 `zoom(delta)`
