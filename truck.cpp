@@ -49,11 +49,11 @@ Truck* truckMk(char* data, unsigned int no, glm::vec3 loc, glm::vec3 rot) {
 	Truck* _ = (Truck*) malloc(sizeof (Truck));
 
 	_->_ptr = data;
-	_->_no = 2;
+	_->_no = no;
 
 	_->_ang = 0.0;
 
-	unsigned int w = 2;
+	unsigned int w = _->_no * 2;
 
 	Obj* child[(w * 2) + 1 + 2];
 	int i = 0;
