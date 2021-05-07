@@ -19,12 +19,12 @@
 #include "line.h"
 
 void** data;
-unsigned int s;
+unsigned int noData;
 char* goal;
 bool eq = false;
 
-unsigned int szGet() {
-	return s;
+unsigned int noDataGet() {
+	return noData;
 }
 
 Lim* boundRng;
@@ -208,9 +208,9 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				}
 				id[pair.key().size()] = '\0';
 
-				s++;
+				noData++;
 				Var* var = varMk(id, val);
-				data[s - 1] = var;
+				data[noData - 1] = var;
 
 				mesh.push_back(val->_parent);
 			}
@@ -241,11 +241,11 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					}
 					id[pair.key().size()] = '\0';
 
-					s++;
+					noData++;
 					Var* var = varMk(id, val);
-					data[s - 1] = var;
+					data[noData - 1] = var;
 
-					mesh.push_back(((Arr*) (((Var*) data[s - 1])->_ptr))->_parent);
+					mesh.push_back(((Arr*) (((Var*) data[noData - 1])->_ptr))->_parent);
 				}
 
 				if (serial["data"][pair.key()][0].type() == nlohmann::json::value_t::array) {
@@ -289,11 +289,11 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 						}
 						id[pair.key().size()] = '\0';
 
-						s++;
+						noData++;
 						Var* var = varMk(id, val);
-						data[s - 1] = var;
+						data[noData - 1] = var;
 
-						mesh.push_back(((Arr*) (((Var*) data[s - 1])->_ptr))->_parent);
+						mesh.push_back(((Arr*) (((Var*) data[noData - 1])->_ptr))->_parent);
 					}
 
 					// 3D

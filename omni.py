@@ -32,15 +32,15 @@ _dataGet = _scn.dataGet
 _dataGet.restype = POINTER(POINTER(_Var))
 _dataGet.argtypes = None
 
-_szGet = _scn.szGet
-_szGet.restype = c_uint
-_szGet.argtypes = None
+_noDataGet = _scn.noDataGet
+_noDataGet.restype = c_uint
+_noDataGet.argtypes = None
 
 _data = _dataGet()
-_sz = _szGet()
+_noData = _noDataGet()
 
 data = {}
-for i in range(_sz):
+for i in range(_noData):
 	id = ''
 
 	c = 0

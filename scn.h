@@ -21,11 +21,11 @@ extern Cam cam;
 extern Console* console;
 
 extern void** data;
-extern unsigned int s;
+extern unsigned int noData;
 extern char* goal;
 extern bool eq;
 
-extern "C" unsigned int szGet();
+extern "C" unsigned int noDataGet();
 
 extern Lim* boundRng;
 extern "C" unsigned int r;
