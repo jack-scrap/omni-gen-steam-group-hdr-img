@@ -23,8 +23,16 @@ unsigned int noData;
 void** goal;
 bool eq = false;
 
+extern "C" void** dataGet() {
+	return data;
+}
+
 unsigned int noDataGet() {
 	return noData;
+}
+
+extern "C" void** goalGet() {
+	return goal;
 }
 
 Lim* boundRng;
@@ -76,14 +84,6 @@ extern "C" unsigned int noCargoShipGet() {
 std::vector<Obj*> mesh;
 std::vector<Obj*> line;
 std::vector<Obj*> pt;
-
-extern "C" void** dataGet() {
-	return data;
-}
-
-extern "C" void** goalGet() {
-	return goal;
-}
 
 void scn::init(unsigned int stage, unsigned int lvl) {
 	nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("lvl/" + omni::stage[stage] + "/" + std::to_string(lvl) + ".json"));

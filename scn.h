@@ -25,7 +25,11 @@ extern unsigned int noData;
 extern void** goal;
 extern bool eq;
 
+extern "C" void** dataGet();
+
 extern "C" unsigned int noDataGet();
+
+extern "C" void** goalGet();
 
 extern Lim* boundRng;
 extern "C" unsigned int r;
@@ -60,10 +64,6 @@ extern "C" unsigned int noCargoShipGet();
 extern std::vector<Obj*> mesh;
 extern std::vector<Obj*> line;
 extern std::vector<Obj*> pt;
-
-extern "C" void** dataGet();
-
-extern "C" void** goalGet();
 
 namespace scn {
 	void init(unsigned int stage, unsigned int lvl);
