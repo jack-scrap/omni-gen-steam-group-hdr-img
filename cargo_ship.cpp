@@ -15,7 +15,7 @@ CargoShip* cargoShipMk(char* init, unsigned int sz, glm::vec3 loc, glm::vec3 rot
 		_->_data->_parent
 	};
 
-	_->_parent = objMk("cargo_ship", "obj", "dir", true, child, sizeof child / sizeof *child, loc + glm::vec3(0.0, 10.0, 0.0), rot);
+	_->_parent = objMk("cargo_ship", "obj", "dir", true, child, sizeof child / sizeof *child, loc, rot);
 
 	glm::vec3 origin = _->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int i = 0; i < 3; i++) {
