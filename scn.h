@@ -41,9 +41,9 @@ extern "C" void* boundRngGet();
 
 extern "C" void** areaRngGet();
 
-extern std::vector<Crane*> crane;
-extern std::vector<Truck*> truck;
-extern std::vector<CargoShip*> cargoShip;
+extern "C" Crane** crane;
+extern "C" Truck** truck;
+extern "C" CargoShip** cargoShip;
 
 extern "C" unsigned int noCrane;
 extern "C" unsigned int noTruck;

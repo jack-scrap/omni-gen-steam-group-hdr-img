@@ -49,24 +49,24 @@ extern "C" void** areaRngGet() {
 	return areaRng;
 }
 
-std::vector<Crane*> crane;
-std::vector<Truck*> truck;
-std::vector<CargoShip*> cargoShip;
+Crane** crane;
+Truck** truck;
+CargoShip** cargoShip;
 
 unsigned int noCrane;
 unsigned int noTruck;
 unsigned int noCargoShip;
 
 extern "C" Crane** craneGet() {
-	return &crane[0];
+	return crane;
 }
 
 extern "C" Truck** truckGet() {
-	return &truck[0];
+	return truck;
 }
 
 extern "C" CargoShip** cargoShipGet() {
-	return &cargoShip[0];
+	return cargoShip;
 }
 
 extern "C" unsigned int noCraneGet() {
@@ -89,20 +89,20 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("lvl/" + omni::stage[stage] + "/" + std::to_string(lvl) + ".json"));
 
 
-	for (void* _ : crane) {
-		free(_);
+	for (int i = 0; i < noCrane; i++) {
+		free(crane[i]);
 	}
-	crane.clear();
+	free(crane);
 
-	for (void* _ : truck) {
-		free(_);
+	for (int i = 0; i < noTruck; i++) {
+		free(truck[i]);
 	}
-	truck.clear();
+	free(truck);
 
-	for (void* _ : cargoShip) {
-		free(_);
+	for (int i = 0; i < noCargoShip; i++) {
+		free(cargoShip[i]);
 	}
-	cargoShip.clear();
+	free(cargoShip);
 
 	for (void* _ : mesh) {
 		free(_);
@@ -110,12 +110,23 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	mesh.clear();
 
 	// vehicle
+	crane = (Crane**) malloc(0);
+	noCrane = 0;
+
+	truck = (Truck**) malloc(0);
+	noTruck = 0;
+
+	cargoShip = (CargoShip**) malloc(0);
+	noCargoShip = 0;
+
 	for (const auto& entry : serial["vehicle"]) {
 		if (entry["name"] == "crane") {
 			Crane* _ = craneMk(glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]));
 
-			crane.push_back(_);
 			noCrane++;
+			crane = (Crane**) realloc(crane, noCrane * sizeof (Crane*));
+			crane[noCrane - 1] = _;
+
 			mesh.push_back(_->_parent);
 		}
 
@@ -130,8 +141,10 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 			CargoShip* _ = cargoShipMk(init, i, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]));
 
-			cargoShip.push_back(_);
 			noCargoShip++;
+			cargoShip = (CargoShip**) realloc(cargoShip, noCargoShip * sizeof (CargoShip*));
+			cargoShip[noCargoShip - 1] = _;
+
 			mesh.push_back(_->_parent);
 		}
 
@@ -146,8 +159,10 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 			Truck* _ = truckMk(init, i, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]));
 
-			truck.push_back(_);
 			noTruck++;
+			truck = (Truck**) realloc(truck, noTruck * sizeof (Truck*));
+			truck[noTruck - 1] = _;
+
 			mesh.push_back(_->_parent);
 		}
 	}
