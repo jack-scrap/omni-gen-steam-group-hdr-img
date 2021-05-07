@@ -153,22 +153,24 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	// path
-	for (int i = 0; i < serial["path"]["link"].size() - 1; i++) {
-		GLushort a = serial["path"]["link"][i];
-		GLushort b = serial["path"]["link"][i + 1];
+	for (const auto& strip : serial["path"]["link"]) {
+		for (int i = 0; i < strip.size() - 1; i++) {
+			GLushort a = strip[i];
+			GLushort b = strip[i + 1];
 
-		GLfloat vtc[2 * 3];
-		for (int p = 0; p < 2; p++) {
-			for (int a = 0; a < 3; a++) {
-				vtc[(p * 3) + a] = serial["path"]["node"][i + p][a];
+			GLfloat vtc[2 * 3];
+			for (int p = 0; p < 2; p++) {
+				for (int a = 0; a < 3; a++) {
+					vtc[(p * 3) + a] = serial["path"]["node"][i + p][a];
+				}
 			}
+
+			GLushort idc[2] = {
+				0, 1
+			};
+
+			line.push_back(objMk(vtc, 2 * 3, idc, 2, "obj", "solid", true));
 		}
-
-		GLushort idc[2] = {
-			0, 1
-		};
-
-		line.push_back(objMk(vtc, 2 * 3, idc, 2, "obj", "solid", true));
 	}
 
 	/* data */
