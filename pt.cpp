@@ -6,6 +6,14 @@
 #include "pt.h"
 #include "scn.h"
 
+Obj* ptMk(GLfloat* vtx, glm::vec3 loc, glm::vec3 rot) {
+	GLushort idx[1] = {
+		0
+	};
+
+	return objMk(vtx, 3, idx, 1, "bevel/main", "bevel/main", "alert", true, glm::vec3(0.0, 1.408, 0.0));
+}
+
 void ptDraw(Obj* obj) {
 	obj->_view = glm::lookAt(cam._pos, cam._pos + glm::vec3(10000.0, -10000.0, -10000.0), glm::vec3(0, 1, 0));
 	obj->_view = glm::scale(obj->_view, cam._scale);

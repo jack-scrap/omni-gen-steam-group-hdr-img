@@ -15,10 +15,6 @@ typedef struct {
 	GLfloat _vtx[3] = {
 		0.0, 0.0, 0.0
 	};
-
-	GLushort _idx[1] = {
-		0
-	};
 } Cone;
 
 Cone* coneMk(GLfloat init[2][2], glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
