@@ -119,8 +119,8 @@ void cranePan(Crane* crane, float delta) {
 void cranePed(Crane* crane, float delta) {
 	Obj*& targ = crane->_parent->_child[2 * 2 * 2 * 2]->_child[0];
 
-	glm::mat4 model = glm::translate(glm::mat4(1.0), glm::vec3(0.0, delta, 0.0));
-	glm::vec3 dest = glm::vec3(targ->_acc * model * glm::vec4(glm::vec3(0.0), 1.0));
+	glm::mat4 trans = glm::translate(glm::mat4(1.0), glm::vec3(0.0, delta, 0.0));
+	glm::vec3 dest = glm::vec3(targ->_acc * trans * glm::vec4(glm::vec3(0.0), 1.0));
 
 	if (
 		dest[Y] > crane->_rngClaw[MIN] &&
