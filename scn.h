@@ -12,7 +12,6 @@
 #include "bound.h"
 #include "var.h"
 #include "arr.h"
-#include "cone.h"
 #include "lim.h"
 
 extern Disp* disp;
@@ -31,12 +30,12 @@ extern "C" unsigned int szGet();
 extern Lim* boundRng;
 extern "C" unsigned int r;
 
-extern "C" void** coneRng;
-extern "C" unsigned int c;
+extern "C" void** areaRng;
+extern "C" unsigned int a;
 
 extern "C" void* boundRngGet();
 
-extern "C" void** coneRngGet();
+extern "C" void** areaRngGet();
 
 extern std::vector<Crane*> crane;
 extern std::vector<Truck*> truck;
