@@ -26,6 +26,5 @@ Dict* dictMk(void* data, unsigned int no, std::string name, glm::vec3 loc, glm::
 
 	_->_parent = scope->_parent;
 
-
 	return _;
 }
