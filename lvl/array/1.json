@@ -5,10 +5,12 @@
       0
     ]
   },
-  "goal": [
-    0,
-    97
-  ],
+	"goal": {
+		"state": [
+			0,
+			97
+		]
+	},
   "vehicle": [
     {
       "name": "crane",

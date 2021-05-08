@@ -9,10 +9,16 @@
       97
     ]
   },
-  "goal": [
-    97,
-    0
-  ],
+  "goal": {
+		"state": [
+			97,
+			0
+		],
+		"other state": [
+			0,
+			97
+		]
+	},
   "vehicle": [
     {
       "name": "crane",

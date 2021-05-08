@@ -5,9 +5,12 @@
 			"hjkl": 7
 		}
   },
-  "goal": [
-    97
-  ],
+	"goal": {
+		"state": {
+			"asdf": 7,
+			"hjkl": 3
+		}
+	},
   "vehicle": [
     {
       "name": "crane",
