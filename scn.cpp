@@ -36,7 +36,7 @@ extern "C" void** goalGet() {
 }
 
 Lim* boundRng;
-unsigned int r;
+unsigned int r = 0;
 
 void** boundArea;
 unsigned int a = 0;
