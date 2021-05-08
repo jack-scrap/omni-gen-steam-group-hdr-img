@@ -316,16 +316,9 @@ std::vector<GLushort> util::mesh::rd::idc(std::string name) {
 }
 
 glm::mat4 util::matr::rot(glm::mat4 model, glm::vec3 rot) {
-	glm::mat4 _ = model;
+	glm::quat quat = glm::quat(rot);
 
-	for (int i = 0; i < 3; i++) {
-		glm::vec3 axis = glm::vec3(0);
-		axis[i] = 1;
-
-		_ = glm::rotate(_, rot[i], axis);
-	}
-
-	return _;
+	return model * glm::mat4_cast(quat);
 }
 
 glm::vec3 apply(glm::vec3 vtx, glm::mat4 model) {
