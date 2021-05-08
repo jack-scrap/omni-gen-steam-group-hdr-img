@@ -36,10 +36,10 @@ extern "C" void** goalGet() {
 }
 
 Lim* boundRng;
-unsigned int r = 0;
+unsigned int noBoundRng = 0;
 
 void** boundArea;
-unsigned int a = 0;
+unsigned int noBoundArea = 0;
 
 extern "C" void* boundRngGet() {
 	return boundRng;
@@ -423,11 +423,11 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 						glm::vec3 loc = glm::vec3(0.0);
 						glm::vec3 rot = glm::vec3(M_PI / 2, 0.0, 0.0);
 						if (it.key() == "X") {
-							r++;
+							noBoundRng++;
 
-							boundRng = (Lim*) realloc(boundRng, r * sizeof (Lim));
+							boundRng = (Lim*) realloc(boundRng, noBoundRng * sizeof (Lim));
 
-							boundRng[r - 1] = {
+							boundRng[noBoundRng - 1] = {
 								X,
 								it.value()
 							};
@@ -438,11 +438,11 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 						}
 
 						if (it.key() == "Z") {
-							r++;
+							noBoundRng++;
 
-							boundRng = (Lim*) realloc(boundRng, r * sizeof (Lim));
+							boundRng = (Lim*) realloc(boundRng, noBoundRng * sizeof (Lim));
 
-							boundRng[r - 1] = {
+							boundRng[noBoundRng - 1] = {
 								Z,
 								it.value()
 							};
@@ -471,10 +471,10 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 				Cone* _ = coneMk(bound, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]));
 
-				a++;
-				boundArea = (void**) realloc(boundArea, a * 3 * sizeof (float));
+				noBoundArea++;
+				boundArea = (void**) realloc(boundArea, noBoundArea * 3 * sizeof (float));
 				for (int i = 0; i < 3; i++) {
-					boundArea[((a - 1) * 3) + i] = _;
+					boundArea[((noBoundArea - 1) * 3) + i] = _;
 				}
 
 				mesh.push_back(_->_parent);
