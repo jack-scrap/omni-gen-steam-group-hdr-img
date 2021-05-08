@@ -45,8 +45,16 @@ extern "C" void* boundRngGet() {
 	return boundRng;
 }
 
+extern "C" unsigned int noBoundRngGet() {
+	return noBoundRng;
+}
+
 extern "C" void** boundAreaGet() {
 	return boundArea;
+}
+
+extern "C" unsigned int noBoundAreaGet() {
+	return noBoundArea;
 }
 
 Crane** crane;

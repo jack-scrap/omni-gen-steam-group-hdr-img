@@ -39,7 +39,11 @@ extern "C" unsigned int noBoundArea;
 
 extern "C" void* boundRngGet();
 
+extern "C" unsigned int noBoundRngGet();
+
 extern "C" void** boundAreaGet();
+
+extern "C" unsigned int noBoundAreaGet();
 
 extern "C" Crane** crane;
 extern "C" Truck** truck;
