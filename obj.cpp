@@ -19,9 +19,6 @@
 #include "state.h"
 #include "phys.h"
 
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
-
 Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string vtx, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
@@ -476,25 +473,6 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	glUniform1ui(_->_uni[ACTIVE], _->_active);
 
 	glUniform1ui(_->_uni[T], _->_t);
-
-	// texture
-	int
-		wd,
-		ht,
-		chan;
-	GLubyte* data = stbi_load("res/dirt.jpg", &wd, &ht, &chan, 0); 
-
-	if (data) {
-		glGenTextures(1, &_->_tex);
-		glBindTexture(GL_TEXTURE_2D, _->_tex);
-
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, wd, ht, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glGenerateMipmap(GL_TEXTURE_2D);
-	} else {
-		std::cout << "Texture error: Failed to load" << std::endl;
-	}
 
 	_->_prog.unUse();
 	glBindVertexArray(0);
