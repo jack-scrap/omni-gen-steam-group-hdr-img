@@ -37,10 +37,6 @@ int main(int argc, char** argv) {
 	std::map<std::string, int> settingInt = util::cfg::parse<int>("cfg/initInt.cfg");
 
 	for (const auto& [key, val] : settingInt) {
-		if (key == "skip_boot") {
-			boot = !val;
-		}
-
 		if (key == "speed") {
 			state::speed = val;
 		}
@@ -71,6 +67,14 @@ int main(int argc, char** argv) {
 	for (const auto& [key, val] : settingStr) {
 		if (key == "time_format") {
 			state::format = val;
+		}
+	}
+
+	std::map<std::string, bool> settingBool = util::cfg::parse<bool>("cfg/initBool.cfg");
+
+	for (const auto& [key, val] : settingBool) {
+		if (key == "skip_boot") {
+			boot = !val;
 		}
 	}
 
