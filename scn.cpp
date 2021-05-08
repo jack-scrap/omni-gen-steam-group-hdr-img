@@ -38,15 +38,15 @@ extern "C" void** goalGet() {
 Lim* boundRng;
 unsigned int r;
 
-void** areaRng;
+void** boundArea;
 unsigned int a = 0;
 
 extern "C" void* boundRngGet() {
 	return boundRng;
 }
 
-extern "C" void** areaRngGet() {
-	return areaRng;
+extern "C" void** boundAreaGet() {
+	return boundArea;
 }
 
 Crane** crane;
@@ -412,7 +412,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 	// bound
 	boundRng = (Lim*) malloc(0);
-	areaRng = (void**) malloc(0);
+	boundArea = (void**) malloc(0);
 
 	for (const auto& entry : serial["bound"].items()) {
 		if (entry.key() == "rng") {
@@ -472,9 +472,9 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				Cone* _ = coneMk(bound, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]));
 
 				a++;
-				areaRng = (void**) realloc(areaRng, a * 3 * sizeof (float));
+				boundArea = (void**) realloc(boundArea, a * 3 * sizeof (float));
 				for (int i = 0; i < 3; i++) {
-					areaRng[((a - 1) * 3) + i] = _;
+					boundArea[((a - 1) * 3) + i] = _;
 				}
 
 				mesh.push_back(_->_parent);

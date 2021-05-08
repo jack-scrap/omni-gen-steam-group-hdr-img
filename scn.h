@@ -34,12 +34,12 @@ extern "C" void** goalGet();
 extern Lim* boundRng;
 extern "C" unsigned int r;
 
-extern "C" void** areaRng;
+extern "C" void** boundArea;
 extern "C" unsigned int a;
 
 extern "C" void* boundRngGet();
 
-extern "C" void** areaRngGet();
+extern "C" void** boundAreaGet();
 
 extern "C" Crane** crane;
 extern "C" Truck** truck;

@@ -74,13 +74,13 @@ class _Cone(Structure):
 		('_loc', c_float * 3)
 	]
 
-_areaRngGet = _scn.areaRngGet
-_areaRngGet.restype = POINTER(POINTER(_Cone))
-_areaRngGet.argtypes = None
+_boundAreaGet = _scn.boundAreaGet
+_boundAreaGet.restype = POINTER(POINTER(_Cone))
+_boundAreaGet.argtypes = None
 
 bound = {
 	'rng': _boundRngGet(),
-	'area': _areaRngGet()
+	'area': _boundAreaGet()
 }
 
 # vehicle
