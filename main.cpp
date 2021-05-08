@@ -34,9 +34,9 @@ int main(int argc, char** argv) {
 	bool boot;
 
 	// initialize
-	std::map<std::string, int> setting = util::cfg::parse<int>("cfg/init.cfg");
+	std::map<std::string, int> settingInt = util::cfg::parse<int>("cfg/initInt.cfg");
 
-	for (const auto& [key, val] : setting) {
+	for (const auto& [key, val] : settingInt) {
 		if (key == "skip_boot") {
 			boot = !val;
 		}
@@ -63,6 +63,14 @@ int main(int argc, char** argv) {
 
 		if (key == "tab_wd") {
 			state::tabWd = val;
+		}
+	}
+
+	std::map<std::string, std::string> settingStr = util::cfg::parse<std::string>("cfg/initStr.cfg");
+
+	for (const auto& [key, val] : settingStr) {
+		if (key == "time_format") {
+			state::format = val;
 		}
 	}
 

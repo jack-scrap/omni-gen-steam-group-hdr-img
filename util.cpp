@@ -505,6 +505,95 @@ std::map<std::string, int> util::cfg::parse<int>(std::string name) {
 	return _;
 }
 
+template <>
+std::map<std::string, std::string> util::cfg::parse<std::string>(std::string name) {
+	std::map<std::string, std::string> _;
+
+	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(name);
+	for (const std::string& line : buff) {
+		std::vector<std::string> ast;
+
+		// lex
+		int i = 0;
+		while (i < line.size()) {
+			// whitespace
+			if (isspace(line[i])) {
+				i++;
+
+				continue;
+			}
+
+			// string
+			if (line[i] == '\'') {
+				std::string tok;
+
+				// opening quote
+				i++;
+
+				while (
+					line[i] != '\'' &&
+					i < line.size()
+				) {
+					tok.push_back(line[i]);
+
+					i++;
+				}
+
+				// closing quote
+				i++;
+
+				ast.push_back(tok);
+
+				continue;
+			}
+
+			// token
+			if (!isspace(line[i])) {
+				std::string tok;
+
+				while (
+					!isspace(line[i]) &&
+					i < line.size()
+				) {
+					tok.push_back(line[i]);
+
+					i++;
+				}
+
+				ast.push_back(tok);
+
+				continue;
+			}
+		}
+
+		if (ast.size()) {
+			// parse
+			if (ast.size() == 1) {
+				continue;
+			}
+
+			// error
+			if (ast.size() != 3) {
+				omni::err("Inappropriate number of tokens in config entry `" + ast[0] + "`");
+			}
+
+			if (ast[1] != "=") {
+				omni::err("Inappropriate token `" + ast[1] + "`");
+			}
+
+			if (!cfg::var(ast[0])) {
+				omni::err("Inappropriate key `" + ast[0] + "`, can only be alpha-numeric with `_` separator");
+
+				break;
+			}
+
+			_[ast[0]] = ast[2];
+		}
+	}
+
+	return _;
+}
+
 std::vector<std::string> util::log(unsigned int loc, unsigned int maxFs) {
 	std::vector<std::string> buff;
 

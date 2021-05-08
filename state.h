@@ -17,5 +17,5 @@ namespace state {
 
 	extern unsigned int speed;
 
-	static const std::string format = "%Y-%m-%d %H:%M";
+	extern std::string format;
 }

@@ -8,3 +8,5 @@ unsigned int state::fps;
 unsigned int state::speed;
 
 unsigned int state::tabWd;
+
+std::string state::format;

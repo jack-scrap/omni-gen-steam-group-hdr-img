@@ -177,7 +177,7 @@ void Console::render() {
 
 	std::string status;
 
-	std::string time = util::now("%Y-%m-%d");
+	std::string time = util::now(state::format);
 	status += util::str::pad(time, time.size() + 1);
 
 	std::string base = util::fs::name(_name);
