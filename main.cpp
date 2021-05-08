@@ -532,10 +532,12 @@ int main(int argc, char** argv) {
 					SDL_GetMouseState(&cam._curr[0], &cam._curr[1]);
 
 					cam._delta[0] = cam._curr[0] - cam._begin[0];
-					cam._delta[1] = -(cam._curr[1] - cam._begin[1]);
+					cam._delta[1] = cam._curr[1] - cam._begin[1];
 
-					cam._pos[0] = cam._prev[0] - cam._delta[0] + cam._delta[1];
-					cam._pos[2] = -(cam._prev[2] + cam._delta[0] + cam._delta[1]);
+					cam._pos[0] = cam._prev[0] + cam._delta[0];
+					cam._pos[2] = -(cam._prev[0] - cam._delta[0]);
+
+					cam._pos[1] = cam._prev[1] + cam._delta[1];
 				}
 			}
 
