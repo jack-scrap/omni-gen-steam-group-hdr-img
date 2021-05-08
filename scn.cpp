@@ -209,8 +209,8 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	/* data */
 	data = (void**) malloc(0);
 
-	// scalar
 	for (const auto& pair : serial["data"].items()) {
+		// scalar
 		if (serial["data"][pair.key()].type() == nlohmann::json::value_t::number_unsigned) {
 			Idx* val = idxMk(0, (char) ((int) serial["data"][pair.key()]));
 
