@@ -460,7 +460,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			}
 		}
 
-		if (entry.key() == "cone") {
+		if (entry.key() == "area") {
 			for (const auto& entry : entry.value()) {
 				GLfloat bound[2][2];
 				for (int y = 0; y < 2; y++) {
