@@ -17,6 +17,7 @@
 #include "cargo_ship.h"
 #include "omni.h"
 #include "line.h"
+#include "dict.h"
 
 void** data;
 unsigned int noData;
@@ -352,34 +353,43 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			unsigned int no = 0;
 
 			for (const auto& pair : pair.value().items()) {
+				// identifier
 				char* id = (char*) malloc(pair.key().size() * sizeof (char));
 				for (int i = 0; i < pair.key().size(); i++) {
-					id[i] = pair.key()[i];
+					id[i] = (char) ((int) pair.key()[i]);
 				}
 
+				// value
 				char* val = (char*) malloc(0);
-				unsigned int v = 0;
 
 				// scalar
 				if (pair.value().type() == nlohmann::json::value_t::number_unsigned) {
-					v++;
-					val = (char*) realloc(val, v * sizeof (char));
-					val[v - 1] = (char) ((int) pair.value());
+					val = (char*) malloc(sizeof (char));
+					val[0] = (char) ((int) pair.value());
 				}
 
 				// array
 				if (pair.value().type() == nlohmann::json::value_t::array) {
+					val = (char*) realloc(val, pair.value().size() * sizeof (char));
 					for (int i = 0; i < pair.value().size(); i++) {
-						v++;
-						val = (char*) realloc(val, v * sizeof (char));
-						val[v - 1] = (char) ((int) pair.value()[i]);
+						val[i] = (char) ((int) pair.value()[i]);
 					}
 				}
 
+				Var* var = varMk(id, val);
+
 				no++;
-				init = (Var**) realloc(init, no * sizeof (long long));
-				init[0] = varMk(id, 0);
+				init = (Var**) realloc(init, no * sizeof (Var*));
+				init[no - 1] = var;
 			}
+
+			Dict* _ = dictMk(init, no, pair.key());
+
+			noData++;
+			data = (void**) realloc(data, noData * sizeof (void*));
+			data[noData - 1] = _;
+
+			mesh.push_back(_->_parent);
 		}
 	}
 

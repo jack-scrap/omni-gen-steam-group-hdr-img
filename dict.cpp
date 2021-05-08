@@ -5,7 +5,7 @@
 #include "layout.h"
 #include "border.h"
 
-Dict* dictMk(void* data, unsigned int no, std::string name, glm::vec3 loc, glm::vec3 rot) {
+Dict* dictMk(Var** data, unsigned int no, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	Dict* _ = (Dict*) malloc(sizeof (Dict));
 
 	Obj* child[1];
@@ -22,7 +22,7 @@ Dict* dictMk(void* data, unsigned int no, std::string name, glm::vec3 loc, glm::
 	Border* scope = borderMk({
 		1.0,
 		1.0
-	}, child, sizeof child / sizeof *child, loc + glm::vec3(0.0), rot);
+	}, child, sizeof child / sizeof *child, loc, rot);
 
 	_->_parent = scope->_parent;
 
