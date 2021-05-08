@@ -211,7 +211,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 	for (const auto& pair : serial["data"].items()) {
 		// scalar
-		if (serial["data"][pair.key()].type() == nlohmann::json::value_t::number_unsigned) {
+		if (pair.value().type() == nlohmann::json::value_t::number_unsigned) {
 			Idx* val = idxMk(0, (char) ((int) serial["data"][pair.key()]));
 
 			for (const auto& pair : serial["data"].items()) {
@@ -230,13 +230,13 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		}
 
 		// array
-		if (serial["data"][pair.key()].type() == nlohmann::json::value_t::array) {
+		if (pair.value().type() == nlohmann::json::value_t::array) {
 			for (const auto& pair : serial["data"].items()) {
 				// 1D
-				if (serial["data"][pair.key()][0].type() == nlohmann::json::value_t::number_unsigned) {
+				if (pair.value()[0].type() == nlohmann::json::value_t::number_unsigned) {
 					unsigned int x = 0;
 					char* init = (char*) malloc(x * sizeof (char));
-					for (const auto& item : serial["data"][pair.key()]) {
+					for (const auto& item : pair.value()) {
 						if (item.type() == nlohmann::json::value_t::number_unsigned) {
 							init[x] = (char) ((int) item);
 
@@ -259,14 +259,14 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					mesh.push_back(((Arr*) (((Var*) data[noData - 1])->_ptr))->_parent);
 				}
 
-				if (serial["data"][pair.key()][0].type() == nlohmann::json::value_t::array) {
+				if (pair.value()[0].type() == nlohmann::json::value_t::array) {
 					// 2D
-					if (serial["data"][pair.key()][0][0].type() == nlohmann::json::value_t::number_unsigned) {
-						char* init = (char*) malloc(serial["data"][pair.key()].size() * serial["data"][pair.key()][0].size() * sizeof (char));
+					if (pair.value()[0][0].type() == nlohmann::json::value_t::number_unsigned) {
+						char* init = (char*) malloc(pair.value().size() * pair.value()[0].size() * sizeof (char));
 
 						unsigned int x = 0;
 						unsigned int y = 0;
-						for (const auto& arr : serial["data"][pair.key()]) {
+						for (const auto& arr : pair.value()) {
 							x = 0;
 
 							y++;
@@ -279,7 +279,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 						}
 
 						unsigned int no = 0;
-						for (const auto& arr : serial["data"][pair.key()]) {
+						for (const auto& arr : pair.value()) {
 							for (const auto& scal : arr) {
 								init[no] = (char) ((int) scal);
 
@@ -305,21 +305,21 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					}
 
 					// 3D
-					if (serial["data"][pair.key()][0][0].type() == nlohmann::json::value_t::array) {
+					if (pair.value()[0][0].type() == nlohmann::json::value_t::array) {
 						char* init = (char*) malloc(2 * 2 * 2 * sizeof (char));
 						unsigned int bound[3] = {
 							0, 0, 0
 						};
 
-						for (const auto& byte : serial["data"][pair.key()][0][0]) {
+						for (const auto& byte : pair.value()[0][0]) {
 							bound[X]++;
 						}
 
-						for (const auto& arr : serial["data"][pair.key()][0]) {
+						for (const auto& arr : pair.value()[0]) {
 							bound[Y]++;
 						}
 
-						for (const auto& matr : serial["data"][pair.key()]) {
+						for (const auto& matr : pair.value()) {
 							bound[Z]++;
 						}
 
@@ -339,11 +339,11 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		}
 
 		// dictionary
-		if (serial["data"][pair.key()].type() == nlohmann::json::value_t::object) {
+		if (pair.value().type() == nlohmann::json::value_t::object) {
 			Var** init = (Var**) malloc(0);
 			unsigned int no = 0;
 
-			for (const auto& pair : serial["data"][pair.key()].items()) {
+			for (const auto& pair : pair.value().items()) {
 				char* id = (char*) malloc(pair.key().size() * sizeof (char));
 				for (int i = 0; i < pair.key().size(); i++) {
 					id[i] = pair.key()[i];
