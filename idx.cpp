@@ -80,3 +80,22 @@ Cont* idxPop(Idx* idx) {
 
 	return byte;
 }
+
+bool idxEq(Idx* lhs, Idx* rhs) {
+	bool _;
+
+	// null
+	if (!lhs->_data && !rhs->_data) {
+		_ = true;
+	}
+
+	if (!lhs->_data ^ !rhs->_data) {
+		_ = false;
+	}
+
+	if (lhs->_data && rhs->_data) {
+		_ = lhs->_data->_c == rhs->_data->_c;
+	}
+
+	return _;
+}

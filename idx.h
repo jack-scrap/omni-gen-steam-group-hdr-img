@@ -18,3 +18,5 @@ Idx* idxMk(unsigned int i, char c, std::string name = "", glm::vec3 loc = glm::v
 void idxInsert(Idx* idx, Cont* byte);
 
 Cont* idxPop(Idx* idx);
+
+bool idxEq(Idx* lhs, Idx* rhs);
