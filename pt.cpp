@@ -15,7 +15,7 @@ Obj* ptMk(GLfloat* vtx, std::string nameVtx, std::string nameGeom, std::string n
 }
 
 void ptDraw(Obj* obj) {
-	obj->_view = glm::lookAt(cam._pos, cam._pos + glm::vec3(10000.0, -10000.0, -10000.0), glm::vec3(0, 1, 0));
+	obj->_view = glm::lookAt(cam._pos, cam._pos + glm::vec3(10000.0, -10000.0, 10000.0), glm::vec3(0, 1, 0));
 	obj->_view = glm::scale(obj->_view, cam._scale);
 
 	glBindVertexArray(obj->_mesh->_id[VAO]);
