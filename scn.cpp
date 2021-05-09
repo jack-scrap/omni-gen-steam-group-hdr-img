@@ -528,14 +528,14 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 		if (entry.key() == "area") {
 			for (const auto& entry : entry.value()) {
-				GLfloat bound[2][2];
+				GLfloat init[2][2];
 				for (int y = 0; y < 2; y++) {
 					for (int x = 0; x < 2; x++) {
-						bound[y][x] = entry["bound"][y][x];
+						init[y][x] = entry["init"][y][x];
 					}
 				}
 
-				Cone* _ = coneMk(bound, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]));
+				Cone* _ = coneMk(init, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]));
 
 				noBoundArea++;
 				boundArea = (Cone**) realloc(boundArea, noBoundArea * sizeof (Cone*));
