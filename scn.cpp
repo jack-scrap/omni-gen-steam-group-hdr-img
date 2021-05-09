@@ -335,7 +335,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 							}
 						}
 
-						char* id = (char*) malloc(pair.key().size() * sizeof (char));
+						char* id = (char*) malloc((pair.key().size() + 1) * sizeof (char));
 						for (int i = 0; i < pair.key().size(); i++) {
 							id[i] = pair.key()[i];
 						}
@@ -362,10 +362,11 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 			for (const auto& pair : pair.value().items()) {
 				// identifier
-				char* id = (char*) malloc(pair.key().size() * sizeof (char));
+				char* id = (char*) malloc((pair.key().size() + 1) * sizeof (char));
 				for (int i = 0; i < pair.key().size(); i++) {
 					id[i] = (char) ((int) pair.key()[i]);
 				}
+				id[pair.key().size()] = '\0';
 
 				/* value */
 				char* val = (char*) malloc(0);
@@ -391,10 +392,11 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				init[no - 1] = _;
 			}
 
-			char* id = (char*) malloc(pair.key().size() * sizeof (char));
+			char* id = (char*) malloc((pair.key().size() + 1) * sizeof (char));
 			for (int i = 0; i < pair.key().size(); i++) {
 				id[i] = pair.key()[i];
 			}
+			id[pair.key().size()] = '\0';
 
 			Dict* val = dictMk(init, no, pair.key());
 
@@ -413,7 +415,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	unsigned int g = 0;
 
 	for (const auto& pair : serial["goal"].items()) {
-		char* id = (char*) malloc(pair.key().size() + 1);
+		char* id = (char*) malloc((pair.key().size() + 1) * sizeof (char));
 		for (int i = 0; i < pair.key().size(); i++) {
 			id[i] = pair.key().size();
 		}
