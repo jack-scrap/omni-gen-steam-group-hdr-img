@@ -97,7 +97,7 @@ std::vector<Obj*> pt;
 void scn::init(unsigned int stage, unsigned int lvl) {
 	nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("lvl/" + omni::stage[stage] + "/" + std::to_string(lvl) + ".json"));
 
-
+	// clear
 	for (int i = 0; i < noCrane; i++) {
 		free(crane[i]);
 	}
@@ -141,14 +141,14 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 		if (entry["name"] == "cargo_ship") {
 			char* init = (char*) malloc(entry["data"].size() * sizeof (char));
-			unsigned int i = 0;
+			unsigned int no = 0;
 			for (const auto& byte : entry["data"]) {
-				init[i] = (char) ((int) byte);
+				init[no] = (char) ((int) byte);
 
-				i++;
+				no++;
 			}
 
-			CargoShip* _ = cargoShipMk(init, i, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]));
+			CargoShip* _ = cargoShipMk(init, no, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]));
 
 			noCargoShip++;
 			cargoShip = (CargoShip**) realloc(cargoShip, noCargoShip * sizeof (CargoShip*));
@@ -159,14 +159,14 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 		if (entry["name"] == "truck") {
 			char* init = (char*) malloc(entry["data"].size() * sizeof (char));
-			unsigned int i = 0;
+			unsigned int no = 0;
 			for (const auto& _ : entry["data"]) {
-				init[i] = (char) ((int) _);
+				init[no] = (char) ((int) _);
 
-				i++;
+				no++;
 			}
 
-			Truck* _ = truckMk(init, i, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]));
+			Truck* _ = truckMk(init, no, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]));
 
 			noTruck++;
 			truck = (Truck**) realloc(truck, noTruck * sizeof (Truck*));
@@ -230,11 +230,11 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				}
 				id[pair.key().size()] = '\0';
 
-				Var* var = varMk(id, val);
+				Var* _ = varMk(id, val);
 
 				noData++;
 				data = (void**) realloc(data, noData * sizeof (void*));
-				data[noData - 1] = var;
+				data[noData - 1] = _;
 
 				mesh.push_back(val->_parent);
 			}
@@ -265,15 +265,16 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					}
 					id[pair.key().size()] = '\0';
 
-					Var* var = varMk(id, val);
+					Var* _ = varMk(id, val);
 
 					noData++;
 					data = (void**) realloc(data, noData * sizeof (void*));
-					data[noData - 1] = var;
+					data[noData - 1] = _;
 
 					mesh.push_back(((Arr*) (((Var*) data[noData - 1])->_ptr))->_parent);
 				}
 
+				// matrix
 				if (pair.value()[0].type() == nlohmann::json::value_t::array) {
 					// 2D
 					if (pair.value()[0][0].type() == nlohmann::json::value_t::number_unsigned) {
@@ -304,17 +305,17 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 						init = (char*) realloc(init, x * y * sizeof (char));
 
-						Arr* val = arrMk(init, x, y, pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))));
-
 						char* id = (char*) malloc((pair.key().size() + 1) * sizeof (char));
 						for (int i = 0; i < pair.key().size(); i++) {
 							id[i] = pair.key()[i];
 						}
 						id[pair.key().size()] = '\0';
 
+						Arr* val = arrMk(init, x, y, pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))));
+
 						noData++;
-						Var* var = varMk(id, val);
-						data[noData - 1] = var;
+						Var* _ = varMk(id, val);
+						data[noData - 1] = _;
 
 						mesh.push_back(((Arr*) (((Var*) data[noData - 1])->_ptr))->_parent);
 					}
@@ -342,11 +343,11 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 						Arr* val = arrMk(init, cont.size(), cont[0].size(), cont[0][0].size(), pair.key());
 
-						Var* var = varMk(id, val);
+						Var* _ = varMk(id, val);
 
 						noData++;
 						data = (void**) realloc(data, noData * sizeof (void*));
-						data[noData - 1] = var;
+						data[noData - 1] = _;
 
 						mesh.push_back(val->_parent);
 					}
@@ -366,7 +367,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					id[i] = (char) ((int) pair.key()[i]);
 				}
 
-				// value
+				/* value */
 				char* val = (char*) malloc(0);
 
 				// scalar
@@ -383,27 +384,27 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					}
 				}
 
-				Var* var = varMk(id, val);
+				Var* _ = varMk(id, val);
 
 				no++;
 				init = (Var**) realloc(init, no * sizeof (Var*));
-				init[no - 1] = var;
+				init[no - 1] = _;
 			}
-
-			Dict* _ = dictMk(init, no, pair.key());
 
 			char* id = (char*) malloc(pair.key().size() * sizeof (char));
 			for (int i = 0; i < pair.key().size(); i++) {
 				id[i] = pair.key()[i];
 			}
 
-			Var* var = varMk(id, _);
+			Dict* val = dictMk(init, no, pair.key());
+
+			Var* _ = varMk(id, val);
 
 			noData++;
 			data = (void**) realloc(data, noData * sizeof (void*));
-			data[noData - 1] = var;
+			data[noData - 1] = _;
 
-			mesh.push_back(_->_parent);
+			mesh.push_back(val->_parent);
 		}
 	}
 
@@ -412,6 +413,12 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	unsigned int g = 0;
 
 	for (const auto& pair : serial["goal"].items()) {
+		char* id = (char*) malloc(pair.key().size() + 1);
+		for (int i = 0; i < pair.key().size(); i++) {
+			id[i] = pair.key().size();
+		}
+		id[pair.key().size()] = '\0';
+
 		void* val;
 
 		// scalar
@@ -463,18 +470,11 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				}
 			}
 		}
-
-		char* id = (char*) malloc(pair.key().size() + 1);
-		for (int i = 0; i < pair.key().size(); i++) {
-			id[i] = pair.key().size();
-		}
-		id[pair.key().size()] = '\0';
-
-		Var* var = varMk(id, val);
+		Var* _ = varMk(id, val);
 
 		g++;
 		goal = (void**) realloc(goal, g * sizeof (void*));
-		goal[g - 1] = var;
+		goal[g - 1] = _;
 	}
 
 	// object
