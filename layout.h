@@ -22,8 +22,8 @@ namespace layout {
 
 		idx[3] = {
 			2,
-			4,
-			2
+			2,
+			4
 		},
 
 		stride[2] = {

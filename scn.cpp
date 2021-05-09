@@ -253,7 +253,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 						}
 					}
 
-					Arr* val = arrMk(init, x, pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2))));
+					Arr* val = arrMk(init, x, pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))));
 
 					char* id = (char*) malloc((pair.key().size() + 1) * sizeof (char));
 					for (int i = 0; i < pair.key().size(); i++) {
@@ -298,7 +298,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 						init = (char*) realloc(init, x * y * sizeof (char));
 
-						Arr* val = arrMk(init, x, y, pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Y] / 2) + (layout::offset * 2) + (layout::margin * 2))));
+						Arr* val = arrMk(init, x, y, pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))));
 
 						char* id = (char*) malloc((pair.key().size() + 1) * sizeof (char));
 						for (int i = 0; i < pair.key().size(); i++) {

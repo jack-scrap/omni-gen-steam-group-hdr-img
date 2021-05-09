@@ -12,7 +12,7 @@ Idx* idxMk(unsigned int i, std::string name, glm::vec3 loc, glm::vec3 rot) {
 
 	Obj* child[2];
 
-	Obj* no = objMk("glyph/" + std::to_string(i), "obj", "solid", true, glm::vec3((layout::stroke * 2) + (layout::idx[X] / 2), 0.0, (layout::stroke * 2) + (layout::idx[Y] / 2)), rot);
+	Obj* no = objMk("glyph/" + std::to_string(i), "obj", "solid", true, glm::vec3((layout::stroke * 2) + (layout::idx[X] / 2), 0.0, (layout::stroke * 2) + (layout::idx[Z] / 2)), rot);
 
 	child[0] = no;
 
@@ -25,7 +25,7 @@ Idx* idxMk(unsigned int i, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	}
 
 	Border* border = borderMk({
-		layout::idx[X] + (layout::margin * 2 * 2), layout::idx[Y] + (layout::pad * 2 * 2)
+		layout::idx[X] + (layout::margin * 2 * 2), layout::idx[Z] + (layout::pad * 2 * 2)
 	}, child, sizeof child / sizeof *child,
 	loc, rot);
 	_->_parent = border->_parent;
@@ -38,7 +38,7 @@ Idx* idxMk(unsigned int i, char c, std::string name, glm::vec3 loc, glm::vec3 ro
 
 	Obj* child[1 + 1 + 1];
 
-	Obj* no = objMk("glyph/" + std::to_string(i), "obj", "solid", true, glm::vec3((layout::stroke * 2) + (layout::idx[X] / 2), 0.0, (layout::stroke * 2) + (layout::idx[Y] / 2)), rot);
+	Obj* no = objMk("glyph/" + std::to_string(i), "obj", "solid", true, glm::vec3((layout::stroke * 2) + (layout::idx[X] / 2), 0.0, (layout::stroke * 2) + (layout::idx[Z] / 2)), rot);
 
 	child[0] = no;
 
@@ -58,7 +58,7 @@ Idx* idxMk(unsigned int i, char c, std::string name, glm::vec3 loc, glm::vec3 ro
 	_->_data = byte;
 
 	Border* border = borderMk({
-		layout::idx[X] + (layout::margin * 2 * 2), layout::idx[Y] + (layout::pad * 2 * 2)
+		layout::idx[X] + (layout::margin * 2 * 2), layout::idx[Z] + (layout::pad * 2 * 2)
 	}, child, sizeof child / sizeof *child, loc, rot);
 	_->_parent = border->_parent;
 
