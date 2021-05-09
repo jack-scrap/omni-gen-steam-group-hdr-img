@@ -19,36 +19,38 @@ Arr* arrMk(char* init, unsigned int x, std::string name, glm::vec3 loc, glm::vec
 		_->_loc[i] = loc[i];
 	}
 
-	_->_data = (Idx**) malloc(_->_x * _->_y * sizeof (Idx*));
+	_->_data = (Idx**) malloc(_->_x * _->_y * _->_z * sizeof (Idx*));
 
 	// data
-	Obj** child = (Obj**) malloc(0);
+	Obj** child = (Obj**) malloc((1 + (_->_x * _->_y * _->_z)) * sizeof (Obj*));
 	unsigned int noChild = 1;
 
+	int no = 0;
 	for (int j = 0; j < _->_y; j++) {
 		for (int i = 0; i < _->_x; i++) {
 			Idx* idx;
 			glm::vec3 offset = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2) + glm::vec3(i * layout::stride[X], 0.0, j * layout::stride[Z]);
-			if (init[(j * _->_y) + i]) {
-				idx = idxMk(i, init[(j * _->_y) + i], "", offset);
+			if (init[no]) {
+				idx = idxMk(no, init[no], "", offset);
 			} else {
-				idx = idxMk((j * _->_y) + i, "", offset);
+				idx = idxMk(no, "", offset);
 			}
 
-			_->_data[(j * _->_y) + i] = idx;
+			_->_data[no] = idx;
 
 			noChild++;
-			child = (Obj**) realloc(child, noChild * sizeof (Obj*));
-			child[(j * _->_y) + i] = _->_data[(j * _->_y) + i]->_parent;
+			child[noChild - 1] = _->_data[no]->_parent;
+
+			no++;
 		}
 	}
 
 	// identifier
 	if (!name.empty()) {
 		Str* id = strMk(name, glm::vec3(0.0, 0.0, -(layout::margin * 2)));
-		child[noChild - 1] = id->_parent;
+		child[0] = id->_parent;
 	} else {
-		child[noChild - 1] = nullptr;
+		child[0] = nullptr;
 	}
 
 	// scope
@@ -74,33 +76,35 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, std::string name, glm::ve
 		_->_loc[i] = loc[i];
 	}
 
-	_->_data = (Idx**) malloc(_->_x * _->_y * sizeof (Idx*));
+	_->_data = (Idx**) malloc(_->_x * _->_y * _->_z * sizeof (Idx*));
 
 	// data
-	Obj** child = (Obj**) malloc(0);
+	Obj** child = (Obj**) malloc((1 + (_->_x * _->_y * _->_z)) * sizeof (Obj*));
 	unsigned int noChild = 1;
 
+	int no = 0;
 	for (int j = 0; j < _->_y; j++) {
 		for (int i = 0; i < _->_x; i++) {
 			Idx* idx;
 			glm::vec3 offset = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2) + glm::vec3(i * layout::stride[X], 0.0, j * layout::stride[Z]);
-			if (init[(j * _->_y) + i]) {
-				idx = idxMk(i, init[(j * _->_y) + i], "", offset);
+			if (init[no]) {
+				idx = idxMk(no, init[no], "", offset);
 			} else {
-				idx = idxMk((j * _->_y) + i, "", offset);
+				idx = idxMk(no, "", offset);
 			}
 
-			_->_data[(j * _->_y) + i] = idx;
+			_->_data[no] = idx;
 
 			noChild++;
-			child = (Obj**) realloc(child, noChild * sizeof (Obj*));
-			child[(j * _->_y) + i] = _->_data[(j * _->_y) + i]->_parent;
+			child[noChild -1] = _->_data[no]->_parent;
+
+			no++;
 		}
 	}
 
 	// identifier
 	Str* id = strMk(name, glm::vec3(0.0, 0.0, -(layout::margin * 2)));
-	child[noChild - 1] = id->_parent;
+	child[0] = id->_parent;
 
 	Border* scope = borderMk({
 		layout::stroke + (_->_x * layout::stride[X]),
@@ -127,7 +131,7 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, unsigned int z, std::stri
 	_->_data = (Idx**) malloc(_->_x * _->_y * _->_z * sizeof (Idx*));
 
 	// data
-	Obj** child = (Obj**) malloc(0);
+	Obj** child = (Obj**) malloc((1 + (_->_x * _->_y * _->_z)) * sizeof (Obj*));
 	unsigned int noChild = 1;
 
 	int no = 0;
@@ -137,15 +141,14 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, unsigned int z, std::stri
 				Idx* idx;
 				glm::vec3 offset = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2) + glm::vec3(i * layout::stride[X], 0.0, j * layout::stride[Z]);
 				if (init[no]) {
-					idx = idxMk(i, init[no], "", offset);
+					idx = idxMk(no, init[no], "", offset);
 				} else {
-					idx = idxMk(init[no], "", offset);
+					idx = idxMk(no, "", offset);
 				}
 
 				_->_data[no] = idx;
 
 				noChild++;
-				child = (Obj**) realloc(child, noChild * sizeof (Obj*));
 				child[noChild - 1] = _->_data[no]->_parent;
 
 				no++;
