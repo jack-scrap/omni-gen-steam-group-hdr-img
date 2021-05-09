@@ -19,9 +19,9 @@ Arr* arrMk(char* init, unsigned int x, std::string name, glm::vec3 loc, glm::vec
 		_->_loc[i] = loc[i];
 	}
 
+	// data
 	_->_data = (Idx**) malloc(_->_x * _->_y * _->_z * sizeof (Idx*));
 
-	// data
 	Obj** child = (Obj**) malloc((1 + (_->_x * _->_y * _->_z)) * sizeof (Obj*));
 	unsigned int noChild = 1;
 
@@ -76,9 +76,9 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, std::string name, glm::ve
 		_->_loc[i] = loc[i];
 	}
 
+	// data
 	_->_data = (Idx**) malloc(_->_x * _->_y * _->_z * sizeof (Idx*));
 
-	// data
 	Obj** child = (Obj**) malloc((1 + (_->_x * _->_y * _->_z)) * sizeof (Obj*));
 	unsigned int noChild = 1;
 
@@ -128,9 +128,9 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, unsigned int z, std::stri
 		_->_loc[i] = loc[i];
 	}
 
+	// data
 	_->_data = (Idx**) malloc(_->_x * _->_y * _->_z * sizeof (Idx*));
 
-	// data
 	Obj** child = (Obj**) malloc((1 + (_->_x * _->_y * _->_z)) * sizeof (Obj*));
 	unsigned int noChild = 1;
 
