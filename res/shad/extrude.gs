@@ -12,11 +12,10 @@ uniform mat4
 	proj;
 
 uniform unsigned int axis;
-vec3 trans = vec3(0.0);
-
 uniform float fac;
 
 void main() {
+	vec3 trans = vec3(0.0);
 	trans[axis] = fac;
 
 	// mirror
