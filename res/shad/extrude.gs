@@ -14,7 +14,7 @@ uniform mat4
 float fac = 0.16 * 2;
 
 void main() {
-	// draw
+	// mirror
 	for (int b = 0; b < 2; b++) {
 		for (int i = 0; i < gl_PatchVerticesIn; i++) {
 			gl_Position = proj * view * model * vec4(gl_in[i].gl_Position.xyz + vec3(0.0, 0.0, 0.0), 1.0);
