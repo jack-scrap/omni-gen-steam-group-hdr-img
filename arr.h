@@ -27,3 +27,5 @@ Arr* arrMk(char* init, unsigned int no, std::string name = "", glm::vec3 loc = g
 Arr* arrMk(char* init, unsigned int x, unsigned int y, std::string name = "", glm::vec3 loc = glm::vec3(0.0, 0.0, 0.0), glm::vec3 rot = glm::vec3(0.0, 0.0, 0.0));
 
 Arr* arrMk(char* init, unsigned int x, unsigned int y, unsigned int z, std::string name = "", glm::vec3 loc = glm::vec3(0.0, 0.0, 0.0), glm::vec3 rot = glm::vec3(0.0, 0.0, 0.0));
+
+bool arrEq(Arr* lhs, Arr* rhs);

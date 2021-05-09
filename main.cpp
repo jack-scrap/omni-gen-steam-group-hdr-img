@@ -100,6 +100,11 @@ int main(int argc, char** argv) {
 	console = new Console(".", name, util::fs::rd<std::vector<std::string>>(name));
 	scn::init(stage, lvl);
 
+	std::cout << arrEq(
+		(Arr*) (((Var*) data[0])->_ptr),
+		(Arr*) (((Var*) goal[0])->_ptr)
+	) << std::endl;
+
 	if (boot) {
 		GLuint vao;
 		glGenVertexArrays(1, &vao);
