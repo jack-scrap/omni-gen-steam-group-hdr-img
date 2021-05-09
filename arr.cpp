@@ -174,17 +174,18 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, unsigned int z, std::stri
 bool arrEq(Arr* lhs, Arr* rhs) {
 	bool _ = true;
 
+	int no = 0;
 	for (int y = 0; y < lhs->_y; y++) {
 		for (int x = 0; x < lhs->_x; x++) {
-			int idx = (y * lhs->_x) + x;
-
-			if (!idxEq(lhs->_data[idx], rhs->_data[idx])) {
+			if (!idxEq(lhs->_data[no], rhs->_data[no])) {
 				_ = false;
 			}
 
 			if (!_) {
 				break;
 			}
+
+			no++;
 		}
 
 		if (!_) {
