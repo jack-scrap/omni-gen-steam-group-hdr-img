@@ -7,14 +7,14 @@
       ]
     ]
   },
-  "goal": [
+  "goal": {
     "state": [
       [
         97,
         0
       ]
     ]
-  ],
+	},
   "vehicle": [
   ],
   "bound": {
