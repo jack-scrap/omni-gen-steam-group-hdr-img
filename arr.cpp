@@ -13,6 +13,7 @@ Arr* arrMk(char* init, unsigned int no, std::string name, glm::vec3 loc, glm::ve
 	_->_ptr = init;
 	_->_x = no;
 	_->_y = 1;
+	_->_z = 1;
 
 	for (int i = 0; i < 3; i++) {
 		_->_loc[i] = loc[i];
@@ -72,6 +73,7 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, std::string name, glm::ve
 	_->_ptr = init;
 	_->_x = x;
 	_->_y = y;
+	_->_z = 1;
 
 	for (int i = 0; i < 3; i++) {
 		_->_loc[i] = loc[i];
@@ -175,23 +177,6 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, unsigned int z, std::stri
 	}, child, noChild, loc + glm::vec3(0.0), rot);
 
 	_->_parent = scope->_parent;
-
-	return _;
-}
-
-bool arrEq(Arr* lhs, Arr* rhs) { 
-	bool _ = true;
-
-	/* std::cout << lhs->_x << std::endl; */
-	std::cout << rhs->_x << std::endl;
-
-	/* for (int i = 0; i < lhs->_y; i++) { */
-	/* 	if (!idxEq(lhs->_data[0], rhs->_data[0])) { */
-	/* 		_ = false; */
-
-	/* 		return _; */
-	/* 	} */
-	/* } */
 
 	return _;
 }
