@@ -285,7 +285,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 							y++;
 
 							if (arr.type() == nlohmann::json::value_t::array) {
-								for (const auto& scal : arr) {
+								for (const auto& byte : arr) {
 									x++;
 								}	
 							}
@@ -293,8 +293,8 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 						unsigned int no = 0;
 						for (const auto& arr : pair.value()) {
-							for (const auto& scal : arr) {
-								init[no] = (char) ((int) scal);
+							for (const auto& byte : arr) {
+								init[no] = (char) ((int) byte);
 
 								no++;
 							}	
