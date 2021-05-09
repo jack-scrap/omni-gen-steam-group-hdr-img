@@ -429,6 +429,19 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 				val = arrMk(init, cont.size(), pair.key());
 			}
+
+			// 2D
+			if (cont[0].type() == nlohmann::json::value_t::array) {
+				char* init = (char*) malloc(cont.size() * cont[0].size() * sizeof (char));
+
+				for (int j = 0; j < cont.size(); j++) {
+					for (int i = 0; i < cont[j].size(); i++) {
+						init[(j * cont[0].size()) + i] = (char) ((int) cont[j][i]);
+					}
+				}
+
+				val = arrMk(init, cont.size() * cont[0].size(), pair.key());
+			}
 		}
 
 		char* id = (char*) malloc(pair.key().size() + 1);
