@@ -52,7 +52,7 @@ for i in range(_noData):
 	data[id] = _data[i].contents._ptr
 
 _goalGet = _scn.goalGet
-_goalGet.restype = POINTER(c_char)
+_goalGet.restype = POINTER(POINTER(_Var))
 _goalGet.argtypes = None
 
 goal = _goalGet()
