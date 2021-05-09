@@ -22,15 +22,15 @@ extern Cam cam;
 extern Console* console;
 
 extern void** data;
-extern unsigned int noData;
 extern void** goal;
+extern unsigned int noData;
 extern bool eq;
 
 extern "C" void** dataGet();
 
-extern "C" unsigned int noDataGet();
-
 extern "C" void** goalGet();
+
+extern "C" unsigned int noDataGet();
 
 extern Lim** boundRng;
 extern "C" unsigned int noBoundRng;

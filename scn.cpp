@@ -20,20 +20,20 @@
 #include "dict.h"
 
 void** data;
-unsigned int noData;
 void** goal;
+unsigned int noData;
 bool eq = false;
 
 extern "C" void** dataGet() {
 	return data;
 }
 
-unsigned int noDataGet() {
-	return noData;
-}
-
 extern "C" void** goalGet() {
 	return goal;
+}
+
+unsigned int noDataGet() {
+	return noData;
 }
 
 Lim** boundRng;
