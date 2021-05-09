@@ -37,10 +37,10 @@ extern "C" void** goalGet() {
 }
 
 Lim** boundRng;
-unsigned int noBoundRng = 0;
+unsigned int noBoundRng;
 
 Cone** boundArea;
-unsigned int noBoundArea = 0;
+unsigned int noBoundArea;
 
 extern "C" Lim** boundRngGet() {
 	return boundRng;
@@ -488,7 +488,10 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 	// bound
 	boundRng = (Lim**) malloc(0);
+	noBoundRng = 0;
+
 	boundArea = (Cone**) malloc(0);
+	noBoundArea = 0;
 
 	for (const auto& entry : serial["bound"].items()) {
 		if (entry.key() == "rng") {
