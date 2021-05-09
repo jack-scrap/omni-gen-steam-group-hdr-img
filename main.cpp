@@ -34,47 +34,41 @@ int main(int argc, char** argv) {
 	bool boot;
 
 	// initialize
-	std::map<std::string, int> settingInt = util::cfg::parse<int>("cfg/initInt.cfg");
+	std::map<std::string, std::string> setting = util::cfg::parse<std::string>("cfg/init.cfg");
 
-	for (const auto& [key, val] : settingInt) {
+	for (const auto& [key, val] : setting) {
+		if (key == "skip_boot") {
+			bool asdf = val == "y";
+
+			boot = !asdf;
+		}
+
 		if (key == "speed") {
-			state::speed = val;
+			state::speed = std::stoi(val);
 		}
 
 		if (key == "wd") {
-			layout::view = glm::vec2(val, state::line * layout::dim[Y]);
+			layout::view = glm::vec2(std::stoi(val), state::line * layout::dim[Y]);
 		}
 
 		if (key == "fps") {
-			state::fps = val;
+			state::fps = std::stoi(val);
 		}
 
 		if (key == "line_count") {
-			state::line = val;
+			state::line = std::stoi(val);
 		}
 
 		if (key == "line_width") {
-			state::ln = val;
+			state::ln = std::stoi(val);
 		}
 
 		if (key == "tab_wd") {
-			state::tabWd = val;
+			state::tabWd = std::stoi(val);
 		}
-	}
 
-	std::map<std::string, std::string> settingStr = util::cfg::parse<std::string>("cfg/initStr.cfg");
-
-	for (const auto& [key, val] : settingStr) {
 		if (key == "time_format") {
 			state::format = val;
-		}
-	}
-
-	std::map<std::string, bool> settingBool = util::cfg::parse<bool>("cfg/initBool.cfg");
-
-	for (const auto& [key, val] : settingBool) {
-		if (key == "skip_boot") {
-			boot = !val;
 		}
 	}
 
