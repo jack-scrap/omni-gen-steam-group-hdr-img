@@ -27,7 +27,7 @@ Arr* arrMk(char* init, unsigned int no, std::string name, glm::vec3 loc, glm::ve
 	for (int j = 0; j < _->_y; j++) {
 		for (int i = 0; i < _->_x; i++) {
 			Idx* idx;
-			glm::vec3 offset = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2) + glm::vec3(i * layout::stride[X], 0.0, j * layout::stride[Y]);
+			glm::vec3 offset = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2) + glm::vec3(i * layout::stride[X], 0.0, j * layout::stride[Z]);
 			if (init[(j * _->_y) + i]) {
 				idx = idxMk(i, init[(j * _->_y) + i], "", offset);
 			} else {
@@ -52,8 +52,8 @@ Arr* arrMk(char* init, unsigned int no, std::string name, glm::vec3 loc, glm::ve
 
 	// scope
 	GLfloat scale[2] = {
-		(_->_y * layout::stroke) + (_->_x * layout::stride[X]),
-		(_->_y * layout::stroke) + (_->_y * layout::stride[Y])
+		layout::stroke + (_->_x * layout::stride[X]),
+		layout::stroke + (_->_y * layout::stride[Z])
 	};
 
 	Border* scope = borderMk({
@@ -86,7 +86,7 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, std::string name, glm::ve
 	for (int j = 0; j < _->_y; j++) {
 		for (int i = 0; i < _->_x; i++) {
 			Idx* idx;
-			glm::vec3 offset = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2) + glm::vec3(i * layout::stride[X], 0.0, j * layout::stride[Y]);
+			glm::vec3 offset = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2) + glm::vec3(i * layout::stride[X], 0.0, j * layout::stride[Z]);
 			if (init[(j * _->_y) + i]) {
 				idx = idxMk(i, init[(j * _->_y) + i], "", offset);
 			} else {
@@ -107,8 +107,8 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, std::string name, glm::ve
 
 	// scale
 	GLfloat scale[2] = {
-		(_->_y * layout::stroke) + (_->_x * layout::stride[X]),
-		(_->_y * layout::stroke) + (_->_y * layout::stride[Y])
+		layout::stroke + (_->_x * layout::stride[X]),
+		layout::stroke + (_->_y * layout::stride[Z])
 	};
 
 	Border* scope = borderMk({
@@ -143,7 +143,7 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, unsigned int z, std::stri
 		for (int j = 0; j < _->_y; j++) {
 			for (int i = 0; i < _->_x; i++) {
 				Idx* idx;
-				glm::vec3 offset = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2) + glm::vec3(i * layout::stride[X], 0.0, j * layout::stride[Y]);
+				glm::vec3 offset = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2) + glm::vec3(i * layout::stride[X], 0.0, j * layout::stride[Z]);
 				if (init[(k * (j * _->_y)) + i]) {
 					idx = idxMk(i, init[(k * (j * _->_y)) + i], "", offset);
 				} else {
@@ -165,8 +165,8 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, unsigned int z, std::stri
 
 	// scope
 	GLfloat scale[2] = {
-		(_->_y * layout::stroke) + (_->_x * layout::stride[X]),
-		(_->_y * layout::stroke) + (_->_y * layout::stride[Y])
+		layout::stroke + (_->_x * layout::stride[X]),
+		layout::stroke + (_->_y * layout::stride[Z])
 	};
 
 	Border* scope = borderMk({

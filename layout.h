@@ -26,9 +26,10 @@ namespace layout {
 			4
 		},
 
-		stride[2] = {
+		stride[3] = {
 			idx[X] + (offset * 2) + (margin * 2 * 2),
-			idx[Y] + (offset * 2) + (margin * 2 * 2)
+			idx[Y],
+			idx[Z] + (offset * 2) + (margin * 2 * 2)
 		},
 
 		glyph[2] = {
