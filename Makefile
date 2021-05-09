@@ -25,7 +25,7 @@ all: $(PROG) ro mk_stage
 	$(CXX) $(CXXFLAGS) -c $< -o $@ $(LDFLAGS)
 
 lib%.so: %.o
-	$(CC) $(CXXFLAGS) -shared $< -o $@
+	$(CXX) $(CXXFLAGS) -shared $< -o $@
 
 main.o: main.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@ $(LDFLAGS)
