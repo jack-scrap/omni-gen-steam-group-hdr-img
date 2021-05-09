@@ -39,7 +39,7 @@ extern "C" void** goalGet() {
 Lim* boundRng;
 unsigned int noBoundRng = 0;
 
-void** boundArea;
+Cone** boundArea;
 unsigned int noBoundArea = 0;
 
 extern "C" void* boundRngGet() {
@@ -50,7 +50,7 @@ extern "C" unsigned int noBoundRngGet() {
 	return noBoundRng;
 }
 
-extern "C" void** boundAreaGet() {
+extern "C" Cone** boundAreaGet() {
 	return boundArea;
 }
 
@@ -466,7 +466,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 	// bound
 	boundRng = (Lim*) malloc(0);
-	boundArea = (void**) malloc(0);
+	boundArea = (Cone**) malloc(0);
 
 	for (const auto& entry : serial["bound"].items()) {
 		if (entry.key() == "rng") {
@@ -526,7 +526,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				Cone* _ = coneMk(bound, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]));
 
 				noBoundArea++;
-				boundArea = (void**) realloc(boundArea, noBoundArea * 3 * sizeof (float));
+				boundArea = (Cone**) realloc(boundArea, noBoundArea * sizeof (Cone*));
 				for (int i = 0; i < 3; i++) {
 					boundArea[((noBoundArea - 1) * 3) + i] = _;
 				}

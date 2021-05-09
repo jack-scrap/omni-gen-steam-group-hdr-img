@@ -13,6 +13,7 @@
 #include "var.h"
 #include "arr.h"
 #include "lim.h"
+#include "cone.h"
 
 extern Disp* disp;
 
@@ -34,14 +35,14 @@ extern "C" void** goalGet();
 extern Lim* boundRng;
 extern "C" unsigned int noBoundRng;
 
-extern "C" void** boundArea;
+extern "C" Cone** boundArea;
 extern "C" unsigned int noBoundArea;
 
 extern "C" void* boundRngGet();
 
 extern "C" unsigned int noBoundRngGet();
 
-extern "C" void** boundAreaGet();
+extern "C" Cone** boundAreaGet();
 
 extern "C" unsigned int noBoundAreaGet();
 
