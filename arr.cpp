@@ -7,11 +7,11 @@
 #include "idx.h"
 #include "str.h"
 
-Arr* arrMk(char* init, unsigned int no, std::string name, glm::vec3 loc, glm::vec3 rot) {
+Arr* arrMk(char* init, unsigned int x, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	Arr* _ = (Arr*) malloc(sizeof (Arr));
 
 	_->_ptr = init;
-	_->_x = no;
+	_->_x = x;
 	_->_y = 1;
 	_->_z = 1;
 
