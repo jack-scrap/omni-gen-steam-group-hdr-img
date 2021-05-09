@@ -36,13 +36,13 @@ extern "C" void** goalGet() {
 	return goal;
 }
 
-Lim* boundRng;
+Lim** boundRng;
 unsigned int noBoundRng = 0;
 
 Cone** boundArea;
 unsigned int noBoundArea = 0;
 
-extern "C" void* boundRngGet() {
+extern "C" Lim** boundRngGet() {
 	return boundRng;
 }
 
@@ -465,7 +465,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	// bound
-	boundRng = (Lim*) malloc(0);
+	boundRng = (Lim**) malloc(0);
 	boundArea = (Cone**) malloc(0);
 
 	for (const auto& entry : serial["bound"].items()) {
@@ -477,36 +477,23 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 						glm::vec3 loc = glm::vec3(0.0);
 						glm::vec3 rot = glm::vec3(M_PI / 2, 0.0, 0.0);
 						if (it.key() == "X") {
-							noBoundRng++;
-
-							boundRng = (Lim*) realloc(boundRng, noBoundRng * sizeof (Lim));
-
-							boundRng[noBoundRng - 1] = {
-								X,
-								it.value()
-							};
-
 							axis = 0;
 							loc[X] = it.value();
 							rot[Y] = 0.0;
 						}
 
 						if (it.key() == "Z") {
-							noBoundRng++;
-
-							boundRng = (Lim*) realloc(boundRng, noBoundRng * sizeof (Lim));
-
-							boundRng[noBoundRng - 1] = {
-								Z,
-								it.value()
-							};
-
 							axis = 2;
 							loc[Z] = it.value();
 							rot[Y] = M_PI / 2;
 						}
 
 						Lim* lim = limMk(axis, it.value(), loc, rot);
+
+						noBoundRng++;
+						boundRng = (Lim**) realloc(boundRng, noBoundRng * sizeof (Lim*));
+
+						boundRng[noBoundRng - 1] = lim;
 
 						mesh.push_back(lim->_parent);
 					}

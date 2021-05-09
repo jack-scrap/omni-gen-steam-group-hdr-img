@@ -32,13 +32,13 @@ extern "C" unsigned int noDataGet();
 
 extern "C" void** goalGet();
 
-extern Lim* boundRng;
+extern Lim** boundRng;
 extern "C" unsigned int noBoundRng;
 
 extern "C" Cone** boundArea;
 extern "C" unsigned int noBoundArea;
 
-extern "C" void* boundRngGet();
+extern "C" Lim** boundRngGet();
 
 extern "C" unsigned int noBoundRngGet();
 
