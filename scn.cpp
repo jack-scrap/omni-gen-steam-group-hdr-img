@@ -230,8 +230,10 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				}
 				id[pair.key().size()] = '\0';
 
-				noData++;
 				Var* var = varMk(id, val);
+
+				noData++;
+				data = (void**) realloc(data, noData * sizeof (void*));
 				data[noData - 1] = var;
 
 				mesh.push_back(val->_parent);
@@ -261,8 +263,10 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					}
 					id[pair.key().size()] = '\0';
 
-					noData++;
 					Var* var = varMk(id, val);
+
+					noData++;
+					data = (void**) realloc(data, noData * sizeof (void*));
 					data[noData - 1] = var;
 
 					mesh.push_back(((Arr*) (((Var*) data[noData - 1])->_ptr))->_parent);
@@ -385,9 +389,16 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 			Dict* _ = dictMk(init, no, pair.key());
 
+			char* id = (char*) malloc(pair.key().size() * sizeof (char));
+			for (int i = 0; i < pair.key().size(); i++) {
+				id[i] = pair.key()[i];
+			}
+
+			Var* var = varMk(id, _);
+
 			noData++;
 			data = (void**) realloc(data, noData * sizeof (void*));
-			data[noData - 1] = _;
+			data[noData - 1] = var;
 
 			mesh.push_back(_->_parent);
 		}
@@ -398,11 +409,11 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	unsigned int g = 0;
 
 	for (const auto& pair : serial["goal"].items()) {
+		void* val;
+
 		// scalar
 		if (pair.value().type() == nlohmann::json::value_t::number_unsigned) {
-			g++;
-			goal = (void**) realloc(goal, g * sizeof (void*));
-			goal[g - 1] = idxMk(0, (char) ((int) pair.value()), pair.key());
+			val = idxMk(0, (char) ((int) pair.value()), pair.key());
 		}
 
 		// array
@@ -416,11 +427,21 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					init[i] = (char) ((int) cont[i]);
 				}
 
-				g++;
-				goal = (void**) realloc(goal, g * sizeof (void*));
-				goal[g - 1] = arrMk(init, cont.size(), pair.key());
+				val = arrMk(init, cont.size(), pair.key());
 			}
 		}
+
+		char* id = (char*) malloc(pair.key().size() + 1);
+		for (int i = 0; i < pair.key().size(); i++) {
+			id[i] = pair.key().size();
+		}
+		id[pair.key().size()] = '\0';
+
+		Var* var = varMk(id, val);
+
+		g++;
+		goal = (void**) realloc(goal, g * sizeof (void*));
+		goal[g - 1] = var;
 	}
 
 	// object
