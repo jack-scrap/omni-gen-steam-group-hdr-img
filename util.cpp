@@ -353,9 +353,15 @@ bool util::phys::aabb(Obj* p, Obj* q) {
 				trans[Z] < bound[Z][MAX][Z]
 			) {
 				_ = true;
+			}
 
+			if (_) {
 				break;
 			}
+		}
+
+		if (_) {
+			break;
 		}
 	}
 
