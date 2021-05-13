@@ -65,6 +65,10 @@ Crane* craneMk(glm::vec3 loc, glm::vec3 rot) {
 
 	_->_parent = objMk("crane/body", "obj", "dir", true, child, sizeof child / sizeof *child, loc, rot);
 
+	// alias
+	_->_head = _->_parent->_child[2 * 2 * 2 * 2];
+	_->_claw = _->_head->_child[0];
+
 	glm::vec3 origin = _->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int i = 0; i < 3; i++) {
 		_->_loc[i] = origin[i];
@@ -145,13 +149,10 @@ void craneGrab(Crane* crane) {
 
 		switch (type[i]) {
 			case SCALAR: {
-				Obj* head = crane->_parent->_child[2 * 2 * 2 * 2];
-				Obj* claw = head->_child[0];
-
 				Idx* idx = (Idx*) var->_ptr;
 
 				if (idx->_data) {
-					if (util::phys::aabb(claw, idx->_data->_parent)) {
+					if (util::phys::aabb(crane->_claw, idx->_data->_parent)) {
 						craneInsert(crane, idxPop(idx));
 
 						return;
@@ -165,13 +166,10 @@ void craneGrab(Crane* crane) {
 				Arr* arr = (Arr*) var->_ptr;
 
 				for (int i = 0; i < arr->_x * arr->_y * arr->_z; i++) {
-					Obj* head = crane->_parent->_child[2 * 2 * 2 * 2];
-					Obj* claw = head->_child[0];
-
 					Idx* idx = arr->_data[i];
 
 					if (idx->_data) {
-						if (util::phys::aabb(claw, idx->_data->_parent)) {
+						if (util::phys::aabb(crane->_claw, idx->_data->_parent)) {
 							craneInsert(crane, idxPop(idx));
 
 							return;

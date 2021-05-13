@@ -9,6 +9,9 @@ typedef struct Crane {
 	Cont* _data;
 	GLfloat _loc[3];
 
+	Obj* _head;
+	Obj* _claw;
+
 	static constexpr GLfloat _rngHead[2] = {
 		-3.0,
 		3.0
