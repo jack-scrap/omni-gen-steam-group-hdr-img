@@ -6,12 +6,12 @@
 #include "obj.h"
 #include "scn.h"
 
-Obj* lineMk(GLfloat* vtc, glm::vec3 loc, glm::vec3 rot) {
+Obj* lineMk(GLfloat* vtc, std::string nameVtx, std::string nameGeom, std::string nameFrag, glm::vec3 loc, glm::vec3 rot) {
 	GLushort idc[2] = {
 		0, 1
 	};
 
-	return objMk(vtc, 2 * 3, idc, 2, "obj", "thick", "solid", true, loc, rot);
+	return objMk(vtc, 2 * 3, idc, 2, nameVtx, nameGeom, nameFrag, true, loc, rot);
 }
 
 void lineDraw(Obj* line) {

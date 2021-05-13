@@ -224,7 +224,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					}
 				}
 
-				line.push_back(lineMk(vtc));
+				line.push_back(lineMk(vtc, "obj", "thick", "solid"));
 			}
 
 			if (strip[1].type() == nlohmann::json::value_t::array) {
@@ -241,7 +241,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 						}
 					}
 
-					line.push_back(lineMk(vtc));
+					line.push_back(lineMk(vtc, "obj", "thick", "solid"));
 				}
 			}
 		}
