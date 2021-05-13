@@ -32,14 +32,20 @@ _dataGet = _scn.dataGet
 _dataGet.restype = POINTER(POINTER(_Var))
 _dataGet.argtypes = None
 
+_goalGet = _scn.goalGet
+_goalGet.restype = POINTER(POINTER(_Var))
+_goalGet.argtypes = None
+
 _noDataGet = _scn.noDataGet
 _noDataGet.restype = c_uint
 _noDataGet.argtypes = None
 
 _data = _dataGet()
+_goal = _goalGet()
 _noData = _noDataGet()
 
 data = {}
+goal = {}
 for i in range(_noData):
 	id = ''
 
@@ -51,11 +57,13 @@ for i in range(_noData):
 
 	data[id] = _data[i].contents._ptr
 
-_goalGet = _scn.goalGet
-_goalGet.restype = POINTER(POINTER(_Var))
-_goalGet.argtypes = None
+	c = 0
+	while _goal[i].contents._id[c] != b'\0':
+		id += _goal[i].contents._id[c].decode("utf-8")
 
-goal = _goalGet()
+		c += 1
+
+	goal[id] = _goal[i].contents._ptr
 
 # bound
 class _Lim(Structure):
