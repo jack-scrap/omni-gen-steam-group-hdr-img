@@ -66,8 +66,6 @@ void Disp::draw() {
 
 	glViewport(0, 0, layout::res[Y], layout::view[Y]);
 
-	glPointSize(10);
-
 	console->draw();
 
 	update();
