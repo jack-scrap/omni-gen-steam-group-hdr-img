@@ -10,21 +10,6 @@
 #include "prog.h"
 #include "mesh.h"
 
-enum attr {
-	POS,
-	ST
-};
-
-enum uni {
-	MODEL,
-	VIEW,
-	PROJ,
-
-	ACTIVE,
-
-	T
-};
-
 typedef struct Obj {
 	Mesh* _mesh;
 
@@ -54,6 +39,21 @@ typedef struct Obj {
 	unsigned int _noChild;
 
 	GLuint _tex;
+
+	enum attr {
+		POS,
+		ST
+	};
+
+	enum uni {
+		MODEL,
+		VIEW,
+		PROJ,
+
+		ACTIVE,
+
+		T
+	};
 } Obj;
 
 Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string vtx, std::string frag, bool active, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));

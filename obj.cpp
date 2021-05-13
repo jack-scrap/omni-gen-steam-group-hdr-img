@@ -44,27 +44,27 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_prog.use();
 
 	// attribute
-	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh->_id[VBO]);
-	_->_attr[POS] = glGetAttribLocation(_->_prog._id, "pos");
-	glVertexAttribPointer(_->_attr[POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
-	glEnableVertexAttribArray(_->_attr[POS]);
+	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh->_id[Mesh::VBO]);
+	_->_attr[Obj::POS] = glGetAttribLocation(_->_prog._id, "pos");
+	glVertexAttribPointer(_->_attr[Obj::POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+	glEnableVertexAttribArray(_->_attr[Obj::POS]);
 
 	// uniform
-	_->_uni[MODEL] = glGetUniformLocation(_->_prog._id, "model");
-	_->_uni[VIEW] = glGetUniformLocation(_->_prog._id, "view");
-	_->_uni[PROJ] = glGetUniformLocation(_->_prog._id, "proj");
+	_->_uni[Obj::MODEL] = glGetUniformLocation(_->_prog._id, "model");
+	_->_uni[Obj::VIEW] = glGetUniformLocation(_->_prog._id, "view");
+	_->_uni[Obj::PROJ] = glGetUniformLocation(_->_prog._id, "proj");
 
-	_->_uni[ACTIVE] = glGetUniformLocation(_->_prog._id, "active");
+	_->_uni[Obj::ACTIVE] = glGetUniformLocation(_->_prog._id, "active");
 
-	_->_uni[T] = glGetUniformLocation(_->_prog._id, "t");
+	_->_uni[Obj::T] = glGetUniformLocation(_->_prog._id, "t");
 
-	glUniformMatrix4fv(_->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
-	glUniformMatrix4fv(_->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
-	glUniformMatrix4fv(_->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
+	glUniformMatrix4fv(_->_uni[Obj::MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
+	glUniformMatrix4fv(_->_uni[Obj::VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
+	glUniformMatrix4fv(_->_uni[Obj::PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
 
-	glUniform1ui(_->_uni[ACTIVE], _->_active);
+	glUniform1ui(_->_uni[Obj::ACTIVE], _->_active);
 
-	glUniform1ui(_->_uni[T], _->_t);
+	glUniform1ui(_->_uni[Obj::T], _->_t);
 
 	_->_prog.unUse();
 	glBindVertexArray(0);
@@ -125,27 +125,27 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_prog.use();
 
 	// attribute
-	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh->_id[VBO]);
-	_->_attr[POS] = glGetAttribLocation(_->_prog._id, "pos");
-	glVertexAttribPointer(_->_attr[POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
-	glEnableVertexAttribArray(_->_attr[POS]);
+	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh->_id[Mesh::VBO]);
+	_->_attr[Obj::POS] = glGetAttribLocation(_->_prog._id, "pos");
+	glVertexAttribPointer(_->_attr[Obj::POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+	glEnableVertexAttribArray(_->_attr[Obj::POS]);
 
 	// uniform
-	_->_uni[MODEL] = glGetUniformLocation(_->_prog._id, "model");
-	_->_uni[VIEW] = glGetUniformLocation(_->_prog._id, "view");
-	_->_uni[PROJ] = glGetUniformLocation(_->_prog._id, "proj");
+	_->_uni[Obj::MODEL] = glGetUniformLocation(_->_prog._id, "model");
+	_->_uni[Obj::VIEW] = glGetUniformLocation(_->_prog._id, "view");
+	_->_uni[Obj::PROJ] = glGetUniformLocation(_->_prog._id, "proj");
 
-	_->_uni[ACTIVE] = glGetUniformLocation(_->_prog._id, "active");
+	_->_uni[Obj::ACTIVE] = glGetUniformLocation(_->_prog._id, "active");
 
-	_->_uni[T] = glGetUniformLocation(_->_prog._id, "t");
+	_->_uni[Obj::T] = glGetUniformLocation(_->_prog._id, "t");
 
-	glUniformMatrix4fv(_->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
-	glUniformMatrix4fv(_->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
-	glUniformMatrix4fv(_->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
+	glUniformMatrix4fv(_->_uni[Obj::MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
+	glUniformMatrix4fv(_->_uni[Obj::VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
+	glUniformMatrix4fv(_->_uni[Obj::PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
 
-	glUniform1ui(_->_uni[ACTIVE], _->_active);
+	glUniform1ui(_->_uni[Obj::ACTIVE], _->_active);
 
-	glUniform1ui(_->_uni[T], _->_t);
+	glUniform1ui(_->_uni[Obj::T], _->_t);
 
 	_->_prog.unUse();
 	glBindVertexArray(0);
@@ -205,27 +205,27 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm
 	_->_prog.use();
 
 	// attribute
-	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh->_id[VBO]);
-	_->_attr[POS] = glGetAttribLocation(_->_prog._id, "pos");
-	glVertexAttribPointer(_->_attr[POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
-	glEnableVertexAttribArray(_->_attr[POS]);
+	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh->_id[Mesh::VBO]);
+	_->_attr[Obj::POS] = glGetAttribLocation(_->_prog._id, "pos");
+	glVertexAttribPointer(_->_attr[Obj::POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+	glEnableVertexAttribArray(_->_attr[Obj::POS]);
 
 	// uniform
-	_->_uni[MODEL] = glGetUniformLocation(_->_prog._id, "model");
-	_->_uni[VIEW] = glGetUniformLocation(_->_prog._id, "view");
-	_->_uni[PROJ] = glGetUniformLocation(_->_prog._id, "proj");
+	_->_uni[Obj::MODEL] = glGetUniformLocation(_->_prog._id, "model");
+	_->_uni[Obj::VIEW] = glGetUniformLocation(_->_prog._id, "view");
+	_->_uni[Obj::PROJ] = glGetUniformLocation(_->_prog._id, "proj");
 
-	_->_uni[ACTIVE] = glGetUniformLocation(_->_prog._id, "active");
+	_->_uni[Obj::ACTIVE] = glGetUniformLocation(_->_prog._id, "active");
 
-	_->_uni[T] = glGetUniformLocation(_->_prog._id, "t");
+	_->_uni[Obj::T] = glGetUniformLocation(_->_prog._id, "t");
 
-	glUniformMatrix4fv(_->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
-	glUniformMatrix4fv(_->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
-	glUniformMatrix4fv(_->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
+	glUniformMatrix4fv(_->_uni[Obj::MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
+	glUniformMatrix4fv(_->_uni[Obj::VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
+	glUniformMatrix4fv(_->_uni[Obj::PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
 
-	glUniform1ui(_->_uni[ACTIVE], _->_active);
+	glUniform1ui(_->_uni[Obj::ACTIVE], _->_active);
 
-	glUniform1ui(_->_uni[T], _->_t);
+	glUniform1ui(_->_uni[Obj::T], _->_t);
 
 	_->_prog.unUse();
 	glBindVertexArray(0);
@@ -288,27 +288,27 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj
 	_->_prog.use();
 
 	// attribute
-	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh->_id[VBO]);
-	_->_attr[POS] = glGetAttribLocation(_->_prog._id, "pos");
-	glVertexAttribPointer(_->_attr[POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
-	glEnableVertexAttribArray(_->_attr[POS]);
+	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh->_id[Mesh::VBO]);
+	_->_attr[Obj::POS] = glGetAttribLocation(_->_prog._id, "pos");
+	glVertexAttribPointer(_->_attr[Obj::POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+	glEnableVertexAttribArray(_->_attr[Obj::POS]);
 
 	// uniform
-	_->_uni[MODEL] = glGetUniformLocation(_->_prog._id, "model");
-	_->_uni[VIEW] = glGetUniformLocation(_->_prog._id, "view");
-	_->_uni[PROJ] = glGetUniformLocation(_->_prog._id, "proj");
+	_->_uni[Obj::MODEL] = glGetUniformLocation(_->_prog._id, "model");
+	_->_uni[Obj::VIEW] = glGetUniformLocation(_->_prog._id, "view");
+	_->_uni[Obj::PROJ] = glGetUniformLocation(_->_prog._id, "proj");
 
-	_->_uni[ACTIVE] = glGetUniformLocation(_->_prog._id, "active");
+	_->_uni[Obj::ACTIVE] = glGetUniformLocation(_->_prog._id, "active");
 
-	_->_uni[T] = glGetUniformLocation(_->_prog._id, "t");
+	_->_uni[Obj::T] = glGetUniformLocation(_->_prog._id, "t");
 
-	glUniformMatrix4fv(_->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
-	glUniformMatrix4fv(_->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
-	glUniformMatrix4fv(_->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
+	glUniformMatrix4fv(_->_uni[Obj::MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
+	glUniformMatrix4fv(_->_uni[Obj::VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
+	glUniformMatrix4fv(_->_uni[Obj::PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
 
-	glUniform1ui(_->_uni[ACTIVE], _->_active);
+	glUniform1ui(_->_uni[Obj::ACTIVE], _->_active);
 
-	glUniform1ui(_->_uni[T], _->_t);
+	glUniform1ui(_->_uni[Obj::T], _->_t);
 
 	_->_prog.unUse();
 	glBindVertexArray(0);
@@ -401,18 +401,18 @@ void objDraw(Obj* obj) {
 	obj->_view = glm::lookAt(cam._pos, cam._pos + glm::vec3(1000.0, -1000.0, 1000.0), glm::vec3(0, 1, 0));
 	obj->_view = glm::scale(obj->_view, cam._scale);
 
-	glBindVertexArray(obj->_mesh->_id[VAO]);
+	glBindVertexArray(obj->_mesh->_id[Mesh::VAO]);
 	obj->_prog.use();
 
 	glActiveTexture(GL_TEXTURE0 + 1);
 	glBindTexture(GL_TEXTURE_2D, obj->_tex);
 
-	glUniformMatrix4fv(obj->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(obj->_acc));
-	glUniformMatrix4fv(obj->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(obj->_view));
+	glUniformMatrix4fv(obj->_uni[Obj::MODEL], 1, GL_FALSE, glm::value_ptr(obj->_acc));
+	glUniformMatrix4fv(obj->_uni[Obj::VIEW], 1, GL_FALSE, glm::value_ptr(obj->_view));
 
-	glUniform1ui(obj->_uni[T], obj->_t);
+	glUniform1ui(obj->_uni[Obj::T], obj->_t);
 
-	glUniform1ui(obj->_uni[ACTIVE], obj->_active);
+	glUniform1ui(obj->_uni[Obj::ACTIVE], obj->_active);
 
 	glDrawElements(GL_TRIANGLES, obj->_mesh->_noIdc, GL_UNSIGNED_SHORT, (GLvoid*) 0);
 
@@ -452,27 +452,27 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_prog.use();
 
 	// attribute
-	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh->_id[VBO]);
-	_->_attr[POS] = glGetAttribLocation(_->_prog._id, "pos");
-	glVertexAttribPointer(_->_attr[POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
-	glEnableVertexAttribArray(_->_attr[POS]);
+	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh->_id[Mesh::VBO]);
+	_->_attr[Obj::POS] = glGetAttribLocation(_->_prog._id, "pos");
+	glVertexAttribPointer(_->_attr[Obj::POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+	glEnableVertexAttribArray(_->_attr[Obj::POS]);
 
 	// uniform
-	_->_uni[MODEL] = glGetUniformLocation(_->_prog._id, "model");
-	_->_uni[VIEW] = glGetUniformLocation(_->_prog._id, "view");
-	_->_uni[PROJ] = glGetUniformLocation(_->_prog._id, "proj");
+	_->_uni[Obj::MODEL] = glGetUniformLocation(_->_prog._id, "model");
+	_->_uni[Obj::VIEW] = glGetUniformLocation(_->_prog._id, "view");
+	_->_uni[Obj::PROJ] = glGetUniformLocation(_->_prog._id, "proj");
 
-	_->_uni[ACTIVE] = glGetUniformLocation(_->_prog._id, "active");
+	_->_uni[Obj::ACTIVE] = glGetUniformLocation(_->_prog._id, "active");
 
-	_->_uni[T] = glGetUniformLocation(_->_prog._id, "t");
+	_->_uni[Obj::T] = glGetUniformLocation(_->_prog._id, "t");
 
-	glUniformMatrix4fv(_->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
-	glUniformMatrix4fv(_->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
-	glUniformMatrix4fv(_->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
+	glUniformMatrix4fv(_->_uni[Obj::MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
+	glUniformMatrix4fv(_->_uni[Obj::VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
+	glUniformMatrix4fv(_->_uni[Obj::PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
 
-	glUniform1ui(_->_uni[ACTIVE], _->_active);
+	glUniform1ui(_->_uni[Obj::ACTIVE], _->_active);
 
-	glUniform1ui(_->_uni[T], _->_t);
+	glUniform1ui(_->_uni[Obj::T], _->_t);
 
 	_->_prog.unUse();
 	glBindVertexArray(0);
@@ -511,27 +511,27 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_prog.use();
 
 	// attribute
-	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh->_id[VBO]);
-	_->_attr[POS] = glGetAttribLocation(_->_prog._id, "pos");
-	glVertexAttribPointer(_->_attr[POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
-	glEnableVertexAttribArray(_->_attr[POS]);
+	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh->_id[Mesh::VBO]);
+	_->_attr[Obj::POS] = glGetAttribLocation(_->_prog._id, "pos");
+	glVertexAttribPointer(_->_attr[Obj::POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+	glEnableVertexAttribArray(_->_attr[Obj::POS]);
 
 	// uniform
-	_->_uni[MODEL] = glGetUniformLocation(_->_prog._id, "model");
-	_->_uni[VIEW] = glGetUniformLocation(_->_prog._id, "view");
-	_->_uni[PROJ] = glGetUniformLocation(_->_prog._id, "proj");
+	_->_uni[Obj::MODEL] = glGetUniformLocation(_->_prog._id, "model");
+	_->_uni[Obj::VIEW] = glGetUniformLocation(_->_prog._id, "view");
+	_->_uni[Obj::PROJ] = glGetUniformLocation(_->_prog._id, "proj");
 
-	_->_uni[ACTIVE] = glGetUniformLocation(_->_prog._id, "active");
+	_->_uni[Obj::ACTIVE] = glGetUniformLocation(_->_prog._id, "active");
 
-	_->_uni[T] = glGetUniformLocation(_->_prog._id, "t");
+	_->_uni[Obj::T] = glGetUniformLocation(_->_prog._id, "t");
 
-	glUniformMatrix4fv(_->_uni[MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
-	glUniformMatrix4fv(_->_uni[VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
-	glUniformMatrix4fv(_->_uni[PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
+	glUniformMatrix4fv(_->_uni[Obj::MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
+	glUniformMatrix4fv(_->_uni[Obj::VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
+	glUniformMatrix4fv(_->_uni[Obj::PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
 
-	glUniform1ui(_->_uni[ACTIVE], _->_active);
+	glUniform1ui(_->_uni[Obj::ACTIVE], _->_active);
 
-	glUniform1ui(_->_uni[T], _->_t);
+	glUniform1ui(_->_uni[Obj::T], _->_t);
 
 	_->_prog.unUse();
 	glBindVertexArray(0);

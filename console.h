@@ -48,12 +48,6 @@ class Console {
 		bool _w;
 
 	public:
-		enum mode {
-			FS,
-			EDITOR,
-			PROMPT
-		};
-
 		unsigned int
 			_mode,
 
@@ -80,6 +74,17 @@ class Console {
 		bool* _hl;
 
 		const std::string _ps1 = "[] ";
+
+		enum mode {
+			FS,
+			EDITOR,
+			PROMPT
+		};
+
+		enum attr {
+			POS,
+			ST
+		};
 
 		Console(std::string cwd, std::string name, std::vector<std::string> buff);
 
