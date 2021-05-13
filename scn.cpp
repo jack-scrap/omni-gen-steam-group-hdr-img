@@ -479,8 +479,8 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		goal[g - 1] = _;
 	}
 
-	// object
-	for (const auto& entry : serial["obj"]) {
+	// prop
+	for (const auto& entry : serial["prop"]) {
 		Obj* obj = objMk(entry["name"], "obj", "dir", true, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]));
 
 		mesh.push_back(obj);
