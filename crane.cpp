@@ -14,7 +14,7 @@
 Crane* craneMk(glm::vec3 loc, glm::vec3 rot) {
 	Crane* _ = (Crane*) malloc(sizeof (Crane));
 
-	_->_op = nullptr;
+	_->_data = nullptr;
 
 	// wheel
 	Obj* child[(2 * 2 * 2 * 2) + 1 + (2 * 2) + 1];

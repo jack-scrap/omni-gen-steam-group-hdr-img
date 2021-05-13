@@ -98,7 +98,7 @@ class _Obj(Structure):
 
 class _Crane(_Obj):
 	_fields_ = [
-		('_op', POINTER(_Cont)),
+		('_data', POINTER(_Cont)),
 		('_loc', c_float * 3),
 		('_rngHead', c_float * 2),
 		('_rngClaw', c_float * 2),
@@ -125,7 +125,7 @@ class _Crane(_Obj):
 	def grab(self):
 		_craneGrab(self._ptr)
 
-		self._op = self._ptr.contents._op
+		self._data = self._ptr.contents._data
 
 _craneZoom = _crane.craneZoom
 _craneZoom.restype = c_void_p

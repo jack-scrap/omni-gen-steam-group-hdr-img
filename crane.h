@@ -6,7 +6,7 @@
 #include "cont.h"
 
 typedef struct Crane {
-	Cont* _op;
+	Cont* _data;
 	GLfloat _loc[3];
 
 	static constexpr GLfloat _rngHead[2] = {
