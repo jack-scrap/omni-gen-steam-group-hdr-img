@@ -19,17 +19,17 @@
 #include "line.h"
 #include "dict.h"
 
-void** data;
-void** goal;
+Var** data;
+Var** goal;
 unsigned int* type;
 unsigned int noData;
 bool eq = false;
 
-extern "C" void** dataGet() {
+extern "C" Var** dataGet() {
 	return data;
 }
 
-extern "C" void** goalGet() {
+extern "C" Var** goalGet() {
 	return goal;
 }
 
@@ -248,7 +248,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	/* data */
-	data = (void**) malloc(0);
+	data = (Var**) malloc(0);
 
 	for (const auto& pair : serial["data"].items()) {
 		// scalar
@@ -265,7 +265,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				Var* _ = varMk(id, val);
 
 				noData++;
-				data = (void**) realloc(data, noData * sizeof (void*));
+				data = (Var**) realloc(data, noData * sizeof (void*));
 				type = (unsigned int*) realloc(type, noData * sizeof (unsigned int*));
 				data[noData - 1] = _;
 				type[noData - 1] = SCALAR;
@@ -302,7 +302,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					Var* _ = varMk(id, val);
 
 					noData++;
-					data = (void**) realloc(data, noData * sizeof (void*));
+					data = (Var**) realloc(data, noData * sizeof (void*));
 					type = (unsigned int*) realloc(type, noData * sizeof (unsigned int*));
 					data[noData - 1] = _;
 					type[noData - 1] = ARRAY;
@@ -382,7 +382,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 						Var* _ = varMk(id, val);
 
 						noData++;
-						data = (void**) realloc(data, noData * sizeof (void*));
+						data = (Var**) realloc(data, noData * sizeof (void*));
 						type = (unsigned int*) realloc(type, noData * sizeof (unsigned int*));
 						data[noData - 1] = _;
 						type[noData - 1] = ARRAY;
@@ -441,7 +441,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			Var* _ = varMk(id, val);
 
 			noData++;
-			data = (void**) realloc(data, noData * sizeof (void*));
+			data = (Var**) realloc(data, noData * sizeof (void*));
 			type = (unsigned int*) realloc(type, noData * sizeof (unsigned int*));
 			data[noData - 1] = _;
 			type[noData - 1] = DICT;
@@ -451,7 +451,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	/* goal */
-	goal = (void**) malloc(0);
+	goal = (Var**) malloc(0);
 	unsigned int g = 0;
 
 	for (const auto& pair : serial["goal"].items()) {
@@ -515,7 +515,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		Var* _ = varMk(id, val);
 
 		g++;
-		goal = (void**) realloc(goal, g * sizeof (void*));
+		goal = (Var**) realloc(goal, g * sizeof (void*));
 		goal[g - 1] = _;
 	}
 
