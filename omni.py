@@ -19,7 +19,7 @@ class _Data(Structure):
 		('_x', c_uint),
 		('_y', c_uint),
 		('_z', c_uint),
-		('_loc', c_float * 3),
+		('_loc', c_float * 3)
 	]
 
 class _Var(Structure):
@@ -101,7 +101,7 @@ class _Crane(_Obj):
 		('_data', POINTER(_Cont)),
 		('_loc', c_float * 3),
 		('_rngHead', c_float * 2),
-		('_rngClaw', c_float * 2),
+		('_rngClaw', c_float * 2)
 	]
 
 	def zoom(self, delta):
@@ -156,7 +156,7 @@ class _Truck(_Obj):
 	_fields_ = [
 		('_data', POINTER(_Data)),
 		('_loc', c_float * 3),
-		('_ang', c_float),
+		('_ang', c_float)
 	]
 
 	def turn(self, delta):
