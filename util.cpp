@@ -330,7 +330,8 @@ bool util::phys::aabb(Obj* p, Obj* q) {
 
 	for (int e = 0; e < 2; e++) {
 		for (int i = 0; i < 2 * 2 * 2 * 3; i += 3) {
-			glm::vec3 vtx = glm::vec3((e ? q : p)->_acc * glm::vec4(glm::vec3((e ? q : p)->_bound[i], (e ? q : p)->_bound[i + 1], (e ? q : p)->_bound[i + 2]), 1.0));
+			glm::vec3 vtx = glm::vec3((e ? q : p)->_bound[i], (e ? q : p)->_bound[i + 1], (e ? q : p)->_bound[i + 2]);
+			glm::vec3 trans = glm::vec3((e ? q : p)->_acc * glm::vec4(vtx, 1.0));
 
 			glm::vec3 bound[3][2] = {
 				glm::vec3((e ? p : q)->_acc * glm::vec4(glm::vec3((e ? p : q)->_rng[X][MIN], 0.0, 0.0), 1.0)),
@@ -344,12 +345,12 @@ bool util::phys::aabb(Obj* p, Obj* q) {
 			};
 
 			if (
-				vtx[X] > bound[X][MIN][X] &&
-				vtx[X] < bound[X][MAX][X] &&
-				vtx[Y] > bound[Y][MIN][Y] &&
-				vtx[Y] < bound[Y][MAX][Y] &&
-				vtx[Z] > bound[Z][MIN][Z] &&
-				vtx[Z] < bound[Z][MAX][Z]
+				trans[X] > bound[X][MIN][X] &&
+				trans[X] < bound[X][MAX][X] &&
+				trans[Y] > bound[Y][MIN][Y] &&
+				trans[Y] < bound[Y][MAX][Y] &&
+				trans[Z] > bound[Z][MIN][Z] &&
+				trans[Z] < bound[Z][MAX][Z]
 			) {
 				_ = true;
 
