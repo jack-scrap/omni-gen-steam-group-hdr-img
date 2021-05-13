@@ -145,12 +145,17 @@ void craneGrab(Crane* crane) {
 
 		switch (type[i]) {
 			case SCALAR: {
+				Obj* head = crane->_parent->_child[2 * 2 * 2 * 2];
+				Obj* claw = head->_child[0];
+
 				Idx* idx = (Idx*) var->_ptr;
 
 				if (idx->_data) {
-					craneInsert(crane, idxPop(idx));
+					if (util::phys::aabb(claw, idx->_data->_parent)) {
+						craneInsert(crane, idxPop(idx));
 
-					return;
+						return;
+					}
 				}
 
 				break;
@@ -160,12 +165,17 @@ void craneGrab(Crane* crane) {
 				Arr* arr = (Arr*) var->_ptr;
 
 				for (int i = 0; i < arr->_x * arr->_y * arr->_z; i++) {
+					Obj* head = crane->_parent->_child[2 * 2 * 2 * 2];
+					Obj* claw = head->_child[0];
+
 					Idx* idx = arr->_data[i];
 
 					if (idx->_data) {
-						craneInsert(crane, idxPop(idx));
+						if (util::phys::aabb(claw, idx->_data->_parent)) {
+							craneInsert(crane, idxPop(idx));
 
-						return;
+							return;
+						}
 					}
 				}
 
