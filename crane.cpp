@@ -148,6 +148,8 @@ void craneGrab(Crane* crane) {
 				Idx* idx = (Idx*) var->_ptr;
 
 				if (idx->_data) {
+					craneInsert(crane, idx->_data);
+
 					return;
 				}
 
@@ -161,6 +163,8 @@ void craneGrab(Crane* crane) {
 					Idx* idx = arr->_data[i];
 
 					if (idx->_data) {
+						craneInsert(crane, idx->_data);
+
 						return;
 					}
 				}
@@ -169,4 +173,11 @@ void craneGrab(Crane* crane) {
 			}
 		}
 	}
+}
+
+void craneInsert(Crane* crane, Cont* byte) {
+	crane->_data = byte;
+	crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)] = crane->_data->_parent;
+
+	objAcc(crane->_parent, glm::mat4(1.0));
 }
