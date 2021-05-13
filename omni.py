@@ -58,28 +58,26 @@ goal = {}
 for i in range(_noData):
 	id = ''
 
-	t = None
-	if _type[i] == 0:
-		t = _Idx
-
-	if _type[i] == 1:
-		t = _Arr
-
 	c = 0
 	while _data[i].contents._id[c] != b'\0':
 		id += _data[i].contents._id[c].decode("utf-8")
 
 		c += 1
 
-	data[id] = _data[i].contents._ptr
+	t = None
+	if _type[i] == 0:
+		ptr = cast(_data[i].contents._ptr, POINTER(_Idx))
+		idx = _Idx(ptr.contents._data)
 
-	c = 0
-	while _goal[i].contents._id[c] != b'\0':
-		id += _goal[i].contents._id[c].decode("utf-8")
+		data[id] = idx
+		goal[id] = idx
 
-		c += 1
+	if _type[i] == 1:
+		ptr = cast(_data[i].contents._ptr, POINTER(_Arr))
+		arr = _Arr(ptr.contents._data, ptr.contents._x, ptr.contents._y, ptr.contents._z, ptr.contents._loc)
 
-	goal[id] = _goal[i].contents._ptr
+		data[id] = arr
+		goal[id] = arr
 
 # bound
 class _Lim(Structure):
