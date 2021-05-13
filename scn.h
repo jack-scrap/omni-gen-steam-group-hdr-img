@@ -31,6 +31,8 @@ extern "C" Var** dataGet();
 
 extern "C" Var** goalGet();
 
+extern "C" unsigned int* typeGet();
+
 extern "C" unsigned int noDataGet();
 
 extern Lim** boundRng;

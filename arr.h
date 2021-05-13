@@ -7,10 +7,9 @@
 #include "idx.h"
 
 typedef struct {
-	char* _ptr;
-	unsigned int
-		_depth,
+	Idx** _data;
 
+	unsigned int
 		_x,
 		_y,
 		_z;
@@ -18,8 +17,6 @@ typedef struct {
 	float _loc[3];
 
 	Obj* _parent;
-
-	Idx** _data;
 } Arr;
 
 Arr* arrMk(char* init, unsigned int x, std::string name = "", glm::vec3 loc = glm::vec3(0.0, 0.0, 0.0), glm::vec3 rot = glm::vec3(0.0, 0.0, 0.0));

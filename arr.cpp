@@ -10,7 +10,6 @@
 Arr* arrMk(char* init, unsigned int x, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	Arr* _ = (Arr*) malloc(sizeof (Arr));
 
-	_->_ptr = init;
 	_->_x = x;
 	_->_y = 1;
 	_->_z = 1;
@@ -67,7 +66,6 @@ Arr* arrMk(char* init, unsigned int x, std::string name, glm::vec3 loc, glm::vec
 Arr* arrMk(char* init, unsigned int x, unsigned int y, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	Arr* _ = (Arr*) malloc(sizeof (Arr));
 
-	_->_ptr = init;
 	_->_x = x;
 	_->_y = y;
 	_->_z = 1;
@@ -119,7 +117,6 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, std::string name, glm::ve
 Arr* arrMk(char* init, unsigned int x, unsigned int y, unsigned int z, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	Arr* _ = (Arr*) malloc(sizeof (Arr));
 
-	_->_ptr = init;
 	_->_x = x;
 	_->_y = y;
 	_->_z = z;

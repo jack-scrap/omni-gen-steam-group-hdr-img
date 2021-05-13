@@ -33,6 +33,10 @@ extern "C" Var** goalGet() {
 	return goal;
 }
 
+extern "C" unsigned int* typeGet() {
+	return type;
+}
+
 unsigned int noDataGet() {
 	return noData;
 }

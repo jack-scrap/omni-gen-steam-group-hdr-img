@@ -12,10 +12,14 @@ class _Cont(Structure):
 		('_c', c_char)
 	]
 
-class _Data(Structure):
+class _Idx(Structure):
 	_fields_ = [
-		('_ptr', c_ulong),
-		('_depth', c_uint),
+		('_data', POINTER(_Cont))
+	]
+
+class _Arr(Structure):
+	_fields_ = [
+		('_data', POINTER(POINTER(_Idx))),
 		('_x', c_uint),
 		('_y', c_uint),
 		('_z', c_uint),
@@ -25,7 +29,7 @@ class _Data(Structure):
 class _Var(Structure):
     _fields_ = [
 	    ('_id', POINTER(c_char)),
-	    ('_ptr', POINTER(_Data))
+	    ('_ptr', c_void_p)
     ]
 
 _dataGet = _scn.dataGet
@@ -36,18 +40,30 @@ _goalGet = _scn.goalGet
 _goalGet.restype = POINTER(POINTER(_Var))
 _goalGet.argtypes = None
 
+_typeGet = _scn.typeGet
+_typeGet.restype = POINTER(c_uint)
+_typeGet.argtypes = None
+
 _noDataGet = _scn.noDataGet
 _noDataGet.restype = c_uint
 _noDataGet.argtypes = None
 
 _data = _dataGet()
 _goal = _goalGet()
+_type = _typeGet()
 _noData = _noDataGet()
 
 data = {}
 goal = {}
 for i in range(_noData):
 	id = ''
+
+	t = None
+	if _type[i] == 0:
+		t = _Idx
+
+	if _type[i] == 1:
+		t = _Arr
 
 	c = 0
 	while _data[i].contents._id[c] != b'\0':
@@ -162,7 +178,7 @@ _craneGrab.argtypes = None
 
 class _Truck(_Obj):
 	_fields_ = [
-		('_data', POINTER(_Data)),
+		('_data', POINTER(_Arr)),
 		('_loc', c_float * 3),
 		('_ang', c_float)
 	]
@@ -197,7 +213,7 @@ _truckMv.argtypes = [
 
 class _CargoShip(_Obj):
 	_fields_ = [
-		('_data', POINTER(_Data)),
+		('_data', POINTER(_Arr)),
 		('_loc', c_float * 3)
 	]
 
