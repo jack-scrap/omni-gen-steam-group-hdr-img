@@ -140,10 +140,33 @@ void cranePed(Crane* crane, float delta) {
 }
 
 void craneGrab(Crane* crane) {
-	Obj*& head = crane->_parent->_child[2 * 2 * 2 * 2];
-	Obj*& claw = head->_child[0];
+	for (int i = 0; i < noData; i++) {
+		Var* var = (Var*) data[i];
 
-	Obj*& slot = crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)];
+		switch (type[i]) {
+			case SCALAR: {
+				Idx* idx = (Idx*) var->_ptr;
 
-	objAcc(crane->_parent, glm::mat4(1.0));
+				if (idx->_data) {
+					return;
+				}
+
+				break;
+			}
+
+			case ARRAY: {
+				Arr* arr = (Arr*) var->_ptr;
+
+				for (int i = 0; i < arr->_x * arr->_y * arr->_z; i++) {
+					Idx* idx = arr->_data[i];
+
+					if (idx->_data) {
+						return;
+					}
+				}
+
+				break;
+			}
+		}
+	}
 }
