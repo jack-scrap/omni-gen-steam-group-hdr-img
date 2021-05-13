@@ -36,7 +36,7 @@ void dispatch(Console* console, std::string name) {
 			}
 		};
 
-		std::string deser = data.dump();
+		std::string deser = data.dump(4);
 
 		util::fs::write("player.json", util::str::split(deser, '\n'));
 	}
