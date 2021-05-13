@@ -148,7 +148,7 @@ void craneGrab(Crane* crane) {
 				Idx* idx = (Idx*) var->_ptr;
 
 				if (idx->_data) {
-					craneInsert(crane, idx->_data);
+					craneInsert(crane, idxPop(idx));
 
 					return;
 				}
@@ -163,7 +163,7 @@ void craneGrab(Crane* crane) {
 					Idx* idx = arr->_data[i];
 
 					if (idx->_data) {
-						craneInsert(crane, idx->_data);
+						craneInsert(crane, idxPop(idx));
 
 						return;
 					}

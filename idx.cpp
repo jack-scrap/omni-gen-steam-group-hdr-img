@@ -73,12 +73,12 @@ void idxInsert(Idx* idx, Cont* byte) {
 }
 
 Cont* idxPop(Idx* idx) {
-	Cont* byte = idx->_data;
+	Cont* _ = idx->_data;
 
 	idx->_data = nullptr;
-	idx->_parent->_child[idx->_parent->_noChild - 1] = idx->_data->_parent;
+	idx->_parent->_child[idx->_parent->_noChild - 1] = nullptr;
 
-	return byte;
+	return _;
 }
 
 bool idxEq(Idx* lhs, Idx* rhs) {
