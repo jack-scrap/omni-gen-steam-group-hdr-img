@@ -38,9 +38,7 @@ int main(int argc, char** argv) {
 
 	for (const auto& [key, val] : setting) {
 		if (key == "skip_boot") {
-			bool asdf = val == "y";
-
-			boot = !asdf;
+			boot = !(val == "y");
 		}
 
 		if (key == "speed") {
