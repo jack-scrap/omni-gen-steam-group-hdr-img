@@ -97,7 +97,16 @@ std::vector<Obj*> pt;
 void scn::init(unsigned int stage, unsigned int lvl) {
 	nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("lvl/" + omni::stage[stage] + "/" + std::to_string(lvl) + ".json"));
 
-	// clear
+	/* de-allocate */
+	// data
+	for (int i = 0; i < noData; i++) {
+		free(data[i]);
+		free(goal[i]);
+	}
+	free(data);
+	free(goal);
+
+	// vehicle
 	for (int i = 0; i < noCrane; i++) {
 		free(crane[i]);
 	}
@@ -118,6 +127,28 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 	mesh.clear();
 
+	for (void* _ : line) {
+		free(_);
+	}
+	line.clear();
+
+	for (void* _ : pt) {
+		free(_);
+	}
+	pt.clear();
+
+	// bound
+	for (int i = 0; i < noBoundRng; i++) {
+		free(boundRng[i]);
+	}
+	free(boundRng);
+
+	for (int i = 0; i < noBoundArea; i++) {
+		free(boundArea[i]);
+	}
+	free(boundArea);
+
+	/* allocate */
 	// vehicle
 	crane = (Crane**) malloc(0);
 	noCrane = 0;
