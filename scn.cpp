@@ -21,6 +21,7 @@
 
 void** data;
 void** goal;
+unsigned int* type;
 unsigned int noData;
 bool eq = false;
 
@@ -265,7 +266,9 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 				noData++;
 				data = (void**) realloc(data, noData * sizeof (void*));
+				type = (unsigned int*) realloc(type, noData * sizeof (unsigned int*));
 				data[noData - 1] = _;
+				type[noData - 1] = SCALAR;
 
 				mesh.push_back(val->_parent);
 			}
@@ -300,7 +303,9 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 					noData++;
 					data = (void**) realloc(data, noData * sizeof (void*));
+					type = (unsigned int*) realloc(type, noData * sizeof (unsigned int*));
 					data[noData - 1] = _;
+					type[noData - 1] = ARRAY;
 
 					mesh.push_back(((Arr*) (((Var*) data[noData - 1])->_ptr))->_parent);
 				}
@@ -378,7 +383,9 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 						noData++;
 						data = (void**) realloc(data, noData * sizeof (void*));
+						type = (unsigned int*) realloc(type, noData * sizeof (unsigned int*));
 						data[noData - 1] = _;
+						type[noData - 1] = ARRAY;
 
 						mesh.push_back(val->_parent);
 					}
@@ -435,7 +442,9 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 			noData++;
 			data = (void**) realloc(data, noData * sizeof (void*));
+			type = (unsigned int*) realloc(type, noData * sizeof (unsigned int*));
 			data[noData - 1] = _;
+			type[noData - 1] = DICT;
 
 			mesh.push_back(val->_parent);
 		}

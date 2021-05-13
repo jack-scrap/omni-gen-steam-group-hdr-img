@@ -23,6 +23,7 @@ extern Console* console;
 
 extern void** data;
 extern void** goal;
+extern unsigned int* type;
 extern unsigned int noData;
 extern bool eq;
 
@@ -73,3 +74,9 @@ extern std::vector<Obj*> pt;
 namespace scn {
 	void init(unsigned int stage, unsigned int lvl);
 }
+
+enum type {
+	SCALAR,
+	ARRAY,
+	DICT
+};
