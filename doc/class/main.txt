@@ -84,6 +84,42 @@ obj = Parent()
 print(obj.var)
 ```
 
+# Private
+Should variables and functions strictly be desired to be used within the class, names can be marked as such.
+
+Prefixing names with double underscores (`__`) will only make these declarations visible within the class itself.
+
+```
+class Blueprint:
+	__var = 3
+
+	__fn():
+		print("Text")
+```
+
+These names may be accessed within the scope of the class.
+However, attempting access them outside of the class will not match the identifier.
+
+The following is valid.
+
+```
+class Blueprint:
+	...
+
+	def other_fn():
+		__fn()
+```
+
+The following is not.
+
+```
+...
+
+obj = Blueprint()
+
+obj.__fn()
+```
+
 # Class methods
 It is not necessary for classes to create objects.
 

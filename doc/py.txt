@@ -72,6 +72,24 @@ This will simply import the module, but attach it to the global namespace.
 
 `from module import *`
 
+# Private
+Like classes, variables and functions strictly desired for use within a module can be marked as private.
+
+Prefixing with any amount of underscores will only allow access within the module.
+
+```
+_var = 3
+
+def _fn():
+	print("Text")
+```
+
+The following is valid.
+
+```
+other_var = _var
+```
+
 ## Package
 Packages are greater collections of modules.
 
