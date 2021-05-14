@@ -143,7 +143,7 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, unsigned int z, std::stri
 	// data
 	_->_data = (Idx**) malloc(_->_x * _->_y * _->_z * sizeof (Idx*));
 
-	Obj** child = (Obj**) malloc((1 + (_->_x * _->_y * _->_z)) * sizeof (Obj*));
+	Obj** child = (Obj**) malloc(1 + (_->_x * _->_y * _->_z) * sizeof (Obj*));
 	unsigned int noChild = 1;
 
 	int no = 0;
