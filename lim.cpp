@@ -35,7 +35,7 @@ Lim* limMk(unsigned int axis, GLfloat val) {
 		rot[Y] = 0.0;
 	}
 
-	_->_parent = lineMk(vtc, "pt", "thick", "solid", loc, rot);
+	_->_parent = lineMk(vtc, "geom", "thick", "solid", loc, rot);
 
 	return _;
 }
