@@ -1,5 +1,4 @@
 #include <iostream>
-#include <Python.h>
 #include <dlfcn.h>
 #include <thread>
 #include <SDL2/SDL.h>
