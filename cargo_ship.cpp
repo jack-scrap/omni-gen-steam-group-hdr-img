@@ -19,8 +19,8 @@ CargoShip* cargoShipMk(char* init, unsigned int no, glm::vec3 loc, glm::vec3 rot
 	};
 
 	glm::vec2 sz = {
-		(_->_x * layout::stride[X]) + pad[X],
-		(_->_y * layout::stride[Z]) + pad[Y]
+		(_->_x * layout::stride[Z]) + pad[X],
+		(_->_y * layout::stride[X]) + pad[Y]
 	};
 
 	// data
@@ -45,7 +45,7 @@ CargoShip* cargoShipMk(char* init, unsigned int no, glm::vec3 loc, glm::vec3 rot
 
 	Obj* child[2];
 
-	child[0] = objMk(vtc, 2 * 2 * 3, &idc[0], 2 * 3, "obj", "solid", true);
+	child[0] = objMk(vtc, 2 * 2 * 3, &idc[0], 2 * 3, "obj", "solid", false, glm::vec3(-(sz[X] / 2), 0.0, -(sz[Y] / 2)));
 
 	child[1] = _->_data->_parent;
 
