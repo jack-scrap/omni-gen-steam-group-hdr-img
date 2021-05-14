@@ -17,7 +17,7 @@ class Disp {
 
 		SDL_Window* _win;
 
-		glm::vec2 _res;
+		unsigned int _res[2];
 
 		Disp(const char* title, glm::vec2 res, glm::vec3 bg);
 

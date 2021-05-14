@@ -150,7 +150,7 @@ int main(int argc, char** argv) {
 		prog.use();
 
 		glUniform1ui(uniActive, true);
-		glUniform2fv(uniRes, 1, glm::value_ptr(disp->_res));
+		glUniform2ui(uniRes, disp->_res[X], disp->_res[Y]);
 
 		prog.unUse();
 
