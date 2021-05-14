@@ -45,7 +45,8 @@ int main(int argc, char** argv) {
 		}
 
 		if (key == "wd") {
-			layout::view = glm::vec2(std::stoi(val), state::line * layout::dim[Y]);
+			layout::view[X] = std::stoi(val);
+			layout::view[Y] = state::line * layout::dim[Y];
 		}
 
 		if (key == "fps") {
@@ -69,7 +70,8 @@ int main(int argc, char** argv) {
 		}
 	}
 
-	layout::res = glm::vec2(state::ln * layout::dim[X], layout::view[Y]);
+	layout::res[X] = state::ln * layout::dim[X];
+	layout::res[Y] = layout::view[Y];
 
 	disp = new Disp("Omni", {
 		layout::view[X] + (state::ln * layout::dim[X]), layout::view[Y]

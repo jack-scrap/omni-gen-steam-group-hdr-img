@@ -5,11 +5,13 @@
 #include "state.h"
 
 namespace layout {
-	static glm::vec2 dim = glm::vec2(16, 32);
+	static unsigned int dim[2] = {
+		16, 32
+	};
 
-	extern glm::vec2 view;
+	extern unsigned int view[2];
 
-	extern glm::vec2 res;
+	extern unsigned int res[2];
 
 	static GLfloat bound = abs(-1.0 - 1.0);
 

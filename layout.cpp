@@ -1,5 +1,5 @@
 #include "layout.h"
 
-glm::vec2 layout::view;
+unsigned int layout::view[2];
 
-glm::vec2 layout::res;
+unsigned int layout::res[2];
