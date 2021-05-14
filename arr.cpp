@@ -53,10 +53,17 @@ Arr* arrMk(char* init, unsigned int x, std::string name, glm::vec3 loc, glm::vec
 	}
 
 	// scope
-	Border* scope = borderMk({
-		(layout::margin * 2) + (_->_x * layout::stride[X]),
-		(layout::margin * 2) + (_->_y * layout::stride[Z])
-	}, child, noChild, loc, rot);
+	glm::vec2 pad = {
+		layout::margin * 2,
+		layout::margin * 2
+	};
+
+	glm::vec2 sz = {
+		(_->_x * layout::stride[X]) + pad[X],
+		(_->_y * layout::stride[Z]) + pad[Y]
+	};
+
+	Border* scope = borderMk(sz, child, noChild, loc, rot);
 
 	_->_parent = scope->_parent;
 
@@ -105,10 +112,17 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, std::string name, glm::ve
 	child[0] = id->_parent;
 
 	// scope
-	Border* scope = borderMk({
-		(layout::margin * 2) + (_->_x * layout::stride[X]),
-		(layout::margin * 2) + (_->_y * layout::stride[Z])
-	}, child, noChild, loc, rot);
+	glm::vec2 pad = {
+		layout::margin * 2,
+		layout::margin * 2
+	};
+
+	glm::vec2 sz = {
+		(_->_x * layout::stride[X]) + pad[X],
+		(_->_y * layout::stride[Z]) + pad[Y]
+	};
+
+	Border* scope = borderMk(sz, child, noChild, loc, rot);
 
 	_->_parent = scope->_parent;
 
@@ -159,10 +173,17 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, unsigned int z, std::stri
 	child[0] = id->_parent;
 
 	// scope
-	Border* scope = borderMk({
-		(layout::margin * 2) + (_->_x * layout::stride[X]),
-		(layout::margin * 2) + (_->_y * layout::stride[Z])
-	}, child, noChild, loc, rot);
+	glm::vec2 pad = {
+		layout::margin * 2,
+		layout::margin * 2
+	};
+
+	glm::vec2 sz = {
+		(_->_x * layout::stride[X]) + pad[X],
+		(_->_y * layout::stride[Z]) + pad[Y]
+	};
+
+	Border* scope = borderMk(sz, child, noChild, loc, rot);
 
 	_->_parent = scope->_parent;
 

@@ -19,8 +19,8 @@ CargoShip* cargoShipMk(char* init, unsigned int no, glm::vec3 loc, glm::vec3 rot
 	};
 
 	glm::vec2 sz = {
-		pad[X] + (_->_x * layout::stride[X]),
-		pad[Y] + (_->_y * layout::stride[Z])
+		(_->_x * layout::stride[X]) + pad[X],
+		(_->_y * layout::stride[Z]) + pad[Y]
 	};
 
 	// data
