@@ -9,6 +9,7 @@ Idx* idxMk(unsigned int i, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	Idx* _ = (Idx*) malloc(sizeof (Idx));
 
 	_->_data = nullptr;
+	_->_no = 0;
 
 	Obj* child[2];
 
@@ -31,10 +32,12 @@ Idx* idxMk(unsigned int i, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	return _;
 }
 
-Idx* idxMk(unsigned int i, char c, std::string name, glm::vec3 loc, glm::vec3 rot) {
+Idx* idxMk(unsigned int i, char* c, unsigned int no, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	Idx* _ = (Idx*) malloc(sizeof (Idx));
 
-	Obj* child[1 + 1 + 1];
+	_->_no = no;
+
+	Obj* child[1 + 1 + _->_no];
 
 	child[0] = objMk("glyph/" + std::to_string(i), "obj", "solid", true, glm::vec3((layout::stroke * 2) + (layout::idx[X] / 2), 0.0, (layout::stroke * 2) + (layout::idx[Z] / 2)), rot);
 
@@ -47,11 +50,13 @@ Idx* idxMk(unsigned int i, char c, std::string name, glm::vec3 loc, glm::vec3 ro
 	}
 
 	// data
-	Cont* byte = contMk(c, glm::vec3((layout::stroke * 2) + (2.0 / 2), 1.0, (layout::stroke * 2) + (4.0 / 2)));
+	for (int i = 0; i < no; i++) {
+		Cont* byte = contMk(c[i], glm::vec3((layout::stroke * 2) + (2.0 / 2), 1.0, (layout::stroke * 2) + (4.0 / 2)) + glm::vec3(0.0, i * layout::stride[Y], 0.0));
 
-	child[2] = byte->_parent;
+		_->_data = byte;
 
-	_->_data = byte;
+		child[2 + i] = byte->_parent;
+	}
 
 	Border* border = borderMk({
 		layout::idx[X] + (layout::margin * 2 * 2), layout::idx[Z] + (layout::pad * 2 * 2)

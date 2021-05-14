@@ -257,7 +257,9 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	for (const auto& pair : serial["data"].items()) {
 		// scalar
 		if (pair.value().type() == nlohmann::json::value_t::number_unsigned) {
-			Idx* val = idxMk(0, (char) ((int) pair.value()), pair.key());
+			char init = (char) ((int) pair.value());
+
+			Idx* val = idxMk(0, &init, 1, pair.key());
 
 			for (const auto& pair : serial["data"].items()) {
 				char* id = (char*) malloc((pair.key().size() + 1) * sizeof (char));
@@ -469,7 +471,9 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 		// scalar
 		if (pair.value().type() == nlohmann::json::value_t::number_unsigned) {
-			val = idxMk(0, (char) ((int) pair.value()), pair.key());
+			char init = (char) ((int) (pair.value()));
+
+			val = idxMk(0, &init, 1, pair.key());
 		}
 
 		// array
@@ -507,7 +511,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					for (int k = 0; k < cont.size(); k++) {
 						for (int j = 0; j < cont[k].size(); j++) {
 							for (int i = 0; i < cont[k][j].size(); i++) {
-								/* init[(k * j * cont[0].size()) + i] = (char) ((int) cont[j][i]); */
+								init[(k * j * cont[0].size()) + i] = (char) ((int) cont[j][i]);
 							}
 						}
 					}
