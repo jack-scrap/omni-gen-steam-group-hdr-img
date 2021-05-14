@@ -3,25 +3,39 @@
 #include "lim.h"
 #include "util.h"
 #include "layout.h"
+#include "line.h"
 
-Lim* limMk(unsigned int axis, GLfloat val, glm::vec3 loc, glm::vec3 rot) {
+Lim* limMk(unsigned int axis, GLfloat val) {
 	Lim* _ = (Lim*) malloc(sizeof (Lim));
 
 	_->_axis = axis;
 	_->_val = val;
 
-	std::vector<GLfloat> vtc = util::mesh::rect::pos(glm::vec2(
-		layout::pad,
-		100.0
-	), Y, true);
-
-	std::vector<GLushort> idc;
-	for (int i = 0; i < 2 * 2; i++) {
-		idc.push_back(i);
+	GLfloat vtc[2 * 3];
+	for (int b = 0; b < 2; b++) {
+		for (int i = 0; i < 3; i++) {
+			if (!i) {
+				vtc[(b * 3) + i] = (b ? 1 : -1) * 100.0;
+			} else {
+				vtc[(b * 3) + i] = 0.0;
+			}
+		}
 	}
-	std::vector<GLushort> strip = util::mesh::strip(idc);
 
-	_->_parent = objMk(&vtc[0], vtc.size() * sizeof (GLfloat), &strip[0], strip.size() * sizeof (GLushort), "obj", "solid", true, loc, rot);
+	glm::vec3 loc = glm::vec3(0.0);
+	glm::vec3 rot = glm::vec3(0.0);
+
+	if (axis == X) {
+		loc[X] = val;
+		rot[Y] = M_PI / 2;
+	}
+
+	if (axis == Z) {
+		loc[Z] = val;
+		rot[Y] = 0.0;
+	}
+
+	_->_parent = lineMk(vtc, "pt", "thick", "solid", loc, rot);
 
 	return _;
 }

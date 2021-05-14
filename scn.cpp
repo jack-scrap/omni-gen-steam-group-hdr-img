@@ -543,27 +543,21 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				for (const auto& lim : rng) {
 					for (auto it = lim.begin(); it != lim.end(); ++it) {
 						unsigned int axis;
-						glm::vec3 loc = glm::vec3(0.0);
-						glm::vec3 rot = glm::vec3(M_PI / 2, 0.0, 0.0);
 						if (it.key() == "X") {
 							axis = 0;
-							loc[X] = it.value();
-							rot[Y] = 0.0;
 						}
 
 						if (it.key() == "Z") {
 							axis = 2;
-							loc[Z] = it.value();
-							rot[Y] = M_PI / 2;
 						}
 
-						Lim* _ = limMk(axis, it.value(), loc, rot);
+						Lim* _ = limMk(axis, it.value());
 
 						noBoundRng++;
 						boundRng = (Lim**) realloc(boundRng, noBoundRng * sizeof (Lim*));
 						boundRng[noBoundRng - 1] = _;
 
-						mesh.push_back(_->_parent);
+						line.push_back(_->_parent);
 					}
 				}
 			}
