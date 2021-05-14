@@ -3,8 +3,10 @@
 #include "obj.h"
 #include "arr.h"
 
-typedef struct {
+typedef struct CargoShip {
 	Arr* _data;
+	static constexpr unsigned int _x = 6;
+	static constexpr unsigned int _y = 2;
 
 	GLfloat _loc[3];
 
