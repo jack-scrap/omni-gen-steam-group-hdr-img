@@ -540,8 +540,8 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	for (const auto& entry : serial["bound"].items()) {
 		if (entry.key() == "rng") {
 			for (const auto& rng : entry.value()) {
-				for (const auto& bound : rng) {
-					for (auto it = bound.begin(); it != bound.end(); ++it) {
+				for (const auto& lim : rng) {
+					for (auto it = lim.begin(); it != lim.end(); ++it) {
 						unsigned int axis;
 						glm::vec3 loc = glm::vec3(0.0);
 						glm::vec3 rot = glm::vec3(M_PI / 2, 0.0, 0.0);
@@ -557,14 +557,13 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 							rot[Y] = M_PI / 2;
 						}
 
-						Lim* lim = limMk(axis, it.value(), loc, rot);
+						Lim* _ = limMk(axis, it.value(), loc, rot);
 
 						noBoundRng++;
 						boundRng = (Lim**) realloc(boundRng, noBoundRng * sizeof (Lim*));
+						boundRng[noBoundRng - 1] = _;
 
-						boundRng[noBoundRng - 1] = lim;
-
-						mesh.push_back(lim->_parent);
+						mesh.push_back(_->_parent);
 					}
 				}
 			}
