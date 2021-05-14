@@ -28,7 +28,8 @@ Arr* arrMk(char* init, unsigned int x, std::string name, glm::vec3 loc, glm::vec
 	for (int j = 0; j < _->_y; j++) {
 		for (int i = 0; i < _->_x; i++) {
 			Idx* idx;
-			glm::vec3 offset = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2) + glm::vec3(i * layout::stride[X], 0.0, j * layout::stride[Z]);
+			glm::vec3 overhead = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2);
+			glm::vec3 offset = overhead + glm::vec3(i * layout::stride[X], 0.0, j * layout::stride[Z]);
 			if (init[no]) {
 				idx = idxMk(no, init[no], "", offset);
 			} else {
@@ -91,7 +92,8 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, std::string name, glm::ve
 	for (int j = 0; j < _->_y; j++) {
 		for (int i = 0; i < _->_x; i++) {
 			Idx* idx;
-			glm::vec3 offset = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2) + glm::vec3(i * layout::stride[X], 0.0, j * layout::stride[Z]);
+			glm::vec3 overhead = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2);
+			glm::vec3 offset = overhead + glm::vec3(i * layout::stride[X], 0.0, j * layout::stride[Z]);
 			if (init[no]) {
 				idx = idxMk(no, init[no], "", offset);
 			} else {
@@ -151,7 +153,8 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, unsigned int z, std::stri
 		for (int j = 0; j < _->_y; j++) {
 			for (int i = 0; i < _->_x; i++) {
 				Idx* idx;
-				glm::vec3 offset = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2) + glm::vec3(i * layout::stride[X], 0.0, j * layout::stride[Z]);
+				glm::vec3 overhead = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2);
+				glm::vec3 offset = overhead + glm::vec3(i * layout::stride[X], 0.0, j * layout::stride[Z]);
 				if (init[no]) {
 					idx = idxMk(no, init[no], "", offset);
 				} else {
