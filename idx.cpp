@@ -12,9 +12,7 @@ Idx* idxMk(unsigned int i, std::string name, glm::vec3 loc, glm::vec3 rot) {
 
 	Obj* child[2];
 
-	Obj* no = objMk("glyph/" + std::to_string(i), "obj", "solid", true, glm::vec3((layout::stroke * 2) + (layout::idx[X] / 2), 0.0, (layout::stroke * 2) + (layout::idx[Z] / 2)), rot);
-
-	child[0] = no;
+	child[0] = objMk("glyph/" + std::to_string(i), "obj", "solid", true, glm::vec3((layout::stroke * 2) + (layout::idx[X] / 2), 0.0, (layout::stroke * 2) + (layout::idx[Z] / 2)), rot);
 
 	// identifier
 	if (!name.empty()) {
@@ -38,9 +36,7 @@ Idx* idxMk(unsigned int i, char c, std::string name, glm::vec3 loc, glm::vec3 ro
 
 	Obj* child[1 + 1 + 1];
 
-	Obj* no = objMk("glyph/" + std::to_string(i), "obj", "solid", true, glm::vec3((layout::stroke * 2) + (layout::idx[X] / 2), 0.0, (layout::stroke * 2) + (layout::idx[Z] / 2)), rot);
-
-	child[0] = no;
+	child[0] = objMk("glyph/" + std::to_string(i), "obj", "solid", true, glm::vec3((layout::stroke * 2) + (layout::idx[X] / 2), 0.0, (layout::stroke * 2) + (layout::idx[Z] / 2)), rot);
 
 	// identifier
 	if (!name.empty()) {
