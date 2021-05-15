@@ -15,6 +15,8 @@
 #include "cam.h"
 #include "omni.h"
 #include "col.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
 Disp* disp;
 Console* console;
@@ -101,6 +103,79 @@ int main(int argc, char** argv) {
 	scn::init(stage, lvl);
 
 	if (boot) {
+		/* GLuint vao; */
+		/* glGenVertexArrays(1, &vao); */
+		/* glBindVertexArray(vao); */
+
+		/* GLuint vbo; */
+		/* glGenBuffers(1, &vbo); */
+		/* glBindBuffer(GL_ARRAY_BUFFER, vbo); */
+
+		/* GLfloat vtc[] = { */
+		/* 	-0.26, -0.26, */
+		/* 	0.16, -0.26, */
+		/* 	0.06, -0.10, */
+		/* 	-0.10, -0.10, */
+
+		/* 	0.16, -0.26, */
+		/* 	0.26, -0.16, */
+		/* 	0.10, -0.06, */
+		/* 	0.06, -0.10, */
+
+		/* 	0.26, -0.16, */
+		/* 	0.26, 0.26, */
+		/* 	0.10, 0.10, */
+		/* 	0.10, -0.06, */
+
+		/* 	0.26, 0.26, */
+		/* 	-0.16, 0.26, */
+		/* 	-0.06, 0.10, */
+		/* 	0.10, 0.10, */
+
+		/* 	-0.16, 0.26, */
+		/* 	-0.26, 0.16, */
+		/* 	-0.10, 0.06, */
+		/* 	-0.06, 0.10, */
+
+		/* 	-0.10, 0.06, */
+		/* 	-0.26, 0.16, */
+		/* 	-0.26, -0.26, */
+		/* 	-0.10, -0.10 */
+		/* }; */
+		/* glBufferData(GL_ARRAY_BUFFER, sizeof vtc, vtc, GL_STATIC_DRAW); */
+
+		/* // shader */
+		/* Prog prog("logo", "solid"); */
+
+		/* /// attribute */
+		/* GLint attrPos = glGetAttribLocation(prog._id, "pos"); */
+		/* glVertexAttribPointer(attrPos, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0); */
+		/* glEnableVertexAttribArray(attrPos); */
+
+		/* /// uniform */
+		/* GLint uniActive = glGetUniformLocation(prog._id, "active"); */
+		/* GLint uniRes = glGetUniformLocation(prog._id, "res"); */
+
+		/* // initialize */
+		/* prog.use(); */
+
+		/* glUniform1ui(uniActive, true); */
+		/* glUniform2i(uniRes, disp->_res[X], disp->_res[Y]); */
+
+		/* prog.unUse(); */
+
+		/* // draw */
+		/* disp->clear(); */
+
+		/* prog.use(); */
+
+		/* glDrawArrays(GL_QUADS, 0, (2 + 3) * 2 * 2 * 3); */
+
+		/* prog.unUse(); */
+
+		/* disp->update(); */
+
+
 		GLuint vao;
 		glGenVertexArrays(1, &vao);
 		glBindVertexArray(vao);
@@ -110,49 +185,64 @@ int main(int argc, char** argv) {
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
 		GLfloat vtc[] = {
-			-0.26, -0.26,
-			0.16, -0.26,
-			0.06, -0.10,
-			-0.10, -0.10,
+			0.0, 0.0,
+			0.0, 1.0,
+			1.0, 0.0,
 
-			0.16, -0.26,
-			0.26, -0.16,
-			0.10, -0.06,
-			0.06, -0.10,
-
-			0.26, -0.16,
-			0.26, 0.26,
-			0.10, 0.10,
-			0.10, -0.06,
-
-			0.26, 0.26,
-			-0.16, 0.26,
-			-0.06, 0.10,
-			0.10, 0.10,
-
-			-0.16, 0.26,
-			-0.26, 0.16,
-			-0.10, 0.06,
-			-0.06, 0.10,
-
-			-0.10, 0.06,
-			-0.26, 0.16,
-			-0.26, -0.26,
-			-0.10, -0.10
+			1.0, 0.0,
+			0.0, 1.0,
+			1.0, 1.0
 		};
 		glBufferData(GL_ARRAY_BUFFER, sizeof vtc, vtc, GL_STATIC_DRAW);
 
 		// shader
-		Prog prog("logo", "solid");
+		Prog prog("rend", "tex");
+
+		GLuint stbo;
+		glGenBuffers(1, &stbo);
+		glBindBuffer(GL_ARRAY_BUFFER, stbo);
+
+		GLfloat st[] = {
+			0.0, 0.0,
+			0.0, 1.0,
+			1.0, 0.0,
+
+			1.0, 0.0,
+			0.0, 1.0,
+			1.0, 1.0
+		};
+		glBufferData(GL_ARRAY_BUFFER, sizeof st, st, GL_STATIC_DRAW);
 
 		/// attribute
 		GLint attrPos = glGetAttribLocation(prog._id, "pos");
 		glVertexAttribPointer(attrPos, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 		glEnableVertexAttribArray(attrPos);
 
+		GLint attrSt = glGetAttribLocation(prog._id, "st");
+		glVertexAttribPointer(attrSt, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+		glEnableVertexAttribArray(attrSt);
+
 		/// uniform
 		GLint uniActive = glGetUniformLocation(prog._id, "active");
 		GLint uniRes = glGetUniformLocation(prog._id, "res");
+
+		/// texture
+		int
+			wd,
+			ht,
+			chan;
+		unsigned char* data = stbi_load("res/dirt.jpg", &wd, &ht, &chan, 0); 
+
+		if (data) {
+			GLuint tex;
+			glGenTextures(1, &tex);
+			glBindTexture(GL_TEXTURE_2D, tex);
+
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, wd, ht, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			glGenerateMipmap(GL_TEXTURE_2D);
+		} else {
+			std::cout << "Error: Texture failed to load" << std::endl;
+		}
 
 		// initialize
 		prog.use();
@@ -167,7 +257,7 @@ int main(int argc, char** argv) {
 
 		prog.use();
 
-		glDrawArrays(GL_QUADS, 0, (2 + 3) * 2 * 2 * 3);
+		glDrawArrays(GL_TRIANGLES, 0, sizeof vtc / sizeof *vtc);
 
 		prog.unUse();
 
