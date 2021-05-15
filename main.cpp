@@ -31,7 +31,7 @@ Cam cam = {
 	}
 };
 
-void spray() {
+void spray(char c) {
 	GLuint vao;
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
@@ -40,14 +40,14 @@ void spray() {
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
-	std::vector<GLfloat> vtc = util::mesh::rd::vtc("glyph/0");
+	std::vector<GLfloat> vtc = util::mesh::rd::vtc(std::string("glyph/") + c);
 	glBufferData(GL_ARRAY_BUFFER, vtc.size() * sizeof (GLfloat), &vtc[0], GL_STATIC_DRAW);
 
 	GLuint ibo;
 	glGenBuffers(1, &ibo);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 
-	std::vector<GLushort> idc = util::mesh::rd::idc("glyph/0");
+	std::vector<GLushort> idc = util::mesh::rd::idc(std::string("glyph/") + c);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, idc.size() * sizeof (GLfloat), &idc[0], GL_STATIC_DRAW);
 
 	// shader
@@ -312,7 +312,7 @@ int main(int argc, char** argv) {
 		GLint uniActive = glGetUniformLocation(prog._id, "active");
 		GLint uniRes = glGetUniformLocation(prog._id, "res");
 
-		spray();
+		spray('0');
 
 		// initialize
 		prog.use();
