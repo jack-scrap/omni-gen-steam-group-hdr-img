@@ -2,7 +2,7 @@
 
 in vec2 pos;
 
-uniform vec2 res;
+uniform ivec2 res;
 
 float ratio = res.x / res.y;
 

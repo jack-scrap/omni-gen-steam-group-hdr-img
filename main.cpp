@@ -158,7 +158,7 @@ int main(int argc, char** argv) {
 		prog.use();
 
 		glUniform1ui(uniActive, true);
-		glUniform2ui(uniRes, disp->_res[X], disp->_res[Y]);
+		glUniform2i(uniRes, disp->_res[X], disp->_res[Y]);
 
 		prog.unUse();
 
