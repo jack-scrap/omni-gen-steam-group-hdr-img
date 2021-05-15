@@ -167,7 +167,7 @@ int main(int argc, char** argv) {
 
 		prog.use();
 
-		glDrawArrays(GL_QUADS, 0, ((2 + 3) * 2) * 2 * 3);
+		glDrawArrays(GL_QUADS, 0, (2 + 3) * 2 * 2 * 3);
 
 		prog.unUse();
 
