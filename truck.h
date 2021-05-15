@@ -13,6 +13,11 @@ typedef struct Truck {
 
 	float _ang;
 
+	static constexpr GLfloat _rngWheel[2] = {
+		-(M_PI / 2),
+		M_PI / 2
+	};
+
 	char* _ptr;
 	unsigned int _no;
 
@@ -24,11 +29,6 @@ typedef struct Truck {
 
 	GLushort _idx[1] = {
 		0
-	};
-
-	static constexpr GLfloat _rngWheel[2] = {
-		-(M_PI / 2),
-		M_PI / 2
 	};
 
 	GLuint _uniSzBed;

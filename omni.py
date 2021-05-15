@@ -178,7 +178,8 @@ class _Truck(_Obj):
 	_fields_ = [
 		('_data', POINTER(_Arr)),
 		('_loc', c_float * 3),
-		('_ang', c_float)
+		('_ang', c_float),
+		('_rngWheel', c_float * 2)
 	]
 
 	def turn(self, delta):
