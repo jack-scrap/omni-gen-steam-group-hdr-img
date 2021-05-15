@@ -89,7 +89,14 @@ int main(int argc, char** argv) {
 	} else {
 		lvl = 0;
 	}
-	std::string name = "script/" + omni::stage[stage] + "/" + std::to_string(lvl) + "/main.py";
+
+	std::string name;
+	if (argc > 1) {
+		name = "script/" + omni::stage[stage] + "/" + std::to_string(lvl) + "/main.py";
+	} else {
+		name = "doc/intro.txt";
+	}
+
 	console = new Console(".", name, util::fs::rd<std::vector<std::string>>(name));
 	scn::init(stage, lvl);
 
