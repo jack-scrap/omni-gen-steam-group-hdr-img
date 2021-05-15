@@ -30,6 +30,9 @@ typedef struct Truck {
 		-(M_PI / 2),
 		M_PI / 2
 	};
+
+	GLuint _uniSzBed;
+	GLuint _uniSzOuter;
 } Truck;
 
 Truck* truckMk(glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0, 0.0, 0.0));
