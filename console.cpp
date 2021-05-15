@@ -445,7 +445,6 @@ void Console::draw() {
 	glBindVertexArray(_id[Mesh::VAO]);
 	_prog.use();
 
-	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, _tex);
 
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 2 * 2 * 3);
