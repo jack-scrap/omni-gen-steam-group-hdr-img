@@ -225,7 +225,7 @@ int main(int argc, char** argv) {
 		GLint uniActive = glGetUniformLocation(prog._id, "active");
 		GLint uniRes = glGetUniformLocation(prog._id, "res");
 
-		util::tex::spray('0');
+		GLuint tex = util::tex::spray('0');
 
 		// initialize
 		prog.use();
@@ -240,6 +240,8 @@ int main(int argc, char** argv) {
 
 		glBindVertexArray(vao);
 		prog.use();
+
+		glBindTexture(GL_TEXTURE_2D, tex);
 
 		glDrawArrays(GL_TRIANGLES, 0, sizeof vtc / sizeof *vtc);
 

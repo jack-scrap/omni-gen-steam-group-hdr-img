@@ -82,7 +82,7 @@ namespace util {
 	}
 
 	namespace tex {
-		void spray(char c);
+		GLuint spray(char c);
 	}
 
 	std::vector<std::string> log(unsigned int loc, unsigned int maxFs);

@@ -579,7 +579,7 @@ std::string util::now(std::string format) {
 	return std::string(out);
 }
 
-void util::tex::spray(char c) {
+GLuint util::tex::spray(char c) {
 	GLuint vao;
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
@@ -664,4 +664,7 @@ void util::tex::spray(char c) {
 	glBindVertexArray(0);
 
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	return cbo;
 }
