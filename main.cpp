@@ -51,7 +51,7 @@ void spray() {
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, idc.size() * sizeof (GLfloat), &idc[0], GL_STATIC_DRAW);
 
 	// shader
-	Prog prog("tri", "tri");
+	Prog prog("vec", "solid");
 
 	prog.use();
 
@@ -67,6 +67,9 @@ void spray() {
 	/// uniform
 	GLint uniModel = glGetUniformLocation(prog._id, "model");
 	glUniformMatrix4fv(uniModel, 1, GL_FALSE, glm::value_ptr(model));
+
+	GLint uniActive = glGetUniformLocation(prog._id, "active");
+	glUniform1ui(uniActive, true);
 
 	prog.unUse();
 
