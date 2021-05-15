@@ -40,31 +40,33 @@ void spray() {
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
-	GLfloat vtc[] = {
-		-0.5, 0.0,
-		0.0, 0.5,
-		0.5, 0.0
-	};
-	glBufferData(GL_ARRAY_BUFFER, sizeof vtc, vtc, GL_STATIC_DRAW);
+	std::vector<GLfloat> vtc = util::mesh::rd::vtc("glyph/0");
+	glBufferData(GL_ARRAY_BUFFER, vtc.size() * sizeof (GLfloat), &vtc[0], GL_STATIC_DRAW);
 
 	GLuint ibo;
 	glGenBuffers(1, &ibo);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 
-	GLushort idc[] = {
-		0, 1, 2
-	};
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof idc, idc, GL_STATIC_DRAW);
+	std::vector<GLushort> idc = util::mesh::rd::idc("glyph/0");
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, idc.size() * sizeof (GLfloat), &idc[0], GL_STATIC_DRAW);
 
 	// shader
 	Prog prog("tri", "tri");
 
 	prog.use();
 
+	// matrix
+	glm::mat4 model = glm::mat4(1.0);
+	model = glm::rotate(model, (GLfloat) -(M_PI / 2), glm::vec3(1, 0, 0));
+
 	/// attribute
 	GLint attrPos = glGetAttribLocation(prog._id, "pos");
-	glVertexAttribPointer(attrPos, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+	glVertexAttribPointer(attrPos, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 	glEnableVertexAttribArray(attrPos);
+
+	/// uniform
+	GLint uniModel = glGetUniformLocation(prog._id, "model");
+	glUniformMatrix4fv(uniModel, 1, GL_FALSE, glm::value_ptr(model));
 
 	prog.unUse();
 
@@ -105,7 +107,7 @@ void spray() {
 	glBindVertexArray(vao);
 	prog.use();
 
-	glDrawElements(GL_TRIANGLES, sizeof idc / sizeof *idc, GL_UNSIGNED_SHORT, (GLvoid*) 0);
+	glDrawElements(GL_TRIANGLES, idc.size(), GL_UNSIGNED_SHORT, (GLvoid*) 0);
 
 	prog.unUse();
 	glBindVertexArray(0);
