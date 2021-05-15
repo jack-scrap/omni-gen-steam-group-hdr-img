@@ -3,11 +3,13 @@
 #include <dirent.h>
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/string_cast.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include <sys/stat.h>
 
 #include "util.h"
 #include "math.h"
 #include "state.h"
+#include "scn.h"
 #include "omni.h"
 
 template <typename T>
@@ -575,4 +577,91 @@ std::string util::now(std::string format) {
 	strftime(out, sizeof out / sizeof *out, format.c_str(), info);
 
 	return std::string(out);
+}
+
+void util::tex::spray(char c) {
+	GLuint vao;
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
+
+	GLuint vbo;
+	glGenBuffers(1, &vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+
+	std::vector<GLfloat> vtc = util::mesh::rd::vtc(std::string("glyph/") + c);
+	glBufferData(GL_ARRAY_BUFFER, vtc.size() * sizeof (GLfloat), &vtc[0], GL_STATIC_DRAW);
+
+	GLuint ibo;
+	glGenBuffers(1, &ibo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+
+	std::vector<GLushort> idc = util::mesh::rd::idc(std::string("glyph/") + c);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, idc.size() * sizeof (GLfloat), &idc[0], GL_STATIC_DRAW);
+
+	// shader
+	Prog prog("vec", "solid");
+
+	prog.use();
+
+	// matrix
+	glm::mat4 model = glm::mat4(1.0);
+	model = glm::rotate(model, (GLfloat) -(M_PI / 2), glm::vec3(1, 0, 0));
+
+	/// attribute
+	GLint attrPos = glGetAttribLocation(prog._id, "pos");
+	glVertexAttribPointer(attrPos, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+	glEnableVertexAttribArray(attrPos);
+
+	/// uniform
+	GLint uniModel = glGetUniformLocation(prog._id, "model");
+	glUniformMatrix4fv(uniModel, 1, GL_FALSE, glm::value_ptr(model));
+
+	GLint uniActive = glGetUniformLocation(prog._id, "active");
+	glUniform1ui(uniActive, true);
+
+	prog.unUse();
+
+	// framebuffer
+	GLuint fbo;
+	glGenFramebuffers(1, &fbo);
+
+	/// color attachment
+	GLuint cbo;
+	glGenTextures(1, &cbo);
+	glBindTexture(GL_TEXTURE_2D, cbo);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 1000, 1000, 0, GL_RGB, GL_UNSIGNED_BYTE, (GLvoid*) 0);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	/// renderbuffer (stencil)
+	GLuint rbo;
+	glGenRenderbuffers(1, &rbo);
+	glBindRenderbuffer(GL_RENDERBUFFER, rbo);
+
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_STENCIL_INDEX8, 800, 600);
+
+	/// attach texture, renderbuffer
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, cbo, 0);
+
+	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+		std::cout << "Error: Framebuffer not complete" << std::endl;
+	}
+
+	/// render
+	prog.unUse();
+
+	disp->clear();
+
+	glBindVertexArray(vao);
+	prog.use();
+
+	glDrawElements(GL_TRIANGLES, idc.size(), GL_UNSIGNED_SHORT, (GLvoid*) 0);
+
+	prog.unUse();
+	glBindVertexArray(0);
+
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 }

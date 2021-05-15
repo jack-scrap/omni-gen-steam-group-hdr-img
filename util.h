@@ -81,6 +81,10 @@ namespace util {
 		std::map<std::string, T> parse(std::string name);
 	}
 
+	namespace tex {
+		void spray(char c);
+	}
+
 	std::vector<std::string> log(unsigned int loc, unsigned int maxFs);
 
 	std::string now(std::string format);
