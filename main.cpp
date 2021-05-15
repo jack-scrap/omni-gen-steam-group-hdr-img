@@ -47,6 +47,15 @@ void spray() {
 	};
 	glBufferData(GL_ARRAY_BUFFER, sizeof vtc, vtc, GL_STATIC_DRAW);
 
+	GLuint ibo;
+	glGenBuffers(1, &ibo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+
+	GLushort idc[] = {
+		0, 1, 2
+	};
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof idc, idc, GL_STATIC_DRAW);
+
 	// shader
 	Prog prog("tri", "tri");
 
@@ -96,7 +105,7 @@ void spray() {
 	glBindVertexArray(vao);
 	prog.use();
 
-	glDrawArrays(GL_TRIANGLES, 0, sizeof vtc / sizeof *vtc);
+	glDrawElements(GL_TRIANGLES, sizeof idc / sizeof *idc, GL_UNSIGNED_SHORT, (GLvoid*) 0);
 
 	prog.unUse();
 	glBindVertexArray(0);
