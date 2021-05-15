@@ -31,6 +31,79 @@ Cam cam = {
 	}
 };
 
+void spray() {
+	GLuint vao;
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
+
+	GLuint vbo;
+	glGenBuffers(1, &vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+
+	GLfloat vtc[] = {
+		-0.5, 0.0,
+		0.0, 0.5,
+		0.5, 0.0
+	};
+	glBufferData(GL_ARRAY_BUFFER, sizeof vtc, vtc, GL_STATIC_DRAW);
+
+	// shader
+	Prog prog("tri", "tri");
+
+	prog.use();
+
+	/// attribute
+	GLint attrPos = glGetAttribLocation(prog._id, "pos");
+	glVertexAttribPointer(attrPos, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+	glEnableVertexAttribArray(attrPos);
+
+	prog.unUse();
+
+	// framebuffer
+	GLuint fbo;
+	glGenFramebuffers(1, &fbo);
+	
+	/// color attachment
+	GLuint cbo;
+	glGenTextures(1, &cbo);
+	glBindTexture(GL_TEXTURE_2D, cbo);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 800, 600, 0, GL_RGB, GL_UNSIGNED_BYTE, (GLvoid*) 0);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	/// renderbuffer (stencil)
+	GLuint rbo;
+	glGenRenderbuffers(1, &rbo);
+	glBindRenderbuffer(GL_RENDERBUFFER, rbo);
+
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_STENCIL_INDEX8, 800, 600);
+
+	/// attach texture, renderbuffer
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, cbo, 0);
+
+	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+		std::cout << "Error: Framebuffer not complete" << std::endl;
+	}
+
+	/// render
+	prog.unUse();
+
+	disp->clear();
+
+	glBindVertexArray(vao);
+	prog.use();
+
+	glDrawArrays(GL_TRIANGLES, 0, sizeof vtc / sizeof *vtc);
+
+	prog.unUse();
+	glBindVertexArray(0);
+
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+}
+
 int main(int argc, char** argv) {
 	bool boot;
 
@@ -175,7 +248,6 @@ int main(int argc, char** argv) {
 
 		/* disp->update(); */
 
-
 		GLuint vao;
 		glGenVertexArrays(1, &vao);
 		glBindVertexArray(vao);
@@ -226,23 +298,7 @@ int main(int argc, char** argv) {
 		GLint uniActive = glGetUniformLocation(prog._id, "active");
 		GLint uniRes = glGetUniformLocation(prog._id, "res");
 
-		/// texture
-		int
-			wd,
-			ht,
-			chan;
-		unsigned char* data = stbi_load("res/dirt.jpg", &wd, &ht, &chan, 0); 
-
-		if (data) {
-			GLuint tex;
-			glGenTextures(1, &tex);
-			glBindTexture(GL_TEXTURE_2D, tex);
-
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, wd, ht, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-			glGenerateMipmap(GL_TEXTURE_2D);
-		} else {
-			std::cout << "Error: Texture failed to load" << std::endl;
-		}
+		spray();
 
 		// initialize
 		prog.use();
@@ -255,11 +311,13 @@ int main(int argc, char** argv) {
 		// draw
 		disp->clear();
 
+		glBindVertexArray(vao);
 		prog.use();
 
 		glDrawArrays(GL_TRIANGLES, 0, sizeof vtc / sizeof *vtc);
 
 		prog.unUse();
+		glBindVertexArray(0);
 
 		disp->update();
 
