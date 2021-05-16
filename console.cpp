@@ -364,6 +364,16 @@ void Console::exec() {
 				}
 			}
 
+			if (_cmd == "set") {
+				if (tok.size() == 1 + 2) {
+					_buff = util::fs::rd<std::vector<std::string>>(tok[1]);
+
+					scn::init(std::stoi(tok[1]), std::stoi(tok[2]));
+				} else {
+					omni::err("Incorrect number of arguments");
+				}
+			}
+
 			if (_cmd == "save") {
 				if (tok.size() > 1) {
 					util::fs::write(tok[1], _buff);
