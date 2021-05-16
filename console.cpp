@@ -364,6 +364,14 @@ void Console::exec() {
 				}
 			}
 
+			if (_cmd == "save") {
+				if (tok.size() > 1) {
+					util::fs::write(tok[1], _buff);
+				} else {
+					util::fs::write(_name, _buff);
+				}
+			}
+
 			if (_cmd == "run") {
 				if (tok.size() > 1) {
 					std::thread t(dispatch, this, tok[1]);
@@ -371,14 +379,6 @@ void Console::exec() {
 				} else {
 					std::thread t(dispatch, this, _name);
 					t.detach();
-				}
-			}
-
-			if (_cmd == "save") {
-				if (tok.size() > 1) {
-					util::fs::write(tok[1], _buff);
-				} else {
-					util::fs::write(_name, _buff);
 				}
 			}
 

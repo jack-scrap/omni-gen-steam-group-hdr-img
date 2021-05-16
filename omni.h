@@ -34,8 +34,8 @@ namespace omni {
 
 	static std::vector<std::string> lib = {
 		"open",
-		"run",
 		"save",
+		"run",
 		"next"
 	};
 }
