@@ -18,6 +18,7 @@
 #include "omni.h"
 #include "line.h"
 #include "dict.h"
+#include "street_light.h"
 
 Var** data;
 Var** goal;
@@ -669,5 +670,18 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				mesh.push_back(_->_parent);
 			}
 		}
+	}
+
+	// control flow
+	for (const auto& entry : serial["ctrl"].items()) {
+		unsigned int no = entry.value()["pass"].size();
+		bool* pass = (bool*) malloc(no * sizeof (bool));
+		for (int i = 0; i < no; i++) {
+			pass[i] = entry.value()["pass"][i];
+		}
+
+		StreetLight* _ = streetLightMk(pass, no, glm::vec3(entry.value()["loc"][0], entry.value()["loc"][1], entry.value()["loc"][2]), glm::vec3(entry.value()["rot"][0], entry.value()["rot"][1], entry.value()["rot"][2]));
+
+		mesh.push_back(_->_parent);
 	}
 }

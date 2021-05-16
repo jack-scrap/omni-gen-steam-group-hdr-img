@@ -10,7 +10,12 @@ StreetLight* streetLightMk(bool* pass, unsigned int no, glm::vec3 loc, glm::vec3
 		_->_pass[i] = pass[i];
 	}
 
-	_->_parent = objMk("street_light", "obj", "dir", true, loc, rot);
+	Obj* child[no];
+	for (int i = 0; i < no; i++) {
+		child[i] = objMk("go", "obj", "solid", true, glm::vec3(i * 2.0, 6.0, 0.0), glm::vec3(0.0, M_PI / 2, 0.0));
+	}
+
+	_->_parent = objMk("street_light", "obj", "dir", false, child, sizeof child / sizeof *child, loc, rot);
 
 	return _;
 }

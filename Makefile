@@ -5,7 +5,7 @@ CXXFLAGS = -std=c++14 -Wno-narrowing
 
 HDR = cam col math phys
 
-STATIC = main disp util mesh console var str border node cont idx arr dict lim cone state layout omni
+STATIC = main disp util mesh console var str border node cont idx arr dict lim cone street_light state layout omni
 DYNA = scn obj line crane truck cargo_ship pt prog bound
 
 DEP_HDR = $(patsubst %, %.h, $(HDR))

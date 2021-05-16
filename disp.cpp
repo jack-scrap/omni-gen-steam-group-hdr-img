@@ -55,8 +55,6 @@ void Disp::draw() {
 
 	glViewport(layout::res[X], 0, layout::view[X], layout::view[Y]);
 
-	objTrans(mesh[mesh.size() - 1], glm::vec3(0.0), glm::vec3(0.0, 0.1, 0.0));
-
 	for (Obj* _ : mesh) {
 		objDraw(_);
 	}

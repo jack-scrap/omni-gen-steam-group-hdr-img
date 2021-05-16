@@ -11,4 +11,4 @@ typedef struct {
 	Obj* _parent;
 } StreetLight;
 
-StreetLight* streetLightMk(bool* _pass, unsigned int no, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
+StreetLight* streetLightMk(bool* pass, unsigned int no, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
