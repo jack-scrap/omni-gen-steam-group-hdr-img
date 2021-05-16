@@ -214,7 +214,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	// path
-	for (const auto& strip : serial["path"]["link"]) {
+	for (const auto& strip : serial["road"]["path"]) {
 		for (int i = 0; i < strip.size() - 1; i++) {
 			if (strip[1].type() == nlohmann::json::value_t::number_unsigned) {
 				GLushort pt[2] = {
@@ -225,7 +225,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				GLfloat vtc[2 * 3];
 				for (int p = 0; p < 2; p++) {
 					for (int a = 0; a < 3; a++) {
-						vtc[(p * 3) + a] = serial["path"]["node"][pt[p]][a];
+						vtc[(p * 3) + a] = serial["road"]["node"][pt[p]][a];
 					}
 				}
 
@@ -242,7 +242,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					GLfloat vtc[2 * 3];
 					for (int p = 0; p < 2; p++) {
 						for (int a = 0; a < 3; a++) {
-							vtc[(p * 3) + a] = serial["path"]["node"][pt[p]][a];
+							vtc[(p * 3) + a] = serial["road"]["node"][pt[p]][a];
 						}
 					}
 
