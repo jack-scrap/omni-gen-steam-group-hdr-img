@@ -27,15 +27,15 @@ unsigned int* type;
 unsigned int noData;
 bool eq = false;
 
-extern "C" Var** dataGet() {
+Var** dataGet() {
 	return data;
 }
 
-extern "C" Var** goalGet() {
+Var** goalGet() {
 	return goal;
 }
 
-extern "C" unsigned int* typeGet() {
+unsigned int* typeGet() {
 	return type;
 }
 
@@ -49,19 +49,19 @@ unsigned int noBoundRng;
 Cone** boundArea;
 unsigned int noBoundArea;
 
-extern "C" Lim** boundRngGet() {
+Lim** boundRngGet() {
 	return boundRng;
 }
 
-extern "C" unsigned int noBoundRngGet() {
+unsigned int noBoundRngGet() {
 	return noBoundRng;
 }
 
-extern "C" Cone** boundAreaGet() {
+Cone** boundAreaGet() {
 	return boundArea;
 }
 
-extern "C" unsigned int noBoundAreaGet() {
+unsigned int noBoundAreaGet() {
 	return noBoundArea;
 }
 
@@ -73,27 +73,27 @@ unsigned int noCrane;
 unsigned int noTruck;
 unsigned int noCargoShip;
 
-extern "C" Crane** craneGet() {
+Crane** craneGet() {
 	return crane;
 }
 
-extern "C" Truck** truckGet() {
+Truck** truckGet() {
 	return truck;
 }
 
-extern "C" CargoShip** cargoShipGet() {
+CargoShip** cargoShipGet() {
 	return cargoShip;
 }
 
-extern "C" unsigned int noCraneGet() {
+unsigned int noCraneGet() {
 	return noCrane;
 }
 
-extern "C" unsigned int noTruckGet() {
+unsigned int noTruckGet() {
 	return noTruck;
 }
 
-extern "C" unsigned int noCargoShipGet() {
+unsigned int noCargoShipGet() {
 	return noCargoShip;
 }
 
