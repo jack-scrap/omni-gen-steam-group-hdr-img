@@ -14,6 +14,7 @@
 #include "arr.h"
 #include "lim.h"
 #include "cone.h"
+#include "street_light.h"
 
 extern Disp* disp;
 
@@ -82,3 +83,9 @@ enum type {
 	ARRAY,
 	DICT
 };
+
+extern "C" StreetLight** streetLight;
+extern "C" StreetLight** streetLightGet();
+
+extern "C" unsigned int noStreetLight;
+extern "C" unsigned int noStreetLightGet();

@@ -5,8 +5,8 @@ CXXFLAGS = -std=c++14 -Wno-narrowing
 
 HDR = cam col math phys
 
-STATIC = main disp util mesh console var str border node cont idx arr dict lim cone road street_light state layout omni
-DYNA = scn obj line crane truck cargo_ship pt prog bound
+STATIC = main disp util mesh console var str border node cont idx arr dict lim cone road state layout omni
+DYNA = scn obj line crane truck cargo_ship pt prog bound street_light
 
 DEP_HDR = $(patsubst %, %.h, $(HDR))
 OBJ_STATIC = $(patsubst %, %.o, $(STATIC))
@@ -55,6 +55,9 @@ prog.o: prog.cpp prog.h
 	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
 
 bound.o: bound.cpp bound.h
+	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
+
+street_light.o: street_light.cpp street_light.h
 	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
 
 lib%.so: %.o

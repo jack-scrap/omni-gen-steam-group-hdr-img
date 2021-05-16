@@ -4,6 +4,7 @@ _obj = CDLL('libobj.so')
 _truck = CDLL('libtruck.so')
 _crane = CDLL('libcrane.so')
 _cargo_ship = CDLL('libcargo_ship.so')
+_street_light = CDLL('libstreet_light.so')
 _scn = CDLL('libscn.so')
 
 # data
@@ -284,3 +285,29 @@ if _noCargoShipGet():
 	
     else:
 	    cargoShip = _CargoShip(_cargoShipGet()[0])
+
+class _StreetLight(_Obj):
+	_fields_ = [
+		('_pass', POINTER(c_bool)),
+		('_no', c_int)
+	]
+
+	def toggle(self, i):
+		_streetLightToggle(self._ptr, i)
+
+# control-flow
+_streetLightGet = _scn.streetLightGet
+_streetLightGet.restype = POINTER(POINTER(_StreetLight))
+_streetLightGet.argtypes = None
+
+_noStreetLightGet = _scn.noStreetLightGet
+_noStreetLightGet.restype = c_uint
+_noStreetLightGet.argtypes = None
+
+_streetLightToggle = _street_light.streetLightToggle
+_streetLightToggle.restype = c_uint
+_streetLightToggle.argtypes = None
+
+streetLight = []
+for i in range(_noStreetLightGet()):
+	streetLight.append(_StreetLight(_streetLightGet()[i]))

@@ -101,6 +101,16 @@ std::vector<Obj*> mesh;
 std::vector<Obj*> line;
 std::vector<Obj*> pt;
 
+StreetLight** streetLight;
+extern "C" StreetLight** streetLightGet() {
+	return streetLight;
+}
+
+unsigned int noStreetLight;
+unsigned int noStreetLightGet() {
+	return noStreetLight;
+}
+
 void scn::init(unsigned int stage, unsigned int lvl) {
 	nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("lvl/" + omni::stage[stage] + "/" + std::to_string(lvl) + ".json"));
 
@@ -674,6 +684,9 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	// control flow
+	streetLight = (StreetLight**) malloc(0);
+	noStreetLight = 0;
+
 	for (const auto& entry : serial["ctrl"].items()) {
 		unsigned int no = entry.value()["pass"].size();
 		bool* pass = (bool*) malloc(no * sizeof (bool));
@@ -681,7 +694,11 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			pass[i] = entry.value()["pass"][i];
 		}
 
-		StreetLight* _ = streetLightMk(pass, no, glm::vec3(entry.value()["loc"][0], entry.value()["loc"][1], entry.value()["loc"][2]), glm::vec3(entry.value()["rot"][0], entry.value()["rot"][1], entry.value()["rot"][2]));
+		StreetLight* _ = streetLightMk(pass, no);
+
+		noStreetLight++;
+		streetLight = (StreetLight**) malloc(noStreetLight * sizeof (StreetLight*));
+		streetLight[noStreetLight - 1] = _;
 
 		mesh.push_back(_->_parent);
 	}
