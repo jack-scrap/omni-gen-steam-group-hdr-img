@@ -19,6 +19,7 @@
 #include "line.h"
 #include "dict.h"
 #include "street_light.h"
+#include "road.h"
 
 Var** data;
 Var** goal;
