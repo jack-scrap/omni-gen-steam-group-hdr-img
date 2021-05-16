@@ -9,6 +9,7 @@ typedef struct Mesh {
 
 	enum id {
 		VAO,
+
 		VBO,
 		STBO,
 
