@@ -3,7 +3,7 @@ A "higher order" function refers to a function that itself utilizes a function a
 After defining a function, this allows for extensibility beyond the default definition.
 
 # Arguments
-Functions are passed the same as arguments.
+Functions are passed the same as variables.
 
 ```
 def fn():
@@ -34,23 +34,6 @@ def higher(fn):
 
 	fn()
 ```
-
-Where a detached thread exists, this provides a convenient method of guaranteeing
-
-```
-import threading
-
-def higher(fn):
-    fn()
-
-def fn():
-		print('Text')
-
-higher_thread = threading.Thread(target = higher, args = [fn])
-higher_thread.start()
-```
-
-No awaiting on the newly created thread has been done. However, the passed function will be called in the same body following the rest of the statements.
 
 # Return value
 functions can be generated

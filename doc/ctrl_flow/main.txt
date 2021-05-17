@@ -1,7 +1,7 @@
 The following will run you through the order of execution in a program, referred to as "control-flow".
 
 # Scope
-Like functions, the blocks in conditionals have scope.
+Like functions, the blocks defined in control-flow have scope.
 
 Variables can be defined, expressions can be evaluated and other statements can be nested.
 
@@ -63,7 +63,7 @@ The general-purpose "while" loop executes a block of code while the condition re
 
 ```
 while 3 < 7:
-	...
+	print("Yes")
 ```
 
 Because this condition is true, and the program cannot proceed beyond the loop, the block will execute forever.
@@ -106,7 +106,7 @@ while i < 3:
 ```
 
 # pass
-The `pass` keyword substitute a block of code where one is required, the syntax requiring some kind of statement.
+The `pass` keyword substitutes a block of code where one is required, the syntax requiring some kind of statement.
 
 ```
 if 3 == 7:

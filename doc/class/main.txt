@@ -35,7 +35,7 @@ obj = Blueprint()
 
 This function is created implicitly, and does not need to be defined should it work the same.
 
-### Custom constructor
+### Custom
 Instead of the default constructor, one can be defined.
 
 ```
@@ -46,27 +46,20 @@ class Blueprint:
 obj = Blueprint()
 ```
 
+The return type is constant, and refers to the class that it is created in.
+
 Custom arguments may be provided.
 
 ```
 class Blueprint:
 	def __init__(self, arg):
 		print(arg)
-```
 
-## Methods
-"Methods" are functions scoped to an object.
-
-Defining methods simply requires writing them in the function body.
-
-```
-class Parent:
-	def fn(self):
-		print('Text')
+obj = Blueprint(3)
 ```
 
 ## Local variables
-Variables local to a function must be defined in the constructor.
+Variables local to a class must be defined in the constructor.
 
 Doing so requires usage of the `self` variable.
 
@@ -84,6 +77,17 @@ obj = Parent()
 print(obj.var)
 ```
 
+## Methods
+"Methods" are functions scoped to an object.
+
+Defining methods simply requires writing them in the function body.
+
+```
+class Parent:
+	def fn(self):
+		print('Text')
+```
+
 # Private
 Should variables and functions strictly be desired to be used within the class, names can be marked as such.
 
@@ -98,7 +102,7 @@ class Blueprint:
 ```
 
 These names may be accessed within the scope of the class.
-However, attempting access them outside of the class will not match the identifier.
+However, attempting access them outside of the class will not match.
 
 The following is valid.
 
@@ -120,56 +124,33 @@ obj = Blueprint()
 obj.__fn()
 ```
 
-# Class methods
-It is not necessary for classes to create objects.
+## Class methods
+Without creating an object, classes can simply be used to scope data and functions to a specific location.
 
-"Class methods" describe the process of simply creating functions within the scope of a class definition.
+`self` now refers to the class instead of the object.
 
 ```
-class Group:
+class Parent:
 	var = 3
 
 	@classmethod
-	def hjkl(self):
+	def fn(self):
 		print(self.var)
 ```
 
-# Static methods
-Static methods take the concept of class methods one step further.
+## Static methods
+Like class methods, static methods don't require the creation of an object.
 
-Variables and functions can be defined within a class definition, w
-
-```
-class Group:
-	var = 3
-```
-
-This simply scopes the defined va
-
-Accessing works the same as it would on an object.
+Additionally, no knowledge of the class or object exist via the `self` variable.
+Because of this, no local variables may be utilized.
 
 ```
-print(Group.var)
-```
-
-## Methods
-Defining and utilizing functions where an object is not present works slightly differently.
-
-The `staticmethod` decorator must be provided proceeding the function.
-
-```
-class Group:
+class Class:
 	@staticmethod
 	def fn():
 		print('Text')
-```
 
-Note the lack of a `self` argument to refer an object that would be present.
-
-Accessing works the same.
-
-```
-Group.fn()
+Class.fn()
 ```
 
 # Getters and setters

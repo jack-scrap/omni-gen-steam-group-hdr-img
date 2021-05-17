@@ -1,12 +1,10 @@
 Functions may be created without any kind of identifier, allowing them simply to be used for evaluation.
 
-These anonymous functions are referred to as "lambdas", and the process of doing so in Python
+These anonymous functions are referred to as "lambdas".
 
 `lambda arg: arg + 3`
 
-Following the `lambda` keyword, the names of the arguments proceed `:`, and the expression to evaluate follows.
-
-The names of the arguments proceed a colon:
+Following the `lambda` keyword, the names of the arguments proceed a colon:
 The expression which would typically be the function body follows it.
 
 Call by providing the typical list tuple.

@@ -19,11 +19,11 @@ class Child(Parent):
 ```
 
 Here, the properties have been automatically added to the class `Child`.
-Creation and usage of a child object will examplify this.
+Creation and usage of a child object like the parent will examplify this.
 
 ```
 obj = Child()
-print (child.var)
+print(child.var)
 ```
 
 ## Multi-level
@@ -141,34 +141,3 @@ class Child(Parent):
 obj = Child()
 obj.other_fn()
 ```
-
-## Class methods
-Without creating an object, classes can simply be used to create functions, scoping data and functions to a specific location.
-
-`self` now refers to the class instead of the object.
-
-```
-class Parent:
-	var = 3
-
-	@classmethod
-	def fn(self):
-		print(self.var)
-```
-
-## Static methods
-Like class methods, static methods don't require the creation of an object.
-Additionally, no knowledge of the class or object exist via the `self` variable.
-
-Because of this, no local variables may be utilized.
-
-```
-class Class:
-	@staticmethod
-	def fn():
-		print('Text')
-
-Class.fn()
-```
-
-This provides the ability to simply scope functions to a specific location.

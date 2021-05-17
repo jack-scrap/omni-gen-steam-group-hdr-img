@@ -15,14 +15,11 @@ except NameError:
 
 Here, invalid code has been created.
 
-In defined by the program to be logically impossible.
 This references a variable that does not exist.
 
 One of Python's errors must be provided.
 
 In the case of a non-existent variable, `NameError` is appropriate.
-
-More can be provided.
 
 Several provided by the Python programming language are listed below.
 
@@ -41,7 +38,7 @@ finally:
 	print('Text')
 ```
 
-# Semanticaly valid but
+# TODO
 Code can be semantically valid and pass execution, but other cases and logical requirements may still exist.
 
 An example is the arithmetic case of division by 0.
