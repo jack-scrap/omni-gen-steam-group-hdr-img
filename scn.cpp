@@ -102,7 +102,7 @@ std::vector<Obj*> line;
 std::vector<Obj*> pt;
 
 StreetLight** streetLight;
-extern "C" StreetLight** streetLightGet() {
+StreetLight** streetLightGet() {
 	return streetLight;
 }
 
