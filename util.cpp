@@ -345,16 +345,14 @@ bool util::phys::aabb(Obj* p, Obj* q) {
 				glm::vec3((e ? p : q)->_acc * glm::vec4(glm::vec3(0.0, 0.0, (e ? p : q)->_rng[Z][MIN]), 1.0)),
 				glm::vec3((e ? p : q)->_acc * glm::vec4(glm::vec3(0.0, 0.0, (e ? p : q)->_rng[Z][MAX]), 1.0))
 			};
-
-			if (
-				trans[X] > bound[X][MIN][X] &&
-				trans[X] < bound[X][MAX][X] &&
-				trans[Y] > bound[Y][MIN][Y] &&
-				trans[Y] < bound[Y][MAX][Y] &&
-				trans[Z] > bound[Z][MIN][Z] &&
-				trans[Z] < bound[Z][MAX][Z]
-			) {
-				_ = true;
+			
+			for (int i = 0; i < 3; i++) {
+				if (!(
+					trans[i] > bound[i][MIN][i] &&
+					trans[i] < bound[i][MAX][i]
+				)) {
+					_ = false;
+				}
 			}
 
 			if (_) {
