@@ -2,21 +2,21 @@
 	"data": {
 		"state": [
 			0,
-			97
+			1
 		],
 		"other state": [
 			0,
-			97
+			1
 		]
 	},
 	"goal": {
 		"state": [
-			97,
+			1,
 			0
 		],
 		"other state": [
 			0,
-			97
+			1
 		]
 	},
 	"vehicle": [
