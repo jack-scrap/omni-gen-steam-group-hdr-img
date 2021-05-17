@@ -13,9 +13,7 @@
 	},
 	"vehicle": [
 		{
-			"name": "crane",
-			"loc": [0.0, 0.0, 0.0],
-			"rot": [0.0, 0.0, 0.0]
+			"name": "crane"
 		}
 	],
 	"bound": {

@@ -5,13 +5,12 @@
 	},
 	"vehicle": [
 		{
-			"name": "cargo_ship",
+			"name": "cargo_ship"
 			"data": [
 				97,
 				97
 			],
 			"loc": [-10.0, -1, 0.0],
-			"rot": [0.0, 0.0, 0.0]
 		}
 	],
 	"bound": {

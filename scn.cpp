@@ -178,7 +178,21 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 	for (const auto& entry : serial["vehicle"]) {
 		if (entry["name"] == "crane") {
-			Crane* _ = craneMk(glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]));
+			glm::vec3 loc = glm::vec3(0.0);
+			if (entry.contains("loc")) {
+				for (int i = 0; i < 3; i++) {
+					loc[i] = entry["loc"][i];
+				}
+			}
+
+			glm::vec3 rot = glm::vec3(0.0);
+			if (entry.contains("rot")) {
+				for (int i = 0; i < 3; i++) {
+					rot[i] = entry["rot"][i];
+				}
+			}
+
+			Crane* _ = craneMk(loc, rot);
 
 			noCrane++;
 			crane = (Crane**) realloc(crane, noCrane * sizeof (Crane*));
@@ -196,7 +210,21 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				no++;
 			}
 
-			CargoShip* _ = cargoShipMk(init, no, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]));
+			glm::vec3 loc = glm::vec3(0.0);
+			if (entry.contains("loc")) {
+				for (int i = 0; i < 3; i++) {
+					loc[i] = entry["loc"][i];
+				}
+			}
+
+			glm::vec3 rot = glm::vec3(0.0);
+			if (entry.contains("rot")) {
+				for (int i = 0; i < 3; i++) {
+					rot[i] = entry["rot"][i];
+				}
+			}
+
+			CargoShip* _ = cargoShipMk(init, no, loc, rot);
 
 			noCargoShip++;
 			cargoShip = (CargoShip**) realloc(cargoShip, noCargoShip * sizeof (CargoShip*));
@@ -214,7 +242,21 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				no++;
 			}
 
-			Truck* _ = truckMk(init, no, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]));
+			glm::vec3 loc = glm::vec3(0.0);
+			if (entry.contains("loc")) {
+				for (int i = 0; i < 3; i++) {
+					loc[i] = entry["loc"][i];
+				}
+			}
+
+			glm::vec3 rot = glm::vec3(0.0);
+			if (entry.contains("rot")) {
+				for (int i = 0; i < 3; i++) {
+					rot[i] = entry["rot"][i];
+				}
+			}
+
+			Truck* _ = truckMk(init, no, loc, rot);
 
 			noTruck++;
 			truck = (Truck**) realloc(truck, noTruck * sizeof (Truck*));
@@ -541,7 +583,21 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 	// prop
 	for (const auto& entry : serial["prop"]) {
-		Obj* obj = objMk(entry["name"], "obj", "dir", true, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]), glm::vec3(entry["rot"][X], entry["rot"][Y], entry["rot"][Z]));
+		glm::vec3 loc = glm::vec3(0.0);
+		if (entry.contains("loc")) {
+			for (int i = 0; i < 3; i++) {
+				loc[i] = entry["loc"][i];
+			}
+		}
+
+		glm::vec3 rot = glm::vec3(0.0);
+		if (entry.contains("rot")) {
+			for (int i = 0; i < 3; i++) {
+				rot[i] = entry["rot"][i];
+			}
+		}
+
+		Obj* obj = objMk(entry["name"], "obj", "dir", true, loc, rot);
 
 		mesh.push_back(obj);
 	}
@@ -670,7 +726,14 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					}
 				}
 
-				Cone* _ = coneMk(init, glm::vec3(entry["loc"][X], entry["loc"][Y], entry["loc"][Z]));
+				glm::vec3 loc = glm::vec3(0.0);
+				if (entry.contains("loc")) {
+					for (int i = 0; i < 3; i++) {
+						loc[i] = entry["loc"][i];
+					}
+				}
+
+				Cone* _ = coneMk(init, loc);
 
 				noBoundArea++;
 				boundArea = (Cone**) realloc(boundArea, noBoundArea * sizeof (Cone*));
