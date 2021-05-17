@@ -7,6 +7,10 @@ _cargo_ship = CDLL('libcargo_ship.so')
 _street_light = CDLL('libstreet_light.so')
 _scn = CDLL('libscn.so')
 
+class _Obj(Structure):
+	def __init__(self, ptr):
+		self._ptr = ptr
+
 # data
 class _Cont(Structure):
 	_fields_ = [
@@ -115,10 +119,6 @@ bound = {
 }
 
 # vehicle
-class _Obj(Structure):
-	def __init__(self, ptr):
-		self._ptr = ptr
-
 class _Crane(_Obj):
 	_fields_ = [
 		('_data', POINTER(_Cont)),
