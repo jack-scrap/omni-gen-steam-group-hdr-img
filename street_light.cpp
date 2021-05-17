@@ -23,4 +23,6 @@ StreetLight* streetLightMk(bool* pass, unsigned int no, glm::vec3 loc, glm::vec3
 
 void streetLightToggle(StreetLight* streetLight, unsigned int i) {
 	streetLight->_pass[i] = !streetLight->_pass[i];
+
+	streetLight->_parent->_child[i]->_active = streetLight->_pass[i];
 }
