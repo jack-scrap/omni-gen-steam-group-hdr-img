@@ -1,6 +1,5 @@
 from ctypes import *
 
-_obj = CDLL('libobj.so')
 _truck = CDLL('libtruck.so')
 _crane = CDLL('libcrane.so')
 _cargo_ship = CDLL('libcargo_ship.so')
@@ -308,6 +307,6 @@ _streetLightToggle = _street_light.streetLightToggle
 _streetLightToggle.restype = c_uint
 _streetLightToggle.argtypes = None
 
-streetLight = []
+street_light = []
 for i in range(_noStreetLightGet()):
-	streetLight.append(_StreetLight(_streetLightGet()[i]))
+	street_light.append(_StreetLight(_streetLightGet()[i]))
