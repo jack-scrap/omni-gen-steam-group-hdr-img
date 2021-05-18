@@ -32,7 +32,7 @@ class _Arr(Structure):
 
 class _Var(Structure):
     _fields_ = [
-	    ('_id', POINTER(c_char)),
+	    ('_id', c_char_p),
 	    ('_ptr', c_void_p)
     ]
 
@@ -60,13 +60,7 @@ _noData = _noDataGet()
 data = {}
 goal = {}
 for i in range(_noData):
-	id = ''
-
-	c = 0
-	while _data[i].contents._id[c] != b'\0':
-		id += _data[i].contents._id[c].decode("utf-8")
-
-		c += 1
+	id = _data[i].contents._id.decode("utf-8")
 
 	t = None
 	if _type[i] == 0:
