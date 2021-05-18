@@ -191,7 +191,7 @@ std::vector<GLfloat> util::mesh::plane(glm::vec2 sz) {
 }
 
 std::vector<GLfloat> util::mesh::rd::vtc(std::string name) {
-	std::vector<GLfloat> obj;
+	std::vector<GLfloat> _;
 
 	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>("res/obj/" + name + ".obj");
 
@@ -200,16 +200,16 @@ std::vector<GLfloat> util::mesh::rd::vtc(std::string name) {
 
 		if (tok[0] == "v") {
 			for (int i = 1; i < 1 + 3; i++) {
-				obj.push_back(std::stof(tok[i]));
+				_.push_back(std::stof(tok[i]));
 			}
 		}
 	}
 
-	return obj;
+	return _;
 }
 
 std::vector<GLfloat> util::mesh::rd::st(std::string name) {
-	std::vector<GLfloat> obj;
+	std::vector<GLfloat> _;
 
 	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>("res/obj/" + name + ".obj");
 
@@ -218,12 +218,12 @@ std::vector<GLfloat> util::mesh::rd::st(std::string name) {
 
 		if (tok[0] == "vt") {
 			for (int i = 1; i < 1 + 2; i++) {
-				obj.push_back(std::stof(tok[i]));
+				_.push_back(std::stof(tok[i]));
 			}
 		}
 	}
 
-	return obj;
+	return _;
 }
 
 std::vector<GLushort> util::mesh::strip(std::vector<GLushort> idc) {
