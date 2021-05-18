@@ -16,17 +16,17 @@ namespace layout {
 	static GLfloat bound = abs(-1.0 - 1.0);
 
 	static constexpr GLfloat
-		pad = 0.16,
-		margin = 0.16,
-		stroke = pad * 2,
-
-		offset = stroke + margin,
-
 		idx[3] = {
 			2,
 			2,
 			4
 		},
+
+		pad = 0.16,
+		margin = 0.16,
+		stroke = pad * 2,
+
+		offset = stroke + margin,
 
 		stride[3] = {
 			idx[X] + (margin * 2) + (margin * 2 * 2) + (stroke * 2),
