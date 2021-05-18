@@ -208,6 +208,24 @@ std::vector<GLfloat> util::mesh::rd::vtc(std::string name) {
 	return obj;
 }
 
+std::vector<GLfloat> util::mesh::rd::st(std::string name) {
+	std::vector<GLfloat> obj;
+
+	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>("res/obj/" + name + ".obj");
+
+	for (const std::string& l : buff) {
+		std::vector<std::string> tok = util::str::split(l, ' ');
+
+		if (tok[0] == "vt") {
+			for (int i = 1; i < 1 + 2; i++) {
+				obj.push_back(std::stof(tok[i]));
+			}
+		}
+	}
+
+	return obj;
+}
+
 std::vector<GLushort> util::mesh::strip(std::vector<GLushort> idc) {
 	std::vector<GLushort> _;
 

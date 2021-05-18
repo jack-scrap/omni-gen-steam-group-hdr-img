@@ -54,6 +54,7 @@ namespace util {
 
 		namespace rd {
 			std::vector<GLfloat> vtc(std::string name);
+			std::vector<GLfloat> st(std::string name);
 			std::vector<GLushort> idc(std::string name);
 		}
 	}
