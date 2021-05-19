@@ -105,8 +105,8 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
 	_->_active = active;
-	_->_child = (Obj**) malloc(noChild * sizeof (Obj*));
 	_->_noChild = noChild;
+	_->_child = (Obj**) malloc(_->_noChild * sizeof (Obj*));
 	for (int i = 0; i < _->_noChild; i++) {
 		_->_child[i] = child[i];
 	}
@@ -266,8 +266,8 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
 	_->_active = active;
-	_->_child = (Obj**) malloc(noChild * sizeof (Obj*));
 	_->_noChild = noChild;
+	_->_child = (Obj**) malloc(_->_noChild * sizeof (Obj*));
 	for (int i = 0; i < _->_noChild; i++) {
 		_->_child[i] = child[i];
 	}
