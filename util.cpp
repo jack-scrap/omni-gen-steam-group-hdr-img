@@ -317,7 +317,7 @@ std::vector<GLushort> util::mesh::rect::idc() {
 	return _;
 }
 
-std::vector<GLushort> util::mesh::rd::idc(std::string name) {
+std::vector<GLushort> util::mesh::rd::idc(std::string name, unsigned int attr) {
 	std::vector<GLushort> obj;
 
 	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>("res/obj/" + name + ".obj");
@@ -329,7 +329,7 @@ std::vector<GLushort> util::mesh::rd::idc(std::string name) {
 			for (int i = 1; i < 1 + 3; i++) {
 				std::vector<std::string> type = util::str::split(tok[i], '/');
 
-				obj.push_back(std::stoi(type[0]) - 1);
+				obj.push_back(std::stoi(type[attr]) - 1);
 			}
 		}
 	}
@@ -613,7 +613,7 @@ GLuint util::tex::spray(char c) {
 	glGenBuffers(1, &ibo);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 
-	std::vector<GLushort> idc = util::mesh::rd::idc(std::string("glyph/") + c);
+	std::vector<GLushort> idc = util::mesh::rd::idc(std::string("glyph/") + c, 0);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, idc.size() * sizeof (GLfloat), &idc[0], GL_STATIC_DRAW);
 
 	// shader

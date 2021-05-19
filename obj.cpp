@@ -192,7 +192,7 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm
 	_->_t = 0;
 
 	std::vector<GLfloat> vtc = util::mesh::rd::vtc(name);
-	std::vector<GLushort> idc = util::mesh::rd::idc(name);
+	std::vector<GLushort> idc = util::mesh::rd::idc(name, 0);
 	_->_mesh = meshMk(&vtc[0], vtc.size(), &idc[0], idc.size());
 
 	// matrix
@@ -275,7 +275,7 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj
 	_->_t = 0;
 
 	std::vector<GLfloat> vtc = util::mesh::rd::vtc(name);
-	std::vector<GLushort> idc = util::mesh::rd::idc(name);
+	std::vector<GLushort> idc = util::mesh::rd::idc(name, 0);
 	_->_mesh = meshMk(&vtc[0], vtc.size(), &idc[0], idc.size());
 
 	// matrix
