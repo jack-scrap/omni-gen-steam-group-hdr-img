@@ -327,7 +327,9 @@ std::vector<GLushort> util::mesh::rd::idc(std::string name) {
 
 		if (tok[0] == "f") {
 			for (int i = 1; i < 1 + 3; i++) {
-				obj.push_back(std::stoi(tok[i]) - 1);
+				std::vector<std::string> type = util::str::split(tok[i], '/');
+
+				obj.push_back(std::stoi(type[0]) - 1);
 			}
 		}
 	}
