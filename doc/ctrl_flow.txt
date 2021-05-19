@@ -1,7 +1,7 @@
 The following will run you through the order of execution in a program, referred to as "control-flow".
 
 # Scope
-Like functions, the blocks in conditionals have scope.
+Blocks in control-flow have scope.
 
 Variables can be defined, expressions can be evaluated and other statements can be nested.
 
@@ -190,7 +190,7 @@ finally:
 	print('Text')
 ```
 
-# Semanticaly valid but
+# Exceptions
 Code can be semantically valid and pass execution, but other cases and logical requirements may still exist.
 
 An example is the arithmetic case of division by 0.

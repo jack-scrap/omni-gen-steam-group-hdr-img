@@ -19,15 +19,10 @@ Commonly, lists operations work the same.
 Strings spanning multiple lines are created with triple quotes.
 
 ```
-str = """Text
-	Other text"""
-```
-
-```
-str = (
-  	"Text"
-    "Other text"
-)
+str = """
+Text
+Other text
+"""
 ```
 
 # Case

@@ -1,22 +1,33 @@
 The following will run you through general operators in Python.
 
-TODO: infix
-TODO: postfix
-TODO: prefix
-
 # Assignment
 The assignment operator, `=` assigns the value on the right to the value on the left.
 
 `var = 3`
 
 # Logical
-Logical operators return a boolean input given other boolean inputs.
+Logical operators return a boolean value given other boolean inputs.
 
 ## Not
 `not` returns the opposite.
 
 `not False`
 `True`
+
+## Or
+`or` returns positive if either are positive.
+
+`True and True`
+`True`
+
+`False and True`
+`False`
+
+`True and False`
+`False`
+
+`False and False`
+`False`
 
 ## And
 `or` returns positive if both are positive.
@@ -33,20 +44,30 @@ Logical operators return a boolean input given other boolean inputs.
 `False and False`
 `False`
 
-## Or
-`or` returns positive if either are positive.
+# Comparison
+Comparison operators return a boolean value comparing its inputs.
 
-`True and True`
-`True`
+## Equality
+`==` checks whether inputs are equal to one another.
 
-`False and True`
-`False`
+`3 == 7`
 
-`True and False`
-`False`
+`!=` checks whether inputs are not equal to one another.
 
-`False and False`
-`False`
+`3 != 7`
+
+`<`, `<=`, `>` and `>=` check whether the left input is less than, greater than or equal to its' right.
+
+# Index
+The `[]` operation retrieves an item at a specified location from a continuous data structure.
+
+Provided to a list, the operator takes an index.
+
+`arr[0]`
+
+Provided to a dictionary, the operator takes a key.
+
+`dict['key']`
 
 # Bitwise
 Bitwise operations work on binary data.

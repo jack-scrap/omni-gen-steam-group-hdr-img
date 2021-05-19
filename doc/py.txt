@@ -18,13 +18,6 @@ def fn(): # Function
 # Indentation
 Python uses whitespace to signify code blocks.
 
-The following is not valid, considering the function body to be empty and the following lines to be separate statements.
-
-```
-def fn():
-print("Text")
-```
-
 Indented lines following statements warranting code blocks are considered to be in the block.
 
 The following is valid.
@@ -34,9 +27,16 @@ def fn():
 	print("Text")
 ```
 
+	The following is not valid, considering the function body to be empty and the following lines to be separate statements.
+
+```
+def fn():
+	print("Text")
+```
+
 This indentation may be of any width, but must be consistent within each block.
 
-Nested scopes may be of separate indentation with.
+Nested scopes may be of separate indentation width.
 
 # Modules
 "Modules" are external files containing Python code.
@@ -84,12 +84,6 @@ def _fn():
 	print("Text")
 ```
 
-The following is valid.
-
-```
-other_var = _var
-```
-
 ## Package
 Packages are greater collections of modules.
 
@@ -109,6 +103,6 @@ Both the imported module and the identifiers it contains can be re-named via the
 # Attributes
 The function `dir()` can be used to view all attributes on an object.
 
-This can be used to without consulting documentation.
-
 `dir(obj)`
+
+This can be used to view the inner workings of code without consulting documentation.

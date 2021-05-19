@@ -48,7 +48,7 @@ Initially, the first minimum is first item.
 
 Once sorted, these are combined into a larger set.
 
-This will continue into the greater array has been sorted.
+This will continue until the greater array has been sorted.
 
 ## Quick
 "Quick sort" divid

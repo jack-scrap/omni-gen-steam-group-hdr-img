@@ -1,8 +1,8 @@
-Threads allow the simultaneous execution of commands.
-
-The following will walk you through the process of creating and utilizing threads, and the process of guaranteeing proper execution order.
+Threads allow the simultaneous execution of processes.
 
 Because commands are no longer executed in order, performance gains can be met where processes are no longer required to await the completion of the previous ones.
+
+The following will walk you through the process of creating and utilizing threads, and the process of guaranteeing proper execution order.
 
 # Creation
 The following spawns a thread.
@@ -24,7 +24,7 @@ Immediately, an error case arrises.
 
 Because the creation of the thread is the last statement, the program immediately terminates and eliminates any threads, likely before they have a chance to execute.
 
-In order to guarantee the completion of this thread, the process must await its completion.
+In order to guarantee the completion of this thread, the program must await its completion.
 This is achieved with the `join` function.
 
 ```
@@ -64,7 +64,7 @@ other_thread.start()
 Depending on determinism during the execution of the program, the output of the processes will change.
 
 ## Lock
-"Locking" a thread halts execution on the present thread until the locked one has completed.
+"Locking" a thread halts execution until the locked one has completed.
 
 ```
 import threading
@@ -143,8 +143,6 @@ other_thread.start()
 other_thread.join()
 ```
 
-The previous will guarantee that no data races exist whilst the promin is deterministic.
-
 Adding a unique log to each unique iteration of the while loop will display which is being called.
 Repeated executions of this script should reveal that the deterministic script is guaranteed not to clash.
 
@@ -183,7 +181,7 @@ Because the order of execution is now non-deterministic, the cannot be guarantee
 These errors should be resolved, should they be confirmed.
 
 ## Deadlock
-Deadlock is misuse of mutual exclusion where one thread is awaits the other, and vice-versa.
+"Deadlock" is misuse of mutual exclusion where one thread is awaits the other, and vice-versa.
 
 Deadlock occurs when one thread is awaiting the output of another before proceeding, and the other thread is simultaneously awaiting the output of the first.
 

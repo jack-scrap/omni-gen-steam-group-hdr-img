@@ -1,3 +1,32 @@
+# Mode
+[F1] File Browser
+[F2] Editor
+[F3] Prompt
+
+## File Browser
+[Down Arrow] -             Next entry
+[Up Arrow] -               Previous entry
+[Enter *directory*] -      Change current directory
+[Enter *file*] -           Open in editor
+
+## Editor
+[Enter] -                  New line
+[Backspace] -              Delete
+
+## Prompt
+`*command* *argument* ...`
+
+[Enter] -                  Run
+[Backspace] -              Delete
+
+# Display
+[Left Mouse Button] -      Pan camera
+[Scroll Wheel] -           Zoom
+
+# Command
+`save` -                   Write buffer to disk
+`open` -                   Open in editor
+`run` -                    Execute
 `import omni`
 
 # Data
@@ -5,46 +34,55 @@
 
 # Vehicles
 ## Crane
+`._loc` - Location
+
 ### Navigation
 `.zoom(delta)` - Move forward, back
-`.pan(delta)` - Translate head left and right
-`.ped(delta)` - Translate head up and down
+`.pan(delta)` -  Translate head left and right
+`.ped(delta)` -  Translate head up and down
 
 `.grab()` - Grab container
 
 ## Truck
 This allows for complete freedom of movement without being restricted to an axis.
 
-`.mv(delta)` - Move forward, back
+`._loc` - Location
+`._data` - Data
+
+### Navigation
+`.mv(delta)` -   Move forward, back
 
 `.turn(delta)` - Turn left, right
 
 ## Ship
-`zoom(delta)`
+`zoom(delta)` - Move forward, back
+
+`._loc` -  Location
+`._data` - Data
 
 # Data
-Data can be accessed.
-
-Both initial and the desired state is provided.
-
 Data sets can be accessed by key.
 
 `.data`
 `.other_data`
 
 `.data`
+	`._x` - Size (X)
+	`._y` - Size (Y)
+	`._z` - Size (Z)
+	`._loc`
 
-`._depth`
+Both initial and the desired state is provided.
 
-`._ptr`
-`._x`
-`._y`
-`._z`
-`._loc`
+`.goal`
 
 # Bounds
 Bounds are provided.
 
 `.bounds`
+	`.area`
+	`.rng`
 
-These can be used to assert.
+Area-based bounds from cones are provided in `.area`, and range-based bounds providing limits are provided in `rng`.
+
+These can be used to assert that colissions do not occur.
