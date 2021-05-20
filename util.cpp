@@ -147,36 +147,6 @@ bool util::fs::w(std::string name) {
 	return perm == 128;
 }
 
-std::vector<std::string> util::str::split(std::string buff, char delim) {
-	std::vector<std::string> tok;
-
-	std::stringstream s(buff);
-	std::string seg;
-	while (std::getline(s, seg, delim)) {
-		tok.push_back(seg);
-	}
-
-	return tok;
-}
-
-std::string util::str::join(std::vector<std::string> buff) {
-	std::string _;
-	for (const std::string& l : buff) {
-		_ += l + '\n';
-	}
-
-	return _;
-}
-
-std::string util::str::pad(std::string buff, unsigned int roof) {
-	std::string line = buff;
-	for (int i = buff.length(); i < roof; i++) {
-		line.push_back(' ');
-	}
-
-	return line;
-}
-
 std::vector<GLfloat> util::mesh::plane(glm::vec2 sz) {
 	std::vector<GLfloat> _;
 
@@ -402,6 +372,36 @@ bool util::phys::aabbGround(Obj* obj) {
 	}
 
 	return _;
+}
+
+std::vector<std::string> util::str::split(std::string buff, char delim) {
+	std::vector<std::string> tok;
+
+	std::stringstream s(buff);
+	std::string seg;
+	while (std::getline(s, seg, delim)) {
+		tok.push_back(seg);
+	}
+
+	return tok;
+}
+
+std::string util::str::join(std::vector<std::string> buff) {
+	std::string _;
+	for (const std::string& l : buff) {
+		_ += l + '\n';
+	}
+
+	return _;
+}
+
+std::string util::str::pad(std::string buff, unsigned int roof) {
+	std::string line = buff;
+	for (int i = buff.length(); i < roof; i++) {
+		line.push_back(' ');
+	}
+
+	return line;
 }
 
 std::string util::cfg::key(std::string buff) {

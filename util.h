@@ -32,13 +32,6 @@ namespace util {
 		bool w(std::string name);
 	}
 
-	namespace str {
-		std::vector<std::string> split(std::string buff, char delim);
-		std::string join(std::vector<std::string> buff);
-
-		std::string pad(std::string buff, unsigned int roof);
-	}
-
 	namespace mesh {
 		std::vector<GLfloat> plane(glm::vec2 sz);
 
@@ -69,6 +62,13 @@ namespace util {
 		bool aabb(Obj* p, Obj* q);
 
 		bool aabbGround(Obj* obj);
+	}
+
+	namespace str {
+		std::vector<std::string> split(std::string buff, char delim);
+		std::string join(std::vector<std::string> buff);
+
+		std::string pad(std::string buff, unsigned int roof);
 	}
 
 	namespace cfg {
