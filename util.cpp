@@ -371,6 +371,18 @@ cArr util::json::matr2(nlohmann::json serial) {
 	return _;
 }
 
+cArr util::json::matr3(nlohmann::json serial) {
+	cArr _;
+
+	_._x = serial[0][0].size();
+	_._y = serial[0].size();
+	_._z = serial.size();
+
+	_._ptr = (char*) malloc(0);
+
+	return _;
+}
+
 glm::vec3 util::json::vec(nlohmann::json serial) {
 	glm::vec3 _;
 

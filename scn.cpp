@@ -370,18 +370,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 					// 3D
 					if (pair.value()[0][0].type() == nlohmann::json::value_t::array) {
-						char* init = (char*) malloc(cont.size() * cont[0].size() * cont[0][0].size() * sizeof (char));
-
-						int no = 0;
-						for (int k = 0; k < cont.size(); k++) {
-							for (int j = 0; j < cont[k].size(); j++) {
-								for (int i = 0; i < cont[k][j].size(); i++) {
-									init[no] = (char) ((int) cont[k][j][i]);
-
-									no++;
-								}
-							}
-						}
+						cArr init = util::json::matr3(pair.value());
 
 						char* id = (char*) malloc((pair.key().size() + 1) * sizeof (char));
 						for (int i = 0; i < pair.key().size(); i++) {
@@ -389,7 +378,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 						}
 						id[pair.key().size()] = '\0';
 
-						Arr* val = arrMk(init, cont.size(), cont[0].size(), cont[0][0].size(), pair.key());
+						Arr* val = arrMk((char*) init._ptr, init._x, init._y, init._z, pair.key());
 
 						Var* _ = varMk(id, val);
 
@@ -494,17 +483,9 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 				// 3D
 				if (cont[0][0].type() == nlohmann::json::value_t::array) {
-					char* init = (char*) malloc(cont.size() * cont[0].size() * cont[0][0].size() * sizeof (char));
+					cArr init = util::json::matr3(pair.value());
 
-					for (int k = 0; k < cont.size(); k++) {
-						for (int j = 0; j < cont[k].size(); j++) {
-							for (int i = 0; i < cont[k][j].size(); i++) {
-								init[(k * j * cont[0].size()) + i] = (char) ((int) cont[j][i]);
-							}
-						}
-					}
-
-					val = arrMk(init, cont.size() * cont[0].size() * cont[0][0].size(), pair.key());
+					val = arrMk((char*) init._ptr, init._x, init._y, init._z, pair.key());
 				}
 			}
 		}

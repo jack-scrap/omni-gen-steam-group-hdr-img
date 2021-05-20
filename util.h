@@ -77,6 +77,7 @@ namespace util {
 
 		cArr arr(nlohmann::json serial);
 		cArr matr2(nlohmann::json serial);
+		cArr matr3(nlohmann::json serial);
 
 		glm::vec3 vec(nlohmann::json serial);
 	}
