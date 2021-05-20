@@ -548,14 +548,12 @@ GLuint util::tex::spray(char c) {
 	GLuint vbo;
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-
 	std::vector<GLfloat> vtc = util::mesh::rd::vtc(std::string("glyph/") + c);
 	glBufferData(GL_ARRAY_BUFFER, vtc.size() * sizeof (GLfloat), &vtc[0], GL_STATIC_DRAW);
 
 	GLuint ibo;
 	glGenBuffers(1, &ibo);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-
 	std::vector<GLushort> idc = util::mesh::rd::idc(std::string("glyph/") + c, 0);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, idc.size() * sizeof (GLfloat), &idc[0], GL_STATIC_DRAW);
 
@@ -582,11 +580,11 @@ GLuint util::tex::spray(char c) {
 
 	prog.unUse();
 
-	// framebuffer
+	/* framebuffer */
 	GLuint fbo;
 	glGenFramebuffers(1, &fbo);
 
-	/// color attachment
+	// color
 	GLuint cbo;
 	glGenTextures(1, &cbo);
 	glBindTexture(GL_TEXTURE_2D, cbo);
@@ -596,14 +594,14 @@ GLuint util::tex::spray(char c) {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	/// renderbuffer (stencil)
+	// renderbuffer (stencil)
 	GLuint rbo;
 	glGenRenderbuffers(1, &rbo);
 	glBindRenderbuffer(GL_RENDERBUFFER, rbo);
 
 	glRenderbufferStorage(GL_RENDERBUFFER, GL_STENCIL_INDEX8, 800, 600);
 
-	/// attach texture, renderbuffer
+	// attach texture, renderbuffer
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, cbo, 0);
 
@@ -611,7 +609,7 @@ GLuint util::tex::spray(char c) {
 		omni::err("Framebuffer not complete");
 	}
 
-	/// render
+	// draw
 	prog.unUse();
 
 	disp->clear();
