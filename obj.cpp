@@ -156,138 +156,19 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 }
 
 Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
-	// initialize
-	Obj* _ = (Obj*) malloc(sizeof (Obj));
-
-	_->_active = active;
-	_->_child = nullptr;
-	_->_noChild = 0;
-	_->_v = 0.0;
-	_->_t = 0;
-
 	std::vector<GLfloat> vtc = util::mesh::rd::vtc(name);
 	std::vector<GLushort> idc = util::mesh::rd::idc(name, 0);
-	_->_mesh = meshMk(&vtc[0], vtc.size(), &idc[0], idc.size());
 
-	// matrix
-	_->_model = glm::mat4(1.0);
-	_->_model *= glm::translate(glm::mat4(1.0), loc);
-	_->_model *= util::matr::rot(glm::mat4(1.0), rot);
-	_->_view = glm::lookAt(cam._pos, cam._pos + glm::vec3(1000.0, -1000.0, 1000.0), glm::vec3(0, 1, 0));
-	_->_proj = glm::ortho(-(layout::view[X] / 2.0), layout::view[X] / 2.0, -(layout::view[Y] / 2.0), layout::view[Y] / 2.0, 0.1, 10000.0);
-	_->_acc = glm::mat4(1.0);
-
-	_->_prog = Prog(vtx, frag);
-
-	_->_prog.use();
-
-	// attribute
-	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh->_id[Mesh::VBO]);
-	_->_attr[Obj::POS] = glGetAttribLocation(_->_prog._id, "pos");
-	glVertexAttribPointer(_->_attr[Obj::POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
-	glEnableVertexAttribArray(_->_attr[Obj::POS]);
-
-	// uniform
-	_->_uni[Obj::MODEL] = glGetUniformLocation(_->_prog._id, "model");
-	_->_uni[Obj::VIEW] = glGetUniformLocation(_->_prog._id, "view");
-	_->_uni[Obj::PROJ] = glGetUniformLocation(_->_prog._id, "proj");
-
-	_->_uni[Obj::ACTIVE] = glGetUniformLocation(_->_prog._id, "active");
-
-	_->_uni[Obj::T] = glGetUniformLocation(_->_prog._id, "t");
-
-	glUniformMatrix4fv(_->_uni[Obj::MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
-	glUniformMatrix4fv(_->_uni[Obj::VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
-	glUniformMatrix4fv(_->_uni[Obj::PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
-
-	glUniform1ui(_->_uni[Obj::ACTIVE], _->_active);
-
-	glUniform1ui(_->_uni[Obj::T], _->_t);
-
-	_->_prog.unUse();
-	glBindVertexArray(0);
-
-	// bounds
-	for (int i = 0; i < 3; i++) {
-		for (int b = 0; b < 2; b++) {
-			_->_rng[i][b] = 0.0;
-		}
-	}
-
-	util::mesh::bound(_->_rng, &vtc[0], vtc.size());
-
-	// children
-	objAcc(_, glm::mat4(1.0));
+	Obj* _ = objMk(&vtc[0], vtc.size(), &idc[0], idc.size(), vtx, frag, active, loc, rot);
 
 	return _;
 }
 
 Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
-	// initialize
-	Obj* _ = (Obj*) malloc(sizeof (Obj));
-
-	_->_active = active;
-	_->_noChild = noChild;
-	_->_child = (Obj**) malloc(_->_noChild * sizeof (Obj*));
-	for (int i = 0; i < _->_noChild; i++) {
-		_->_child[i] = child[i];
-	}
-	_->_v = 0.0;
-	_->_t = 0;
-
 	std::vector<GLfloat> vtc = util::mesh::rd::vtc(name);
 	std::vector<GLushort> idc = util::mesh::rd::idc(name, 0);
-	_->_mesh = meshMk(&vtc[0], vtc.size(), &idc[0], idc.size());
 
-	// matrix
-	_->_model = glm::mat4(1.0);
-	_->_model *= glm::translate(glm::mat4(1.0), loc);
-	_->_model *= util::matr::rot(glm::mat4(1.0), rot);
-	_->_view = glm::lookAt(cam._pos, cam._pos + glm::vec3(1000.0, -1000.0, 1000.0), glm::vec3(0, 1, 0));
-	_->_proj = glm::ortho(-(layout::view[X] / 2.0), layout::view[X] / 2.0, -(layout::view[Y] / 2.0), layout::view[Y] / 2.0, 0.1, 10000.0);
-	_->_acc = glm::mat4(1.0);
-
-	_->_prog = Prog(vtx, frag);
-
-	_->_prog.use();
-
-	// attribute
-	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh->_id[Mesh::VBO]);
-	_->_attr[Obj::POS] = glGetAttribLocation(_->_prog._id, "pos");
-	glVertexAttribPointer(_->_attr[Obj::POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
-	glEnableVertexAttribArray(_->_attr[Obj::POS]);
-
-	// uniform
-	_->_uni[Obj::MODEL] = glGetUniformLocation(_->_prog._id, "model");
-	_->_uni[Obj::VIEW] = glGetUniformLocation(_->_prog._id, "view");
-	_->_uni[Obj::PROJ] = glGetUniformLocation(_->_prog._id, "proj");
-
-	_->_uni[Obj::ACTIVE] = glGetUniformLocation(_->_prog._id, "active");
-
-	_->_uni[Obj::T] = glGetUniformLocation(_->_prog._id, "t");
-
-	glUniformMatrix4fv(_->_uni[Obj::MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
-	glUniformMatrix4fv(_->_uni[Obj::VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
-	glUniformMatrix4fv(_->_uni[Obj::PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
-
-	glUniform1ui(_->_uni[Obj::ACTIVE], _->_active);
-
-	glUniform1ui(_->_uni[Obj::T], _->_t);
-
-	_->_prog.unUse();
-	glBindVertexArray(0);
-
-	// bounds
-	for (int i = 0; i < 3; i++) {
-		for (int b = 0; b < 2; b++) {
-			_->_rng[i][b] = 0.0;
-		}
-	}
-
-	util::mesh::bound(_->_rng, &vtc[0], vtc.size());
-
-	// children
-	objAcc(_, glm::mat4(1.0));
+	Obj* _ = objMk(&vtc[0], vtc.size(), &idc[0], idc.size(), vtx, frag, active, child, noChild, loc, rot);
 
 	return _;
 }
