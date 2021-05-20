@@ -21,11 +21,6 @@
 #include "street_light.h"
 #include "road.h"
 
-typedef struct {
-	void* _ptr;
-	size_t _sz;
-} cArr;
-
 Var** data;
 Var** goal;
 unsigned int* type;
@@ -333,17 +328,9 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 				// 1D
 				if (pair.value()[0].type() == nlohmann::json::value_t::number_unsigned) {
-					unsigned int x = 0;
-					char* init = (char*) malloc(x * sizeof (char));
-					for (const auto& item : pair.value()) {
-						if (item.type() == nlohmann::json::value_t::number_unsigned) {
-							init[x] = (char) ((int) item);
+					cArr init = util::json::arr(pair.value());
 
-							x++;
-						}
-					}
-
-					Arr* val = arrMk(init, x, pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))));
+					Arr* val = arrMk((char*) init._ptr, init._no, pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))));
 
 					char* id = (char*) malloc((pair.key().size() + 1) * sizeof (char));
 					for (int i = 0; i < pair.key().size(); i++) {

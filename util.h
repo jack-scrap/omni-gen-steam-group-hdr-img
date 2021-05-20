@@ -10,6 +10,7 @@
 #include <nlohmann/json.hpp>
 
 #include "obj.h"
+#include "c_arr.h"
 
 namespace util {
 	namespace fs {
@@ -73,6 +74,8 @@ namespace util {
 
 	namespace json {
 		char byte(nlohmann::json serial);
+
+		cArr arr(nlohmann::json serial);
 
 		glm::vec3 vec(nlohmann::json serial);
 	}

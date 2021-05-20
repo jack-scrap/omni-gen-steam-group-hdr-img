@@ -341,6 +341,18 @@ char util::json::byte(nlohmann::json serial) {
 	return (char) ((int) serial);
 }
 
+cArr util::json::arr(nlohmann::json serial) {
+	cArr _;
+
+	_._no = serial.size();
+	_._ptr = (char*) malloc(serial.size() * sizeof (char));
+	for (int i = 0; i < _._no; i++) {
+		((char*) _._ptr)[i] = (char) ((int) serial[i]);
+	}
+
+	return _;
+}
+
 glm::vec3 util::json::vec(nlohmann::json serial) {
 	glm::vec3 _;
 
