@@ -328,9 +328,9 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 				// 1D
 				if (pair.value()[0].type() == nlohmann::json::value_t::number_unsigned) {
-					cArr init = util::json::arr(pair.value());
+					cBuff init = util::json::arr(pair.value());
 
-					Arr* val = arrMk((char*) init._ptr, init._no, pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))));
+					Arr* val = arrMk((char*) init._ptr, init._x, pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))));
 
 					char* id = (char*) malloc((pair.key().size() + 1) * sizeof (char));
 					for (int i = 0; i < pair.key().size(); i++) {

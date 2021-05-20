@@ -2,5 +2,8 @@
 
 typedef struct {
 	void* _ptr;
-	unsigned int _no;
+	unsigned int
+		_x,
+		_y,
+		_z;
 } cArr;

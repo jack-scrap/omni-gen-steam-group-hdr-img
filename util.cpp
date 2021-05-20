@@ -344,9 +344,11 @@ char util::json::byte(nlohmann::json serial) {
 cArr util::json::arr(nlohmann::json serial) {
 	cArr _;
 
-	_._no = serial.size();
+	_._x = serial.size();
+	_._y = 1;
+	_._z = 1;
 	_._ptr = (char*) malloc(serial.size() * sizeof (char));
-	for (int i = 0; i < _._no; i++) {
+	for (int i = 0; i < _._x; i++) {
 		((char*) _._ptr)[i] = (char) ((int) serial[i]);
 	}
 
