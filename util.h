@@ -72,6 +72,8 @@ namespace util {
 	}
 
 	namespace json {
+		char byte(nlohmann::json serial);
+
 		glm::vec3 vec(nlohmann::json serial);
 	}
 

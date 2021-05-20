@@ -337,6 +337,10 @@ std::string util::str::pad(std::string buff, unsigned int roof) {
 	return line;
 }
 
+char util::json::byte(nlohmann::json serial) {
+	return (char) ((int) serial);
+}
+
 glm::vec3 util::json::vec(nlohmann::json serial) {
 	glm::vec3 _;
 
