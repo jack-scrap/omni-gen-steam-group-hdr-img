@@ -347,7 +347,7 @@ cArr util::json::arr(nlohmann::json serial) {
 	_._x = serial.size();
 	_._y = 1;
 	_._z = 1;
-	_._ptr = (char*) malloc(serial.size() * sizeof (char));
+	_._ptr = (char*) malloc(_._x * sizeof (char));
 	for (int i = 0; i < _._x; i++) {
 		((char*) _._ptr)[i] = (char) ((int) serial[i]);
 	}
@@ -361,7 +361,7 @@ cArr util::json::matr2(nlohmann::json serial) {
 	_._x = serial[0].size();
 	_._y = serial.size();
 	_._z = 1;
-	_._ptr = (char*) malloc(serial.size() * sizeof (char));
+	_._ptr = (char*) malloc(_._x * _._y * sizeof (char));
 	for (int j = 0; j < _._y; j++) {
 		for (int i = 0; i < _._x; i++) {
 			((char*) _._ptr)[(j * _._x) + i] = (char) ((int) serial[j][i]);
