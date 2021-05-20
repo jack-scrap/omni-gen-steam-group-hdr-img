@@ -404,7 +404,7 @@ std::string util::str::pad(std::string buff, unsigned int roof) {
 	return line;
 }
 
-glm::vec3 util::parse::vec(nlohmann::json serial) {
+glm::vec3 util::json::vec(nlohmann::json serial) {
 	glm::vec3 _;
 
 	for (int i = 0; i < 3; i++) {

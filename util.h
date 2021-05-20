@@ -72,7 +72,7 @@ namespace util {
 		std::string pad(std::string buff, unsigned int roof);
 	}
 
-	namespace parse {
+	namespace json {
 		glm::vec3 vec(nlohmann::json serial);
 	}
 
