@@ -351,32 +351,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				if (pair.value()[0].type() == nlohmann::json::value_t::array) {
 					// 2D
 					if (pair.value()[0][0].type() == nlohmann::json::value_t::number_unsigned) {
-						char* init = (char*) malloc(pair.value().size() * pair.value()[0].size() * sizeof (char));
-
-						unsigned int x = 0;
-						unsigned int y = 0;
-						for (const auto& arr : pair.value()) {
-							x = 0;
-
-							y++;
-
-							if (arr.type() == nlohmann::json::value_t::array) {
-								for (const auto& byte : arr) {
-									x++;
-								}	
-							}
-						}
-
-						unsigned int no = 0;
-						for (const auto& arr : pair.value()) {
-							for (const auto& byte : arr) {
-								init[no] = (char) ((int) byte);
-
-								no++;
-							}	
-						}
-
-						init = (char*) realloc(init, x * y * sizeof (char));
+						cArr init = util::json::matr2(pair.value());
 
 						char* id = (char*) malloc((pair.key().size() + 1) * sizeof (char));
 						for (int i = 0; i < pair.key().size(); i++) {
@@ -384,7 +359,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 						}
 						id[pair.key().size()] = '\0';
 
-						Arr* val = arrMk(init, x, y, pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))));
+						Arr* val = arrMk((char*) init._ptr, init._x, init._y, pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))));
 
 						noData++;
 						Var* _ = varMk(id, val);
@@ -512,15 +487,9 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			if (cont[0].type() == nlohmann::json::value_t::array) {
 				// 2D
 				if (cont[0][0].type() == nlohmann::json::value_t::number_unsigned) {
-					char* init = (char*) malloc(cont.size() * cont[0].size() * sizeof (char));
+					cArr init = util::json::matr2(pair.value());
 
-					for (int j = 0; j < cont.size(); j++) {
-						for (int i = 0; i < cont[j].size(); i++) {
-							init[(j * cont[0].size()) + i] = (char) ((int) cont[j][i]);
-						}
-					}
-
-					val = arrMk(init, cont.size() * cont[0].size(), pair.key());
+					val = arrMk((char*) init._ptr, init._x, init._y, pair.key());
 				}
 
 				// 3D

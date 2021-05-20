@@ -355,6 +355,22 @@ cArr util::json::arr(nlohmann::json serial) {
 	return _;
 }
 
+cArr util::json::matr2(nlohmann::json serial) {
+	cArr _;
+
+	_._x = serial[0].size();
+	_._y = serial.size();
+	_._z = 1;
+	_._ptr = (char*) malloc(serial.size() * sizeof (char));
+	for (int j = 0; j < _._y; j++) {
+		for (int i = 0; i < _._x; i++) {
+			((char*) _._ptr)[(j * _._x) + i] = (char) ((int) serial[j][i]);
+		}
+	}
+
+	return _;
+}
+
 glm::vec3 util::json::vec(nlohmann::json serial) {
 	glm::vec3 _;
 
