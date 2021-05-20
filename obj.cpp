@@ -81,7 +81,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 	util::mesh::bound(_->_rng, vtc, noVtc);
 
-	// children
+	// rig
 	objAcc(_, glm::mat4(1.0));
 
 	return _;
@@ -149,7 +149,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 
 	util::mesh::bound(_->_rng, vtc, noVtc);
 
-	// children
+	// rig
 	objAcc(_, glm::mat4(1.0));
 
 	return _;
@@ -309,7 +309,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_prog.unUse();
 	glBindVertexArray(0);
 
-	// children
+	// rig
 	objAcc(_, glm::mat4(1.0));
 
 	return _;
