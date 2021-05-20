@@ -455,68 +455,46 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 		// dictionary
 		if (pair.value().type() == nlohmann::json::value_t::object) {
-			Var** init = (Var**) malloc(0);
-			unsigned int* type = (unsigned int*) malloc(0);
-			unsigned int no = 0;
+			unsigned int no = pair.value().size();
+			void** data = (void**) malloc(no * sizeof (void*));
+			unsigned int* type = (unsigned int*) malloc(no * sizeof (unsigned int));
 
 			for (const auto& pair : pair.value().items()) {
-				// identifier
-				char* id = (char*) malloc((pair.key().size() + 1) * sizeof (char));
+				void* _;
 				unsigned int t;
-				for (int i = 0; i < pair.key().size(); i++) {
-					id[i] = (char) ((int) pair.key()[i]);
-				}
-				id[pair.key().size()] = '\0';
-
-				/* value */
-				char* val = (char*) malloc(0);
 
 				// scalar
 				if (pair.value().type() == nlohmann::json::value_t::number_unsigned) {
-					val = (char*) malloc(sizeof (char));
-					val[0] = (char) ((int) pair.value());
+					char* init = (char*) malloc(sizeof (char));
+					init[0] = (char) ((int) pair.value());
 
+					_ = idxMk(0, init, 1);
 					t = SCALAR;
 				}
 
 				// array
 				if (pair.value().type() == nlohmann::json::value_t::array) {
-					val = (char*) realloc(val, pair.value().size() * sizeof (char));
-					for (int i = 0; i < pair.value().size(); i++) {
-						val[i] = (char) ((int) pair.value()[i]);
-					}
+					// 1D
+					if (pair.value()[0].type() == nlohmann::json::value_t::number_unsigned) {
+						unsigned int no = pair.value();
+						char* init = (char*) malloc(no * sizeof (char));
+						for (int i = 0; i < no; i++) {
+							init[i] = (char) ((int) pair.value()[i]);
+						}
 
-					t = ARRAY;
+						_ = idxMk(0, init, no);
+						t = ARRAY;
+					}
 				}
 
-				Var* _ = varMk(id, val);
-
+				data[no] = _;
+				type[no] = t;
 				no++;
-				init = (Var**) realloc(init, no * sizeof (Var*));
-				type = (unsigned int*) realloc(type, no * sizeof (unsigned int));
-				init[no - 1] = _;
-				type[no - 1] = t;
+			}	
 
-				t = DICT;
-			}
+			Dict* _ = dictMk(data, type, no);
 
-			char* id = (char*) malloc((pair.key().size() + 1) * sizeof (char));
-			for (int i = 0; i < pair.key().size(); i++) {
-				id[i] = pair.key()[i];
-			}
-			id[pair.key().size()] = '\0';
-
-			Dict* val = dictMk(init, type, no, pair.key());
-
-			Var* _ = varMk(id, val);
-
-			noData++;
-			data = (Var**) realloc(data, noData * sizeof (void*));
-			type = (unsigned int*) realloc(type, noData * sizeof (unsigned int*));
-			data[noData - 1] = _;
-			type[noData - 1] = DICT;
-
-			mesh.push_back(val->_parent);
+			mesh.push_back(_->_parent);
 		}
 	}
 

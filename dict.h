@@ -8,4 +8,4 @@ typedef struct {
 	Obj* _parent;
 } Dict;
 
-Dict* dictMk(Var** data, unsigned int* type, unsigned int no, std::string name = "", glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
+Dict* dictMk(void** data, unsigned int* type, unsigned int no, std::string name = "", glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));

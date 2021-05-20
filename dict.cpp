@@ -7,7 +7,7 @@
 #include "idx.h"
 #include "scn.h"
 
-Dict* dictMk(Var** data, unsigned int* type, unsigned int no, std::string name, glm::vec3 loc, glm::vec3 rot) {
+Dict* dictMk(void** data, unsigned int* type, unsigned int no, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	Dict* _ = (Dict*) malloc(sizeof (Dict));
 	
 	Obj* child[1 + no];
@@ -22,17 +22,15 @@ Dict* dictMk(Var** data, unsigned int* type, unsigned int no, std::string name, 
 
 	// data
 	for (int i = 0; i < no; i++) {
-		Var* var = (Var*) data[i];
-
 		switch (type[i]) {
 			case SCALAR: {
-			 	Idx* idx = (Idx*) var->_ptr;
+				child[1 + i] = ((Idx*) data[i])->_parent;
 
 				break;
 			}
 
 			case ARRAY: {
-				Arr* arr = (Arr*) var->_ptr;
+				child[1 + i] = ((Arr*) data[i])->_parent;
 
 				break;
 			}
