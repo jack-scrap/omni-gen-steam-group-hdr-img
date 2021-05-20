@@ -7,8 +7,9 @@
 
 typedef struct {
 	Cont* _data;
-
 	unsigned int _no;
+
+	unsigned int _i;
 
 	Obj* _parent;
 } Idx;

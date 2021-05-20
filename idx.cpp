@@ -10,6 +10,7 @@ Idx* idxMk(unsigned int i, std::string name, glm::vec3 loc, glm::vec3 rot) {
 
 	_->_data = nullptr;
 	_->_no = 0;
+	_->_i = i;
 
 	Obj* child[2];
 
@@ -36,6 +37,7 @@ Idx* idxMk(unsigned int i, char* c, unsigned int no, std::string name, glm::vec3
 	Idx* _ = (Idx*) malloc(sizeof (Idx));
 
 	_->_no = no;
+	_->_i = i;
 
 	Obj* child[1 + 1 + _->_no];
 
@@ -50,7 +52,7 @@ Idx* idxMk(unsigned int i, char* c, unsigned int no, std::string name, glm::vec3
 	}
 
 	// data
-	for (int i = 0; i < no; i++) {
+	for (int i = 0; i < _->_no; i++) {
 		Cont* byte = contMk(c[i], glm::vec3((layout::stroke * 2) + (2.0 / 2), 1.0, (layout::stroke * 2) + (4.0 / 2)) + glm::vec3(0.0, i * layout::stride[Y], 0.0));
 
 		_->_data = byte;
