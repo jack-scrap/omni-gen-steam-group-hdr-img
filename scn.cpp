@@ -588,11 +588,11 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					for (auto it = lim.begin(); it != lim.end(); ++it) {
 						unsigned int axis;
 						if (it.key() == "X") {
-							axis = 0;
+							axis = X;
 						}
 
 						if (it.key() == "Z") {
-							axis = 2;
+							axis = Z;
 						}
 
 						Lim* _ = limMk(axis, it.value());
