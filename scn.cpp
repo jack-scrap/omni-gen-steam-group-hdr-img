@@ -299,7 +299,8 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	/* data */
-	data = (Var**) malloc(0);
+	data = (Var**) malloc(serial["data"].size() * sizeof (Var*));
+	type = (unsigned int*) malloc(serial["data"].size() * sizeof (unsigned int*));
 
 	for (const auto& pair : serial["data"].items()) {
 		// scalar
@@ -317,11 +318,9 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 				Var* _ = varMk(id, val);
 
+				data[noData] = _;
+				type[noData] = SCALAR;
 				noData++;
-				data = (Var**) realloc(data, noData * sizeof (void*));
-				type = (unsigned int*) realloc(type, noData * sizeof (unsigned int*));
-				data[noData - 1] = _;
-				type[noData - 1] = SCALAR;
 
 				mesh.push_back(val->_parent);
 			}
@@ -354,11 +353,9 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 					Var* _ = varMk(id, val);
 
+					data[noData] = _;
+					type[noData] = ARRAY;
 					noData++;
-					data = (Var**) realloc(data, noData * sizeof (void*));
-					type = (unsigned int*) realloc(type, noData * sizeof (unsigned int*));
-					data[noData - 1] = _;
-					type[noData - 1] = ARRAY;
 
 					mesh.push_back(((Arr*) (((Var*) data[noData - 1])->_ptr))->_parent);
 				}
@@ -492,7 +489,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	/* goal */
-	goal = (Var**) malloc(0);
+	goal = (Var**) malloc(serial["goal"].size() * sizeof (Var*));
 	unsigned int g = 0;
 
 	for (const auto& pair : serial["goal"].items()) {
@@ -557,9 +554,8 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		}
 		Var* _ = varMk(id, val);
 
+		goal[g] = _;
 		g++;
-		goal = (Var**) realloc(goal, g * sizeof (void*));
-		goal[g - 1] = _;
 	}
 
 	// prop
@@ -580,10 +576,10 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	// bound
-	boundRng = (Lim**) malloc(0);
+	boundRng = (Lim**) malloc(serial["bound"]["rng"].size() * sizeof (Lim*));
 	noBoundRng = 0;
 
-	boundArea = (Cone**) malloc(0);
+	boundArea = (Cone**) malloc(serial["bound"]["area"].size() * sizeof (Cone*));
 	noBoundArea = 0;
 
 	for (const auto& entry : serial["bound"].items()) {
@@ -602,9 +598,8 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 						Lim* _ = limMk(axis, it.value());
 
+						boundRng[noBoundRng] = _;
 						noBoundRng++;
-						boundRng = (Lim**) realloc(boundRng, noBoundRng * sizeof (Lim*));
-						boundRng[noBoundRng - 1] = _;
 
 						line.push_back(_->_parent);
 					}
@@ -628,11 +623,10 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 				Cone* _ = coneMk(init, loc);
 
-				noBoundArea++;
-				boundArea = (Cone**) realloc(boundArea, noBoundArea * sizeof (Cone*));
 				for (int i = 0; i < 3; i++) {
 					boundArea[((noBoundArea - 1) * 3) + i] = _;
 				}
+				noBoundArea++;
 
 				mesh.push_back(_->_parent);
 			}
@@ -640,7 +634,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	// control flow
-	streetLight = (StreetLight**) malloc(0);
+	streetLight = (StreetLight**) malloc(serial["ctrl"].size() * sizeof (StreetLight*));
 	noStreetLight = 0;
 
 	for (const auto& entry : serial["ctrl"].items()) {
@@ -652,9 +646,8 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 		StreetLight* _ = streetLightMk(pass, no);
 
+		streetLight[noStreetLight] = _;
 		noStreetLight++;
-		streetLight = (StreetLight**) malloc(noStreetLight * sizeof (StreetLight*));
-		streetLight[noStreetLight - 1] = _;
 
 		mesh.push_back(_->_parent);
 	}
