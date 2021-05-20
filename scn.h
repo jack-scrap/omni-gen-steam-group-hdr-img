@@ -9,7 +9,6 @@
 #include "pt.h"
 #include "cam.h"
 #include "console.h"
-#include "bound.h"
 #include "var.h"
 #include "arr.h"
 #include "lim.h"

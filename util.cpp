@@ -229,28 +229,6 @@ void util::mesh::bound(GLfloat rng[3][2], GLfloat* vtc, unsigned int noVtc) {
 	}
 }
 
-void util::mesh::bound(Obj** obj, unsigned int noObj, GLfloat rng[3][2], glm::mat4 prev) {
-	for (int o = 0; o < noObj; o++) {
-		glm::mat4 acc = prev * obj[o]->_model;
-
-		for (int v = 0; v < 2 * 2 * 2 * 3; v += 3) {
-			glm::vec3 vtx = glm::vec3(acc * glm::vec4(glm::vec3(obj[o]->_bound[v], obj[o]->_bound[v + 1], obj[o]->_bound[v + 2]), 1.0));
-
-			for (int i = 0; i < 3; i++) {
-				if (vtx[i] < rng[i][MIN]) {
-					rng[i][MIN] = vtx[i];
-				}
-
-				if (vtx[i] > rng[i][MAX]) {
-					rng[i][MAX] = vtx[i];
-				}
-			}
-		}
-
-		util::mesh::bound(obj[o]->_child, obj[o]->_noChild, rng, acc);
-	}
-}
-
 std::vector<GLfloat> util::mesh::rect::pos(glm::vec2 sz, unsigned int up, bool norm) {
 	std::vector<GLfloat> _;
 
@@ -320,56 +298,11 @@ glm::vec3 apply(glm::vec3 vtx, glm::mat4 model) {
 bool util::phys::aabb(Obj* p, Obj* q) {
 	bool _ = false;
 
-	for (int e = 0; e < 2; e++) {
-		for (int i = 0; i < 2 * 2 * 2 * 3; i += 3) {
-			glm::vec3 vtx = glm::vec3((e ? q : p)->_bound[i], (e ? q : p)->_bound[i + 1], (e ? q : p)->_bound[i + 2]);
-			glm::vec3 trans = glm::vec3((e ? q : p)->_acc * glm::vec4(vtx, 1.0));
-
-			glm::vec3 bound[3][2] = {
-				glm::vec3((e ? p : q)->_acc * glm::vec4(glm::vec3((e ? p : q)->_rng[X][MIN], 0.0, 0.0), 1.0)),
-				glm::vec3((e ? p : q)->_acc * glm::vec4(glm::vec3((e ? p : q)->_rng[X][MAX], 0.0, 0.0), 1.0)),
-
-				glm::vec3((e ? p : q)->_acc * glm::vec4(glm::vec3(0.0, (e ? p : q)->_rng[Y][MIN], 0.0), 1.0)),
-				glm::vec3((e ? p : q)->_acc * glm::vec4(glm::vec3(0.0, (e ? p : q)->_rng[Y][MAX], 0.0), 1.0)),
-
-				glm::vec3((e ? p : q)->_acc * glm::vec4(glm::vec3(0.0, 0.0, (e ? p : q)->_rng[Z][MIN]), 1.0)),
-				glm::vec3((e ? p : q)->_acc * glm::vec4(glm::vec3(0.0, 0.0, (e ? p : q)->_rng[Z][MAX]), 1.0))
-			};
-			
-			for (int i = 0; i < 3; i++) {
-				if (!(
-					trans[i] > bound[i][MIN][i] &&
-					trans[i] < bound[i][MAX][i]
-				)) {
-					_ = false;
-				}
-			}
-
-			if (_) {
-				break;
-			}
-		}
-
-		if (_) {
-			break;
-		}
-	}
-
 	return _;
 }
 
 bool util::phys::aabbGround(Obj* obj) {
 	bool _ = false;
-
-	for (int i = 0; i < 2 * 2 * 2 * 3; i += 3) {
-		glm::vec3 vtx = glm::vec3(obj->_acc * glm::vec4(glm::vec3(obj->_bound[i], obj->_bound[i + 1], obj->_bound[i + 2]), 1.0));
-
-		if (vtx[Y] <= 0.0) {
-			_ = true;
-
-			break;
-		}
-	}
 
 	return _;
 }

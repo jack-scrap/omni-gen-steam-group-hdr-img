@@ -39,7 +39,6 @@ namespace util {
 		std::vector<GLushort> strip(std::vector<GLushort> idc);
 
 		void bound(GLfloat rng[3][2], GLfloat* vtc, unsigned int noVtc);
-		void bound(Obj** obj, unsigned int noObj, GLfloat rng[3][2], glm::mat4 prev);
 
 		namespace rect {
 			std::vector<GLfloat> pos(glm::vec2 sz, unsigned int up, bool norm);

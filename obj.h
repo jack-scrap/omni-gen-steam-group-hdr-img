@@ -33,7 +33,6 @@ typedef struct Obj {
 		_uni[5];
 
 	GLfloat _rng[3][2];
-	GLfloat _bound[2 * 2 * 2 * 3];
 
 	struct Obj** _child;
 	unsigned int _noChild;
