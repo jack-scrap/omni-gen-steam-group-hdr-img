@@ -21,6 +21,11 @@
 #include "street_light.h"
 #include "road.h"
 
+typedef struct {
+	void* _ptr;
+	size_t _sz;
+} cArr;
+
 Var** data;
 Var** goal;
 unsigned int* type;
