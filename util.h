@@ -7,6 +7,7 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <nlohmann/json.hpp>
 
 #include "obj.h"
 
@@ -69,6 +70,10 @@ namespace util {
 		std::string join(std::vector<std::string> buff);
 
 		std::string pad(std::string buff, unsigned int roof);
+	}
+
+	namespace parse {
+		glm::vec3 vec(nlohmann::json serial);
 	}
 
 	namespace cfg {

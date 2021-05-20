@@ -180,16 +180,12 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		if (entry["name"] == "crane") {
 			glm::vec3 loc = glm::vec3(0.0);
 			if (entry.contains("loc")) {
-				for (int i = 0; i < 3; i++) {
-					loc[i] = entry["loc"][i];
-				}
+				loc = util::parse::vec(entry["loc"]);
 			}
 
 			glm::vec3 rot = glm::vec3(0.0);
 			if (entry.contains("rot")) {
-				for (int i = 0; i < 3; i++) {
-					rot[i] = entry["rot"][i];
-				}
+				rot = util::parse::vec(entry["rot"]);
 			}
 
 			Crane* _ = craneMk(loc, rot);
@@ -212,16 +208,12 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 			glm::vec3 loc = glm::vec3(0.0);
 			if (entry.contains("loc")) {
-				for (int i = 0; i < 3; i++) {
-					loc[i] = entry["loc"][i];
-				}
+				loc = util::parse::vec(entry["loc"]);
 			}
 
 			glm::vec3 rot = glm::vec3(0.0);
 			if (entry.contains("rot")) {
-				for (int i = 0; i < 3; i++) {
-					rot[i] = entry["rot"][i];
-				}
+				rot = util::parse::vec(entry["rot"]);
 			}
 
 			CargoShip* _ = cargoShipMk(init, no, loc, rot);
@@ -244,16 +236,12 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 			glm::vec3 loc = glm::vec3(0.0);
 			if (entry.contains("loc")) {
-				for (int i = 0; i < 3; i++) {
-					loc[i] = entry["loc"][i];
-				}
+				loc = util::parse::vec(entry["loc"]);
 			}
 
 			glm::vec3 rot = glm::vec3(0.0);
 			if (entry.contains("rot")) {
-				for (int i = 0; i < 3; i++) {
-					rot[i] = entry["rot"][i];
-				}
+				rot = util::parse::vec(entry["rot"]);
 			}
 
 			Truck* _ = truckMk(init, no, loc, rot);
@@ -573,16 +561,12 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	for (const auto& entry : serial["prop"]) {
 		glm::vec3 loc = glm::vec3(0.0);
 		if (entry.contains("loc")) {
-			for (int i = 0; i < 3; i++) {
-				loc[i] = entry["loc"][i];
-			}
+			loc = util::parse::vec(entry["loc"]);
 		}
 
 		glm::vec3 rot = glm::vec3(0.0);
 		if (entry.contains("rot")) {
-			for (int i = 0; i < 3; i++) {
-				rot[i] = entry["rot"][i];
-			}
+			rot = util::parse::vec(entry["rot"]);
 		}
 
 		Obj* obj = objMk(entry["name"], "obj", "dir", true, loc, rot);
@@ -634,9 +618,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 				glm::vec3 loc = glm::vec3(0.0);
 				if (entry.contains("loc")) {
-					for (int i = 0; i < 3; i++) {
-						loc[i] = entry["loc"][i];
-					}
+					loc = util::parse::vec(entry["loc"]);
 				}
 
 				Cone* _ = coneMk(init, loc);
