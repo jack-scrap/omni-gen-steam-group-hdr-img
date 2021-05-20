@@ -337,6 +337,19 @@ std::string util::str::pad(std::string buff, unsigned int roof) {
 	return line;
 }
 
+char* util::json::id(nlohmann::json serial) {
+	std::string buff = serial.get<std::string>();
+
+	unsigned int no = buff.size();
+	char* _ = (char*) malloc((no + 1) * sizeof (char));
+	for (int i = 0; i < no; i++) {
+		_[i] = buff[i];
+	}
+	_[no] = '\0';
+	
+	return _;
+}
+
 char util::json::byte(nlohmann::json serial) {
 	return (char) ((int) serial);
 }

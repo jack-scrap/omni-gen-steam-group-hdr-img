@@ -73,6 +73,8 @@ namespace util {
 	}
 
 	namespace json {
+		char* id(nlohmann::json serial);
+
 		char byte(nlohmann::json serial);
 
 		cArr arr(nlohmann::json serial);

@@ -305,11 +305,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			Idx* val = idxMk(0, &init, 1, pair.key());
 
 			for (const auto& pair : serial["data"].items()) {
-				char* id = (char*) malloc((pair.key().size() + 1) * sizeof (char));
-				for (int i = 0; i < pair.key().size(); i++) {
-					id[i] = pair.key()[i];
-				}
-				id[pair.key().size()] = '\0';
+				char* id = util::json::id(pair.key());
 
 				Var* _ = varMk(id, val);
 
@@ -332,11 +328,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 					Arr* val = arrMk((char*) init._ptr, init._x, pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))));
 
-					char* id = (char*) malloc((pair.key().size() + 1) * sizeof (char));
-					for (int i = 0; i < pair.key().size(); i++) {
-						id[i] = pair.key()[i];
-					}
-					id[pair.key().size()] = '\0';
+					char* id = util::json::id(pair.key());
 
 					Var* _ = varMk(id, val);
 
@@ -353,11 +345,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					if (pair.value()[0][0].type() == nlohmann::json::value_t::number_unsigned) {
 						cArr init = util::json::matr2(pair.value());
 
-						char* id = (char*) malloc((pair.key().size() + 1) * sizeof (char));
-						for (int i = 0; i < pair.key().size(); i++) {
-							id[i] = pair.key()[i];
-						}
-						id[pair.key().size()] = '\0';
+						char* id = util::json::id(pair.key());
 
 						Arr* val = arrMk((char*) init._ptr, init._x, init._y, pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))));
 
@@ -372,11 +360,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					if (pair.value()[0][0].type() == nlohmann::json::value_t::array) {
 						cArr init = util::json::matr3(pair.value());
 
-						char* id = (char*) malloc((pair.key().size() + 1) * sizeof (char));
-						for (int i = 0; i < pair.key().size(); i++) {
-							id[i] = pair.key()[i];
-						}
-						id[pair.key().size()] = '\0';
+						char* id = util::json::id(pair.key());
 
 						Arr* val = arrMk((char*) init._ptr, init._x, init._y, init._z, pair.key());
 
@@ -444,11 +428,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	unsigned int g = 0;
 
 	for (const auto& pair : serial["goal"].items()) {
-		char* id = (char*) malloc((pair.key().size() + 1) * sizeof (char));
-		for (int i = 0; i < pair.key().size(); i++) {
-			id[i] = pair.key().size();
-		}
-		id[pair.key().size()] = '\0';
+		char* id = util::json::id(pair.key());
 
 		void* val;
 
