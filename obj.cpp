@@ -18,6 +18,7 @@
 #include "math.h"
 #include "state.h"
 #include "phys.h"
+#include "omni.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
@@ -192,7 +193,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLfloat* st, unsigned int noSt, GLu
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	} else {
-		std::cout << "Texture error: Failed to load" << std::endl;
+		omni::err("Texture failed to load");
 	}
 
 	glBindVertexArray(_->_mesh->_id[Mesh::VAO]);
@@ -235,7 +236,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLfloat* st, unsigned int noSt, GLu
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	} else {
-		std::cout << "Texture error: Failed to load" << std::endl;
+		omni::err("Texture failed to load");
 	}
 
 	glBindVertexArray(_->_mesh->_id[Mesh::VAO]);
