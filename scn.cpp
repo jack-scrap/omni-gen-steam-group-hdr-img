@@ -328,7 +328,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 				// 1D
 				if (pair.value()[0].type() == nlohmann::json::value_t::number_unsigned) {
-					cBuff init = util::json::arr(pair.value());
+					cArr init = util::json::arr(pair.value());
 
 					Arr* val = arrMk((char*) init._ptr, init._x, pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))));
 
