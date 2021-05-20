@@ -456,11 +456,13 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		// dictionary
 		if (pair.value().type() == nlohmann::json::value_t::object) {
 			Var** init = (Var**) malloc(0);
+			unsigned int* type = (unsigned int*) malloc(0);
 			unsigned int no = 0;
 
 			for (const auto& pair : pair.value().items()) {
 				// identifier
 				char* id = (char*) malloc((pair.key().size() + 1) * sizeof (char));
+				unsigned int t;
 				for (int i = 0; i < pair.key().size(); i++) {
 					id[i] = (char) ((int) pair.key()[i]);
 				}
@@ -473,6 +475,8 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				if (pair.value().type() == nlohmann::json::value_t::number_unsigned) {
 					val = (char*) malloc(sizeof (char));
 					val[0] = (char) ((int) pair.value());
+
+					t = SCALAR;
 				}
 
 				// array
@@ -481,13 +485,19 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					for (int i = 0; i < pair.value().size(); i++) {
 						val[i] = (char) ((int) pair.value()[i]);
 					}
+
+					t = ARRAY;
 				}
 
 				Var* _ = varMk(id, val);
 
 				no++;
 				init = (Var**) realloc(init, no * sizeof (Var*));
+				type = (unsigned int*) realloc(type, no * sizeof (unsigned int));
 				init[no - 1] = _;
+				type[no - 1] = t;
+
+				t = DICT;
 			}
 
 			char* id = (char*) malloc((pair.key().size() + 1) * sizeof (char));
@@ -496,7 +506,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			}
 			id[pair.key().size()] = '\0';
 
-			Dict* val = dictMk(init, no, pair.key());
+			Dict* val = dictMk(init, type, no, pair.key());
 
 			Var* _ = varMk(id, val);
 

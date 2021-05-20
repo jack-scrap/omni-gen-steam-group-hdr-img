@@ -4,11 +4,31 @@
 #include "str.h"
 #include "layout.h"
 #include "border.h"
+#include "idx.h"
+#include "scn.h"
 
-Dict* dictMk(Var** data, unsigned int no, std::string name, glm::vec3 loc, glm::vec3 rot) {
+Dict* dictMk(Var** data, unsigned int* type, unsigned int no, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	Dict* _ = (Dict*) malloc(sizeof (Dict));
-
+	
 	Obj* child[1];
+
+	for (int i = 0; i < no; i++) {
+		Var* var = (Var*) data[i];
+
+		switch (type[i]) {
+			case SCALAR: {
+			 	Idx* idx = (Idx*) var->_ptr;
+
+				break;
+			}
+
+			case ARRAY: {
+				Arr* arr = (Arr*) var->_ptr;
+
+				break;
+			}
+		}
+	}
 
 	// identifier
 	if (!name.empty()) {
