@@ -1,14 +1,14 @@
 {
 	"data": {
 		"state": {
-			"asdf": 3,
-			"hjkl": 7
+			"state": 3,
+			"other_state": 7
 		}
 	},
 	"goal": {
 		"state": {
-			"asdf": 7,
-			"hjkl": 3
+			"state": 7,
+			"other_state": 3
 		}
 	},
 	"vehicle": [
