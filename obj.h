@@ -41,7 +41,8 @@ typedef struct Obj {
 
 	enum attr {
 		POS,
-		ST
+		ST,
+		NORM
 	};
 
 	enum uni {

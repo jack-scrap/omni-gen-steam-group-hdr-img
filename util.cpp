@@ -196,6 +196,24 @@ std::vector<GLfloat> util::mesh::rd::st(std::string name) {
 	return _;
 }
 
+std::vector<GLfloat> util::mesh::rd::norm(std::string name) {
+	std::vector<GLfloat> _;
+
+	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>("res/obj/" + name + ".obj");
+
+	for (const std::string& l : buff) {
+		std::vector<std::string> tok = util::str::split(l, ' ');
+
+		if (tok[0] == "vn") {
+			for (int i = 1; i < 1 + 3; i++) {
+				_.push_back(std::stof(tok[i]));
+			}
+		}
+	}
+
+	return _;
+}
+
 std::vector<GLushort> util::mesh::strip(std::vector<GLushort> idc) {
 	std::vector<GLushort> _;
 
