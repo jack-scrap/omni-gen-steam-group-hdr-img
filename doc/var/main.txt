@@ -50,18 +50,18 @@ In the above snippet, the literal `3` is converted into a string.
 The `del` operator will delete the variable provided to it by name.
 
 `
-asdf = 3
+var = 3
 
-del asdf
+del var
 `
 
 The variable has been freed, and is no longer accessible.
 
 ## Lists
 ```
-asdf = [3, 7, 12]
+var = [3, 7, 12]
 
-del asdf[0]
+del var[0]
 ```
 
 ## Dictionaries
@@ -77,11 +77,11 @@ del dict['attr']
 ## Objects
 ```
 class Class:
-	_asdf = 3
+	_var = 3
 
 obj = Class()
 
-del asdf._asdf
+del obj._var
 ```
 
 # Global

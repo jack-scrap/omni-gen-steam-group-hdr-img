@@ -4,7 +4,7 @@ Tupes, however are immutable.
 The elements will remain the same, and new elements may not be added or removed.
 
 # Creating
-`(3, 'asdf')`
+`(3, 'Text')`
 
 # Accessing
-(3, 'asdf')[0]
+(3, 'Text')[0]
