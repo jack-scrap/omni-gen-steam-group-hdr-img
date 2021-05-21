@@ -251,14 +251,14 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					strip[i + 1]
 				};
 
-				GLfloat vtc[2 * 3];
+				GLfloat vtc[2][3];
 				for (int p = 0; p < 2; p++) {
 					for (int a = 0; a < 3; a++) {
-						vtc[(p * 3) + a] = serial["road"]["node"][pt[p]][a];
+						vtc[p][a] = serial["road"]["node"][pt[p]][a];
 					}
 				}
 
-				line.push_back(lineMk(vtc, "obj", "thick", "solid"));
+				line.push_back(lineMk((GLfloat*) vtc, "obj", "thick", "solid"));
 			}
 
 			if (strip[1].type() == nlohmann::json::value_t::array) {
@@ -268,14 +268,14 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 						no
 					};
 
-					GLfloat vtc[2 * 3];
+					GLfloat vtc[2][3];
 					for (int p = 0; p < 2; p++) {
 						for (int a = 0; a < 3; a++) {
-							vtc[(p * 3) + a] = serial["road"]["node"][pt[p]][a];
+							vtc[p][a] = serial["road"]["node"][pt[p]][a];
 						}
 					}
 
-					line.push_back(lineMk(vtc, "obj", "thick", "solid"));
+					line.push_back(lineMk((GLfloat*) vtc, "obj", "thick", "solid"));
 				}
 			}
 		}
