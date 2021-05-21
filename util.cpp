@@ -283,7 +283,7 @@ std::vector<GLushort> util::mesh::rect::idc() {
 	return _;
 }
 
-std::vector<GLfloat> util::mesh::norm::face(std::vector<glm::vec3> vtc) {
+std::vector<GLfloat> util::mesh::gen::normTri(std::vector<glm::vec3> vtc) {
 	std::vector<GLfloat> _;
 
 	// get edges
@@ -302,32 +302,6 @@ std::vector<GLfloat> util::mesh::norm::face(std::vector<glm::vec3> vtc) {
 		}
 
 		return _;
-}
-
-std::vector<GLfloat> util::mesh::norm::cont(std::vector<GLfloat> vtc, std::vector<GLushort> idc) {
-	std::vector<GLfloat> _;
-
-	for (int i = 0; i < idc.size(); i += 3) {
-		// indices
-		int
-			idxA = idc[i] * 3,
-			idxB = idc[i + 1] * 3,
-			idxC = idc[i + 2] * 3;
-
-		std::vector<GLfloat> norm = util::mesh::norm::face({
-			glm::vec3(vtc[idxA], vtc[idxA + 1], vtc[idxA + 2]),
-			glm::vec3(vtc[idxB], vtc[idxB + 1], vtc[idxB + 2]),
-			glm::vec3(vtc[idxC], vtc[idxC + 1], vtc[idxC + 2])
-		});
-
-		for (int i = 0; i < 3; i++) {
-			for (int a = 0; a < 3; a++) {
-				_.push_back(norm[a]);
-			}
-		}
-	}
-
-	return _;
 }
 
 std::vector<GLushort> util::mesh::rd::idc(std::string name, unsigned int attr) {

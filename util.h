@@ -46,9 +46,8 @@ namespace util {
 			std::vector<GLushort> idc();
 		}
 
-		namespace norm {
-			std::vector<GLfloat> face(std::vector<glm::vec3> vtc);
-			std::vector<GLfloat> cont(std::vector<GLfloat> vtc, std::vector<GLushort> idc);
+		namespace gen {
+			std::vector<GLfloat> normTri(std::vector<glm::vec3> vtc);
 		}
 
 		namespace rd {
