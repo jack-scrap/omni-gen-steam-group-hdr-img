@@ -46,6 +46,10 @@ namespace util {
 			std::vector<GLushort> idc();
 		}
 
+		namespace norm {
+			std::vector<GLfloat> face(std::vector<GLfloat> vtc, std::vector<GLushort> idc);
+		}
+
 		namespace rd {
 			std::vector<GLfloat> vtc(std::string name);
 			std::vector<GLfloat> st(std::string name);

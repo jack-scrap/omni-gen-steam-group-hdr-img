@@ -283,6 +283,44 @@ std::vector<GLushort> util::mesh::rect::idc() {
 	return _;
 }
 
+std::vector<GLfloat> util::mesh::norm::face(std::vector<GLfloat> vtc, std::vector<GLushort> idc) {
+	std::vector<GLfloat> _;
+
+	for (int i = 0; i < idc.size(); i += 3) {
+		// indices
+		int
+			idxA = idc[i] * 3,
+			idxB = idc[i + 1] * 3,
+			idxC = idc[i + 2] * 3;
+
+		// points
+		glm::vec3 pt[3] = {
+			glm::vec3(vtc[idxA], vtc[idxA + 1], vtc[idxA + 2]),
+			glm::vec3(vtc[idxB], vtc[idxB + 1], vtc[idxB + 2]),
+			glm::vec3(vtc[idxC], vtc[idxC + 1], vtc[idxC + 2])
+		};
+
+		// get edges
+		glm::vec3
+			u = pt[1] - pt[0],
+			v = pt[2] - pt[0];
+
+		// calculate cross product
+		glm::vec3 orth = glm::cross(u, v);
+
+		// normalize
+		glm::vec3 norm = glm::normalize(orth);
+
+		for (int i = 0; i < 3; i++) {
+			for (int a = 0; a < 3; a++) {
+				_.push_back(norm[a]);
+			}
+		}
+	}
+
+	return _;
+}
+
 std::vector<GLushort> util::mesh::rd::idc(std::string name, unsigned int attr) {
 	std::vector<GLushort> obj;
 

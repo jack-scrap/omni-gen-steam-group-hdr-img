@@ -5,6 +5,8 @@
 #include <vector>
 #include <string>
 #include <glm/gtc/type_ptr.hpp>
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/string_cast.hpp>
 
 #include "scn.h"
 #include "util.h"
