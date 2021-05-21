@@ -198,13 +198,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		}
 
 		if (entry["name"] == "cargo_ship") {
-			char* init = (char*) malloc(entry["data"].size() * sizeof (char));
-			unsigned int no = 0;
-			for (const auto& byte : entry["data"]) {
-				init[no] = (char) ((int) byte);
-
-				no++;
-			}
+			cArr init = util::json::arr(entry["data"]);
 
 			glm::vec3 loc = glm::vec3(0.0);
 			if (entry.contains("loc")) {
@@ -216,7 +210,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				rot = util::json::vec(entry["rot"]);
 			}
 
-			CargoShip* _ = cargoShipMk(init, no, loc, rot);
+			CargoShip* _ = cargoShipMk((char*) init._ptr, init._x * init._y, loc, rot);
 
 			noCargoShip++;
 			cargoShip = (CargoShip**) realloc(cargoShip, noCargoShip * sizeof (CargoShip*));
@@ -226,13 +220,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		}
 
 		if (entry["name"] == "truck") {
-			char* init = (char*) malloc(entry["data"].size() * sizeof (char));
-			unsigned int no = 0;
-			for (const auto& _ : entry["data"]) {
-				init[no] = (char) ((int) _);
-
-				no++;
-			}
+			cArr init = util::json::arr(entry["data"]);
 
 			glm::vec3 loc = glm::vec3(0.0);
 			if (entry.contains("loc")) {
@@ -244,7 +232,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				rot = util::json::vec(entry["rot"]);
 			}
 
-			Truck* _ = truckMk(init, no, loc, rot);
+			Truck* _ = truckMk((char*) init._ptr, init._x, loc, rot);
 
 			noTruck++;
 			truck = (Truck**) realloc(truck, noTruck * sizeof (Truck*));
@@ -397,21 +385,6 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					t = SCALAR;
 				}
 
-				// array
-				if (pair.value().type() == nlohmann::json::value_t::array) {
-					// 1D
-					if (pair.value()[0].type() == nlohmann::json::value_t::number_unsigned) {
-						unsigned int no = pair.value();
-						char* init = (char*) malloc(no * sizeof (char));
-						for (int i = 0; i < no; i++) {
-							init[i] = (char) ((int) pair.value()[i]);
-						}
-
-						_ = idxMk(0, init, no);
-						t = ARRAY;
-					}
-				}
-
 				data[no] = _;
 				type[no] = t;
 				no++;
@@ -445,12 +418,9 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 			// 1D
 			if (cont[0].type() == nlohmann::json::value_t::number_unsigned) {
-				char* init = (char*) malloc(cont.size() * sizeof (char));
-				for (int i = 0; i < cont.size(); i++) {
-					init[i] = (char) ((int) cont[i]);
-				}
+				cArr init = util::json::arr(pair.value());
 
-				val = arrMk(init, cont.size(), pair.key());
+				val = arrMk((char*) init._ptr, init._x, pair.key());
 			}
 
 			if (cont[0].type() == nlohmann::json::value_t::array) {
