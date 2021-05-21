@@ -282,9 +282,10 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	/* data */
+	// initial
 	util::json::scope(serial, mesh);
 
-	/* goal */
+	// desired
 	util::json::scope(serial, mesh);
 
 	// prop
