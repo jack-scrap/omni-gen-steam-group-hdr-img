@@ -11,6 +11,7 @@
 
 #include "obj.h"
 #include "c_arr.h"
+#include "var.h"
 
 namespace util {
 	namespace fs {
@@ -87,6 +88,8 @@ namespace util {
 		cArr matr3(nlohmann::json serial);
 
 		glm::vec3 vec(nlohmann::json serial);
+
+		void scope(nlohmann::json serial, std::vector<Obj*>& mesh);
 	}
 
 	namespace cfg {
