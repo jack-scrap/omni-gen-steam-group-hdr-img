@@ -111,6 +111,123 @@ unsigned int noStreetLightGet() {
 	return noStreetLight;
 }
 
+void parseScope(nlohmann::json serial, Var** data, unsigned int* type) {
+	data = (Var**) malloc(serial["data"].size() * sizeof (Var*));
+	type = (unsigned int*) malloc(serial["data"].size() * sizeof (unsigned int*));
+
+	for (const auto& pair : serial["data"].items()) {
+		// scalar
+		if (pair.value().type() == nlohmann::json::value_t::number_unsigned) {
+			char init = util::json::byte(pair.value());
+
+			Idx* val = idxMk(0, &init, 1, pair.key());
+
+			for (const auto& pair : serial["data"].items()) {
+				char* id = util::json::id(pair.key());
+
+				Var* _ = varMk(id, val);
+
+				data[noData] = _;
+				type[noData] = SCALAR;
+				noData++;
+
+				mesh.push_back(val->_parent);
+			}
+		}
+
+		// array
+		if (pair.value().type() == nlohmann::json::value_t::array) {
+			for (const auto& pair : serial["data"].items()) {
+				const auto cont = pair.value();
+
+				// 1D
+				if (pair.value()[0].type() == nlohmann::json::value_t::number_unsigned) {
+					cArr init = util::json::arr(pair.value());
+
+					Arr* val = arrMk((char*) init._ptr, init._x, pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))));
+
+					char* id = util::json::id(pair.key());
+
+					Var* _ = varMk(id, val);
+
+					data[noData] = _;
+					type[noData] = ARRAY;
+					noData++;
+
+					mesh.push_back(((Arr*) (((Var*) data[noData - 1])->_ptr))->_parent);
+				}
+
+				// matrix
+				if (pair.value()[0].type() == nlohmann::json::value_t::array) {
+					// 2D
+					if (pair.value()[0][0].type() == nlohmann::json::value_t::number_unsigned) {
+						cArr init = util::json::matr2(pair.value());
+
+						char* id = util::json::id(pair.key());
+
+						Arr* val = arrMk((char*) init._ptr, init._x, init._y, pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))));
+
+						noData++;
+						Var* _ = varMk(id, val);
+						data[noData - 1] = _;
+
+						mesh.push_back(((Arr*) (((Var*) data[noData - 1])->_ptr))->_parent);
+					}
+
+					// 3D
+					if (pair.value()[0][0].type() == nlohmann::json::value_t::array) {
+						cArr init = util::json::matr3(pair.value());
+
+						char* id = util::json::id(pair.key());
+
+						Arr* val = arrMk((char*) init._ptr, init._x, init._y, init._z, pair.key());
+
+						Var* _ = varMk(id, val);
+
+						noData++;
+						data = (Var**) realloc(data, noData * sizeof (void*));
+						type = (unsigned int*) realloc(type, noData * sizeof (unsigned int*));
+						data[noData - 1] = _;
+						type[noData - 1] = ARRAY;
+
+						mesh.push_back(val->_parent);
+					}
+				}
+			}
+		}
+
+		// dictionary
+		if (pair.value().type() == nlohmann::json::value_t::object) {
+			unsigned int no = pair.value().size();
+			void** data = (void**) malloc(no * sizeof (void*));
+			unsigned int* type = (unsigned int*) malloc(no * sizeof (unsigned int));
+
+			for (const auto& pair : pair.value().items()) {
+				void* _;
+				unsigned int t;
+
+				// scalar
+				if (pair.value().type() == nlohmann::json::value_t::number_unsigned) {
+					char* init = (char*) malloc(sizeof (char));
+					init[0] = (char) ((int) pair.value());
+
+					_ = idxMk(0, init, 1);
+					t = SCALAR;
+				}
+
+				data[no] = _;
+				type[no] = t;
+				no++;
+			}	
+
+			Dict* _ = dictMk(data, type, no);
+
+			mesh.push_back(_->_parent);
+		}
+	}
+
+}
+
 void scn::init(unsigned int stage, unsigned int lvl) {
 	nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("lvl/" + omni::stage[stage] + "/" + std::to_string(lvl) + ".json"));
 
@@ -282,168 +399,10 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	/* data */
-	data = (Var**) malloc(serial["data"].size() * sizeof (Var*));
-	type = (unsigned int*) malloc(serial["data"].size() * sizeof (unsigned int*));
-
-	for (const auto& pair : serial["data"].items()) {
-		// scalar
-		if (pair.value().type() == nlohmann::json::value_t::number_unsigned) {
-			char init = util::json::byte(pair.value());
-
-			Idx* val = idxMk(0, &init, 1, pair.key());
-
-			for (const auto& pair : serial["data"].items()) {
-				char* id = util::json::id(pair.key());
-
-				Var* _ = varMk(id, val);
-
-				data[noData] = _;
-				type[noData] = SCALAR;
-				noData++;
-
-				mesh.push_back(val->_parent);
-			}
-		}
-
-		// array
-		if (pair.value().type() == nlohmann::json::value_t::array) {
-			for (const auto& pair : serial["data"].items()) {
-				const auto cont = pair.value();
-
-				// 1D
-				if (pair.value()[0].type() == nlohmann::json::value_t::number_unsigned) {
-					cArr init = util::json::arr(pair.value());
-
-					Arr* val = arrMk((char*) init._ptr, init._x, pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))));
-
-					char* id = util::json::id(pair.key());
-
-					Var* _ = varMk(id, val);
-
-					data[noData] = _;
-					type[noData] = ARRAY;
-					noData++;
-
-					mesh.push_back(((Arr*) (((Var*) data[noData - 1])->_ptr))->_parent);
-				}
-
-				// matrix
-				if (pair.value()[0].type() == nlohmann::json::value_t::array) {
-					// 2D
-					if (pair.value()[0][0].type() == nlohmann::json::value_t::number_unsigned) {
-						cArr init = util::json::matr2(pair.value());
-
-						char* id = util::json::id(pair.key());
-
-						Arr* val = arrMk((char*) init._ptr, init._x, init._y, pair.key(), glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))));
-
-						noData++;
-						Var* _ = varMk(id, val);
-						data[noData - 1] = _;
-
-						mesh.push_back(((Arr*) (((Var*) data[noData - 1])->_ptr))->_parent);
-					}
-
-					// 3D
-					if (pair.value()[0][0].type() == nlohmann::json::value_t::array) {
-						cArr init = util::json::matr3(pair.value());
-
-						char* id = util::json::id(pair.key());
-
-						Arr* val = arrMk((char*) init._ptr, init._x, init._y, init._z, pair.key());
-
-						Var* _ = varMk(id, val);
-
-						noData++;
-						data = (Var**) realloc(data, noData * sizeof (void*));
-						type = (unsigned int*) realloc(type, noData * sizeof (unsigned int*));
-						data[noData - 1] = _;
-						type[noData - 1] = ARRAY;
-
-						mesh.push_back(val->_parent);
-					}
-				}
-			}
-		}
-
-		// dictionary
-		if (pair.value().type() == nlohmann::json::value_t::object) {
-			unsigned int no = pair.value().size();
-			void** data = (void**) malloc(no * sizeof (void*));
-			unsigned int* type = (unsigned int*) malloc(no * sizeof (unsigned int));
-
-			for (const auto& pair : pair.value().items()) {
-				void* _;
-				unsigned int t;
-
-				// scalar
-				if (pair.value().type() == nlohmann::json::value_t::number_unsigned) {
-					char* init = (char*) malloc(sizeof (char));
-					init[0] = (char) ((int) pair.value());
-
-					_ = idxMk(0, init, 1);
-					t = SCALAR;
-				}
-
-				data[no] = _;
-				type[no] = t;
-				no++;
-			}	
-
-			Dict* _ = dictMk(data, type, no);
-
-			mesh.push_back(_->_parent);
-		}
-	}
+	parseScope(serial, data, type);
 
 	/* goal */
-	goal = (Var**) malloc(serial["goal"].size() * sizeof (Var*));
-	unsigned int g = 0;
-
-	for (const auto& pair : serial["goal"].items()) {
-		char* id = util::json::id(pair.key());
-
-		void* val;
-
-		// scalar
-		if (pair.value().type() == nlohmann::json::value_t::number_unsigned) {
-			char init = util::json::byte(pair.value());
-
-			val = idxMk(0, &init, 1, pair.key());
-		}
-
-		// array
-		if (pair.value().type() == nlohmann::json::value_t::array) {
-			const auto cont = pair.value();
-
-			// 1D
-			if (cont[0].type() == nlohmann::json::value_t::number_unsigned) {
-				cArr init = util::json::arr(pair.value());
-
-				val = arrMk((char*) init._ptr, init._x, pair.key());
-			}
-
-			if (cont[0].type() == nlohmann::json::value_t::array) {
-				// 2D
-				if (cont[0][0].type() == nlohmann::json::value_t::number_unsigned) {
-					cArr init = util::json::matr2(pair.value());
-
-					val = arrMk((char*) init._ptr, init._x, init._y, pair.key());
-				}
-
-				// 3D
-				if (cont[0][0].type() == nlohmann::json::value_t::array) {
-					cArr init = util::json::matr3(pair.value());
-
-					val = arrMk((char*) init._ptr, init._x, init._y, init._z, pair.key());
-				}
-			}
-		}
-		Var* _ = varMk(id, val);
-
-		goal[g] = _;
-		g++;
-	}
+	parseScope(serial, goal, type);
 
 	// prop
 	for (const auto& entry : serial["prop"]) {
