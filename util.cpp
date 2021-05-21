@@ -283,7 +283,28 @@ std::vector<GLushort> util::mesh::rect::idc() {
 	return _;
 }
 
-std::vector<GLfloat> util::mesh::norm::face(std::vector<GLfloat> vtc, std::vector<GLushort> idc) {
+std::vector<GLfloat> util::mesh::norm::face(std::vector<glm::vec3> vtc) {
+	std::vector<GLfloat> _;
+
+	// get edges
+	glm::vec3
+		u = vtc[1] - vtc[0],
+		v = vtc[2] - vtc[0];
+
+		// calculate cross product
+		glm::vec3 orth = glm::cross(u, v);
+
+		// normalize
+		glm::vec3 norm = glm::normalize(orth);
+
+		for (int i = 0; i < 3; i++) {
+			_.push_back(norm[i]);
+		}
+
+		return _;
+}
+
+std::vector<GLfloat> util::mesh::norm::cont(std::vector<GLfloat> vtc, std::vector<GLushort> idc) {
 	std::vector<GLfloat> _;
 
 	for (int i = 0; i < idc.size(); i += 3) {
@@ -293,23 +314,11 @@ std::vector<GLfloat> util::mesh::norm::face(std::vector<GLfloat> vtc, std::vecto
 			idxB = idc[i + 1] * 3,
 			idxC = idc[i + 2] * 3;
 
-		// points
-		glm::vec3 pt[3] = {
+		std::vector<GLfloat> norm = util::mesh::norm::face({
 			glm::vec3(vtc[idxA], vtc[idxA + 1], vtc[idxA + 2]),
 			glm::vec3(vtc[idxB], vtc[idxB + 1], vtc[idxB + 2]),
 			glm::vec3(vtc[idxC], vtc[idxC + 1], vtc[idxC + 2])
-		};
-
-		// get edges
-		glm::vec3
-			u = pt[1] - pt[0],
-			v = pt[2] - pt[0];
-
-		// calculate cross product
-		glm::vec3 orth = glm::cross(u, v);
-
-		// normalize
-		glm::vec3 norm = glm::normalize(orth);
+		});
 
 		for (int i = 0; i < 3; i++) {
 			for (int a = 0; a < 3; a++) {
