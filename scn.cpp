@@ -316,17 +316,17 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		if (entry.key() == "rng") {
 			for (const auto& rng : entry.value()) {
 				for (const auto& lim : rng) {
-					for (auto it = lim.begin(); it != lim.end(); ++it) {
+					for (const auto& pair : lim.items()) {
 						unsigned int axis;
-						if (it.key() == "X") {
+						if (pair.key() == "X") {
 							axis = X;
 						}
 
-						if (it.key() == "Z") {
+						if (pair.key() == "Z") {
 							axis = Z;
 						}
 
-						Lim* _ = limMk(axis, it.value());
+						Lim* _ = limMk(axis, pair.value());
 
 						boundRng[noBoundRng] = _;
 						noBoundRng++;
