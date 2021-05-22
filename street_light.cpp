@@ -14,10 +14,10 @@ StreetLight* streetLightMk(bool* pass, unsigned int no, glm::vec3 loc, glm::vec3
 
 	Obj* child[_->_no];
 	for (int i = 0; i < _->_no; i++) {
-		child[i] = objMk("go", "obj", "solid", true, glm::vec3(-((0.2 / 2) + (layout::pad * 2)), 6.0 + 1.0, i * 2.0), glm::vec3(0.0, M_PI / 2, 0.0));
+		child[i] = objMk("street_light/go", "obj", "solid", true, glm::vec3(-((0.2 / 2) + (layout::pad * 2)), 6.0 + 1.0, i * 2.0), glm::vec3(0.0, M_PI / 2, 0.0));
 	}
 
-	_->_parent = objMk("street_light", "obj", "dir", false, child, sizeof child / sizeof *child, loc, rot);
+	_->_parent = objMk("street_light/body", "obj", "dir", false, child, sizeof child / sizeof *child, loc, rot);
 
 	return _;
 }
