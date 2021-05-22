@@ -453,20 +453,20 @@ void util::json::scope(nlohmann::json serial, std::vector<Obj*>& mesh) {
 	type = (unsigned int*) malloc(_.size() * sizeof (unsigned int*));
 
 	for (const auto& pair : _.items()) {
+		glm::vec3 loc = glm::vec3(0.0);
+		if (pair.value().contains("loc")) {
+			loc = util::json::vec(pair.value()["loc"]);
+		}
+
+		glm::vec3 rot = glm::vec3(0.0);
+		if (pair.value().contains("rot")) {
+			rot = util::json::vec(pair.value()["rot"]);
+		}
+
 		switch (pair.value()["block"].type()) {
 			// scalar
 			case nlohmann::json::value_t::number_unsigned: {
 				char init = util::json::byte(pair.value()["block"]);
-
-				glm::vec3 loc = glm::vec3(0.0);
-				if (pair.value().contains("loc")) {
-					loc = util::json::vec(pair.value()["loc"]);
-				}
-
-				glm::vec3 rot = glm::vec3(0.0);
-				if (pair.value().contains("rot")) {
-					rot = util::json::vec(pair.value()["rot"]);
-				}
 
 				Idx* val = idxMk(0, &init, 1, pair.key(), loc, rot);
 
@@ -488,20 +488,20 @@ void util::json::scope(nlohmann::json serial, std::vector<Obj*>& mesh) {
 			// array
 			case nlohmann::json::value_t::array: {
 				for (const auto& pair : _.items()) {
+					glm::vec3 loc = glm::vec3(0.0);
+					if (pair.value().contains("loc")) {
+						loc = util::json::vec(pair.value()["loc"]);
+					}
+
+					glm::vec3 rot = glm::vec3(0.0);
+					if (pair.value().contains("rot")) {
+						rot = util::json::vec(pair.value()["rot"]);
+					}
+
 					switch (pair.value()["block"][0].type()) {
 						// 1D
 						case nlohmann::json::value_t::number_unsigned: {
 							cArr init = util::json::arr(pair.value()["block"]);
-
-							glm::vec3 loc = glm::vec3(0.0);
-							if (pair.value().contains("loc")) {
-							  loc = util::json::vec(pair.value()["loc"]);
-							}
-
-							glm::vec3 rot = glm::vec3(0.0);
-							if (pair.value().contains("rot")) {
-							  rot = util::json::vec(pair.value()["rot"]);
-							}
 
 							Arr* val = arrMk((char*) init._ptr, init._x, pair.key(), loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
 
@@ -524,16 +524,6 @@ void util::json::scope(nlohmann::json serial, std::vector<Obj*>& mesh) {
 								case nlohmann::json::value_t::number_unsigned: {
 									cArr init = util::json::matr2(pair.value()["block"]);
 
-									glm::vec3 loc = glm::vec3(0.0);
-									if (pair.value().contains("loc")) {
-										loc = util::json::vec(pair.value()["loc"]);
-									}
-
-									glm::vec3 rot = glm::vec3(0.0);
-									if (pair.value().contains("rot")) {
-										rot = util::json::vec(pair.value()["rot"]);
-									}
-
 									char* id = util::json::id(pair.key());
 
 									Arr* val = arrMk((char*) init._ptr, init._x, init._y, pair.key(), loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
@@ -549,16 +539,6 @@ void util::json::scope(nlohmann::json serial, std::vector<Obj*>& mesh) {
 
 								case nlohmann::json::value_t::array: {
 									cArr init = util::json::matr3(pair.value()["block"]);
-
-									glm::vec3 loc = glm::vec3(0.0);
-									if (pair.value().contains("loc")) {
-										loc = util::json::vec(pair.value()["loc"]);
-									}
-
-									glm::vec3 rot = glm::vec3(0.0);
-									if (pair.value().contains("rot")) {
-										rot = util::json::vec(pair.value()["rot"]);
-									}
 
 									char* id = util::json::id(pair.key());
 
@@ -591,16 +571,6 @@ void util::json::scope(nlohmann::json serial, std::vector<Obj*>& mesh) {
 				unsigned int no = pair.value()["block"].size();
 				void** data = (void**) malloc(no * sizeof (void*));
 				unsigned int* type = (unsigned int*) malloc(no * sizeof (unsigned int));
-
-				glm::vec3 loc = glm::vec3(0.0);
-				if (pair.value().contains("loc")) {
-					loc = util::json::vec(pair.value()["loc"]);
-				}
-
-				glm::vec3 rot = glm::vec3(0.0);
-				if (pair.value().contains("rot")) {
-					rot = util::json::vec(pair.value()["rot"]);
-				}
 
 				for (const auto& pair : pair.value()["block"].items()) {
 					void* _;

@@ -177,17 +177,17 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	noCargoShip = 0;
 
 	for (const auto& entry : serial["vehicle"]) {
+		glm::vec3 loc = glm::vec3(0.0);
+		if (entry.contains("loc")) {
+			loc = util::json::vec(entry["loc"]);
+		}
+
+		glm::vec3 rot = glm::vec3(0.0);
+		if (entry.contains("rot")) {
+			rot = util::json::vec(entry["rot"]);
+		}
+
 		if (entry["name"] == "crane") {
-			glm::vec3 loc = glm::vec3(0.0);
-			if (entry.contains("loc")) {
-				loc = util::json::vec(entry["loc"]);
-			}
-
-			glm::vec3 rot = glm::vec3(0.0);
-			if (entry.contains("rot")) {
-				rot = util::json::vec(entry["rot"]);
-			}
-
 			Crane* _ = craneMk(loc, rot);
 
 			noCrane++;
@@ -200,16 +200,6 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		if (entry["name"] == "cargo_ship") {
 			cArr init = util::json::arr(entry["data"]);
 
-			glm::vec3 loc = glm::vec3(0.0);
-			if (entry.contains("loc")) {
-				loc = util::json::vec(entry["loc"]);
-			}
-
-			glm::vec3 rot = glm::vec3(0.0);
-			if (entry.contains("rot")) {
-				rot = util::json::vec(entry["rot"]);
-			}
-
 			CargoShip* _ = cargoShipMk((char*) init._ptr, init._x * init._y, loc, rot);
 
 			noCargoShip++;
@@ -221,16 +211,6 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 		if (entry["name"] == "truck") {
 			cArr init = util::json::arr(entry["data"]);
-
-			glm::vec3 loc = glm::vec3(0.0);
-			if (entry.contains("loc")) {
-				loc = util::json::vec(entry["loc"]);
-			}
-
-			glm::vec3 rot = glm::vec3(0.0);
-			if (entry.contains("rot")) {
-				rot = util::json::vec(entry["rot"]);
-			}
 
 			Truck* _ = truckMk((char*) init._ptr, init._x, loc, rot);
 
