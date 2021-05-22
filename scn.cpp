@@ -245,27 +245,11 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	// path
 	for (const auto& strip : serial["road"]["path"]) {
 		for (int i = 0; i < strip.size() - 1; i++) {
-			if (strip[1].type() == nlohmann::json::value_t::number_unsigned) {
-				GLushort pt[2] = {
-					strip[i],
-					strip[i + 1]
-				};
-
-				GLfloat vtc[2][3];
-				for (int p = 0; p < 2; p++) {
-					for (int a = 0; a < 3; a++) {
-						vtc[p][a] = serial["road"]["node"][pt[p]][a];
-					}
-				}
-
-				line.push_back(lineMk((GLfloat*) vtc, "obj", "thick", "solid"));
-			}
-
-			if (strip[1].type() == nlohmann::json::value_t::array) {
-				for (const auto& no : strip[1]) {
+			switch (strip[1].type()) {
+				case nlohmann::json::value_t::number_unsigned: {
 					GLushort pt[2] = {
 						strip[i],
-						no
+						strip[i + 1]
 					};
 
 					GLfloat vtc[2][3];
@@ -276,6 +260,28 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					}
 
 					line.push_back(lineMk((GLfloat*) vtc, "obj", "thick", "solid"));
+
+					break;
+				}
+
+				case nlohmann::json::value_t::array: {
+					for (const auto& no : strip[1]) {
+						GLushort pt[2] = {
+							strip[i],
+							no
+						};
+
+						GLfloat vtc[2][3];
+						for (int p = 0; p < 2; p++) {
+							for (int a = 0; a < 3; a++) {
+								vtc[p][a] = serial["road"]["node"][pt[p]][a];
+							}
+						}
+
+						line.push_back(lineMk((GLfloat*) vtc, "obj", "thick", "solid"));
+					}
+
+					break;
 				}
 			}
 		}
