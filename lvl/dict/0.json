@@ -1,14 +1,18 @@
 {
 	"data": {
 		"state": {
-			"state": 3,
-			"other_state": 7
+			"block": {
+				"state": 3,
+				"other_state": 7
+			}
 		}
 	},
 	"goal": {
 		"state": {
-			"state": 7,
-			"other_state": 3
+			"block": {
+				"state": 7,
+				"other_state": 3
+			}
 		}
 	},
 	"vehicle": [
