@@ -1,9 +1,15 @@
 {
 	"data": {
-		"state": 0
+		"state": {
+			"block": 0,
+			"loc": [3.0, 0.0, 0.0],
+			"rot": [0.0, 0.0, 0.0]
+		}
 	},
 	"goal": {
-		"state": 1
+		"state": {
+			"block": 1
+		}
 	},
 	"vehicle": [
 		{
