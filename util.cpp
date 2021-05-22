@@ -560,7 +560,6 @@ void util::json::scope(nlohmann::json serial, std::vector<Obj*>& mesh) {
 			mesh.push_back(_->_parent);
 		}
 	}
-
 }
 
 
