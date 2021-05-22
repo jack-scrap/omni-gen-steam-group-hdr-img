@@ -447,17 +447,19 @@ glm::vec3 util::json::vec(nlohmann::json serial) {
 }
 
 void util::json::scope(nlohmann::json serial, std::vector<Obj*>& mesh) {
-	data = (Var**) malloc(serial["data"].size() * sizeof (Var*));
-	type = (unsigned int*) malloc(serial["data"].size() * sizeof (unsigned int*));
+	nlohmann::json _ = serial["data"];
 
-	for (const auto& pair : serial["data"].items()) {
+	data = (Var**) malloc(_.size() * sizeof (Var*));
+	type = (unsigned int*) malloc(_.size() * sizeof (unsigned int*));
+
+	for (const auto& pair : _.items()) {
 		// scalar
 		if (pair.value().type() == nlohmann::json::value_t::number_unsigned) {
 			char init = util::json::byte(pair.value());
 
 			Idx* val = idxMk(0, &init, 1, pair.key());
 
-			for (const auto& pair : serial["data"].items()) {
+			for (const auto& pair : _.items()) {
 				char* id = util::json::id(pair.key());
 
 				Var* _ = varMk(id, val);
@@ -472,7 +474,7 @@ void util::json::scope(nlohmann::json serial, std::vector<Obj*>& mesh) {
 
 		// array
 		if (pair.value().type() == nlohmann::json::value_t::array) {
-			for (const auto& pair : serial["data"].items()) {
+			for (const auto& pair : _.items()) {
 				const auto cont = pair.value();
 
 				// 1D
