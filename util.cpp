@@ -437,6 +437,12 @@ cBuff util::json::matr3(nlohmann::json deser) {
 	return _;
 }
 
+Var* var(nlohmann::json key, nlohmann::json val) {
+	Var* _;
+
+	return _;
+}
+
 Var** util::json::scope(nlohmann::json deser, unsigned int*& type) {
 	Var** scope = (Var**) malloc(noData * sizeof (Var*));
 

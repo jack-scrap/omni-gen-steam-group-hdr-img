@@ -32,27 +32,24 @@ extern "C" Var** dataGet();
 extern "C" Var** goalGet();
 
 extern "C" unsigned int* typeGet();
-
 extern "C" unsigned int noDataGet();
 
 extern "C" Crane** crane;
-extern "C" Truck** truck;
-extern "C" CargoShip** cargoShip;
-
 extern "C" unsigned int noCrane;
+
+extern "C" Truck** truck;
 extern "C" unsigned int noTruck;
+
+extern "C" CargoShip** cargoShip;
 extern "C" unsigned int noCargoShip;
 
 extern "C" Crane** craneGet();
-
-extern "C" Truck** truckGet();
-
-extern "C" CargoShip** cargoShipGet();
-
 extern "C" unsigned int noCraneGet();
 
+extern "C" Truck** truckGet();
 extern "C" unsigned int noTruckGet();
 
+extern "C" CargoShip** cargoShipGet();
 extern "C" unsigned int noCargoShipGet();
 
 extern std::vector<Obj*> obj;
@@ -76,12 +73,10 @@ extern "C" Cone** boundArea;
 extern "C" unsigned int noBoundArea;
 
 extern "C" Lim** boundRngGet();
-
-extern "C" unsigned int noBoundRngGet();
+extern "C" unsigned int noBoundAreaGet();
 
 extern "C" Cone** boundAreaGet();
-
-extern "C" unsigned int noBoundAreaGet();
+extern "C" unsigned int noBoundRngGet();
 
 enum type {
 	SCALAR,

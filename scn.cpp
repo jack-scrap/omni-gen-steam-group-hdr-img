@@ -55,20 +55,20 @@ Crane** craneGet() {
 	return crane;
 }
 
-Truck** truckGet() {
-	return truck;
-}
-
-CargoShip** cargoShipGet() {
-	return cargoShip;
-}
-
 unsigned int noCraneGet() {
 	return noCrane;
 }
 
+Truck** truckGet() {
+	return truck;
+}
+
 unsigned int noTruckGet() {
 	return noTruck;
+}
+
+CargoShip** cargoShipGet() {
+	return cargoShip;
 }
 
 unsigned int noCargoShipGet() {
