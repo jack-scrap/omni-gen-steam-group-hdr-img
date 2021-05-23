@@ -288,7 +288,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			rot = util::json::vec(entry["rot"]);
 		}
 
-		Obj* obj = objMk(entry["name"], "obj", "dir", true, loc, rot);
+		Obj* obj = objMk(entry["name"], "obj", "dir", false, loc, rot);
 
 		mesh.push_back(obj);
 	}
