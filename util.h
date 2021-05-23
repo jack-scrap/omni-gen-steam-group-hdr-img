@@ -89,9 +89,9 @@ namespace util {
 		cBuff matr2(nlohmann::json deser);
 		cBuff matr3(nlohmann::json deser);
 
-		glm::vec3 vec(nlohmann::json deser);
-
 		void scope(nlohmann::json deser, Var**& data, unsigned int*& type);
+
+		glm::vec3 vec(nlohmann::json deser);
 
 		StreetLight* streetLight(nlohmann::json deser);
 

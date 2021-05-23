@@ -437,16 +437,6 @@ cBuff util::json::matr3(nlohmann::json deser) {
 	return _;
 }
 
-glm::vec3 util::json::vec(nlohmann::json deser) {
-	glm::vec3 _;
-
-	for (int i = 0; i < 3; i++) {
-		_[i] = deser[i];
-	}
-
-	return _;
-}
-
 void util::json::scope(nlohmann::json deser, Var**& data, unsigned int*& type) {
 	data = (Var**) malloc(deser.size() * sizeof (Var*));
 	type = (unsigned int*) malloc(deser.size() * sizeof (unsigned int*));
@@ -604,6 +594,16 @@ void util::json::scope(nlohmann::json deser, Var**& data, unsigned int*& type) {
 
 		i++;
 	}
+}
+
+glm::vec3 util::json::vec(nlohmann::json deser) {
+	glm::vec3 _;
+
+	for (int i = 0; i < 3; i++) {
+		_[i] = deser[i];
+	}
+
+	return _;
 }
 
 StreetLight* util::json::streetLight(nlohmann::json deser) {
