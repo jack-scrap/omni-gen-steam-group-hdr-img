@@ -90,7 +90,7 @@ namespace util {
 		cBuff matr2(nlohmann::json deser);
 		cBuff matr3(nlohmann::json deser);
 
-		void scope(nlohmann::json deser, Var**& data, unsigned int*& type);
+		Var** scope(nlohmann::json deser, unsigned int*& type);
 
 		glm::vec3 vec(nlohmann::json deser);
 

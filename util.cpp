@@ -437,9 +437,8 @@ cBuff util::json::matr3(nlohmann::json deser) {
 	return _;
 }
 
-void util::json::scope(nlohmann::json deser, Var**& data, unsigned int*& type) {
-	data = (Var**) malloc(deser.size() * sizeof (Var*));
-	type = (unsigned int*) malloc(deser.size() * sizeof (unsigned int*));
+Var** util::json::scope(nlohmann::json deser, unsigned int*& type) {
+	Var** scope = (Var**) malloc(noData * sizeof (Var*));
 
 	unsigned int i = 0;
 	for (const auto& pair : deser.items()) {
@@ -465,7 +464,7 @@ void util::json::scope(nlohmann::json deser, Var**& data, unsigned int*& type) {
 
 					Var* _ = varMk(id, val);
 
-					data[i] = _;
+					scope[i] = _;
 					type[i] = SCALAR;
 					i++;
 				}
@@ -497,7 +496,7 @@ void util::json::scope(nlohmann::json deser, Var**& data, unsigned int*& type) {
 
 							Var* _ = varMk(id, val);
 
-							data[i] = _;
+							scope[i] = _;
 							type[i] = ARRAY;
 							i++;
 
@@ -516,7 +515,7 @@ void util::json::scope(nlohmann::json deser, Var**& data, unsigned int*& type) {
 
 									Var* _ = varMk(id, val);
 
-									data[i - 1] = _;
+									scope[i - 1] = _;
 									type[i] = ARRAY;
 									i++;
 
@@ -532,7 +531,7 @@ void util::json::scope(nlohmann::json deser, Var**& data, unsigned int*& type) {
 
 									Var* _ = varMk(id, val);
 
-									data[i - 1] = _;
+									scope[i - 1] = _;
 									type[i - 1] = ARRAY;
 									i++;
 
@@ -547,43 +546,12 @@ void util::json::scope(nlohmann::json deser, Var**& data, unsigned int*& type) {
 
 				break;
 			}
-
-			// dictionary
-			case nlohmann::json::value_t::object: {
-				unsigned int no = pair.value()["block"].size();
-				void** data = (void**) malloc(no * sizeof (void*));
-				unsigned int* type = (unsigned int*) malloc(no * sizeof (unsigned int));
-
-				for (const auto& pair : pair.value()["block"].items()) {
-					void* _;
-					unsigned int t;
-
-					// scalar
-					switch (pair.value()["block"].type()) {
-						case nlohmann::json::value_t::number_unsigned: {
-							char* init = (char*) malloc(sizeof (char));
-							init[0] = (char) ((int) pair.value()["block"]);
-
-							_ = idxMk(0, init, 1);
-							t = SCALAR;
-
-							break;
-						}
-					}
-
-					data[no] = _;
-					type[no] = t;
-					no++;
-				}	
-
-				Dict* _ = dictMk(data, type, no, "", loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
-
-				break;
-			}
 		}
 
 		i++;
 	}
+
+	return scope;
 }
 
 glm::vec3 util::json::vec(nlohmann::json deser) {
