@@ -43,28 +43,6 @@ unsigned int noDataGet() {
 	return noData;
 }
 
-Lim** boundRng;
-unsigned int noBoundRng;
-
-Cone** boundArea;
-unsigned int noBoundArea;
-
-Lim** boundRngGet() {
-	return boundRng;
-}
-
-unsigned int noBoundRngGet() {
-	return noBoundRng;
-}
-
-Cone** boundAreaGet() {
-	return boundArea;
-}
-
-unsigned int noBoundAreaGet() {
-	return noBoundArea;
-}
-
 Crane** crane;
 Truck** truck;
 CargoShip** cargoShip;
@@ -109,6 +87,28 @@ StreetLight** streetLightGet() {
 unsigned int noStreetLight;
 unsigned int noStreetLightGet() {
 	return noStreetLight;
+}
+
+Lim** boundRng;
+unsigned int noBoundRng;
+
+Cone** boundArea;
+unsigned int noBoundArea;
+
+Lim** boundRngGet() {
+	return boundRng;
+}
+
+unsigned int noBoundRngGet() {
+	return noBoundRng;
+}
+
+Cone** boundAreaGet() {
+	return boundArea;
+}
+
+unsigned int noBoundAreaGet() {
+	return noBoundArea;
 }
 
 void scn::init(unsigned int stage, unsigned int lvl) {

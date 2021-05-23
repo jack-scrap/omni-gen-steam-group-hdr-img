@@ -35,20 +35,6 @@ extern "C" unsigned int* typeGet();
 
 extern "C" unsigned int noDataGet();
 
-extern Lim** boundRng;
-extern "C" unsigned int noBoundRng;
-
-extern "C" Cone** boundArea;
-extern "C" unsigned int noBoundArea;
-
-extern "C" Lim** boundRngGet();
-
-extern "C" unsigned int noBoundRngGet();
-
-extern "C" Cone** boundAreaGet();
-
-extern "C" unsigned int noBoundAreaGet();
-
 extern "C" Crane** crane;
 extern "C" Truck** truck;
 extern "C" CargoShip** cargoShip;
@@ -77,14 +63,28 @@ namespace scn {
 	void init(unsigned int stage, unsigned int lvl);
 }
 
-enum type {
-	SCALAR,
-	ARRAY,
-	DICT
-};
-
 extern "C" StreetLight** streetLight;
 extern "C" StreetLight** streetLightGet();
 
 extern "C" unsigned int noStreetLight;
 extern "C" unsigned int noStreetLightGet();
+
+extern Lim** boundRng;
+extern "C" unsigned int noBoundRng;
+
+extern "C" Cone** boundArea;
+extern "C" unsigned int noBoundArea;
+
+extern "C" Lim** boundRngGet();
+
+extern "C" unsigned int noBoundRngGet();
+
+extern "C" Cone** boundAreaGet();
+
+extern "C" unsigned int noBoundAreaGet();
+
+enum type {
+	SCALAR,
+	ARRAY,
+	DICT
+};
