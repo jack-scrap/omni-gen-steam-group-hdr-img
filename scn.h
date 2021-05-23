@@ -63,7 +63,7 @@ namespace scn {
 extern "C" cArr streetLight;
 extern "C" cArr streetLightGet();
 
-extern cArr boundRng;
+extern "C" cArr boundRng;
 
 extern "C" cArr boundArea;
 
