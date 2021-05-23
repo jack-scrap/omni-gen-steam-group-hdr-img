@@ -224,46 +224,10 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 	// path
 	for (const auto& strip : deser["road"]["path"]) {
-		for (int i = 0; i < strip.size() - 1; i++) {
-			switch (strip[1].type()) {
-				case nlohmann::json::value_t::number_unsigned: {
-					GLushort pt[2] = {
-						strip[i],
-						strip[i + 1]
-					};
+		std::vector<Obj*> _ = util::json::path(strip, deser["road"]["node"]);
 
-					GLfloat vtc[2][3];
-					for (int p = 0; p < 2; p++) {
-						for (int a = 0; a < 3; a++) {
-							vtc[p][a] = deser["road"]["node"][pt[p]][a];
-						}
-					}
-
-					line.push_back(lineMk((GLfloat*) vtc, "obj", "thick", "solid"));
-
-					break;
-				}
-
-				case nlohmann::json::value_t::array: {
-					for (const auto& no : strip[1]) {
-						GLushort pt[2] = {
-							strip[i],
-							no
-						};
-
-						GLfloat vtc[2][3];
-						for (int p = 0; p < 2; p++) {
-							for (int a = 0; a < 3; a++) {
-								vtc[p][a] = deser["road"]["node"][pt[p]][a];
-							}
-						}
-
-						line.push_back(lineMk((GLfloat*) vtc, "obj", "thick", "solid"));
-					}
-
-					break;
-				}
-			}
+		for (Obj* seg : _) {
+			line.push_back(seg);
 		}
 	}
 

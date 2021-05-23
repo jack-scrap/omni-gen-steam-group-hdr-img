@@ -11,6 +11,7 @@
 #include "state.h"
 #include "scn.h"
 #include "dict.h"
+#include "line.h"
 #include "omni.h"
 
 template <typename T>
@@ -613,6 +614,54 @@ StreetLight* util::json::streetLight(nlohmann::json deser) {
 	}
 
 	StreetLight* _ = streetLightMk(pass, no);
+
+	return _;
+}
+
+std::vector<Obj*> util::json::path(nlohmann::json deser, nlohmann::json node) {
+	std::vector<Obj*> _;
+
+	for (int i = 0; i < deser.size() - 1; i++) {
+		switch (deser[1].type()) {
+			case nlohmann::json::value_t::number_unsigned: {
+				GLushort pt[2] = {
+					deser[i],
+					deser[i + 1]
+				};
+
+				GLfloat vtc[2][3];
+				for (int p = 0; p < 2; p++) {
+					for (int a = 0; a < 3; a++) {
+						vtc[p][a] = node[pt[p]][a];
+					}
+				}
+
+				_.push_back(lineMk((GLfloat*) vtc, "obj", "thick", "solid"));
+
+				break;
+			}
+
+			case nlohmann::json::value_t::array: {
+				for (const auto& no : deser[1]) {
+					GLushort pt[2] = {
+						deser[i],
+						no
+					};
+
+					GLfloat vtc[2][3];
+					for (int p = 0; p < 2; p++) {
+						for (int a = 0; a < 3; a++) {
+							vtc[p][a] = node[pt[p]][a];
+						}
+					}
+
+					_.push_back(lineMk((GLfloat*) vtc, "obj", "thick", "solid"));
+				}
+
+				break;
+			}
+		}
+	}
 
 	return _;
 }
