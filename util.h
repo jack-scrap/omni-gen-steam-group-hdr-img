@@ -80,23 +80,23 @@ namespace util {
 	}
 
 	namespace json {
-		char* id(nlohmann::json serial);
+		char* id(nlohmann::json deser);
 
-		char byte(nlohmann::json serial);
+		char byte(nlohmann::json deser);
 
-		cBuff arr(nlohmann::json serial);
-		cBuff matr2(nlohmann::json serial);
-		cBuff matr3(nlohmann::json serial);
+		cBuff arr(nlohmann::json deser);
+		cBuff matr2(nlohmann::json deser);
+		cBuff matr3(nlohmann::json deser);
 
-		glm::vec3 vec(nlohmann::json serial);
+		glm::vec3 vec(nlohmann::json deser);
 
-		void scope(nlohmann::json serial, Var**& data, unsigned int*& type, std::vector<Obj*>& obj);
+		void scope(nlohmann::json deser, Var**& data, unsigned int*& type, std::vector<Obj*>& obj);
 
-		void prop(nlohmann::json serial, std::vector<Obj*>& obj);
+		void prop(nlohmann::json deser, std::vector<Obj*>& obj);
 
 		namespace bound {
-			void rng(nlohmann::json serial);
-			Cone* area(nlohmann::json serial);
+			void rng(nlohmann::json deser);
+			Cone* area(nlohmann::json deser);
 		}
 	}
 

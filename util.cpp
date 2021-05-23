@@ -377,8 +377,8 @@ std::string util::str::pad(std::string buff, unsigned int roof) {
 	return line;
 }
 
-char* util::json::id(nlohmann::json serial) {
-	std::string buff = serial.get<std::string>();
+char* util::json::id(nlohmann::json deser) {
+	std::string buff = deser.get<std::string>();
 
 	unsigned int no = buff.size();
 	char* _ = (char*) malloc((no + 1) * sizeof (char));
@@ -390,68 +390,68 @@ char* util::json::id(nlohmann::json serial) {
 	return _;
 }
 
-char util::json::byte(nlohmann::json serial) {
-	return (char) ((int) serial);
+char util::json::byte(nlohmann::json deser) {
+	return (char) ((int) deser);
 }
 
-cBuff util::json::arr(nlohmann::json serial) {
+cBuff util::json::arr(nlohmann::json deser) {
 	cBuff _;
 
-	_._x = serial.size();
+	_._x = deser.size();
 	_._y = 1;
 	_._z = 1;
 	_._ptr = (char*) malloc(_._x * sizeof (char));
 	for (int i = 0; i < _._x; i++) {
-		((char*) _._ptr)[i] = (char) ((int) serial[i]);
+		((char*) _._ptr)[i] = (char) ((int) deser[i]);
 	}
 
 	return _;
 }
 
-cBuff util::json::matr2(nlohmann::json serial) {
+cBuff util::json::matr2(nlohmann::json deser) {
 	cBuff _;
 
-	_._x = serial[0].size();
-	_._y = serial.size();
+	_._x = deser[0].size();
+	_._y = deser.size();
 	_._z = 1;
 	_._ptr = (char*) malloc(_._x * _._y * sizeof (char));
 	for (int j = 0; j < _._y; j++) {
 		for (int i = 0; i < _._x; i++) {
-			((char*) _._ptr)[(j * _._x) + i] = (char) ((int) serial[j][i]);
+			((char*) _._ptr)[(j * _._x) + i] = (char) ((int) deser[j][i]);
 		}
 	}
 
 	return _;
 }
 
-cBuff util::json::matr3(nlohmann::json serial) {
+cBuff util::json::matr3(nlohmann::json deser) {
 	cBuff _;
 
-	_._x = serial[0][0].size();
-	_._y = serial[0].size();
-	_._z = serial.size();
+	_._x = deser[0][0].size();
+	_._y = deser[0].size();
+	_._z = deser.size();
 
 	_._ptr = (char*) malloc(0);
 
 	return _;
 }
 
-glm::vec3 util::json::vec(nlohmann::json serial) {
+glm::vec3 util::json::vec(nlohmann::json deser) {
 	glm::vec3 _;
 
 	for (int i = 0; i < 3; i++) {
-		_[i] = serial[i];
+		_[i] = deser[i];
 	}
 
 	return _;
 }
 
-void util::json::scope(nlohmann::json serial, Var**& data, unsigned int*& type, std::vector<Obj*>& obj) {
-	data = (Var**) malloc(serial.size() * sizeof (Var*));
-	type = (unsigned int*) malloc(serial.size() * sizeof (unsigned int*));
+void util::json::scope(nlohmann::json deser, Var**& data, unsigned int*& type, std::vector<Obj*>& obj) {
+	data = (Var**) malloc(deser.size() * sizeof (Var*));
+	type = (unsigned int*) malloc(deser.size() * sizeof (unsigned int*));
 
 	unsigned int i = 0;
-	for (const auto& pair : serial.items()) {
+	for (const auto& pair : deser.items()) {
 		glm::vec3 loc = glm::vec3(0.0);
 		if (pair.value().contains("loc")) {
 			loc = util::json::vec(pair.value()["loc"]);
@@ -469,7 +469,7 @@ void util::json::scope(nlohmann::json serial, Var**& data, unsigned int*& type, 
 
 				Idx* val = idxMk(0, &init, 1, pair.key(), loc, rot);
 
-				for (const auto& pair : serial.items()) {
+				for (const auto& pair : deser.items()) {
 					char* id = util::json::id(pair.key());
 
 					Var* _ = varMk(id, val);
@@ -486,7 +486,7 @@ void util::json::scope(nlohmann::json serial, Var**& data, unsigned int*& type, 
 
 			// array
 			case nlohmann::json::value_t::array: {
-				for (const auto& pair : serial.items()) {
+				for (const auto& pair : deser.items()) {
 					glm::vec3 loc = glm::vec3(0.0);
 					if (pair.value().contains("loc")) {
 						loc = util::json::vec(pair.value()["loc"]);
@@ -605,24 +605,24 @@ void util::json::scope(nlohmann::json serial, Var**& data, unsigned int*& type, 
 	}
 }
 
-void util::json::prop(nlohmann::json serial, std::vector<Obj*>& obj) {
+void util::json::prop(nlohmann::json deser, std::vector<Obj*>& obj) {
 	glm::vec3 loc = glm::vec3(0.0);
-	if (serial.contains("loc")) {
-		loc = util::json::vec(serial["loc"]);
+	if (deser.contains("loc")) {
+		loc = util::json::vec(deser["loc"]);
 	}
 
 	glm::vec3 rot = glm::vec3(0.0);
-	if (serial.contains("rot")) {
-		rot = util::json::vec(serial["rot"]);
+	if (deser.contains("rot")) {
+		rot = util::json::vec(deser["rot"]);
 	}
 
-	Obj* _ = objMk(serial["name"], "obj", "dir", false, loc, rot);
+	Obj* _ = objMk(deser["name"], "obj", "dir", false, loc, rot);
 
 	obj.push_back(_);
 }
 
-void util::json::bound::rng(nlohmann::json serial) {
-	for (const auto& rng : serial) {
+void util::json::bound::rng(nlohmann::json deser) {
+	for (const auto& rng : deser) {
 		for (const auto& lim : rng) {
 			for (const auto& pair : lim.items()) {
 				unsigned int axis;
@@ -645,17 +645,17 @@ void util::json::bound::rng(nlohmann::json serial) {
 	}
 }
 
-Cone* util::json::bound::area(nlohmann::json serial) {
+Cone* util::json::bound::area(nlohmann::json deser) {
 	GLfloat init[2][2];
 	for (int y = 0; y < 2; y++) {
 		for (int x = 0; x < 2; x++) {
-			init[y][x] = serial["init"][y][x];
+			init[y][x] = deser["init"][y][x];
 		}
 	}
 
 	glm::vec3 loc = glm::vec3(0.0);
-	if (serial.contains("loc")) {
-		loc = util::json::vec(serial["loc"]);
+	if (deser.contains("loc")) {
+		loc = util::json::vec(deser["loc"]);
 	}
 
 	Cone* _ = coneMk(init, loc);

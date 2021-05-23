@@ -25,9 +25,9 @@ void dispatch(Console* console, std::string name) {
 
 		console->_buff = util::log(console->_buff.size(), console->_maxFs);
 
-		nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("player.json"));
+		nlohmann::json deser = nlohmann::json::parse(util::fs::rd<std::string>("player.json"));
 
-		unsigned int rank = serial["rank"];
+		unsigned int rank = deser["rank"];
 		rank++;
 
 		nlohmann::json data = {
@@ -36,9 +36,9 @@ void dispatch(Console* console, std::string name) {
 			}
 		};
 
-		std::string deser = data.dump(4);
+		std::string serial = data.dump(4);
 
-		util::fs::write("player.json", util::str::split(deser, '\n'));
+		util::fs::write("player.json", util::str::split(serial, '\n'));
 	}
 }
 
@@ -396,9 +396,9 @@ void Console::exec() {
 				if (eq) {
 					eq = false;
 
-					nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("player.json"));
+					nlohmann::json deser = nlohmann::json::parse(util::fs::rd<std::string>("player.json"));
 
-					unsigned int rank = serial["rank"];
+					unsigned int rank = deser["rank"];
 
 					_buff = util::fs::rd<std::vector<std::string>>("script/" + omni::stage[0] + "/" + std::to_string(rank) + "/" + "main.py");
 					scn::init(0, rank);

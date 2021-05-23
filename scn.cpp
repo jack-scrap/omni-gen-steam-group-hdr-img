@@ -112,7 +112,7 @@ unsigned int noStreetLightGet() {
 }
 
 void scn::init(unsigned int stage, unsigned int lvl) {
-	nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("lvl/" + omni::stage[stage] + "/" + std::to_string(lvl) + ".json"));
+	nlohmann::json deser = nlohmann::json::parse(util::fs::rd<std::string>("lvl/" + omni::stage[stage] + "/" + std::to_string(lvl) + ".json"));
 
 	/* de-allocate */
 	// data
@@ -176,7 +176,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	cargoShip = (CargoShip**) malloc(0);
 	noCargoShip = 0;
 
-	for (const auto& entry : serial["vehicle"]) {
+	for (const auto& entry : deser["vehicle"]) {
 		glm::vec3 loc = glm::vec3(0.0);
 		if (entry.contains("loc")) {
 			loc = util::json::vec(entry["loc"]);
@@ -223,7 +223,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	// path
-	for (const auto& strip : serial["road"]["path"]) {
+	for (const auto& strip : deser["road"]["path"]) {
 		for (int i = 0; i < strip.size() - 1; i++) {
 			switch (strip[1].type()) {
 				case nlohmann::json::value_t::number_unsigned: {
@@ -235,7 +235,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					GLfloat vtc[2][3];
 					for (int p = 0; p < 2; p++) {
 						for (int a = 0; a < 3; a++) {
-							vtc[p][a] = serial["road"]["node"][pt[p]][a];
+							vtc[p][a] = deser["road"]["node"][pt[p]][a];
 						}
 					}
 
@@ -254,7 +254,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 						GLfloat vtc[2][3];
 						for (int p = 0; p < 2; p++) {
 							for (int a = 0; a < 3; a++) {
-								vtc[p][a] = serial["road"]["node"][pt[p]][a];
+								vtc[p][a] = deser["road"]["node"][pt[p]][a];
 							}
 						}
 
@@ -268,27 +268,27 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	/* data */
-	noData = serial["data"].size();
+	noData = deser["data"].size();
 
 	// initial
-	util::json::scope(serial["data"], data, type, obj);
+	util::json::scope(deser["data"], data, type, obj);
 
 	// desired
-	util::json::scope(serial["goal"], goal, type, obj);
+	util::json::scope(deser["goal"], goal, type, obj);
 
 	// prop
-	for (const auto& entry : serial["prop"]) {
+	for (const auto& entry : deser["prop"]) {
 		util::json::prop(entry, obj);
 	}
 
 	// bound
-	boundRng = (Lim**) malloc(serial["bound"]["rng"].size() * sizeof (Lim*));
+	boundRng = (Lim**) malloc(deser["bound"]["rng"].size() * sizeof (Lim*));
 	noBoundRng = 0;
 
-	boundArea = (Cone**) malloc(serial["bound"]["area"].size() * sizeof (Cone*));
+	boundArea = (Cone**) malloc(deser["bound"]["area"].size() * sizeof (Cone*));
 	noBoundArea = 0;
 
-	for (const auto& entry : serial["bound"].items()) {
+	for (const auto& entry : deser["bound"].items()) {
 		if (entry.key() == "rng") {
 			util::json::bound::rng(entry.value());
 		}
@@ -301,10 +301,10 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	// control flow
-	streetLight = (StreetLight**) malloc(serial["ctrl"].size() * sizeof (StreetLight*));
+	streetLight = (StreetLight**) malloc(deser["ctrl"].size() * sizeof (StreetLight*));
 	noStreetLight = 0;
 
-	for (const auto& entry : serial["ctrl"].items()) {
+	for (const auto& entry : deser["ctrl"].items()) {
 		unsigned int no = entry.value()["pass"].size();
 		bool* pass = (bool*) malloc(no * sizeof (bool));
 		for (int i = 0; i < no; i++) {
