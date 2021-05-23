@@ -296,6 +296,9 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		if (entry.key() == "area") {
 			for (const auto& entry : entry.value()) {
 				Cone* _ = util::json::bound::area(entry);
+
+				boundArea[noBoundArea] = _;
+				noBoundArea++;
 			}
 		}
 	}

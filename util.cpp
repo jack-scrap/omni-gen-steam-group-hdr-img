@@ -674,9 +674,6 @@ Cone* util::json::bound::area(nlohmann::json deser) {
 
 	Cone* _ = coneMk(init, loc);
 
-	boundArea[noBoundArea] = _;
-	noBoundArea++;
-
 	obj.push_back(_->_parent);
 
 	return _;
