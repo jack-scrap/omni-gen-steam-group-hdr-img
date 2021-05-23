@@ -69,7 +69,7 @@ extern "C" unsigned int noTruckGet();
 
 extern "C" unsigned int noCargoShipGet();
 
-extern std::vector<Obj*> mesh;
+extern std::vector<Obj*> obj;
 extern std::vector<Obj*> line;
 extern std::vector<Obj*> pt;
 

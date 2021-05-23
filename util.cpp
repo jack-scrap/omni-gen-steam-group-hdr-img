@@ -446,7 +446,7 @@ glm::vec3 util::json::vec(nlohmann::json serial) {
 	return _;
 }
 
-void util::json::scope(nlohmann::json serial, Var**& data, unsigned int*& type, std::vector<Obj*>& mesh) {
+void util::json::scope(nlohmann::json serial, Var**& data, unsigned int*& type, std::vector<Obj*>& obj) {
 	data = (Var**) malloc(serial.size() * sizeof (Var*));
 	type = (unsigned int*) malloc(serial.size() * sizeof (unsigned int*));
 
@@ -478,7 +478,7 @@ void util::json::scope(nlohmann::json serial, Var**& data, unsigned int*& type, 
 					type[i] = SCALAR;
 					i++;
 
-					mesh.push_back(val->_parent);
+					obj.push_back(val->_parent);
 				}
 
 				break;
@@ -512,7 +512,7 @@ void util::json::scope(nlohmann::json serial, Var**& data, unsigned int*& type, 
 							type[i] = ARRAY;
 							i++;
 
-							mesh.push_back(((Arr*) (((Var*) data[i - 1])->_ptr))->_parent);
+							obj.push_back(((Arr*) (((Var*) data[i - 1])->_ptr))->_parent);
 
 							break;
 						}
@@ -531,7 +531,7 @@ void util::json::scope(nlohmann::json serial, Var**& data, unsigned int*& type, 
 									Var* _ = varMk(id, val);
 									data[i - 1] = _;
 
-									mesh.push_back(((Arr*) (((Var*) data[i - 1])->_ptr))->_parent);
+									obj.push_back(((Arr*) (((Var*) data[i - 1])->_ptr))->_parent);
 
 									break;
 								}
@@ -551,7 +551,7 @@ void util::json::scope(nlohmann::json serial, Var**& data, unsigned int*& type, 
 									data[i - 1] = _;
 									type[i - 1] = ARRAY;
 
-									mesh.push_back(val->_parent);
+									obj.push_back(val->_parent);
 
 									break;
 								}
@@ -595,7 +595,7 @@ void util::json::scope(nlohmann::json serial, Var**& data, unsigned int*& type, 
 
 				Dict* _ = dictMk(data, type, no, "", loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
 
-				mesh.push_back(_->_parent);
+				obj.push_back(_->_parent);
 
 				break;
 			}
@@ -605,7 +605,7 @@ void util::json::scope(nlohmann::json serial, Var**& data, unsigned int*& type, 
 	}
 }
 
-void util::json::prop(nlohmann::json serial, std::vector<Obj*>& mesh) {
+void util::json::prop(nlohmann::json serial, std::vector<Obj*>& obj) {
 	glm::vec3 loc = glm::vec3(0.0);
 	if (serial.contains("loc")) {
 		loc = util::json::vec(serial["loc"]);
@@ -618,7 +618,7 @@ void util::json::prop(nlohmann::json serial, std::vector<Obj*>& mesh) {
 
 	Obj* _ = objMk(serial["name"], "obj", "dir", false, loc, rot);
 
-	mesh.push_back(_);
+	obj.push_back(_);
 }
 
 void util::json::bound::rng(nlohmann::json serial) {

@@ -89,9 +89,9 @@ namespace util {
 
 		glm::vec3 vec(nlohmann::json serial);
 
-		void scope(nlohmann::json serial, Var**& data, unsigned int*& type, std::vector<Obj*>& mesh);
+		void scope(nlohmann::json serial, Var**& data, unsigned int*& type, std::vector<Obj*>& obj);
 
-		void prop(nlohmann::json serial, std::vector<Obj*>& mesh);
+		void prop(nlohmann::json serial, std::vector<Obj*>& obj);
 
 		namespace bound {
 			void rng(nlohmann::json serial);

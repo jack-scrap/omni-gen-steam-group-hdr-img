@@ -97,7 +97,7 @@ unsigned int noCargoShipGet() {
 	return noCargoShip;
 }
 
-std::vector<Obj*> mesh;
+std::vector<Obj*> obj;
 std::vector<Obj*> line;
 std::vector<Obj*> pt;
 
@@ -139,10 +139,10 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 	free(cargoShip);
 
-	for (void* _ : mesh) {
+	for (void* _ : obj) {
 		free(_);
 	}
-	mesh.clear();
+	obj.clear();
 
 	for (void* _ : line) {
 		free(_);
@@ -194,7 +194,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			crane = (Crane**) realloc(crane, noCrane * sizeof (Crane*));
 			crane[noCrane - 1] = _;
 
-			mesh.push_back(_->_parent);
+			obj.push_back(_->_parent);
 		}
 
 		if (entry["name"] == "cargo_ship") {
@@ -206,7 +206,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			cargoShip = (CargoShip**) realloc(cargoShip, noCargoShip * sizeof (CargoShip*));
 			cargoShip[noCargoShip - 1] = _;
 
-			mesh.push_back(_->_parent);
+			obj.push_back(_->_parent);
 		}
 
 		if (entry["name"] == "truck") {
@@ -218,7 +218,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			truck = (Truck**) realloc(truck, noTruck * sizeof (Truck*));
 			truck[noTruck - 1] = _;
 
-			mesh.push_back(_->_parent);
+			obj.push_back(_->_parent);
 		}
 	}
 
@@ -271,14 +271,14 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	noData = serial["data"].size();
 
 	// initial
-	util::json::scope(serial["data"], data, type, mesh);
+	util::json::scope(serial["data"], data, type, obj);
 
 	// desired
-	util::json::scope(serial["goal"], goal, type, mesh);
+	util::json::scope(serial["goal"], goal, type, obj);
 
 	// prop
 	for (const auto& entry : serial["prop"]) {
-		util::json::prop(entry, mesh);
+		util::json::prop(entry, obj);
 	}
 
 	// bound
@@ -314,7 +314,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				}
 				noBoundArea++;
 
-				mesh.push_back(_->_parent);
+				obj.push_back(_->_parent);
 			}
 		}
 	}
@@ -335,6 +335,6 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		streetLight[noStreetLight] = _;
 		noStreetLight++;
 
-		mesh.push_back(_->_parent);
+		obj.push_back(_->_parent);
 	}
 }
