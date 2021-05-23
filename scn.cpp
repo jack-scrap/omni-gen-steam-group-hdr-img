@@ -240,6 +240,29 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	// desired
 	util::json::scope(deser["goal"], goal, type);
 
+	for (int i = 0; i < noData; i++) {
+		Obj* _;
+
+		switch (type[i]) {
+			case SCALAR:
+				_ = ((Idx*) data[i]->_ptr)->_parent;
+
+				break;
+
+			case ARRAY:
+				_ = ((Arr*) data[i]->_ptr)->_parent;
+
+				break;
+
+			case DICT:
+				_ = ((Dict*) data[i]->_ptr)->_parent;
+
+				break;
+		}
+
+		obj.push_back(_);
+	}
+
 	// prop
 	for (const auto& entry : deser["prop"]) {
 		Obj* _ = util::json::prop(entry);

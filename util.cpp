@@ -468,8 +468,6 @@ void util::json::scope(nlohmann::json deser, Var**& data, unsigned int*& type) {
 					data[i] = _;
 					type[i] = SCALAR;
 					i++;
-
-					obj.push_back(val->_parent);
 				}
 
 				break;
@@ -503,8 +501,6 @@ void util::json::scope(nlohmann::json deser, Var**& data, unsigned int*& type) {
 							type[i] = ARRAY;
 							i++;
 
-							obj.push_back(((Arr*) (((Var*) data[i - 1])->_ptr))->_parent);
-
 							break;
 						}
 
@@ -524,8 +520,6 @@ void util::json::scope(nlohmann::json deser, Var**& data, unsigned int*& type) {
 									type[i] = ARRAY;
 									i++;
 
-									obj.push_back(((Arr*) (((Var*) data[i - 1])->_ptr))->_parent);
-
 									break;
 								}
 
@@ -541,8 +535,6 @@ void util::json::scope(nlohmann::json deser, Var**& data, unsigned int*& type) {
 									data[i - 1] = _;
 									type[i - 1] = ARRAY;
 									i++;
-
-									obj.push_back(val->_parent);
 
 									break;
 								}
@@ -585,8 +577,6 @@ void util::json::scope(nlohmann::json deser, Var**& data, unsigned int*& type) {
 				}	
 
 				Dict* _ = dictMk(data, type, no, "", loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
-
-				obj.push_back(_->_parent);
 
 				break;
 			}
