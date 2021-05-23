@@ -148,7 +148,7 @@ void craneGrab(Crane* crane) {
 		Var* var = (Var*) data[i];
 
 		switch (type[i]) {
-			case SCALAR: {
+			case util::json::SCALAR: {
 				Idx* idx = (Idx*) var->_ptr;
 
 				if (idx->_data) {
@@ -162,7 +162,7 @@ void craneGrab(Crane* crane) {
 				break;
 			}
 
-			case ARRAY: {
+			case util::json::ARRAY: {
 				Arr* arr = (Arr*) var->_ptr;
 
 				for (int i = 0; i < arr->_x * arr->_y * arr->_z; i++) {

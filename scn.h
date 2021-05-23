@@ -60,11 +60,8 @@ namespace scn {
 	void init(unsigned int stage, unsigned int lvl);
 }
 
-extern "C" StreetLight** streetLight;
-extern "C" StreetLight** streetLightGet();
-
-extern "C" unsigned int noStreetLight;
-extern "C" unsigned int noStreetLightGet();
+extern "C" cArr streetLight;
+extern "C" cArr streetLightGet();
 
 extern Lim** boundRng;
 extern "C" unsigned int noBoundRng;

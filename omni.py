@@ -6,6 +6,12 @@ _cargo_ship = CDLL('libcargo_ship.so')
 _street_light = CDLL('libstreet_light.so')
 _scn = CDLL('libscn.so')
 
+class _cArr(Structure):
+	_fields_ = [
+		('_ptr', c_void_p),
+		('_no', c_uint)
+	]
+
 class _Obj(Structure):
 	def __init__(self, ptr):
 		self._ptr = ptr
@@ -290,17 +296,15 @@ class _StreetLight(_Obj):
 
 # control-flow
 _streetLightGet = _scn.streetLightGet
-_streetLightGet.restype = POINTER(POINTER(_StreetLight))
+_streetLightGet.restype = _cArr
 _streetLightGet.argtypes = None
-
-_noStreetLightGet = _scn.noStreetLightGet
-_noStreetLightGet.restype = c_uint
-_noStreetLightGet.argtypes = None
 
 _streetLightToggle = _street_light.streetLightToggle
 _streetLightToggle.restype = c_uint
 _streetLightToggle.argtypes = None
 
+ptrStreetLight = cast(_streetLightGet()._ptr, POINTER(_StreetLight))
+
 street_light = []
-for i in range(_noStreetLightGet()):
-	street_light.append(_StreetLight(_streetLightGet()[i]))
+for i in range(_streetLightGet()._no):
+	street_light.append(_StreetLight(ptrStreetLight[i]))

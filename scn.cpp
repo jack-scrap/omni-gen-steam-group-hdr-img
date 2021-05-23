@@ -79,14 +79,9 @@ std::vector<Obj*> obj;
 std::vector<Obj*> line;
 std::vector<Obj*> pt;
 
-StreetLight** streetLight;
-StreetLight** streetLightGet() {
+cArr streetLight;
+cArr streetLightGet() {
 	return streetLight;
-}
-
-unsigned int noStreetLight;
-unsigned int noStreetLightGet() {
-	return noStreetLight;
 }
 
 Lim** boundRng;
@@ -308,14 +303,14 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	// control flow
-	streetLight = (StreetLight**) malloc(deser["ctrl"].size() * sizeof (StreetLight*));
-	noStreetLight = 0;
+	streetLight._ptr = (StreetLight**) malloc(deser["ctrl"].size() * sizeof (StreetLight*));
+	streetLight._no = 0;
 
 	for (const auto& entry : deser["ctrl"].items()) {
 		StreetLight* _ = util::json::streetLight(entry.value());
 
-		streetLight[noStreetLight] = _;
-		noStreetLight++;
+		((StreetLight**) streetLight._ptr)[streetLight._no] = _;
+		streetLight._no++;
 
 		obj.push_back(_->_parent);
 	}
