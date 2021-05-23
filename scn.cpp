@@ -268,11 +268,13 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	/* data */
+	noData = serial["data"].size();
+
 	// initial
-	util::json::scope(serial, mesh);
+	util::json::scope(serial["data"], data, type, mesh);
 
 	// desired
-	util::json::scope(serial, mesh);
+	util::json::scope(serial["goal"], goal, type, mesh);
 
 	// prop
 	for (const auto& entry : serial["prop"]) {

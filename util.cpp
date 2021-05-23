@@ -446,13 +446,12 @@ glm::vec3 util::json::vec(nlohmann::json serial) {
 	return _;
 }
 
-void util::json::scope(nlohmann::json serial, std::vector<Obj*>& mesh) {
-	nlohmann::json _ = serial["data"];
+void util::json::scope(nlohmann::json serial, Var**& data, unsigned int*& type, std::vector<Obj*>& mesh) {
+	data = (Var**) malloc(serial.size() * sizeof (Var*));
+	type = (unsigned int*) malloc(serial.size() * sizeof (unsigned int*));
 
-	data = (Var**) malloc(_.size() * sizeof (Var*));
-	type = (unsigned int*) malloc(_.size() * sizeof (unsigned int*));
-
-	for (const auto& pair : _.items()) {
+	unsigned int i = 0;
+	for (const auto& pair : serial.items()) {
 		glm::vec3 loc = glm::vec3(0.0);
 		if (pair.value().contains("loc")) {
 			loc = util::json::vec(pair.value()["loc"]);
@@ -470,14 +469,14 @@ void util::json::scope(nlohmann::json serial, std::vector<Obj*>& mesh) {
 
 				Idx* val = idxMk(0, &init, 1, pair.key(), loc, rot);
 
-				for (const auto& pair : _.items()) {
+				for (const auto& pair : serial.items()) {
 					char* id = util::json::id(pair.key());
 
 					Var* _ = varMk(id, val);
 
-					data[noData] = _;
-					type[noData] = SCALAR;
-					noData++;
+					data[i] = _;
+					type[i] = SCALAR;
+					i++;
 
 					mesh.push_back(val->_parent);
 				}
@@ -487,7 +486,7 @@ void util::json::scope(nlohmann::json serial, std::vector<Obj*>& mesh) {
 
 			// array
 			case nlohmann::json::value_t::array: {
-				for (const auto& pair : _.items()) {
+				for (const auto& pair : serial.items()) {
 					glm::vec3 loc = glm::vec3(0.0);
 					if (pair.value().contains("loc")) {
 						loc = util::json::vec(pair.value()["loc"]);
@@ -509,11 +508,11 @@ void util::json::scope(nlohmann::json serial, std::vector<Obj*>& mesh) {
 
 							Var* _ = varMk(id, val);
 
-							data[noData] = _;
-							type[noData] = ARRAY;
-							noData++;
+							data[i] = _;
+							type[i] = ARRAY;
+							i++;
 
-							mesh.push_back(((Arr*) (((Var*) data[noData - 1])->_ptr))->_parent);
+							mesh.push_back(((Arr*) (((Var*) data[i - 1])->_ptr))->_parent);
 
 							break;
 						}
@@ -528,11 +527,11 @@ void util::json::scope(nlohmann::json serial, std::vector<Obj*>& mesh) {
 
 									Arr* val = arrMk((char*) init._ptr, init._x, init._y, pair.key(), loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
 
-									noData++;
+									i++;
 									Var* _ = varMk(id, val);
-									data[noData - 1] = _;
+									data[i - 1] = _;
 
-									mesh.push_back(((Arr*) (((Var*) data[noData - 1])->_ptr))->_parent);
+									mesh.push_back(((Arr*) (((Var*) data[i - 1])->_ptr))->_parent);
 
 									break;
 								}
@@ -546,11 +545,11 @@ void util::json::scope(nlohmann::json serial, std::vector<Obj*>& mesh) {
 
 									Var* _ = varMk(id, val);
 
-									noData++;
-									data = (Var**) realloc(data, noData * sizeof (void*));
-									type = (unsigned int*) realloc(type, noData * sizeof (unsigned int*));
-									data[noData - 1] = _;
-									type[noData - 1] = ARRAY;
+									i++;
+									data = (Var**) realloc(data, i * sizeof (void*));
+									type = (unsigned int*) realloc(type, i * sizeof (unsigned int*));
+									data[i - 1] = _;
+									type[i - 1] = ARRAY;
 
 									mesh.push_back(val->_parent);
 
@@ -601,6 +600,8 @@ void util::json::scope(nlohmann::json serial, std::vector<Obj*>& mesh) {
 				break;
 			}
 		}
+
+		i++;
 	}
 }
 
