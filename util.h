@@ -95,7 +95,7 @@ namespace util {
 
 		StreetLight* streetLight(nlohmann::json deser);
 
-		void prop(nlohmann::json deser, std::vector<Obj*>& obj);
+		Obj* prop(nlohmann::json deser, std::vector<Obj*>& obj);
 
 		namespace bound {
 			void rng(nlohmann::json deser);

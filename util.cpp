@@ -619,7 +619,7 @@ StreetLight* util::json::streetLight(nlohmann::json deser) {
 	return _;
 }
 
-void util::json::prop(nlohmann::json deser, std::vector<Obj*>& obj) {
+Obj* util::json::prop(nlohmann::json deser, std::vector<Obj*>& obj) {
 	glm::vec3 loc = glm::vec3(0.0);
 	if (deser.contains("loc")) {
 		loc = util::json::vec(deser["loc"]);
@@ -631,6 +631,8 @@ void util::json::prop(nlohmann::json deser, std::vector<Obj*>& obj) {
 	}
 
 	Obj* _ = objMk(deser["name"], "obj", "dir", false, loc, rot);
+
+	return _;
 
 	obj.push_back(_);
 }

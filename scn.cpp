@@ -278,7 +278,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 	// prop
 	for (const auto& entry : deser["prop"]) {
-		util::json::prop(entry, obj);
+		Obj* _ = util::json::prop(entry, obj);
 	}
 
 	// bound
