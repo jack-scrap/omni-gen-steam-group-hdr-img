@@ -645,29 +645,27 @@ void util::json::bound::rng(nlohmann::json serial) {
 	}
 }
 
-void util::json::bound::area(nlohmann::json serial) {
-	for (const auto& entry : serial) {
-		GLfloat init[2][2];
-		for (int y = 0; y < 2; y++) {
-			for (int x = 0; x < 2; x++) {
-				init[y][x] = entry["init"][y][x];
-			}
+Cone* util::json::bound::area(nlohmann::json serial) {
+	GLfloat init[2][2];
+	for (int y = 0; y < 2; y++) {
+		for (int x = 0; x < 2; x++) {
+			init[y][x] = serial["init"][y][x];
 		}
-
-		glm::vec3 loc = glm::vec3(0.0);
-		if (entry.contains("loc")) {
-			loc = util::json::vec(entry["loc"]);
-		}
-
-		Cone* _ = coneMk(init, loc);
-
-		for (int i = 0; i < 3; i++) {
-			boundArea[((noBoundArea - 1) * 3) + i] = _;
-		}
-		noBoundArea++;
-
-		obj.push_back(_->_parent);
 	}
+
+	glm::vec3 loc = glm::vec3(0.0);
+	if (serial.contains("loc")) {
+		loc = util::json::vec(serial["loc"]);
+	}
+
+	Cone* _ = coneMk(init, loc);
+
+	boundArea[noBoundArea] = _;
+	noBoundArea++;
+
+	obj.push_back(_->_parent);
+
+	return _;
 }
 
 std::string util::cfg::key(std::string buff) {

@@ -12,6 +12,7 @@
 #include "obj.h"
 #include "c_buff.h"
 #include "var.h"
+#include "cone.h"
 
 namespace util {
 	namespace fs {
@@ -95,7 +96,7 @@ namespace util {
 
 		namespace bound {
 			void rng(nlohmann::json serial);
-			void area(nlohmann::json serial);
+			Cone* area(nlohmann::json serial);
 		}
 	}
 
