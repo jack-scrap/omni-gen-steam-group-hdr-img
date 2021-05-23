@@ -442,6 +442,8 @@ Var** util::json::scope(nlohmann::json deser, unsigned int*& type) {
 
 	unsigned int i = 0;
 	for (const auto& pair : deser.items()) {
+		char* id = util::json::id(pair.key());
+
 		glm::vec3 loc = glm::vec3(0.0);
 		if (pair.value().contains("loc")) {
 			loc = util::json::vec(pair.value()["loc"]);
@@ -460,8 +462,6 @@ Var** util::json::scope(nlohmann::json deser, unsigned int*& type) {
 				Idx* val = idxMk(0, &init, 1, pair.key(), loc, rot);
 
 				for (const auto& pair : deser.items()) {
-					char* id = util::json::id(pair.key());
-
 					Var* _ = varMk(id, val);
 
 					scope[i] = _;
@@ -475,24 +475,12 @@ Var** util::json::scope(nlohmann::json deser, unsigned int*& type) {
 			// array
 			case nlohmann::json::value_t::array: {
 				for (const auto& pair : deser.items()) {
-					glm::vec3 loc = glm::vec3(0.0);
-					if (pair.value().contains("loc")) {
-						loc = util::json::vec(pair.value()["loc"]);
-					}
-
-					glm::vec3 rot = glm::vec3(0.0);
-					if (pair.value().contains("rot")) {
-						rot = util::json::vec(pair.value()["rot"]);
-					}
-
 					switch (pair.value()["block"][0].type()) {
 						// 1D
 						case nlohmann::json::value_t::number_unsigned: {
 							cBuff init = util::json::arr(pair.value()["block"]);
 
 							Arr* val = arrMk((char*) init._ptr, init._x, pair.key(), loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
-
-							char* id = util::json::id(pair.key());
 
 							Var* _ = varMk(id, val);
 
@@ -509,8 +497,6 @@ Var** util::json::scope(nlohmann::json deser, unsigned int*& type) {
 								case nlohmann::json::value_t::number_unsigned: {
 									cBuff init = util::json::matr2(pair.value()["block"]);
 
-									char* id = util::json::id(pair.key());
-
 									Arr* val = arrMk((char*) init._ptr, init._x, init._y, pair.key(), loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
 
 									Var* _ = varMk(id, val);
@@ -524,8 +510,6 @@ Var** util::json::scope(nlohmann::json deser, unsigned int*& type) {
 
 								case nlohmann::json::value_t::array: {
 									cBuff init = util::json::matr3(pair.value()["block"]);
-
-									char* id = util::json::id(pair.key());
 
 									Arr* val = arrMk((char*) init._ptr, init._x, init._y, init._z, pair.key(), loc, rot);
 
