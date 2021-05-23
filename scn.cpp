@@ -294,28 +294,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		}
 
 		if (entry.key() == "area") {
-			for (const auto& entry : entry.value()) {
-				GLfloat init[2][2];
-				for (int y = 0; y < 2; y++) {
-					for (int x = 0; x < 2; x++) {
-						init[y][x] = entry["init"][y][x];
-					}
-				}
-
-				glm::vec3 loc = glm::vec3(0.0);
-				if (entry.contains("loc")) {
-					loc = util::json::vec(entry["loc"]);
-				}
-
-				Cone* _ = coneMk(init, loc);
-
-				for (int i = 0; i < 3; i++) {
-					boundArea[((noBoundArea - 1) * 3) + i] = _;
-				}
-				noBoundArea++;
-
-				obj.push_back(_->_parent);
-			}
+			util::json::bound::area(entry.value());
 		}
 	}
 

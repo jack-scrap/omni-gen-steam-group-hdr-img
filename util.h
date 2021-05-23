@@ -95,6 +95,7 @@ namespace util {
 
 		namespace bound {
 			void rng(nlohmann::json serial);
+			void area(nlohmann::json serial);
 		}
 	}
 
