@@ -305,17 +305,9 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	noStreetLight = 0;
 
 	for (const auto& entry : deser["ctrl"].items()) {
-		unsigned int no = entry.value()["pass"].size();
-		bool* pass = (bool*) malloc(no * sizeof (bool));
-		for (int i = 0; i < no; i++) {
-			pass[i] = entry.value()["pass"][i];
-		}
-
-		StreetLight* _ = streetLightMk(pass, no);
+		StreetLight* _ = util::json::streetLight(entry.value());
 
 		streetLight[noStreetLight] = _;
 		noStreetLight++;
-
-		obj.push_back(_->_parent);
 	}
 }

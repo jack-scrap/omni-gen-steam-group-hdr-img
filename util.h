@@ -13,6 +13,7 @@
 #include "c_buff.h"
 #include "var.h"
 #include "cone.h"
+#include "street_light.h"
 
 namespace util {
 	namespace fs {
@@ -91,6 +92,8 @@ namespace util {
 		glm::vec3 vec(nlohmann::json deser);
 
 		void scope(nlohmann::json deser, Var**& data, unsigned int*& type, std::vector<Obj*>& obj);
+
+		StreetLight* streetLight(nlohmann::json deser);
 
 		void prop(nlohmann::json deser, std::vector<Obj*>& obj);
 

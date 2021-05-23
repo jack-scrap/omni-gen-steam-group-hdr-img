@@ -605,6 +605,20 @@ void util::json::scope(nlohmann::json deser, Var**& data, unsigned int*& type, s
 	}
 }
 
+StreetLight* util::json::streetLight(nlohmann::json deser) {
+	unsigned int no = deser["pass"].size();
+	bool* pass = (bool*) malloc(no * sizeof (bool));
+	for (int i = 0; i < no; i++) {
+		pass[i] = deser["pass"][i];
+	}
+
+	StreetLight* _ = streetLightMk(pass, no);
+
+	obj.push_back(_->_parent);
+
+	return _;
+}
+
 void util::json::prop(nlohmann::json deser, std::vector<Obj*>& obj) {
 	glm::vec3 loc = glm::vec3(0.0);
 	if (deser.contains("loc")) {
