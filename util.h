@@ -91,11 +91,11 @@ namespace util {
 
 		glm::vec3 vec(nlohmann::json deser);
 
-		void scope(nlohmann::json deser, Var**& data, unsigned int*& type, std::vector<Obj*>& obj);
+		void scope(nlohmann::json deser, Var**& data, unsigned int*& type);
 
 		StreetLight* streetLight(nlohmann::json deser);
 
-		Obj* prop(nlohmann::json deser, std::vector<Obj*>& obj);
+		Obj* prop(nlohmann::json deser);
 
 		namespace bound {
 			void rng(nlohmann::json deser);

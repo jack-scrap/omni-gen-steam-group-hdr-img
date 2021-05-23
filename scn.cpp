@@ -271,14 +271,16 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	noData = deser["data"].size();
 
 	// initial
-	util::json::scope(deser["data"], data, type, obj);
+	util::json::scope(deser["data"], data, type);
 
 	// desired
-	util::json::scope(deser["goal"], goal, type, obj);
+	util::json::scope(deser["goal"], goal, type);
 
 	// prop
 	for (const auto& entry : deser["prop"]) {
-		Obj* _ = util::json::prop(entry, obj);
+		Obj* _ = util::json::prop(entry);
+
+		obj.push_back(_);
 	}
 
 	// bound
@@ -299,6 +301,8 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 				boundArea[noBoundArea] = _;
 				noBoundArea++;
+
+				obj.push_back(_->_parent);
 			}
 		}
 	}
@@ -312,5 +316,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 		streetLight[noStreetLight] = _;
 		noStreetLight++;
+
+		obj.push_back(_->_parent);
 	}
 }

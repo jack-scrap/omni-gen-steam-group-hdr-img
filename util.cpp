@@ -446,7 +446,7 @@ glm::vec3 util::json::vec(nlohmann::json deser) {
 	return _;
 }
 
-void util::json::scope(nlohmann::json deser, Var**& data, unsigned int*& type, std::vector<Obj*>& obj) {
+void util::json::scope(nlohmann::json deser, Var**& data, unsigned int*& type) {
 	data = (Var**) malloc(deser.size() * sizeof (Var*));
 	type = (unsigned int*) malloc(deser.size() * sizeof (unsigned int*));
 
@@ -614,12 +614,10 @@ StreetLight* util::json::streetLight(nlohmann::json deser) {
 
 	StreetLight* _ = streetLightMk(pass, no);
 
-	obj.push_back(_->_parent);
-
 	return _;
 }
 
-Obj* util::json::prop(nlohmann::json deser, std::vector<Obj*>& obj) {
+Obj* util::json::prop(nlohmann::json deser) {
 	glm::vec3 loc = glm::vec3(0.0);
 	if (deser.contains("loc")) {
 		loc = util::json::vec(deser["loc"]);
@@ -633,8 +631,6 @@ Obj* util::json::prop(nlohmann::json deser, std::vector<Obj*>& obj) {
 	Obj* _ = objMk(deser["name"], "obj", "dir", false, loc, rot);
 
 	return _;
-
-	obj.push_back(_);
 }
 
 void util::json::bound::rng(nlohmann::json deser) {
@@ -675,8 +671,6 @@ Cone* util::json::bound::area(nlohmann::json deser) {
 	}
 
 	Cone* _ = coneMk(init, loc);
-
-	obj.push_back(_->_parent);
 
 	return _;
 }
