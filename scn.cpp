@@ -290,27 +290,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 	for (const auto& entry : serial["bound"].items()) {
 		if (entry.key() == "rng") {
-			for (const auto& rng : entry.value()) {
-				for (const auto& lim : rng) {
-					for (const auto& pair : lim.items()) {
-						unsigned int axis;
-						if (pair.key() == "X") {
-							axis = X;
-						}
-
-						if (pair.key() == "Z") {
-							axis = Z;
-						}
-
-						Lim* _ = limMk(axis, pair.value());
-
-						boundRng[noBoundRng] = _;
-						noBoundRng++;
-
-						line.push_back(_->_parent);
-					}
-				}
-			}
+			util::json::bound::rng(entry.value());
 		}
 
 		if (entry.key() == "area") {

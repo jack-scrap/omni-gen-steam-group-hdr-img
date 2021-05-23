@@ -621,6 +621,30 @@ void util::json::prop(nlohmann::json serial, std::vector<Obj*>& mesh) {
 	mesh.push_back(_);
 }
 
+void util::json::bound::rng(nlohmann::json serial) {
+	for (const auto& rng : serial) {
+		for (const auto& lim : rng) {
+			for (const auto& pair : lim.items()) {
+				unsigned int axis;
+				if (pair.key() == "X") {
+					axis = X;
+				}
+
+				if (pair.key() == "Z") {
+					axis = Z;
+				}
+
+				Lim* _ = limMk(axis, pair.value());
+
+				boundRng[noBoundRng] = _;
+				noBoundRng++;
+
+				line.push_back(_->_parent);
+			}
+		}
+	}
+}
+
 std::string util::cfg::key(std::string buff) {
 	std::string _;
 
