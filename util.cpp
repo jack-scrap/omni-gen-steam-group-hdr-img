@@ -518,9 +518,11 @@ void util::json::scope(nlohmann::json deser, Var**& data, unsigned int*& type) {
 
 									Arr* val = arrMk((char*) init._ptr, init._x, init._y, pair.key(), loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
 
-									i++;
 									Var* _ = varMk(id, val);
+
 									data[i - 1] = _;
+									type[i] = ARRAY;
+									i++;
 
 									obj.push_back(((Arr*) (((Var*) data[i - 1])->_ptr))->_parent);
 
@@ -536,11 +538,9 @@ void util::json::scope(nlohmann::json deser, Var**& data, unsigned int*& type) {
 
 									Var* _ = varMk(id, val);
 
-									i++;
-									data = (Var**) realloc(data, i * sizeof (void*));
-									type = (unsigned int*) realloc(type, i * sizeof (unsigned int*));
 									data[i - 1] = _;
 									type[i - 1] = ARRAY;
+									i++;
 
 									obj.push_back(val->_parent);
 
