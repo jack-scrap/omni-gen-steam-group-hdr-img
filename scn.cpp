@@ -111,6 +111,29 @@ unsigned int noStreetLightGet() {
 	return noStreetLight;
 }
 
+Cone* asdf(nlohmann::json serial) {
+	GLfloat init[2][2];
+	for (int y = 0; y < 2; y++) {
+		for (int x = 0; x < 2; x++) {
+			init[y][x] = serial["init"][y][x];
+		}
+	}
+
+	glm::vec3 loc = glm::vec3(0.0);
+	if (serial.contains("loc")) {
+		loc = util::json::vec(serial["loc"]);
+	}
+
+	Cone* _ = coneMk(init, loc);
+
+	boundArea[noBoundArea] = _;
+	noBoundArea++;
+
+	obj.push_back(_->_parent);
+
+	return _;
+}
+
 void scn::init(unsigned int stage, unsigned int lvl) {
 	nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("lvl/" + omni::stage[stage] + "/" + std::to_string(lvl) + ".json"));
 
@@ -289,12 +312,18 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	noBoundArea = 0;
 
 	for (const auto& entry : serial["bound"].items()) {
-		if (entry.key() == "rng") {
-			util::json::bound::rng(entry.value());
-		}
+		/* if (entry.key() == "rng") { */
+		/* 	util::json::bound::rng(entry.value()); */
+		/* } */
+
+		/* if (entry.key() == "area") { */
+		/* 	util::json::bound::area(entry.value()); */
+		/* } */
 
 		if (entry.key() == "area") {
-			util::json::bound::area(entry.value());
+			for (const auto& hjkl : entry.value()) {
+				Cone* _ = asdf(hjkl);
+			}
 		}
 	}
 
