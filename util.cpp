@@ -605,6 +605,21 @@ void util::json::scope(nlohmann::json serial, Var**& data, unsigned int*& type, 
 	}
 }
 
+void util::json::prop(nlohmann::json serial, std::vector<Obj*>& mesh) {
+	glm::vec3 loc = glm::vec3(0.0);
+	if (serial.contains("loc")) {
+		loc = util::json::vec(serial["loc"]);
+	}
+
+	glm::vec3 rot = glm::vec3(0.0);
+	if (serial.contains("rot")) {
+		rot = util::json::vec(serial["rot"]);
+	}
+
+	Obj* _ = objMk(serial["name"], "obj", "dir", false, loc, rot);
+
+	mesh.push_back(_);
+}
 
 std::string util::cfg::key(std::string buff) {
 	std::string _;

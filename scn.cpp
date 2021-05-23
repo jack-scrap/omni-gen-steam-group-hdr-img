@@ -278,19 +278,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 	// prop
 	for (const auto& entry : serial["prop"]) {
-		glm::vec3 loc = glm::vec3(0.0);
-		if (entry.contains("loc")) {
-			loc = util::json::vec(entry["loc"]);
-		}
-
-		glm::vec3 rot = glm::vec3(0.0);
-		if (entry.contains("rot")) {
-			rot = util::json::vec(entry["rot"]);
-		}
-
-		Obj* obj = objMk(entry["name"], "obj", "dir", false, loc, rot);
-
-		mesh.push_back(obj);
+		util::json::prop(entry, mesh);
 	}
 
 	// bound
