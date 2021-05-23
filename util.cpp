@@ -394,8 +394,8 @@ char util::json::byte(nlohmann::json serial) {
 	return (char) ((int) serial);
 }
 
-cArr util::json::arr(nlohmann::json serial) {
-	cArr _;
+cBuff util::json::arr(nlohmann::json serial) {
+	cBuff _;
 
 	_._x = serial.size();
 	_._y = 1;
@@ -408,8 +408,8 @@ cArr util::json::arr(nlohmann::json serial) {
 	return _;
 }
 
-cArr util::json::matr2(nlohmann::json serial) {
-	cArr _;
+cBuff util::json::matr2(nlohmann::json serial) {
+	cBuff _;
 
 	_._x = serial[0].size();
 	_._y = serial.size();
@@ -424,8 +424,8 @@ cArr util::json::matr2(nlohmann::json serial) {
 	return _;
 }
 
-cArr util::json::matr3(nlohmann::json serial) {
-	cArr _;
+cBuff util::json::matr3(nlohmann::json serial) {
+	cBuff _;
 
 	_._x = serial[0][0].size();
 	_._y = serial[0].size();
@@ -501,7 +501,7 @@ void util::json::scope(nlohmann::json serial, std::vector<Obj*>& mesh) {
 					switch (pair.value()["block"][0].type()) {
 						// 1D
 						case nlohmann::json::value_t::number_unsigned: {
-							cArr init = util::json::arr(pair.value()["block"]);
+							cBuff init = util::json::arr(pair.value()["block"]);
 
 							Arr* val = arrMk((char*) init._ptr, init._x, pair.key(), loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
 
@@ -522,7 +522,7 @@ void util::json::scope(nlohmann::json serial, std::vector<Obj*>& mesh) {
 						case nlohmann::json::value_t::array: {
 							switch (pair.value()["block"][0][0].type()) {
 								case nlohmann::json::value_t::number_unsigned: {
-									cArr init = util::json::matr2(pair.value()["block"]);
+									cBuff init = util::json::matr2(pair.value()["block"]);
 
 									char* id = util::json::id(pair.key());
 
@@ -538,7 +538,7 @@ void util::json::scope(nlohmann::json serial, std::vector<Obj*>& mesh) {
 								}
 
 								case nlohmann::json::value_t::array: {
-									cArr init = util::json::matr3(pair.value()["block"]);
+									cBuff init = util::json::matr3(pair.value()["block"]);
 
 									char* id = util::json::id(pair.key());
 

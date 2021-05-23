@@ -198,7 +198,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		}
 
 		if (entry["name"] == "cargo_ship") {
-			cArr init = util::json::arr(entry["data"]);
+			cBuff init = util::json::arr(entry["data"]);
 
 			CargoShip* _ = cargoShipMk((char*) init._ptr, init._x * init._y, loc, rot);
 
@@ -210,7 +210,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		}
 
 		if (entry["name"] == "truck") {
-			cArr init = util::json::arr(entry["data"]);
+			cBuff init = util::json::arr(entry["data"]);
 
 			Truck* _ = truckMk((char*) init._ptr, init._x, loc, rot);
 

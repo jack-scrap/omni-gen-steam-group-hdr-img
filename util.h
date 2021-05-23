@@ -10,7 +10,7 @@
 #include <nlohmann/json.hpp>
 
 #include "obj.h"
-#include "c_arr.h"
+#include "c_buff.h"
 #include "var.h"
 
 namespace util {
@@ -83,9 +83,9 @@ namespace util {
 
 		char byte(nlohmann::json serial);
 
-		cArr arr(nlohmann::json serial);
-		cArr matr2(nlohmann::json serial);
-		cArr matr3(nlohmann::json serial);
+		cBuff arr(nlohmann::json serial);
+		cBuff matr2(nlohmann::json serial);
+		cBuff matr3(nlohmann::json serial);
 
 		glm::vec3 vec(nlohmann::json serial);
 

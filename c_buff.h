@@ -6,4 +6,4 @@ typedef struct {
 		_x,
 		_y,
 		_z;
-} cArr;
+} cBuff;
