@@ -77,9 +77,3 @@ extern "C" unsigned int noBoundAreaGet();
 
 extern "C" Cone** boundAreaGet();
 extern "C" unsigned int noBoundRngGet();
-
-enum type {
-	SCALAR,
-	ARRAY,
-	DICT
-};

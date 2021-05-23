@@ -23,13 +23,13 @@ Dict* dictMk(void** data, unsigned int* type, unsigned int no, std::string name,
 	// data
 	for (int i = 0; i < no; i++) {
 		switch (type[i]) {
-			case SCALAR: {
+			case util::json::SCALAR: {
 				child[1 + i] = ((Idx*) data[i])->_parent;
 
 				break;
 			}
 
-			case ARRAY: {
+			case util::json::ARRAY: {
 				child[1 + i] = ((Arr*) data[i])->_parent;
 
 				break;

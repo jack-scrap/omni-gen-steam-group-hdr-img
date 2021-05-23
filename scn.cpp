@@ -246,17 +246,17 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		Obj* _;
 
 		switch (type[i]) {
-			case SCALAR:
+			case util::json::SCALAR:
 				_ = ((Idx*) data[i]->_ptr)->_parent;
 
 				break;
 
-			case ARRAY:
+			case util::json::ARRAY:
 				_ = ((Arr*) data[i]->_ptr)->_parent;
 
 				break;
 
-			case DICT:
+			case util::json::DICT:
 				_ = ((Dict*) data[i]->_ptr)->_parent;
 
 				break;
