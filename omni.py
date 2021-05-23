@@ -230,23 +230,21 @@ _cargoShipMv.argtypes = [
 ]
 
 _craneGet = _scn.craneGet
-_craneGet.restype = POINTER(POINTER(_Crane))
+_craneGet.restype = _cArr
 _craneGet.argtypes = None
 
-_noCraneGet = _scn.noCraneGet
-_noCraneGet.restype = c_uint
-_noCraneGet.argtypes = None
+_ptrCrane = cast(_craneGet()._ptr, POINTER(POINTER(_Crane)))
 
 crane = None
-if _noCraneGet():
-    if _noCraneGet() > 1:
+if _craneGet()._no:
+    if _craneGet()._no > 1:
 	    crane = []
 
-	    for i in range(_noCraneGet()):
-		    crane.append(_Crane(_craneGet()[i]))
+	    for i in range(_craneGet()._no):
+		    crane.append(_ptrCrane[i])
 
     else:
-	    crane = _Crane(_craneGet()[0])
+	    crane = _Crane(_ptrCrane[0])
 
 _truckGet = _scn.truckGet
 _truckGet.restype = POINTER(POINTER(_Truck))

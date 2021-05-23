@@ -34,8 +34,7 @@ extern "C" Var** goalGet();
 extern "C" unsigned int* typeGet();
 extern "C" unsigned int noDataGet();
 
-extern "C" Crane** crane;
-extern "C" unsigned int noCrane;
+extern "C" cArr crane;
 
 extern "C" Truck** truck;
 extern "C" unsigned int noTruck;
@@ -43,8 +42,7 @@ extern "C" unsigned int noTruck;
 extern "C" CargoShip** cargoShip;
 extern "C" unsigned int noCargoShip;
 
-extern "C" Crane** craneGet();
-extern "C" unsigned int noCraneGet();
+extern "C" cArr craneGet();
 
 extern "C" Truck** truckGet();
 extern "C" unsigned int noTruckGet();
