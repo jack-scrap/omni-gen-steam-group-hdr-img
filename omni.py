@@ -60,7 +60,7 @@ _noData = _noDataGet()
 data = {}
 goal = {}
 for i in range(_noData):
-	id = _data[i].contents._id.decode("utf-8")
+	id = _data[i].contents._id.decode('utf-8')
 
 	t = None
 	if _type[i] == 0:
