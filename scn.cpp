@@ -84,26 +84,16 @@ cArr streetLightGet() {
 	return streetLight;
 }
 
-Lim** boundRng;
-unsigned int noBoundRng;
+cArr boundRng;
 
-Cone** boundArea;
-unsigned int noBoundArea;
+cArr boundArea;
 
-Lim** boundRngGet() {
+cArr boundRngGet() {
 	return boundRng;
 }
 
-unsigned int noBoundRngGet() {
-	return noBoundRng;
-}
-
-Cone** boundAreaGet() {
+cArr boundAreaGet() {
 	return boundArea;
-}
-
-unsigned int noBoundAreaGet() {
-	return noBoundArea;
 }
 
 void scn::init(unsigned int stage, unsigned int lvl) {
@@ -150,15 +140,15 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	pt.clear();
 
 	// bound
-	for (int i = 0; i < noBoundRng; i++) {
-		free(boundRng[i]);
+	for (int i = 0; i < boundRng._no; i++) {
+		free(((Lim**) boundRng._ptr)[i]);
 	}
-	free(boundRng);
+	free(boundRng._ptr);
 
-	for (int i = 0; i < noBoundArea; i++) {
-		free(boundArea[i]);
+	for (int i = 0; i < boundArea._no; i++) {
+		free(((Cone**) boundArea._ptr)[i]);
 	}
-	free(boundArea);
+	free(boundArea._ptr);
 
 	/* allocate */
 	// vehicle
@@ -268,11 +258,11 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	// bound
-	boundRng = (Lim**) malloc(deser["bound"]["rng"].size() * sizeof (Lim*));
-	noBoundRng = 0;
+	boundRng._ptr = (Lim**) malloc(deser["bound"]["rng"].size() * sizeof (Lim*));
+	boundRng._no = 0;
 
-	boundArea = (Cone**) malloc(deser["bound"]["area"].size() * sizeof (Cone*));
-	noBoundArea = 0;
+	boundArea._ptr = (Cone**) malloc(deser["bound"]["area"].size() * sizeof (Cone*));
+	boundArea._no = 0;
 
 	for (const auto& entry : deser["bound"].items()) {
 		if (entry.key() == "rng") {
@@ -281,8 +271,8 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					for (const auto& lim : rng.items()) {
 						Lim* _ = util::json::bound::lim(lim.key(), lim.value());
 
-						boundRng[noBoundRng] = _;
-						noBoundRng++;
+						boundRng._ptr[boundRng._no] = _;
+						boundRng._no++;
 
 						line.push_back(_->_parent);
 					}
@@ -294,8 +284,8 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			for (const auto& entry : entry.value()) {
 				Cone* _ = util::json::bound::area(entry);
 
-				boundArea[noBoundArea] = _;
-				noBoundArea++;
+				((Cone**) boundArea._ptr)[boundArea._no] = _;
+				boundArea._no++;
 
 				obj.push_back(_->_parent);
 			}

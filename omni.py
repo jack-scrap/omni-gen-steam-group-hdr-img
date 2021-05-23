@@ -91,12 +91,8 @@ class _Lim(Structure):
 	]
 
 _boundRngGet = _scn.boundRngGet
-_boundRngGet.restype = POINTER(_Lim)
+_boundRngGet.restype = _cArr
 _boundRngGet.argtypes = None
-
-_noBoundRngGet = _scn.noBoundRngGet
-_noBoundRngGet.restype = c_uint
-_noBoundRngGet.argtypes = None
 
 class _Cone(Structure):
 	_fields_ = [
@@ -105,12 +101,16 @@ class _Cone(Structure):
 	]
 
 _boundAreaGet = _scn.boundAreaGet
-_boundAreaGet.restype = POINTER(POINTER(_Cone))
+_boundAreaGet.restype = _cArr
 _boundAreaGet.argtypes = None
 
-_noBoundAreaGet = _scn.noBoundAreaGet
-_noBoundAreaGet.restype = c_uint
-_noBoundAreaGet.argtypes = None
+_ptrBoundArea = cast(_boundAreaGet()._ptr, POINTER(POINTER(_Cone)))
+
+_boundRngGet = _scn.boundRngGet
+_boundRngGet.restype = _cArr
+_boundRngGet.argtypes = None
+
+_ptrBoundArea = cast(_boundRngGet()._ptr, POINTER(POINTER(_Lim)))
 
 bound = {
 	'rng': _boundRngGet(),
@@ -303,7 +303,7 @@ _streetLightToggle = _street_light.streetLightToggle
 _streetLightToggle.restype = c_uint
 _streetLightToggle.argtypes = None
 
-ptrStreetLight = cast(_streetLightGet()._ptr, POINTER(_StreetLight))
+_ptrStreetLight = cast(_streetLightGet()._ptr, POINTER(_StreetLight))
 
 street_light = []
 for i in range(_streetLightGet()._no):

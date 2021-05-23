@@ -63,14 +63,10 @@ namespace scn {
 extern "C" cArr streetLight;
 extern "C" cArr streetLightGet();
 
-extern Lim** boundRng;
-extern "C" unsigned int noBoundRng;
+extern cArr boundRng;
 
-extern "C" Cone** boundArea;
-extern "C" unsigned int noBoundArea;
+extern "C" cArr boundArea;
 
-extern "C" Lim** boundRngGet();
-extern "C" unsigned int noBoundAreaGet();
+extern "C" cArr boundRngGet();
 
-extern "C" Cone** boundAreaGet();
-extern "C" unsigned int noBoundRngGet();
+extern "C" cArr boundAreaGet();
