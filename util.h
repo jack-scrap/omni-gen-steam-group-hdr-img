@@ -12,6 +12,7 @@
 #include "obj.h"
 #include "c_buff.h"
 #include "var.h"
+#include "lim.h"
 #include "cone.h"
 #include "street_light.h"
 
@@ -100,7 +101,7 @@ namespace util {
 		Obj* prop(nlohmann::json deser);
 
 		namespace bound {
-			void rng(nlohmann::json deser);
+			Lim* lim(nlohmann::json key, nlohmann::json val);
 			Cone* area(nlohmann::json deser);
 		}
 	}

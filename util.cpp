@@ -682,28 +682,19 @@ Obj* util::json::prop(nlohmann::json deser) {
 	return _;
 }
 
-void util::json::bound::rng(nlohmann::json deser) {
-	for (const auto& rng : deser) {
-		for (const auto& lim : rng) {
-			for (const auto& pair : lim.items()) {
-				unsigned int axis;
-				if (pair.key() == "X") {
-					axis = X;
-				}
-
-				if (pair.key() == "Z") {
-					axis = Z;
-				}
-
-				Lim* _ = limMk(axis, pair.value());
-
-				boundRng[noBoundRng] = _;
-				noBoundRng++;
-
-				line.push_back(_->_parent);
-			}
-		}
+Lim* util::json::bound::lim(nlohmann::json key, nlohmann::json val) {
+	unsigned int axis;
+	if (key == "X") {
+		axis = X;
 	}
+
+	if (key == "Z") {
+		axis = Z;
+	}
+
+	Lim* _ = limMk(axis, val);
+
+	return _;
 }
 
 Cone* util::json::bound::area(nlohmann::json deser) {

@@ -256,7 +256,18 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 	for (const auto& entry : deser["bound"].items()) {
 		if (entry.key() == "rng") {
-			util::json::bound::rng(entry.value());
+			for (const auto& entry : entry.value()) {
+				for (const auto& rng : entry) {
+					for (const auto& lim : rng.items()) {
+						Lim* _ = util::json::bound::lim(lim.key(), lim.value());
+
+						boundRng[noBoundRng] = _;
+						noBoundRng++;
+
+						line.push_back(_->_parent);
+					}
+				}	
+			}	
 		}
 
 		if (entry.key() == "area") {
