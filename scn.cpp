@@ -86,11 +86,11 @@ cArr streetLightGet() {
 
 cArr boundRng;
 
-cArr boundArea;
-
 cArr boundRngGet() {
 	return boundRng;
 }
+
+cArr boundArea;
 
 cArr boundAreaGet() {
 	return boundArea;
@@ -271,7 +271,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					for (const auto& lim : rng.items()) {
 						Lim* _ = util::json::bound::lim(lim.key(), lim.value());
 
-						boundRng._ptr[boundRng._no] = _;
+						((Lim**) boundRng._ptr)[boundRng._no] = _;
 						boundRng._no++;
 
 						line.push_back(_->_parent);

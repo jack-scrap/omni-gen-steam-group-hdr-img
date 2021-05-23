@@ -64,9 +64,7 @@ extern "C" cArr streetLight;
 extern "C" cArr streetLightGet();
 
 extern "C" cArr boundRng;
-
-extern "C" cArr boundArea;
-
 extern "C" cArr boundRngGet();
 
+extern "C" cArr boundArea;
 extern "C" cArr boundAreaGet();
