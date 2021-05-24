@@ -37,9 +37,9 @@ Truck* truckMk(glm::vec3 loc, glm::vec3 rot) {
 
 	_->_parent = objMk("truck/front", "obj", "dir", true, child, sizeof child / sizeof *child, loc + glm::vec3(2.4, 1.3, 0.0), rot);
 
-	glm::vec3 origin = _->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 offset = _->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int i = 0; i < 3; i++) {
-		_->_loc[i] = origin[i];
+		_->_loc[i] = offset[i];
 	}
 
 	return _;
@@ -100,9 +100,9 @@ Truck* truckMk(char* init, unsigned int no, glm::vec3 loc, glm::vec3 rot) {
 
 	_->_parent = objMk("truck/front", "obj", "dir", true, child, sizeof child / sizeof *child, loc + glm::vec3(2.4, 1.3, 0.0), rot);
 
-	glm::vec3 origin = _->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 offset = _->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int i = 0; i < 3; i++) {
-		_->_loc[i] = origin[i];
+		_->_loc[i] = offset[i];
 	}
 
 	return _;
@@ -122,9 +122,9 @@ void truckTurn(Truck* truck, float delta) {
 		omni::err("Cannot turn truck; rotation of wheels exceeds range");
 	}
 
-	glm::vec3 origin = truck->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 offset = truck->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int i = 0; i < 3; i++) {
-		truck->_loc[i] = origin[i];
+		truck->_loc[i] = offset[i];
 	}
 }
 
@@ -133,8 +133,8 @@ void truckMv(Truck* truck, float delta) {
 
 	objAnim(truck->_parent, loc, glm::vec3(0.0));
 
-	glm::vec3 origin = truck->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 offset = truck->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int i = 0; i < 3; i++) {
-		truck->_loc[i] = origin[i];
+		truck->_loc[i] = offset[i];
 	}
 }
