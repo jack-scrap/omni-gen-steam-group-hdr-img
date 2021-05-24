@@ -50,10 +50,6 @@ extern std::vector<Obj*> obj;
 extern std::vector<Obj*> line;
 extern std::vector<Obj*> pt;
 
-namespace scn {
-	void init(unsigned int stage, unsigned int lvl);
-}
-
 extern "C" cArr streetLight;
 extern "C" cArr streetLightGet();
 
@@ -62,3 +58,7 @@ extern "C" cArr boundRngGet();
 
 extern "C" cArr boundArea;
 extern "C" cArr boundAreaGet();
+
+namespace scn {
+	void init(unsigned int stage, unsigned int lvl);
+}
