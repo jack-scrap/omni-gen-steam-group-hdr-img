@@ -25,14 +25,18 @@ Lim* limMk(unsigned int axis, GLfloat val) {
 	glm::vec3 loc = glm::vec3(0.0);
 	glm::vec3 rot = glm::vec3(0.0);
 
-	if (axis == X) {
-		loc[X] = val;
-		rot[Y] = M_PI / 2;
-	}
+	switch (axis) {
+		case X:
+			loc[X] = val;
+			rot[Y] = M_PI / 2;
 
-	if (axis == Z) {
-		loc[Z] = val;
-		rot[Y] = 0.0;
+			break;
+
+		case Z:
+			loc[Z] = val;
+			rot[Y] = 0.0;
+
+			break;
 	}
 
 	_->_parent = lineMk(vtc, "geom", "thick", "solid", loc, rot);
