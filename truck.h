@@ -31,8 +31,12 @@ typedef struct Truck {
 		0
 	};
 
-	GLuint _uniSzBed;
-	GLuint _uniSzOuter;
+	GLuint _uni[2];
+
+	enum uni {
+		SZ_BED,
+		SZ_OUTER
+	};
 } Truck;
 
 Truck* truckMk(glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));

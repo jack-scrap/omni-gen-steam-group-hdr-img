@@ -75,9 +75,9 @@ Truck* truckMk(char* init, unsigned int no, glm::vec3 loc, glm::vec3 rot) {
 
 	bed->_prog.use();
 
-	_->_uniSzBed = glGetUniformLocation(bed->_prog._id, "sz");
+	_->_uni[Truck::SZ_BED] = glGetUniformLocation(bed->_prog._id, "sz");
 
-	glUniform1ui(_->_uniSzBed, no);
+	glUniform1ui(_->_uni[Truck::SZ_BED], no);
 
 	bed->_prog.unUse();
 
@@ -85,9 +85,9 @@ Truck* truckMk(char* init, unsigned int no, glm::vec3 loc, glm::vec3 rot) {
 
 	outer->_prog.use();
 
-	_->_uniSzOuter = glGetUniformLocation(outer->_prog._id, "sz");
+	_->_uni[Truck::SZ_OUTER] = glGetUniformLocation(outer->_prog._id, "sz");
 
-	glUniform1ui(_->_uniSzOuter, no);
+	glUniform1ui(_->_uni[Truck::SZ_OUTER], no);
 
 	outer->_prog.unUse();
 
