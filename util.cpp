@@ -395,8 +395,8 @@ char util::json::byte(nlohmann::json deser) {
 	return (char) ((int) deser);
 }
 
-cBuff util::json::arr(nlohmann::json deser) {
-	cBuff _;
+CBuff util::json::arr(nlohmann::json deser) {
+	CBuff _;
 
 	_._x = deser.size();
 	_._y = 1;
@@ -409,8 +409,8 @@ cBuff util::json::arr(nlohmann::json deser) {
 	return _;
 }
 
-cBuff util::json::matr2(nlohmann::json deser) {
-	cBuff _;
+CBuff util::json::matr2(nlohmann::json deser) {
+	CBuff _;
 
 	_._x = deser[0].size();
 	_._y = deser.size();
@@ -425,8 +425,8 @@ cBuff util::json::matr2(nlohmann::json deser) {
 	return _;
 }
 
-cBuff util::json::matr3(nlohmann::json deser) {
-	cBuff _;
+CBuff util::json::matr3(nlohmann::json deser) {
+	CBuff _;
 
 	_._x = deser[0][0].size();
 	_._y = deser[0].size();
@@ -484,7 +484,7 @@ Var** util::json::scope(nlohmann::json deser, unsigned int*& type) {
 					switch (pair.value()["block"][0].type()) {
 						// 1D
 						case nlohmann::json::value_t::number_unsigned: {
-							cBuff init = util::json::arr(pair.value()["block"]);
+							CBuff init = util::json::arr(pair.value()["block"]);
 
 							Arr* val = arrMk((char*) init._ptr, init._x, pair.key(), loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
 
@@ -501,7 +501,7 @@ Var** util::json::scope(nlohmann::json deser, unsigned int*& type) {
 						case nlohmann::json::value_t::array: {
 							switch (pair.value()["block"][0][0].type()) {
 								case nlohmann::json::value_t::number_unsigned: {
-									cBuff init = util::json::matr2(pair.value()["block"]);
+									CBuff init = util::json::matr2(pair.value()["block"]);
 
 									Arr* val = arrMk((char*) init._ptr, init._x, init._y, pair.key(), loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
 
@@ -515,7 +515,7 @@ Var** util::json::scope(nlohmann::json deser, unsigned int*& type) {
 								}
 
 								case nlohmann::json::value_t::array: {
-									cBuff init = util::json::matr3(pair.value()["block"]);
+									CBuff init = util::json::matr3(pair.value()["block"]);
 
 									Arr* val = arrMk((char*) init._ptr, init._x, init._y, init._z, pair.key(), loc, rot);
 

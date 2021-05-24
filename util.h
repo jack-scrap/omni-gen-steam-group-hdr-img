@@ -86,9 +86,9 @@ namespace util {
 
 		char byte(nlohmann::json deser);
 
-		cBuff arr(nlohmann::json deser);
-		cBuff matr2(nlohmann::json deser);
-		cBuff matr3(nlohmann::json deser);
+		CBuff arr(nlohmann::json deser);
+		CBuff matr2(nlohmann::json deser);
+		CBuff matr3(nlohmann::json deser);
 
 		Var** scope(nlohmann::json deser, unsigned int*& type);
 

@@ -3,7 +3,7 @@
 typedef struct {
 	void* _ptr;
 	size_t _sz;
-} cArr;
+} CArr;
 
 typedef struct {
 	void* _ptr;
@@ -11,4 +11,4 @@ typedef struct {
 		_x,
 		_y,
 		_z;
-} cBuff;
+} CBuff;

@@ -6,7 +6,7 @@ _cargo_ship = CDLL('libcargo_ship.so')
 _street_light = CDLL('libstreet_light.so')
 _scn = CDLL('libscn.so')
 
-class _cArr(Structure):
+class _CArr(Structure):
 	_fields_ = [
 		('_ptr', c_void_p),
 		('_sz', c_size_t)
@@ -91,7 +91,7 @@ class _Lim(Structure):
 	]
 
 _boundRngGet = _scn.boundRngGet
-_boundRngGet.restype = _cArr
+_boundRngGet.restype = _CArr
 _boundRngGet.argtypes = None
 
 class _Cone(Structure):
@@ -101,13 +101,13 @@ class _Cone(Structure):
 	]
 
 _boundAreaGet = _scn.boundAreaGet
-_boundAreaGet.restype = _cArr
+_boundAreaGet.restype = _CArr
 _boundAreaGet.argtypes = None
 
 _ptrBoundArea = cast(_boundAreaGet()._ptr, POINTER(POINTER(_Cone)))
 
 _boundRngGet = _scn.boundRngGet
-_boundRngGet.restype = _cArr
+_boundRngGet.restype = _CArr
 _boundRngGet.argtypes = None
 
 _ptrBoundArea = cast(_boundRngGet()._ptr, POINTER(POINTER(_Lim)))
@@ -230,7 +230,7 @@ _cargoShipMv.argtypes = [
 ]
 
 _craneGet = _scn.craneGet
-_craneGet.restype = _cArr
+_craneGet.restype = _CArr
 _craneGet.argtypes = None
 
 _cranePtr = cast(_craneGet()._ptr, POINTER(POINTER(_Crane)))
@@ -250,7 +250,7 @@ if _craneGet()._sz:
 		crane = _Crane(_cranePtr[0])
 
 _truckGet = _scn.truckGet
-_truckGet.restype = _cArr
+_truckGet.restype = _CArr
 _truckGet.argtypes = None
 
 _truckPtr = cast(_truckGet()._ptr, POINTER(POINTER(_Truck)))
@@ -270,7 +270,7 @@ if _truckGet()._sz:
 		truck = _Truck(_truckPtr[0])
 
 _cargoShipGet = _scn.cargoShipGet
-_cargoShipGet.restype = _cArr
+_cargoShipGet.restype = _CArr
 _cargoShipGet.argtypes = None
 
 _cargoShipPtr = cast(_cargoShipGet()._ptr, POINTER(POINTER(_CargoShip)))
@@ -300,7 +300,7 @@ class _StreetLight(_Obj):
 
 # control-flow
 _streetLightGet = _scn.streetLightGet
-_streetLightGet.restype = _cArr
+_streetLightGet.restype = _CArr
 _streetLightGet.argtypes = None
 
 _streetLightToggle = _street_light.streetLightToggle

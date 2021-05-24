@@ -34,26 +34,26 @@ extern "C" Var** goalGet();
 extern "C" unsigned int* typeGet();
 extern "C" unsigned int noDataGet();
 
-extern "C" cArr crane;
+extern "C" CArr crane;
 
-extern "C" cArr truck;
+extern "C" CArr truck;
 
-extern "C" cArr cargoShip;
+extern "C" CArr cargoShip;
 
-extern "C" cArr craneGet();
+extern "C" CArr craneGet();
 
-extern "C" cArr truckGet();
+extern "C" CArr truckGet();
 
-extern "C" cArr cargoShipGet();
+extern "C" CArr cargoShipGet();
 
-extern "C" cArr streetLight;
-extern "C" cArr streetLightGet();
+extern "C" CArr streetLight;
+extern "C" CArr streetLightGet();
 
-extern "C" cArr boundRng;
-extern "C" cArr boundRngGet();
+extern "C" CArr boundRng;
+extern "C" CArr boundRngGet();
 
-extern "C" cArr boundArea;
-extern "C" cArr boundAreaGet();
+extern "C" CArr boundArea;
+extern "C" CArr boundAreaGet();
 
 namespace scn {
 	extern std::vector<Obj*> obj;

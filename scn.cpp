@@ -43,19 +43,19 @@ unsigned int noDataGet() {
 	return noData;
 }
 
-cArr crane;
-cArr truck;
-cArr cargoShip;
+CArr crane;
+CArr truck;
+CArr cargoShip;
 
-cArr craneGet() {
+CArr craneGet() {
 	return crane;
 }
 
-cArr truckGet() {
+CArr truckGet() {
 	return truck;
 }
 
-cArr cargoShipGet() {
+CArr cargoShipGet() {
 	return cargoShip;
 }
 
@@ -63,20 +63,20 @@ std::vector<Obj*> scn::obj;
 std::vector<Obj*> scn::line;
 std::vector<Obj*> scn::pt;
 
-cArr streetLight;
-cArr streetLightGet() {
+CArr streetLight;
+CArr streetLightGet() {
 	return streetLight;
 }
 
-cArr boundRng;
+CArr boundRng;
 
-cArr boundRngGet() {
+CArr boundRngGet() {
 	return boundRng;
 }
 
-cArr boundArea;
+CArr boundArea;
 
-cArr boundAreaGet() {
+CArr boundAreaGet() {
 	return boundArea;
 }
 
@@ -167,7 +167,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		}
 
 		if (entry["name"] == "cargo_ship") {
-			cBuff init = util::json::arr(entry["data"]);
+			CBuff init = util::json::arr(entry["data"]);
 
 			CargoShip* _ = cargoShipMk((char*) init._ptr, loc, rot);
 
@@ -179,7 +179,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		}
 
 		if (entry["name"] == "truck") {
-			cBuff init = util::json::arr(entry["data"]);
+			CBuff init = util::json::arr(entry["data"]);
 
 			Truck* _ = truckMk((char*) init._ptr, init._x, loc, rot);
 
