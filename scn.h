@@ -21,11 +21,11 @@ extern Cam cam;
 
 extern Console* console;
 
-extern Var** data;
-extern Var** goal;
-extern unsigned int* type;
-extern unsigned int noData;
-extern bool eq;
+extern "C" Var** data;
+extern "C" Var** goal;
+extern "C" unsigned int* type;
+extern "C" unsigned int noData;
+extern "C" bool eq;
 
 extern "C" Var** dataGet();
 
