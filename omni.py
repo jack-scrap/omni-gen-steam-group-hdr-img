@@ -233,7 +233,7 @@ _craneGet = _scn.craneGet
 _craneGet.restype = _cArr
 _craneGet.argtypes = None
 
-_ptrCrane = cast(_craneGet()._ptr, POINTER(POINTER(_Crane)))
+_cranePtr = cast(_craneGet()._ptr, POINTER(POINTER(_Crane)))
 
 crane = None
 if _craneGet()._no:
@@ -241,16 +241,16 @@ if _craneGet()._no:
 	    crane = []
 
 	    for i in range(_craneGet()._no):
-		    crane.append(_ptrCrane[i])
+		    crane.append(_cranePtr[i])
 
     else:
-	    crane = _Crane(_ptrCrane[0])
+	    crane = _Crane(_cranePtr[0])
 
 _truckGet = _scn.truckGet
 _truckGet.restype = _cArr
 _truckGet.argtypes = None
 
-_ptrTruck = cast(_truckGet()._ptr, POINTER(POINTER(_Truck)))
+_truckPtr = cast(_truckGet()._ptr, POINTER(POINTER(_Truck)))
 
 truck = None
 if _truckGet()._no:
@@ -258,10 +258,10 @@ if _truckGet()._no:
 	    truck = []
 
 	    for i in range(_truckGet()._no):
-		    truck.append(_Truck(_ptrTruck[i]))
+		    truck.append(_Truck(_truckPtr[i]))
 
     else:
-	    truck = _Truck(_ptrTruck[0])
+	    truck = _Truck(_truckPtr[0])
 
 _cargoShipGet = _scn.cargoShipGet
 _cargoShipGet.restype = _cArr
@@ -298,8 +298,8 @@ _streetLightToggle = _street_light.streetLightToggle
 _streetLightToggle.restype = c_uint
 _streetLightToggle.argtypes = None
 
-_ptrStreetLight = cast(_streetLightGet()._ptr, POINTER(_StreetLight))
+_streetLightPtr = cast(_streetLightGet()._ptr, POINTER(_StreetLight))
 
 street_light = []
 for i in range(_streetLightGet()._no):
-	street_light.append(_StreetLight(ptrStreetLight[i]))
+	street_light.append(_StreetLight(_streetLightPtr[i]))
