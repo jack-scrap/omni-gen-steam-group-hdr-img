@@ -55,15 +55,15 @@ void Disp::draw() {
 
 	glViewport(layout::res[X], 0, layout::view[X], layout::view[Y]);
 
-	for (Obj* _ : obj) {
+	for (Obj* _ : scn::obj) {
 		objDraw(_);
 	}
 
-	for (Obj* _ : line) {
+	for (Obj* _ : scn::line) {
 		lineDraw(_);
 	}
 
-	for (Obj* _ : pt) {
+	for (Obj* _ : scn::pt) {
 		ptDraw(_);
 	}
 

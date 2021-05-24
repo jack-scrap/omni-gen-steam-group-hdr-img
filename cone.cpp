@@ -23,7 +23,7 @@ Cone* coneMk(GLfloat init[2][2], glm::vec3 loc, glm::vec3 rot) {
 
 	_->_parent = objMk("cone", "obj", "dir", true, child, sizeof child / sizeof *child, loc, rot);
 
-	pt.push_back(bound);
+	scn::pt.push_back(bound);
 
 	return _;
 }

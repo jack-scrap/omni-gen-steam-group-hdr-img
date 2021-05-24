@@ -91,8 +91,8 @@ Truck* truckMk(char* data, unsigned int no, glm::vec3 loc, glm::vec3 rot) {
 
 	outer->_prog.unUse();
 
-	pt.push_back(bed);
-	pt.push_back(outer);
+	scn::pt.push_back(bed);
+	scn::pt.push_back(outer);
 
 	child[(w * 2) + 1] = bed;
 	child[(w * 2) + 1 + 1] = outer;

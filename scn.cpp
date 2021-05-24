@@ -59,9 +59,9 @@ cArr cargoShipGet() {
 	return cargoShip;
 }
 
-std::vector<Obj*> obj;
-std::vector<Obj*> line;
-std::vector<Obj*> pt;
+std::vector<Obj*> scn::obj;
+std::vector<Obj*> scn::line;
+std::vector<Obj*> scn::pt;
 
 cArr streetLight;
 cArr streetLightGet() {
