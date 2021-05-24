@@ -12,6 +12,7 @@ Idx* idxMk(unsigned int i, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	_->_no = 0;
 	_->_i = i;
 
+	// index
 	std::string str = std::to_string(i);
 
 	Obj* child[str.size() + 1];
@@ -43,6 +44,7 @@ Idx* idxMk(unsigned int i, char* c, unsigned int no, std::string name, glm::vec3
 	_->_no = no;
 	_->_i = i;
 
+	// index
 	std::string str = std::to_string(i);
 
 	Obj* child[str.size() + _->_no + 1];
