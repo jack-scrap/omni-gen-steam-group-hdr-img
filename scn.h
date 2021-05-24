@@ -38,15 +38,13 @@ extern "C" cArr crane;
 
 extern "C" cArr truck;
 
-extern "C" CargoShip** cargoShip;
-extern "C" unsigned int noCargoShip;
+extern "C" cArr cargoShip;
 
 extern "C" cArr craneGet();
 
 extern "C" cArr truckGet();
 
-extern "C" CargoShip** cargoShipGet();
-extern "C" unsigned int noCargoShipGet();
+extern "C" cArr cargoShipGet();
 
 extern std::vector<Obj*> obj;
 extern std::vector<Obj*> line;

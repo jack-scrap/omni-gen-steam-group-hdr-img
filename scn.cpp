@@ -45,9 +45,7 @@ unsigned int noDataGet() {
 
 cArr crane;
 cArr truck;
-CargoShip** cargoShip;
-
-unsigned int noCargoShip;
+cArr cargoShip;
 
 cArr craneGet() {
 	return crane;
@@ -57,12 +55,8 @@ cArr truckGet() {
 	return truck;
 }
 
-CargoShip** cargoShipGet() {
+cArr cargoShipGet() {
 	return cargoShip;
-}
-
-unsigned int noCargoShipGet() {
-	return noCargoShip;
 }
 
 std::vector<Obj*> obj;
@@ -109,10 +103,10 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 	free(truck._ptr);
 
-	for (int i = 0; i < noCargoShip; i++) {
-		free(cargoShip[i]);
+	for (int i = 0; i < cargoShip._no; i++) {
+		free(((CargoShip**) cargoShip._ptr)[i]);
 	}
-	free(cargoShip);
+	free(cargoShip._ptr);
 
 	for (void* _ : obj) {
 		free(_);
@@ -148,8 +142,8 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	truck._ptr = (Truck**) malloc(0);
 	truck._no = 0;
 
-	cargoShip = (CargoShip**) malloc(0);
-	noCargoShip = 0;
+	cargoShip._ptr = (CargoShip**) malloc(0);
+	cargoShip._no = 0;
 
 	for (const auto& entry : deser["vehicle"]) {
 		glm::vec3 loc = glm::vec3(0.0);
@@ -177,9 +171,9 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 			CargoShip* _ = cargoShipMk((char*) init._ptr, init._x * init._y, loc, rot);
 
-			noCargoShip++;
-			cargoShip = (CargoShip**) realloc(cargoShip, noCargoShip * sizeof (CargoShip*));
-			cargoShip[noCargoShip - 1] = _;
+			cargoShip._no++;
+			cargoShip._ptr = (CargoShip**) realloc(cargoShip._ptr, cargoShip._no * sizeof (CargoShip*));
+			((CargoShip**) cargoShip._ptr)[cargoShip._no - 1] = _;
 
 			obj.push_back(_->_parent);
 		}

@@ -264,23 +264,21 @@ if _truckGet()._no:
 	    truck = _Truck(_ptrTruck[0])
 
 _cargoShipGet = _scn.cargoShipGet
-_cargoShipGet.restype = POINTER(POINTER(_CargoShip))
+_cargoShipGet.restype = _cArr
 _cargoShipGet.argtypes = None
 
-_noCargoShipGet = _scn.noCargoShipGet
-_noCargoShipGet.restype = c_uint
-_noCargoShipGet.argtypes = None
+_cargoShipPtr = cast(_cargoShipGet()._ptr, POINTER(POINTER(_CargoShip)))
 
 cargoShip = None
-if _noCargoShipGet():
-    if _noCargoShipGet() > 1:
+if _cargoShipGet()._no:
+    if _cargoShipGet()._no > 1:
 	    cargoShip = []
 
-	    for i in range(_noCargoShipGet()):
-		    cargoShip.append(_CargoShip(_cargoShipGet()[i]))
+	    for i in range(_cargoShipGet()._no):
+		    cargoShip.append(_CargoShip(_cargoShipPtr))
 	
     else:
-	    cargoShip = _CargoShip(_cargoShipGet()[0])
+	    cargoShip = _CargoShip(_cargoShipPtr[0])
 
 class _StreetLight(_Obj):
 	_fields_ = [
