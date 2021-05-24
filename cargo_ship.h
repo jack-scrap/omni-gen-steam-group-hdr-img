@@ -13,6 +13,6 @@ typedef struct CargoShip {
 	Obj* _parent;
 } CargoShip;
 
-CargoShip* cargoShipMk(char* init, unsigned int no, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
+CargoShip* cargoShipMk(char* init, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
 
 extern "C" void cargoShipMv(CargoShip* cargoShip, float delta);

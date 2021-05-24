@@ -7,10 +7,10 @@
 #include "arr.h"
 #include "util.h"
 
-CargoShip* cargoShipMk(char* init, unsigned int no, glm::vec3 loc, glm::vec3 rot) {
+CargoShip* cargoShipMk(char* init, glm::vec3 loc, glm::vec3 rot) {
 	CargoShip* _ = (CargoShip*) malloc(sizeof (CargoShip));
 
-	_->_data = arrMk(init, no, "state", glm::vec3(-(layout::stride[Y] * no), 1.0, layout::stride[X]));
+	_->_data = arrMk(init, _->_x, _->_y, "state", glm::vec3(-(layout::stride[Y] * _->_x * _->_y), 1.0, layout::stride[X]));
 
 	// layout
 	glm::vec2 pad = {
