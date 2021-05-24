@@ -10,7 +10,6 @@
 Truck* truckMk(glm::vec3 loc, glm::vec3 rot) {
 	Truck* _ = (Truck*) malloc(sizeof (Truck));
 
-	_->_ptr = nullptr;
 	_->_no = 0;
 
 	_->_ang = 0.0;
@@ -48,7 +47,6 @@ Truck* truckMk(glm::vec3 loc, glm::vec3 rot) {
 Truck* truckMk(char* init, unsigned int no, glm::vec3 loc, glm::vec3 rot) {
 	Truck* _ = (Truck*) malloc(sizeof (Truck));
 
-	_->_ptr = init;
 	_->_no = no;
 
 	_->_ang = 0.0;

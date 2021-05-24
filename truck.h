@@ -18,7 +18,6 @@ typedef struct Truck {
 		M_PI / 2
 	};
 
-	char* _ptr;
 	unsigned int _no;
 
 	Obj* _parent;
