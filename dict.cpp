@@ -6,6 +6,7 @@
 #include "border.h"
 #include "idx.h"
 #include "scn.h"
+#include "omni.h"
 
 Dict* dictMk(void** data, unsigned int* type, unsigned int no, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	Dict* _ = (Dict*) malloc(sizeof (Dict));
@@ -23,13 +24,13 @@ Dict* dictMk(void** data, unsigned int* type, unsigned int no, std::string name,
 	// data
 	for (int i = 0; i < no; i++) {
 		switch (type[i]) {
-			case util::json::SCALAR: {
+			case omni::SCALAR: {
 				child[1 + i] = ((Idx*) data[i])->_parent;
 
 				break;
 			}
 
-			case util::json::ARRAY: {
+			case omni::ARRAY: {
 				child[1 + i] = ((Arr*) data[i])->_parent;
 
 				break;

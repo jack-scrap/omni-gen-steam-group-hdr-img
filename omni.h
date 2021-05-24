@@ -39,4 +39,10 @@ namespace omni {
 		"run",
 		"next"
 	};
+
+	enum type {
+		SCALAR,
+		ARRAY,
+		DICT
+	};
 }

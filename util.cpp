@@ -471,7 +471,7 @@ Var** util::json::scope(nlohmann::json deser, unsigned int*& type) {
 					Var* _ = varMk(id, val);
 
 					scope[i] = _;
-					type[i] = SCALAR;
+					type[i] = omni::SCALAR;
 					i++;
 				}
 
@@ -491,7 +491,7 @@ Var** util::json::scope(nlohmann::json deser, unsigned int*& type) {
 							Var* _ = varMk(id, val);
 
 							scope[i] = _;
-							type[i] = ARRAY;
+							type[i] = omni::ARRAY;
 							i++;
 
 							break;
@@ -508,7 +508,7 @@ Var** util::json::scope(nlohmann::json deser, unsigned int*& type) {
 									Var* _ = varMk(id, val);
 
 									scope[i - 1] = _;
-									type[i] = ARRAY;
+									type[i] = omni::ARRAY;
 									i++;
 
 									break;
@@ -522,7 +522,7 @@ Var** util::json::scope(nlohmann::json deser, unsigned int*& type) {
 									Var* _ = varMk(id, val);
 
 									scope[i - 1] = _;
-									type[i - 1] = ARRAY;
+									type[i - 1] = omni::ARRAY;
 									i++;
 
 									break;

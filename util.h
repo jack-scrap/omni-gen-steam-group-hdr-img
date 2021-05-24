@@ -100,12 +100,6 @@ namespace util {
 
 		Obj* prop(nlohmann::json deser);
 
-		enum type {
-			SCALAR,
-			ARRAY,
-			DICT
-		};
-
 		namespace bound {
 			Lim* lim(nlohmann::json key, nlohmann::json val);
 			Cone* area(nlohmann::json deser);
