@@ -9,7 +9,7 @@ _scn = CDLL('libscn.so')
 class _cArr(Structure):
 	_fields_ = [
 		('_ptr', c_void_p),
-		('_no', c_uint)
+		('_sz', c_size_t)
 	]
 
 class _Obj(Structure):
@@ -37,10 +37,10 @@ class _Arr(Structure):
 	]
 
 class _Var(Structure):
-    _fields_ = [
-	    ('_id', c_char_p),
-	    ('_ptr', c_void_p)
-    ]
+	_fields_ = [
+		('_id', c_char_p),
+		('_ptr', c_void_p)
+	]
 
 _dataGet = _scn.dataGet
 _dataGet.restype = POINTER(POINTER(_Var))
@@ -130,19 +130,19 @@ class _Crane(_Obj):
 		_craneZoom(self._ptr, delta)
 
 		for i in range(3):
-		    self._loc[i] = self._ptr.contents._loc[i]
+			self._loc[i] = self._ptr.contents._loc[i]
 
 	def pan(self, delta):
 		_cranePan(self._ptr, delta)
 
 		for i in range(3):
-		    self._loc[i] = self._ptr.contents._loc[i]
+			self._loc[i] = self._ptr.contents._loc[i]
 
 	def ped(self, delta):
 		_cranePed(self._ptr, delta)
 
 		for i in range(3):
-		    self._loc[i] = self._ptr.contents._loc[i]
+			self._loc[i] = self._ptr.contents._loc[i]
 
 	def grab(self):
 		_craneGrab(self._ptr)
@@ -188,11 +188,11 @@ class _Truck(_Obj):
 		self._ang = self._data.contents._ang
 
 		for i in range(3):
-		    self._loc[i] = self._ptr.contents._loc[i]
+			self._loc[i] = self._ptr.contents._loc[i]
 
 	def mv(self, delta):
 		for i in range(3):
-		    self._loc[i] = self._ptr.contents._loc[i]
+			self._loc[i] = self._ptr.contents._loc[i]
 
 		_truckMv(self._ptr, delta)
 
@@ -220,7 +220,7 @@ class _CargoShip(_Obj):
 		_cargoShipMv(self._ptr, delta)
 
 		for i in range(3):
-		    self._loc[i] = self._ptr.contents._loc[i]
+			self._loc[i] = self._ptr.contents._loc[i]
 
 _cargoShipMv = _cargo_ship.cargoShipMv
 _cargoShipMv.restype = c_void_p
@@ -236,15 +236,18 @@ _craneGet.argtypes = None
 _cranePtr = cast(_craneGet()._ptr, POINTER(POINTER(_Crane)))
 
 crane = None
-if _craneGet()._no:
-    if _craneGet()._no > 1:
-	    crane = []
+if _craneGet()._sz:
+	if _craneGet()._sz > 8:
+		crane = []
 
-	    for i in range(_craneGet()._no):
-		    crane.append(_cranePtr[i])
+		i = 0
+		while i < _craneGet()._sz:
+			crane.append(_cranePtr[i])
 
-    else:
-	    crane = _Crane(_cranePtr[0])
+			i += sizeof(c_void_p)
+
+	else:
+		crane = _Crane(_cranePtr[0])
 
 _truckGet = _scn.truckGet
 _truckGet.restype = _cArr
@@ -253,15 +256,18 @@ _truckGet.argtypes = None
 _truckPtr = cast(_truckGet()._ptr, POINTER(POINTER(_Truck)))
 
 truck = None
-if _truckGet()._no:
-    if _truckGet()._no > 1:
-	    truck = []
+if _truckGet()._sz:
+	if _truckGet()._sz > 8:
+		truck = []
 
-	    for i in range(_truckGet()._no):
-		    truck.append(_Truck(_truckPtr[i]))
+		i = 0
+		while i < _truckGet()._sz:
+			truck.append(_Truck(_truckPtr[i]))
 
-    else:
-	    truck = _Truck(_truckPtr[0])
+			i += sizeof(c_void_p)
+
+	else:
+		truck = _Truck(_truckPtr[0])
 
 _cargoShipGet = _scn.cargoShipGet
 _cargoShipGet.restype = _cArr
@@ -270,15 +276,18 @@ _cargoShipGet.argtypes = None
 _cargoShipPtr = cast(_cargoShipGet()._ptr, POINTER(POINTER(_CargoShip)))
 
 cargoShip = None
-if _cargoShipGet()._no:
-    if _cargoShipGet()._no > 1:
-	    cargoShip = []
+if _cargoShipGet()._sz:
+	if _cargoShipGet()._sz > 8:
+		cargoShip = []
 
-	    for i in range(_cargoShipGet()._no):
-		    cargoShip.append(_CargoShip(_cargoShipPtr))
+		i = 0
+		while i < _cargoShipGet()._sz:
+			cargoShip.append(_CargoShip(_cargoShipPtr))
+
+			i += sizeof(c_void_p)
 	
-    else:
-	    cargoShip = _CargoShip(_cargoShipPtr[0])
+	else:
+		cargoShip = _CargoShip(_cargoShipPtr[0])
 
 class _StreetLight(_Obj):
 	_fields_ = [
@@ -301,5 +310,8 @@ _streetLightToggle.argtypes = None
 _streetLightPtr = cast(_streetLightGet()._ptr, POINTER(_StreetLight))
 
 street_light = []
-for i in range(_streetLightGet()._no):
+i = 0
+while i < _streetLightGet()._sz:
 	street_light.append(_StreetLight(_streetLightPtr[i]))
+
+	i += sizeof(c_void_p)

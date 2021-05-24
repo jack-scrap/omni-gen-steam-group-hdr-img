@@ -2,7 +2,7 @@
 
 typedef struct {
 	void* _ptr;
-	unsigned int _no;
+	size_t _sz;
 } cArr;
 
 typedef struct {

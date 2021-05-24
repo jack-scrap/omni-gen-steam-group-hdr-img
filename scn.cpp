@@ -93,17 +93,17 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	free(goal);
 
 	// vehicle
-	for (int i = 0; i < crane._no; i++) {
+	for (int i = 0; i < crane._sz; i += sizeof (Crane*)) {
 		free(((Crane**) crane._ptr)[i]);
 	}
 	free(crane._ptr);
 
-	for (int i = 0; i < truck._no; i++) {
+	for (int i = 0; i < truck._sz; i += sizeof (Truck*)) {
 		free(((Truck**) truck._ptr)[i]);
 	}
 	free(truck._ptr);
 
-	for (int i = 0; i < cargoShip._no; i++) {
+	for (int i = 0; i < cargoShip._sz; i += sizeof (CargoShip*)) {
 		free(((CargoShip**) cargoShip._ptr)[i]);
 	}
 	free(cargoShip._ptr);
@@ -124,12 +124,12 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	pt.clear();
 
 	// bound
-	for (int i = 0; i < boundRng._no; i++) {
+	for (int i = 0; i < boundRng._sz; i += sizeof (Lim*)) {
 		free(((Lim**) boundRng._ptr)[i]);
 	}
 	free(boundRng._ptr);
 
-	for (int i = 0; i < boundArea._no; i++) {
+	for (int i = 0; i < boundArea._sz; i += sizeof (Cone*)) {
 		free(((Cone**) boundArea._ptr)[i]);
 	}
 	free(boundArea._ptr);
@@ -137,13 +137,13 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	/* allocate */
 	// vehicle
 	crane._ptr = (Crane**) malloc(0);
-	crane._no = 0;
+	crane._sz = 0;
 
 	truck._ptr = (Truck**) malloc(0);
-	truck._no = 0;
+	truck._sz = 0;
 
 	cargoShip._ptr = (CargoShip**) malloc(0);
-	cargoShip._no = 0;
+	cargoShip._sz = 0;
 
 	for (const auto& entry : deser["vehicle"]) {
 		glm::vec3 loc = glm::vec3(0.0);
@@ -159,9 +159,9 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		if (entry["name"] == "crane") {
 			Crane* _ = craneMk(loc, rot);
 
-			crane._no++;
-			crane._ptr = (Crane**) realloc(crane._ptr, crane._no * sizeof (Crane*));
-			((Crane**) crane._ptr)[crane._no - 1] = _;
+			crane._sz += sizeof (Crane*);
+			crane._ptr = (Crane**) realloc(crane._ptr, crane._sz);
+			((Crane**) crane._ptr)[crane._sz - sizeof (Crane*)] = _;
 
 			obj.push_back(_->_parent);
 		}
@@ -171,9 +171,9 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 			CargoShip* _ = cargoShipMk((char*) init._ptr, init._x * init._y, loc, rot);
 
-			cargoShip._no++;
-			cargoShip._ptr = (CargoShip**) realloc(cargoShip._ptr, cargoShip._no * sizeof (CargoShip*));
-			((CargoShip**) cargoShip._ptr)[cargoShip._no - 1] = _;
+			cargoShip._sz += sizeof (CargoShip*);
+			cargoShip._ptr = (CargoShip**) realloc(cargoShip._ptr, cargoShip._sz);
+			((CargoShip**) cargoShip._ptr)[cargoShip._sz - sizeof (CargoShip*)] = _;
 
 			obj.push_back(_->_parent);
 		}
@@ -183,9 +183,9 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 			Truck* _ = truckMk((char*) init._ptr, init._x, loc, rot);
 
-			truck._no++;
-			truck._ptr = (Truck**) realloc(truck._ptr, truck._no * sizeof (Truck*));
-			((Truck**) truck._ptr)[truck._no - 1] = _;
+			truck._sz += sizeof (Truck*);
+			truck._ptr = (Truck**) realloc(truck._ptr, truck._sz);
+			((Truck**) truck._ptr)[truck._sz - sizeof (Truck*)] = _;
 
 			obj.push_back(_->_parent);
 
@@ -246,20 +246,21 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 	// bound
 	boundRng._ptr = (Lim**) malloc(deser["bound"]["rng"].size() * sizeof (Lim*));
-	boundRng._no = 0;
+	boundRng._sz = deser["bound"]["rng"].size();
 
 	boundArea._ptr = (Cone**) malloc(deser["bound"]["area"].size() * sizeof (Cone*));
-	boundArea._no = 0;
+	boundArea._sz = deser["bound"]["area"].size();
 
 	for (const auto& entry : deser["bound"].items()) {
+		int i = 0;
 		if (entry.key() == "rng") {
 			for (const auto& entry : entry.value()) {
 				for (const auto& rng : entry) {
 					for (const auto& lim : rng.items()) {
 						Lim* _ = util::json::bound::lim(lim.key(), lim.value());
 
-						((Lim**) boundRng._ptr)[boundRng._no] = _;
-						boundRng._no++;
+						((Lim**) boundRng._ptr)[i] = _;
+						i++;
 
 						line.push_back(_->_parent);
 					}
@@ -268,11 +269,12 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		}
 
 		if (entry.key() == "area") {
+			int i = 0;
 			for (const auto& entry : entry.value()) {
 				Cone* _ = util::json::bound::area(entry);
 
-				((Cone**) boundArea._ptr)[boundArea._no] = _;
-				boundArea._no++;
+				((Cone**) boundArea._ptr)[i] = _;
+				i++;
 
 				obj.push_back(_->_parent);
 				pt.push_back(_->_parent->_child[0]);
@@ -282,13 +284,14 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 	// control flow
 	streetLight._ptr = (StreetLight**) malloc(deser["ctrl"].size() * sizeof (StreetLight*));
-	streetLight._no = 0;
+	streetLight._sz = deser["ctrl"].size();
 
+	int i = 0;
 	for (const auto& entry : deser["ctrl"].items()) {
 		StreetLight* _ = util::json::streetLight(entry.value());
 
-		((StreetLight**) streetLight._ptr)[streetLight._no] = _;
-		streetLight._no++;
+		((StreetLight**) streetLight._ptr)[i] = _;
+		i++;
 
 		obj.push_back(_->_parent);
 	}
