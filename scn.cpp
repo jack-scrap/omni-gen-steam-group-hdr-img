@@ -188,6 +188,9 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			((Truck**) truck._ptr)[truck._no - 1] = _;
 
 			obj.push_back(_->_parent);
+
+			pt.push_back(_->_parent->_child[((_->_no * 2) + 1)]);
+			pt.push_back(_->_parent->_child[((_->_no * 2) + 1 + 1)]);
 		}
 	}
 
@@ -272,6 +275,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				boundArea._no++;
 
 				obj.push_back(_->_parent);
+				pt.push_back(_->_parent->_child[0]);
 			}
 		}
 	}
