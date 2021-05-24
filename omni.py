@@ -247,22 +247,21 @@ if _craneGet()._no:
 	    crane = _Crane(_ptrCrane[0])
 
 _truckGet = _scn.truckGet
-_truckGet.restype = POINTER(POINTER(_Truck))
+_truckGet.restype = _cArr
 _truckGet.argtypes = None
 
-_noTruckGet = _scn.noTruckGet
-_noTruckGet.restype = c_uint
-_noTruckGet.argtypes = None
+_ptrTruck = cast(_truckGet()._ptr, POINTER(POINTER(_Truck)))
 
 truck = None
-if _noTruckGet():
-    if _noTruckGet() > 1:
+if _truckGet()._no:
+    if _truckGet()._no > 1:
 	    truck = []
 
-	    for i in range(_noTruckGet()):
-		    truck.append(_Truck(_truckGet()[i]))
+	    for i in range(_truckGet()._no):
+		    truck.append(_Truck(_ptrTruck[i]))
+
     else:
-	    truck = _Truck(_truckGet()[0])
+	    truck = _Truck(_ptrTruck[0])
 
 _cargoShipGet = _scn.cargoShipGet
 _cargoShipGet.restype = POINTER(POINTER(_CargoShip))

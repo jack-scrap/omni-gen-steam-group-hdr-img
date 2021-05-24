@@ -36,16 +36,14 @@ extern "C" unsigned int noDataGet();
 
 extern "C" cArr crane;
 
-extern "C" Truck** truck;
-extern "C" unsigned int noTruck;
+extern "C" cArr truck;
 
 extern "C" CargoShip** cargoShip;
 extern "C" unsigned int noCargoShip;
 
 extern "C" cArr craneGet();
 
-extern "C" Truck** truckGet();
-extern "C" unsigned int noTruckGet();
+extern "C" cArr truckGet();
 
 extern "C" CargoShip** cargoShipGet();
 extern "C" unsigned int noCargoShipGet();

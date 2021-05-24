@@ -44,22 +44,17 @@ unsigned int noDataGet() {
 }
 
 cArr crane;
-Truck** truck;
+cArr truck;
 CargoShip** cargoShip;
 
-unsigned int noTruck;
 unsigned int noCargoShip;
 
 cArr craneGet() {
 	return crane;
 }
 
-Truck** truckGet() {
+cArr truckGet() {
 	return truck;
-}
-
-unsigned int noTruckGet() {
-	return noTruck;
 }
 
 CargoShip** cargoShipGet() {
@@ -109,10 +104,10 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 	free(crane._ptr);
 
-	for (int i = 0; i < noTruck; i++) {
-		free(truck[i]);
+	for (int i = 0; i < truck._no; i++) {
+		free(((Truck**) truck._ptr)[i]);
 	}
-	free(truck);
+	free(truck._ptr);
 
 	for (int i = 0; i < noCargoShip; i++) {
 		free(cargoShip[i]);
@@ -150,8 +145,8 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	crane._ptr = (Crane**) malloc(0);
 	crane._no = 0;
 
-	truck = (Truck**) malloc(0);
-	noTruck = 0;
+	truck._ptr = (Truck**) malloc(0);
+	truck._no = 0;
 
 	cargoShip = (CargoShip**) malloc(0);
 	noCargoShip = 0;
@@ -194,9 +189,9 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 			Truck* _ = truckMk((char*) init._ptr, init._x, loc, rot);
 
-			noTruck++;
-			truck = (Truck**) realloc(truck, noTruck * sizeof (Truck*));
-			truck[noTruck - 1] = _;
+			truck._no++;
+			truck._ptr = (Truck**) realloc(truck._ptr, truck._no * sizeof (Truck*));
+			((Truck**) truck._ptr)[truck._no - 1] = _;
 
 			obj.push_back(_->_parent);
 		}
