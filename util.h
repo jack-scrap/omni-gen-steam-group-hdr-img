@@ -86,10 +86,6 @@ namespace util {
 
 		char byte(nlohmann::json deser);
 
-		CBuff arr(nlohmann::json deser);
-		CBuff matr2(nlohmann::json deser);
-		CBuff matr3(nlohmann::json deser);
-
 		Var** scope(nlohmann::json deser, unsigned int*& type);
 
 		glm::vec3 vec(nlohmann::json deser);
@@ -99,6 +95,12 @@ namespace util {
 		std::vector<Obj*> path(nlohmann::json deser, nlohmann::json node);
 
 		Obj* prop(nlohmann::json deser);
+
+		namespace arr {
+			CBuff arr(nlohmann::json deser);
+			CBuff matr2(nlohmann::json deser);
+			CBuff matr3(nlohmann::json deser);
+		}
 
 		namespace bound {
 			Lim* lim(nlohmann::json key, nlohmann::json val);
