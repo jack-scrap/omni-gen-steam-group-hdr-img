@@ -719,7 +719,7 @@ Cone* util::json::bound::area(nlohmann::json deser) {
 	GLfloat init[2][2];
 	for (int y = 0; y < 2; y++) {
 		for (int x = 0; x < 2; x++) {
-			init[y][x] = deser["init"][y][x];
+			init[y][x] = deser["bound"][y][x];
 		}
 	}
 
