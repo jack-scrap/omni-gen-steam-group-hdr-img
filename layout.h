@@ -38,4 +38,6 @@ namespace layout {
 			0.8,
 			1
 		};
+
+	glm::vec2 item(glm::vec2 bound);
 }
