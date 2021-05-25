@@ -7,6 +7,14 @@
 #include "state.h"
 #include "omni.h"
 
+GLfloat Truck::_vtx[3] = {
+	0.0, 0.0, 0.0
+};
+
+GLushort Truck::_idx[1] = {
+	0
+};
+
 Truck* truckMk(glm::vec3 loc, glm::vec3 rot) {
 	Truck* _ = (Truck*) malloc(sizeof (Truck));
 
@@ -69,7 +77,7 @@ Truck* truckMk(char* init, unsigned int no, glm::vec3 loc, glm::vec3 rot) {
 
 	child[w * 2] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-(no * layout::idx[Z]) - (layout::stroke) - (layout::stroke * 2), 0.0, 0.0), rot);
 
-	Obj* bed = ptMk(_->_vtx, "geom", "bed", "dir", glm::vec3(0.0), glm::vec3(0.0, M_PI / 2, 0.0));
+	Obj* bed = ptMk(Truck::_vtx, "geom", "bed", "dir", glm::vec3(0.0), glm::vec3(0.0, M_PI / 2, 0.0));
 
 	bed->_prog.use();
 
@@ -79,7 +87,7 @@ Truck* truckMk(char* init, unsigned int no, glm::vec3 loc, glm::vec3 rot) {
 
 	bed->_prog.unUse();
 
-	Obj* outer = ptMk(_->_vtx, "geom", "outer", "dir", glm::vec3(0.0), glm::vec3(0.0, M_PI / 2, 0.0));
+	Obj* outer = ptMk(Truck::_vtx, "geom", "outer", "dir", glm::vec3(0.0), glm::vec3(0.0, M_PI / 2, 0.0));
 
 	outer->_prog.use();
 

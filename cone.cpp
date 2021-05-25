@@ -2,6 +2,10 @@
 #include "obj.h"
 #include "scn.h"
 
+GLfloat Cone::_vtx[3] = {
+	0.0, 0.0, 0.0
+};
+
 Cone* coneMk(GLfloat init[2][2], glm::vec3 loc, glm::vec3 rot) {
 	Cone* _ = (Cone*) malloc(sizeof (Cone));
 	

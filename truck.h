@@ -22,13 +22,9 @@ typedef struct Truck {
 
 	Obj* _parent;
 
-	GLfloat _vtx[3] = {
-		0.0, 0.0, 0.0
-	};
+	static GLfloat _vtx[3];
 
-	GLushort _idx[1] = {
-		0
-	};
+	static GLushort _idx[1];
 
 	GLuint _uni[2];
 
