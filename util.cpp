@@ -395,6 +395,31 @@ char util::json::byte(nlohmann::json deser) {
 	return (char) ((int) deser);
 }
 
+CBuff util::json::arr::dim(nlohmann::json deser, CBuff buff, int i) {
+	switch (i) {
+		case 0:
+			buff._z = deser.size();
+
+			break;
+
+		case 1:
+			buff._y = deser.size();
+
+			break;
+
+		case 2:
+			buff._x = deser.size();
+
+			break;
+	}
+
+	if (deser[0].type() == nlohmann::json::value_t::array) {
+		return dim(deser[0], buff, i + 1);
+	} else {
+		return buff;
+	}
+}
+
 CBuff util::json::arr::arr(nlohmann::json deser) {
 	CBuff _;
 

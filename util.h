@@ -97,6 +97,8 @@ namespace util {
 		Obj* prop(nlohmann::json deser);
 
 		namespace arr {
+			CBuff dim(nlohmann::json deser, CBuff buff, int i);
+
 			CBuff arr(nlohmann::json deser);
 			CBuff matr2(nlohmann::json deser);
 			CBuff matr3(nlohmann::json deser);
