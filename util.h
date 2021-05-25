@@ -96,6 +96,9 @@ namespace util {
 
 		Obj* prop(nlohmann::json deser);
 
+		template <typename T>
+		std::vector<T> ls(nlohmann::json deser);
+
 		CBuff str(nlohmann::json deser);
 
 		namespace arr {

@@ -599,13 +599,13 @@ glm::vec3 util::json::vec(nlohmann::json deser) {
 }
 
 StreetLight* util::json::streetLight(nlohmann::json deser) {
-	unsigned int no = deser["pass"].size();
-	bool* pass = (bool*) malloc(no * sizeof (bool));
-	for (int i = 0; i < no; i++) {
-		pass[i] = deser["pass"][i];
+	std::vector<bool> pass = util::json::ls<bool>(deser["pass"]);
+	bool arr[pass.size()];
+	for (int i = 0; i < pass.size(); i++) {
+		arr[i] = pass[i];
 	}
 
-	StreetLight* _ = streetLightMk(pass, no);
+	StreetLight* _ = streetLightMk(arr, sizeof arr / sizeof *arr);
 
 	return _;
 }
@@ -653,6 +653,17 @@ std::vector<Obj*> util::json::path(nlohmann::json deser, nlohmann::json node) {
 				break;
 			}
 		}
+	}
+
+	return _;
+}
+
+template <typename T>
+std::vector<T> util::json::ls(nlohmann::json deser) {
+	std::vector<T> _;
+
+	for (int i = 0; i < deser.size(); i++) {
+		_.push_back((T) deser[i]);
 	}
 
 	return _;
