@@ -522,6 +522,21 @@ Var** util::json::scope(nlohmann::json deser, unsigned int*& type) {
 				break;
 			}
 
+			// string
+			case nlohmann::json::value_t::string: {
+				CBuff init = util::json::str(pair.value()["block"]);
+
+				Arr* val = arrMk((char*) init._ptr, init._x, pair.key(), loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
+
+				Var* _ = varMk(id, val);
+
+				scope[i] = _;
+				type[i] = omni::ARRAY;
+				i++;
+
+				break;
+			}
+
 			// array
 			case nlohmann::json::value_t::array: {
 				for (const auto& pair : deser.items()) {
