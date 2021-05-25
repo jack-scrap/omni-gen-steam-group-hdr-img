@@ -10,6 +10,9 @@ typedef struct CargoShip {
 
 	GLfloat _loc[3];
 
+	GLfloat _vtc[2 * 2 * 3];
+	GLushort _idc[2 * 2];
+
 	Obj* _parent;
 } CargoShip;
 
