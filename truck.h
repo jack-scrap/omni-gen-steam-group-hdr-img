@@ -13,7 +13,7 @@ typedef struct Truck {
 
 	float _ang;
 
-	static constexpr GLfloat _rngWheel[2] = {
+	GLfloat _rngWheel[2] = {
 		-(M_PI / 2),
 		M_PI / 2
 	};

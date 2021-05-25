@@ -12,11 +12,11 @@ typedef struct Crane {
 	Obj* _head;
 	Obj* _claw;
 
-	static constexpr GLfloat _rngHead[2] = {
+	GLfloat _rngHead[2] = {
 		-3.0,
 		3.0
 	};
-	static constexpr GLfloat _rngClaw[2] = {
+	GLfloat _rngClaw[2] = {
 		0.0,
 		13.8
 	};
