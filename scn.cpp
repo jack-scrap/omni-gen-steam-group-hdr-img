@@ -245,11 +245,11 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	// bound
-	boundRng._ptr = (Lim**) malloc(deser["bound"]["rng"].size() * sizeof (Lim*));
 	boundRng._sz = deser["bound"]["rng"].size();
+	boundRng._ptr = (Lim**) malloc(boundRng._sz * sizeof (Lim*));
 
-	boundArea._ptr = (Cone**) malloc(deser["bound"]["area"].size() * sizeof (Cone*));
 	boundArea._sz = deser["bound"]["area"].size();
+	boundArea._ptr = (Cone**) malloc(boundArea._sz * sizeof (Cone*));
 
 	for (const auto& entry : deser["bound"].items()) {
 		int i = 0;
@@ -283,8 +283,8 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	// control flow
-	streetLight._ptr = (StreetLight**) malloc(deser["ctrl"].size() * sizeof (StreetLight*));
 	streetLight._sz = deser["ctrl"].size();
+	streetLight._ptr = (StreetLight**) malloc(streetLight._sz * sizeof (StreetLight*));
 
 	int i = 0;
 	for (const auto& entry : deser["ctrl"].items()) {
