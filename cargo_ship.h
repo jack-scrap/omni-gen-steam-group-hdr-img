@@ -5,6 +5,7 @@
 
 typedef struct CargoShip {
 	Arr* _data;
+
 	static constexpr unsigned int
 		_x = 6,
 		_y = 2;
