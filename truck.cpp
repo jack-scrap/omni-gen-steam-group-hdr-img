@@ -11,10 +11,6 @@ GLfloat Truck::_vtx[3] = {
 	0.0, 0.0, 0.0
 };
 
-GLushort Truck::_idx[1] = {
-	0
-};
-
 Truck* truckMk(glm::vec3 loc, glm::vec3 rot) {
 	Truck* _ = (Truck*) malloc(sizeof (Truck));
 
