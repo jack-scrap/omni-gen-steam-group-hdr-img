@@ -420,6 +420,25 @@ CBuff util::json::arr::dim(nlohmann::json deser, CBuff buff, int i) {
 	}
 }
 
+CBuff util::json::str(nlohmann::json deser) {
+	CBuff _;
+
+	_._y = 1;
+	_._z = 1;
+
+	std::string buff = deser;
+
+	_._x = buff.size();
+
+		_._ptr = (char*) malloc(_._x * sizeof (char));
+
+	for (int i = 0; i < buff.size(); i++) {
+		((char*) _._ptr)[i] = buff[i];
+	}
+
+	return _;
+}
+
 CBuff util::json::arr::arr(nlohmann::json deser) {
 	CBuff _;
 
