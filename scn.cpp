@@ -195,7 +195,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	// path
-	for (const auto& strip : deser["road"]["path"]) {
+	for (const nlohmann::json::array_t& strip : deser["road"]["path"]) {
 		std::vector<Obj*> _ = util::json::path(strip, deser["road"]["node"]);
 
 		for (Obj* seg : _) {
@@ -238,7 +238,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	// prop
-	for (const auto& entry : deser["prop"]) {
+	for (const nlohmann::json::object_t& entry : deser["prop"]) {
 		Obj* _ = util::json::prop(entry);
 
 		obj.push_back(_);
