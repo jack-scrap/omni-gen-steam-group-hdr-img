@@ -448,6 +448,7 @@ Scope util::json::dict(nlohmann::json deser) {
 
 	int i = 0;
 	for (const auto& pair : deser.items()) {
+		// scalar
 		Var* var = util::json::var(pair.key(), pair.value());
 
 		_._ptr[i] = var;
