@@ -57,7 +57,7 @@ Truck* truckMk(char* init, unsigned int no, glm::vec3 loc, glm::vec3 rot) {
 
 	unsigned int w = _->_no * 2;
 
-	Obj* child[(w * 2) + 1 + 2];
+	Obj* child[(w * 2) + 1 + 2 + 1];
 	int i = 0;
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < w; x++) {
@@ -70,8 +70,6 @@ Truck* truckMk(char* init, unsigned int no, glm::vec3 loc, glm::vec3 rot) {
 			i++;
 		}
 	}
-
-	child[w * 2] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-(no * layout::idx[Z]) - (layout::stroke) - (layout::stroke * 2), 0.0, 0.0), rot);
 
 	Obj* bed = ptMk(Truck::_vtx, "geom", "bed", "dir", glm::vec3(0.0), glm::vec3(0.0, M_PI / 2, 0.0));
 
@@ -99,6 +97,8 @@ Truck* truckMk(char* init, unsigned int no, glm::vec3 loc, glm::vec3 rot) {
 	_->_data = arrMk(init, no, "", glm::vec3(0.0, 0.0, -((layout::idx[X] / 2) + (layout::stroke * 2) + (layout::margin * 2 * 2))), glm::vec3(0.0, -M_PI / 2, 0.0));
 
 	child[w * 2] = _->_data->_parent;
+
+	child[(w * 2) + 1 + 1 + 1] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-(no * layout::idx[Z]) - (layout::stroke) - (layout::stroke * 2), 0.0, 0.0), rot);
 
 	_->_parent = objMk("truck/front", "obj", "dir", true, child, sizeof child / sizeof *child, loc + glm::vec3(2.4, 1.3, 0.0), rot);
 
