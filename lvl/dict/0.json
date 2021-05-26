@@ -2,16 +2,24 @@
 	"data": {
 		"state": {
 			"block": {
-				"state": 3,
-				"other_state": 7
+				"state": {
+					"block": 3
+				},
+				"other_state": {
+					"block": 7
+				}
 			}
 		}
 	},
 	"goal": {
 		"state": {
 			"block": {
-				"state": 7,
-				"other_state": 3
+				"state": {
+					"block": 7
+				},
+				"other_state": {
+					"block": 3
+				}
 			}
 		}
 	},

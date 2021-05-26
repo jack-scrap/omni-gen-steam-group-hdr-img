@@ -441,6 +441,7 @@ CBuff util::json::str(nlohmann::json deser) {
 
 void util::json::dict(nlohmann::json deser) {
 	for (const auto& pair : deser.items()) {
+		Var* _ = util::json::var(pair.key(), pair.value());
 	}
 }
 
