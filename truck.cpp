@@ -90,7 +90,7 @@ Truck* truckMk(char* init, unsigned int no, glm::vec3 loc, glm::vec3 rot) {
 	child[(w * 2) + 1] = bed;
 	child[(w * 2) + 1 + 1] = outer;
 
-	_->_data = arrMk(init, no, "", glm::vec3(0.0, 0.0, -((layout::idx[X] / 2) + (layout::stroke * 2) + (layout::margin * 2 * 2))), glm::vec3(0.0, -M_PI / 2, 0.0));
+	_->_data = arrMk(init, no, "", glm::vec3(0.0, layout::pad * 2, -((layout::idx[X] / 2) + (layout::stroke * 2) + (layout::margin * 2 * 2))), glm::vec3(0.0, -M_PI / 2, 0.0));
 
 	child[w * 2] = _->_data->_parent;
 
