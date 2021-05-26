@@ -14,11 +14,9 @@ GLfloat Truck::_vtx[3] = {
 Truck* truckMk(glm::vec3 loc, glm::vec3 rot) {
 	Truck* _ = (Truck*) malloc(sizeof (Truck));
 
-	_->_no = 0;
-
 	_->_ang = 0.0;
 
-	unsigned int w = _->_no * 2;
+	unsigned int w = 2 * 2;
 
 	Obj* child[(w * 2) + 1 + 1];
 	int i = 0;
@@ -51,11 +49,9 @@ Truck* truckMk(glm::vec3 loc, glm::vec3 rot) {
 Truck* truckMk(char* init, unsigned int no, glm::vec3 loc, glm::vec3 rot) {
 	Truck* _ = (Truck*) malloc(sizeof (Truck));
 
-	_->_no = no;
-
 	_->_ang = 0.0;
 
-	unsigned int w = _->_no * 2;
+	unsigned int w = no * 2;
 
 	Obj* child[(w * 2) + 1 + 2 + 1];
 	int i = 0;

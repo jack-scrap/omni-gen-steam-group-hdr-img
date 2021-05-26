@@ -195,8 +195,8 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 			obj.push_back(_->_parent);
 
-			pt.push_back(_->_parent->_child[(_->_no * 2 * 2) + 1]);
-			pt.push_back(_->_parent->_child[(_->_no * 2 * 2) + 1 + 1]);
+			pt.push_back(_->_parent->_child[(_->_data->_x * 2 * 2) + 1]);
+			pt.push_back(_->_parent->_child[(_->_data->_x * 2 * 2) + 1 + 1]);
 		}
 	}
 
