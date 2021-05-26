@@ -496,12 +496,73 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val) {
 		rot = util::json::vec(val["rot"]);
 	}
 
-	if (val["block"].type() == nlohmann::json::value_t::number_unsigned) {
-		char init = util::json::byte(val["block"]);
+	switch (val["block"].type()) {
+		// scalar
+		case nlohmann::json::value_t::number_unsigned: {
+			char init = util::json::byte(val["block"]);
 
-		Idx* idx = idxMk(0, &init, 1, key, loc, rot);
+			Idx* idx = idxMk(0, &init, 1, key, loc, rot);
 
-		_ = varMk(id, idx);
+			_ = varMk(id, idx);
+
+			break;
+		}
+
+		// array
+		case nlohmann::json::value_t::array: {
+			switch (val["block"][0].type()) {
+				// 1D
+				case nlohmann::json::value_t::number_unsigned: {
+					CBuff init = util::json::arr::arr(val["block"]);
+
+					Arr* val = arrMk((char*) init._ptr, init._x, key, loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
+
+					_ = varMk(id, val);
+
+					break;
+				}
+
+				// matrix
+				case nlohmann::json::value_t::array: {
+					switch (val["block"][0][0].type()) {
+						// 2D
+						case nlohmann::json::value_t::number_unsigned: {
+							CBuff init = util::json::arr::matr2(val["block"]);
+
+							Arr* val = arrMk((char*) init._ptr, init._x, init._y, key, loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
+
+							_ = varMk(id, val);
+
+							break;
+						}
+
+						// 3D
+						case nlohmann::json::value_t::array: {
+							CBuff init = util::json::arr::matr3(val["block"]);
+
+							Arr* val = arrMk((char*) init._ptr, init._x, init._y, init._z, key, loc, rot);
+
+							_ = varMk(id, val);
+
+							break;
+						}
+					}
+				}
+			}
+
+			break;
+		}
+
+		// string
+		case nlohmann::json::value_t::string: {
+			CBuff init = util::json::str(val["block"]);
+
+			Arr* val = arrMk((char*) init._ptr, init._x, key, loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
+
+			_ = varMk(id, val);
+
+			break;
+		}
 	}
 
 	return _;
@@ -538,11 +599,7 @@ Var** util::json::scope(nlohmann::json deser) {
 
 			// string
 			case nlohmann::json::value_t::string: {
-				CBuff init = util::json::str(pair.value()["block"]);
-
-				Arr* val = arrMk((char*) init._ptr, init._x, pair.key(), loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
-
-				Var* _ = varMk(id, val);
+				Var* _ = util::json::var(pair.key(), pair.value());
 
 				scope[i] = _;
 				type[i] = omni::ARRAY;
@@ -556,11 +613,7 @@ Var** util::json::scope(nlohmann::json deser) {
 				switch (pair.value()["block"][0].type()) {
 					// 1D
 					case nlohmann::json::value_t::number_unsigned: {
-						CBuff init = util::json::arr::arr(pair.value()["block"]);
-
-						Arr* val = arrMk((char*) init._ptr, init._x, pair.key(), loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
-
-						Var* _ = varMk(id, val);
+						Var* _ = util::json::var(pair.key(), pair.value());
 
 						scope[i] = _;
 						type[i] = omni::ARRAY;
@@ -572,29 +625,23 @@ Var** util::json::scope(nlohmann::json deser) {
 					// matrix
 					case nlohmann::json::value_t::array: {
 						switch (pair.value()["block"][0][0].type()) {
+							// 2D
 							case nlohmann::json::value_t::number_unsigned: {
-								CBuff init = util::json::arr::matr2(pair.value()["block"]);
+								Var* _ = util::json::var(pair.key(), pair.value());
 
-								Arr* val = arrMk((char*) init._ptr, init._x, init._y, pair.key(), loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
-
-								Var* _ = varMk(id, val);
-
-								scope[i - 1] = _;
+								scope[i] = _;
 								type[i] = omni::ARRAY;
 								i++;
 
 								break;
 							}
 
+							// 3D
 							case nlohmann::json::value_t::array: {
-								CBuff init = util::json::arr::matr3(pair.value()["block"]);
+								Var* _ = util::json::var(pair.key(), pair.value());
 
-								Arr* val = arrMk((char*) init._ptr, init._x, init._y, init._z, pair.key(), loc, rot);
-
-								Var* _ = varMk(id, val);
-
-								scope[i - 1] = _;
-								type[i - 1] = omni::ARRAY;
+								scope[i] = _;
+								type[i] = omni::ARRAY;
 								i++;
 
 								break;
