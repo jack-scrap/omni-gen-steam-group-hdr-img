@@ -677,7 +677,7 @@ Var** util::json::scope(nlohmann::json deser) {
 
 			// dictionary
 			case nlohmann::json::value_t::object: {
-				util::json::dict(pair.value()["block"]);
+				Scope _ = util::json::dict(pair.value()["block"]);
 			}
 		}
 
