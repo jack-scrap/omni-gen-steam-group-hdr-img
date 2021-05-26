@@ -7,6 +7,8 @@
 typedef struct {
 	char _c;
 
+	GLuint _tex;
+
 	Obj* _parent;
 } Cont;
 
