@@ -17,11 +17,11 @@ Border* borderMk(glm::vec2 sz, glm::vec3 loc, glm::vec3 rot) {
 	int i = 0;
 	for (int y = 0; y < 2; y++) {
 		for (int x = 0; x < 2; x++) {
-			vtc[i] = outer[i];
-			vtc[i + 1] = outer[i + 1];
-			vtc[i + 2] = outer[i + 2];
+			for (int a = 0; a < 3; a++) {
+				vtc[i] = outer[i];
 
-			i += 3;
+				i++;
+			}
 		}
 	}
 
