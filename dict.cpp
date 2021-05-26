@@ -8,7 +8,7 @@
 #include "scn.h"
 #include "omni.h"
 
-Dict* dictMk(void** data, unsigned int* type, unsigned int no, std::string name, glm::vec3 loc, glm::vec3 rot) {
+Dict* dictMk(void** init, unsigned int* type, unsigned int no, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	Dict* _ = (Dict*) malloc(sizeof (Dict));
 	
 	Obj* child[1 + no];
@@ -25,13 +25,13 @@ Dict* dictMk(void** data, unsigned int* type, unsigned int no, std::string name,
 	for (int i = 0; i < no; i++) {
 		switch (type[i]) {
 			case omni::SCALAR: {
-				child[1 + i] = ((Idx*) data[i])->_parent;
+				child[1 + i] = ((Idx*) init[i])->_parent;
 
 				break;
 			}
 
 			case omni::ARRAY: {
-				child[1 + i] = ((Arr*) data[i])->_parent;
+				child[1 + i] = ((Arr*) init[i])->_parent;
 
 				break;
 			}
