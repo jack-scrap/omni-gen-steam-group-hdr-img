@@ -588,8 +588,12 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val) {
 	return _;
 }
 
-Var** util::json::scope(nlohmann::json deser) {
-	Var** scope = (Var**) malloc(noData * sizeof (Var*));
+Scope util::json::scope(nlohmann::json deser) {
+	Scope _;
+
+	_._no = deser.size();
+	_._ptr = (Var**) malloc(_._no * sizeof (Var*));
+	_._type = (unsigned int*) malloc(_._no * sizeof (unsigned int));
 
 	unsigned int i = 0;
 	for (const auto& pair : deser.items()) {
@@ -608,10 +612,10 @@ Var** util::json::scope(nlohmann::json deser) {
 		switch (pair.value()["block"].type()) {
 			// scalar
 			case nlohmann::json::value_t::number_unsigned: {
-				Var* _ = util::json::var(pair.key(), pair.value());
+				Var* var = util::json::var(pair.key(), pair.value());
 
-				scope[i] = _;
-				type[i] = omni::SCALAR;
+				((Var**) _._ptr)[i] = var;
+				((unsigned int*) _._type)[i] = omni::SCALAR;
 				i++;
 	
 				break;
@@ -619,10 +623,10 @@ Var** util::json::scope(nlohmann::json deser) {
 
 			// string
 			case nlohmann::json::value_t::string: {
-				Var* _ = util::json::var(pair.key(), pair.value());
+				Var* var = util::json::var(pair.key(), pair.value());
 
-				scope[i] = _;
-				type[i] = omni::ARRAY;
+				((Var**) _._ptr)[i] = var;
+				((unsigned int*) _._type)[i] = omni::ARRAY;
 				i++;
 
 				break;
@@ -633,10 +637,10 @@ Var** util::json::scope(nlohmann::json deser) {
 				switch (pair.value()["block"][0].type()) {
 					// 1D
 					case nlohmann::json::value_t::number_unsigned: {
-						Var* _ = util::json::var(pair.key(), pair.value());
+						Var* var = util::json::var(pair.key(), pair.value());
 
-						scope[i] = _;
-						type[i] = omni::ARRAY;
+						((Var**) _._ptr)[i] = var;
+						((unsigned int*) _._type)[i] = omni::ARRAY;
 						i++;
 
 						break;
@@ -647,10 +651,10 @@ Var** util::json::scope(nlohmann::json deser) {
 						switch (pair.value()["block"][0][0].type()) {
 							// 2D
 							case nlohmann::json::value_t::number_unsigned: {
-								Var* _ = util::json::var(pair.key(), pair.value());
+								Var* var = util::json::var(pair.key(), pair.value());
 
-								scope[i] = _;
-								type[i] = omni::ARRAY;
+								((Var**) _._ptr)[i] = var;
+								((unsigned int*) _._type)[i] = omni::ARRAY;
 								i++;
 
 								break;
@@ -658,10 +662,10 @@ Var** util::json::scope(nlohmann::json deser) {
 
 							// 3D
 							case nlohmann::json::value_t::array: {
-								Var* _ = util::json::var(pair.key(), pair.value());
+								Var* var = util::json::var(pair.key(), pair.value());
 
-								scope[i] = _;
-								type[i] = omni::ARRAY;
+								((Var**) _._ptr)[i] = var;
+								((unsigned int*) _._type)[i] = omni::ARRAY;
 								i++;
 
 								break;
@@ -684,7 +688,7 @@ Var** util::json::scope(nlohmann::json deser) {
 		i++;
 	}
 
-	return scope;
+	return _;
 }
 
 glm::vec3 util::json::vec(nlohmann::json deser) {
