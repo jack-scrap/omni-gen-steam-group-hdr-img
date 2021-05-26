@@ -16,18 +16,21 @@ namespace omni {
 			"array"
 		}, {
 			2,
-			"dict"
+			"str",
 		}, {
 			3,
-			"ctrl_flow"
+			"dict"
 		}, {
 			4,
-			"thread"
+			"ctrl_flow"
 		}, {
 			5,
-			"path"
+			"thread"
 		}, {
 			6,
+			"path"
+		}, {
+			7,
 			"matrix"
 		}
 	};

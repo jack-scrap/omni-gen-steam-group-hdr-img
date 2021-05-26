@@ -1,0 +1,29 @@
+{
+	"data": {
+		"state": {
+			"block": "eTxt"
+		}
+	},
+	"goal": {
+		"state": {
+			"block": "Text"
+		}
+	},
+	"vehicle": [
+		{
+			"name": "crane"
+		}
+	],
+	"bound": {
+		"rng": [
+			{
+				"min": {
+					"Z": -11.6
+				},
+				"max": {
+					"Z": 11.6
+				}
+			}
+		]
+	}
+}
