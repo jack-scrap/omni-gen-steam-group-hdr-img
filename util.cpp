@@ -484,6 +484,28 @@ CBuff util::json::arr::matr3(nlohmann::json deser) {
 Var* util::json::var(nlohmann::json key, nlohmann::json val) {
 	Var* _;
 
+	char* id = util::json::id(key);
+
+	glm::vec3 loc = glm::vec3(0.0);
+	if (val.contains("loc")) {
+		loc = util::json::vec(val["loc"]);
+	}
+
+	glm::vec3 rot = glm::vec3(0.0);
+	if (val.contains("rot")) {
+		rot = util::json::vec(val["rot"]);
+	}
+
+	if (val["block"].type() == nlohmann::json::value_t::number_unsigned) {
+		char init = util::json::byte(val["block"]);
+
+		Idx* idx = idxMk(0, &init, 1, key, loc, rot);
+
+		for (const auto& pair : val.items()) {
+			_ = varMk(id, idx);
+		}
+	}
+
 	return _;
 }
 
@@ -507,18 +529,12 @@ Var** util::json::scope(nlohmann::json deser) {
 		switch (pair.value()["block"].type()) {
 			// scalar
 			case nlohmann::json::value_t::number_unsigned: {
-				char init = util::json::byte(pair.value()["block"]);
+				Var* _ = util::json::var(pair.key(), pair.value());
 
-				Idx* val = idxMk(0, &init, 1, pair.key(), loc, rot);
-
-				for (const auto& pair : deser.items()) {
-					Var* _ = varMk(id, val);
-
-					scope[i] = _;
-					type[i] = omni::SCALAR;
-					i++;
-				}
-
+				scope[i] = _;
+				type[i] = omni::SCALAR;
+				i++;
+	
 				break;
 			}
 
