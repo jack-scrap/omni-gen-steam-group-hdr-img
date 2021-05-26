@@ -9,9 +9,6 @@ typedef struct Crane {
 	Cont* _data;
 	GLfloat _loc[3];
 
-	Obj* _head;
-	Obj* _claw;
-
 	GLfloat _rngHead[2] = {
 		-3.0,
 		3.0
@@ -24,6 +21,11 @@ typedef struct Crane {
 	static constexpr GLfloat _speed = 0.1;
 
 	Obj* _parent;
+
+	enum child {
+		HEAD = 2 * 2 * 2 * 2,
+		CLAW = 0
+	};
 } Crane;
 
 Crane* craneMk(glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));

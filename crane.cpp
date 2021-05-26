@@ -66,9 +66,6 @@ Crane* craneMk(glm::vec3 loc, glm::vec3 rot) {
 	_->_parent = objMk("crane/body", "obj", "dir", true, child, sizeof child / sizeof *child, loc, rot);
 
 	// alias
-	_->_head = _->_parent->_child[2 * 2 * 2 * 2];
-	_->_claw = _->_head->_child[0];
-
 	glm::vec3 offset = _->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int i = 0; i < 3; i++) {
 		_->_loc[i] = offset[i];
@@ -152,7 +149,7 @@ void craneGrab(Crane* crane) {
 				Idx* idx = (Idx*) var->_ptr;
 
 				if (idx->_data) {
-					if (util::phys::aabb(crane->_claw, idx->_data->_parent)) {
+					if (util::phys::aabb(crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW], idx->_data->_parent)) {
 						craneInsert(crane, idxPop(idx));
 
 						return;
@@ -169,7 +166,7 @@ void craneGrab(Crane* crane) {
 					Idx* idx = arr->_data[i];
 
 					if (idx->_data) {
-						if (util::phys::aabb(crane->_claw, idx->_data->_parent)) {
+						if (util::phys::aabb(crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW], idx->_data->_parent)) {
 							craneInsert(crane, idxPop(idx));
 
 							return;
