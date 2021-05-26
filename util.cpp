@@ -481,7 +481,7 @@ CBuff util::json::arr::matr3(nlohmann::json deser) {
 	return _;
 }
 
-Var* var(nlohmann::json key, nlohmann::json val) {
+Var* util::json::var(nlohmann::json key, nlohmann::json val) {
 	Var* _;
 
 	return _;
