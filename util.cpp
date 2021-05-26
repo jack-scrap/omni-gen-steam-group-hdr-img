@@ -439,6 +439,11 @@ CBuff util::json::str(nlohmann::json deser) {
 	return _;
 }
 
+void util::json::dict(nlohmann::json deser) {
+	for (const auto& pair : deser.items()) {
+	}
+}
+
 CBuff util::json::arr::arr(nlohmann::json deser) {
 	CBuff _;
 
@@ -653,6 +658,11 @@ Var** util::json::scope(nlohmann::json deser) {
 				}
 
 				break;
+			}
+
+			// dictionary
+			case nlohmann::json::value_t::object: {
+				util::json::dict(pair.value()["block"]);
 			}
 		}
 
