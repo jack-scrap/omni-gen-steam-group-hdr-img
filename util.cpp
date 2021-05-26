@@ -439,10 +439,23 @@ CBuff util::json::str(nlohmann::json deser) {
 	return _;
 }
 
-void util::json::dict(nlohmann::json deser) {
+Scope util::json::dict(nlohmann::json deser) {
+	Scope _;
+
+	_._no = deser.size();
+	_._ptr = (Var**) malloc(_._no * sizeof (Var*));
+	_._type = (unsigned int*) malloc(_._no * sizeof (unsigned int));
+
+	int i = 0;
 	for (const auto& pair : deser.items()) {
-		Var* _ = util::json::var(pair.key(), pair.value());
+		Var* var = util::json::var(pair.key(), pair.value());
+
+		_._ptr[i] = var;
+		_._type[i] = omni::SCALAR;
+		i++;
 	}
+
+	return _;
 }
 
 CBuff util::json::arr::arr(nlohmann::json deser) {

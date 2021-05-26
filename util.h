@@ -103,7 +103,7 @@ namespace util {
 
 		CBuff str(nlohmann::json deser);
 
-		void dict(nlohmann::json deser);
+		Scope dict(nlohmann::json deser);
 
 		namespace arr {
 			CBuff dim(nlohmann::json deser, CBuff buff, int i);

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "var.h"
+
 typedef struct {
 	void* _ptr;
 	size_t _sz;
@@ -12,3 +14,9 @@ typedef struct {
 		_y,
 		_z;
 } CBuff;
+
+typedef struct {
+	Var** _ptr;
+	unsigned int* _type;
+	unsigned int _no;
+} Scope;
