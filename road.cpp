@@ -24,7 +24,7 @@ Road* roadMk(GLfloat* vtc, bool pass, glm::vec3 loc, glm::vec3 rot) {
 			break;
 	};
 
-	_->_parent = lineMk(vtc, "geom", "thick", name, loc, rot);
+	_->_parent = lineMk(vtc, "geom", "thick", name, true, loc, rot);
 	
 	return _;
 }

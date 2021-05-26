@@ -67,7 +67,7 @@ Truck* truckMk(char* init, unsigned int no, glm::vec3 loc, glm::vec3 rot) {
 		}
 	}
 
-	Obj* bed = ptMk(Truck::_vtx, "geom", "bed", "dir", glm::vec3(0.0), glm::vec3(0.0, M_PI / 2, 0.0));
+	Obj* bed = ptMk(Truck::_vtx, "geom", "bed", "dir", false, glm::vec3(0.0), glm::vec3(0.0, M_PI / 2, 0.0));
 
 	bed->_prog.use();
 
@@ -77,7 +77,7 @@ Truck* truckMk(char* init, unsigned int no, glm::vec3 loc, glm::vec3 rot) {
 
 	bed->_prog.unUse();
 
-	Obj* outer = ptMk(Truck::_vtx, "geom", "outer", "dir", glm::vec3(0.0), glm::vec3(0.0, M_PI / 2, 0.0));
+	Obj* outer = ptMk(Truck::_vtx, "geom", "outer", "dir", true, glm::vec3(0.0), glm::vec3(0.0, M_PI / 2, 0.0));
 
 	outer->_prog.use();
 
