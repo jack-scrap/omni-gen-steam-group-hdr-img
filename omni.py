@@ -315,3 +315,8 @@ while i < _streetLightGet()._sz:
 	street_light.append(_StreetLight(_streetLightPtr[i]))
 
 	i += sizeof(c_void_p)
+
+# path
+_pathGet = _scn.pathGet
+_pathGet.restype = _CArr
+_pathGet.argtypes = None
