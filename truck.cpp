@@ -87,12 +87,12 @@ Truck* truckMk(char* init, unsigned int no, glm::vec3 loc, glm::vec3 rot) {
 
 	outer->_prog.unUse();
 
-	child[(w * 2) + 1] = bed;
-	child[(w * 2) + 1 + 1] = outer;
+	child[w * 2] = bed;
+	child[(w * 2) + 1] = outer;
 
 	_->_data = arrMk(init, no, "", glm::vec3(0.0, layout::pad * 2, -((layout::idx[X] / 2) + (layout::stroke * 2) + (layout::margin * 2 * 2))), glm::vec3(0.0, -M_PI / 2, 0.0));
 
-	child[w * 2] = _->_data->_parent;
+	child[(w * 2) + 2] = _->_data->_parent;
 
 	child[(w * 2) + 2 + 1] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-(no * layout::idx[Z]) - (layout::stroke * 2), -layout::stroke, 0.0), rot);
 
