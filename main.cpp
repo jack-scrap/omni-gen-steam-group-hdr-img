@@ -1,3 +1,6 @@
+#define GLM_ENABLE_EXPERIMENTAL
+#define STB_IMAGE_IMPLEMENTATION
+
 #include <iostream>
 #include <dlfcn.h>
 #include <thread>
@@ -5,7 +8,6 @@
 #include <vector>
 #include <string>
 #include <glm/gtc/type_ptr.hpp>
-#define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/string_cast.hpp>
 
 #include "scn.h"
@@ -17,7 +19,6 @@
 #include "cam.h"
 #include "omni.h"
 #include "col.h"
-#define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
 Disp* disp;

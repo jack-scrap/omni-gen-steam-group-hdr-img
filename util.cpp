@@ -1,7 +1,8 @@
+#define GLM_ENABLE_EXPERIMENTAL
+
 #include <iostream>
 #include <sstream>
 #include <dirent.h>
-#define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/string_cast.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <sys/stat.h>

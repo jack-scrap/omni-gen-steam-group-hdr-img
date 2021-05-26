@@ -1,3 +1,6 @@
+#define GLM_ENABLE_EXPERIMENTAL
+#define STB_IMAGE_IMPLEMENTATION
+
 #include <stdio.h>
 #include <cmath>
 #include <thread>
@@ -8,7 +11,6 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/string_cast.hpp>
 
 #include "obj.h"
@@ -20,7 +22,6 @@
 #include "phys.h"
 #include "omni.h"
 
-#define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
 Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string vtx, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
