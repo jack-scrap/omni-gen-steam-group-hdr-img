@@ -88,7 +88,7 @@ namespace util {
 
 		Var* var(nlohmann::json key, nlohmann::json val);
 
-		Var** scope(nlohmann::json deser, unsigned int*& type);
+		Var** scope(nlohmann::json deser);
 
 		glm::vec3 vec(nlohmann::json deser);
 

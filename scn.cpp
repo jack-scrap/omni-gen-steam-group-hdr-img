@@ -215,10 +215,10 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	type = (unsigned int*) malloc(noData * sizeof (unsigned int*));
 
 	// initial
-	data = util::json::scope(deser["data"], type);
+	data = util::json::scope(deser["data"]);
 
 	// desired
-	goal = util::json::scope(deser["goal"], type);
+	goal = util::json::scope(deser["goal"]);
 
 	for (int i = 0; i < noData; i++) {
 		Obj* _;

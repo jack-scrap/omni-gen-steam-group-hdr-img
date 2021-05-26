@@ -487,7 +487,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val) {
 	return _;
 }
 
-Var** util::json::scope(nlohmann::json deser, unsigned int*& type) {
+Var** util::json::scope(nlohmann::json deser) {
 	Var** scope = (Var**) malloc(noData * sizeof (Var*));
 
 	unsigned int i = 0;
