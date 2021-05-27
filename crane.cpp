@@ -24,10 +24,10 @@ Crane* craneMk(glm::vec3 loc, glm::vec3 rot) {
 		objMk("crane/claw", "obj", "dir", true)
 	};
 
-	child[0] = objMk("crane/head", "obj", "dir", true, claw, 1, glm::vec3(0.0, 13.8, 0.0));
+	child[Crane::HEAD] = objMk("crane/head", "obj", "dir", true, claw, 1, glm::vec3(0.0, 13.8, 0.0));
 
 	// data
-	child[1] = nullptr;
+	child[Crane::SLOT] = nullptr;
 
 	// wheel
 	int i = 0;
@@ -99,16 +99,14 @@ void craneZoom(Crane* crane, float delta) {
 }
 
 void cranePan(Crane* crane, float delta) {
-	Obj* targ = crane->_parent->_child[0];
-
 	glm::mat4 trans = glm::translate(glm::mat4(1.0), glm::vec3(0.0, 0.0, delta));
-	glm::vec3 dest = glm::vec3(targ->_model * trans * glm::vec4(glm::vec3(0.0), 1.0));
+	glm::vec3 dest = glm::vec3(crane->_parent->_child[Crane::HEAD]->_model * trans * glm::vec4(glm::vec3(0.0), 1.0));
 
 	if (
 		dest[Z] > crane->_rngHead[MIN] &&
 		dest[Z] < crane->_rngHead[MAX]
 	) {
-		objTrans(targ, glm::vec3(0.0, 0.0, delta), glm::vec3(0.0));
+		objTrans(crane->_parent->_child[Crane::HEAD], glm::vec3(0.0, 0.0, delta), glm::vec3(0.0));
 	} else {
 		omni::err("Cannot move crane head; translation exceeds range");
 	}
@@ -120,10 +118,8 @@ void cranePan(Crane* crane, float delta) {
 }
 
 void cranePed(Crane* crane, float delta) {
-	Obj*& targ = crane->_parent->_child[2 * 2 * 2 * 2]->_child[0];
-
 	glm::mat4 trans = glm::translate(glm::mat4(1.0), glm::vec3(0.0, delta, 0.0));
-	glm::vec3 dest = glm::vec3(targ->_acc * trans * glm::vec4(glm::vec3(0.0), 1.0));
+	glm::vec3 dest = glm::vec3(crane->_parent->_child[Crane::HEAD]->_acc * trans * glm::vec4(glm::vec3(0.0), 1.0));
 
 	if (
 		dest[Y] > crane->_rngClaw[MIN] &&
@@ -131,7 +127,7 @@ void cranePed(Crane* crane, float delta) {
 	) {
 		glm::vec3 offset = glm::vec3(0.0, delta, 0.0);
 
-		objTrans(targ, offset, glm::vec3(0.0));
+		objTrans(crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW], offset, glm::vec3(0.0));
 	} else {
 		omni::err("Cannot move crane claw; translation exceeds range");
 	}
@@ -184,7 +180,7 @@ void craneGrab(Crane* crane) {
 
 void craneInsert(Crane* crane, Cont* byte) {
 	crane->_data = byte;
-	crane->_parent->_child[1] = crane->_data->_parent;
+	crane->_parent->_child[Crane::SLOT] = crane->_data->_parent;
 
 	objAcc(crane->_parent, glm::mat4(1.0));
 }
