@@ -421,6 +421,28 @@ CBuff util::json::arr::dim(nlohmann::json deser, CBuff buff, int i) {
 	}
 }
 
+bool util::json::arr::euclid(nlohmann::json deser, unsigned int sz) {
+	bool _;
+
+	if (sz > 3) {
+		_ = false;
+	} else {
+		switch (deser[0].type()) {
+			case nlohmann::json::value_t::number_unsigned:
+				_ = true;
+
+				break;
+
+			case nlohmann::json::value_t::array:
+				_ = euclid(deser[0], sz + 1);
+
+				break;
+		}
+	}
+
+	return _;
+}
+
 CBuff util::json::str(nlohmann::json deser) {
 	CBuff _;
 
@@ -1101,4 +1123,26 @@ GLuint util::tex::spray(char c) {
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	return cbo;
+}
+
+bool euclid(nlohmann::json deser, unsigned int sz) {
+	bool _;
+
+	if (sz > 3) {
+		_ = false;
+	} else {
+		switch (deser[0].type()) {
+			case nlohmann::json::value_t::number_integer:
+				_ = true;
+
+				break;
+
+			case nlohmann::json::value_t::array:
+				_ = euclid(deser[0], sz + 1);
+
+				break;
+		}
+	}
+
+	return _;
 }
