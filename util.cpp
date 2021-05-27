@@ -732,7 +732,7 @@ std::vector<Obj*> util::json::path(nlohmann::json deser, nlohmann::json node) {
 					}
 				}
 
-				_.push_back(lineMk((GLfloat*) vtc, "geom", "thick", "solid", true));
+				_.push_back(lineMk((GLfloat*) vtc, "main", "thick", "solid", true));
 
 				break;
 			}

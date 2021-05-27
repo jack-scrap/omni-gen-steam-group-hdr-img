@@ -39,7 +39,7 @@ Lim* limMk(unsigned int axis, GLfloat val) {
 			break;
 	}
 
-	_->_parent = lineMk(vtc, "geom", "thick", "solid", true, loc, rot);
+	_->_parent = lineMk(vtc, "main", "thick", "solid", true, loc, rot);
 
 	return _;
 }
