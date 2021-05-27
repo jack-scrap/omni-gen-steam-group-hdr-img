@@ -1,16 +1,17 @@
 {
 	"data": {
 		"state": {
-			"block": 0,
-			"loc": [
-				3,
-				0,
-				0
-			]
+			"block": 0
+		},
+		"other state": {
+			"block": 0
 		}
 	},
 	"goal": {
 		"state": {
+			"block": 1
+		},
+		"other state": {
 			"block": 1
 		}
 	},
