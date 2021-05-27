@@ -7,6 +7,8 @@
 namespace omni {
 	void err(std::string msg);
 
+	void assertion(bool cond, std::string msg);
+
 	static std::map<unsigned int, std::string> stage = {
 		{
 			0,

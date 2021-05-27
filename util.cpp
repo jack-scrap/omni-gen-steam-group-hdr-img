@@ -427,16 +427,10 @@ bool util::json::arr::euclid(nlohmann::json deser, unsigned int sz) {
 	if (sz > 3) {
 		_ = false;
 	} else {
-		switch (deser[0].type()) {
-			case nlohmann::json::value_t::number_unsigned:
-				_ = true;
-
-				break;
-
-			case nlohmann::json::value_t::array:
-				_ = euclid(deser[0], sz + 1);
-
-				break;
+		if (deser.type() == nlohmann::json::value_t::array) {
+			_ = euclid(deser[0], sz + 1);
+		} else {
+			_ = true;
 		}
 	}
 
@@ -657,6 +651,8 @@ Scope util::json::scope(nlohmann::json deser) {
 
 			// array
 			case nlohmann::json::value_t::array: {
+				omni::assertion(util::json::arr::euclid(pair.value()["block"], 1), std::string("Depth of `") + pair.key() + std::string("` exceeds 3 dimensions"));
+
 				switch (pair.value()["block"][0].type()) {
 					// 1D
 					case nlohmann::json::value_t::number_unsigned: {
