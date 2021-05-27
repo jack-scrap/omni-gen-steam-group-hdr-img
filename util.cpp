@@ -286,7 +286,7 @@ std::vector<GLushort> util::mesh::rect::idc() {
 	return _;
 }
 
-std::vector<GLfloat> util::mesh::gen::normTri(std::vector<glm::vec3> vtc) {
+std::vector<GLfloat> util::mesh::gen::norm(std::vector<glm::vec3> vtc) {
 	std::vector<GLfloat> _;
 
 	// get edges

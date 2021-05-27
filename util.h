@@ -51,7 +51,7 @@ namespace util {
 		}
 
 		namespace gen {
-			std::vector<GLfloat> normTri(std::vector<glm::vec3> vtc);
+			std::vector<GLfloat> norm(std::vector<glm::vec3> vtc);
 		}
 
 		namespace rd {
