@@ -1,0 +1,35 @@
+{
+	"data": {
+		"state": {
+			"state": {
+				"state": 3,
+				"other_state": 7
+			}
+		}
+	},
+	"goal": {
+		"state": {
+			"state": {
+				"state": 7,
+				"other_state": 3
+			}
+		}
+	},
+	"vehicle": [
+		{
+			"name": "crane"
+		}
+	],
+	"bound": {
+		"rng": [
+			{
+				"min": {
+					"Z": -11.6
+				},
+				"max": {
+					"Z": 11.6
+				}
+			}
+		]
+	}
+}
