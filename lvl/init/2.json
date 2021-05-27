@@ -3,7 +3,7 @@
 		"state": {
 			"block": 0
 		},
-		"other state": {
+		"other_state": {
 			"block": 0
 		}
 	},
@@ -11,7 +11,7 @@
 		"state": {
 			"block": 1
 		},
-		"other state": {
+		"other_state": {
 			"block": 1
 		}
 	},
