@@ -8,7 +8,6 @@
 
 typedef struct Truck {
 	Arr* _data;
-
 	GLfloat _loc[3];
 
 	float _ang;

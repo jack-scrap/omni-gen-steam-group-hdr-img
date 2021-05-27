@@ -5,12 +5,10 @@
 
 typedef struct CargoShip {
 	Arr* _data;
-
+	GLfloat _loc[3];
 	static constexpr unsigned int
 		_x = 6,
 		_y = 2;
-
-	GLfloat _loc[3];
 
 	GLfloat _vtc[2 * 2 * 3];
 	GLushort _idc[2 * 2];
