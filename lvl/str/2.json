@@ -1,0 +1,25 @@
+{
+	"data": {
+		"state": "Other text"
+	},
+	"goal": {
+		"state": " Oeehrtttx"
+	},
+	"vehicle": [
+		{
+			"name": "crane"
+		}
+	],
+	"bound": {
+		"rng": [
+			{
+				"min": {
+					"Z": -11.6
+				},
+				"max": {
+					"Z": 11.6
+				}
+			}
+		]
+	}
+}
