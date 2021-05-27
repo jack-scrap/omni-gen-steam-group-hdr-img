@@ -24,6 +24,11 @@ typedef struct Truck {
 
 	GLuint _uni[2];
 
+	enum {
+		BED,
+		OUTER
+	};
+
 	enum uni {
 		SZ_BED,
 		SZ_OUTER

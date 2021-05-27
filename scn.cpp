@@ -195,8 +195,8 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 			obj.push_back(_->_parent);
 
-			pt.push_back(_->_parent->_child[0]);
-			pt.push_back(_->_parent->_child[1]);
+			pt.push_back(_->_parent->_child[Truck::BED]);
+			pt.push_back(_->_parent->_child[Truck::OUTER]);
 		}
 	}
 
