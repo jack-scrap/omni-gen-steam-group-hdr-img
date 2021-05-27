@@ -23,7 +23,9 @@ typedef struct Crane {
 	Obj* _parent;
 
 	enum {
-		HEAD = 2 * 2 * 2 * 2,
+		HEAD,
+		SLOT,
+
 		CLAW = 0
 	};
 } Crane;

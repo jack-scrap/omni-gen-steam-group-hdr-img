@@ -17,8 +17,19 @@ Crane* craneMk(glm::vec3 loc, glm::vec3 rot) {
 
 	_->_data = nullptr;
 
+	Obj* child[1 + 1 + (2 * 2 * 2 * 2) + (2 * 2)];
+
+	// head
+	Obj* claw[] = {
+		objMk("crane/claw", "obj", "dir", true)
+	};
+
+	child[0] = objMk("crane/head", "obj", "dir", true, claw, 1, glm::vec3(0.0, 13.8, 0.0));
+
+	// data
+	child[1] = nullptr;
+
 	// wheel
-	Obj* child[(2 * 2 * 2 * 2) + 1 + (2 * 2) + 1];
 	int i = 0;
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < 2; x++) {
@@ -29,20 +40,13 @@ Crane* craneMk(glm::vec3 loc, glm::vec3 rot) {
 						rim[b] = objMk("rim", "obj", "dir", true, glm::vec3(0.0), glm::vec3(0.0, b * M_PI, 0.0));
 					}
 
-					child[i] = objMk("wheel", "obj", "dir", false, rim, 2, glm::vec3(((x ? 1 : -1) * 3.0) + (j ? 1 : -1), 1.0, ((z ? 1 : -1) * 10.0) + ((k ? 1 : -1) * 0.6)));
+					child[1 + 1 + i] = objMk("wheel", "obj", "dir", false, rim, 2, glm::vec3(((x ? 1 : -1) * 3.0) + (j ? 1 : -1), 1.0, ((z ? 1 : -1) * 10.0) + ((k ? 1 : -1) * 0.6)));
 
 					i++;
 				}
 			}
 		}
 	}
-
-	// claw
-	Obj* claw[] = {
-		objMk("crane/claw", "obj", "dir", true)
-	};
-
-	child[2 * 2 * 2 * 2] = objMk("crane/head", "obj", "dir", true, claw, 1, glm::vec3(0.0, 13.8, 0.0));
 
 	// light
 	std::vector<GLfloat> rect = util::mesh::rect::pos(glm::vec2(0.6, 1.0), Y, true);
@@ -56,13 +60,11 @@ Crane* craneMk(glm::vec3 loc, glm::vec3 rot) {
 	i = 0;
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < 2; x++) {
-			child[(2 * 2 * 2 * 2) + 1 + i] = objMk(&rect[0], 2 * 2 * 3, &strip[0], 3 * 2, "obj", "alert", false, glm::vec3((x ? 1 : -1) * (6.0 + (layout::pad * 2)), 1.74, (z ? 1 : -1) * 10.0), glm::vec3(0.0, M_PI / 2, 0.0));
+			child[1 + 1 + (2 * 2 * 2 * 2) + i] = objMk(&rect[0], 2 * 2 * 3, &strip[0], 3 * 2, "obj", "alert", false, glm::vec3((x ? 1 : -1) * (6.0 + (layout::pad * 2)), 1.74, (z ? 1 : -1) * 10.0), glm::vec3(0.0, M_PI / 2, 0.0));
 
 			i++;
 		}
 	}
-
-	child[(2 * 2 * 2 * 2) + 1 + (2 * 2)] = nullptr;
 
 	_->_parent = objMk("crane/body", "obj", "dir", true, child, sizeof child / sizeof *child, loc, rot);
 
@@ -76,13 +78,13 @@ Crane* craneMk(glm::vec3 loc, glm::vec3 rot) {
 
 void craneAnim(Crane* crane, glm::vec3 loc) {
 	for (int i = 0; i < 2 * 2; i++) {
-		crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + i]->_active = true;
+		crane->_parent->_child[1 + 1 + (2 * 2 * 2 * 2) + i]->_active = true;
 	}
 
 	objTrans(crane->_parent, loc, glm::vec3(0.0));
 
 	for (int i = 0; i < 2 * 2; i++) {
-		crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + i]->_active = false;
+		crane->_parent->_child[1 + 1 + (2 * 2 * 2 * 2) + i]->_active = false;
 	}
 }
 
@@ -97,7 +99,7 @@ void craneZoom(Crane* crane, float delta) {
 }
 
 void cranePan(Crane* crane, float delta) {
-	Obj* targ = crane->_parent->_child[2 * 2 * 2 * 2];
+	Obj* targ = crane->_parent->_child[0];
 
 	glm::mat4 trans = glm::translate(glm::mat4(1.0), glm::vec3(0.0, 0.0, delta));
 	glm::vec3 dest = glm::vec3(targ->_model * trans * glm::vec4(glm::vec3(0.0), 1.0));
@@ -182,7 +184,7 @@ void craneGrab(Crane* crane) {
 
 void craneInsert(Crane* crane, Cont* byte) {
 	crane->_data = byte;
-	crane->_parent->_child[(2 * 2 * 2 * 2) + 1 + (2 * 2)] = crane->_data->_parent;
+	crane->_parent->_child[1] = crane->_data->_parent;
 
 	objAcc(crane->_parent, glm::mat4(1.0));
 }
