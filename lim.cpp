@@ -11,13 +11,13 @@ Lim* limMk(unsigned int axis, GLfloat val) {
 	_->_axis = axis;
 	_->_val = val;
 
-	GLfloat vtc[2 * 3];
+	GLfloat vtc[2][3];
 	for (int b = 0; b < 2; b++) {
 		for (int i = 0; i < 3; i++) {
 			if (!i) {
-				vtc[(b * 3) + i] = (b ? 1 : -1) * 100.0;
+				vtc[b][i] = (b ? 1 : -1) * 100.0;
 			} else {
-				vtc[(b * 3) + i] = 0.0;
+				vtc[b][i] = 0.0;
 			}
 		}
 	}
@@ -43,7 +43,7 @@ Lim* limMk(unsigned int axis, GLfloat val) {
 			break;
 	}
 
-	_->_parent = lineMk(vtc, 2 * 3, idc, 2, "main", "thick", "solid", true, loc, rot);
+	_->_parent = lineMk((GLfloat*) vtc, 2 * 3, idc, 2, "main", "thick", "solid", true, loc, rot);
 
 	return _;
 }
