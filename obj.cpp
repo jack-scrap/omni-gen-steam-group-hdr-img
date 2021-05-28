@@ -24,7 +24,7 @@
 
 #include "stb_image.h"
 
-Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string vtx, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
+Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noPrim, std::string vtx, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -34,7 +34,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_v = 0.0;
 	_->_t = 0;
 
-	_->_mesh = meshMk(vtc, noVtc, idc, noIdc);
+	_->_mesh = meshMk(vtc, noVtc, idc, noPrim);
 
 	// matrix
 	_->_model = glm::mat4(1.0);
@@ -89,7 +89,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	return _;
 }
 
-Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string vtx, std::string frag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
+Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noPrim, std::string vtx, std::string frag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -102,7 +102,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_v = 0.0;
 	_->_t = 0;
 
-	_->_mesh = meshMk(vtc, noVtc, idc, noIdc);
+	_->_mesh = meshMk(vtc, noVtc, idc, noPrim);
 
 	// matrix
 	_->_model = glm::mat4(1.0);
@@ -175,8 +175,8 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj
 	return _;
 }
 
-Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLfloat* st, unsigned int noSt, GLushort* idc, unsigned int noIdc, std::string vtx, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
-	Obj* _ = objMk(vtc, noVtc, idc, noIdc, vtx, frag, active, loc, rot);
+Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLfloat* st, unsigned int noSt, GLushort* idc, unsigned int noPrim, std::string vtx, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
+	Obj* _ = objMk(vtc, noVtc, idc, noPrim, vtx, frag, active, loc, rot);
 
 	// texture
 	int
@@ -218,8 +218,8 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLfloat* st, unsigned int noSt, GLu
 	return _;
 }
 
-Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLfloat* st, unsigned int noSt, GLushort* idc, unsigned int noIdc, std::string vtx, std::string frag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
-	Obj* _ = objMk(vtc, noVtc, idc, noIdc, vtx, frag, active, child, noChild, loc, rot);
+Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLfloat* st, unsigned int noSt, GLushort* idc, unsigned int noPrim, std::string vtx, std::string frag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
+	Obj* _ = objMk(vtc, noVtc, idc, noPrim, vtx, frag, active, child, noChild, loc, rot);
 
 	// texture
 	int
@@ -261,7 +261,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLfloat* st, unsigned int noSt, GLu
 	return _;
 }
 
-Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string vtx, std::string geom, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
+Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noPrim, std::string vtx, std::string geom, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -271,7 +271,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, 
 	_->_v = 0.0;
 	_->_t = 0;
 
-	_->_mesh = meshMk(vtc, noVtc, idc, noIdc);
+	_->_mesh = meshMk(vtc, noVtc, idc, noPrim);
 
 	// matrix
 	_->_model = glm::mat4(1.0);
@@ -389,7 +389,7 @@ void objDraw(Obj* obj) {
 
 	glUniform1ui(obj->_uni[Obj::ACTIVE], obj->_active);
 
-	glDrawElements(GL_TRIANGLES, obj->_mesh->_noIdc, GL_UNSIGNED_SHORT, (GLvoid*) 0);
+	glDrawElements(GL_TRIANGLES, obj->_mesh->_noPrim, GL_UNSIGNED_SHORT, (GLvoid*) 0);
 
 	obj->_prog.unUse();
 	glBindVertexArray(0);

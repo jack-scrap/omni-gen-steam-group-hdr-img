@@ -6,7 +6,7 @@
 #include "pt.h"
 #include "scn.h"
 
-Obj* ptMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string nameVtx, std::string nameGeom, std::string nameFrag, bool active, glm::vec3 loc, glm::vec3 rot) {
+Obj* ptMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noPrim, std::string nameVtx, std::string nameGeom, std::string nameFrag, bool active, glm::vec3 loc, glm::vec3 rot) {
 	return objMk(vtc, sizeof vtc / sizeof *vtc, idc, sizeof idc / sizeof *idc, nameVtx, nameGeom, nameFrag, active, loc, rot);
 }
 
@@ -24,7 +24,7 @@ void ptDraw(Obj* pt) {
 
 	glUniform1ui(pt->_uni[Obj::ACTIVE], pt->_active);
 
-	glDrawElements(GL_POINTS, pt->_mesh->_noIdc, GL_UNSIGNED_SHORT, (GLvoid*) 0);
+	glDrawElements(GL_POINTS, pt->_mesh->_noPrim, GL_UNSIGNED_SHORT, (GLvoid*) 0);
 
 	pt->_prog.unUse();
 	glBindVertexArray(0);

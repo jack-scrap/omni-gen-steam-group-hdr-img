@@ -1,7 +1,7 @@
 #include "road.h"
 #include "line.h"
 
-Road* roadMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, bool pass, glm::vec3 loc, glm::vec3 rot) {
+Road* roadMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noPrim, bool pass, glm::vec3 loc, glm::vec3 rot) {
 	Road* _ = (Road*) malloc(sizeof (Road));
 
 	_->_pass = pass;
@@ -24,7 +24,7 @@ Road* roadMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc
 			break;
 	};
 
-	_->_parent = lineMk(vtc, noVtc, idc, noIdc, "main", "thick", name, true, loc, rot);
+	_->_parent = lineMk(vtc, noVtc, idc, noPrim, "main", "thick", name, true, loc, rot);
 	
 	return _;
 }
