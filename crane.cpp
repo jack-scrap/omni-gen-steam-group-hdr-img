@@ -12,11 +12,11 @@
 #include "state.h"
 #include "omni.h"
 
-Crane* craneMk(char* init, glm::vec3 loc, glm::vec3 rot) {
+Crane* craneMk(char init, glm::vec3 loc, glm::vec3 rot) {
 	Crane* _ = (Crane*) malloc(sizeof (Crane));
 
 	if (init) {
-		_->_data = contMk(*init);
+		_->_data = contMk(init);
 	} else {
 		_->_data = nullptr;
 	}
