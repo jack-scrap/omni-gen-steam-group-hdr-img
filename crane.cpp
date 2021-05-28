@@ -12,10 +12,14 @@
 #include "state.h"
 #include "omni.h"
 
-Crane* craneMk(glm::vec3 loc, glm::vec3 rot) {
+Crane* craneMk(char* init, glm::vec3 loc, glm::vec3 rot) {
 	Crane* _ = (Crane*) malloc(sizeof (Crane));
 
-	_->_data = nullptr;
+	if (init) {
+		_->_data = contMk(*init);
+	} else {
+		_->_data = nullptr;
+	}
 
 	Obj* child[1 + 1 + (2 * 2 * 2 * 2) + (2 * 2)];
 
@@ -27,7 +31,11 @@ Crane* craneMk(glm::vec3 loc, glm::vec3 rot) {
 	child[Crane::HEAD] = objMk("crane/head", "obj", "dir", true, claw, 1, glm::vec3(0.0, 13.8, 0.0));
 
 	// data
-	child[Crane::SLOT] = nullptr;
+	if (_->_data) {
+		child[Crane::SLOT] = _->_data->_parent;
+	} else {
+		child[Crane::SLOT] = nullptr;
+	}
 
 	// wheel
 	int i = 0;

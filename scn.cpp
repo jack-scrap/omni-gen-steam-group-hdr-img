@@ -163,7 +163,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		}
 
 		if (entry["name"] == "crane") {
-			Crane* _ = craneMk(loc, rot);
+			Crane* _ = craneMk(nullptr, loc, rot);
 
 			crane._sz += sizeof (Crane*);
 			crane._ptr = (Crane**) realloc(crane._ptr, crane._sz);
