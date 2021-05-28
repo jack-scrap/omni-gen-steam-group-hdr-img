@@ -2,9 +2,11 @@
 
 #include "obj.h"
 
-typedef struct {
+typedef struct Lim {
 	unsigned int _axis;
 	GLfloat _val;
+
+	static GLushort _idc[2];
 
 	Obj* _parent;
 } Lim;

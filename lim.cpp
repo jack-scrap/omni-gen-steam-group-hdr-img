@@ -5,6 +5,10 @@
 #include "layout.h"
 #include "line.h"
 
+GLushort Lim::_idc[2] = {
+	0, 1
+};
+
 Lim* limMk(unsigned int axis, GLfloat val) {
 	Lim* _ = (Lim*) malloc(sizeof (Lim));
 
@@ -22,11 +26,7 @@ Lim* limMk(unsigned int axis, GLfloat val) {
 		}
 	}
 
-	GLushort idc[2] = {
-		0, 1
-	};
-
-	_->_parent = lineMk((GLfloat*) vtc, 2 * 3, idc, 2, "main", "thick", "solid", true);
+	_->_parent = lineMk((GLfloat*) vtc, 2 * 3, Lim::_idc, 2, "main", "thick", "solid", true);
 
 	return _;
 }
