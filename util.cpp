@@ -826,6 +826,8 @@ Obj* util::json::prop(nlohmann::json deser) {
 
 	Obj* _ = objMk(deser["name"], "obj", "dir", false, loc, rot);
 
+	omni::assertion(!util::phys::aabbGround(_), std::string("Prop `") + std::string(deser["name"]) + std::string("` clipping into ground plane"));
+
 	return _;
 }
 
