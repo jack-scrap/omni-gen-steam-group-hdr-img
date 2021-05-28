@@ -6,8 +6,8 @@
 #include "pt.h"
 #include "scn.h"
 
-Obj* ptMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noPrim, std::string nameVtx, std::string nameGeom, std::string nameFrag, bool active, glm::vec3 loc, glm::vec3 rot) {
-	return objMk(vtc, sizeof vtc / sizeof *vtc, idc, sizeof idc / sizeof *idc, nameVtx, nameGeom, nameFrag, active, loc, rot);
+Obj* ptMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string nameVtx, std::string nameGeom, std::string nameFrag, bool active, glm::vec3 loc, glm::vec3 rot) {
+	return objMk(vtc, idc, sizeof idc / sizeof *idc, nameVtx, nameGeom, nameFrag, active, loc, rot);
 }
 
 void ptDraw(Obj* pt) {

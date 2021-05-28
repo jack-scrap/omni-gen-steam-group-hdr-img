@@ -24,7 +24,7 @@ Road* roadMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noPri
 			break;
 	};
 
-	_->_parent = lineMk(vtc, noVtc, idc, noPrim, "main", "thick", name, true, loc, rot);
+	_->_parent = lineMk(vtc, idc, noPrim, "main", "thick", name, true, loc, rot);
 	
 	return _;
 }

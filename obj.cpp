@@ -24,7 +24,7 @@
 
 #include "stb_image.h"
 
-Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noPrim, std::string vtx, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
+Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -34,7 +34,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noPrim,
 	_->_v = 0.0;
 	_->_t = 0;
 
-	_->_mesh = meshMk(vtc, noVtc, idc, noPrim);
+	_->_mesh = meshMk(vtc, noPrim * 3, idc, noPrim);
 
 	// matrix
 	_->_model = glm::mat4(1.0);
@@ -81,7 +81,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noPrim,
 		}
 	}
 
-	util::mesh::bound(_->_rng, vtc, noVtc);
+	util::mesh::bound(_->_rng, vtc, noPrim * 3);
 
 	// rig
 	objAcc(_, glm::mat4(1.0));
@@ -89,7 +89,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noPrim,
 	return _;
 }
 
-Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noPrim, std::string vtx, std::string frag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
+Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, std::string frag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -102,7 +102,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noPrim,
 	_->_v = 0.0;
 	_->_t = 0;
 
-	_->_mesh = meshMk(vtc, noVtc, idc, noPrim);
+	_->_mesh = meshMk(vtc, noPrim * 3, idc, noPrim);
 
 	// matrix
 	_->_model = glm::mat4(1.0);
@@ -149,7 +149,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noPrim,
 		}
 	}
 
-	util::mesh::bound(_->_rng, vtc, noVtc);
+	util::mesh::bound(_->_rng, vtc, noPrim * 3);
 
 	// rig
 	objAcc(_, glm::mat4(1.0));
@@ -161,7 +161,7 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm
 	std::vector<GLfloat> vtc = util::mesh::rd::vtc(name);
 	std::vector<GLushort> idc = util::mesh::rd::idc(name, 0);
 
-	Obj* _ = objMk(&vtc[0], vtc.size(), &idc[0], idc.size(), vtx, frag, active, loc, rot);
+	Obj* _ = objMk(&vtc[0], &idc[0], idc.size(), vtx, frag, active, loc, rot);
 
 	return _;
 }
@@ -170,13 +170,13 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj
 	std::vector<GLfloat> vtc = util::mesh::rd::vtc(name);
 	std::vector<GLushort> idc = util::mesh::rd::idc(name, 0);
 
-	Obj* _ = objMk(&vtc[0], vtc.size(), &idc[0], idc.size(), vtx, frag, active, child, noChild, loc, rot);
+	Obj* _ = objMk(&vtc[0], &idc[0], idc.size(), vtx, frag, active, child, noChild, loc, rot);
 
 	return _;
 }
 
-Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLfloat* st, unsigned int noSt, GLushort* idc, unsigned int noPrim, std::string vtx, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
-	Obj* _ = objMk(vtc, noVtc, idc, noPrim, vtx, frag, active, loc, rot);
+Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::string vtx, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
+	Obj* _ = objMk(vtc, idc, noPrim, vtx, frag, active, loc, rot);
 
 	// texture
 	int
@@ -201,7 +201,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLfloat* st, unsigned int noSt, GLu
 
 	glGenBuffers(1, &_->_mesh->_id[Mesh::STBO]);
 	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh->_id[Mesh::STBO]);
-	glBufferData(GL_ARRAY_BUFFER, noSt * sizeof (GLfloat), st, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, noPrim * 2 * sizeof (GLfloat), st, GL_STATIC_DRAW);
 
 	glBindVertexArray(0);
 
@@ -218,8 +218,8 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLfloat* st, unsigned int noSt, GLu
 	return _;
 }
 
-Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLfloat* st, unsigned int noSt, GLushort* idc, unsigned int noPrim, std::string vtx, std::string frag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
-	Obj* _ = objMk(vtc, noVtc, idc, noPrim, vtx, frag, active, child, noChild, loc, rot);
+Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::string vtx, std::string frag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
+	Obj* _ = objMk(vtc, idc, noPrim, vtx, frag, active, child, noChild, loc, rot);
 
 	// texture
 	int
@@ -244,7 +244,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLfloat* st, unsigned int noSt, GLu
 
 	glGenBuffers(1, &_->_mesh->_id[Mesh::STBO]);
 	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh->_id[Mesh::STBO]);
-	glBufferData(GL_ARRAY_BUFFER, noSt * sizeof (GLfloat), st, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, noPrim * 2 * sizeof (GLfloat), st, GL_STATIC_DRAW);
 
 	glBindVertexArray(0);
 
@@ -261,7 +261,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLfloat* st, unsigned int noSt, GLu
 	return _;
 }
 
-Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noPrim, std::string vtx, std::string geom, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
+Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, std::string geom, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -271,7 +271,7 @@ Obj* objMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noPrim,
 	_->_v = 0.0;
 	_->_t = 0;
 
-	_->_mesh = meshMk(vtc, noVtc, idc, noPrim);
+	_->_mesh = meshMk(vtc, noPrim * 3, idc, noPrim);
 
 	// matrix
 	_->_model = glm::mat4(1.0);

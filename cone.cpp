@@ -23,7 +23,7 @@ Cone* coneMk(GLfloat init[2][2], glm::vec3 loc, glm::vec3 rot) {
 		}
 	}
 
-	Obj* bound = ptMk(_->_vtx, 3, _->_idx, 1, "main", "bevel/main", "alert", true, glm::vec3(0.0, 1.408, 0.0));
+	Obj* bound = ptMk(_->_vtx, _->_idx, 1, "main", "bevel/main", "alert", true, glm::vec3(0.0, 1.408, 0.0));
 
 	Obj* child[] = {
 		bound

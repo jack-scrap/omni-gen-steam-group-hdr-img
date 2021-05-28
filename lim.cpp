@@ -26,7 +26,7 @@ Lim* limMk(unsigned int axis, GLfloat val) {
 		}
 	}
 
-	_->_parent = lineMk((GLfloat*) vtc, 2 * 3, Lim::_idc, 2, "main", "thick", "solid", true);
+	_->_parent = lineMk((GLfloat*) vtc, Lim::_idc, 2, "main", "thick", "solid", true);
 
 	return _;
 }

@@ -778,7 +778,7 @@ std::vector<Obj*> util::json::path(nlohmann::json deser, nlohmann::json node) {
 					0, 1
 				};
 
-				_.push_back(lineMk((GLfloat*) vtc, 2 * 3, idc, 2, "main", "thick", "solid", true));
+				_.push_back(lineMk((GLfloat*) vtc, idc, 2, "main", "thick", "solid", true));
 
 				break;
 			}
@@ -801,7 +801,7 @@ std::vector<Obj*> util::json::path(nlohmann::json deser, nlohmann::json node) {
 						0, 1
 					};
 
-					_.push_back(lineMk((GLfloat*) vtc, 2 * 3, idc, 2, "obj", "thick", "solid", true));
+					_.push_back(lineMk((GLfloat*) vtc, idc, 2, "obj", "thick", "solid", true));
 				}
 
 				break;

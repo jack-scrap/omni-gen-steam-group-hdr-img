@@ -68,7 +68,7 @@ Crane* craneMk(char init, glm::vec3 loc, glm::vec3 rot) {
 	i = 0;
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < 2; x++) {
-			child[1 + 1 + (2 * 2 * 2 * 2) + i] = objMk(&rect[0], 2 * 2 * 3, &strip[0], 3 * 2, "obj", "alert", false, glm::vec3((x ? 1 : -1) * (6.0 + (layout::pad * 2)), 1.74, (z ? 1 : -1) * 10.0), glm::vec3(0.0, M_PI / 2, 0.0));
+			child[1 + 1 + (2 * 2 * 2 * 2) + i] = objMk(&rect[0], &strip[0], 3 * 2, "obj", "alert", false, glm::vec3((x ? 1 : -1) * (6.0 + (layout::pad * 2)), 1.74, (z ? 1 : -1) * 10.0), glm::vec3(0.0, M_PI / 2, 0.0));
 
 			i++;
 		}

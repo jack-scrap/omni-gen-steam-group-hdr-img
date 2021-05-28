@@ -6,8 +6,8 @@
 #include "obj.h"
 #include "scn.h"
 
-Obj* lineMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noPrim, std::string nameVtx, std::string nameGeom, std::string nameFrag, bool active, glm::vec3 loc, glm::vec3 rot) {
-	return objMk(vtc, noVtc, idc, noPrim, nameVtx, nameGeom, nameFrag, active, loc, rot);
+Obj* lineMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string nameVtx, std::string nameGeom, std::string nameFrag, bool active, glm::vec3 loc, glm::vec3 rot) {
+	return objMk(vtc, idc, noPrim, nameVtx, nameGeom, nameFrag, active, loc, rot);
 }
 
 void lineDraw(Obj* line) {
