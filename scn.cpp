@@ -274,10 +274,18 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	// prop
-	for (const nlohmann::json::object_t& entry : deser["prop"]) {
+	for (const nlohmann::json::object_t& entry : deser["prop"]["static"]) {
 		Obj* _ = util::json::prop(entry);
 
 		obj.push_back(_);
+	}
+
+	for (nlohmann::json::object_t entry : deser["prop"]["dyna"]) {
+		if (entry["name"] == "i_beam") {
+			Obj* _ = iBeamMk();
+
+			line.push_back(_);
+		}
 	}
 
 	// bound
@@ -331,8 +339,4 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 		obj.push_back(_->_parent);
 	}
-
-	Obj* _ = iBeamMk();
-
-	line.push_back(_);
 }

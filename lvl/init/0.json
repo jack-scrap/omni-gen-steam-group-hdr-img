@@ -25,5 +25,17 @@
 				}
 			}
 		]
+	},
+	"prop": {
+		"static": [
+			{
+				"name": "container_2x4"
+			}
+		],
+		"dyna": [
+			{
+				"name": "i_beam"
+			}
+		]
 	}
 }
