@@ -365,5 +365,16 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 	Obj* _ = lineMk((GLfloat*) vtc, sizeof vtc / sizeof (GLfloat), (GLushort*) idc, sizeof idc / sizeof (GLushort), "main", "beam", "dir", false);
 
+	_->_prog.use();
+
+	GLint
+		uniAxis = glGetUniformLocation(_->_prog._id, "axis"),
+		uniLn = glGetUniformLocation(_->_prog._id, "ln");
+
+	glUniform1ui(uniAxis, X);
+	glUniform1f(uniLn, 3.0);
+
+	_->_prog.unUse();
+
 	line.push_back(_);
 }
