@@ -20,6 +20,7 @@
 #include "dict.h"
 #include "street_light.h"
 #include "road.h"
+#include "i_beam.h"
 
 Var** data;
 Var** goal;
@@ -331,50 +332,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		obj.push_back(_->_parent);
 	}
 
-	GLfloat vtc[3][2][3] = {
-		{
-			{
-				0.0, -1.0, -1.0
-			}, {
-				0.0, -1.0, 1.0
-			}
-		}, {
-			{
-				0.0, 1.0, -1.0
-			}, {
-				0.0, 1.0, 1.0
-			}
-		}, {
-			{
-				0.0, -1.0, 0.0
-			}, {
-				0.0, 1.0, 0.0
-			}
-		}
-	};
-
-	GLushort idc[3][2] = {
-		{
-			0, 1
-		}, {
-			2, 3
-		}, {
-			4, 5
-		}
-	};
-
-	Obj* _ = lineMk((GLfloat*) vtc, sizeof vtc / sizeof (GLfloat), (GLushort*) idc, sizeof idc / sizeof (GLushort), "main", "beam", "dir", false);
-
-	_->_prog.use();
-
-	GLint
-		uniAxis = glGetUniformLocation(_->_prog._id, "axis"),
-		uniLn = glGetUniformLocation(_->_prog._id, "ln");
-
-	glUniform1ui(uniAxis, X);
-	glUniform1f(uniLn, 3.0);
-
-	_->_prog.unUse();
+	Obj* _ = iBeamMk();
 
 	line.push_back(_);
 }
