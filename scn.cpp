@@ -330,4 +330,40 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 		obj.push_back(_->_parent);
 	}
+
+	GLfloat vtc[3][2][3] = {
+		{
+			{
+				0.0, -1.0, -1.0
+			}, {
+				0.0, -1.0, 1.0
+			}
+		}, {
+			{
+				0.0, 1.0, -1.0
+			}, {
+				0.0, 1.0, 1.0
+			}
+		}, {
+			{
+				0.0, -1.0, 0.0
+			}, {
+				0.0, 1.0, 0.0
+			}
+		}
+	};
+
+	GLushort idc[3][2] = {
+		{
+			0, 1
+		}, {
+			2, 3
+		}, {
+			4, 5
+		}
+	};
+
+	Obj* _ = lineMk((GLfloat*) vtc, sizeof vtc / sizeof (GLfloat), (GLushort*) idc, sizeof idc / sizeof (GLushort), "main", "beam", "dir", false);
+
+	line.push_back(_);
 }
