@@ -17,6 +17,8 @@ typedef struct Truck {
 		M_PI / 2
 	};
 
+	GLfloat _speed = 0.3;
+
 	Obj* _parent;
 
 	static GLfloat _vtx[3];

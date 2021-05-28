@@ -18,7 +18,7 @@ typedef struct Crane {
 		13.8
 	};
 
-	static constexpr GLfloat _speed = 0.1;
+	GLfloat _speed = 0.2;
 
 	Obj* _parent;
 

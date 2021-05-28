@@ -13,6 +13,8 @@ typedef struct CargoShip {
 	GLfloat _vtc[2 * 2 * 3];
 	GLushort _idc[2 * 2];
 
+	GLfloat _speed = 0.1;
+
 	Obj* _parent;
 } CargoShip;
 
