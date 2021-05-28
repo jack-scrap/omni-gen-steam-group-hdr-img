@@ -333,7 +333,7 @@ glm::mat4 util::matr::rot(glm::mat4 model, glm::vec3 rot) {
 	return model * glm::mat4_cast(quat);
 }
 
-glm::vec3 apply(glm::vec3 vtx, glm::mat4 model) {
+glm::vec3 util::matr::apply(glm::vec3 vtx, glm::mat4 model) {
 	return glm::vec3(model * glm::vec4(glm::vec3(0.0), 1.0));
 }
 
@@ -344,7 +344,7 @@ bool util::phys::aabb(Obj* p, Obj* q) {
 }
 
 bool util::phys::aabbGround(Obj* obj) {
-	glm::vec3 bottom = apply(glm::vec3(0.0, obj->_rng[Y][MIN], 0.0), obj->_acc);
+	glm::vec3 bottom = util::matr::apply(glm::vec3(0.0, obj->_rng[Y][MIN], 0.0), obj->_acc);
 
 	return bottom[Y] < 0.0;
 }
@@ -1131,26 +1131,4 @@ GLuint util::tex::spray(char c) {
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	return cbo;
-}
-
-bool euclid(nlohmann::json deser, unsigned int sz) {
-	bool _;
-
-	if (sz > 3) {
-		_ = false;
-	} else {
-		switch (deser[0].type()) {
-			case nlohmann::json::value_t::number_integer:
-				_ = true;
-
-				break;
-
-			case nlohmann::json::value_t::array:
-				_ = euclid(deser[0], sz + 1);
-
-				break;
-		}
-	}
-
-	return _;
 }
