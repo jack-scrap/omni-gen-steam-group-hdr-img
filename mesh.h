@@ -18,4 +18,4 @@ typedef struct Mesh {
 	};
 } Mesh;
 
-Mesh* meshMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noidc);
+Mesh* meshMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noPrim);
