@@ -34,20 +34,21 @@
 
 # Vehicles
 ## Crane
+`._data` - Data
 `._loc` - Location
 
 ### Navigation
 `.zoom(delta)` - Move forward, back
-`.pan(delta)` -  Translate head left and right
-`.ped(delta)` -  Translate head up and down
+`.pan(delta)` -  Move head left and right
+`.ped(delta)` -  Move head up and down
 
-`.grab()` - Grab container
+`.grab()` - Grab, insert container
 
 ## Truck
 This allows for complete freedom of movement without being restricted to an axis.
 
-`._loc` - Location
 `._data` - Data
+`._loc` - Location
 
 ### Navigation
 `.mv(delta)` -   Move forward, back
@@ -57,8 +58,8 @@ This allows for complete freedom of movement without being restricted to an axis
 ## Ship
 `zoom(delta)` - Move forward, back
 
-`._loc` -  Location
 `._data` - Data
+`._loc` -  Location
 
 # Data
 Data sets can be accessed by key.
