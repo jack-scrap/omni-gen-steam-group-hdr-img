@@ -167,7 +167,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			if (entry.contains("data")) {
 				init = util::json::byte(entry["data"]);
 			} else {
-				init = 0;
+				init = NULL;
 			}
 
 			Crane* _ = craneMk(init, loc, rot);
