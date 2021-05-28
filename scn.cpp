@@ -233,11 +233,15 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	Scope init = util::json::scope(deser["data"]);
 	data = init._ptr;
 
-	type = init._type;
-
 	// desired
 	Scope desired = util::json::scope(deser["goal"]);
 	goal = desired._ptr;
+
+	for (int i = 0; i < init._no; i++) {
+		omni::assertion(init._type[i] == desired._type[i], std::string("Data `") + data[i]->_id + std::string("` not comparable"));
+	}
+
+	type = init._type;
 
 	for (int i = 0; i < noData; i++) {
 		Obj* _;
