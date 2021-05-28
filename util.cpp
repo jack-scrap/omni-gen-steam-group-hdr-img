@@ -552,6 +552,8 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val) {
 
 			Idx* idx = idxMk(0, &init, 1, key, loc, rot);
 
+			omni::assertion(!(util::phys::aabbGround(idx->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
+
 			_ = varMk(id, idx);
 
 			break;
@@ -565,6 +567,8 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val) {
 					CBuff init = util::json::arr::arr(val["block"]);
 
 					Arr* val = arrMk((char*) init._ptr, init._x, key, loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
+
+					omni::assertion(!(util::phys::aabbGround(val->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
 					_ = varMk(id, val);
 
@@ -580,6 +584,8 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val) {
 
 							Arr* val = arrMk((char*) init._ptr, init._x, init._y, key, loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
 
+							omni::assertion(!(util::phys::aabbGround(val->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
+
 							_ = varMk(id, val);
 
 							break;
@@ -590,6 +596,8 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val) {
 							CBuff init = util::json::arr::matr3(val["block"]);
 
 							Arr* val = arrMk((char*) init._ptr, init._x, init._y, init._z, key, loc, rot);
+
+							omni::assertion(!(util::phys::aabbGround(val->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
 							_ = varMk(id, val);
 
@@ -607,6 +615,8 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val) {
 			CBuff init = util::json::str(val["block"]);
 
 			Arr* val = arrMk((char*) init._ptr, init._x, key, loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
+
+			omni::assertion(!(util::phys::aabbGround(val->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
 			_ = varMk(id, val);
 
