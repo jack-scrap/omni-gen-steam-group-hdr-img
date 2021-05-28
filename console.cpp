@@ -110,12 +110,12 @@ Console::Console(std::string cwd, std::string name, std::vector<std::string> buf
 		}
 
 		/* data */
-		glGenVertexArrays(1, &_id[Mesh::VAO]);
-		glBindVertexArray(_id[Mesh::VAO]);
+		glGenVertexArrays(1, &_id[Console::VAO]);
+		glBindVertexArray(_id[Console::VAO]);
 
 		glGenBuffers(2, &_id[1]);
 
-		glBindBuffer(GL_ARRAY_BUFFER, _id[Mesh::VBO]);
+		glBindBuffer(GL_ARRAY_BUFFER, _id[Console::VBO]);
 		std::vector<GLfloat> pos = util::mesh::plane(glm::vec2(abs(-1 - 1), -1 - 1));
 		glBufferData(GL_ARRAY_BUFFER, pos.size() * sizeof (GLfloat), &pos[0], GL_STATIC_DRAW);
 
@@ -126,12 +126,12 @@ Console::Console(std::string cwd, std::string name, std::vector<std::string> buf
 		_prog.use();
 
 		// attribute
-		glBindBuffer(GL_ARRAY_BUFFER, _id[Mesh::VBO]);
+		glBindBuffer(GL_ARRAY_BUFFER, _id[Console::VBO]);
 		_attr[Console::POS] = glGetAttribLocation(_prog._id, "pos");
 		glVertexAttribPointer(_attr[POS], 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 		glEnableVertexAttribArray(_attr[POS]);
 
-		glBindBuffer(GL_ARRAY_BUFFER, _id[2]);
+		glBindBuffer(GL_ARRAY_BUFFER, _id[Console::STBO]);
 		_attr[Console::ST] = glGetAttribLocation(_prog._id, "st");
 		glVertexAttribPointer(_attr[ST], 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 		glEnableVertexAttribArray(_attr[ST]);
@@ -452,7 +452,7 @@ void Console::pop() {
 }
 
 void Console::draw() {
-	glBindVertexArray(_id[Mesh::VAO]);
+	glBindVertexArray(_id[Console::VAO]);
 	_prog.use();
 
 	glBindTexture(GL_TEXTURE_2D, _tex);

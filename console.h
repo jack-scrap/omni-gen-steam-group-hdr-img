@@ -81,6 +81,14 @@ class Console {
 			PROMPT
 		};
 
+		enum id {
+			VAO,
+
+			VBO,
+
+			STBO
+		};
+
 		enum attr {
 			POS,
 			ST
