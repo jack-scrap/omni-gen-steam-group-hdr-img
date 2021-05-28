@@ -11,10 +11,19 @@ uniform mat4
 
 float pad = 0.16;
 
+vec2 norm(vec2 vec) {
+	return normalize(vec2(-vec.y, vec.x));
+}
+
 void main() {
+	vec2 orth = norm(gl_in[1].gl_Position.xz - gl_in[0].gl_Position.xy);
+
 	for	(int i = 0; i < 2; i++) {
 		for	(int b = 0; b < 2; b++) {
-			gl_Position = proj * view * model * vec4(gl_in[i].gl_Position.xyz + vec3(0.0, 0.0, b * pad * 2), 1.0);
+			gl_Position = proj * view * model * vec4(
+				gl_in[i].gl_Position.xyz + (b * vec3(orth.x, 0.0, orth.y) * pad * 2),
+				1.0
+			);
 
 			EmitVertex();
 		}
