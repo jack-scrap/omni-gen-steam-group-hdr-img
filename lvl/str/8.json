@@ -1,0 +1,41 @@
+{
+	"data": {
+		"str": {
+			"block": "                     "
+		},
+		"sub": {
+			"block": [
+				"Text",
+				"Other text"
+			]
+		}
+	},
+	"goal": {
+		"str": {
+			"block": "Text Other text"
+		},
+		"sub": {
+			"block": [
+				"    ",
+				"          "
+			]
+		}
+	},
+	"vehicle": [
+		{
+			"name": "crane"
+		}
+	],
+	"bound": {
+		"rng": [
+			{
+				"min": {
+					"Z": -11.6
+				},
+				"max": {
+					"Z": 11.6
+				}
+			}
+		]
+	}
+}
