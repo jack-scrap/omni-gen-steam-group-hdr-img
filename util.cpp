@@ -396,6 +396,12 @@ char util::json::byte(nlohmann::json deser) {
 	return (char) ((int) deser);
 }
 
+bool util::json::ascii(nlohmann::json deser) {
+	return
+		deser >= 0 &&
+		deser <= 127;
+}
+
 CBuff util::json::arr::dim(nlohmann::json deser, CBuff buff, int i) {
 	switch (i) {
 		case 0:

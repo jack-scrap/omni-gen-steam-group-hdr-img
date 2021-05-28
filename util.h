@@ -86,6 +86,8 @@ namespace util {
 
 		char byte(nlohmann::json deser);
 
+		bool ascii(nlohmann::json deser);
+
 		Var* var(nlohmann::json key, nlohmann::json val);
 
 		Scope scope(nlohmann::json deser);
