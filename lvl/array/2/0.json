@@ -1,12 +1,30 @@
 {
 	"data": {
 		"state": {
-			"block": "asfd"
+			"block": [
+				[
+					1,
+					0
+				],
+				[
+					1,
+					0
+				]
+			]
 		}
 	},
 	"goal": {
 		"state": {
-			"block": "asdf"
+			"block": [
+				[
+					0,
+					1
+				],
+				[
+					0,
+					1
+				]
+			]
 		}
 	},
 	"vehicle": [
