@@ -344,9 +344,9 @@ bool util::phys::aabb(Obj* p, Obj* q) {
 }
 
 bool util::phys::aabbGround(Obj* obj) {
-	bool _ = false;
+	glm::vec3 bottom = apply(glm::vec3(0.0, obj->_rng[Y][MIN], 0.0), obj->_acc);
 
-	return _;
+	return bottom[Y] < 0.0;
 }
 
 std::vector<std::string> util::str::split(std::string buff, char delim) {
