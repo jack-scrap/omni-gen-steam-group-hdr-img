@@ -13,6 +13,7 @@ typedef struct Cone {
 	Obj* _parent;
 
 	static GLfloat _vtx[3];
+	static GLushort _idx[1];
 } Cone;
 
 Cone* coneMk(GLfloat init[2][2], glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
