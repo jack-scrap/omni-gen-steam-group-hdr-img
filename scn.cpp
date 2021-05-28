@@ -163,7 +163,16 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		}
 
 		if (entry["name"] == "crane") {
-			Crane* _ = craneMk(nullptr, loc, rot);
+			char init;
+			char* ptr;
+			if (entry.contains("data")) {
+				init = util::json::byte(entry["data"]);
+				ptr = &init;
+			} else {
+				ptr = nullptr;
+			}
+
+			Crane* _ = craneMk(ptr, loc, rot);
 
 			crane._sz += sizeof (Crane*);
 			crane._ptr = (Crane**) realloc(crane._ptr, crane._sz);
