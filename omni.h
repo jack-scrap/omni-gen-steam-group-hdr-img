@@ -24,17 +24,17 @@ namespace omni {
 			"dict"
 		}, {
 			4,
-			"ctrl_flow"
+			"matrix"
 		}, {
 			5,
-			"thread"
+			"ctrl_flow"
 		}, {
 			6,
 			"path"
 		}, {
 			7,
-			"matrix"
-		}
+			"thread"
+		},
 	};
 
 	static std::vector<std::string> lib = {
