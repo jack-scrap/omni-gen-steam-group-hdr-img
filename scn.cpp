@@ -172,6 +172,8 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 			Crane* _ = craneMk(init, loc, rot);
 
+			omni::assertion(!util::phys::aabbGround(_->_parent), "Crane clipping into ground plane");
+
 			crane._sz += sizeof (Crane*);
 			crane._ptr = (Crane**) realloc(crane._ptr, crane._sz);
 			((Crane**) crane._ptr)[crane._sz - sizeof (Crane*)] = _;
@@ -183,6 +185,8 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			CBuff init = util::json::arr::arr(entry["data"]);
 
 			CargoShip* _ = cargoShipMk((char*) init._ptr, loc, rot);
+
+			omni::assertion(!util::phys::aabbGround(_->_parent), "Cargo ship clipping into ground plane");
 
 			cargoShip._sz += sizeof (CargoShip*);
 			cargoShip._ptr = (CargoShip**) realloc(cargoShip._ptr, cargoShip._sz);
@@ -203,6 +207,8 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 			}
 
 			Truck* _ = truckMk((char*) init._ptr, init._x, loc, rot);
+
+			omni::assertion(!util::phys::aabbGround(_->_parent), "Truck clipping into ground plane");
 
 			truck._sz += sizeof (Truck*);
 			truck._ptr = (Truck**) realloc(truck._ptr, truck._sz);
