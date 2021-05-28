@@ -14,4 +14,4 @@ typedef struct {
 	};
 } Road;
 
-Road* roadMk(GLfloat* vtc, bool pass, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
+Road* roadMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, bool pass, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));

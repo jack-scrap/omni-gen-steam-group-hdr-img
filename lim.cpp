@@ -22,6 +22,10 @@ Lim* limMk(unsigned int axis, GLfloat val) {
 		}
 	}
 
+	GLushort idc[2] = {
+		0, 1
+	};
+
 	glm::vec3 loc = glm::vec3(0.0);
 	glm::vec3 rot = glm::vec3(0.0);
 
@@ -39,7 +43,7 @@ Lim* limMk(unsigned int axis, GLfloat val) {
 			break;
 	}
 
-	_->_parent = lineMk(vtc, "main", "thick", "solid", true, loc, rot);
+	_->_parent = lineMk(vtc, 2 * 3, idc, 2, "main", "thick", "solid", true, loc, rot);
 
 	return _;
 }

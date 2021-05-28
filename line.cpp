@@ -6,12 +6,8 @@
 #include "obj.h"
 #include "scn.h"
 
-GLushort Line::_idc[2] = {
-	0, 1
-};
-
-Obj* lineMk(GLfloat* vtc, std::string nameVtx, std::string nameGeom, std::string nameFrag, bool active, glm::vec3 loc, glm::vec3 rot) {
-	return objMk(vtc, 2 * 3, Line::_idc, 2, nameVtx, nameGeom, nameFrag, active, loc, rot);
+Obj* lineMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noIdc, std::string nameVtx, std::string nameGeom, std::string nameFrag, bool active, glm::vec3 loc, glm::vec3 rot) {
+	return objMk(vtc, noVtc, idc, noIdc, nameVtx, nameGeom, nameFrag, active, loc, rot);
 }
 
 void lineDraw(Obj* line) {
@@ -28,7 +24,7 @@ void lineDraw(Obj* line) {
 
 	glUniform1ui(line->_uni[Obj::ACTIVE], line->_active);
 
-	glDrawElements(GL_LINES, 2, GL_UNSIGNED_SHORT, (GLvoid*) 0);
+	glDrawElements(GL_LINES, line->_mesh->_noIdc, GL_UNSIGNED_SHORT, (GLvoid*) 0);
 
 	line->_prog.unUse();
 	glBindVertexArray(0);
