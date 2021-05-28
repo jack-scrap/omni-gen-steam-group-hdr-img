@@ -1,0 +1,48 @@
+{
+	"data": {
+		"state": {
+			"block": 3
+		},
+		"other_state": {
+			"block": 3,
+			"loc": [0.0, 0.0, -25.12]
+		}
+	},
+	"goal": {
+		"state": {
+			"block": 3
+		},
+		"other_state": {
+			"block": 3
+		}
+	},
+	"vehicle": [
+		{
+			"name": "crane"
+		},
+		{
+			"name": "crane",
+			"loc": [0.0, 0.0, -25.12]
+		}
+	],
+	"bound": {
+		"rng": [
+			{
+				"min": {
+					"Z": -11.6
+				},
+				"max": {
+					"Z": 11.6
+				}
+			},
+			{
+				"min": {
+					"Z": 12.24
+				},
+				"max": {
+					"Z": 35.44
+				}
+			}
+		]
+	}
+}
