@@ -3,7 +3,7 @@
 #include <GL/glew.h>
 
 typedef struct Mesh {
-	GLuint _id[4];
+	GLuint _id[3];
 
 	unsigned int _noPrim;
 
@@ -11,9 +11,10 @@ typedef struct Mesh {
 		VAO,
 
 		VBO,
-		STBO,
 
-		IBO
+		IBO,
+
+		STBO
 	};
 } Mesh;
 
