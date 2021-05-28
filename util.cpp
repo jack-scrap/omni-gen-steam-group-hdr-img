@@ -751,6 +751,8 @@ StreetLight* util::json::streetLight(nlohmann::json deser) {
 
 	StreetLight* _ = streetLightMk(arr, sizeof arr / sizeof *arr);
 
+	omni::assertion(!util::phys::aabbGround(_->_parent), "Street light clipping into ground plane");
+
 	return _;
 }
 
@@ -843,6 +845,8 @@ Lim* util::json::bound::lim(nlohmann::json key, nlohmann::json val) {
 
 	Lim* _ = limMk(axis, val);
 
+	omni::assertion(!util::phys::aabbGround(_->_parent), "Limit clipping into ground plane");
+
 	return _;
 }
 
@@ -860,6 +864,8 @@ Cone* util::json::bound::area(nlohmann::json deser) {
 	}
 
 	Cone* _ = coneMk(init, loc);
+
+	omni::assertion(!util::phys::aabbGround(_->_parent), "Cone clipping into ground plane");
 
 	return _;
 }
