@@ -2,7 +2,7 @@
 
 layout (lines) in;
 
-layout (triangle_strip, max_vertices = 32) out;
+layout (triangle_strip, max_vertices = 24) out;
 
 out vec3 _pos;
 
@@ -63,23 +63,6 @@ void main() {
 			_pos = gl_Position.xyz;
 
 			EmitVertex();
-		}
-
-		EndPrimitive();
-	}
-
-	// X
-	for (int b = 0; b < 2; b++) {
-		for (int y = 0; y < 2; y++) {
-			for (int x = 0; x < 2; x++) {
-				gl_Position = proj * view * model * vec4(
-					vtc[(b * 2) + (y * 2 * 2) + x],
-					1.0
-				);
-				_pos = gl_Position.xyz;
-
-				EmitVertex();
-			}
 		}
 
 		EndPrimitive();
