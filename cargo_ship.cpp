@@ -24,16 +24,13 @@ CargoShip* cargoShipMk(char* init, glm::vec3 loc, glm::vec3 rot) {
 	};
 
 	// data
-	GLfloat vtc[2 * 2 * 3];
+	GLfloat vtc[2 * 2][3];
 
-	int i = 0;
 	for (int y = 0; y < 2; y++) {
 		for (int x = 0; x < 2; x++) {
-			vtc[i] = x * sz[X];
-			vtc[i + 1] = 0.0;
-			vtc[i + 2] = y * sz[Y];
-
-			i += 3;
+			vtc[(y * 2) + x][0] = x * sz[X];
+			vtc[(y * 2) + x][1] = 0.0;
+			vtc[(y * 2) + x][2] = y * sz[Y];
 		}
 	}
 
@@ -51,7 +48,7 @@ CargoShip* cargoShipMk(char* init, glm::vec3 loc, glm::vec3 rot) {
 
 	Obj* child[2];
 
-	child[0] = objMk(vtc, idc, 2 * 3, "obj", "solid", false, glm::vec3(-(sz[X] / 2), 0.0, -(sz[Y] / 2)));
+	child[0] = objMk((GLfloat*) vtc, idc, 2 * 3, "obj", "solid", false, glm::vec3(-(sz[X] / 2), 0.0, -(sz[Y] / 2)));
 
 	child[1] = _->_data->_parent;
 
