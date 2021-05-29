@@ -15,12 +15,12 @@ GLushort Truck::_idx[1] = {
 	0
 };
 
-Truck* truckMk(char* init, unsigned int no, glm::vec3 loc, glm::vec3 rot) {
+Truck* truckMk(CArr init, glm::vec3 loc, glm::vec3 rot) {
 	Truck* _ = (Truck*) malloc(sizeof (Truck));
 
 	_->_ang = 0.0;
 
-	unsigned int w = no * 2;
+	unsigned int w = init._sz * 2;
 
 	Obj* child[4 + (w * 2)];
 
@@ -31,7 +31,7 @@ Truck* truckMk(char* init, unsigned int no, glm::vec3 loc, glm::vec3 rot) {
 
 	_->_uni[Truck::SZ_BED] = glGetUniformLocation(bed->_prog._id, "sz");
 
-	glUniform1ui(_->_uni[Truck::SZ_BED], no);
+	glUniform1ui(_->_uni[Truck::SZ_BED], init._sz);
 
 	bed->_prog.unUse();
 
@@ -41,17 +41,17 @@ Truck* truckMk(char* init, unsigned int no, glm::vec3 loc, glm::vec3 rot) {
 
 	_->_uni[Truck::SZ_OUTER] = glGetUniformLocation(outer->_prog._id, "sz");
 
-	glUniform1ui(_->_uni[Truck::SZ_OUTER], no);
+	glUniform1ui(_->_uni[Truck::SZ_OUTER], init._sz);
 
 	outer->_prog.unUse();
 
 	child[0] = bed;
 	child[1] = outer;
 
-	child[2] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-(no * layout::idx[Z]) - (layout::stroke * 2), -layout::stroke, 0.0), rot);
+	child[2] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-(init._sz * layout::idx[Z]) - (layout::stroke * 2), -layout::stroke, 0.0), rot);
 
 	// data
-	_->_data = arrMk(init, no, "", glm::vec3(0.0, layout::pad * 2, -((layout::idx[X] / 2) + (layout::stroke * 2) + (layout::margin * 2 * 2))), glm::vec3(0.0, -M_PI / 2, 0.0));
+	_->_data = arrMk((char*) init._ptr, init._sz, "", glm::vec3(0.0, layout::pad * 2, -((layout::idx[X] / 2) + (layout::stroke * 2) + (layout::margin * 2 * 2))), glm::vec3(0.0, -M_PI / 2, 0.0));
 
 	child[3] = _->_data->_parent;
 

@@ -5,6 +5,7 @@
 #include "obj.h"
 #include "pt.h"
 #include "arr.h"
+#include "c_buff.h"
 
 typedef struct Truck {
 	Arr* _data;
@@ -37,7 +38,10 @@ typedef struct Truck {
 	};
 } Truck;
 
-Truck* truckMk(char* init, unsigned int no, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
+Truck* truckMk(CArr init = {
+	nullptr,
+	0
+}, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
 
 extern "C" void truckTurn(Truck* truck, float delta);
 
