@@ -7,9 +7,15 @@
 typedef struct {
 	char _c;
 
-	GLuint _tex;
+	GLuint
+		_id[1],
+		_tex;
 
 	Obj* _parent;
+
+	enum id {
+		ST
+	};
 } Cont;
 
 Cont* contMk(char c, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
