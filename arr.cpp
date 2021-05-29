@@ -154,18 +154,28 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, unsigned int z, std::stri
 
 	Idx* idx;
 	glm::vec3 overhead = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2);
-	glm::vec3 offset = overhead;
 
-	char* asdf = (char*) malloc(3 * sizeof (char));
-	asdf[0] = 'T';
-	asdf[1] = 'e';
-	asdf[2] = 'x';
-	idx = idxMk(0, asdf, 3, "", offset);
+	int i = 0;
+	for (int x = 0; x < 3; x++) {
+		glm::vec3 offset = overhead + glm::vec3(
+			x * (2.0 + (0.16 * 2 * 2 * 2) + (0.16 * 2 * 2) + (0.16 * 2)),
+			0.0,
+			0.0
+		);
 
-	_->_data[0] = idx;
+		char* asdf = (char*) malloc(3 * sizeof (char));
+		asdf[0] = 'T';
+		asdf[1] = 'e';
+		asdf[2] = 'x';
+		idx = idxMk(0, asdf, 3, "", offset);
 
-	noChild++;
-	child[noChild - 1] = _->_data[0]->_parent;
+		_->_data[i] = idx;
+
+		noChild++;
+		child[noChild - 1] = _->_data[i]->_parent;
+
+		i++;
+	}
 
 	// scope
 	glm::vec2 pad = {
