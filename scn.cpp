@@ -187,8 +187,6 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 			CargoShip* _ = cargoShipMk((char*) init._ptr, loc, rot);
 
-			omni::assertion(!util::phys::aabbGround(_->_parent), "Cargo ship clipping into ground plane");
-
 			cargoShip._sz += sizeof (CargoShip*);
 			cargoShip._ptr = (CargoShip**) realloc(cargoShip._ptr, cargoShip._sz);
 			((CargoShip**) cargoShip._ptr)[cargoShip._sz - sizeof (CargoShip*)] = _;
