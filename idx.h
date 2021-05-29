@@ -9,7 +9,7 @@ typedef struct {
 	unsigned int _i;
 
 	Cont* _data;
-	unsigned int _no;
+	unsigned int _sz;
 
 	Obj* _parent;
 } Idx;
