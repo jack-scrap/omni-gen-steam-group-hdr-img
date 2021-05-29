@@ -2,7 +2,7 @@
 #include "line.h"
 #include "lim.h"
 
-Road* roadMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noPrim, bool pass, glm::vec3 loc, glm::vec3 rot) {
+Road* roadMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noPrim, unsigned int pass, glm::vec3 loc, glm::vec3 rot) {
 	Road* _ = (Road*) malloc(sizeof (Road));
 
 	_->_pass = pass;
