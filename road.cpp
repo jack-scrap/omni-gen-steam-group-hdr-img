@@ -1,5 +1,6 @@
 #include "road.h"
 #include "line.h"
+#include "lim.h"
 
 Road* roadMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noPrim, bool pass, glm::vec3 loc, glm::vec3 rot) {
 	Road* _ = (Road*) malloc(sizeof (Road));
@@ -8,17 +9,17 @@ Road* roadMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noPri
 
 	std::string name;
 	switch (_->_pass) {
-		case Road::PASS:
+		case Lim::PASS:
 			name = "solid";
 
 			break;
 
-		case Road::HALT:
+		case Lim::HALT:
 			name = "solid";
 
 			break;
 
-		case Road::ALERT:
+		case Lim::ALERT:
 			name = "alert";
 
 			break;
