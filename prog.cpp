@@ -4,6 +4,7 @@
 
 #include "prog.h"
 #include "util.h"
+#include "omni.h"
 
 Shad::Shad(std::string name, unsigned int stage) {
 	std::string ext;
@@ -41,8 +42,8 @@ Shad::Shad(std::string name, unsigned int stage) {
 	glGetShaderiv(_id, GL_COMPILE_STATUS, &succ);
 	if (!succ) {
 		glGetShaderInfoLog(_id, 512, NULL, err);
-		std::cout << "Error: " << std::endl;
-		std::cout << err << std::endl;
+		omni::err("Shader compilation failed...");
+		omni::err(std::string(err));
 	}
 }
 
