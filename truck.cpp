@@ -45,8 +45,8 @@ Truck* truckMk(CArr init, glm::vec3 loc, glm::vec3 rot) {
 
 	outer->_prog.unUse();
 
-	child[0] = bed;
-	child[1] = outer;
+	child[Truck::BED] = bed;
+	child[Truck::OUTER] = outer;
 
 	child[2] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-(init._sz * layout::idx[Z]) - (layout::stroke * 2), -layout::stroke, 0.0), rot);
 
