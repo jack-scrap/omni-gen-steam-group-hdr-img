@@ -24,12 +24,10 @@ Arr* arrMk(char* init, unsigned int x, std::string name, glm::vec3 loc, glm::vec
 	Obj** child = (Obj**) malloc((1 + (_->_x * _->_y * _->_z)) * sizeof (Obj*));
 	unsigned int noChild = 1;
 
-	glm::vec3 overhead = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2);
-
 	int no = 0;
 	for (int i = 0; i < _->_x; i++) {
 		Idx* idx;
-		glm::vec3 offset = overhead + glm::vec3(i * layout::stride[X], 0.0, 0.0);
+		glm::vec3 offset = glm::vec3(layout::overhead, 0.0, layout::overhead) + glm::vec3(i * layout::stride[X], 0.0, 0.0);
 		if (init[no]) {
 			idx = idxMk(no, &init[no], 1, "", offset);
 		} else {
@@ -91,13 +89,11 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, std::string name, glm::ve
 	// data
 	_->_data = (Idx**) malloc(_->_x * _->_y * _->_z * sizeof (Idx*));
 
-	glm::vec3 overhead = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2);
-
 	int no = 0;
 	for (int j = 0; j < _->_y; j++) {
 		for (int i = 0; i < _->_x; i++) {
 			Idx* idx;
-			glm::vec3 offset = overhead + glm::vec3(i * layout::stride[X], 0.0, j * layout::stride[Z]);
+			glm::vec3 offset = glm::vec3(layout::overhead, 0.0, layout::overhead) + glm::vec3(i * layout::stride[X], 0.0, 0.0);
 			if (init[no]) {
 				idx = idxMk(no, &init[no], 1, "", offset);
 			} else {
@@ -153,11 +149,10 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, unsigned int z, std::stri
 	_->_data = (Idx**) malloc(_->_x * _->_y * _->_z * sizeof (Idx*));
 
 	Idx* idx;
-	glm::vec3 overhead = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2);
 
 	int i = 0;
 	for (int x = 0; x < 3; x++) {
-		glm::vec3 offset = overhead + glm::vec3(
+		glm::vec3 offset = glm::vec3(layout::overhead, 0.0, layout::overhead) + glm::vec3(
 			x * (2.0 + (0.16 * 2 * 2 * 2) + (0.16 * 2 * 2) + (0.16 * 2)),
 			0.0,
 			0.0

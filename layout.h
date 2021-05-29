@@ -27,6 +27,7 @@ namespace layout {
 		stroke = pad * 2,
 
 		offset = stroke + margin,
+		overhead = stroke * 2,
 
 		stride[3] = {
 			idx[X] + (margin * 2) + (margin * 2 * 2) + (stroke * 2),
