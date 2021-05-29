@@ -17,8 +17,8 @@ Arr* arrMk(char* init, unsigned int x, std::string name, glm::vec3 loc, glm::vec
 	// data
 	_->_data = (Idx**) malloc(_->_x * _->_y * _->_z * sizeof (Idx*));
 
-	Obj** child = (Obj**) malloc((1 + (_->_x * _->_y * _->_z)) * sizeof (Obj*));
-	unsigned int noChild = 1;
+	unsigned int noChild = 1 + (_->_x * _->_y * _->_z);
+	Obj** child = (Obj**) malloc(noChild * sizeof (Obj*));
 
 	int no = 0;
 	for (int i = 0; i < _->_x; i++) {
@@ -31,9 +31,7 @@ Arr* arrMk(char* init, unsigned int x, std::string name, glm::vec3 loc, glm::vec
 		}
 
 		_->_data[no] = idx;
-
-		noChild++;
-		child[noChild - 1] = _->_data[no]->_parent;
+		child[1 + no] = _->_data[no]->_parent;
 
 		no++;
 	}
@@ -76,8 +74,8 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, std::string name, glm::ve
 	_->_y = y;
 	_->_z = 1;
 
-	Obj** child = (Obj**) malloc((1 + (_->_x * _->_y * _->_z)) * sizeof (Obj*));
-	unsigned int noChild = 1;
+	unsigned int noChild = 1 + (_->_x * _->_y * _->_z);
+	Obj** child = (Obj**) malloc(noChild * sizeof (Obj*));
 
 	// identifier
 	Str* id = strMk(name, glm::vec3(0.0, 0.0, -(layout::margin * 2)));
@@ -98,9 +96,7 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, std::string name, glm::ve
 			}
 
 			_->_data[no] = idx;
-
-			noChild++;
-			child[noChild -1] = _->_data[no]->_parent;
+			child[1 + no] = _->_data[no]->_parent;
 
 			no++;
 		}
@@ -136,8 +132,8 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, unsigned int z, std::stri
 	_->_y = y;
 	_->_z = z;
 
-	Obj** child = (Obj**) malloc(1 + (_->_x * _->_y * _->_z) * sizeof (Obj*));
-	unsigned int noChild = 1;
+	unsigned int noChild = 1 + (_->_x * _->_y * _->_z);
+	Obj** child = (Obj**) malloc(noChild * sizeof (Obj*));
 
 	// identifier
 	Str* id = strMk(name, glm::vec3(0.0, 0.0, -(layout::margin * 2)));
@@ -164,8 +160,7 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, unsigned int z, std::stri
 
 		_->_data[i] = idx;
 
-		noChild++;
-		child[noChild - 1] = _->_data[i]->_parent;
+		child[1 + i] = _->_data[i]->_parent;
 
 		i++;
 	}
