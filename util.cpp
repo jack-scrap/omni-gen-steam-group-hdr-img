@@ -525,7 +525,10 @@ CBuff util::json::arr::matr3(nlohmann::json deser) {
 	_._y = deser[0].size();
 	_._z = deser.size();
 
-	_._ptr = (char*) malloc(0);
+	_._ptr = (char*) malloc(3 * sizeof (char));
+	for (int i = 0; i < 3; i++) {
+		((char*) _._ptr)[i] = 'a';
+	}
 
 	return _;
 }
@@ -673,7 +676,7 @@ Scope util::json::scope(nlohmann::json deser) {
 
 			// array
 			case nlohmann::json::value_t::array: {
-				omni::assertion(util::json::arr::euclid(pair.value()["block"], 1), std::string("Depth of `") + pair.key() + std::string("` exceeds 3 dimensions"));
+				omni::assertion(util::json::arr::euclid(pair.value()["block"], 0), std::string("Depth of `") + pair.key() + std::string("` exceeds 3 dimensions"));
 
 				switch (pair.value()["block"][0].type()) {
 					// 1D
