@@ -13,6 +13,8 @@ GLushort Cone::_idx[1] = {
 Cone* coneMk(GLfloat init[2][2], glm::vec3 loc, glm::vec3 rot) {
 	Cone* _ = (Cone*) malloc(sizeof (Cone));
 	
+	Obj* child[1];
+
 	for (int i = 0; i < 3; i++) {
 		_->_loc[i] = loc[i];
 	}
@@ -25,9 +27,7 @@ Cone* coneMk(GLfloat init[2][2], glm::vec3 loc, glm::vec3 rot) {
 
 	Obj* bound = ptMk(_->_vtx, _->_idx, 1, "main", "bevel/main", "alert", true, glm::vec3(0.0, 1.408, 0.0));
 
-	Obj* child[] = {
-		bound
-	};
+	child[0] = bound;
 
 	_->_parent = objMk("cone", "obj", "dir", true, child, sizeof child / sizeof *child, loc, rot);
 
