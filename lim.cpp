@@ -17,12 +17,22 @@ Lim* limMk(unsigned int axis, GLfloat val) {
 
 	GLfloat vtc[2][3];
 	for (int b = 0; b < 2; b++) {
-		for (int i = 0; i < 3; i++) {
-			if (i == axis) {
-				vtc[b][i] = (b ? 1 : -1) * 100.0;
-			} else {
-				vtc[b][i] = 0.0;
-			}
+		for (int a = 0; a < 3; a++) {
+			vtc[b][a] = 0.0;
+		}
+
+		switch (axis) {
+			case X:
+				vtc[b][X] = val;
+				vtc[b][Z] = (b ? 1 : -1) * 100.0;
+				
+				break;
+
+			case Z:
+				vtc[b][Z] = val;
+				vtc[b][X] = (b ? 1 : -1) * 100.0;
+
+				break;
 		}
 	}
 
