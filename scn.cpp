@@ -281,9 +281,19 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		obj.push_back(_);
 	}
 
-	for (nlohmann::json::object_t entry : deser["prop"]["dyna"]) {
+	for (nlohmann::json entry : deser["prop"]["dyna"]) {
+		glm::vec3 loc = glm::vec3(0.0);
+		if (entry.contains("loc")) {
+			loc = util::json::vec(entry["loc"]);
+		}
+
+		glm::vec3 rot = glm::vec3(0.0);
+		if (entry.contains("rot")) {
+			rot = util::json::vec(entry["rot"]);
+		}
+
 		if (entry["name"] == "i_beam") {
-			Obj* _ = iBeamMk();
+			Obj* _ = iBeamMk(loc, rot);
 
 			line.push_back(_);
 		}
