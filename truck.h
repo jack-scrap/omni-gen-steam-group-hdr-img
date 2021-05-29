@@ -43,6 +43,8 @@ Truck* truckMk(CArr init = {
 	0
 }, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
 
+void truckAnim(Truck* truck, glm::vec3 loc, glm::vec3 rot);
+
 extern "C" void truckTurn(Truck* truck, float delta);
 
 extern "C" void truckMv(Truck* truck, float delta);

@@ -22,7 +22,7 @@ Truck* truckMk(CArr init, glm::vec3 loc, glm::vec3 rot) {
 
 	unsigned int w = init._sz * 2;
 
-	Obj* child[4 + (w * 2)];
+	Obj* child[4 + (w * 2) + 2];
 
 	// bed
 	Obj* bed = ptMk(Truck::_vtx, Truck::_idx, 1, "main", "bed", "dir", false, glm::vec3(0.0), glm::vec3(0.0, M_PI / 2, 0.0));
@@ -69,6 +69,28 @@ Truck* truckMk(CArr init, glm::vec3 loc, glm::vec3 rot) {
 		}
 	}
 
+	// light
+	GLfloat vtc[2 * 2][3] = {
+		{
+			0.0, -0.3, -0.5
+		}, {
+			0.0, -0.3, 0.5
+		}, {
+			0.0, 0.3, -0.5
+		}, {
+			0.0, 0.3, 0.5
+		}
+	};
+
+	GLushort idc[2 * 3] = {
+		0, 1, 2,
+		2, 1, 3
+	};
+
+	for (int z = 0; z < 2; z++) {
+		child[4 + (w * 2) + z] = objMk((GLfloat*) vtc, idc, 2 * 3, "obj", "alert", false, glm::vec3(-(init._sz * layout::idx[Z]) - (layout::stroke * 2) - layout::stroke - layout::stroke, 0.0, z ? 1 : -1));
+	}
+
 	_->_parent = objMk("truck/front", "obj", "dir", true, child, sizeof child / sizeof *child, loc + glm::vec3(2.4, 1.3, 0.0), rot);
 
 	glm::vec3 offset = _->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
@@ -77,6 +99,29 @@ Truck* truckMk(CArr init, glm::vec3 loc, glm::vec3 rot) {
 	}
 
 	return _;
+}
+
+void truckAnim(Truck* truck, glm::vec3 loc, glm::vec3 rot) {
+	for (int i = 0; i < 2; i++) {
+		truck->_parent->_child[4 + (truck->_data->_x * 2 * 2) + i]->_active = true;
+	}
+
+	objTrans(truck->_parent, loc, rot);
+
+	for (int i = 0; i < 2; i++) {
+		truck->_parent->_child[4 + (truck->_data->_x * 2 * 2) + i]->_active = false;
+	}
+}
+
+void truckMv(Truck* truck, float delta) {
+	glm::vec3 dest = glm::vec3(delta, 0.0, 0.0);
+
+	truckAnim(truck, dest, glm::vec3(0.0));
+
+	glm::vec3 offset = truck->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	for (int i = 0; i < 3; i++) {
+		truck->_loc[i] = offset[i];
+	}
 }
 
 void truckTurn(Truck* truck, float delta) {
@@ -92,17 +137,6 @@ void truckTurn(Truck* truck, float delta) {
 	} else {
 		omni::err("Cannot turn truck; rotation of wheels exceeds range");
 	}
-
-	glm::vec3 offset = truck->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
-	for (int i = 0; i < 3; i++) {
-		truck->_loc[i] = offset[i];
-	}
-}
-
-void truckMv(Truck* truck, float delta) {
-	glm::vec3 dest = glm::vec3(delta, 0.0, 0.0);
-
-	objAnim(truck->_parent, dest, glm::vec3(0.0));
 
 	glm::vec3 offset = truck->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int i = 0; i < 3; i++) {
