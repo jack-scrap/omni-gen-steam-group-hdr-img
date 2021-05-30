@@ -139,6 +139,7 @@ void truckTurn(Truck* truck, float delta) {
 		omni::err("Cannot turn truck; rotation of wheels exceeds range");
 	}
 
+	// offset
 	glm::vec3 offset = truck->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int i = 0; i < 3; i++) {
 		truck->_loc[i] = offset[i];
