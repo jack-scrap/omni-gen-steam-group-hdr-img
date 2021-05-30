@@ -20,9 +20,7 @@ Truck* truckMk(CArr init, glm::vec3 loc, glm::vec3 rot) {
 
 	_->_ang = 0.0;
 
-	unsigned int w = init._sz * 2;
-
-	Obj* child[4 + (w * 2) + 2];
+	Obj* child[4 + (init._sz * 2 * 2) + 2];
 
 	// bed
 	Obj* bed = ptMk(Truck::_vtx, Truck::_idx, 1, "main", "bed", "dir", false, glm::vec3(0.0), glm::vec3(0.0, M_PI / 2, 0.0));
@@ -58,7 +56,7 @@ Truck* truckMk(CArr init, glm::vec3 loc, glm::vec3 rot) {
 	// wheel
 	int i = 0;
 	for (int z = 0; z < 2; z++) {
-		for (int x = 0; x < w; x++) {
+		for (int x = 0; x < init._sz * 2; x++) {
 			Obj* rim[] = {
 				objMk("rim", "obj", "dir", true)
 			};
@@ -88,7 +86,7 @@ Truck* truckMk(CArr init, glm::vec3 loc, glm::vec3 rot) {
 	};
 
 	for (int z = 0; z < 2; z++) {
-		child[4 + (w * 2) + z] = objMk((GLfloat*) vtc, idc, 2 * 3, "obj", "alert", false, glm::vec3(-(init._sz * layout::idx[Z]) - (layout::stroke * 2) - layout::stroke - layout::stroke, 0.0, z ? 1 : -1));
+		child[4 + (init._sz * 2 * 2) + z] = objMk((GLfloat*) vtc, idc, 2 * 3, "obj", "alert", false, glm::vec3(-(init._sz * layout::idx[Z]) - (layout::stroke * 2) - layout::stroke - layout::stroke, 0.0, z ? 1 : -1));
 	}
 
 	_->_parent = objMk("truck/front", "obj", "dir", true, child, sizeof child / sizeof *child, loc + glm::vec3(2.4, 1.3, 0.0), rot);
