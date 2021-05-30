@@ -4,10 +4,10 @@
 
 #include "obj.h"
 
-typedef struct Bound {
+typedef struct Aabb {
 	Obj* _parent;
 
 	static GLushort _idc[3 * 2 * 3 * 2];
-} Bound;
+} Aabb;
 
-Bound* boundMk(Obj** obj, unsigned int sz);
+Aabb* aabbMK(Obj** obj, unsigned int sz);

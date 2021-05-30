@@ -236,7 +236,7 @@ std::vector<GLushort> util::mesh::strip(std::vector<GLushort> idc) {
 	return _;
 }
 
-void util::mesh::bound(GLfloat rng[3][2], GLfloat* vtc, unsigned int noVtc) {
+void util::mesh::aabb(GLfloat rng[3][2], GLfloat* vtc, unsigned int noVtc) {
 	for (int v = 0; v < noVtc; v++) {
 		for (int i = 0; i < 3; i++) {
 			if (vtc[(v + 3) + i] < rng[i][MIN]) {

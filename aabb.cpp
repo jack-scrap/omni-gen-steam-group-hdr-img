@@ -1,8 +1,8 @@
-#include "bound.h"
+#include "aabb.h"
 #include "util.h"
 #include "math.h"
 
-GLushort Bound::_idc[3 * 2 * 3 * 2] = {
+GLushort Aabb::_idc[3 * 2 * 3 * 2] = {
 	0, 1, 2,
 	2, 1, 3,
 
@@ -22,8 +22,8 @@ GLushort Bound::_idc[3 * 2 * 3 * 2] = {
 	3, 5, 7
 };
 
-Bound* boundMk(Obj** obj, unsigned int sz) {
-	Bound* _ = (Bound*) malloc(sizeof (Bound));
+Aabb* aabbMk(Obj** obj, unsigned int sz) {
+	Aabb* _ = (Aabb*) malloc(sizeof (Aabb));
 
 	GLfloat vtc[2 * 2 * 2 * 3];
 
@@ -35,7 +35,7 @@ Bound* boundMk(Obj** obj, unsigned int sz) {
 		}
 	}
 
-	util::mesh::bound(rng, vtc, sz);
+	util::mesh::aabb(rng, vtc, sz);
 
 	// generate
 	int i = 0;
@@ -51,7 +51,7 @@ Bound* boundMk(Obj** obj, unsigned int sz) {
 		}
 	}
 
-	_->_parent = objMk(vtc, Bound::_idc, 3 * 2 * 3 * 2, "obj", "trans", true);
+	_->_parent = objMk(vtc, Aabb::_idc, 3 * 2 * 3 * 2, "obj", "trans", true);
 
 	return _;
 }
