@@ -41,4 +41,5 @@ namespace layout {
 		};
 
 	glm::vec2 item(glm::vec2 bound);
+	glm::vec2 sz(glm::vec2 dim);
 }
