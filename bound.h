@@ -4,7 +4,7 @@
 
 #include "obj.h"
 
-typedef struct {
+typedef struct Bound {
 	Obj* _parent;
 
 	static GLushort _idc[3 * 2 * 3 * 2];

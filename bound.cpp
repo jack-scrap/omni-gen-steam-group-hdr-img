@@ -2,7 +2,7 @@
 #include "util.h"
 #include "math.h"
 
-static GLushort Bound::_idc[3 * 2 * 3 * 2] = {
+GLushort Bound::_idc[3 * 2 * 3 * 2] = {
 	0, 1, 2,
 	2, 1, 3,
 
@@ -20,7 +20,7 @@ static GLushort Bound::_idc[3 * 2 * 3 * 2] = {
 
 	1, 5, 3,
 	3, 5, 7
-}
+};
 
 Bound* boundMk(Obj** obj, unsigned int sz) {
 	Bound* _ = (Bound*) malloc(sizeof (Bound));
@@ -35,7 +35,7 @@ Bound* boundMk(Obj** obj, unsigned int sz) {
 		}
 	}
 
-	util::mesh::bound(obj, sz, rng, glm::mat4(1.0));
+	util::mesh::bound(rng, vtc, sz);
 
 	// generate
 	int i = 0;
@@ -51,7 +51,7 @@ Bound* boundMk(Obj** obj, unsigned int sz) {
 		}
 	}
 
-	_->_parent = objMk(vtc, 2 * 2 * 2 * 3, Bound::_idc, 3 * 2 * 3 * 2, "obj", "trans", true);
+	_->_parent = objMk(vtc, Bound::_idc, 3 * 2 * 3 * 2, "obj", "trans", true);
 
 	return _;
 }
