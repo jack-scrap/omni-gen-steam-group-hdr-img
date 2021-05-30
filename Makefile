@@ -24,9 +24,6 @@ all: $(PROG) ro mk_stage
 %.o: %.cpp %.h
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-scn.o: scn.cpp scn.h
-	$(CXX) $(CXXFLAGS) -c $< -o $@
-
 console.o: console.cpp console.h
 	$(CXX) $(CXXFLAGS) -c $< -o $@ $(LDPY)
 
