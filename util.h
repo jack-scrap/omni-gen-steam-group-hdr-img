@@ -118,7 +118,7 @@ namespace util {
 		}
 
 		namespace bound {
-			Lim* lim(nlohmann::json key, nlohmann::json val);
+			Lim* lim(nlohmann::json val);
 			Cone* area(nlohmann::json deser);
 		}
 	}

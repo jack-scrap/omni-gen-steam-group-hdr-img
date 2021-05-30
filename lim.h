@@ -17,4 +17,4 @@ typedef struct Lim {
 	};
 } Lim;
 
-Lim* limMk(unsigned int axis, GLfloat val);
+Lim* limMk(unsigned int axis, GLfloat val, unsigned int status);

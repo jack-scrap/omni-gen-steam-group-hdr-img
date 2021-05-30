@@ -9,7 +9,7 @@ GLushort Lim::_idc[2] = {
 	0, 1
 };
 
-Lim* limMk(unsigned int axis, GLfloat val) {
+Lim* limMk(unsigned int axis, GLfloat val, unsigned int status) {
 	Lim* _ = (Lim*) malloc(sizeof (Lim));
 
 	_->_axis = axis;
@@ -36,7 +36,29 @@ Lim* limMk(unsigned int axis, GLfloat val) {
 		}
 	}
 
-	_->_parent = lineMk((GLfloat*) vtc, Lim::_idc, 2, "main", "thick", "solid", true);
+	std::string frag;
+	bool active;
+	switch (status) {
+		case Lim::PASS:
+			frag = "solid";
+			active = false;
+
+			break;
+
+		case Lim::HALT:
+			frag = "solid";
+			active = true;
+
+			break;
+
+		case Lim::ALERT:
+			frag = "alert";
+			active = true;
+
+			break;
+	}
+
+	_->_parent = lineMk((GLfloat*) vtc, Lim::_idc, 2, "main", "thick", frag, active);
 
 	return _;
 }

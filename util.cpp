@@ -873,17 +873,30 @@ Obj* util::json::prop(nlohmann::json deser) {
 	return _;
 }
 
-Lim* util::json::bound::lim(nlohmann::json key, nlohmann::json val) {
+Lim* util::json::bound::lim(nlohmann::json val) {
 	unsigned int axis;
-	if (key == "X") {
+	if (val["axis"] == "X") {
 		axis = X;
 	}
 
-	if (key == "Z") {
+	if (val["axis"] == "Z") {
 		axis = Z;
 	}
 
-	Lim* _ = limMk(axis, val);
+	unsigned int status;
+	if (val["status"] == "pass") {
+		status = Lim::PASS;
+	}
+
+	if (val["status"] == "halt") {
+		status = Lim::HALT;
+	}
+
+	if (val["status"] == "alert") {
+		status = Lim::ALERT;
+	}
+
+	Lim* _ = limMk(axis, val["val"], status);
 
 	omni::assertion(!util::phys::aabbGround(_->_parent), "Limit clipping into ground plane");
 

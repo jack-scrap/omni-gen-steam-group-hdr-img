@@ -311,14 +311,12 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		if (entry.key() == "rng") {
 			for (const auto& entry : entry.value()) {
 				for (const auto& rng : entry) {
-					for (const auto& lim : rng.items()) {
-						Lim* _ = util::json::bound::lim(lim.key(), lim.value());
+					Lim* _ = util::json::bound::lim(rng);
 
-						((Lim**) boundRng._ptr)[i] = _;
-						i++;
+					((Lim**) boundRng._ptr)[i] = _;
+					i++;
 
-						line.push_back(_->_parent);
-					}
+					line.push_back(_->_parent);
 				}	
 			}	
 		}
