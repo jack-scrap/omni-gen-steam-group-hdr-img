@@ -761,12 +761,17 @@ glm::vec3 util::json::vec(nlohmann::json deser) {
 
 StreetLight* util::json::streetLight(nlohmann::json deser) {
 	std::vector<bool> pass = util::json::ls<bool>(deser["pass"]);
-	bool arr[pass.size()];
-	for (int i = 0; i < pass.size(); i++) {
+
+	unsigned int no = pass.size();
+	bool* arr = (bool*) malloc(no * sizeof (bool));
+	for (int i = 0; i < no; i++) {
 		arr[i] = pass[i];
 	}
 
-	StreetLight* _ = streetLightMk(arr, sizeof arr / sizeof *arr);
+	StreetLight* _ = streetLightMk({
+		arr,
+		no
+	});
 
 	omni::assertion(!util::phys::aabbGround(_->_parent), "Street light clipping into ground plane");
 

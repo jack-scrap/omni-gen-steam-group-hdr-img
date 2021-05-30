@@ -3,17 +3,13 @@
 #include "street_light.h"
 #include "layout.h"
 
-StreetLight* streetLightMk(bool* pass, unsigned int no, glm::vec3 loc, glm::vec3 rot) {
+StreetLight* streetLightMk(CArr pass, glm::vec3 loc, glm::vec3 rot) {
 	StreetLight* _ = (StreetLight*) malloc(sizeof (StreetLight));
 
-	_->_no = no;
-	_->_pass = (bool*) malloc(_->_no * sizeof (bool));
-	for (int i = 0; i < _->_no; i++) {
-		_->_pass[i] = pass[i];
-	}
+	_->_pass = pass;
 
-	Obj* child[_->_no];
-	for (int i = 0; i < _->_no; i++) {
+	Obj* child[_->_pass._sz];
+	for (int i = 0; i < _->_pass._sz; i++) {
 		child[i] = objMk("street_light/go", "obj", "solid", true, glm::vec3(-((0.2 / 2) + (layout::pad * 2)), 6.0 + 1.0, i * 2.0), glm::vec3(0.0, M_PI / 2, 0.0));
 	}
 
@@ -23,7 +19,7 @@ StreetLight* streetLightMk(bool* pass, unsigned int no, glm::vec3 loc, glm::vec3
 }
 
 void streetLightToggle(StreetLight* streetLight, unsigned int i) {
-	streetLight->_pass[i] = !streetLight->_pass[i];
+	((bool*) streetLight->_pass._ptr)[i] = !((bool*) streetLight->_pass._ptr)[i];
 
-	streetLight->_parent->_child[i]->_active = streetLight->_pass[i];
+	streetLight->_parent->_child[i]->_active = ((char*) streetLight->_pass._ptr)[i];
 }
