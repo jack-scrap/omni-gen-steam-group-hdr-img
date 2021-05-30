@@ -768,10 +768,20 @@ StreetLight* util::json::streetLight(nlohmann::json deser) {
 		arr[i] = pass[i];
 	}
 
+	glm::vec3 loc = glm::vec3(0.0);
+	if (deser.contains("loc")) {
+		loc = util::json::vec(deser["loc"]);
+	}
+
+	glm::vec3 rot = glm::vec3(0.0);
+	if (deser.contains("rot")) {
+		rot = util::json::vec(deser["rot"]);
+	}
+
 	StreetLight* _ = streetLightMk({
 		arr,
 		no
-	});
+	}, loc, rot);
 
 	omni::assertion(!util::phys::aabbGround(_->_parent), "Street light clipping into ground plane");
 
