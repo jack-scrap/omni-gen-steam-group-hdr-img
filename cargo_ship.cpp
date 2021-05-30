@@ -12,7 +12,7 @@ CargoShip* cargoShipMk(char* init, glm::vec3 loc, glm::vec3 rot) {
 
 	_->_data = arrMk(init, _->_x, _->_y, "state", glm::vec3(-(layout::stride[Y] * _->_x * _->_y), 1.0, layout::stride[X]));
 
-	// layout
+	// bed
 	glm::vec2 pad = {
 		layout::margin * 2,
 		layout::margin * 2
