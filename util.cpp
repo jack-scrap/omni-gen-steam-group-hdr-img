@@ -491,10 +491,13 @@ CBuff util::json::arr::arr(nlohmann::json deser) {
 	_._y = 1;
 	_._z = 1;
 	_._ptr = (char*) malloc(_._x * sizeof (char));
+	int c = 0;
 	for (int i = 0; i < _._x; i++) {
 		omni::assertion(util::json::ascii(deser[i]), std::string("Data at index [") + std::to_string(i) + std::string("] not ASCII applicable"));
 
-		((char*) _._ptr)[i] = (char) ((int) deser[i]);
+		((char*) _._ptr)[c] = (char) ((int) deser[i]);
+
+		c++;
 	}
 
 	return _;
@@ -507,11 +510,14 @@ CBuff util::json::arr::matr2(nlohmann::json deser) {
 	_._y = deser.size();
 	_._z = 1;
 	_._ptr = (char*) malloc(_._x * _._y * sizeof (char));
+	int c = 0;
 	for (int j = 0; j < _._y; j++) {
 		for (int i = 0; i < _._x; i++) {
 			omni::assertion(util::json::ascii(deser[j][i]), std::string("Data at index [") + std::to_string(j) + "][" + std::to_string(i) + std::string("] not ASCII applicable"));
 
-			((char*) _._ptr)[(j * _._x) + i] = (char) ((int) deser[j][i]);
+			((char*) _._ptr)[c] = (char) ((int) deser[j][i]);
+
+			c++;
 		}
 	}
 
@@ -524,10 +530,18 @@ CBuff util::json::arr::matr3(nlohmann::json deser) {
 	_._x = deser[0][0].size();
 	_._y = deser[0].size();
 	_._z = deser.size();
+	_._ptr = (char*) malloc(_._x * _._y * _._x * sizeof (char));
+	int c = 0;
+	for (int k = 0; k < _._y; k++) {
+		for (int j = 0; j < _._y; j++) {
+			for (int i = 0; i < _._x; i++) {
+				omni::assertion(util::json::ascii(deser[k][j][i]), std::string("Data at index [") + std::to_string(j) + "][" + std::to_string(i) + std::string("] not ASCII applicable"));
 
-	_._ptr = (char*) malloc(3 * sizeof (char));
-	for (int i = 0; i < 3; i++) {
-		((char*) _._ptr)[i] = 'a';
+				((char*) _._ptr)[c] = (char) ((int) deser[k][j][i]);
+
+				c++;
+			}
+		}
 	}
 
 	return _;
