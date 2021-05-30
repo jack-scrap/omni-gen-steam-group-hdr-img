@@ -88,7 +88,7 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, std::string name, glm::ve
 	for (int j = 0; j < _->_y; j++) {
 		for (int i = 0; i < _->_x; i++) {
 			Idx* idx;
-			glm::vec3 offset = glm::vec3(layout::overhead, 0.0, layout::overhead) + glm::vec3(i * layout::stride[X], 0.0, 0.0);
+			glm::vec3 offset = glm::vec3(layout::overhead, 0.0, layout::overhead) + glm::vec3(i * layout::stride[X], 0.0, j * layout::stride[Z]);
 			if (init[no]) {
 				idx = idxMk(no, &init[no], 1, "", offset);
 			} else {
