@@ -34,7 +34,7 @@ CargoShip* cargoShipMk(char* init, glm::vec3 loc, glm::vec3 rot) {
 		}
 	}
 
-	GLushort idc[2 * 2];
+	GLushort idc[2 * 3];
 
 	std::vector<GLushort> seq;
 	for (int i = 0; i < 2 * 2; i++) {
@@ -42,13 +42,13 @@ CargoShip* cargoShipMk(char* init, glm::vec3 loc, glm::vec3 rot) {
 	}
 
 	std::vector<GLushort> strip = util::mesh::strip(seq);
-	for (int i = 0; i < 2 * 2; i++) {
+	for (int i = 0; i < 2 * 3; i++) {
 		idc[i] = strip[i];
 	}
 
 	Obj* child[2];
 
-	child[0] = objMk((GLfloat*) vtc, idc, 2 * 3, "obj", "solid", false, glm::vec3(-(sz[X] / 2), 0.0, -(sz[Y] / 2)));
+	child[0] = objMk((GLfloat*) vtc, idc, 2 * 3, "obj", "dir", false, glm::vec3(-(sz[X] / 2), 0.0, -(sz[Y] / 2)));
 
 	child[1] = _->_data->_parent;
 
