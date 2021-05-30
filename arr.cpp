@@ -142,27 +142,24 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, unsigned int z, std::stri
 	// data
 	_->_data = (Idx**) malloc(_->_x * _->_y * _->_z * sizeof (Idx*));
 
-	Idx* idx;
+	int c = 0;
+	for (int k = 0; k < _->_z; k++) {
+		for (int j = 0; j < _->_y; j++) {
+			for (int i = 0; i < _->_x; i++) {
+				Idx* idx;
+				glm::vec3 offset = glm::vec3(layout::overhead, 0.0, layout::overhead) + glm::vec3(i * layout::stride[X], k * layout::stride[Y], j * layout::stride[Z]);
+				if (init[c]) {
+					idx = idxMk(c, &init[c], 1, "", offset);
+				} else {
+					idx = idxMk(c, "", offset);
+				}
 
-	int i = 0;
-	for (int x = 0; x < 3; x++) {
-		glm::vec3 offset = glm::vec3(layout::overhead, 0.0, layout::overhead) + glm::vec3(
-			x * (2.0 + (0.16 * 2 * 2 * 2) + (0.16 * 2 * 2) + (0.16 * 2)),
-			0.0,
-			0.0
-		);
+				_->_data[c] = idx;
+				child[1 + c] = _->_data[c]->_parent;
 
-		char* asdf = (char*) malloc(3 * sizeof (char));
-		asdf[0] = 'T';
-		asdf[1] = 'e';
-		asdf[2] = 'x';
-		idx = idxMk(0, asdf, 3, "", offset);
-
-		_->_data[i] = idx;
-
-		child[1 + i] = _->_data[i]->_parent;
-
-		i++;
+				c++;
+			}
+		}
 	}
 
 	// scope
