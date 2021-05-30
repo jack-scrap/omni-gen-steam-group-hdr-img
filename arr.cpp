@@ -44,7 +44,6 @@ Arr* arrMk(char* init, unsigned int x, std::string name, glm::vec3 loc, glm::vec
 		child[0] = nullptr;
 	}
 
-	// scope
 	glm::vec2 sz = {
 		(_->_x * layout::stride[X]) + (layout::pad * 2),
 		(_->_y * layout::stride[Z]) + (layout::pad * 2)
@@ -97,7 +96,6 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, std::string name, glm::ve
 		}
 	}
 
-	// scope
 	glm::vec2 sz = {
 		(_->_x * layout::stride[X]) + (layout::pad * 2),
 		(_->_y * layout::stride[Z]) + (layout::pad * 2)
@@ -155,7 +153,6 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, unsigned int z, std::stri
 		}
 	}
 
-	// scope
 	glm::vec2 sz = {
 		(_->_x * layout::stride[X]) + (layout::pad * 2),
 		(_->_y * layout::stride[Z]) + (layout::pad * 2)
