@@ -29,7 +29,9 @@ typedef struct Truck {
 
 	enum {
 		BED,
-		OUTER
+		OUTER,
+		TAIL,
+		DATA
 	};
 
 	enum uni {

@@ -48,12 +48,12 @@ Truck* truckMk(CArr init, glm::vec3 loc, glm::vec3 rot) {
 	child[Truck::BED] = bed;
 	child[Truck::OUTER] = outer;
 
-	child[2] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-(init._sz * layout::idx[Z]) - (layout::stroke * 2), -layout::stroke, 0.0), rot);
+	child[Truck::TAIL] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-(init._sz * layout::idx[Z]) - (layout::stroke * 2), -layout::stroke, 0.0), rot);
 
 	// data
 	_->_data = arrMk((char*) init._ptr, init._sz, "", glm::vec3(0.0, layout::pad * 2, -((layout::idx[X] / 2) + (layout::stroke * 2) + (layout::margin * 2 * 2))), glm::vec3(0.0, -M_PI / 2, 0.0));
 
-	child[3] = _->_data->_parent;
+	child[Truck::DATA] = _->_data->_parent;
 
 	// wheel
 	int i = 0;

@@ -15,7 +15,8 @@ typedef struct CargoShip {
 	Obj* _parent;
 
 	enum {
-		BED
+		BED,
+		DATA
 	};
 } CargoShip;
 
