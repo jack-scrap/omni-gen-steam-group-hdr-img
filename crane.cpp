@@ -76,6 +76,7 @@ Crane* craneMk(char init, glm::vec3 loc, glm::vec3 rot) {
 
 	_->_parent = objMk("crane/body", "obj", "dir", true, child, sizeof child / sizeof *child, loc, rot);
 
+	// offset
 	glm::vec3 offset = _->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int i = 0; i < 3; i++) {
 		_->_loc[i] = offset[i];
