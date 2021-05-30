@@ -169,7 +169,7 @@ void craneGrab(Crane* crane) {
 			case omni::ARRAY: {
 				Arr* arr = (Arr*) var->_ptr;
 
-				for (int i = 0; i < arr->_x * arr->_y * arr->_z; i++) {
+				for (int i = 0; i < arr->_x * arr->_y; i++) {
 					Idx* idx = arr->_data[i];
 
 					if (idx->_data) {

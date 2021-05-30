@@ -12,12 +12,11 @@ Arr* arrMk(char* init, unsigned int x, std::string name, glm::vec3 loc, glm::vec
 
 	_->_x = x;
 	_->_y = 1;
-	_->_z = 1;
 
 	// data
-	_->_data = (Idx**) malloc(_->_x * _->_y * _->_z * sizeof (Idx*));
+	_->_data = (Idx**) malloc(_->_x * _->_y * sizeof (Idx*));
 
-	unsigned int noChild = 1 + (_->_x * _->_y * _->_z);
+	unsigned int noChild = 1 + (_->_x * _->_y);
 	Obj** child = (Obj**) malloc(noChild * sizeof (Obj*));
 
 	int c = 0;
@@ -65,9 +64,8 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, std::string name, glm::ve
 
 	_->_x = x;
 	_->_y = y;
-	_->_z = 1;
 
-	unsigned int noChild = 1 + (_->_x * _->_y * _->_z);
+	unsigned int noChild = 1 + (_->_x * _->_y);
 	Obj** child = (Obj**) malloc(noChild * sizeof (Obj*));
 
 	// identifier
@@ -75,7 +73,7 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, std::string name, glm::ve
 	child[0] = id->_parent;
 
 	// data
-	_->_data = (Idx**) malloc(_->_x * _->_y * _->_z * sizeof (Idx*));
+	_->_data = (Idx**) malloc(_->_x * _->_y * sizeof (Idx*));
 
 	int c = 0;
 	for (int j = 0; j < _->_y; j++) {
@@ -116,9 +114,8 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, unsigned int z, std::stri
 
 	_->_x = x;
 	_->_y = y;
-	_->_z = 1;
 
-	unsigned int noChild = 1 + (_->_x * _->_y * _->_z);
+	unsigned int noChild = 1 + (_->_x * _->_y);
 	Obj** child = (Obj**) malloc(noChild * sizeof (Obj*));
 
 	// identifier
@@ -126,7 +123,7 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, unsigned int z, std::stri
 	child[0] = id->_parent;
 
 	// data
-	_->_data = (Idx**) malloc(_->_x * _->_y * _->_z * sizeof (Idx*));
+	_->_data = (Idx**) malloc(_->_x * _->_y * sizeof (Idx*));
 
 	int c = 0;
 	for (int j = 0; j < _->_y; j++) {

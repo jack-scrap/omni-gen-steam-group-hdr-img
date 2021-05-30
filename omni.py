@@ -32,7 +32,6 @@ class _Arr(Structure):
 		('_data', POINTER(POINTER(_Idx))),
 		('_x', c_uint),
 		('_y', c_uint),
-		('_z', c_uint),
 		('_loc', c_float * 3)
 	]
 
@@ -78,7 +77,7 @@ for i in range(_noData):
 
 	if _type[i] == 1:
 		ptr = cast(_data[i].contents._ptr, POINTER(_Arr))
-		arr = _Arr(ptr.contents._data, ptr.contents._x, ptr.contents._y, ptr.contents._z, ptr.contents._loc)
+		arr = _Arr(ptr.contents._data, ptr.contents._x, ptr.contents._y, ptr.contents._loc)
 
 		data[id] = arr
 		goal[id] = arr

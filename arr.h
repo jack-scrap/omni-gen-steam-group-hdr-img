@@ -11,8 +11,7 @@ typedef struct {
 
 	unsigned int
 		_x,
-		_y,
-		_z;
+		_y;
 
 	float _loc[3];
 
