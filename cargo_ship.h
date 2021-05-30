@@ -13,6 +13,10 @@ typedef struct CargoShip {
 	GLfloat _speed = 0.1;
 
 	Obj* _parent;
+
+	enum {
+		BED
+	};
 } CargoShip;
 
 CargoShip* cargoShipMk(char* init, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
