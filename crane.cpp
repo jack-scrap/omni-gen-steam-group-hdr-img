@@ -59,11 +59,7 @@ Crane* craneMk(char init, glm::vec3 loc, glm::vec3 rot) {
 	// light
 	std::vector<GLfloat> rect = util::mesh::rect::pos(glm::vec2(0.6, 1.0), Y, true);
 
-	std::vector<GLushort> rng;
-	for (int i = 0; i < 2 * 2; i++) {
-		rng.push_back(i);
-	}
-	std::vector<GLushort> strip = util::mesh::strip(rng);
+	std::vector<GLushort> strip = util::mesh::strip();
 
 	i = 0;
 	for (int z = 0; z < 2; z++) {

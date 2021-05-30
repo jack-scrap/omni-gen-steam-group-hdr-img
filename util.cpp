@@ -217,7 +217,7 @@ std::vector<GLfloat> util::mesh::rd::norm(std::string name) {
 	return _;
 }
 
-std::vector<GLushort> util::mesh::strip(std::vector<GLushort> idc) {
+std::vector<GLushort> util::mesh::strip() {
 	std::vector<GLushort> _;
 
 	bool far = false;

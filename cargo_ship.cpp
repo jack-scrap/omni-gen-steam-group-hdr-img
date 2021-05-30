@@ -29,11 +29,7 @@ CargoShip* cargoShipMk(char* init, glm::vec3 loc, glm::vec3 rot) {
 		}
 	}
 
-	std::vector<GLushort> seq;
-	for (int i = 0; i < 2 * 2; i++) {
-		seq.push_back(i);
-	}
-	std::vector<GLushort> strip = util::mesh::strip(seq);
+	std::vector<GLushort> strip = util::mesh::strip();
 
 	Obj* child[2];
 
