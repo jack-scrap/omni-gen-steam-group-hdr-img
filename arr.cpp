@@ -133,15 +133,17 @@ Arr* arrMk(char* init, unsigned int x, unsigned int y, unsigned int z, std::stri
 	int c = 0;
 	for (int j = 0; j < _->_y; j++) {
 		for (int i = 0; i < _->_x; i++) {
-			char* asdf = (char*) malloc(z * sizeof (char));
+			int start = ((j * _->_y) + i) * _->_x;
+
+			char* vec = (char*) malloc(z * sizeof (char));
 			for (int i = 0; i < z; i++) {
-				asdf[i] = 'a';
+				vec[i] = init[start + i];
 			}
 
 			Idx* idx;
 			glm::vec3 offset = glm::vec3(layout::overhead, 0.0, layout::overhead) + glm::vec3(i * layout::stride[X], 0.0, j * layout::stride[Z]);
 			if (init[c]) {
-				idx = idxMk(c, asdf, z, "", offset);
+				idx = idxMk(c, vec, z, "", offset);
 			} else {
 				idx = idxMk(c, "", offset);
 			}
