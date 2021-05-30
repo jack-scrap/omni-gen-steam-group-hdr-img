@@ -905,9 +905,9 @@ Lim* util::json::bound::lim(nlohmann::json val) {
 
 Cone* util::json::bound::area(nlohmann::json deser) {
 	GLfloat init[2][2];
-	for (int y = 0; y < 2; y++) {
-		for (int x = 0; x < 2; x++) {
-			init[y][x] = deser["bound"][y][x];
+	for (int a = 0; a < 2; a++) {
+		for (int b = 0; b < 2; b++) {
+			init[a][b] = deser["bound"][a][b];
 		}
 	}
 
