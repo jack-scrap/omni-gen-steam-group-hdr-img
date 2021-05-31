@@ -80,10 +80,11 @@ Truck* truckMk(CArr init, glm::vec3 loc, glm::vec3 rot) {
 		}
 	};
 
-	std::vector<GLushort> strip = util::mesh::strip();
+	GLushort idc[2][3];
+	util::mesh::strip(idc);
 
 	for (int z = 0; z < 2; z++) {
-		child[4 + (init._sz * 2 * 2) + z] = objMk((GLfloat*) vtc, &strip[0], 2 * 3, "obj", "alert", false, glm::vec3(-(init._sz * layout::idx[Z]) - (layout::stroke * 2) - layout::stroke - layout::stroke, 0.0, z ? 1 : -1));
+		child[4 + (init._sz * 2 * 2) + z] = objMk((GLfloat*) vtc, (GLushort*) idc, 2 * 3, "obj", "alert", false, glm::vec3(-(init._sz * layout::idx[Z]) - (layout::stroke * 2) - layout::stroke - layout::stroke, 0.0, z ? 1 : -1));
 	}
 
 	_->_parent = objMk("truck/front", "obj", "dir", true, child, sizeof child / sizeof *child, loc + glm::vec3(2.4, 1.3, 0.0), rot);

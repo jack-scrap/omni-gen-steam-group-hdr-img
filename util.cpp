@@ -217,9 +217,7 @@ std::vector<GLfloat> util::mesh::rd::norm(std::string name) {
 	return _;
 }
 
-std::vector<GLushort> util::mesh::strip() {
-	std::vector<GLushort> _;
-
+void util::mesh::strip(GLushort idc[2][3]) {
 	bool far = false;
 
 	for (int t = 0; t < 2; t++) {
@@ -229,11 +227,9 @@ std::vector<GLushort> util::mesh::strip() {
 				step = (i * (t ? -1 : 1)),
 				last = (3 * (t && i == 2));
 
-			_.push_back(start + step + last);
+			idc[t][i] = start + step + last;
 		}
 	}
-
-	return _;
 }
 
 void util::mesh::aabb(GLfloat rng[3][2], GLfloat* vtc, unsigned int noVtc) {

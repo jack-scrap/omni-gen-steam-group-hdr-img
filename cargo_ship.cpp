@@ -26,11 +26,12 @@ CargoShip* cargoShipMk(char* init, glm::vec3 loc, glm::vec3 rot) {
 		}
 	}
 
-	std::vector<GLushort> strip = util::mesh::strip();
+	GLushort idc[2][3];
+	util::mesh::strip(idc);
 
 	Obj* child[2];
 
-	child[CargoShip::BED] = objMk((GLfloat*) vtc, &strip[0], 2 * 3, "obj", "dir", false, glm::vec3(-(sz[X] / 2), 0.0, -(sz[Y] / 2)));
+	child[CargoShip::BED] = objMk((GLfloat*) vtc, (GLushort*) idc, 2 * 3, "obj", "dir", false, glm::vec3(-(sz[X] / 2), 0.0, -(sz[Y] / 2)));
 
 	// data
 	_->_data = arrMk(init, _->_x, _->_y, "state", glm::vec3(-(layout::stride[Y] * _->_x * _->_y), 1.0, layout::stride[X]));

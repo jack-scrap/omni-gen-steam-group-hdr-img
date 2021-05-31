@@ -41,7 +41,7 @@ namespace util {
 	namespace mesh {
 		std::vector<GLfloat> plane(glm::vec2 sz);
 
-		std::vector<GLushort> strip();
+		void strip(GLushort idc[2][3]);
 
 		void aabb(GLfloat rng[3][2], GLfloat* vtc, unsigned int noVtc);
 
