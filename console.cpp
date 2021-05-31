@@ -36,7 +36,7 @@ void dispatch(Console* console, std::string name) {
 			}
 		};
 
-		std::string serial = data.dump(4);
+		std::string serial = data.dump(1, '\t');
 
 		util::fs::write("player.json", util::str::split(serial, '\n'));
 	}
