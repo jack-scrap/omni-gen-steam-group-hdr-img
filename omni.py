@@ -320,18 +320,13 @@ _pathGet = _scn.pathGet
 _pathGet.restype = _CArr
 _pathGet.argtypes = None
 
-# getter
-# _asdfGet = _scn.asdfGet
-# _asdfGet.restype = c_int
-# _pathGet.argtypes = None
-
 class _Asdf(Structure):
 	def __init__(self):
-		self._asdf = _dataGet()
+		self._asdf = None
 	
 	@property
 	def asdf(self):
-		self._asdf = cast(_data[i].contents._ptr, POINTER(_Idx))._data.contents
+		self._asdf = cast(_data[i].contents._ptr, POINTER(_Idx)).contents
 
 		return self._asdf
 

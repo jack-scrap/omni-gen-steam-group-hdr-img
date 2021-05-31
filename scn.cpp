@@ -60,11 +60,6 @@ CArr cargoShipGet() {
 	return cargoShip;
 }
 
-int asdf = 3;
-int asdfGet() {
-	return asdf;
-}
-
 std::vector<Obj*> scn::obj;
 std::vector<Obj*> scn::line;
 std::vector<Obj*> scn::pt;

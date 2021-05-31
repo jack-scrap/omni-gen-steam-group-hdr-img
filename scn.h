@@ -58,9 +58,6 @@ extern "C" CArr boundAreaGet();
 extern "C" CArr path;
 extern "C" CArr pathGet();
 
-extern "C" int asdf;
-extern "C" int asdfGet();
-
 namespace scn {
 	extern std::vector<Obj*> obj;
 	extern std::vector<Obj*> line;
