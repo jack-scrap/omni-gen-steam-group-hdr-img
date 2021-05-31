@@ -38,7 +38,7 @@ Crane* craneMk(char init, glm::vec3 loc, glm::vec3 rot) {
 	}
 
 	// wheel
-	int i = 0;
+	int w = 0;
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < 2; x++) {
 			for (int j = 0; j < 2; j++) {
@@ -48,9 +48,9 @@ Crane* craneMk(char init, glm::vec3 loc, glm::vec3 rot) {
 						rim[b] = objMk("rim", "obj", "dir", true, glm::vec3(0.0), glm::vec3(0.0, b * M_PI, 0.0));
 					}
 
-					child[1 + 1 + i] = objMk("wheel", "obj", "dir", false, rim, 2, glm::vec3(((x ? 1 : -1) * 3.0) + (j ? 1 : -1), 1.0, ((z ? 1 : -1) * 10.0) + ((k ? 1 : -1) * 0.6)));
+					child[1 + 1 + w] = objMk("wheel", "obj", "dir", false, rim, 2, glm::vec3(((x ? 1 : -1) * 3.0) + (j ? 1 : -1), 1.0, ((z ? 1 : -1) * 10.0) + ((k ? 1 : -1) * 0.6)));
 
-					i++;
+					w++;
 				}
 			}
 		}
@@ -61,12 +61,12 @@ Crane* craneMk(char init, glm::vec3 loc, glm::vec3 rot) {
 
 	std::vector<GLushort> strip = util::mesh::strip();
 
-	i = 0;
+	int l = 0;
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < 2; x++) {
-			child[1 + 1 + (2 * 2 * 2 * 2) + i] = objMk(&rect[0], &strip[0], 3 * 2, "obj", "alert", false, glm::vec3((x ? 1 : -1) * (6.0 + (layout::pad * 2)), 1.74, (z ? 1 : -1) * 10.0), glm::vec3(0.0, M_PI / 2, 0.0));
+			child[1 + 1 + (2 * 2 * 2 * 2) + l] = objMk(&rect[0], &strip[0], 3 * 2, "obj", "alert", false, glm::vec3((x ? 1 : -1) * (6.0 + (layout::pad * 2)), 1.74, (z ? 1 : -1) * 10.0), glm::vec3(0.0, M_PI / 2, 0.0));
 
-			i++;
+			l++;
 		}
 	}
 
