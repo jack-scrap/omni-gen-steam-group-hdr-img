@@ -33,11 +33,6 @@ typedef struct Truck {
 		TAIL,
 		DATA
 	};
-
-	enum uni {
-		SZ_BED,
-		SZ_OUTER
-	};
 } Truck;
 
 Truck* truckMk(CArr init = {
