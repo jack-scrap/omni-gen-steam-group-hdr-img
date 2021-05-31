@@ -28,6 +28,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
+	_->_uni = (GLint*) malloc(5 * sizeof (GLint));
 	_->_active = active;
 	_->_child = nullptr;
 	_->_noChild = 0;
@@ -93,6 +94,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
+	_->_uni = (GLint*) malloc(5 * sizeof (GLint));
 	_->_active = active;
 	_->_noChild = noChild;
 	_->_child = (Obj**) malloc(_->_noChild * sizeof (Obj*));
@@ -265,6 +267,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
+	_->_uni = (GLint*) malloc(5 * sizeof (GLint));
 	_->_active = active;
 	_->_child = nullptr;
 	_->_noChild = 0;
