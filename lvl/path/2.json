@@ -1,10 +1,7 @@
 {
-	"data": {
-	},
-	"goal": {
-	},
-	"vehicle": [
-	],
+	"data": {},
+	"goal": {},
+	"vehicle": [],
 	"road": {
 		"node": [
 			[
@@ -31,6 +28,5 @@
 			]
 		]
 	},
-	"ctrl": [
-	]
+	"ctrl": []
 }

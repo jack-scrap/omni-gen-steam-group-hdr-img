@@ -1,14 +1,26 @@
 {
 	"data": {
 		"state": {
-			"state": [3, 7],
-			"other_state": [7, 12]
+			"state": [
+				3,
+				7
+			],
+			"other_state": [
+				7,
+				12
+			]
 		}
 	},
 	"goal": {
 		"state": {
-			"state": [7, 12],
-			"other_state": [12, 7]
+			"state": [
+				7,
+				12
+			],
+			"other_state": [
+				12,
+				7
+			]
 		}
 	},
 	"vehicle": [
@@ -20,10 +32,14 @@
 		"rng": [
 			{
 				"min": {
-					"Z": -11.64
+					"axis": "Z",
+					"val": -11.64,
+					"status": "halt"
 				},
 				"max": {
-					"Z": 11.64
+					"axis": "Z",
+					"val": 11.64,
+					"status": "halt"
 				}
 			}
 		]

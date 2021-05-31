@@ -30,10 +30,14 @@
 		"rng": [
 			{
 				"min": {
-					"Z": -11.64
+					"axis": "Z",
+					"val": -11.64,
+					"status": "halt"
 				},
 				"max": {
-					"Z": 11.64
+					"axis": "Z",
+					"val": 11.64,
+					"status": "halt"
 				}
 			}
 		]
