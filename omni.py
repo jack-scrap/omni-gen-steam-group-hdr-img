@@ -319,3 +319,15 @@ while i < _streetLightGet()._sz:
 _pathGet = _scn.pathGet
 _pathGet.restype = _CArr
 _pathGet.argtypes = None
+
+class _Asdf(Structure):
+	def __init__(self):
+		self._asdf = 3
+	
+	@property
+	def asdf(self):
+		print('asdf')
+
+		return self._asdf
+
+asdf = _Asdf()
