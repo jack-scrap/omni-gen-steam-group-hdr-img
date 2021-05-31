@@ -17,7 +17,6 @@ CargoShip* cargoShipMk(char* init, glm::vec3 loc, glm::vec3 rot) {
 	});
 
 	GLfloat vtc[2 * 2][3];
-
 	for (int y = 0; y < 2; y++) {
 		for (int x = 0; x < 2; x++) {
 			vtc[(y * 2) + x][0] = x * sz[X];
