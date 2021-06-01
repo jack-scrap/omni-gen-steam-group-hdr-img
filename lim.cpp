@@ -52,7 +52,7 @@ Lim* limMk(unsigned int axis, GLfloat val, unsigned int status) {
 			break;
 
 		case Lim::ALERT:
-			frag = "alert";
+			frag = "alertLine";
 			active = true;
 
 			break;

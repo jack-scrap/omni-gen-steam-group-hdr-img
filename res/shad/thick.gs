@@ -4,6 +4,8 @@ layout (lines) in;
 
 layout (triangle_strip, max_vertices = 4) out;
 
+out vec3 _posNoTrans;
+
 uniform mat4
 	model,
 	view,
@@ -24,6 +26,7 @@ void main() {
 				gl_in[i].gl_Position.xyz + (b * vec3(orth.x, 0.0, orth.y) * pad * 2),
 				1.0
 			);
+			_posNoTrans = gl_in[i].gl_Position.xyz + (b * vec3(orth.x, 0.0, orth.y) * pad * 2);
 
 			EmitVertex();
 		}
