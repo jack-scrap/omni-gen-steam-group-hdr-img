@@ -344,10 +344,10 @@ void objAnim(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
 		d = glm::translate(d, locInc);
 		d = util::matr::rot(d, rotInc);
 
+		objAcc(obj, obj->_acc * d);
+
 		locFrame += glm::abs(locInc);
 		rotFrame += glm::abs(rotInc);
-
-		objAcc(obj, obj->_acc * d);
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / state::fps));
 	}
