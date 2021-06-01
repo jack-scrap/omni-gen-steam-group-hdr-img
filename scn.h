@@ -63,5 +63,7 @@ namespace scn {
 	extern std::vector<Obj*> line;
 	extern std::vector<Obj*> pt;
 
+	extern unsigned int _t;
+
 	void init(unsigned int stage, unsigned int lvl);
 }

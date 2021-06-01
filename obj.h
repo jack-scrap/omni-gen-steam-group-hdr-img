@@ -17,8 +17,6 @@ typedef struct Obj {
 
 	bool _active;
 
-	unsigned int _t;
-
 	glm::mat4
 		_model,
 		_view,

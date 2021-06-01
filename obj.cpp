@@ -33,7 +33,6 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 	_->_child = nullptr;
 	_->_noChild = 0;
 	_->_v = 0.0;
-	_->_t = 0;
 
 	_->_mesh = meshMk(vtc, noPrim * 3, idc, noPrim);
 
@@ -70,7 +69,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 
 	glUniform1ui(_->_uni[Obj::ACTIVE], _->_active);
 
-	glUniform1ui(_->_uni[Obj::T], _->_t);
+	glUniform1ui(_->_uni[Obj::T], scn::_t);
 
 	_->_prog.unUse();
 	glBindVertexArray(0);
@@ -102,7 +101,6 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 		_->_child[i] = child[i];
 	}
 	_->_v = 0.0;
-	_->_t = 0;
 
 	_->_mesh = meshMk(vtc, noPrim * 3, idc, noPrim);
 
@@ -139,7 +137,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 
 	glUniform1ui(_->_uni[Obj::ACTIVE], _->_active);
 
-	glUniform1ui(_->_uni[Obj::T], _->_t);
+	glUniform1ui(_->_uni[Obj::T], scn::_t);
 
 	_->_prog.unUse();
 	glBindVertexArray(0);
@@ -272,7 +270,6 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 	_->_child = nullptr;
 	_->_noChild = 0;
 	_->_v = 0.0;
-	_->_t = 0;
 
 	_->_mesh = meshMk(vtc, noPrim * 3, idc, noPrim);
 
@@ -309,7 +306,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 
 	glUniform1ui(_->_uni[Obj::ACTIVE], _->_active);
 
-	glUniform1ui(_->_uni[Obj::T], _->_t);
+	glUniform1ui(_->_uni[Obj::T], scn::_t);
 
 	_->_prog.unUse();
 	glBindVertexArray(0);
@@ -388,7 +385,7 @@ void objDraw(Obj* obj) {
 	glUniformMatrix4fv(obj->_uni[Obj::MODEL], 1, GL_FALSE, glm::value_ptr(obj->_acc));
 	glUniformMatrix4fv(obj->_uni[Obj::VIEW], 1, GL_FALSE, glm::value_ptr(obj->_view));
 
-	glUniform1ui(obj->_uni[Obj::T], obj->_t);
+	glUniform1ui(obj->_uni[Obj::T], scn::_t);
 
 	glUniform1ui(obj->_uni[Obj::ACTIVE], obj->_active);
 
@@ -397,7 +394,6 @@ void objDraw(Obj* obj) {
 	obj->_prog.unUse();
 	glBindVertexArray(0);
 
-	obj->_t++;
 	for (int i = 0; i < obj->_noChild; i++) {
 		if (obj->_child[i]) {
 			objDraw(obj->_child[i]);

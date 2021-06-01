@@ -20,7 +20,7 @@ void lineDraw(Obj* line) {
 	glUniformMatrix4fv(line->_uni[Obj::MODEL], 1, GL_FALSE, glm::value_ptr(line->_acc));
 	glUniformMatrix4fv(line->_uni[Obj::VIEW], 1, GL_FALSE, glm::value_ptr(line->_view));
 
-	glUniform1ui(line->_uni[Obj::T], line->_t);
+	glUniform1ui(line->_uni[Obj::T], scn::_t);
 
 	glUniform1ui(line->_uni[Obj::ACTIVE], line->_active);
 
@@ -29,7 +29,6 @@ void lineDraw(Obj* line) {
 	line->_prog.unUse();
 	glBindVertexArray(0);
 
-	line->_t++;
 	for (int i = 0; i < line->_noChild; i++) {
 		if (line->_child[i]) {
 			lineDraw(line->_child[i]);

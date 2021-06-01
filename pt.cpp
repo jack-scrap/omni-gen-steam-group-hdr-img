@@ -20,7 +20,7 @@ void ptDraw(Obj* pt) {
 	glUniformMatrix4fv(pt->_uni[Obj::MODEL], 1, GL_FALSE, glm::value_ptr(pt->_acc));
 	glUniformMatrix4fv(pt->_uni[Obj::VIEW], 1, GL_FALSE, glm::value_ptr(pt->_view));
 
-	glUniform1ui(pt->_uni[Obj::T], pt->_t);
+	glUniform1ui(pt->_uni[Obj::T], scn::_t);
 
 	glUniform1ui(pt->_uni[Obj::ACTIVE], pt->_active);
 
@@ -29,7 +29,6 @@ void ptDraw(Obj* pt) {
 	pt->_prog.unUse();
 	glBindVertexArray(0);
 
-	pt->_t++;
 	for (int i = 0; i < pt->_noChild; i++) {
 		if (pt->_child[i]) {
 			objDraw(pt->_child[i]);

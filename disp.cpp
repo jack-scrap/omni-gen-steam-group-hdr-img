@@ -72,6 +72,8 @@ void Disp::draw() {
 	console->draw();
 
 	update();
+
+	scn::_t++;
 }
 
 Disp::~Disp() {
