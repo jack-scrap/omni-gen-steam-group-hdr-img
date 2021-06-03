@@ -20,7 +20,7 @@ void lineDraw(Obj* line) {
 	glUniformMatrix4fv(line->_uni[Obj::MODEL], 1, GL_FALSE, glm::value_ptr(line->_acc));
 	glUniformMatrix4fv(line->_uni[Obj::VIEW], 1, GL_FALSE, glm::value_ptr(line->_view));
 
-	glUniform1ui(line->_uni[Obj::T], scn::_t);
+	glUniform1ui(line->_uni[Obj::T], disp->_t);
 
 	glUniform1ui(line->_uni[Obj::ACTIVE], line->_active);
 

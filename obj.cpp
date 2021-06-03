@@ -69,7 +69,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 
 	glUniform1ui(_->_uni[Obj::ACTIVE], _->_active);
 
-	glUniform1ui(_->_uni[Obj::T], scn::_t);
+	glUniform1ui(_->_uni[Obj::T], disp->_t);
 
 	_->_prog.unUse();
 	glBindVertexArray(0);
@@ -136,7 +136,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 
 	glUniform1ui(_->_uni[Obj::ACTIVE], _->_active);
 
-	glUniform1ui(_->_uni[Obj::T], scn::_t);
+	glUniform1ui(_->_uni[Obj::T], disp->_t);
 
 	_->_prog.unUse();
 	glBindVertexArray(0);
@@ -304,7 +304,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 
 	glUniform1ui(_->_uni[Obj::ACTIVE], _->_active);
 
-	glUniform1ui(_->_uni[Obj::T], scn::_t);
+	glUniform1ui(_->_uni[Obj::T], disp->_t);
 
 	_->_prog.unUse();
 	glBindVertexArray(0);
@@ -378,7 +378,7 @@ void objDraw(Obj* obj) {
 	glUniformMatrix4fv(obj->_uni[Obj::MODEL], 1, GL_FALSE, glm::value_ptr(obj->_acc));
 	glUniformMatrix4fv(obj->_uni[Obj::VIEW], 1, GL_FALSE, glm::value_ptr(obj->_view));
 
-	glUniform1ui(obj->_uni[Obj::T], scn::_t);
+	glUniform1ui(obj->_uni[Obj::T], disp->_t);
 
 	glUniform1ui(obj->_uni[Obj::ACTIVE], obj->_active);
 

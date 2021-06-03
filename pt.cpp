@@ -20,7 +20,7 @@ void ptDraw(Obj* pt) {
 	glUniformMatrix4fv(pt->_uni[Obj::MODEL], 1, GL_FALSE, glm::value_ptr(pt->_acc));
 	glUniformMatrix4fv(pt->_uni[Obj::VIEW], 1, GL_FALSE, glm::value_ptr(pt->_view));
 
-	glUniform1ui(pt->_uni[Obj::T], scn::_t);
+	glUniform1ui(pt->_uni[Obj::T], disp->_t);
 
 	glUniform1ui(pt->_uni[Obj::ACTIVE], pt->_active);
 

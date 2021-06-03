@@ -64,8 +64,6 @@ std::vector<Obj*> scn::obj;
 std::vector<Obj*> scn::line;
 std::vector<Obj*> scn::pt;
 
-unsigned int scn::_t = 0;
-
 CArr streetSign;
 CArr streetSignGet() {
 	return streetSign;
