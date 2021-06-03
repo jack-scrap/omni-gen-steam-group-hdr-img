@@ -340,7 +340,7 @@ bool util::phys::aabb(Obj* p, Obj* q) {
 }
 
 bool util::phys::aabbGround(Obj* obj) {
-	glm::vec3 bottom = util::matr::apply(glm::vec3(0.0, obj->_rng[Y][MIN], 0.0), obj->_acc);
+	glm::vec3 bottom = util::matr::apply(glm::vec3(0.0, obj->_bound[Y][MIN], 0.0), obj->_acc);
 
 	return bottom[Y] < 0.0;
 }

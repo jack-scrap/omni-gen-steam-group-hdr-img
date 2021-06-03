@@ -77,11 +77,11 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 	// bounds
 	for (int i = 0; i < 3; i++) {
 		for (int b = 0; b < 2; b++) {
-			_->_rng[i][b] = 0.0;
+			_->_bound[i][b] = 0.0;
 		}
 	}
 
-	util::mesh::aabb(_->_rng, vtc, noPrim * 3);
+	util::mesh::aabb(_->_bound, vtc, noPrim * 3);
 
 	// rig
 	objAcc(_, glm::mat4(1.0));
@@ -145,11 +145,11 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 	// bounds
 	for (int i = 0; i < 3; i++) {
 		for (int b = 0; b < 2; b++) {
-			_->_rng[i][b] = 0.0;
+			_->_bound[i][b] = 0.0;
 		}
 	}
 
-	util::mesh::aabb(_->_rng, vtc, noPrim * 3);
+	util::mesh::aabb(_->_bound, vtc, noPrim * 3);
 
 	// rig
 	objAcc(_, glm::mat4(1.0));
