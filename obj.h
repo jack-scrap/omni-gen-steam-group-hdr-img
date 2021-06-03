@@ -26,8 +26,9 @@ typedef struct Obj {
 
 	Prog _prog;
 
-	GLint _attr[3];
-	GLint* _uni;
+	GLint
+		_attr[3],
+		* _uni;
 
 	GLfloat _rng[3][2];
 
