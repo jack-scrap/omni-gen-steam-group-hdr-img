@@ -80,7 +80,6 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 			_->_bound[i][b] = 0.0;
 		}
 	}
-
 	util::mesh::aabb(_->_bound, vtc, noPrim * 3);
 
 	// rig
@@ -148,7 +147,6 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 			_->_bound[i][b] = 0.0;
 		}
 	}
-
 	util::mesh::aabb(_->_bound, vtc, noPrim * 3);
 
 	// rig
