@@ -755,7 +755,7 @@ glm::vec3 util::json::vec(nlohmann::json deser) {
 	return _;
 }
 
-StreetLight* util::json::streetLight(nlohmann::json deser) {
+StreetSign* util::json::streetSign(nlohmann::json deser) {
 	std::vector<bool> pass = util::json::ls<bool>(deser["pass"]);
 
 	unsigned int no = pass.size();
@@ -774,12 +774,12 @@ StreetLight* util::json::streetLight(nlohmann::json deser) {
 		rot = util::json::vec(deser["rot"]);
 	}
 
-	StreetLight* _ = streetLightMk({
+	StreetSign* _ = streetSignMk({
 		arr,
 		no
 	}, loc, rot);
 
-	omni::assertion(!util::phys::aabbGround(_->_parent), "Street light clipping into ground plane");
+	omni::assertion(!util::phys::aabbGround(_->_parent), "Street sign clipping into ground plane");
 
 	return _;
 }

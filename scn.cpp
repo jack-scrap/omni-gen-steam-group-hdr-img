@@ -18,7 +18,7 @@
 #include "omni.h"
 #include "line.h"
 #include "dict.h"
-#include "street_light.h"
+#include "street_sign.h"
 #include "road.h"
 #include "i_beam.h"
 
@@ -66,9 +66,9 @@ std::vector<Obj*> scn::pt;
 
 unsigned int scn::_t = 0;
 
-CArr streetLight;
-CArr streetLightGet() {
-	return streetLight;
+CArr streetSign;
+CArr streetSignGet() {
+	return streetSign;
 }
 
 CArr boundRng;
@@ -338,14 +338,14 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	// control flow
-	streetLight._sz = deser["ctrl"].size();
-	streetLight._ptr = (StreetLight**) malloc(streetLight._sz * sizeof (StreetLight*));
+	streetSign._sz = deser["ctrl"].size();
+	streetSign._ptr = (StreetSign**) malloc(streetSign._sz * sizeof (StreetSign*));
 
 	int i = 0;
 	for (const auto& entry : deser["ctrl"].items()) {
-		StreetLight* _ = util::json::streetLight(entry.value());
+		StreetSign* _ = util::json::streetSign(entry.value());
 
-		((StreetLight**) streetLight._ptr)[i] = _;
+		((StreetSign**) streetSign._ptr)[i] = _;
 		i++;
 
 		obj.push_back(_->_parent);

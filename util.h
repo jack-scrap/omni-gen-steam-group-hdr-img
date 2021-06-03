@@ -14,7 +14,7 @@
 #include "var.h"
 #include "lim.h"
 #include "cone.h"
-#include "street_light.h"
+#include "street_sign.h"
 
 namespace util {
 	namespace fs {
@@ -94,7 +94,7 @@ namespace util {
 
 		glm::vec3 vec(nlohmann::json deser);
 
-		StreetLight* streetLight(nlohmann::json deser);
+		StreetSign* streetSign(nlohmann::json deser);
 
 		std::vector<Obj*> path(nlohmann::json deser, nlohmann::json node);
 

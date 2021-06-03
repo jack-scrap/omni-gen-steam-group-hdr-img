@@ -3,7 +3,7 @@ from ctypes import *
 _truck = CDLL('libtruck.so')
 _crane = CDLL('libcrane.so')
 _cargo_ship = CDLL('libcargo_ship.so')
-_street_light = CDLL('libstreet_light.so')
+_street_sign = CDLL('libstreet_sign.so')
 _scn = CDLL('libscn.so')
 
 class _CArr(Structure):
@@ -288,30 +288,30 @@ if _cargoShipGet()._sz:
 	else:
 		cargoShip = _CargoShip(_cargoShipPtr[0])
 
-class _StreetLight(_Obj):
+class _(_Obj):
 	_fields_ = [
 		('_pass', POINTER(c_bool)),
 		('_no', c_int)
 	]
 
 	def toggle(self, i):
-		_streetLightToggle(self._ptr, i)
+		_streetSignToggle(self._ptr, i)
 
 # control-flow
-_streetLightGet = _scn.streetLightGet
-_streetLightGet.restype = _CArr
-_streetLightGet.argtypes = None
+_streetSignGet = _scn.streetSignGet
+_streetSignGet.restype = _CArr
+_streetSignGet.argtypes = None
 
-_streetLightToggle = _street_light.streetLightToggle
-_streetLightToggle.restype = c_uint
-_streetLightToggle.argtypes = None
+_streetSignToggle = _street_sign.streetSignToggle
+_streetSignToggle.restype = c_uint
+_streetSignToggle.argtypes = None
 
-_streetLightPtr = cast(_streetLightGet()._ptr, POINTER(_StreetLight))
+_streetSignPtr = cast(_streetSignGet()._ptr, POINTER(_))
 
-street_light = []
+street_sign = []
 i = 0
-while i < _streetLightGet()._sz:
-	street_light.append(_StreetLight(_streetLightPtr[i]))
+while i < _streetSignGet()._sz:
+	street_sign.append(_(_streetSignPtr[i]))
 
 	i += sizeof(c_void_p)
 

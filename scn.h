@@ -13,7 +13,7 @@
 #include "arr.h"
 #include "lim.h"
 #include "cone.h"
-#include "street_light.h"
+#include "street_sign.h"
 
 extern Disp* disp;
 
@@ -46,8 +46,8 @@ extern "C" CArr truckGet();
 
 extern "C" CArr cargoShipGet();
 
-extern "C" CArr streetLight;
-extern "C" CArr streetLightGet();
+extern "C" CArr streetSign;
+extern "C" CArr streetSignGet();
 
 extern "C" CArr boundRng;
 extern "C" CArr boundRngGet();
