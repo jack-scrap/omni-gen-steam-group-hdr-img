@@ -185,7 +185,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 
 		if (entry["name"] == "cargo_ship") {
 			CBuff arr = util::json::arr::arr(entry["data"]["block"]);
-			Arr* init = arrMk((char*) arr._ptr, arr._x, std::string(entry["data"]["name"]));
+			Arr* init = arrayMk((char*) arr._ptr, arr._x, std::string(entry["data"]["name"]));
 
 			CargoShip* _ = cargoShipMk(init, loc, rot);
 
@@ -206,7 +206,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 					0
 				};
 			}
-			Arr* arr = arrMk((char*) init._ptr, init._x, "", glm::vec3(0.0, layout::pad * 2, -((layout::idx[X] / 2) + (layout::stroke * 2) + (layout::margin * 2 * 2))), glm::vec3(0.0, -M_PI / 2, 0.0));
+			Arr* arr = arrayMk((char*) init._ptr, init._x, "", glm::vec3(0.0, layout::pad * 2, -((layout::idx[X] / 2) + (layout::stroke * 2) + (layout::margin * 2 * 2))), glm::vec3(0.0, -M_PI / 2, 0.0));
 
 			Truck* _ = truckMk(arr, loc, rot);
 

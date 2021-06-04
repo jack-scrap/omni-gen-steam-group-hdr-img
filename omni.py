@@ -27,7 +27,7 @@ class _Idx(Structure):
 		('_data', POINTER(_Cont))
 	]
 
-class _Arr(Structure):
+class _Array(Structure):
 	_fields_ = [
 		('_data', POINTER(POINTER(_Idx))),
 		('_x', c_uint),
@@ -76,11 +76,11 @@ for i in range(_noData):
 		goal[id] = idx
 
 	if _type[i] == 1:
-		ptr = cast(_data[i].contents._ptr, POINTER(_Arr))
-		arr = _Arr(ptr.contents._data, ptr.contents._x, ptr.contents._y, ptr.contents._loc)
+		ptr = cast(_data[i].contents._ptr, POINTER(_Array))
+		array = _Array(ptr.contents._data, ptr.contents._x, ptr.contents._y, ptr.contents._loc)
 
-		data[id] = arr
-		goal[id] = arr
+		data[id] = array
+		goal[id] = array
 
 # bound
 class _Lim(Structure):
@@ -175,7 +175,7 @@ _craneGrab.argtypes = None
 
 class _Truck(_Obj):
 	_fields_ = [
-		('_data', POINTER(_Arr)),
+		('_data', POINTER(_Array)),
 		('_loc', c_float * 3),
 		('_ang', c_float),
 		('_rngWheel', c_float * 2)
@@ -211,7 +211,7 @@ _truckMv.argtypes = [
 
 class _CargoShip(_Obj):
 	_fields_ = [
-		('_data', POINTER(_Arr)),
+		('_data', POINTER(_Array)),
 		('_loc', c_float * 3)
 	]
 
