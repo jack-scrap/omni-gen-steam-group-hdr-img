@@ -7,6 +7,8 @@
 #include <SDL2/SDL.h>
 #include <vector>
 #include <string>
+#include <sys/types.h>
+#include <sys/stat.h>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/string_cast.hpp>
 
@@ -92,6 +94,12 @@ int main(int argc, char** argv) {
 		stage = 0;
 	}
 	if (argv[2]) {
+		std::string name = argv[2];
+
+		std::string path = std::string("lvl/") + omni::stage[std::stoi(argv[1])] + std::string("/") + name + std::string(".json");
+		std::ifstream in(path);
+		omni::assertion(in.good(), "Couldn't initialize; no level `" + std::to_string(std::stoi(argv[2])) + std::string("` in stage `") + omni::stage[std::stoi(argv[1])] + std::string("`"));
+
 		lvl = atoi(argv[2]);
 	} else {
 		lvl = 0;
