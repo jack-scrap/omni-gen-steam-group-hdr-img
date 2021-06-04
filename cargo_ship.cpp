@@ -39,9 +39,13 @@ CargoShip* cargoShipMk(char* init, glm::vec3 loc, glm::vec3 rot) {
 	child[CargoShip::BED] = objMk((GLfloat*) vtc, (GLushort*) idc, 2 * 3, "obj", "dir", false, glm::vec3(-(sz[X] / 2), 0.0, -(sz[Y] / 2)));
 
 	// data
-	_->_data = arrMk(init, _->_x, _->_y, "state", glm::vec3(-(layout::stride[Y] * _->_x * _->_y), 1.0, layout::stride[X]));
+	_->_data = nullptr;
 
-	child[CargoShip::DATA] = _->_data->_parent;
+	if (_->_data) {
+		child[CargoShip::DATA] = _->_data->_parent;
+	} else {
+		child[CargoShip::DATA] = nullptr;
+	}
 
 	_->_parent = objMk("cargo_ship", "obj", "dir", true, child, sizeof child / sizeof *child, loc, rot);
 
