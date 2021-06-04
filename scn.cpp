@@ -224,6 +224,10 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	// path
+	for (const auto& node : deser["road"]["node"]) {
+		omni::assertion(node[Y] >= 0, std::string("Path node `") + node.dump() + std::string("` below ground plane"));
+	}
+
 	for (const nlohmann::json::array_t& strip : deser["road"]["path"]) {
 		std::vector<Obj*> _ = util::json::path(strip, deser["road"]["node"]);
 
