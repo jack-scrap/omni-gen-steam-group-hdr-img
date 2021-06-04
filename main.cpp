@@ -84,8 +84,9 @@ int main(int argc, char** argv) {
 		layout::view[X] + (state::ln * layout::dim[X]), layout::view[Y]
 	}, col[false]);
 
-	unsigned int stage;
-	unsigned int lvl;
+	unsigned int
+		stage,
+		lvl;
 	if (argv[1]) {
 		omni::assertion(omni::stage[atoi(argv[1])] != "", "Could not initialize; no corresponding section for `" + std::to_string(std::stoi(argv[1])) + "`");
 
