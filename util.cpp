@@ -69,8 +69,8 @@ void util::fs::write(std::string name, std::vector<std::string> buff) {
 	std::ofstream f;
 	f.open(name);
 
-	for (const std::string& l : buff) {
-		f << l + '\n';
+	for (const std::string& line : buff) {
+		f << line + '\n';
 	}
 
 	f.close();
@@ -380,8 +380,8 @@ std::vector<std::string> util::str::split(std::string buff, char delim) {
 
 std::string util::str::join(std::vector<std::string> buff) {
 	std::string _;
-	for (const std::string& l : buff) {
-		_ += l + '\n';
+	for (const std::string& line : buff) {
+		_ += line + '\n';
 	}
 
 	return _;
