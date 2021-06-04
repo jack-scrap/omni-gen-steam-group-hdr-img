@@ -184,8 +184,8 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		}
 
 		if (entry["name"] == "cargo_ship") {
-			CBuff arr = util::json::arr::arr(entry["data"]);
-			Arr* init = arrMk((char*) arr._ptr, arr._x);
+			CBuff arr = util::json::arr::arr(entry["data"]["block"]);
+			Arr* init = arrMk((char*) arr._ptr, arr._x, std::string(entry["data"]["name"]));
 
 			CargoShip* _ = cargoShipMk(init, loc, rot);
 

@@ -2,10 +2,13 @@
 	"vehicle": [
 		{
 			"name": "cargo_ship",
-			"data": [
-				1,
-				1
-			],
+			"data": {
+				"name": "state",
+				"block": [
+					1,
+					1
+				]
+			},
 			"loc": [
 				-10,
 				-1,
