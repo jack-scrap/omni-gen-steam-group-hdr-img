@@ -44,7 +44,7 @@ std::vector<std::string> util::fs::rd<std::vector<std::string>>(std::string name
 	in.open("./" + name);
 
 	if (in.fail()) {
-		omni::err("Couldn't open " + name + "; file not found");
+		omni::err("Could not open " + name + "; file not found");
 	}
 
 	std::vector<std::string> cont;
@@ -172,7 +172,7 @@ std::vector<GLfloat> util::mesh::rd::vtc(std::string name) {
 		std::vector<std::string> tok = util::str::split(buff[l], ' ');
 
 		if (tok[0] == "v") {
-			omni::assertion(tok.size() == 1 + 3, std::string("Couldn't load object `" ) + name + std::string("`; inappropriate size of vertex position at [" ) + std::to_string(l) + std::string("]"));
+			omni::assertion(tok.size() == 1 + 3, std::string("Could not load object `" ) + name + std::string("`; inappropriate size of vertex position at [" ) + std::to_string(l) + std::string("]"));
 
 			for (int i = 1; i < 1 + 3; i++) {
 				_.push_back(std::stof(tok[i]));
@@ -192,7 +192,7 @@ std::vector<GLfloat> util::mesh::rd::st(std::string name) {
 		std::vector<std::string> tok = util::str::split(buff[l], ' ');
 
 		if (tok[0] == "vt") {
-			omni::assertion(tok.size() == 1 + 2, std::string("Couldn't load object `" ) + name + std::string("`; inappropriate size of texture coordinate at [" ) + std::to_string(l) + std::string("]"));
+			omni::assertion(tok.size() == 1 + 2, std::string("Could not load object `" ) + name + std::string("`; inappropriate size of texture coordinate at [" ) + std::to_string(l) + std::string("]"));
 
 			for (int i = 1; i < 1 + 2; i++) {
 				_.push_back(std::stof(tok[i]));
@@ -212,7 +212,7 @@ std::vector<GLfloat> util::mesh::rd::norm(std::string name) {
 		std::vector<std::string> tok = util::str::split(buff[l], ' ');
 
 		if (tok[0] == "vn") {
-			omni::assertion(tok.size() == 1 + 3, std::string("Couldn't load object `" ) + name + std::string("`; inappropriate size of normal at [" ) + std::to_string(l) + std::string("]"));
+			omni::assertion(tok.size() == 1 + 3, std::string("Could not load object `" ) + name + std::string("`; inappropriate size of normal at [" ) + std::to_string(l) + std::string("]"));
 
 			for (int i = 1; i < 1 + 3; i++) {
 				_.push_back(std::stof(tok[i]));
@@ -315,7 +315,7 @@ std::vector<GLushort> util::mesh::rd::idc(std::string name, unsigned int attr) {
 		std::vector<std::string> tok = util::str::split(buff[l], ' ');
 
 		if (tok[0] == "f") {
-			omni::assertion(tok.size() == 1 + 3, std::string("Couldn't load object `" ) + name + std::string("`; inappropriate number of indices for triangle primitive at [" ) + std::to_string(l) + std::string("]"));
+			omni::assertion(tok.size() == 1 + 3, std::string("Could not load object `" ) + name + std::string("`; inappropriate number of indices for triangle primitive at [" ) + std::to_string(l) + std::string("]"));
 
 			for (int i = 1; i < 1 + 3; i++) {
 				std::vector<std::string> type = util::str::split(tok[i], '/');

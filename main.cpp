@@ -87,7 +87,7 @@ int main(int argc, char** argv) {
 	unsigned int stage;
 	unsigned int lvl;
 	if (argv[1]) {
-		omni::assertion(omni::stage[atoi(argv[1])] != "", "Couldn't initialize; no corresponding section for `" + std::to_string(std::stoi(argv[1])) + "`");
+		omni::assertion(omni::stage[atoi(argv[1])] != "", "Could not initialize; no corresponding section for `" + std::to_string(std::stoi(argv[1])) + "`");
 
 		stage = atoi(argv[1]);
 	} else {
@@ -98,7 +98,7 @@ int main(int argc, char** argv) {
 
 		std::string path = std::string("lvl/") + omni::stage[std::stoi(argv[1])] + std::string("/") + name + std::string(".json");
 		std::ifstream in(path);
-		omni::assertion(in.good(), "Couldn't initialize; no level `" + std::to_string(std::stoi(argv[2])) + std::string("` in stage `") + omni::stage[std::stoi(argv[1])] + std::string("`"));
+		omni::assertion(in.good(), "Could not initialize; no level `" + std::to_string(std::stoi(argv[2])) + std::string("` in stage `") + omni::stage[std::stoi(argv[1])] + std::string("`"));
 
 		lvl = atoi(argv[2]);
 	} else {
