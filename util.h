@@ -35,7 +35,7 @@ namespace util {
 
 		std::string base(std::string buff);
 
-		bool w(std::string name);
+		std::string perm(std::string name);
 	}
 
 	namespace mesh {

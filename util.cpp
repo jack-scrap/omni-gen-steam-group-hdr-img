@@ -58,9 +58,9 @@ std::vector<std::string> util::fs::rd<std::vector<std::string>>(std::string name
 }
 
 void util::fs::write(std::string name, std::vector<std::string> buff) {
-	bool w = util::fs::w(name);
+	std::string stat = util::fs::perm(name);
 
-	if (!w) {
+	if (stat[1] != 'w') {
 		omni::err("Could not write " + name + "; file read-only");
 
 		return;
@@ -142,12 +142,19 @@ std::string util::fs::base(std::string buff) {
 	return util::str::split(f, '.')[0];
 }
 
-bool util::fs::w(std::string name) {
-	struct stat info;
-	stat(name.c_str(), &info);
-	int perm = info.st_mode & S_IWUSR;
+std::string util::fs::perm(std::string name) {
+	std::string _;
 
-	return perm == 128;
+	struct stat f;
+	if (stat(name.c_str(), &f) < 0) {
+		return _;
+	}
+
+	_.push_back(f.st_mode & S_IRUSR ? 'r' : '-');
+	_.push_back(f.st_mode & S_IWUSR ? 'w' : '-');
+	_.push_back(f.st_mode & S_IXUSR ? 'x' : '-');
+
+	return _;
 }
 
 std::vector<GLfloat> util::mesh::plane(glm::vec2 sz) {

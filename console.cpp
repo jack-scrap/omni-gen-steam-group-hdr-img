@@ -57,7 +57,7 @@ Console::Console(std::string cwd, std::string name, std::vector<std::string> buf
 
 		_name = name;
 
-		_w = util::fs::w(_name);
+		_w = util::fs::perm(_name)[1] == 'w';
 
 		if (!_w) {
 			std::string post;
