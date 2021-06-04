@@ -1,0 +1,56 @@
+{
+	"data": {
+		"state": {
+			"vector": [
+				[
+					[0]
+				], [
+					[3]
+				], [
+					[3]
+				], [
+					[3]
+				]
+			]
+		},
+		"scalar": {
+			"block": 7
+		}
+	},
+	"goal": {
+		"vector": {
+			"block": [
+				[
+					[7]
+				[
+					[3]
+				], [
+					[3]
+				], [
+					[3]
+				]
+			]
+		},
+		"scalar": {
+			"block": 3
+		}
+	},
+	"vehicle": [
+	],
+	"bound": {
+		"rng": [
+			{
+				"min": {
+					"axis": "Z",
+					"val": -11.64,
+					"status": "halt"
+				},
+				"max": {
+					"axis": "Z",
+					"val": 11.64,
+					"status": "halt"
+				}
+			}
+		]
+	}
+}
