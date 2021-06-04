@@ -227,8 +227,8 @@ void util::mesh::strip(GLushort idc[2][3]) {
 	}
 }
 
-void util::mesh::aabb(GLfloat bound[3][2], GLfloat* vtc, unsigned int noVtc) {
-	for (int v = 0; v < noVtc; v++) {
+void util::mesh::aabb(GLfloat bound[3][2], GLfloat* vtc, unsigned int noPrim) {
+	for (int v = 0; v < noPrim; v++) {
 		for (int i = 0; i < 3; i++) {
 			if (vtc[(v + 3) + i] < bound[i][MIN]) {
 				bound[i][MIN] = vtc[(v + 3) + i];
