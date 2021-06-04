@@ -172,6 +172,8 @@ std::vector<GLfloat> util::mesh::rd::vtc(std::string name) {
 		std::vector<std::string> tok = util::str::split(l, ' ');
 
 		if (tok[0] == "v") {
+			omni::assertion(tok.size() == 1 + 3, "Couldn't load object `" + name + "`; inappropriate size of vertex position");
+
 			for (int i = 1; i < 1 + 3; i++) {
 				_.push_back(std::stof(tok[i]));
 			}
@@ -190,6 +192,8 @@ std::vector<GLfloat> util::mesh::rd::st(std::string name) {
 		std::vector<std::string> tok = util::str::split(l, ' ');
 
 		if (tok[0] == "vt") {
+			omni::assertion(tok.size() == 1 + 2, "Couldn't load object `" + name + "`; inappropriate size of texture coordinate");
+
 			for (int i = 1; i < 1 + 2; i++) {
 				_.push_back(std::stof(tok[i]));
 			}
@@ -208,6 +212,8 @@ std::vector<GLfloat> util::mesh::rd::norm(std::string name) {
 		std::vector<std::string> tok = util::str::split(l, ' ');
 
 		if (tok[0] == "vn") {
+			omni::assertion(tok.size() == 1 + 3, "Couldn't load object `" + name + "`; inappropriate size of normal");
+
 			for (int i = 1; i < 1 + 3; i++) {
 				_.push_back(std::stof(tok[i]));
 			}
