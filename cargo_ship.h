@@ -10,9 +10,9 @@ typedef struct CargoShip {
 		_x = 6,
 		_y = 2;
 
-	GLfloat _speed = 0.1;
-
 	Obj* _parent;
+
+	static GLfloat _speed;
 
 	enum {
 		BED,

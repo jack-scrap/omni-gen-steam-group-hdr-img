@@ -7,6 +7,8 @@
 #include "arr.h"
 #include "util.h"
 
+GLfloat CargoShip::_speed = 0.1;
+
 CargoShip* cargoShipMk(char* init, glm::vec3 loc, glm::vec3 rot) {
 	CargoShip* _ = (CargoShip*) malloc(sizeof (CargoShip));
 

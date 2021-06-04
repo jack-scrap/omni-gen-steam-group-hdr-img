@@ -15,6 +15,8 @@ GLushort Truck::_idx[1] = {
 	0
 };
 
+GLfloat Truck::_speed = 0.3;
+
 Truck* truckMk(CArr init, glm::vec3 loc, glm::vec3 rot) {
 	Truck* _ = (Truck*) malloc(sizeof (Truck));
 

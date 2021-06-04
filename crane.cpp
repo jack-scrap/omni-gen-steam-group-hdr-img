@@ -12,6 +12,8 @@
 #include "state.h"
 #include "omni.h"
 
+GLfloat Crane::_speed = 0.2;
+
 Crane* craneMk(char init, glm::vec3 loc, glm::vec3 rot) {
 	Crane* _ = (Crane*) malloc(sizeof (Crane));
 

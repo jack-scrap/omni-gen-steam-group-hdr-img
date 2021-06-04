@@ -18,9 +18,9 @@ typedef struct Crane {
 		13.8
 	};
 
-	GLfloat _speed = 0.2;
-
 	Obj* _parent;
+
+	static GLfloat _speed;
 
 	enum {
 		HEAD,
