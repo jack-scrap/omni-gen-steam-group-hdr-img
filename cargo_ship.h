@@ -7,8 +7,8 @@ typedef struct CargoShip {
 	Arr* _data;
 	GLfloat _loc[3];
 	static constexpr unsigned int
-		_x = 6,
-		_y = 2;
+		_x = 10,
+		_y = 4;
 
 	Obj* _parent;
 
