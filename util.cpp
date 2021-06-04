@@ -218,16 +218,11 @@ std::vector<GLfloat> util::mesh::rd::norm(std::string name) {
 }
 
 void util::mesh::strip(GLushort idc[2][3]) {
-	bool far = false;
+	const int roof = (2 * 2) - 1;
 
 	for (int t = 0; t < 2; t++) {
 		for (int i = 0; i < 3; i++) {
-			int
-				start = (far * 2) + (2 * t),
-				step = (i * (t ? -1 : 1)),
-				last = (3 * (t && i == 2));
-
-			idc[t][i] = start + step + last;
+			idc[t][i] = (t * roof) + ((t ? -1 : 1) * i);
 		}
 	}
 }
