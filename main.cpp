@@ -85,6 +85,8 @@ int main(int argc, char** argv) {
 	unsigned int stage;
 	unsigned int lvl;
 	if (argv[1]) {
+		omni::assertion(omni::stage[atoi(argv[1])] != "", "Couldn't initialize; no corresponding section for `" + std::to_string(std::stoi(argv[1])) + "`");
+
 		stage = atoi(argv[1]);
 	} else {
 		stage = 0;
