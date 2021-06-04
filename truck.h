@@ -35,10 +35,7 @@ typedef struct Truck {
 	};
 } Truck;
 
-Truck* truckMk(CArr init = {
-	nullptr,
-	0
-}, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
+Truck* truckMk(Arr* init, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
 
 void truckAnim(Truck* truck, glm::vec3 loc, glm::vec3 rot);
 

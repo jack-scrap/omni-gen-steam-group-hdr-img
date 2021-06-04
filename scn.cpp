@@ -205,10 +205,9 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				};
 			}
 
-			Truck* _ = truckMk({
-				init._ptr,
-				init._x
-			}, loc, rot);
+			Arr* arr = arrMk((char*) init._ptr, init._x, "", glm::vec3(0.0, layout::pad * 2, -((layout::idx[X] / 2) + (layout::stroke * 2) + (layout::margin * 2 * 2))), glm::vec3(0.0, -M_PI / 2, 0.0));
+
+			Truck* _ = truckMk(arr, loc, rot);
 
 			omni::assertion(!util::phys::aabbGround(_->_parent), "Truck clipping into ground plane");
 
