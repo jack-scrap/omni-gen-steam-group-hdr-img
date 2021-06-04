@@ -2,7 +2,7 @@
 
 #include "mesh.h"
 
-Mesh* meshMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noPrim) {
+Mesh* meshMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim) {
 	Mesh* _ = (Mesh*) malloc(sizeof (Mesh));
 
 	_->_noPrim = noPrim;
@@ -12,7 +12,7 @@ Mesh* meshMk(GLfloat* vtc, unsigned int noVtc, GLushort* idc, unsigned int noPri
 
 	glGenBuffers(1, &_->_id[Mesh::VBO]);
 	glBindBuffer(GL_ARRAY_BUFFER, _->_id[Mesh::VBO]);
-	glBufferData(GL_ARRAY_BUFFER, noVtc * sizeof (GLfloat), vtc, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, noPrim * 3 * sizeof (GLfloat), vtc, GL_STATIC_DRAW);
 
 	glGenBuffers(1, &_->_id[Mesh::IBO]);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _->_id[Mesh::IBO]);

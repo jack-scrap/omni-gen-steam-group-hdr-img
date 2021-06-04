@@ -34,7 +34,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 	_->_noChild = 0;
 	_->_v = 0.0;
 
-	_->_mesh = meshMk(vtc, noPrim * 3, idc, noPrim);
+	_->_mesh = meshMk(vtc, idc, noPrim);
 
 	// matrix
 	_->_model = glm::mat4(1.0);
@@ -101,7 +101,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 	}
 	_->_v = 0.0;
 
-	_->_mesh = meshMk(vtc, noPrim * 3, idc, noPrim);
+	_->_mesh = meshMk(vtc, idc, noPrim);
 
 	// matrix
 	_->_model = glm::mat4(1.0);
@@ -269,7 +269,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 	_->_noChild = 0;
 	_->_v = 0.0;
 
-	_->_mesh = meshMk(vtc, noPrim * 3, idc, noPrim);
+	_->_mesh = meshMk(vtc, idc, noPrim);
 
 	// matrix
 	_->_model = glm::mat4(1.0);
