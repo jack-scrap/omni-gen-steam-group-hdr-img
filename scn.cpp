@@ -184,9 +184,10 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		}
 
 		if (entry["name"] == "cargo_ship") {
-			CBuff init = util::json::arr::arr(entry["data"]);
+			CBuff arr = util::json::arr::arr(entry["data"]);
+			Arr* init = arrMk((char*) arr._ptr, arr._x);
 
-			CargoShip* _ = cargoShipMk((char*) init._ptr, loc, rot);
+			CargoShip* _ = cargoShipMk(init, loc, rot);
 
 			cargoShip._sz += sizeof (CargoShip*);
 			cargoShip._ptr = (CargoShip**) realloc(cargoShip._ptr, cargoShip._sz);

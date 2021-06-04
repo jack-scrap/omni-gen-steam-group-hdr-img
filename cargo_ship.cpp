@@ -13,7 +13,7 @@ unsigned int
 
 GLfloat CargoShip::_speed = 0.1;
 
-CargoShip* cargoShipMk(char* init, glm::vec3 loc, glm::vec3 rot) {
+CargoShip* cargoShipMk(Arr* init, glm::vec3 loc, glm::vec3 rot) {
 	CargoShip* _ = (CargoShip*) malloc(sizeof (CargoShip));
 
 	// bed
@@ -39,7 +39,7 @@ CargoShip* cargoShipMk(char* init, glm::vec3 loc, glm::vec3 rot) {
 	child[CargoShip::BED] = objMk((GLfloat*) vtc, (GLushort*) idc, 2 * 3, "obj", "dir", false, glm::vec3(-(sz[X] / 2), 0.0, -(sz[Y] / 2)));
 
 	// data
-	_->_data = nullptr;
+	_->_data = init;
 
 	if (_->_data) {
 		child[CargoShip::DATA] = _->_data->_parent;

@@ -21,6 +21,6 @@ typedef struct CargoShip {
 	};
 } CargoShip;
 
-CargoShip* cargoShipMk(char* init, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
+CargoShip* cargoShipMk(Arr* init, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
 
 extern "C" void cargoShipMv(CargoShip* cargoShip, float delta);
