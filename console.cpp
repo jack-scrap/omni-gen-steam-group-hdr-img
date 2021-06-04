@@ -406,6 +406,10 @@ void Console::exec() {
 					omni::err("Current level not complete");
 				}
 			}
+
+			if (_cmd == "quit") {
+				exit(0);
+			}
 		} else {
 			omni::err("Command `" + _cmd + "` not found");
 		}

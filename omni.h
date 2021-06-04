@@ -42,7 +42,8 @@ namespace omni {
 		"set",
 		"save",
 		"run",
-		"next"
+		"next",
+		"quit"
 	};
 
 	enum type {
