@@ -11,7 +11,7 @@ Obj* ptMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string nameVtx,
 }
 
 void ptDraw(Obj* pt) {
-	pt->_view = glm::lookAt(cam._pos, cam._pos + glm::vec3(1000.0, -1000.0, 1000.0), glm::vec3(0, 1, 0));
+	pt->_view = glm::lookAt(cam._pos, cam._pos + glm::vec3(-1000.0, -1000.0, -1000.0), glm::vec3(0, 1, 0));
 	pt->_view = glm::scale(pt->_view, cam._scale);
 
 	glBindVertexArray(pt->_mesh->_id[Mesh::VAO]);

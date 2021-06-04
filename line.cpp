@@ -11,7 +11,7 @@ Obj* lineMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string nameVt
 }
 
 void lineDraw(Obj* line) {
-	line->_view = glm::lookAt(cam._pos, cam._pos + glm::vec3(1000.0, -1000.0, 1000.0), glm::vec3(0, 1, 0));
+	line->_view = glm::lookAt(cam._pos, cam._pos + glm::vec3(-1000.0, -1000.0, -1000.0), glm::vec3(0, 1, 0));
 	line->_view = glm::scale(line->_view, cam._scale);
 
 	glBindVertexArray(line->_mesh->_id[Mesh::VAO]);
