@@ -227,15 +227,17 @@ void util::mesh::strip(GLushort idc[2][3]) {
 	}
 }
 
-void util::mesh::aabb(GLfloat bound[3][2], GLfloat* vtc, unsigned int noPrim) {
-	for (int v = 0; v < noPrim; v++) {
-		for (int i = 0; i < 3; i++) {
-			if (vtc[(v + 3) + i] < bound[i][MIN]) {
-				bound[i][MIN] = vtc[(v + 3) + i];
+void util::mesh::aabb(GLfloat bound[3][2], GLfloat* vtc, GLushort* idc, unsigned int noPrim) {
+	for (int i = 0; i < noPrim; i++) {
+		int idx = idc[i];
+
+		for (int a = 0; a < 3; a++) {
+			if (vtc[(idx * 3) + a] < bound[a][MIN]) {
+				bound[a][MIN] = vtc[(idx * 3) + a];
 			}
 
-			if (vtc[(v + 3) + i] > bound[i][MAX]) {
-				bound[i][MAX] = vtc[(v + 3) + i];
+			if (vtc[(idx * 3) + a] > bound[a][MAX]) {
+				bound[a][MAX] = vtc[(idx * 3) + a];
 			}
 		}
 	}

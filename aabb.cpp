@@ -35,7 +35,8 @@ Aabb* aabbMk(Obj** obj, unsigned int sz) {
 		}
 	}
 
-	util::mesh::aabb(rng, vtc, sz);
+	GLushort* idc;
+	util::mesh::aabb(rng, vtc, idc, sz);
 
 	// generate
 	int i = 0;
