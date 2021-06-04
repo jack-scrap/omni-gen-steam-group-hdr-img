@@ -1,7 +1,7 @@
 script
 
 *.log
-player.json
+stat.json
 
 *.o
 *.so
