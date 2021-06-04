@@ -4,7 +4,7 @@
 
 #include "obj.h"
 #include "pt.h"
-#include "arr.h"
+#include "array.h"
 #include "c_buff.h"
 
 typedef struct Truck {

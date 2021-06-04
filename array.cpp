@@ -1,6 +1,6 @@
 #include <cstdlib>
 
-#include "arr.h"
+#include "array.h"
 #include "border.h"
 #include "state.h"
 #include "layout.h"

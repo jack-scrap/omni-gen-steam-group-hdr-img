@@ -10,7 +10,7 @@
 #include "cam.h"
 #include "console.h"
 #include "var.h"
-#include "arr.h"
+#include "array.h"
 #include "lim.h"
 #include "cone.h"
 #include "street_sign.h"

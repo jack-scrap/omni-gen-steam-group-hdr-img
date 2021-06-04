@@ -4,7 +4,7 @@
 
 #include "cargo_ship.h"
 #include "layout.h"
-#include "arr.h"
+#include "array.h"
 #include "util.h"
 
 GLfloat CargoShip::_speed = 0.1;
