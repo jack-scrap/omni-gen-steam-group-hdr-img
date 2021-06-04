@@ -6,11 +6,12 @@
 typedef struct CargoShip {
 	Arr* _data;
 	GLfloat _loc[3];
-	static constexpr unsigned int
-		_x = 10,
-		_y = 4;
 
 	Obj* _parent;
+
+	static unsigned int
+		_x,
+		_y;
 
 	static GLfloat _speed;
 

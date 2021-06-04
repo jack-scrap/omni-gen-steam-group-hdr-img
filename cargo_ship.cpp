@@ -7,6 +7,10 @@
 #include "array.h"
 #include "util.h"
 
+unsigned int
+	CargoShip::_x = 10,
+	CargoShip::_y = 4;
+
 GLfloat CargoShip::_speed = 0.1;
 
 CargoShip* cargoShipMk(char* init, glm::vec3 loc, glm::vec3 rot) {
