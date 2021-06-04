@@ -43,7 +43,7 @@ namespace util {
 
 		void strip(GLushort idc[2][3]);
 
-		void aabb(GLfloat rng[3][2], GLfloat* vtc, unsigned int noVtc);
+		void aabb(GLfloat bound[3][2], GLfloat* vtc, unsigned int noVtc);
 
 		namespace rect {
 			std::vector<GLfloat> pos(glm::vec2 sz, unsigned int up, bool norm);

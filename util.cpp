@@ -227,15 +227,15 @@ void util::mesh::strip(GLushort idc[2][3]) {
 	}
 }
 
-void util::mesh::aabb(GLfloat rng[3][2], GLfloat* vtc, unsigned int noVtc) {
+void util::mesh::aabb(GLfloat bound[3][2], GLfloat* vtc, unsigned int noVtc) {
 	for (int v = 0; v < noVtc; v++) {
 		for (int i = 0; i < 3; i++) {
-			if (vtc[(v + 3) + i] < rng[i][MIN]) {
-				rng[i][MIN] = vtc[(v + 3) + i];
+			if (vtc[(v + 3) + i] < bound[i][MIN]) {
+				bound[i][MIN] = vtc[(v + 3) + i];
 			}
 
-			if (vtc[(v + 3) + i] > rng[i][MAX]) {
-				rng[i][MAX] = vtc[(v + 3) + i];
+			if (vtc[(v + 3) + i] > bound[i][MAX]) {
+				bound[i][MAX] = vtc[(v + 3) + i];
 			}
 		}
 	}
@@ -335,7 +335,7 @@ bool util::phys::aabb(Obj* p, Obj* q) {
 }
 
 bool util::phys::aabbGround(Obj* obj) {
-	glm::vec3 bottom = util::matr::apply(glm::vec3(0.0, obj->_bound[Y][MIN], 0.0), obj->_acc);
+	glm::vec3 bottom = util::matr::apply(glm::vec3(0.0, obj->_aabb[Y][MIN], 0.0), obj->_acc);
 
 	return bottom[Y] < 0.0;
 }

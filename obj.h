@@ -30,7 +30,7 @@ typedef struct Obj {
 		_attr[3],
 		* _uni;
 
-	GLfloat _bound[3][2];
+	GLfloat _aabb[3][2];
 
 	struct Obj** _child;
 	unsigned int _noChild;
