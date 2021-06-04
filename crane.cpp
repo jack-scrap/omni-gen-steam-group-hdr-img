@@ -14,11 +14,11 @@
 
 GLfloat Crane::_speed = 0.2;
 
-Crane* craneMk(char init, glm::vec3 loc, glm::vec3 rot) {
+Crane* craneMk(Cont* init, glm::vec3 loc, glm::vec3 rot) {
 	Crane* _ = (Crane*) malloc(sizeof (Crane));
 
 	if (init) {
-		_->_data = contMk(init);
+		_->_data = init;
 	} else {
 		_->_data = nullptr;
 	}

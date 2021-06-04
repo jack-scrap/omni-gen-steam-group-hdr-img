@@ -30,7 +30,7 @@ typedef struct Crane {
 	};
 } Crane;
 
-Crane* craneMk(char init = 0, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
+Crane* craneMk(Cont* init, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
 
 extern "C" void craneAnim(Crane* crane, glm::vec3 loc);
 

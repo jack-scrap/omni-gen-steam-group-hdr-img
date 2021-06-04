@@ -164,11 +164,12 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		}
 
 		if (entry["name"] == "crane") {
-			char init;
+			Cont* init;
 			if (entry.contains("data")) {
-				init = util::json::byte(entry["data"]);
+				char c = util::json::byte(entry["data"]);
+				init = contMk(c);
 			} else {
-				init = NULL;
+				init = nullptr;
 			}
 
 			Crane* _ = craneMk(init, loc, rot);
