@@ -307,23 +307,25 @@ std::vector<GLfloat> util::mesh::gen::norm(std::vector<glm::vec3> vtc) {
 }
 
 std::vector<GLushort> util::mesh::rd::idc(std::string name, unsigned int attr) {
-	std::vector<GLushort> obj;
+	std::vector<GLushort> _;
 
 	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>("res/obj/" + name + ".obj");
 
-	for (const std::string& l : buff) {
-		std::vector<std::string> tok = util::str::split(l, ' ');
+	for (int l = 0; l < buff.size(); l++) {
+		std::vector<std::string> tok = util::str::split(buff[l], ' ');
 
 		if (tok[0] == "f") {
+			omni::assertion(tok.size() == 1 + 3, std::string("Couldn't load object `" ) + name + std::string("`; inappropriate number of indices for triangle primitive at [" ) + std::to_string(l) + std::string("]"));
+
 			for (int i = 1; i < 1 + 3; i++) {
 				std::vector<std::string> type = util::str::split(tok[i], '/');
 
-				obj.push_back(std::stoi(type[attr]) - 1);
+				_.push_back(std::stoi(type[attr]) - 1);
 			}
 		}
 	}
 
-	return obj;
+	return _;
 }
 
 glm::mat4 util::matr::rot(glm::mat4 model, glm::vec3 rot) {
