@@ -339,7 +339,16 @@ glm::vec3 util::matr::apply(glm::vec3 vtx, glm::mat4 model) {
 }
 
 bool util::phys::aabb(Obj* p, Obj* q) {
-	bool _ = false;
+	bool _ = true;
+
+	for (int a = 0; a < 3; a++) {
+		if (!(
+			p->_aabb[a][MIN] >= q->_aabb[a][MIN] &&
+			p->_aabb[a][MAX] <= q->_aabb[a][MAX]
+		)) {
+			_ = false;
+		}
+	}
 
 	return _;
 }
