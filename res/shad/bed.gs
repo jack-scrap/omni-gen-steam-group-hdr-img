@@ -90,8 +90,6 @@ void main() {
 	);
 
 	/* draw */
-	vec3 extrude = vec3(0.0, thick, 0.0);
-
 	// face
 	unsigned int idcFace[(2 * 2) + 2] = unsigned int[(2 * 2) + 2](
 		0,
@@ -107,7 +105,7 @@ void main() {
 			unsigned int idx = idcFace[i];
 
 			gl_Position = proj * view * model * vec4(
-				beveled[idx] + (y * extrude),
+				beveled[idx] + (y * vec3(0.0, thick, 0.0)),
 				1.0
 			);
 			_pos = gl_Position.xyz;
@@ -125,7 +123,7 @@ void main() {
 				unsigned int idx = idcStrip[(i + p) % roof];
 
 				gl_Position = proj * view * model * vec4(
-					beveled[idx] + (y * extrude),
+					beveled[idx] + (y * vec3(0.0, thick, 0.0)),
 					1.0
 				);
 				_pos = gl_Position.xyz;

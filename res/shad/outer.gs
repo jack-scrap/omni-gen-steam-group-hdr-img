@@ -102,14 +102,12 @@ void main() {
 	);
 
 	/* draw */
-	vec3 extrude = vec3(0.0, thick, 0.0);
-
 	// strip
 	for (int i = 0; i < roof - 1; i++) {
 		vec3[3] tri = vec3[3](
 			beveled[i],
 			beveled[i + 1],
-			beveled[i + 1] + extrude
+			beveled[i + 1] + vec3(0.0, thick, 0.0)
 		);
 
 		for (int p = 0; p < 2; p++) {
@@ -117,7 +115,7 @@ void main() {
 				unsigned int idx = idcStrip[(i + p) % roof];
 
 				gl_Position = proj * view * model * vec4(
-					beveled[idx] + (y * extrude) + (norm(tri)),
+					beveled[idx] + (y * vec3(0.0, thick, 0.0)) + (norm(tri)),
 					1.0
 				);
 				_pos = gl_Position.xyz;
