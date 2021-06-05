@@ -24,12 +24,12 @@ float[2] idx = float[2](
 
 vec3[2] bevel(vec3[3] strip, float fac) {
 	vec3
-		a = normalize(strip[2] - strip[0]),
-		b = normalize(strip[1] - strip[0]);
+		u = normalize(strip[2] - strip[0]),
+		v = normalize(strip[1] - strip[0]);
 
 	return vec3[2](
-		strip[0] + (a * fac),
-		strip[0] + (b * fac)
+		strip[0] + (u * fac),
+		strip[0] + (v * fac)
 	);
 }
 
