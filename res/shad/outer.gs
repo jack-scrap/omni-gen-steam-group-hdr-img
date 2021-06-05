@@ -2,104 +2,130 @@
 
 layout (points) in;
 
-layout (triangle_strip, max_vertices = 100) out;
-
-out vec3 _pos;
+layout (triangle_strip, max_vertices = 32) out;
 
 uniform mat4
 	model,
 	view,
 	proj;
 
+uniform unsigned int sz;
+
+out vec3 _pos;
+
 float
 	pad = 0.16,
-	stroke = pad * 2;
+	stroke = pad * 2,
 
-vec2 idx = vec2(
+	thick = -(0.2 * 2);
+
+float[2] idx = float[2](
 	2,
 	4
 );
 
-float thick = -(0.2 * 2);
+vec3 norm(vec3[3] tri) {
+	vec3
+		u = tri[1] - tri[0],
+		v = tri[2] - tri[0],
 
-uniform unsigned int sz;
+		orth = cross(u, v),
+
+		_ = normalize(orth);
+
+	return _;
+}
+
+vec3[2] bevel(vec3[3] strip, float fac) {
+	vec3
+		u = strip[2] - strip[0],
+		v = strip[1] - strip[0];
+
+	return vec3[2](
+		strip[0] + (normalize(u) * fac),
+		strip[0] + (normalize(v) * fac)
+	);
+}
 
 void main() {
+	// generate quad
+	vec3[2 * 2] quad;
+	int i = 0;
 	for (int y = 0; y < 2; y++) {
 		for (int x = 0; x < 2; x++) {
-			for (int b = 0; b < 2; b++) {
-				for (int z = 0; z < 2; z++) {
-					gl_Position = proj * view * model * vec4(
-						gl_in[0].gl_Position.xyz + vec3(
-							(bool(x) ? 1 : -1) * (((idx.x / 2) + stroke) + (b * stroke)),
-							y * thick,
-							(z * sz * -(idx.y + stroke)) - (int(bool(b) && bool(z)) * stroke)
-						),
-						1.0
-					);
-					_pos = gl_Position.xyz;
-
-					EmitVertex();
-				}
-			}
-
-			EndPrimitive();
-		}
-
-		for (int b = 0; b < 2; b++) {
-			for (int x = 0; x < 2; x++) {
-				gl_Position = proj * view * model * vec4(
-					gl_in[0].gl_Position.xyz + vec3(
-						(bool(x) ? 1 : -1) * ((idx.x / 2) + stroke),
-						y * thick,
-						(sz * -idx.y) - (b * stroke)
-					),
-					1.0
-				);
-				_pos = gl_Position.xyz;
-
-				EmitVertex();
-			}
-		}
-
-		EndPrimitive();
-	}
-
-	for (int x = 0; x < 2; x++) {
-		for (int y = 0; y < 2; y++) {
-			for (int z = 0; z < 2; z++) {
-				gl_Position = proj * view * model * vec4(
-					gl_in[0].gl_Position.xyz + vec3(
-						(bool(x) ? 1 : -1) * ((idx.x / 2) + stroke),
-						y * thick,
-						z * -((sz * idx.y) + stroke)
-					),
-					1.0
-				);
-				_pos = gl_Position.xyz;
-
-				EmitVertex();
-			}
-		}
-
-		EndPrimitive();
-	}
-
-	for (int y = 0; y < 2; y++) {
-		for (int x = 0; x < 2; x++) {
-			gl_Position = proj * view * model * vec4(
-				gl_in[0].gl_Position.xyz + vec3(
-					(bool(x) ? 1 : -1) * ((idx.x / 2) + stroke),
-					y * thick,
-					(sz * -idx.y) - stroke
-				),
-				1.0
+			quad[i] = vec3(
+				(bool(x) ? 1 : -1) * ((idx[0] / 2) + stroke),
+				0.0,
+				-(y * ((idx[1] * sz) + stroke))
 			);
-			_pos = gl_Position.xyz;
 
-			EmitVertex();
+			i++;
 		}
 	}
 
-	EndPrimitive();
+	// bevel
+	int q = 0;
+	i = 0;
+	vec3[(2 * 2) + 2] beveled;
+	for	(int y = 0; y < 2; y++) {
+		for	(int x = 0; x < 2; x++) {
+			if (bool(y)) {
+				vec3[3] strip;
+				for (int s = 0; s < 3; s++) {
+					strip[s] = quad[(q + (s * (bool(x) ? -1 : 1))) % (2 * 2)];
+				}
+				vec3[2] corner = bevel(strip, 0.16 * 2);
+				for	(int b = 0; b < 2; b++) {
+					beveled[i] = corner[b];
+
+					i++;
+				}
+			} else {
+				beveled[i] = quad[q];
+
+				i++;
+			}
+
+			q++;
+		}
+	}
+
+	// index
+	const unsigned int roof = (2 * 2) + 1 + 1;
+	unsigned int[roof] idcStrip = unsigned int[roof](
+		0,
+		2,
+		3,
+		5,
+		4,
+		1
+	);
+
+	/* draw */
+	vec3 extrude = vec3(0.0, thick, 0.0);
+
+	// strip
+	for (int i = 0; i < roof - 1; i++) {
+		vec3[3] tri = vec3[3](
+			beveled[i],
+			beveled[i + 1],
+			beveled[i + 1] + extrude
+		);
+
+		for (int p = 0; p < 2; p++) {
+			for (int y = 0; y < 2; y++) {
+				unsigned int idx = idcStrip[(i + p) % roof];
+
+				gl_Position = proj * view * model * vec4(
+					beveled[idx] + (y * extrude) + (norm(tri)),
+					1.0
+				);
+				_pos = gl_Position.xyz;
+
+				EmitVertex();
+			}
+		}
+
+		EndPrimitive();
+	}
 }
