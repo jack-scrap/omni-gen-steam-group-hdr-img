@@ -9,6 +9,8 @@ uniform mat4
 	view,
 	proj;
 
+uniform unsigned int sz;
+
 out vec3 _pos;
 
 float
@@ -19,8 +21,6 @@ float[2] idx = float[2](
 	2 + (pad * 2),
 	4 + (pad * 2)
 );
-
-uniform unsigned int sz;
 
 vec3[2] bevel(vec3[3] strip, float fac) {
 	vec3
