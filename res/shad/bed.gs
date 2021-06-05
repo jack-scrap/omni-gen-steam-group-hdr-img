@@ -20,8 +20,8 @@ float
 	thick = -(pad * 2);
 
 float[2] idx = float[2](
-	2 + stroke,
-	4 + stroke
+	2,
+	4
 );
 
 vec3[2] bevel(vec3[3] strip, float fac) {
@@ -42,9 +42,9 @@ void main() {
 	for (int y = 0; y < 2; y++) {
 		for (int x = 0; x < 2; x++) {
 			quad[i] = vec3(
-				(bool(x) ? 1 : -1) * (idx[0] / 2),
+				(bool(x) ? 1 : -1) * ((idx[0] / 2) + stroke),
 				0.0,
-				-(y * idx[1] * sz)
+				-(y * ((idx[1] * sz) + stroke))
 			);
 
 			i++;
