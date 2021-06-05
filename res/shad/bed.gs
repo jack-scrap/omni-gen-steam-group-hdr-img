@@ -17,7 +17,7 @@ float
 	pad = 0.16,
 	stroke = pad * 2,
 
-	thick = -(pad * 2);
+	thick = -(0.2 * 2);
 
 float[2] idx = float[2](
 	2,
