@@ -15,11 +15,13 @@ out vec3 _pos;
 
 float
 	pad = 0.16,
+	stroke = pad * 2,
+
 	thick = -(pad * 2);
 
 float[2] idx = float[2](
-	2 + (pad * 2),
-	4 + (pad * 2)
+	2 + stroke,
+	4 + stroke
 );
 
 vec3[2] bevel(vec3[3] strip, float fac) {
