@@ -29,11 +29,9 @@ vec3 norm(vec3[3] tri) {
 		u = tri[1] - tri[0],
 		v = tri[2] - tri[0],
 
-		orth = cross(u, v),
+		orth = cross(u, v);
 
-		_ = normalize(orth);
-
-	return _;
+	return normalize(orth);
 }
 
 vec3[2] bevel(vec3[3] strip, float fac) {
