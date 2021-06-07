@@ -107,12 +107,12 @@ namespace util {
 
 		Scope dict(nlohmann::json deser);
 
-		namespace arr {
+		namespace array {
 			CBuff dim(nlohmann::json deser, CBuff buff, int i);
 
 			bool euclid(nlohmann::json deser, unsigned int sz);
 
-			CBuff arr(nlohmann::json deser);
+			CBuff array(nlohmann::json deser);
 			CBuff matr2(nlohmann::json deser);
 			CBuff matr3(nlohmann::json deser);
 		}

@@ -184,8 +184,8 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		}
 
 		if (entry["name"] == "cargo_ship") {
-			CBuff arr = util::json::arr::arr(entry["data"]["block"]);
-			Arr* init = arrayMk((char*) arr._ptr, arr._x, std::string(entry["data"]["name"]));
+			CBuff array = util::json::array::array(entry["data"]["block"]);
+			Array* init = arrayMk((char*) array._ptr, array._x, std::string(entry["data"]["name"]));
 
 			CargoShip* _ = cargoShipMk(init, loc, rot);
 
@@ -199,16 +199,16 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 		if (entry["name"] == "truck") {
 			CBuff init;
 			if (entry.contains("data")) {
-				init = util::json::arr::arr(entry["data"]);
+				init = util::json::array::array(entry["data"]);
 			} else {
 				init = {
 					nullptr,
 					0
 				};
 			}
-			Arr* arr = arrayMk((char*) init._ptr, init._x, "", glm::vec3(0.0, layout::pad * 2, -((layout::idx[X] / 2) + (layout::stroke * 2) + (layout::margin * 2 * 2))), glm::vec3(0.0, -M_PI / 2, 0.0));
+			Array* array = arrayMk((char*) init._ptr, init._x, "", glm::vec3(0.0, layout::pad * 2, -((layout::idx[X] / 2) + (layout::stroke * 2) + (layout::margin * 2 * 2))), glm::vec3(0.0, -M_PI / 2, 0.0));
 
-			Truck* _ = truckMk(arr, loc, rot);
+			Truck* _ = truckMk(array, loc, rot);
 
 			omni::assertion(!util::phys::aabbGround(_->_parent), "Truck clipping into ground plane");
 
@@ -265,7 +265,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 				break;
 
 			case omni::ARRAY:
-				_ = ((Arr*) data[i]->_ptr)->_parent;
+				_ = ((Array*) data[i]->_ptr)->_parent;
 
 				break;
 

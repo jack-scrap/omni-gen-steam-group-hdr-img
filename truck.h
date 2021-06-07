@@ -8,7 +8,7 @@
 #include "c_buff.h"
 
 typedef struct Truck {
-	Arr* _data;
+	Array* _data;
 	GLfloat _loc[3];
 
 	float _ang;
@@ -35,7 +35,7 @@ typedef struct Truck {
 	};
 } Truck;
 
-Truck* truckMk(Arr* init, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
+Truck* truckMk(Array* init, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
 
 void truckAnim(Truck* truck, glm::vec3 loc, glm::vec3 rot);
 

@@ -421,7 +421,7 @@ bool util::json::ascii(nlohmann::json deser) {
 		deser <= 127;
 }
 
-CBuff util::json::arr::dim(nlohmann::json deser, CBuff buff, int i) {
+CBuff util::json::array::dim(nlohmann::json deser, CBuff buff, int i) {
 	switch (i) {
 		case 0:
 			buff._z = deser.size();
@@ -446,7 +446,7 @@ CBuff util::json::arr::dim(nlohmann::json deser, CBuff buff, int i) {
 	}
 }
 
-bool util::json::arr::euclid(nlohmann::json deser, unsigned int sz) {
+bool util::json::array::euclid(nlohmann::json deser, unsigned int sz) {
 	bool _;
 
 	if (sz > 3) {
@@ -501,7 +501,7 @@ Scope util::json::dict(nlohmann::json deser) {
 	return _;
 }
 
-CBuff util::json::arr::arr(nlohmann::json deser) {
+CBuff util::json::array::array(nlohmann::json deser) {
 	CBuff _;
 
 	_._x = deser.size();
@@ -520,7 +520,7 @@ CBuff util::json::arr::arr(nlohmann::json deser) {
 	return _;
 }
 
-CBuff util::json::arr::matr2(nlohmann::json deser) {
+CBuff util::json::array::matr2(nlohmann::json deser) {
 	CBuff _;
 
 	_._x = deser[0].size();
@@ -541,7 +541,7 @@ CBuff util::json::arr::matr2(nlohmann::json deser) {
 	return _;
 }
 
-CBuff util::json::arr::matr3(nlohmann::json deser) {
+CBuff util::json::array::matr3(nlohmann::json deser) {
 	CBuff _;
 
 	_._x = deser[0][0].size();
@@ -598,9 +598,9 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val) {
 			switch (val["block"][0].type()) {
 				// 1D
 				case nlohmann::json::value_t::number_unsigned: {
-					CBuff init = util::json::arr::arr(val["block"]);
+					CBuff init = util::json::array::array(val["block"]);
 
-					Arr* val = arrayMk((char*) init._ptr, init._x, key, loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
+					Array* val = arrayMk((char*) init._ptr, init._x, key, loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
 
 					omni::assertion(!(util::phys::aabbGround(val->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
@@ -614,9 +614,9 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val) {
 					switch (val["block"][0][0].type()) {
 						// 2D
 						case nlohmann::json::value_t::number_unsigned: {
-							CBuff init = util::json::arr::matr2(val["block"]);
+							CBuff init = util::json::array::matr2(val["block"]);
 
-							Arr* val = arrayMk((char*) init._ptr, init._x, init._y, key, loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
+							Array* val = arrayMk((char*) init._ptr, init._x, init._y, key, loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
 
 							omni::assertion(!(util::phys::aabbGround(val->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
@@ -627,9 +627,9 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val) {
 
 						// 3D
 						case nlohmann::json::value_t::array: {
-							CBuff init = util::json::arr::matr3(val["block"]);
+							CBuff init = util::json::array::matr3(val["block"]);
 
-							Arr* val = arrayMk((char*) init._ptr, init._x, init._y, key, loc, rot);
+							Array* val = arrayMk((char*) init._ptr, init._x, init._y, key, loc, rot);
 
 							omni::assertion(!(util::phys::aabbGround(val->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
@@ -648,7 +648,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val) {
 		case nlohmann::json::value_t::string: {
 			CBuff init = util::json::str(val["block"]);
 
-			Arr* val = arrayMk((char*) init._ptr, init._x, key, loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
+			Array* val = arrayMk((char*) init._ptr, init._x, key, loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
 
 			omni::assertion(!(util::phys::aabbGround(val->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
@@ -707,7 +707,7 @@ Scope util::json::scope(nlohmann::json deser) {
 
 			// array
 			case nlohmann::json::value_t::array: {
-				omni::assertion(util::json::arr::euclid(pair.value()["block"], 0), std::string("Depth of `") + pair.key() + std::string("` exceeds 3 dimensions"));
+				omni::assertion(util::json::array::euclid(pair.value()["block"], 0), std::string("Depth of `") + pair.key() + std::string("` exceeds 3 dimensions"));
 
 				switch (pair.value()["block"][0].type()) {
 					// 1D
@@ -780,9 +780,9 @@ StreetSign* util::json::streetSign(nlohmann::json deser) {
 	std::vector<bool> pass = util::json::ls<bool>(deser["pass"]);
 
 	unsigned int no = pass.size();
-	bool* arr = (bool*) malloc(no * sizeof (bool));
+	bool* array = (bool*) malloc(no * sizeof (bool));
 	for (int i = 0; i < no; i++) {
-		arr[i] = pass[i];
+		array[i] = pass[i];
 	}
 
 	glm::vec3 loc = glm::vec3(0.0);
@@ -796,7 +796,7 @@ StreetSign* util::json::streetSign(nlohmann::json deser) {
 	}
 
 	StreetSign* _ = streetSignMk({
-		arr,
+		array,
 		no
 	}, loc, rot);
 

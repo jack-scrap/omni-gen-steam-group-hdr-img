@@ -7,8 +7,8 @@
 #include "idx.h"
 #include "str.h"
 
-Arr* arrayMk(char* init, unsigned int x, std::string name, glm::vec3 loc, glm::vec3 rot) {
-	Arr* _ = (Arr*) malloc(sizeof (Arr));
+Array* arrayMk(char* init, unsigned int x, std::string name, glm::vec3 loc, glm::vec3 rot) {
+	Array* _ = (Array*) malloc(sizeof (Array));
 
 	_->_x = x;
 	_->_y = 1;
@@ -59,8 +59,8 @@ Arr* arrayMk(char* init, unsigned int x, std::string name, glm::vec3 loc, glm::v
 	return _;
 }
 
-Arr* arrayMk(char* init, unsigned int x, unsigned int y, std::string name, glm::vec3 loc, glm::vec3 rot) {
-	Arr* _ = (Arr*) malloc(sizeof (Arr));
+Array* arrayMk(char* init, unsigned int x, unsigned int y, std::string name, glm::vec3 loc, glm::vec3 rot) {
+	Array* _ = (Array*) malloc(sizeof (Array));
 
 	_->_x = x;
 	_->_y = y;
@@ -109,7 +109,7 @@ Arr* arrayMk(char* init, unsigned int x, unsigned int y, std::string name, glm::
 	return _;
 }
 
-bool arrEq(Arr* lhs, Arr* rhs) {
+bool arrayEq(Array* lhs, Array* rhs) {
 	bool _ = true;
 
 	int i = 0;

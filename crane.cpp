@@ -166,10 +166,10 @@ void craneGrab(Crane* crane) {
 			}
 
 			case omni::ARRAY: {
-				Arr* arr = (Arr*) var->_ptr;
+				Array* array = (Array*) var->_ptr;
 
-				for (int i = 0; i < arr->_x * arr->_y; i++) {
-					Idx* idx = arr->_data[i];
+				for (int i = 0; i < array->_x * array->_y; i++) {
+					Idx* idx = array->_data[i];
 
 					if (idx->_data) {
 						if (util::phys::aabb(crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW], idx->_data->_parent)) {

@@ -31,7 +31,7 @@ Dict* dictMk(void** init, unsigned int* type, unsigned int no, std::string name,
 			}
 
 			case omni::ARRAY: {
-				child[1 + i] = ((Arr*) init[i])->_parent;
+				child[1 + i] = ((Array*) init[i])->_parent;
 
 				break;
 			}

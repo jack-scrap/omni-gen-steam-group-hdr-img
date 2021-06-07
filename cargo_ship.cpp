@@ -13,7 +13,7 @@ unsigned int
 
 GLfloat CargoShip::_speed = 0.1;
 
-CargoShip* cargoShipMk(Arr* init, glm::vec3 loc, glm::vec3 rot) {
+CargoShip* cargoShipMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	CargoShip* _ = (CargoShip*) malloc(sizeof (CargoShip));
 
 	// bed

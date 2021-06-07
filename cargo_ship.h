@@ -4,7 +4,7 @@
 #include "array.h"
 
 typedef struct CargoShip {
-	Arr* _data;
+	Array* _data;
 	GLfloat _loc[3];
 
 	Obj* _parent;
@@ -21,6 +21,6 @@ typedef struct CargoShip {
 	};
 } CargoShip;
 
-CargoShip* cargoShipMk(Arr* init, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
+CargoShip* cargoShipMk(Array* init, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
 
 extern "C" void cargoShipMv(CargoShip* cargoShip, float delta);
