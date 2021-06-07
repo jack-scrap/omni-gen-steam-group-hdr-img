@@ -6,7 +6,7 @@ CXXFLAGS = -std=c++14 -Wno-narrowing
 HDR = cam col math phys
 
 STATIC = main disp util mesh console var str border node cont idx array dict lim cone road state layout i_beam omni
-DYNA = scn prog line pt obj crane truck cargo_ship street_sign
+DYNA = scn prog obj line pt crane truck cargo_ship street_sign
 
 DEP_HDR = $(patsubst %, %.h, $(HDR))
 OBJ_STATIC = $(patsubst %, %.o, $(STATIC))
@@ -30,10 +30,16 @@ console.o: console.cpp console.h
 scn.o: scn.cpp scn.h
 	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
 
+prog.o: prog.cpp prog.h
+	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
+
 obj.o: obj.cpp obj.h
 	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
 
 line.o: line.cpp line.h
+	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
+
+pt.o: pt.cpp pt.h
 	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
 
 crane.o: crane.cpp crane.h
@@ -43,12 +49,6 @@ truck.o: truck.cpp truck.h
 	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
 
 cargo_ship.o: cargo_ship.cpp cargo_ship.h
-	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
-
-pt.o: pt.cpp pt.h
-	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
-
-prog.o: prog.cpp prog.h
 	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
 
 street_sign.o: street_sign.cpp street_sign.h
