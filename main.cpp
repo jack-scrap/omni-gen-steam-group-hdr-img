@@ -84,22 +84,21 @@ int main(int argc, char** argv) {
 		layout::view[X] + (state::ln * layout::dim[X]), layout::view[Y]
 	}, col[false]);
 
-	unsigned int
-		stage,
-		lvl;
+	std::string stage;
+	unsigned int lvl;
 	if (argv[1]) {
-		omni::assertion(omni::stage[atoi(argv[1])] != "", "Could not initialize; no corresponding section for `" + std::to_string(std::stoi(argv[1])) + "`");
+		omni::assertion(omni::stage.find(argv[1]) != omni::stage.end(), "Could not initialize; no corresponding section `" + std::string(argv[1]) + "`");
 
-		stage = atoi(argv[1]);
+		stage = argv[1];
 	} else {
-		stage = 0;
+		stage = "init";
 	}
 	if (argv[2]) {
 		std::string name = argv[2];
 
-		std::string path = std::string("lvl/") + omni::stage[std::stoi(argv[1])] + std::string("/") + name + std::string(".json");
+		std::string path = std::string("lvl/") + argv[1] + std::string("/") + name + std::string(".json");
 		std::ifstream in(path);
-		omni::assertion(in.good(), "Could not initialize; no level `" + std::to_string(std::stoi(argv[2])) + std::string("` in stage `") + omni::stage[std::stoi(argv[1])] + std::string("`"));
+		omni::assertion(in.good(), "Could not initialize; no level `" + std::to_string(std::stoi(argv[2])) + std::string("` in stage `") + argv[1] + std::string("`"));
 
 		lvl = atoi(argv[2]);
 	} else {
@@ -108,7 +107,7 @@ int main(int argc, char** argv) {
 
 	std::string name;
 	if (argc > 1) {
-		name = "player/script/" + omni::stage[stage] + "/" + std::to_string(lvl) + "/main.py";
+		name = "player/script/" + stage + "/" + std::to_string(lvl) + "/main.py";
 	} else {
 		name = "player/doc/intro.txt";
 	}

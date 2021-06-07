@@ -368,7 +368,7 @@ void Console::exec() {
 				if (tok.size() == 1 + 2) {
 					_buff = util::fs::rd<std::vector<std::string>>(tok[1]);
 
-					scn::init(std::stoi(tok[1]), std::stoi(tok[2]));
+					scn::init(tok[1], std::stoi(tok[2]));
 				} else {
 					omni::err("Incorrect number of arguments");
 				}
@@ -400,7 +400,7 @@ void Console::exec() {
 
 					unsigned int rank = deser["rank"];
 
-					_buff = util::fs::rd<std::vector<std::string>>("player/script/" + omni::stage[0] + "/" + std::to_string(rank) + "/" + "main.py");
+					_buff = util::fs::rd<std::vector<std::string>>("player/script/init/" + std::to_string(rank) + "/" + "main.py");
 					scn::init(0, rank);
 				} else {
 					omni::err("Current level not complete");

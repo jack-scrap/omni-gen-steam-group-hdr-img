@@ -87,8 +87,8 @@ CArr pathGet() {
 	return path;
 }
 
-void scn::init(unsigned int stage, unsigned int lvl) {
-	nlohmann::json deser = nlohmann::json::parse(util::fs::rd<std::string>("lvl/" + omni::stage[stage] + "/" + std::to_string(lvl) + ".json"));
+void scn::init(std::string stage, unsigned int lvl) {
+	nlohmann::json deser = nlohmann::json::parse(util::fs::rd<std::string>("lvl/" + stage + "/" + std::to_string(lvl) + ".json"));
 
 	/* de-allocate */
 	// data

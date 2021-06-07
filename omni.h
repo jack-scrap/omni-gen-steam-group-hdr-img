@@ -9,31 +9,31 @@ namespace omni {
 
 	void assertion(bool cond, std::string msg);
 
-	static std::map<unsigned int, std::string> stage = {
+	static std::map<std::string, unsigned int> stage = {
 		{
-			0,
-			"init"
+			"init",
+				0
 		}, {
-			1,
-			"array"
+			"array",
+				1
 		}, {
-			2,
 			"str",
+			2
 		}, {
-			3,
-			"dict"
+			"dict",
+			3
 		}, {
-			4,
-			"matrix"
+			"matrix",
+			4
 		}, {
-			5,
-			"ctrl_flow"
+			"ctrl_flow",
+			5
 		}, {
-			6,
-			"path"
+			"path",
+			6
 		}, {
-			7,
-			"thread"
+			"thread",
+			7
 		},
 	};
 
