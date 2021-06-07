@@ -629,7 +629,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val) {
 						case nlohmann::json::value_t::array: {
 							CBuff init = util::json::arr::matr3(val["block"]);
 
-							Arr* val = arrayMk((char*) init._ptr, init._x, init._y, init._z, key, loc, rot);
+							Arr* val = arrayMk((char*) init._ptr, init._x, init._y, key, loc, rot);
 
 							omni::assertion(!(util::phys::aabbGround(val->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
