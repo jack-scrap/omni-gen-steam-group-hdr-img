@@ -825,7 +825,7 @@ std::vector<Obj*> util::json::path(nlohmann::json path, nlohmann::json node, nlo
 	}
 
 	if (status == "alert") {
-		name = "alertLine";
+		name = "alertRoad";
 		active = true;
 	}
 
