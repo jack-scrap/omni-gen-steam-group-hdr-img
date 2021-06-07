@@ -805,12 +805,29 @@ StreetSign* util::json::streetSign(nlohmann::json deser) {
 	return _;
 }
 
-std::vector<Obj*> util::json::path(nlohmann::json path, nlohmann::json node) {
+std::vector<Obj*> util::json::path(nlohmann::json path, nlohmann::json node, nlohmann::json status) {
 	std::vector<Obj*> _;
 
 	GLushort idc[2] = {
 		0, 1
 	};
+
+	std::string name;
+	bool active;
+	if (status == "pass") {
+		name = "solid";
+		active = false;
+	}
+
+	if (status == "halt") {
+		name = "solid";
+		active = true;
+	}
+
+	if (status == "alert") {
+		name = "alert";
+		active = true;
+	}
 
 	for (int i = 0; i < path.size() - 1; i++) {
 		switch (path[1].type()) {
@@ -827,7 +844,7 @@ std::vector<Obj*> util::json::path(nlohmann::json path, nlohmann::json node) {
 					}
 				}
 
-				_.push_back(lineMk((GLfloat*) vtc, idc, 2, "main", "thick", "solid", true));
+				_.push_back(lineMk((GLfloat*) vtc, idc, 2, "main", "thick", name, active));
 
 				break;
 			}
@@ -846,7 +863,7 @@ std::vector<Obj*> util::json::path(nlohmann::json path, nlohmann::json node) {
 						}
 					}
 
-					_.push_back(lineMk((GLfloat*) vtc, idc, 2, "obj", "thick", "solid", true));
+					_.push_back(lineMk((GLfloat*) vtc, idc, 2, "obj", "thick", name, active));
 				}
 
 				break;

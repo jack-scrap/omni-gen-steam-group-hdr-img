@@ -229,7 +229,7 @@ void scn::init(unsigned int stage, unsigned int lvl) {
 	}
 
 	for (const nlohmann::json::array_t& strip : deser["road"]["path"]["idc"]) {
-		std::vector<Obj*> _ = util::json::path(strip, deser["road"]["node"]);
+		std::vector<Obj*> _ = util::json::path(strip, deser["road"]["node"], deser["road"]["path"]["status"]);
 
 		for (Obj* seg : _) {
 			line.push_back(seg);

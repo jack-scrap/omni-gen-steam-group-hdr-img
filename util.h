@@ -96,7 +96,7 @@ namespace util {
 
 		StreetSign* streetSign(nlohmann::json deser);
 
-		std::vector<Obj*> path(nlohmann::json path, nlohmann::json node);
+		std::vector<Obj*> path(nlohmann::json path, nlohmann::json node, nlohmann::json status);
 
 		Obj* prop(nlohmann::json deser);
 

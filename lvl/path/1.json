@@ -48,6 +48,7 @@
 			]
 		],
 		"path": {
+			"status": "halt",
 			"idc": [
 				0,
 				[
