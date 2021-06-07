@@ -805,19 +805,19 @@ StreetSign* util::json::streetSign(nlohmann::json deser) {
 	return _;
 }
 
-std::vector<Obj*> util::json::path(nlohmann::json deser, nlohmann::json node) {
+std::vector<Obj*> util::json::path(nlohmann::json path, nlohmann::json node) {
 	std::vector<Obj*> _;
 
 	GLushort idc[2] = {
 		0, 1
 	};
 
-	for (int i = 0; i < deser.size() - 1; i++) {
-		switch (deser[1].type()) {
+	for (int i = 0; i < path.size() - 1; i++) {
+		switch (path[1].type()) {
 			case nlohmann::json::value_t::number_unsigned: {
 				GLushort pt[2] = {
-					deser[i],
-					deser[i + 1]
+					path[i],
+					path[i + 1]
 				};
 
 				GLfloat vtc[2][3];
@@ -833,9 +833,9 @@ std::vector<Obj*> util::json::path(nlohmann::json deser, nlohmann::json node) {
 			}
 
 			case nlohmann::json::value_t::array: {
-				for (const auto& no : deser[1]) {
+				for (const auto& no : path[1]) {
 					GLushort pt[2] = {
-						deser[i],
+						path[i],
 						no
 					};
 
