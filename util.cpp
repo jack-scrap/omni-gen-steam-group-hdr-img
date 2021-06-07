@@ -808,6 +808,10 @@ StreetSign* util::json::streetSign(nlohmann::json deser) {
 std::vector<Obj*> util::json::path(nlohmann::json deser, nlohmann::json node) {
 	std::vector<Obj*> _;
 
+	GLushort idc[2] = {
+		0, 1
+	};
+
 	for (int i = 0; i < deser.size() - 1; i++) {
 		switch (deser[1].type()) {
 			case nlohmann::json::value_t::number_unsigned: {
@@ -822,10 +826,6 @@ std::vector<Obj*> util::json::path(nlohmann::json deser, nlohmann::json node) {
 						vtc[p][a] = node[pt[p]][a];
 					}
 				}
-
-				GLushort idc[2] = {
-					0, 1
-				};
 
 				_.push_back(lineMk((GLfloat*) vtc, idc, 2, "main", "thick", "solid", true));
 
@@ -845,10 +845,6 @@ std::vector<Obj*> util::json::path(nlohmann::json deser, nlohmann::json node) {
 							vtc[p][a] = node[pt[p]][a];
 						}
 					}
-
-					GLushort idc[2] = {
-						0, 1
-					};
 
 					_.push_back(lineMk((GLfloat*) vtc, idc, 2, "obj", "thick", "solid", true));
 				}
