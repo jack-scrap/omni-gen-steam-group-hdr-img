@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stddef.h>
+
 #include "var.h"
 
 typedef struct {
