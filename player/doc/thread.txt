@@ -168,12 +168,57 @@ Where multiple processes are editing one piece of data, the general term "race c
 
 These processes cannot edit this data simultaneously, and doing so will terminate the proces.
 
+```
+import threading
+
+var = []
+for i in range(1000):
+	var.append(0)
+
+def hjkl():
+	global var
+
+	for i in range(1000):
+		var[i] = 3
+
+	print(var)
+
+hjkl_thread = threading.Thread(target = hjkl)
+
+hjkl_thread.start()
+
+for i in range(1000):
+	var[i] = 7
+
+print(var)
+```
+
 ## Determinism
 Determinism describes an issue where the output of the program depends on certain processes running in a certain order.
 
 This may be unwanted behavior.
 
 In order to guarantee the proper output, the programmer must require that certain conditions are met before running these processes.
+
+```
+import threading
+
+var = 0
+
+def fn():
+	global var
+
+	for _ in range(1000):
+		var += 1
+
+	print(var)
+
+fn_thread = threading.Thread(target = fn)
+
+fn_thread.start()
+
+print(var)
+```
 
 # Errors
 Because the order of execution is now non-deterministic, the cannot be guaranteed at compile time.
