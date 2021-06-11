@@ -354,6 +354,8 @@ bool util::phys::aabb(Obj* p, Obj* q) {
 			p->_aabb[a][MAX] <= q->_aabb[a][MAX]
 		)) {
 			_ = false;
+
+			break;
 		}
 	}
 
