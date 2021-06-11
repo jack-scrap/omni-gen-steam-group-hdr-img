@@ -408,7 +408,29 @@ void Console::exec() {
 			}
 
 			if (_cmd == "quit") {
-				exit(0);
+				std::vector<std::string> buff =  util::fs::rd<std::vector<std::string>>(_name);
+
+				bool diff = false;
+
+				if (buff.size() != _buff.size()) {
+					diff = true;
+				}
+
+				if (!diff) {
+					for (int i = 0; i < _buff.size(); i++) {
+						if (_buff[i] != buff[i]) {
+							diff = true;
+
+							break;
+						}
+					}
+				}
+
+				if (!diff) {
+					exit(0);
+				} else {
+					omni::err("Buffer not saved");
+				}
 			}
 		} else {
 			omni::err("Command `" + _cmd + "` not found");
