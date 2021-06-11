@@ -20,3 +20,19 @@ glm::vec2 layout::sz(glm::vec2 dim) {
 		(dim[Y] * stride[Z]) + (pad * 2)
 	);
 }
+
+glm::vec3 layout::center(Obj* obj) {
+	glm::vec3 sz;
+	for (int a = 0; a < 3; a++) {
+		sz[a] = obj->_aabb[a][MAX] - obj->_aabb[a][MIN];
+	}
+
+	glm::vec3 _;
+	for (int a = 0; a < 3; a++) {
+		sz[a] = obj->_aabb[a][MAX] - obj->_aabb[a][MIN];
+
+		_[a] = -(sz[a] / 2);
+	}
+
+	return _;
+}

@@ -3,6 +3,7 @@
 #include <glm/glm.hpp>
 
 #include "state.h"
+#include "obj.h"
 
 namespace layout {
 	static unsigned int dim[2] = {
@@ -42,4 +43,6 @@ namespace layout {
 
 	glm::vec2 item(glm::vec2 bound);
 	glm::vec2 sz(glm::vec2 dim);
+
+	glm::vec3 center(Obj* obj);
 }
