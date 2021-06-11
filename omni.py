@@ -320,14 +320,25 @@ _pathGet = _scn.pathGet
 _pathGet.restype = _CArr
 _pathGet.argtypes = None
 
-class _Asdf(Structure):
+class _Hjkl(Structure):
+	_fields_ = [
+		('_asdf', c_int)
+	]
+
+class _Asdf():
 	def __init__(self):
-		self._asdf = None
-	
+		self._asdf = 0
+
 	@property
 	def asdf(self):
-		self._asdf = cast(_data[i].contents._ptr, POINTER(_Idx)).contents
+		asdf = _asdfGet()
+
+		self._asdf = asdf.contents._asdf
 
 		return self._asdf
+
+_asdfGet = _scn.asdfGet
+_asdfGet.restype = POINTER(_Hjkl)
+_asdfGet.argtypes = None
 
 asdf = _Asdf()

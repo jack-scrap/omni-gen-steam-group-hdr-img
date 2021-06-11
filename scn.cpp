@@ -353,3 +353,11 @@ void scn::init(std::string stage, unsigned int lvl) {
 		obj.push_back(_->_parent);
 	}
 }
+
+Asdf asdf = {
+	3
+};
+
+Asdf* asdfGet() {
+	return &asdf;
+}

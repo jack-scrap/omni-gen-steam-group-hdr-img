@@ -65,3 +65,11 @@ namespace scn {
 
 	void init(std::string stage, unsigned int lvl);
 }
+
+typedef struct {
+	int _asdf;
+} Asdf;
+
+extern "C" Asdf asdf;
+
+extern "C" Asdf* asdfGet();

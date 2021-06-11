@@ -196,6 +196,11 @@ int main(int argc, char** argv) {
 		while (SDL_PollEvent(&e)) {
 			if (e.type == SDL_KEYDOWN) {
 				switch (e.key.keysym.sym) {
+					case SDLK_F4:
+						asdf._asdf++;
+
+						break;
+
 					case SDLK_F1:
 						console->_mode = Console::FS;
 
