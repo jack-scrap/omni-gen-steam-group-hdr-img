@@ -112,8 +112,8 @@ namespace util {
 			bool euclid(nlohmann::json deser, unsigned int sz);
 
 			CBuff array(nlohmann::json deser);
-			CBuff matr2(nlohmann::json deser);
-			CBuff matr3(nlohmann::json deser);
+			CBuff matr(nlohmann::json deser);
+			CBuff tens(nlohmann::json deser);
 		}
 
 		namespace bound {
