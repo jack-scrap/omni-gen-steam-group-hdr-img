@@ -234,8 +234,8 @@ void util::mesh::strip(GLushort idc[2][3]) {
 	const int roof = (2 * 2) - 1;
 
 	for (int t = 0; t < 2; t++) {
-		for (int i = 0; i < 3; i++) {
-			idc[t][i] = (t * roof) + ((t ? -1 : 1) * i);
+		for (int a = 0; a < 3; a++) {
+			idc[t][a] = (t * roof) + ((t ? -1 : 1) * a);
 		}
 	}
 }
@@ -282,10 +282,10 @@ std::vector<GLushort> util::mesh::rect::idc() {
 	std::vector<GLushort> _;
 
 	for (int t = 0; t < 2; t++) {
-		for (int i = 0; i < 3; i++) {
+		for (int a = 0; a < 3; a++) {
 			GLushort offset = (t * 3);
 
-			_.push_back(offset + (i * (t ? -1 : 1)));
+			_.push_back(offset + (a * (t ? -1 : 1)));
 		}
 	}
 
@@ -306,8 +306,8 @@ std::vector<GLfloat> util::mesh::gen::norm(std::vector<glm::vec3> vtc) {
 		// normalize
 		glm::vec3 norm = glm::normalize(orth);
 
-		for (int i = 0; i < 3; i++) {
-			_.push_back(norm[i]);
+		for (int a = 0; a < 3; a++) {
+			_.push_back(norm[a]);
 		}
 
 		return _;
@@ -771,8 +771,8 @@ Scope util::json::scope(nlohmann::json deser) {
 glm::vec3 util::json::vec(nlohmann::json deser) {
 	glm::vec3 _;
 
-	for (int i = 0; i < 3; i++) {
-		_[i] = deser[i];
+	for (int a = 0; a < 3; a++) {
+		_[a] = deser[a];
 	}
 
 	return _;

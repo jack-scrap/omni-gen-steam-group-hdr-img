@@ -15,8 +15,8 @@ Cone* coneMk(GLfloat init[2][2], glm::vec3 loc, glm::vec3 rot) {
 	
 	Obj* child[1];
 
-	for (int i = 0; i < 3; i++) {
-		_->_loc[i] = loc[i];
+	for (int a = 0; a < 3; a++) {
+		_->_loc[a] = loc[a];
 	}
 
 	for (int y = 0; y < 2; y++) {
