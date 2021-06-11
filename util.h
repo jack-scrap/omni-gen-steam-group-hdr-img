@@ -134,7 +134,7 @@ namespace util {
 	}
 
 	namespace tex {
-		GLuint spray(char c);
+		GLuint spray(Obj* obj);
 	}
 
 	std::vector<std::string> log(unsigned int loc, unsigned int maxFs);

@@ -1148,46 +1148,7 @@ std::string util::now(std::string format) {
 	return std::string(out);
 }
 
-GLuint util::tex::spray(char c) {
-	GLuint vao;
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
-
-	GLuint vbo;
-	glGenBuffers(1, &vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	std::vector<GLfloat> vtc = util::mesh::rd::vtc(std::string("glyph/") + c);
-	glBufferData(GL_ARRAY_BUFFER, vtc.size() * sizeof (GLfloat), &vtc[0], GL_STATIC_DRAW);
-
-	GLuint ibo;
-	glGenBuffers(1, &ibo);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-	std::vector<GLushort> idc = util::mesh::rd::idc(std::string("glyph/") + c, 0);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, idc.size() * sizeof (GLfloat), &idc[0], GL_STATIC_DRAW);
-
-	// shader
-	Prog prog("vec", "solid");
-
-	prog.use();
-
-	// matrix
-	glm::mat4 model = glm::mat4(1.0);
-	model = glm::rotate(model, (GLfloat) -(M_PI / 2), glm::vec3(1, 0, 0));
-
-	/// attribute
-	GLint attrPos = glGetAttribLocation(prog._id, "pos");
-	glVertexAttribPointer(attrPos, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
-	glEnableVertexAttribArray(attrPos);
-
-	/// uniform
-	GLint uniModel = glGetUniformLocation(prog._id, "model");
-	glUniformMatrix4fv(uniModel, 1, GL_FALSE, glm::value_ptr(model));
-
-	GLint uniActive = glGetUniformLocation(prog._id, "active");
-	glUniform1ui(uniActive, true);
-
-	prog.unUse();
-
+GLuint util::tex::spray(Obj* obj) {
 	/* framebuffer */
 	GLuint fbo;
 	glGenFramebuffers(1, &fbo);
@@ -1217,18 +1178,7 @@ GLuint util::tex::spray(char c) {
 		omni::err("Framebuffer not complete");
 	}
 
-	// draw
-	prog.unUse();
-
-	disp->clear();
-
-	glBindVertexArray(vao);
-	prog.use();
-
-	glDrawElements(GL_TRIANGLES, idc.size(), GL_UNSIGNED_SHORT, (GLvoid*) 0);
-
-	prog.unUse();
-	glBindVertexArray(0);
+	objDraw(obj);
 
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 	glBindTexture(GL_TEXTURE_2D, 0);

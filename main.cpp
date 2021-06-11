@@ -116,6 +116,10 @@ int main(int argc, char** argv) {
 	scn::init(stage, lvl);
 
 	if (boot) {
+		Obj* obj = objMk("truck/front", "obj", "solid", true);
+
+		util::tex::spray(obj);
+
 		GLuint vao;
 		glGenVertexArrays(1, &vao);
 		glBindVertexArray(vao);
@@ -125,45 +129,38 @@ int main(int argc, char** argv) {
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
 		GLfloat vtc[] = {
-			-0.26, -0.26,
-			0.16, -0.26,
-			0.06, -0.10,
-			-0.10, -0.10,
-
-			0.16, -0.26,
-			0.26, -0.16,
-			0.10, -0.06,
-			0.06, -0.10,
-
-			0.26, -0.16,
-			0.26, 0.26,
-			0.10, 0.10,
-			0.10, -0.06,
-
-			0.26, 0.26,
-			-0.16, 0.26,
-			-0.06, 0.10,
-			0.10, 0.10,
-
-			-0.16, 0.26,
-			-0.26, 0.16,
-			-0.10, 0.06,
-			-0.06, 0.10,
-
-			-0.10, 0.06,
-			-0.26, 0.16,
-			-0.26, -0.26,
-			-0.10, -0.10
+			-1.0, -1.0,
+			1.0, -1.0,
+			1.0, 1.0,
+			-1.0, 1.0
 		};
 		glBufferData(GL_ARRAY_BUFFER, sizeof vtc, vtc, GL_STATIC_DRAW);
 
+		GLuint stbo;
+		glGenBuffers(1, &stbo);
+		glBindBuffer(GL_ARRAY_BUFFER, stbo);
+
+		GLfloat st[] = {
+			0.0, 0.0,
+			1.0, 0.0,
+			1.0, 1.0,
+			0.0, 1.0
+		};
+		glBufferData(GL_ARRAY_BUFFER, sizeof st, st, GL_STATIC_DRAW);
+
 		// shader
-		Prog prog("logo", "solid");
+		Prog prog("logo", "tex");
 
 		/// attribute
+		glBindBuffer(GL_ARRAY_BUFFER, vbo);
 		GLint attrPos = glGetAttribLocation(prog._id, "pos");
 		glVertexAttribPointer(attrPos, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 		glEnableVertexAttribArray(attrPos);
+
+		glBindBuffer(GL_ARRAY_BUFFER, stbo);
+		GLint attrSt = glGetAttribLocation(prog._id, "st");
+		glVertexAttribPointer(attrSt, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+		glEnableVertexAttribArray(attrSt);
 
 		/// uniform
 		GLint uniActive = glGetUniformLocation(prog._id, "active");
@@ -175,6 +172,26 @@ int main(int argc, char** argv) {
 		glUniform1ui(uniActive, true);
 		glUniform2i(uniRes, disp->_res[X], disp->_res[Y]);
 
+		// texture
+		int
+			wd,
+			ht,
+			chan;
+		GLubyte* data = stbi_load("res/dirt.jpg", &wd, &ht, &chan, 0);
+
+		GLuint tex;
+		if (data) {
+			glGenTextures(1, &tex);
+			glBindTexture(GL_TEXTURE_2D, tex);
+
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, wd, ht, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+			glGenerateMipmap(GL_TEXTURE_2D);
+		} else {
+			omni::err("Texture failed to load");
+		}
+
 		prog.unUse();
 
 		// draw
@@ -182,7 +199,7 @@ int main(int argc, char** argv) {
 
 		prog.use();
 
-		glDrawArrays(GL_QUADS, 0, (2 + 3) * 2 * 2 * 3);
+		glDrawArrays(GL_QUADS, 0, 2 + 2 * 3);
 
 		prog.unUse();
 
