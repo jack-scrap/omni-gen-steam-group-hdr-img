@@ -70,7 +70,6 @@ namespace util {
 
 	namespace phys {
 		bool aabb(Obj* p, Obj* q);
-
 		bool aabbGround(Obj* obj);
 	}
 
