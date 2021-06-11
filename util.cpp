@@ -600,7 +600,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val) {
 				case nlohmann::json::value_t::number_unsigned: {
 					CBuff init = util::json::array::array(val["block"]);
 
-					Array* val = arrayMk((char*) init._ptr, init._x, key, loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
+					Array* val = arrayMk((char*) init._ptr, init._x, key, X, loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
 
 					omni::assertion(!(util::phys::aabbGround(val->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
@@ -648,7 +648,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val) {
 		case nlohmann::json::value_t::string: {
 			CBuff init = util::json::str(val["block"]);
 
-			Array* val = arrayMk((char*) init._ptr, init._x, key, loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
+			Array* val = arrayMk((char*) init._ptr, init._x, key, X, loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
 
 			omni::assertion(!(util::phys::aabbGround(val->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 

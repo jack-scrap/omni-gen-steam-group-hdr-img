@@ -7,7 +7,7 @@
 #include "idx.h"
 #include "str.h"
 
-Array* arrayMk(char* init, unsigned int x, std::string name, glm::vec3 loc, glm::vec3 rot) {
+Array* arrayMk(char* init, unsigned int x, std::string name, unsigned int axis, glm::vec3 loc, glm::vec3 rot) {
 	Array* _ = (Array*) malloc(sizeof (Array));
 
 	_->_x = x;
@@ -22,11 +22,14 @@ Array* arrayMk(char* init, unsigned int x, std::string name, glm::vec3 loc, glm:
 	int c = 0;
 	for (int i = 0; i < _->_x; i++) {
 		Idx* idx;
-		glm::vec3 offset = glm::vec3(layout::overhead, 0.0, layout::overhead) + glm::vec3(i * layout::stride[X], 0.0, 0.0);
+		glm::vec3
+			overhead = glm::vec3(layout::overhead, 0.0, layout::overhead),
+			offset = glm::vec3(0.0);
+		offset[axis] = i * layout::stride[axis];
 		if (init[c]) {
-			idx = idxMk(c, &init[c], 1, "", offset);
+			idx = idxMk(c, &init[c], 1, "", overhead + offset);
 		} else {
-			idx = idxMk(c, "", offset);
+			idx = idxMk(c, "", overhead + offset);
 		}
 
 		_->_data[c] = idx;
@@ -43,10 +46,19 @@ Array* arrayMk(char* init, unsigned int x, std::string name, glm::vec3 loc, glm:
 		child[0] = nullptr;
 	}
 
-	Border* scope = borderMk(layout::sz({
-		_->_x,
-		_->_y
-	}), child, noChild, loc, rot);
+	glm::vec2 sz;
+	switch (axis) {
+		case X:
+			sz = glm::vec2(_->_x, _->_y);
+
+			break;
+
+		case Z:
+			sz = glm::vec2(_->_y, _->_x);
+
+			break;
+	}
+	Border* scope = borderMk(layout::sz(sz), child, noChild, loc, rot);
 
 	_->_parent = scope->_parent;
 
