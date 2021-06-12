@@ -17,8 +17,10 @@ Idx* idxMk(unsigned int i, std::string name, glm::vec3 loc, glm::vec3 rot) {
 
 	Obj* child[str.size() + 1];
 
+	glm::vec3 overhead = glm::vec3((layout::stroke * 2) + (layout::idx[X] / 2), 0.0, (layout::stroke * 2) + (layout::idx[Z] / 2));
 	for (int i = 0; i < str.size(); i++) {
-		child[i] = objMk("glyph/" + std::string(1, str[i]), "obj", "solid", true, glm::vec3((layout::stroke * 2) + (layout::idx[X] / 2), 0.0, (layout::stroke * 2) + (layout::idx[Z] / 2)) +glm::vec3(i * (layout::glyph[X] + layout::stroke), 0.0, 0.0), rot);
+		glm::vec3 offset = glm::vec3(i * (layout::glyph[X] + layout::stroke), 0.0, 0.0);
+		child[i] = objMk("glyph/" + std::string(1, str[i]), "obj", "solid", true, overhead + offset, rot);
 	}
 
 	// identifier
@@ -49,8 +51,10 @@ Idx* idxMk(unsigned int i, char* c, unsigned int sz, std::string name, glm::vec3
 
 	Obj* child[str.size() + _->_sz + 1];
 
+	glm::vec3 overhead = glm::vec3((layout::stroke * 2) + (layout::idx[X] / 2), 0.0, (layout::stroke * 2) + (layout::idx[Z] / 2));
 	for (int i = 0; i < str.size(); i++) {
-		child[i] = objMk("glyph/" + std::string(1, str[i]), "obj", "solid", true, glm::vec3((layout::stroke * 2) + (layout::idx[X] / 2), 0.0, (layout::stroke * 2) + (layout::idx[Z] / 2)) +glm::vec3(i * (layout::glyph[X] + layout::stroke), 0.0, 0.0), rot);
+		glm::vec3 offset = glm::vec3(i * (layout::glyph[X] + layout::stroke), 0.0, 0.0);
+		child[i] = objMk("glyph/" + std::string(1, str[i]), "obj", "solid", true, overhead + offset, rot);
 	}
 
 	// identifier
