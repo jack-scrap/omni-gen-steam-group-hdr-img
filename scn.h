@@ -52,6 +52,9 @@ extern "C" CArr boundRngGet();
 extern "C" CArr boundArea;
 extern "C" CArr boundAreaGet();
 
+extern "C" CArr node;
+extern "C" CArr nodeGet();
+
 extern "C" CArr path;
 extern "C" CArr pathGet();
 

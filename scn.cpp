@@ -84,6 +84,13 @@ CArr boundAreaGet() {
 	return boundArea;
 }
 
+
+CArr node;
+
+CArr nodeGet() {
+	return node;
+}
+
 CArr path;
 
 CArr pathGet() {
@@ -231,8 +238,19 @@ void scn::init(std::string stage, unsigned int lvl) {
 		omni::assertion(node[Y] >= 0, std::string("Path node `") + node.dump() + std::string("` below ground plane"));
 	}
 
+	node._sz = 0;
+	node._ptr = (unsigned int*) malloc(node._sz * sizeof (unsigned int));
 	for (const nlohmann::json::array_t& strip : deser["road"]["path"]["idc"]) {
 		std::vector<Obj*> _ = util::json::path(strip, deser["road"]["node"], deser["road"]["path"]["status"]);
+
+		node._sz += 3;
+		node._ptr = (unsigned int*) realloc(node._ptr, node._sz * sizeof (unsigned int));
+		int a = 0;
+		for (const nlohmann::json::number_unsigned_t& axis : strip) {
+			((unsigned int*) node._ptr)[node._sz - 3 + a] = axis;
+			
+			a++;
+		}
 
 		for (Obj* seg : _) {
 			line.push_back(seg);
