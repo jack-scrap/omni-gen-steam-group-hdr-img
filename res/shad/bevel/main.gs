@@ -38,10 +38,11 @@ void main() {
 					),
 					0.0
 				)).xyz;
-																	
+
 				EmitVertex();
 			}
 		}
+
 		EndPrimitive();
 	}
 
@@ -69,8 +70,9 @@ void main() {
 				EmitVertex();
 			}
 		}
+
 		EndPrimitive();
-	}  
+	}
 
 	// corner
 	for (int z = 0; z < 2; z++) {
@@ -106,7 +108,8 @@ void main() {
 					EmitVertex();
 				}
 			}
+
 			EndPrimitive();
 		}
 	}
-}  
+}
