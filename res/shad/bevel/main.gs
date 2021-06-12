@@ -26,7 +26,7 @@ void main() {
 					vec3(
 						(bool(x) ? 1 : -1) * side,
 						(bool(y) ? 1 : -1) * (2 * pad),
-						(bool(t) ? 1 : -1)
+						bool(t) ? 1 : -1
 					),
 					0.0
 				));
@@ -34,7 +34,7 @@ void main() {
 					vec3(
 						(bool(x) ? 1 : -1) * side,
 						(bool(y) ? 1 : -1) * (2 * pad),
-						(bool(t) ? 1 : -1)
+						bool(t) ? 1 : -1
 					),
 					0.0
 				)).xyz;
@@ -91,7 +91,6 @@ void main() {
 						),
 						0.0
 					));
-
 					_pos = (proj * view * model * (gl_in[0].gl_Position + vec4(
 						vec3(
 							(bool(x) ? 1 : -1) * (1 - edge),
