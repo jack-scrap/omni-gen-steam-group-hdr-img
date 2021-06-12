@@ -107,7 +107,7 @@ void truckAnim(Truck* truck, glm::vec3 loc, glm::vec3 rot) {
 		truck->_parent->_child[4 + (truck->_data->_x * 2 * 2) + i]->_active = true;
 	}
 
-	objTrans(truck->_parent, loc, rot);
+	objMv(truck->_parent, loc, rot);
 
 	for (int i = 0; i < 2; i++) {
 		truck->_parent->_child[4 + (truck->_data->_x * 2 * 2) + i]->_active = false;

@@ -353,14 +353,14 @@ void objAnim(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
 	}
 }
 
-void objTrans(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
+void objMv(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
 	objAnim(obj, loc, rot);
 }
 
 void objA(Obj* obj) {
 	int i = 0;
 	while (!util::phys::aabbGround(obj)) {
-		objTrans(obj, glm::vec3(0.0, -(pow(i, 2) * phys::g), 0.0), glm::vec3(0.0));
+		objMv(obj, glm::vec3(0.0, -(pow(i, 2) * phys::g), 0.0), glm::vec3(0.0));
 
 		i++;
 	}
