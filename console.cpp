@@ -354,6 +354,8 @@ void Console::newline() {
 void Console::exec() {
 	std::vector<std::string> tok = util::str::split(_prompt, ' ');
 
+	_prompt.clear();
+
 	if (tok.size()) {
 		std::string _cmd = tok[0];
 
@@ -380,6 +382,8 @@ void Console::exec() {
 				} else {
 					util::fs::write(_name, _buff);
 				}
+
+				_prompt = _name + " written";
 			}
 
 			if (_cmd == "run") {
@@ -405,6 +409,8 @@ void Console::exec() {
 				} else {
 					omni::err("Current level not complete");
 				}
+
+				_prompt = "Loaded stage `" + std::string("init") + "`, level `" + std::to_string(0) + "`";
 			}
 
 			if (_cmd == "quit") {
@@ -435,8 +441,6 @@ void Console::exec() {
 		} else {
 			omni::err("Command `" + _cmd + "` not found");
 		}
-
-		_prompt.clear();
 
 		_idx[X] = (_ps1 + _prompt).size();
 		_idx[Y] = state::line - 1;
