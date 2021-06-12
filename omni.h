@@ -26,15 +26,18 @@ namespace omni {
 			"matrix",
 			4
 		}, {
-			"ctrl_flow",
+			"vec",
 			5
 		}, {
-			"path",
+			"ctrl_flow",
 			6
 		}, {
-			"thread",
+			"path",
 			7
-		},
+		}, {
+			"thread",
+			8
+		}
 	};
 
 	static std::vector<std::string> lib = {
