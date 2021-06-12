@@ -49,7 +49,7 @@ void main() {
 					(bool(y) ? 1 : -1) * (2 * pad),
 					(bool(z) ? 1 : -1) * side
 				), 1.0);
-				_pos = (proj * view * model * vec4(gl_in[0].gl_Position.xyz + vec3(
+				_pos = (vec4(gl_in[0].gl_Position.xyz + vec3(
 					bool(t) ? 1 : -1,
 					(bool(y) ? 1 : -1) * (2 * pad),
 					(bool(z) ? 1 : -1) * side
@@ -76,7 +76,7 @@ void main() {
 						(bool(v) ? 1 : -1) * (2 * pad),
 						(bool(h) ? 1 : -1) * ((bool(z) ? -1 : 1) * edge)
 					), 1.0);
-					_pos = (proj * view * model * vec4(gl_in[0].gl_Position.xyz + vec3(
+					_pos = (vec4(gl_in[0].gl_Position.xyz + vec3(
 						(bool(x) ? 1 : -1) * (1 - edge),
 						0.0,
 						(bool(z) ? 1 : -1) * (1 - edge)
