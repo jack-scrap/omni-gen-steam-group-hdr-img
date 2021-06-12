@@ -35,15 +35,12 @@ extern "C" unsigned int* typeGet();
 extern "C" unsigned int noDataGet();
 
 extern "C" CArr crane;
-
-extern "C" CArr truck;
-
-extern "C" CArr cargoShip;
-
 extern "C" CArr craneGet();
 
+extern "C" CArr truck;
 extern "C" CArr truckGet();
 
+extern "C" CArr cargoShip;
 extern "C" CArr cargoShipGet();
 
 extern "C" CArr streetSign;

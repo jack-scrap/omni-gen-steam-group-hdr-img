@@ -45,16 +45,18 @@ unsigned int noDataGet() {
 }
 
 CArr crane;
-CArr truck;
-CArr cargoShip;
 
 CArr craneGet() {
 	return crane;
 }
 
+CArr truck;
+
 CArr truckGet() {
 	return truck;
 }
+
+CArr cargoShip;
 
 CArr cargoShipGet() {
 	return cargoShip;
@@ -65,6 +67,7 @@ std::vector<Obj*> scn::line;
 std::vector<Obj*> scn::pt;
 
 CArr streetSign;
+
 CArr streetSignGet() {
 	return streetSign;
 }
