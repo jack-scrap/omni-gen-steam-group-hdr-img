@@ -7,9 +7,9 @@ layout (triangle_strip, max_vertices = 32) out;
 out vec3 _pos;
 
 uniform mat4
-	proj,
+	model,
 	view,
-	model;
+	proj;
 
 float
 	edge = 0.1,
