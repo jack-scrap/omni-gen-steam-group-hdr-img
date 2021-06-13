@@ -23,18 +23,18 @@ Dict* dictMk(void** init, unsigned int* type, unsigned int no, std::string name,
 
 	// data
 	for (int i = 0; i < no; i++) {
+		child[1 + i] = nullptr;
+
 		switch (type[i]) {
-			case omni::SCALAR: {
+			case omni::SCALAR:
 				child[1 + i] = ((Idx*) init[i])->_parent;
 
 				break;
-			}
 
-			case omni::ARRAY: {
+			case omni::ARRAY:
 				child[1 + i] = ((Array*) init[i])->_parent;
 
 				break;
-			}
 		}
 	}
 
