@@ -1,11 +1,11 @@
 {
 	"data": {
 		"state": {
-			"state": [
+			"key": [
 				3,
 				7
 			],
-			"other_state": [
+			"other_key": [
 				7,
 				12
 			]
@@ -13,11 +13,11 @@
 	},
 	"goal": {
 		"state": {
-			"state": [
+			"key": [
 				7,
 				12
 			],
-			"other_state": [
+			"other_key": [
 				12,
 				7
 			]

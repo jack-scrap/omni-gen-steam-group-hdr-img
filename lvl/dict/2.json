@@ -2,16 +2,16 @@
 	"data": {
 		"state": {
 			"state": {
-				"state": 3,
-				"other_state": 7
+				"key": 3,
+				"other_key": 7
 			}
 		}
 	},
 	"goal": {
 		"state": {
 			"state": {
-				"state": 7,
-				"other_state": 3
+				"key": 7,
+				"other_key": 3
 			}
 		}
 	},
