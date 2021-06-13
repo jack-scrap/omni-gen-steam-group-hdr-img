@@ -374,13 +374,13 @@ void scn::init(std::string stage, unsigned int lvl) {
 		obj.push_back(_->_parent);
 	}
 
-
+	
 	void** initDict = (void**) malloc(2 * sizeof (void**));
 	unsigned int typeDict[2];
 
 	char* initIdx = (char*) malloc(sizeof (char));
 	initIdx[0] = 'a';
-	Idx* idx = idxMk(0, initIdx, 1, "", glm::vec3(0.0, 0.0, 0.0));
+	Idx* idx = idxMk(0, initIdx, 1, "asdf", glm::vec3(0.0, 0.0, 0.0));
 
 	initDict[0] = idx;
 	typeDict[0] = omni::SCALAR;
@@ -389,7 +389,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 	initArray[0] = 'a';
 	initArray[1] = 's';
 	initArray[2] = 'd';
-	Array* array = arrayMk(initArray, 3, "", X, glm::vec3(0.0, 0.0, layout::stride[Z]));
+	Array* array = arrayMk(initArray, 3, "asdf", X, glm::vec3(0.0, 0.0, (layout::glyph[Y] + (layout::margin * 2 * 2)) + layout::stride[Z]));
 
 	initDict[1] = array;
 	typeDict[1] = omni::ARRAY;
