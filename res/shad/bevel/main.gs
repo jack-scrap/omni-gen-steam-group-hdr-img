@@ -12,10 +12,10 @@ uniform mat4
 	proj;
 
 float
-	edge = 0.1,
+	fac = 0.1,
 	pad = 0.16,
 
-	side = 1 - (2 * edge);
+	side = 1 - (2 * fac);
 
 void main() {
 	// front, back
@@ -68,22 +68,22 @@ void main() {
 			for (int h = 0; h < 2; h++) {
 				for (int v = 0; v < 2; v++) {
 					gl_Position = proj * view * model * vec4(gl_in[0].gl_Position.xyz + vec3(
-						(bool(x) ? 1 : -1) * (1 - edge),
+						(bool(x) ? 1 : -1) * (1 - fac),
 						0.0,
-						(bool(z) ? 1 : -1) * (1 - edge)
+						(bool(z) ? 1 : -1) * (1 - fac)
 					) + vec3(
-						(bool(h) ? 1 : -1) * ((bool(x) ? 1 : -1) * edge),
+						(bool(h) ? 1 : -1) * ((bool(x) ? 1 : -1) * fac),
 						(bool(v) ? 1 : -1) * (2 * pad),
-						(bool(h) ? 1 : -1) * ((bool(z) ? -1 : 1) * edge)
+						(bool(h) ? 1 : -1) * ((bool(z) ? -1 : 1) * fac)
 					), 1.0);
 					_posNoTrans = (vec4(gl_in[0].gl_Position.xyz + vec3(
-						(bool(x) ? 1 : -1) * (1 - edge),
+						(bool(x) ? 1 : -1) * (1 - fac),
 						0.0,
-						(bool(z) ? 1 : -1) * (1 - edge)
+						(bool(z) ? 1 : -1) * (1 - fac)
 					) + vec3(
-						(bool(h) ? 1 : -1) * ((bool(x) ? 1 : -1) * edge),
+						(bool(h) ? 1 : -1) * ((bool(x) ? 1 : -1) * fac),
 						(bool(v) ? 1 : -1) * (2 * pad),
-						(bool(h) ? 1 : -1) * ((bool(z) ? -1 : 1) * edge)
+						(bool(h) ? 1 : -1) * ((bool(z) ? -1 : 1) * fac)
 					), 1.0)).xyz;
 
 					EmitVertex();
