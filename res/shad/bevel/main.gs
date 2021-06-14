@@ -4,7 +4,7 @@ layout (points) in;
 
 layout (triangle_strip, max_vertices = 32) out;
 
-out vec3 _pos;
+out vec3 _posNoTrans;
 
 uniform mat4
 	model,
@@ -27,7 +27,7 @@ void main() {
 					(bool(y) ? 1 : -1) * (2 * pad),
 					bool(t) ? 1 : -1
 				), 1.0);
-				_pos = vec4(gl_in[0].gl_Position.xyz + vec3(
+				_posNoTrans = vec4(gl_in[0].gl_Position.xyz + vec3(
 					(bool(x) ? 1 : -1) * side,
 					(bool(y) ? 1 : -1) * (2 * pad),
 					bool(t) ? 1 : -1
@@ -49,7 +49,7 @@ void main() {
 					(bool(y) ? 1 : -1) * (2 * pad),
 					(bool(z) ? 1 : -1) * side
 				), 1.0);
-				_pos = (vec4(gl_in[0].gl_Position.xyz + vec3(
+				_posNoTrans = (vec4(gl_in[0].gl_Position.xyz + vec3(
 					bool(t) ? 1 : -1,
 					(bool(y) ? 1 : -1) * (2 * pad),
 					(bool(z) ? 1 : -1) * side
@@ -76,7 +76,7 @@ void main() {
 						(bool(v) ? 1 : -1) * (2 * pad),
 						(bool(h) ? 1 : -1) * ((bool(z) ? -1 : 1) * edge)
 					), 1.0);
-					_pos = (vec4(gl_in[0].gl_Position.xyz + vec3(
+					_posNoTrans = (vec4(gl_in[0].gl_Position.xyz + vec3(
 						(bool(x) ? 1 : -1) * (1 - edge),
 						0.0,
 						(bool(z) ? 1 : -1) * (1 - edge)
