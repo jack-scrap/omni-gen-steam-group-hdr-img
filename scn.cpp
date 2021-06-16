@@ -44,19 +44,28 @@ unsigned int noDataGet() {
 	return noData;
 }
 
-CArr crane;
+CArr crane = {
+	(Crane**) malloc(0),
+	0
+};
 
 CArr craneGet() {
 	return crane;
 }
 
-CArr truck;
+CArr truck = {
+	(Truck**) malloc(0),
+	0
+};
 
 CArr truckGet() {
 	return truck;
 }
 
-CArr cargoShip;
+CArr cargoShip = {
+	(CargoShip**) malloc(0),
+	0
+};
 
 CArr cargoShipGet() {
 	return cargoShip;
@@ -152,16 +161,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 	free(boundArea._ptr);
 
 	/* allocate */
-	// vehicle
-	crane._ptr = (Crane**) malloc(0);
-	crane._sz = 0;
-
-	truck._ptr = (Truck**) malloc(0);
-	truck._sz = 0;
-
-	cargoShip._ptr = (CargoShip**) malloc(0);
-	cargoShip._sz = 0;
-
 	for (const auto& entry : deser["vehicle"]) {
 		glm::vec3 loc = glm::vec3(0.0);
 		if (entry.contains("loc")) {
