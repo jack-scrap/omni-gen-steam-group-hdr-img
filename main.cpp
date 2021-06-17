@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
 	bool boot;
 
 	// initialize
-	std::map<std::string, std::string> setting = util::cfg::parse<std::string>("cfg/init.cfg");
+	std::map<std::string, std::string> setting = util::cfg::parse<std::string>("player/cfg/init.cfg");
 
 	for (const auto& [key, val] : setting) {
 		if (key == "skip_boot") {
