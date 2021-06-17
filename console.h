@@ -51,7 +51,7 @@ class Console {
 		unsigned int
 			_mode,
 
-			_idx[2],
+			_idx[2][2],
 			_l = 0;
 
 		std::string _modeStr;

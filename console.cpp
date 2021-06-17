@@ -91,20 +91,26 @@ Console::Console(std::string cwd, std::string name, std::vector<std::string> buf
 		// index
 		switch (_mode) {
 			case FS:
-				_idx[X] = 0;
-				_idx[Y] = 1 + _l;
+				_idx[MIN][X] = 0;
+				_idx[MIN][Y] = 1 + _l;
+				_idx[MAX][X] = 0;
+				_idx[MAX][Y] = 1 + _l;
 
 				break;
 
 			case EDITOR:
-				_idx[X] = _maxFs + 1 + _maxNo + 1 + _buff.back().size();
-				_idx[Y] = 1 + _buff.size() - 1;
+				_idx[MIN][X] = _maxFs + 1 + _maxNo + 1 + _buff.back().size();
+				_idx[MIN][Y] = 1 + _buff.size() - 1;
+				_idx[MAX][X] = _maxFs + 1 + _maxNo + 1 + _buff.back().size();
+				_idx[MAX][Y] = 1 + _buff.size() - 1;
 
 				break;
 
 			case PROMPT:
-				_idx[X] = (_ps1 + _prompt).size();
-				_idx[Y] = state::line - 1;
+				_idx[MIN][X] = (_ps1 + _prompt).size();
+				_idx[MIN][Y] = state::line - 1;
+				_idx[MAX][X] = (_ps1 + _prompt).size();
+				_idx[MAX][Y] = state::line - 1;
 
 				break;
 		}
@@ -291,10 +297,15 @@ void Console::render() {
 	}
 
 	if (
-		_idx[X] < state::ln &&
-		_idx[Y] < state::line
+		_idx[MIN][X] < state::ln &&
+		_idx[MIN][Y] < state::line &&
+		_idx[MAX][X] < state::ln &&
+		_idx[MAX][Y] < state::line
 	) {
-		glTexSubImage2D(GL_TEXTURE_2D, 0, _idx[X] * layout::dim[X], _idx[Y] * layout::dim[Y], layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _block->pixels);
+		glTexSubImage2D(GL_TEXTURE_2D, 0, _idx[MIN][X] * layout::dim[X], _idx[MIN][Y] * layout::dim[Y], layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _block->pixels);
+		SDL_FillRect(_block, &_blockRect, SDL_MapRGBA(_block->format, col[true][R], col[true][G], col[true][B], 255));
+
+		glTexSubImage2D(GL_TEXTURE_2D, 0, _idx[MAX][X] * layout::dim[X], _idx[MAX][Y] * layout::dim[Y], layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _block->pixels);
 		SDL_FillRect(_block, &_blockRect, SDL_MapRGBA(_block->format, col[true][R], col[true][G], col[true][B], 255));
 	}
 
@@ -311,16 +322,20 @@ void Console::push(char c) {
 				_buff.back().push_back(c);
 			}
 
-			_idx[X] = _maxFs + 1 + _maxNo + 1 + _buff.back().size();
-			_idx[Y] = _buff.size();
+			_idx[MIN][X] = _maxFs + 1 + _maxNo + 1 + _buff.back().size();
+			_idx[MIN][Y] = _buff.size();
+			_idx[MAX][X] = _maxFs + 1 + _maxNo + 1 + _buff.back().size();
+			_idx[MAX][Y] = _buff.size();
 
 			break;
 
 		case PROMPT:
 			_prompt.push_back(c);
 
-			_idx[X] = _ps1.size() + _prompt.size();
-			_idx[Y] = state::line - 1;
+			_idx[MIN][X] = _ps1.size() + _prompt.size();
+			_idx[MIN][Y] = state::line - 1;
+			_idx[MAX][X] = _ps1.size() + _prompt.size();
+			_idx[MAX][Y] = state::line - 1;
 
 			break;
 	}
@@ -345,8 +360,10 @@ void Console::enter() {
 void Console::newline() {
 	_buff.push_back({});
 
-	_idx[X] = _maxFs + 1 + _maxNo + 1;
-	_idx[Y] = 1 + _buff.size() - 1;
+	_idx[MIN][X] = _maxFs + 1 + _maxNo + 1;
+	_idx[MIN][Y] = 1 + _buff.size() - 1;
+	_idx[MAX][X] = _maxFs + 1 + _maxNo + 1;
+	_idx[MAX][Y] = 1 + _buff.size() - 1;
 
 	render();
 }
@@ -442,8 +459,10 @@ void Console::exec() {
 			omni::err("Command `" + _cmd + "` not found");
 		}
 
-		_idx[X] = (_ps1 + _prompt).size();
-		_idx[Y] = state::line - 1;
+		_idx[MIN][X] = (_ps1 + _prompt).size();
+		_idx[MIN][Y] = state::line - 1;
+		_idx[MAX][X] = (_ps1 + _prompt).size();
+		_idx[MAX][Y] = state::line - 1;
 
 		render();
 	}
@@ -462,8 +481,10 @@ void Console::pop() {
 				}
 			}
 
-			_idx[X] = _maxFs + 1 + _maxNo + 1 + _buff.back().size();
-			_idx[Y] = _buff.size();
+			_idx[MIN][X] = _maxFs + 1 + _maxNo + 1 + _buff.back().size();
+			_idx[MIN][Y] = _buff.size();
+			_idx[MAX][X] = _maxFs + 1 + _maxNo + 1 + _buff.back().size();
+			_idx[MAX][Y] = _buff.size();
 
 			break;
 
@@ -472,8 +493,10 @@ void Console::pop() {
 				_prompt.pop_back();
 			}
 
-			_idx[X] = (_ps1 + _prompt).size();
-			_idx[Y] = state::line - 1;
+			_idx[MIN][X] = (_ps1 + _prompt).size();
+			_idx[MIN][Y] = state::line - 1;
+			_idx[MAX][X] = (_ps1 + _prompt).size();
+			_idx[MAX][Y] = state::line - 1;
 
 			break;
 	}
