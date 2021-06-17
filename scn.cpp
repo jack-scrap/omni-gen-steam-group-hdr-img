@@ -375,20 +375,11 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 	nlohmann::json initDict = {
 		{
-			"data", {
-				"state", {
-					"block",
-					{
-						{
-							"key",
-							3
-						}, {
-							"other_key",
-							7
-						}
-					}
-				}
-			}
+			"key",
+			0
+		}, {
+			"other_key",
+			0
 		}
 	};
 

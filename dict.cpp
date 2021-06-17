@@ -11,15 +11,30 @@
 Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 	Dict* _ = (Dict*) malloc(sizeof (Dict));
 
-	for (const auto& pair : deser) {
-		std::cout << pair << std::endl;
+	Obj* child[deser.size()];
+
+	glm::vec3 start = glm::vec3(0.0, 0.0, layout::glyph[Y] + (layout::margin * 2 * 2)) + glm::vec3(layout::overhead, 0.0, layout::overhead);
+	GLfloat szPair = layout::stride[Z] + (layout::margin * 2) + (layout::stroke * 2) + layout::glyph[Z] + (layout::margin * 2 * 2);
+
+	unsigned int i = 0;
+	for (const auto& pair : deser.items()) {
+		if (pair.value() == nlohmann::json::value_t::number_unsigned) {
+			char* init = (char*) malloc(sizeof (char));
+			init[0] = util::json::byte(pair.value());
+
+			Idx* _ = idxMk(i, init, 1, pair.key(), start + glm::vec3(0.0, 0.0, i * szPair));
+
+			child[i] = _->_parent;
+		}
+
+		i++;
 	}
 
 	// scope
 	Border* scope = borderMk({
-		1.0,
-		1.0
-	});
+		10.0,
+		10.0
+	}, child, sizeof child / sizeof *child);
 
 	_->_parent = scope->_parent;
 	
