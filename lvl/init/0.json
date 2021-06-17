@@ -1,13 +1,14 @@
 {
 	"data": {
+		"state": {
+			"block": 0
+		}
 	},
 	"goal": {
-	},
-	"vehicle": [
-		{
-			"name": "crane"
+		"state": {
+			"block": 1
 		}
-	],
+	},
 	"bound": {
 		"rng": [
 			{
