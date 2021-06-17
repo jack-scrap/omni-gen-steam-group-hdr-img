@@ -373,27 +373,26 @@ void scn::init(std::string stage, unsigned int lvl) {
 		obj.push_back(_->_parent);
 	}
 
-	
-	void** initDict = (void**) malloc(2 * sizeof (void**));
-	unsigned int typeDict[2];
+	nlohmann::json initDict = {
+		{
+			"data", {
+				"state", {
+					"block",
+					{
+						{
+							"key",
+							3
+						}, {
+							"other_key",
+							7
+						}
+					}
+				}
+			}
+		}
+	};
 
-	char* initIdx = (char*) malloc(sizeof (char));
-	initIdx[0] = 'a';
-	Idx* idx = idxMk(0, initIdx, 1, "asdf", glm::vec3(0.0, 0.0, 0.0));
-
-	initDict[0] = idx;
-	typeDict[0] = omni::SCALAR;
-
-	char* initArray = (char*) malloc(3 * sizeof (char));
-	initArray[0] = 'a';
-	initArray[1] = 's';
-	initArray[2] = 'd';
-	Array* array = arrayMk(initArray, 3, "asdf", X, glm::vec3(0.0, 0.0, (layout::glyph[Y] + (layout::margin * 2 * 2)) + layout::stride[Z]));
-
-	initDict[1] = array;
-	typeDict[1] = omni::ARRAY;
-
-	Dict* _ = dictMk(initDict, typeDict, 2);
+	Dict* _ = dictMk(initDict);
 
 	obj.push_back(_->_parent);
 }

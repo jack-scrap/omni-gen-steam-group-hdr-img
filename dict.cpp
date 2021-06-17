@@ -8,43 +8,20 @@
 #include "scn.h"
 #include "omni.h"
 
-Dict* dictMk(void** init, unsigned int* type, unsigned int no, std::string name, glm::vec3 loc, glm::vec3 rot) {
+Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 	Dict* _ = (Dict*) malloc(sizeof (Dict));
-	
-	Obj* child[1 + no];
 
-	// identifier
-	if (!name.empty()) {
-		Str* id = strMk(name, glm::vec3(0.0, 0.0, -(layout::margin * 2)));
-		child[0] = id->_parent;
-	} else {
-		child[0] = nullptr;
-	}
-
-	// data
-	for (int i = 0; i < no; i++) {
-		child[1 + i] = nullptr;
-
-		switch (type[i]) {
-			case omni::SCALAR:
-				child[1 + i] = ((Idx*) init[i])->_parent;
-
-				break;
-
-			case omni::ARRAY:
-				child[1 + i] = ((Array*) init[i])->_parent;
-
-				break;
-		}
+	for (const auto& pair : deser) {
+		std::cout << pair << std::endl;
 	}
 
 	// scope
 	Border* scope = borderMk({
 		1.0,
 		1.0
-	}, child, sizeof child / sizeof *child, loc, rot);
+	});
 
 	_->_parent = scope->_parent;
-
+	
 	return _;
 }

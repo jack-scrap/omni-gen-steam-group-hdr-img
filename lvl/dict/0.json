@@ -1,20 +1,9 @@
 {
 	"data": {
-		"state": {
-			"key": 3,
-			"other_key": 7
-		}
 	},
 	"goal": {
-		"state": {
-			"key": 7,
-			"other_key": 3
-		}
 	},
 	"vehicle": [
-		{
-			"name": "crane"
-		}
 	],
 	"bound": {
 		"rng": [
