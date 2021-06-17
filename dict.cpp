@@ -17,6 +17,10 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 	GLfloat szPair = layout::stride[Z] + (layout::margin * 2) + (layout::stroke * 2) + layout::glyph[Z] + (layout::margin * 2 * 2);
 
 	unsigned int i = 0;
+	GLfloat sz[2] = {
+		0.0,
+		0.0
+	};
 	for (const auto& pair : deser.items()) {
 		if (pair.value() == nlohmann::json::value_t::number_unsigned) {
 			char* init = (char*) malloc(sizeof (char));
@@ -25,6 +29,12 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 			Idx* _ = idxMk(i, init, 1, pair.key(), start + glm::vec3(0.0, 0.0, i * szPair));
 
 			child[i] = _->_parent;
+
+			GLfloat curr = _->_parent->_aabb[X][MAX] - _->_parent->_aabb[X][MIN];
+
+			if (curr > sz[X]) {
+				sz[X] = curr;
+			}
 		}
 
 		i++;
@@ -32,7 +42,7 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 
 	// scope
 	Border* scope = borderMk({
-		10.0,
+		sz[X] + (layout::margin * 2 * 2),
 		10.0
 	}, child, sizeof child / sizeof *child);
 
