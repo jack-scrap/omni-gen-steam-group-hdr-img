@@ -359,7 +359,7 @@ void objMv(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
 
 void objA(Obj* obj) {
 	int i = 0;
-	while (!util::phys::aabbGround(obj->_aabb)) {
+	while (!util::phys::collGround(obj->_aabb)) {
 		objMv(obj, glm::vec3(0.0, -(pow(i, 2) * phys::g), 0.0), glm::vec3(0.0));
 
 		i++;
