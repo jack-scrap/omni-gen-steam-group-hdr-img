@@ -373,17 +373,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 		obj.push_back(_->_parent);
 	}
 
-	nlohmann::json initDict = {
-		{
-			"key",
-			0
-		}, {
-			"other_key",
-			0
-		}
-	};
-
-	Dict* _ = dictMk(initDict);
+	Dict* _ = dictMk(deser["asdf"]);
 
 	obj.push_back(_->_parent);
 }
