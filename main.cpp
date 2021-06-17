@@ -31,7 +31,7 @@ Cam cam = {
 		1000.0, 1000.0, 1000.0
 	}, {
 		50, 50, 50
-	}, cam._pos
+	}
 };
 
 int main(int argc, char** argv) {
@@ -207,6 +207,7 @@ int main(int argc, char** argv) {
 	}
 
 	SDL_Event e;
+	glm::vec3 prev;
 	while (disp->_open) {
 		while (SDL_PollEvent(&e)) {
 			if (e.type == SDL_KEYDOWN) {
@@ -551,6 +552,8 @@ int main(int argc, char** argv) {
 			}
 
 			if (e.type == SDL_MOUSEBUTTONDOWN) {
+				prev = cam._pos;
+
 				SDL_GetMouseState(&cam._begin[0], &cam._begin[1]);
 
 				cam._drag = true;
@@ -559,7 +562,7 @@ int main(int argc, char** argv) {
 			if (e.type == SDL_MOUSEBUTTONUP) {
 				cam._drag = false;
 
-				cam._prev = cam._pos;
+				prev = cam._pos;
 			}
 
 			if (e.type == SDL_MOUSEMOTION) {
@@ -569,10 +572,10 @@ int main(int argc, char** argv) {
 					cam._delta[0] = cam._curr[0] - cam._begin[0];
 					cam._delta[1] = cam._curr[1] - cam._begin[1];
 
-					cam._pos[0] = cam._prev[0] + cam._delta[0];
-					cam._pos[2] = cam._prev[0] - cam._delta[0];
+					cam._pos[0] = prev[0] + cam._delta[0];
+					cam._pos[2] = prev[0] - cam._delta[0];
 
-					cam._pos[1] = cam._prev[1] + cam._delta[1];
+					cam._pos[1] = prev[1] + cam._delta[1];
 				}
 			}
 
