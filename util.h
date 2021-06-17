@@ -104,8 +104,6 @@ namespace util {
 
 		CBuff str(nlohmann::json deser);
 
-		Scope dict(nlohmann::json deser);
-
 		namespace array {
 			CBuff dim(nlohmann::json deser, CBuff buff, int i);
 
