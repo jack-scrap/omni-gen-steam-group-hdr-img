@@ -66,12 +66,11 @@ class Console {
 		std::string _prompt;
 
 		char* _scr;
+		bool* _hl;
 
 		unsigned int
 			_maxFs = 0,
 			_maxNo = 0;
-
-		bool* _hl;
 
 		const std::string _ps1 = "[] ";
 
