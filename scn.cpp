@@ -72,8 +72,7 @@ CArr cargoShipGet() {
 }
 
 std::vector<Obj*> scn::obj;
-std::vector<Obj*> scn::line;
-std::vector<Obj*> scn::pt;
+std::vector<unsigned int> scn::objType;
 
 CArr streetSign;
 
@@ -139,16 +138,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 	}
 	obj.clear();
 
-	for (void* _ : line) {
-		free(_);
-	}
-	line.clear();
-
-	for (void* _ : pt) {
-		free(_);
-	}
-	pt.clear();
-
 	// bound
 	for (int i = 0; i < boundRng._sz; i += sizeof (Lim*)) {
 		free(((Lim**) boundRng._ptr)[i]);
@@ -190,6 +179,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 			((Crane**) crane._ptr)[crane._sz - sizeof (Crane*)] = _;
 
 			obj.push_back(_->_parent);
+			objType.push_back(Mesh::OBJ);
 		}
 
 		if (entry["name"] == "cargo_ship") {
@@ -203,6 +193,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 			((CargoShip**) cargoShip._ptr)[cargoShip._sz - sizeof (CargoShip*)] = _;
 
 			obj.push_back(_->_parent);
+			objType.push_back(Mesh::OBJ);
 		}
 
 		if (entry["name"] == "truck") {
@@ -226,9 +217,13 @@ void scn::init(std::string stage, unsigned int lvl) {
 			((Truck**) truck._ptr)[truck._sz - sizeof (Truck*)] = _;
 
 			obj.push_back(_->_parent);
+			objType.push_back(Mesh::OBJ);
 
-			pt.push_back(_->_parent->_child[Truck::BED]);
-			pt.push_back(_->_parent->_child[Truck::OUTER]);
+			obj.push_back(_->_parent->_child[Truck::BED]);
+			objType.push_back(Mesh::PT);
+
+			obj.push_back(_->_parent->_child[Truck::OUTER]);
+			objType.push_back(Mesh::PT);
 		}
 	}
 
@@ -252,7 +247,8 @@ void scn::init(std::string stage, unsigned int lvl) {
 		}
 
 		for (Obj* seg : _) {
-			line.push_back(seg);
+			obj.push_back(seg);
+			objType.push_back(Mesh::LINE);
 		}
 	}
 
@@ -296,6 +292,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 		}
 
 		obj.push_back(_);
+		objType.push_back(Mesh::OBJ);
 	}
 
 	// prop
@@ -303,6 +300,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 		Obj* _ = util::json::prop(entry);
 
 		obj.push_back(_);
+		objType.push_back(Mesh::OBJ);
 	}
 
 	for (nlohmann::json entry : deser["prop"]["dyna"]) {
@@ -319,7 +317,8 @@ void scn::init(std::string stage, unsigned int lvl) {
 		if (entry["name"] == "i_beam") {
 			Obj* _ = iBeamMk(loc, rot);
 
-			line.push_back(_);
+			obj.push_back(_);
+			objType.push_back(Mesh::LINE);
 		}
 	}
 
@@ -340,7 +339,8 @@ void scn::init(std::string stage, unsigned int lvl) {
 					((Lim**) boundRng._ptr)[i] = _;
 					i++;
 
-					line.push_back(_->_parent);
+					obj.push_back(_->_parent);
+					objType.push_back(Mesh::LINE);
 				}	
 			}	
 		}
@@ -354,7 +354,10 @@ void scn::init(std::string stage, unsigned int lvl) {
 				i++;
 
 				obj.push_back(_->_parent);
-				pt.push_back(_->_parent->_child[0]);
+				objType.push_back(Mesh::OBJ);
+
+				obj.push_back(_->_parent->_child[0]);
+				objType.push_back(Mesh::PT);
 			}
 		}
 	}
@@ -371,11 +374,13 @@ void scn::init(std::string stage, unsigned int lvl) {
 		i++;
 
 		obj.push_back(_->_parent);
+		objType.push_back(Mesh::OBJ);
 	}
 
 	Dict* _ = dictMk(deser["asdf"]);
 
 	obj.push_back(_->_parent);
+	objType.push_back(Mesh::OBJ);
 }
 
 Asdf asdf = {

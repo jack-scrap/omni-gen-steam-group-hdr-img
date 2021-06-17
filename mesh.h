@@ -16,6 +16,12 @@ typedef struct Mesh {
 
 		STBO
 	};
+
+	enum type {
+		PT,
+		LINE,
+		OBJ
+	};
 } Mesh;
 
 Mesh* meshMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim);

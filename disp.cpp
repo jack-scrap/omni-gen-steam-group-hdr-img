@@ -5,6 +5,7 @@
 #include "math.h"
 #include "scn.h"
 #include "line.h"
+#include "mesh.h"
 
 Disp::Disp(const char* title, glm::vec2 res, glm::vec3 bg) :
 	_t(0) {
@@ -56,16 +57,23 @@ void Disp::draw() {
 
 	glViewport(layout::res[X], 0, layout::view[X], layout::view[Y]);
 
-	for (Obj* _ : scn::obj) {
-		objDraw(_);
-	}
+	for (int i = 0; i < scn::obj.size(); i++) {
+		switch (scn::objType[i]) {
+			case Mesh::PT:
+				ptDraw(scn::obj[i]);
 
-	for (Obj* _ : scn::line) {
-		lineDraw(_);
-	}
+				break;
 
-	for (Obj* _ : scn::pt) {
-		ptDraw(_);
+			case Mesh::LINE:
+				lineDraw(scn::obj[i]);
+
+				break;
+
+			case Mesh::OBJ:
+				objDraw(scn::obj[i]);
+
+				break;
+		}
 	}
 
 	glViewport(0, 0, layout::res[Y], layout::view[Y]);
