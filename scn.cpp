@@ -183,7 +183,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 			Crane* _ = craneMk(init, loc, rot);
 
-			omni::assertion(!util::phys::aabbGround(_->_parent), "Crane clipping into ground plane");
+			omni::assertion(!util::phys::aabbGround(_->_parent->_aabb), "Crane clipping into ground plane");
 
 			crane._sz += sizeof (Crane*);
 			crane._ptr = (Crane**) realloc(crane._ptr, crane._sz);
@@ -219,7 +219,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 			Truck* _ = truckMk(array, loc, rot);
 
-			omni::assertion(!util::phys::aabbGround(_->_parent), "Truck clipping into ground plane");
+			omni::assertion(!util::phys::aabbGround(_->_parent->_aabb), "Truck clipping into ground plane");
 
 			truck._sz += sizeof (Truck*);
 			truck._ptr = (Truck**) realloc(truck._ptr, truck._sz);
