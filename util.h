@@ -70,6 +70,7 @@ namespace util {
 
 	namespace phys {
 		bool aabb(GLfloat p[3][2], GLfloat q[3][2], glm::mat4 modelP = glm::mat4(1.0), glm::mat4 modelQ = glm::mat4(1.0));
+		bool aabbPt(GLfloat vtx[3], GLfloat bound[3][2], glm::mat4 modelBound = glm::mat4(1.0), glm::mat4 modelVtx = glm::mat4(1.0));
 		bool aabbGround(GLfloat bound[3][2], glm::mat4 model = glm::mat4(1.0));
 	}
 

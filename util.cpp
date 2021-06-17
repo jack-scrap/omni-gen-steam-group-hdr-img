@@ -382,6 +382,34 @@ bool util::phys::aabb(GLfloat p[3][2], GLfloat q[3][2], glm::mat4 modelP, glm::m
 	return _;
 }
 
+bool util::phys::aabbPt(GLfloat vtx[3], GLfloat bound[3][2], glm::mat4 modelVtx, glm::mat4 modelBound) {
+	bool _ = true;
+
+	glm::vec3 vtxTrans = glm::vec3(vtx[X], vtx[Y], vtx[Z]);
+	vtxTrans = glm::vec3(modelVtx * glm::vec4(vtxTrans, 1.0));
+
+	for (int a = 0; a < 3; a++) {
+		glm::vec3 min = glm::vec3(0.0);
+		min[a] = bound[a][MIN];
+		min = glm::vec3(modelVtx * glm::vec4(min, 1.0));
+
+		glm::vec3 max = glm::vec3(0.0);
+		max[a] = bound[a][MAX];
+		max = glm::vec3(modelVtx * glm::vec4(max, 1.0));
+
+		if (!(
+			vtx[a] > min[a] &&
+			vtx[a] < max[a]
+		)) {
+			_ = false;
+
+			break;
+		}
+	}
+
+	return _;
+}
+
 bool util::phys::aabbGround(GLfloat bound[3][2], glm::mat4 model) {
 	glm::vec3 btm = util::matr::apply(glm::vec3(0.0, bound[Y][MIN], 0.0), model);
 
