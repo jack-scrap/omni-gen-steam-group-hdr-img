@@ -316,17 +316,19 @@ while i < _streetSignGet()._sz:
 	i += sizeof(c_void_p)
 
 # path
-## strip
-_pathGet = _scn.pathGet
-_pathGet.restype = _CArr
-_pathGet.argtypes = None
-
 ## node
 _nodeGet = _scn.nodeGet
 _nodeGet.restype = _CArr
 _nodeGet.argtypes = None
 
 node = _nodeGet()
+
+## strip
+_pathGet = _scn.pathGet
+_pathGet.restype = _CArr
+_pathGet.argtypes = None
+
+path = _pathGet()
 
 class _Hjkl(Structure):
 	_fields_ = [

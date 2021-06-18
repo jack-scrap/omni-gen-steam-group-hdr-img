@@ -242,8 +242,12 @@ void scn::init(std::string stage, unsigned int lvl) {
 	}
 
 	// path
-	for (const auto& node : deser["road"]["node"]) {
-		omni::assertion(node[Y] >= 0, std::string("Path node `") + node.dump() + std::string("` below ground plane"));
+	for (const auto& strip : deser["road"]["path"]["idc"]) {
+		for (const auto& node : strip) {
+			path._sz++;
+			path._ptr = (unsigned int*) realloc(path._ptr, path._sz * sizeof (unsigned int));
+			((unsigned int*) path._ptr)[path._sz - 1] = node;
+		}
 	}
 
 	node._sz = 0;
