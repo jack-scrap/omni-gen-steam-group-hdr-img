@@ -281,12 +281,14 @@ void Console::render() {
 
 			if (
 				l == _idx[MIN][Y] &&
-				l == _idx[MAX][Y] &&
-
-				i >= _idx[MIN][X] &&
-				i <= _idx[MAX][X]
+				l == _idx[MAX][Y]
 			) {
-				_hl[(l * state::ln) + i] = true;
+				if (
+					i >= _idx[MIN][X] &&
+					i <= _idx[MAX][X]
+				) {
+					_hl[(l * state::ln) + i] = true;
+				}
 			}
 		}
 	}
