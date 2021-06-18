@@ -75,6 +75,16 @@ Console::Console(std::string cwd, std::string name, std::vector<std::string> buf
 		for (int l = 0; l < state::line; l++) {
 			for (int i = 0; i < state::ln; i++) {
 				_hl[(l * state::ln) + i] = false;
+
+				if (
+					l == _idx[MIN][Y] &&
+					l == _idx[MAX][Y] &&
+
+					i >= _idx[MIN][X] &&
+					i <= _idx[MAX][X]
+				) {
+					_hl[(l * state::ln) + i] = true;
+				}
 			}
 		}
 

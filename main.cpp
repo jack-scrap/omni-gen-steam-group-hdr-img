@@ -556,6 +556,60 @@ int main(int argc, char** argv) {
 
 									console->render();
 								}
+
+								// line
+								if (console->_sel == Console::LINE) {
+									switch (e.key.keysym.sym) {
+										case SDLK_LEFT:
+											if (console->_idx[MAX][X] > console->_maxFs + 1 + console->_maxNo + 1) {
+												console->_idx[MAX][X]--;
+											}
+
+											break;
+
+										case SDLK_RIGHT:
+											if (console->_idx[MAX][X] < console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[MAX][Y] - 1].size()) {
+												console->_idx[MAX][X]++;
+											}
+
+											break;
+
+										case SDLK_DOWN:
+											if (console->_idx[MAX][Y] < console->_buff.size()) {
+												console->_idx[MAX][Y]++;
+												console->_idx[MAX][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[MIN][Y] - 1].size();
+											}
+
+											break;
+
+										case SDLK_UP:
+											if (console->_idx[MAX][Y] > 1) {
+												console->_idx[MAX][Y]--;
+												console->_idx[MAX][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[MIN][Y] - 1].size();
+											}
+
+											break;
+									}
+
+									// highlighting
+									for (int l = 0; l < state::line; l++) {
+										for (int i = 0; i < state::ln; i++) {
+											console->_hl[(l * state::ln) + i] = false;
+
+											if (
+												l == console->_idx[MIN][Y] &&
+												l == console->_idx[MAX][Y] &&
+
+												i >= console->_idx[MIN][X] &&
+												i <= console->_idx[MAX][X]
+											) {
+												console->_hl[(l * state::ln) + i] = true;
+											}
+										}
+									}
+
+									console->render();
+								}
 							}
 						}
 
