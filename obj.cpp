@@ -354,7 +354,25 @@ void objAnim(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
 }
 
 void objMv(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
-	objAnim(obj, loc, rot);
+	bool coll = false;
+	glm::mat4 dest = glm::mat4(1.0);
+	dest = glm::translate(dest, loc);
+	dest = util::matr::rot(dest, rot);
+	for (int i = 0; i < scn::obj.size(); i++) {
+		if (obj != scn::obj[i]) {
+			if (util::phys::coll(obj->_aabb, scn::obj[i]->_aabb)) {
+				coll = true;
+
+				break;
+			}
+		}
+	}
+
+	if (!coll) {
+		objAnim(obj, loc, rot);
+	} else {
+		omni::err("Cannot move; objects clipping");
+	}
 }
 
 void objA(Obj* obj) {
