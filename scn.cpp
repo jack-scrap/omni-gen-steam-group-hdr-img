@@ -74,32 +74,47 @@ CArr cargoShipGet() {
 std::vector<Obj*> scn::obj;
 std::vector<unsigned int> scn::objType;
 
-CArr streetSign;
+CArr streetSign = {
+	(StreetSign**) malloc(0),
+	0
+};
 
 CArr streetSignGet() {
 	return streetSign;
 }
 
-CArr boundRng;
+CArr boundRng = {
+	(Lim**) malloc(0),
+	0
+};
 
 CArr boundRngGet() {
 	return boundRng;
 }
 
-CArr boundArea;
+CArr boundArea = {
+	(Cone**) malloc(0),
+	0
+};
 
 CArr boundAreaGet() {
 	return boundArea;
 }
 
 
-CArr node;
+CArr node = {
+	(GLfloat*) malloc(0),
+	0
+};
 
 CArr nodeGet() {
 	return node;
 }
 
-CArr path;
+CArr path = {
+	(unsigned int*) malloc(0),
+	0
+};
 
 CArr pathGet() {
 	return path;
