@@ -521,8 +521,6 @@ int main(int argc, char** argv) {
 											if (console->_idx[MIN][X] > console->_maxFs + 1 + console->_maxNo + 1) {
 												console->_idx[MIN][X]--;
 												console->_idx[MAX][X]--;
-
-												console->render();
 											}
 
 											break;
@@ -531,8 +529,6 @@ int main(int argc, char** argv) {
 											if (console->_idx[MIN][X] < console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[MIN][Y] - 1].size()) {
 												console->_idx[MIN][X]++;
 												console->_idx[MAX][X]++;
-
-												console->render();
 											}
 
 											break;
@@ -543,8 +539,6 @@ int main(int argc, char** argv) {
 												console->_idx[MIN][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[MIN][Y] - 1].size();
 												console->_idx[MAX][Y]++;
 												console->_idx[MAX][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[MIN][Y] - 1].size();
-
-												console->render();
 											}
 
 											break;
@@ -555,12 +549,12 @@ int main(int argc, char** argv) {
 												console->_idx[MIN][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[MIN][Y] - 1].size();
 												console->_idx[MAX][Y]--;
 												console->_idx[MAX][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[MIN][Y] - 1].size();
-
-												console->render();
 											}
 
 											break;
-									}	
+									}
+
+									console->render();
 								}
 							}
 						}
