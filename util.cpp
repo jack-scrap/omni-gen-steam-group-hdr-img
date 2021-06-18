@@ -388,17 +388,20 @@ bool util::phys::coll(glm::vec3 vtx, Obj* bound, glm::mat4 modelVtx, glm::mat4 m
 	glm::vec3 vtxTrans = glm::vec3(modelVtx * glm::vec4(vtx, 1.0));
 
 	for (int a = 0; a < 3; a++) {
-		glm::vec3 min = glm::vec3(0.0);
-		min[a] = bound->_aabb[a][MIN];
-		min = glm::vec3(modelVtx * glm::vec4(min, 1.0));
+		glm::vec3 rng[2];
+		for (int i = 0; i < 2; i++) {
+			rng[i] = glm::vec3(0.0);
+		}
 
-		glm::vec3 max = glm::vec3(0.0);
-		max[a] = bound->_aabb[a][MAX];
-		max = glm::vec3(modelVtx * glm::vec4(max, 1.0));
+		rng[MIN][a] = bound->_aabb[a][MIN];
+		rng[MIN] = glm::vec3(modelVtx * glm::vec4(rng[MIN], 1.0));
+
+		rng[MAX][a] = bound->_aabb[a][MAX];
+		rng[MAX] = glm::vec3(modelVtx * glm::vec4(rng[MAX], 1.0));
 
 		if (!(
-			vtx[a] > min[a] &&
-			vtx[a] < max[a]
+			vtx[a] > rng[MIN][a] &&
+			vtx[a] < rng[MAX][a]
 		)) {
 			_ = false;
 
