@@ -871,7 +871,7 @@ std::vector<Obj*> util::json::path(nlohmann::json path, nlohmann::json node, nlo
 					}
 				}
 
-				_.push_back(lineMk((GLfloat*) vtc, idc, 2, "main", "thick", name, active));
+				_.push_back(lineMk((GLfloat*) vtc, idc, 2, "main", "lane", name, active));
 
 				break;
 			}
