@@ -46,6 +46,7 @@ Console::Console(std::string cwd, std::string name, std::vector<std::string> buf
 	_cwd(cwd),
 	_tree(util::fs::ls(cwd)),
 	_mode(EDITOR),
+	_sel(IDX),
 	_prog("text", "text") {
 		if (buff.size()) {
 			_buff = buff;

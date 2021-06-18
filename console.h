@@ -50,6 +50,7 @@ class Console {
 	public:
 		unsigned int
 			_mode,
+			_sel,
 
 			_idx[2][2],
 			_l = 0;
@@ -78,6 +79,11 @@ class Console {
 			FS,
 			EDITOR,
 			PROMPT
+		};
+
+		enum sel {
+			IDX,
+			LINE
 		};
 
 		enum id {

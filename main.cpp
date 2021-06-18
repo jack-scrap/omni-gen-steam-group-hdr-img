@@ -512,53 +512,65 @@ int main(int argc, char** argv) {
 										console->pop();
 
 										break;
+								}
 
-									// index
-									case SDLK_LEFT:
-										if (console->_idx[MIN][X] > console->_maxFs + 1 + console->_maxNo + 1) {
-											console->_idx[MIN][X]--;
-											console->_idx[MAX][X]--;
+								// index
+								if (console->_sel == Console::IDX) {
+									switch (e.key.keysym.sym) {
+										case SDLK_LEFT:
+											if (console->_idx[MIN][X] > console->_maxFs + 1 + console->_maxNo + 1) {
+												console->_idx[MIN][X]--;
+												console->_idx[MAX][X]--;
 
-											console->render();
-										}
+												console->render();
+											}
 
-										break;
+											break;
 
-									case SDLK_RIGHT:
-										if (console->_idx[MIN][X] < console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[MIN][Y] - 1].size()) {
-											console->_idx[MIN][X]++;
-											console->_idx[MAX][X]++;
+										case SDLK_RIGHT:
+											if (console->_idx[MIN][X] < console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[MIN][Y] - 1].size()) {
+												console->_idx[MIN][X]++;
+												console->_idx[MAX][X]++;
 
-											console->render();
-										}
+												console->render();
+											}
 
-										break;
+											break;
 
-									case SDLK_DOWN:
-										if (console->_idx[MIN][Y] < console->_buff.size()) {
-											console->_idx[MIN][Y]++;
-											console->_idx[MIN][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[MIN][Y] - 1].size();
-											console->_idx[MAX][Y]++;
-											console->_idx[MAX][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[MIN][Y] - 1].size();
+										case SDLK_DOWN:
+											if (console->_idx[MIN][Y] < console->_buff.size()) {
+												console->_idx[MIN][Y]++;
+												console->_idx[MIN][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[MIN][Y] - 1].size();
+												console->_idx[MAX][Y]++;
+												console->_idx[MAX][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[MIN][Y] - 1].size();
 
-											console->render();
-										}
+												console->render();
+											}
 
-										break;
+											break;
 
-									case SDLK_UP:
-										if (console->_idx[MIN][Y] > 1) {
-											console->_idx[MIN][Y]--;
-											console->_idx[MIN][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[MIN][Y] - 1].size();
-											console->_idx[MAX][Y]--;
-											console->_idx[MAX][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[MIN][Y] - 1].size();
+										case SDLK_UP:
+											if (console->_idx[MIN][Y] > 1) {
+												console->_idx[MIN][Y]--;
+												console->_idx[MIN][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[MIN][Y] - 1].size();
+												console->_idx[MAX][Y]--;
+												console->_idx[MAX][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[MIN][Y] - 1].size();
 
-											console->render();
-										}
+												console->render();
+											}
 
-										break;
+											break;
+									}	
 								}
 							}
+						}
+
+						if (e.key.keysym.mod & (KMOD_ALT)) {
+							console->_sel = Console::LINE;
+						}
+
+						if (e.key.keysym.sym == SDLK_ESCAPE) {
+							console->_sel = Console::IDX;
 						}
 
 						break;
