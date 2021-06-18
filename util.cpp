@@ -382,11 +382,10 @@ bool util::phys::coll(Obj* p, Obj* q, glm::mat4 modelP, glm::mat4 modelQ) {
 	return _;
 }
 
-bool util::phys::coll(GLfloat vtx[3], Obj* bound, glm::mat4 modelVtx, glm::mat4 modelBound) {
+bool util::phys::coll(glm::vec3 vtx, Obj* bound, glm::mat4 modelVtx, glm::mat4 modelBound) {
 	bool _ = true;
 
-	glm::vec3 vtxTrans = glm::vec3(vtx[X], vtx[Y], vtx[Z]);
-	vtxTrans = glm::vec3(modelVtx * glm::vec4(vtxTrans, 1.0));
+	glm::vec3 vtxTrans = glm::vec3(modelVtx * glm::vec4(vtx, 1.0));
 
 	for (int a = 0; a < 3; a++) {
 		glm::vec3 min = glm::vec3(0.0);
