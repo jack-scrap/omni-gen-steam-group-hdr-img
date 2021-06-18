@@ -71,23 +71,6 @@ Console::Console(std::string cwd, std::string name, std::vector<std::string> buf
 		_scr = (char*) malloc(sizeof (char) * state::line * state::ln);
 		_hl = (bool*) malloc(sizeof (bool) * state::line * state::ln);
 
-		// highlighting
-		for (int l = 0; l < state::line; l++) {
-			for (int i = 0; i < state::ln; i++) {
-				_hl[(l * state::ln) + i] = false;
-
-				if (
-					l == _idx[MIN][Y] &&
-					l == _idx[MAX][Y] &&
-
-					i >= _idx[MIN][X] &&
-					i <= _idx[MAX][X]
-				) {
-					_hl[(l * state::ln) + i] = true;
-				}
-			}
-		}
-
 		// file system
 		std::sort(_tree.begin(), _tree.end());
 
@@ -289,6 +272,23 @@ void Console::render() {
 
 	for (int i = 0; i < state::ln; i++) {
 		_scr[((state::line - 1) * state::ln) + i] = strPadded[i];
+	}
+
+	// highlighting
+	for (int l = 0; l < state::line; l++) {
+		for (int i = 0; i < state::ln; i++) {
+			_hl[(l * state::ln) + i] = false;
+
+			if (
+				l == _idx[MIN][Y] &&
+				l == _idx[MAX][Y] &&
+
+				i >= _idx[MIN][X] &&
+				i <= _idx[MAX][X]
+			) {
+				_hl[(l * state::ln) + i] = true;
+			}
+		}
 	}
 
 	glActiveTexture(_tex);

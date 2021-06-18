@@ -591,23 +591,6 @@ int main(int argc, char** argv) {
 											break;
 									}
 
-									// highlighting
-									for (int l = 0; l < state::line; l++) {
-										for (int i = 0; i < state::ln; i++) {
-											console->_hl[(l * state::ln) + i] = false;
-
-											if (
-												l == console->_idx[MIN][Y] &&
-												l == console->_idx[MAX][Y] &&
-
-												i >= console->_idx[MIN][X] &&
-												i <= console->_idx[MAX][X]
-											) {
-												console->_hl[(l * state::ln) + i] = true;
-											}
-										}
-									}
-
 									console->render();
 								}
 							}
