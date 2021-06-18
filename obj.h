@@ -78,4 +78,4 @@ void objMv(Obj* obj, glm::vec3 loc, glm::vec3 rot);
 
 void objA(Obj* obj);
 
-void objDraw(Obj* obj);
+void objDraw(Obj* obj, unsigned int type);

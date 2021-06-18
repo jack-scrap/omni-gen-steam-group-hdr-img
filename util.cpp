@@ -1201,7 +1201,7 @@ GLuint util::tex::spray(Obj* obj) {
 		omni::err("Framebuffer not complete");
 	}
 
-	objDraw(obj);
+	objDraw(obj, Mesh::OBJ);
 
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 	glBindTexture(GL_TEXTURE_2D, 0);

@@ -58,22 +58,7 @@ void Disp::draw() {
 	glViewport(layout::res[X], 0, layout::view[X], layout::view[Y]);
 
 	for (int i = 0; i < scn::obj.size(); i++) {
-		switch (scn::objType[i]) {
-			case Mesh::PT:
-				ptDraw(scn::obj[i]);
-
-				break;
-
-			case Mesh::LINE:
-				lineDraw(scn::obj[i]);
-
-				break;
-
-			case Mesh::OBJ:
-				objDraw(scn::obj[i]);
-
-				break;
-		}
+		objDraw(scn::obj[i], scn::objType[i]);
 	}
 
 	glViewport(0, 0, layout::res[Y], layout::view[Y]);

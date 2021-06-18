@@ -366,7 +366,25 @@ void objA(Obj* obj) {
 	}
 }
 
-void objDraw(Obj* obj) {
+void objDraw(Obj* obj, unsigned int type) {
+	GLenum prim;
+	switch (type) {
+		case Mesh::PT:
+			prim = GL_POINTS;
+
+			break;
+
+		case Mesh::LINE:
+			prim = GL_LINES;
+
+			break;
+
+		case Mesh::OBJ:
+			prim = GL_TRIANGLES;
+
+			break;
+	};
+
 	obj->_view = glm::lookAt(cam._pos, cam._pos + glm::vec3(-1000.0, -1000.0, -1000.0), glm::vec3(0, 1, 0));
 	obj->_view = glm::scale(obj->_view, cam._scale);
 
@@ -382,14 +400,14 @@ void objDraw(Obj* obj) {
 
 	glUniform1ui(obj->_uni[Obj::ACTIVE], obj->_active);
 
-	glDrawElements(GL_TRIANGLES, obj->_mesh->_noPrim, GL_UNSIGNED_SHORT, (GLvoid*) 0);
+	glDrawElements(prim, obj->_mesh->_noPrim, GL_UNSIGNED_SHORT, (GLvoid*) 0);
 
 	obj->_prog.unUse();
 	glBindVertexArray(0);
 
 	for (int i = 0; i < obj->_noChild; i++) {
 		if (obj->_child[i]) {
-			objDraw(obj->_child[i]);
+			objDraw(obj->_child[i], type);
 		}
 	}
 }
