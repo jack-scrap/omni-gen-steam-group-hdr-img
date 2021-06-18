@@ -22,7 +22,7 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 		0.0
 	};
 	for (const auto& pair : deser.items()) {
-		if (pair.value() == nlohmann::json::value_t::number_unsigned) {
+		if (pair.value().type() == nlohmann::json::value_t::number_unsigned) {
 			char* init = (char*) malloc(sizeof (char));
 			init[0] = util::json::byte(pair.value());
 
