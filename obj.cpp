@@ -360,7 +360,7 @@ void objMv(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
 	dest = util::matr::rot(dest, rot);
 	for (int i = 0; i < scn::obj.size(); i++) {
 		if (obj != scn::obj[i]) {
-			if (util::phys::coll(obj->_aabb, scn::obj[i]->_aabb)) {
+			if (util::phys::coll(obj, scn::obj[i])) {
 				coll = true;
 
 				break;
@@ -377,7 +377,7 @@ void objMv(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
 
 void objA(Obj* obj) {
 	int i = 0;
-	while (!util::phys::collGround(obj->_aabb)) {
+	while (!util::phys::collGround(obj)) {
 		objMv(obj, glm::vec3(0.0, -(pow(i, 2) * phys::g), 0.0), glm::vec3(0.0));
 
 		i++;
