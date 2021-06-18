@@ -21,16 +21,25 @@ By examining sets of data and re-structuring accordingly, operations can elimina
 `[7, 3]`
 `[3, 7]`
 
-- `[3, 7, 12]`
+`[3, 7, 12]`
 
 ## Insertion
-"Insertion Sort"
+"Insertion Sort" continually traverses data until it encounters an unsorted item, and then traverses backwards until it has found a more appropriate index.
 
-Dividing a set of data into a sort portion into an unsorted portion, the algorithm continually proceeds until it encounters a larger item.
+Traversing the set continually comparing groups of two, compare the items.
 
-`[3] [7]`
+`[7, 12, 3]`
 
-Upon encountering a larger item, this item will be added to the sorted portion.
+`[7, 12]`
+`[7, 12]`
+
+`[7, 12, 3]`
+
+`[12, 3]`
+
+`[3, 7, 12]`
+
+Should the second item be larger than the first, the set will be traversed backwards until it encounters an item it is larger than.
 
 ## Selection sort
 Continually proceed until it finds a minimum.
