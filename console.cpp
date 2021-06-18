@@ -274,23 +274,27 @@ void Console::render() {
 		_scr[((state::line - 1) * state::ln) + i] = strPadded[i];
 	}
 
-	// highlighting
+	/* highlighting */
 	for (int l = 0; l < state::line; l++) {
 		for (int i = 0; i < state::ln; i++) {
 			_hl[(l * state::ln) + i] = false;
-
-			if (
-				l == _idx[MIN][Y] &&
-				l == _idx[MAX][Y]
-			) {
-				if (
-					i >= _idx[MIN][X] &&
-					i <= _idx[MAX][X]
-				) {
-					_hl[(l * state::ln) + i] = true;
-				}
-			}
 		}
+	}
+
+	// line
+	int dir = 0;
+	if (_idx[MAX][X] > _idx[MIN][X]) {
+		dir = 1;
+	}
+	if (_idx[MAX][X] < _idx[MIN][X]) {
+		dir = -1;
+	}
+
+	unsigned int
+		l = _idx[MIN][Y],
+		delta = abs((int) _idx[MAX][X] - (int) _idx[MIN][X]);
+	for (int i = _idx[MIN][X]; i < _idx[MIN][X] + delta; i++) {
+		_hl[(l * state::ln) + (i * dir)] = true;
 	}
 
 	glActiveTexture(_tex);
