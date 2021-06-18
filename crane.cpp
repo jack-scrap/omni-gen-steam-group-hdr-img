@@ -148,11 +148,9 @@ void cranePed(Crane* crane, float delta) {
 
 void craneGrab(Crane* crane) {
 	for (int i = 0; i < noData; i++) {
-		Var* var = (Var*) data[i];
-
 		switch (type[i]) {
 			case omni::SCALAR: {
-				Idx* idx = (Idx*) var->_ptr;
+				Idx* idx = (Idx*) data[i]->_ptr;
 
 				if (idx->_data) {
 					if (util::phys::coll(crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW]->_aabb, idx->_data->_parent->_aabb)) {
@@ -166,7 +164,7 @@ void craneGrab(Crane* crane) {
 			}
 
 			case omni::ARRAY: {
-				Array* array = (Array*) var->_ptr;
+				Array* array = (Array*) data[i]->_ptr;
 
 				for (int i = 0; i < array->_x * array->_y; i++) {
 					Idx* idx = array->_data[i];
