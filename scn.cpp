@@ -101,7 +101,6 @@ CArr boundAreaGet() {
 	return boundArea;
 }
 
-
 CArr node = {
 	(GLfloat*) malloc(0),
 	0
