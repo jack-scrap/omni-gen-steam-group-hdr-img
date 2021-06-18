@@ -23,6 +23,9 @@
 	},
 	"asdf": {
 		"key": 0,
-		"other_key": 0
+		"other_key": [
+			0,
+			0
+		]
 	}
 }

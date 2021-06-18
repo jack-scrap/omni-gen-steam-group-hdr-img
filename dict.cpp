@@ -37,6 +37,24 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 			}
 		}
 
+		if (pair.value().type() == nlohmann::json::value_t::array) {
+			char* init = (char*) malloc(pair.value().size() * sizeof (char));
+			unsigned int sz = pair.value().size();
+			for (int i = 0; i < sz; i++) {
+				init[i] = (char) ((int) pair.value()[i]);
+			}
+
+			Array* _ = arrayMk(init, sz, pair.key(), X, start + glm::vec3(0.0, 0.0, i * szPair));
+
+			child[i] = _->_parent;
+
+			GLfloat curr = _->_parent->_aabb[X][MAX] - _->_parent->_aabb[X][MIN];
+
+			if (curr > max[X]) {
+				max[X] = curr;
+			}
+		}
+
 		i++;
 	}
 
