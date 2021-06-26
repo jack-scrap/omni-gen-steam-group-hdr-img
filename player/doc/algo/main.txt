@@ -60,7 +60,26 @@ Once sorted, these are combined into a larger set.
 This will continue until the greater array has been sorted.
 
 ## Quick
-"Quick sort" divid
+"Quick sort" partitions items depending on whether they are or less, equal to or greater than a "pivot".
+
+This continues recursively.
+
+`[12, 7, 3, 12, 3]`
+
+Designating the center element as the pivot, the set is divided down the center.
+
+`12 > 3`
+`7 > 3`
+
+`[12, 7]`
+
+`12 > 3`
+`3 == 3`
+
+`[12, 7, 12]`
+`[3]`
+
+...
 
 ## Big-O
 What is referred to as "Big-O" notation describes the effectiveness of an algorithm as the input data set scales in size.
