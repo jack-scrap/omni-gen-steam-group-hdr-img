@@ -1,5 +1,3 @@
-PROG=omni
-
 CXX=g++
 
 CXXFLAGS=-std=c++14 -Wno-narrowing
@@ -22,7 +20,7 @@ STAGE=init ctrl_flow thread path matrix
 
 .PHONY: ro mk_stage clean
 
-all: $(PROG) ro mk_stage
+all: omni ro mk_stage
 
 %.o: %.cpp %.h
 	$(CXX) $(CXXFLAGS) -c $< -o $@
@@ -63,7 +61,7 @@ lib%.so: %.o
 main.o: main.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-$(PROG): $(OBJ_STATIC) $(OBJ_DYNA) $(DEP_HDR)
+omni: $(OBJ_STATIC) $(OBJ_DYNA) $(DEP_HDR)
 	$(CXX) $(CXXFLAGS) $(OBJ_STATIC) -o $@ $(LDSDL) $(LDGL) $(LDPY) $(LDLIB)
 
 ro:
