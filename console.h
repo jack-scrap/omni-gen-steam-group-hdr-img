@@ -52,6 +52,7 @@ class Console {
 			_mode,
 			_sel,
 
+			_curs[2][2],
 			_idx[2][2],
 			_l = 0;
 
