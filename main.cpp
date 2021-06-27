@@ -518,6 +518,12 @@ int main(int argc, char** argv) {
 								if (console->_sel == Console::IDX) {
 									switch (e.key.keysym.sym) {
 										case SDLK_LEFT:
+											if (console->_curs[MIN][X] > 0) {
+												for (int i = 0; i < 2; i++) {
+													console->_curs[i][X]--;
+												}
+											}
+
 											if (console->_idx[MIN][X] > console->_maxFs + 1 + console->_maxNo + 1) {
 												for (int i = 0; i < 2; i++) {
 													console->_idx[i][X]--;
@@ -527,6 +533,12 @@ int main(int argc, char** argv) {
 											break;
 
 										case SDLK_RIGHT:
+											if (console->_curs[MIN][X] < console->_buff[console->_idx[MIN][Y] - 1].size()) {
+												for (int i = 0; i < 2; i++) {
+													console->_curs[i][X]++;
+												}
+											}
+
 											if (console->_idx[MIN][X] < console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[MIN][Y] - 1].size()) {
 												for (int i = 0; i < 2; i++) {
 													console->_idx[i][X]++;
@@ -536,6 +548,13 @@ int main(int argc, char** argv) {
 											break;
 
 										case SDLK_DOWN:
+											if (console->_curs[MIN][Y] < console->_buff.size()) {
+												for (int i = 0; i < 2; i++) {
+													console->_curs[i][X] = 0;
+													console->_curs[i][Y]++;
+												}
+											}
+
 											if (console->_idx[MIN][Y] < console->_buff.size()) {
 												for (int i = 0; i < 2; i++) {
 													console->_idx[i][Y]++;
@@ -546,6 +565,13 @@ int main(int argc, char** argv) {
 											break;
 
 										case SDLK_UP:
+											if (console->_curs[MIN][Y] > 0) {
+												for (int i = 0; i < 2; i++) {
+													console->_curs[i][X] = 0;
+													console->_curs[i][Y]--;
+												}
+											}
+
 											if (console->_idx[MIN][Y] > 1) {
 												for (int i = 0; i < 2; i++) {
 													console->_idx[i][Y]--;
