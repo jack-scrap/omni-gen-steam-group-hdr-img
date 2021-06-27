@@ -1,6 +1,7 @@
 PROG=omni
 
 CXX=g++
+
 CXXFLAGS=-std=c++14 -Wno-narrowing
 
 HDR=cam col math phys
