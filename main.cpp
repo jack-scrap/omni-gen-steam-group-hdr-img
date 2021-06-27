@@ -220,10 +220,10 @@ int main(int argc, char** argv) {
 					case SDLK_F1:
 						console->_mode = Console::FS;
 
-						console->_idx[MIN][X] = 0;
-						console->_idx[MIN][Y] = 1 + console->_l;
-						console->_idx[MAX][X] = 0;
-						console->_idx[MAX][Y] = 1 + console->_l;
+						for (int i = 0; i < 2; i++) {
+							console->_idx[i][X] = 0;
+							console->_idx[i][Y] = 1 + console->_l;
+						}
 
 						console->render();
 
@@ -232,10 +232,10 @@ int main(int argc, char** argv) {
 					case SDLK_F2:
 						console->_mode = Console::EDITOR;
 
-						console->_idx[MIN][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff.back().size();
-						console->_idx[MIN][Y] = console->_buff.size();
-						console->_idx[MAX][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff.back().size();
-						console->_idx[MAX][Y] = console->_buff.size();
+						for (int i = 0; i < 2; i++) {
+							console->_idx[i][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff.back().size();
+							console->_idx[i][Y] = console->_buff.size();
+						}
 
 						console->render();
 
@@ -244,10 +244,10 @@ int main(int argc, char** argv) {
 					case SDLK_F3:
 						console->_mode = Console::PROMPT;
 
-						console->_idx[MIN][X] = (console->_ps1 + console->_prompt).size();
-						console->_idx[MIN][Y] = state::line - 1;
-						console->_idx[MAX][X] = (console->_ps1 + console->_prompt).size();
-						console->_idx[MAX][Y] = state::line - 1;
+						for (int i = 0; i < 2; i++) {
+							console->_idx[i][X] = (console->_ps1 + console->_prompt).size();
+							console->_idx[i][Y] = state::line - 1;
+						}
 
 						console->render();
 
@@ -289,10 +289,10 @@ int main(int argc, char** argv) {
 								break;
 						}
 
-						console->_idx[MIN][X] = 0;
-						console->_idx[MIN][Y] = 1 + console->_l;
-						console->_idx[MAX][X] = 0;
-						console->_idx[MAX][Y] = 1 + console->_l;
+						for (int i = 0; i < 2; i++) {
+							console->_idx[i][X] = 0;
+							console->_idx[i][Y] = 1 + console->_l;
+						}
 
 						for (int l = 0; l < console->_tree.size(); l++) {
 							for (int i = 0; i < console->_maxFs; i++) {
@@ -519,36 +519,38 @@ int main(int argc, char** argv) {
 									switch (e.key.keysym.sym) {
 										case SDLK_LEFT:
 											if (console->_idx[MIN][X] > console->_maxFs + 1 + console->_maxNo + 1) {
-												console->_idx[MIN][X]--;
-												console->_idx[MAX][X]--;
+												for (int i = 0; i < 2; i++) {
+													console->_idx[i][X]--;
+												}
 											}
 
 											break;
 
 										case SDLK_RIGHT:
 											if (console->_idx[MIN][X] < console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[MIN][Y] - 1].size()) {
-												console->_idx[MIN][X]++;
-												console->_idx[MAX][X]++;
+												for (int i = 0; i < 2; i++) {
+													console->_idx[i][X]++;
+												}
 											}
 
 											break;
 
 										case SDLK_DOWN:
 											if (console->_idx[MIN][Y] < console->_buff.size()) {
-												console->_idx[MIN][Y]++;
-												console->_idx[MIN][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[MIN][Y] - 1].size();
-												console->_idx[MAX][Y]++;
-												console->_idx[MAX][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[MIN][Y] - 1].size();
+												for (int i = 0; i < 2; i++) {
+													console->_idx[i][Y]++;
+													console->_idx[i][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[MIN][Y] - 1].size();
+												}
 											}
 
 											break;
 
 										case SDLK_UP:
 											if (console->_idx[MIN][Y] > 1) {
-												console->_idx[MIN][Y]--;
-												console->_idx[MIN][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[MIN][Y] - 1].size();
-												console->_idx[MAX][Y]--;
-												console->_idx[MAX][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[MIN][Y] - 1].size();
+												for (int i = 0; i < 2; i++) {
+													console->_idx[i][Y]--;
+													console->_idx[i][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[MIN][Y] - 1].size();
+												}
 											}
 
 											break;
