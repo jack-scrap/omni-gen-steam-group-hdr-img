@@ -1,6 +1,6 @@
 CXX=g++
 
-CXXFLAGS=-std=c++14 -Wno-narrowing
+CXXFLAGS=-std=c++11 -Wno-narrowing
 
 HDR=cam col math phys
 

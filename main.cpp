@@ -26,15 +26,16 @@
 Disp* disp;
 Console* console;
 
-Cam cam = {
-	{
-		1000.0, 1000.0, 1000.0
-	}, {
-		50, 50, 50
-	}
-};
+Cam cam;
 
 int main(int argc, char** argv) {
+	cam._pos = {
+		1000.0, 1000.0, 1000.0
+	};
+	cam._scale = {
+		50, 50, 50
+	};
+
 	bool boot;
 
 	// initialize
