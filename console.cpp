@@ -51,10 +51,6 @@ void Console::scrub(unsigned int dir) {
 				}
 			}
 
-			for (int i = 0; i < 2; i++) {
-				_idx[i][X] = _maxFs + 1 + _maxNo + 1 + _curs[i][X];
-			}
-
 			break;
 
 		case R:
@@ -64,10 +60,6 @@ void Console::scrub(unsigned int dir) {
 				}
 			}
 
-			for (int i = 0; i < 2; i++) {
-				_idx[i][X] = _maxFs + 1 + _maxNo + 1 + _curs[i][X];
-			}
-
 			break;
 
 		case D:
@@ -75,13 +67,6 @@ void Console::scrub(unsigned int dir) {
 				for (int i = 0; i < 2; i++) {
 					_curs[i][X] = 0;
 					_curs[i][Y]++;
-				}
-			}
-
-			if (_idx[MIN][Y] < _buff.size()) {
-				for (int i = 0; i < 2; i++) {
-					_idx[i][Y]++;
-					_idx[i][X] = _maxFs + 1 + _maxNo + 1 + _buff[_idx[MIN][Y] - 1].size();
 				}
 			}
 
@@ -95,14 +80,12 @@ void Console::scrub(unsigned int dir) {
 				}
 			}
 
-			if (_idx[MIN][Y] > 1) {
-				for (int i = 0; i < 2; i++) {
-					_idx[i][Y]--;
-					_idx[i][X] = _maxFs + 1 + _maxNo + 1 + _buff[_idx[MIN][Y] - 1].size();
-				}
-			}
-
 			break;
+	}
+
+	for (int i = 0; i < 2; i++) {
+		_idx[i][X] = _maxFs + 1 + _maxNo + 1 + _curs[i][X];
+		_idx[i][Y] = _curs[i][Y];
 	}
 }
 
