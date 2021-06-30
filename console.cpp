@@ -51,10 +51,8 @@ void Console::scrub(unsigned int dir) {
 				}
 			}
 
-			if (_idx[MIN][X] > _maxFs + 1 + _maxNo + 1) {
-				for (int i = 0; i < 2; i++) {
-					_idx[i][X]--;
-				}
+			for (int i = 0; i < 2; i++) {
+				_idx[i][X] = _maxFs + 1 + _maxNo + 1 + _curs[i][X];
 			}
 
 			break;
@@ -66,10 +64,8 @@ void Console::scrub(unsigned int dir) {
 				}
 			}
 
-			if (_idx[MIN][X] < _maxFs + 1 + _maxNo + 1 + _buff[_idx[MIN][Y] - 1].size()) {
-				for (int i = 0; i < 2; i++) {
-					_idx[i][X]++;
-				}
+			for (int i = 0; i < 2; i++) {
+				_idx[i][X] = _maxFs + 1 + _maxNo + 1 + _curs[i][X];
 			}
 
 			break;
