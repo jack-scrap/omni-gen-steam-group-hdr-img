@@ -52,8 +52,20 @@ class Console {
 			_mode,
 			_sel,
 
-			_curs[2][2],
-			_idx[2][2],
+			_curs[2][2] = {
+				{
+					0, 0
+				}, {
+					0, 0
+				}
+			},
+			_idx[2][2] = {
+				{
+					0, 0
+				}, {
+					0, 0
+				}
+			},
 			_l = 0;
 
 		std::string _cwd;
