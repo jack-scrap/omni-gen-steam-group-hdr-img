@@ -85,14 +85,14 @@ int main(int argc, char** argv) {
 
 	std::string stage;
 	unsigned int lvl;
-	if (argv[1]) {
+	if (argc > 1) {
 		omni::assertion(omni::stage.find(argv[1]) != omni::stage.end(), "Could not initialize; no corresponding section `" + std::string(argv[1]) + "`");
 
 		stage = argv[1];
 	} else {
 		stage = "init";
 	}
-	if (argv[2]) {
+	if (argc > 2) {
 		std::string name = argv[2];
 
 		std::string path = std::string("lvl/") + argv[1] + std::string("/") + name + std::string(".json");
