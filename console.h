@@ -98,7 +98,16 @@ class Console {
 			ST
 		};
 
+		enum dir {
+			R,
+			L,
+			D,
+			U
+		};
+
 		Console(std::string cwd, std::string name, std::vector<std::string> buff);
+
+		void scrub(unsigned int dir);
 
 		void render();
 

@@ -42,6 +42,74 @@ void dispatch(Console* console, std::string name) {
 	}
 }
 
+void Console::scrub(unsigned int dir) {
+	switch (dir) {
+		case L:
+			if (_curs[MIN][X] > 0) {
+				for (int i = 0; i < 2; i++) {
+					_curs[i][X]--;
+				}
+			}
+
+			if (_idx[MIN][X] > _maxFs + 1 + _maxNo + 1) {
+				for (int i = 0; i < 2; i++) {
+					_idx[i][X]--;
+				}
+			}
+
+			break;
+
+		case R:
+			if (_curs[MIN][X] < _buff[_idx[MIN][Y] - 1].size()) {
+				for (int i = 0; i < 2; i++) {
+					_curs[i][X]++;
+				}
+			}
+
+			if (_idx[MIN][X] < _maxFs + 1 + _maxNo + 1 + _buff[_idx[MIN][Y] - 1].size()) {
+				for (int i = 0; i < 2; i++) {
+					_idx[i][X]++;
+				}
+			}
+
+			break;
+
+		case D:
+			if (_curs[MIN][Y] < _buff.size()) {
+				for (int i = 0; i < 2; i++) {
+					_curs[i][X] = 0;
+					_curs[i][Y]++;
+				}
+			}
+
+			if (_idx[MIN][Y] < _buff.size()) {
+				for (int i = 0; i < 2; i++) {
+					_idx[i][Y]++;
+					_idx[i][X] = _maxFs + 1 + _maxNo + 1 + _buff[_idx[MIN][Y] - 1].size();
+				}
+			}
+
+			break;
+
+		case U:
+			if (_curs[MIN][Y] > 0) {
+				for (int i = 0; i < 2; i++) {
+					_curs[i][X] = 0;
+					_curs[i][Y]--;
+				}
+			}
+
+			if (_idx[MIN][Y] > 1) {
+				for (int i = 0; i < 2; i++) {
+					_idx[i][Y]--;
+					_idx[i][X] = _maxFs + 1 + _maxNo + 1 + _buff[_idx[MIN][Y] - 1].size();
+				}
+			}
+
+			break;
+	}
+}
+
 Console::Console(std::string cwd, std::string name, std::vector<std::string> buff) :
 	_cwd(cwd),
 	_tree(util::fs::ls(cwd)),
