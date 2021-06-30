@@ -158,19 +158,20 @@ Console::Console(std::string cwd, std::string name, std::vector<std::string> buf
 	}
 
 void Console::render() {
+	std::string modeStr;
 	switch (_mode) {
 		case FS:
-			_modeStr = "FS";
+			modeStr = "FS";
 
 			break;
 
 		case EDITOR:
-			_modeStr = "EDITOR";
+			modeStr = "EDITOR";
 
 			break;
 
 		case PROMPT:
-			_modeStr = "PROMPT";
+			modeStr = "PROMPT";
 
 			break;
 	};
@@ -183,8 +184,8 @@ void Console::render() {
 	std::string base = util::fs::name(_name);
 	status += util::str::pad(base, base.size() + 1);
 
-	std::string statusPadded = util::str::pad(status, state::ln - _modeStr.size());
-	statusPadded += _modeStr;
+	std::string statusPadded = util::str::pad(status, state::ln - modeStr.size());
+	statusPadded += modeStr;
 
 	for (int i = 0; i < state::ln; i++) {
 		_scr[i] = statusPadded[i];

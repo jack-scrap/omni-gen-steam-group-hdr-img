@@ -257,23 +257,6 @@ int main(int argc, char** argv) {
 
 				switch (console->_mode) {
 					case Console::FS:
-						console->_modeStr = "FS";
-
-						break;
-
-					case Console::EDITOR:
-						console->_modeStr = "EDITOR";
-
-						break;
-
-					case Console::PROMPT:
-						console->_modeStr = "PROMPT";
-
-						break;
-				};
-
-				switch (console->_mode) {
-					case Console::FS:
 						switch (e.key.keysym.sym) {
 							case SDLK_DOWN:
 								if (console->_l < console->_tree.size() - 1) {
