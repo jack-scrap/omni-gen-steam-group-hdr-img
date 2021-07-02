@@ -499,37 +499,41 @@ void Console::exec() {
 
 			if (_cmd == "update") {
 				if (std::find(omni::var.begin(), omni::var.end(), _cmd) != omni::var.end()) {
-					if (tok[1] == "skip_boot") {
-						boot = !(tok[2] == "y");
-					}
+					if (tok.size() == 1 + 2) {
+						if (tok[1] == "skip_boot") {
+							boot = !(tok[2] == "y");
+						}
 
-					if (tok[1] == "speed") {
-						state::speed = std::stoi(tok[2]);
-					}
+						if (tok[1] == "speed") {
+							state::speed = std::stoi(tok[2]);
+						}
 
-					if (tok[1] == "wd") {
-						layout::view[X] = std::stoi(tok[2]);
-						layout::view[Y] = state::line * layout::dim[Y];
-					}
+						if (tok[1] == "wd") {
+							layout::view[X] = std::stoi(tok[2]);
+							layout::view[Y] = state::line * layout::dim[Y];
+						}
 
-					if (tok[1] == "fps") {
-						state::fps = std::stoi(tok[2]);
-					}
+						if (tok[1] == "fps") {
+							state::fps = std::stoi(tok[2]);
+						}
 
-					if (tok[1] == "line_count") {
-						state::line = std::stoi(tok[2]);
-					}
+						if (tok[1] == "line_count") {
+							state::line = std::stoi(tok[2]);
+						}
 
-					if (tok[1] == "line_width") {
-						state::ln = std::stoi(tok[2]);
-					}
+						if (tok[1] == "line_width") {
+							state::ln = std::stoi(tok[2]);
+						}
 
-					if (tok[1] == "tab_wd") {
-						state::tabWd = std::stoi(tok[2]);
-					}
+						if (tok[1] == "tab_wd") {
+							state::tabWd = std::stoi(tok[2]);
+						}
 
-					if (tok[1] == "time_format") {
-						state::format = tok[2];
+						if (tok[1] == "time_format") {
+							state::format = tok[2];
+						}
+					} else {
+						omni::err("Incorrect number of arguments");
 					}
 				} else {
 					omni::err("Variable `" + tok[1] + "` not found");
