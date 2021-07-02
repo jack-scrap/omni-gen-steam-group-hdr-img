@@ -387,20 +387,20 @@ void Console::push(char c) {
 				_buff.back().push_back(c);
 			}
 
-			_idx[MIN][X] = _maxFs + 1 + _maxNo + 1 + _buff.back().size();
-			_idx[MIN][Y] = _buff.size();
-			_idx[MAX][X] = _maxFs + 1 + _maxNo + 1 + _buff.back().size();
-			_idx[MAX][Y] = _buff.size();
+			for (int i = 0; i < 2; i++) {
+				_idx[i][X] = _maxFs + 1 + _maxNo + 1 + _buff.back().size();
+				_idx[i][Y] = _buff.size();
+			}
 
 			break;
 
 		case PROMPT:
 			_prompt.push_back(c);
 
-			_idx[MIN][X] = _ps1.size() + _prompt.size();
-			_idx[MIN][Y] = state::line - 1;
-			_idx[MAX][X] = _ps1.size() + _prompt.size();
-			_idx[MAX][Y] = state::line - 1;
+			for (int i = 0; i < 2; i++) {
+				_idx[i][X] = _ps1.size() + _prompt.size();
+				_idx[i][Y] = state::line - 1;
+			}
 
 			break;
 	}
@@ -425,10 +425,10 @@ void Console::enter() {
 void Console::newline() {
 	_buff.push_back({});
 
-	_idx[MIN][X] = _maxFs + 1 + _maxNo + 1;
-	_idx[MIN][Y] = 1 + _buff.size() - 1;
-	_idx[MAX][X] = _maxFs + 1 + _maxNo + 1;
-	_idx[MAX][Y] = 1 + _buff.size() - 1;
+	for (int i = 0; i < 2; i++) {
+		_idx[i][X] = _maxFs + 1 + _maxNo + 1;
+		_idx[i][Y] = 1 + _buff.size() - 1;
+	}
 
 	render();
 }
@@ -524,10 +524,10 @@ void Console::exec() {
 			omni::err("Command `" + _cmd + "` not found");
 		}
 
-		_idx[MIN][X] = (_ps1 + _prompt).size();
-		_idx[MIN][Y] = state::line - 1;
-		_idx[MAX][X] = (_ps1 + _prompt).size();
-		_idx[MAX][Y] = state::line - 1;
+		for (int i = 0; i < 2; i++) {
+			_idx[i][X] = (_ps1 + _prompt).size();
+			_idx[i][Y] = state::line - 1;
+		}
 
 		render();
 	}
@@ -546,10 +546,10 @@ void Console::pop() {
 				}
 			}
 
-			_idx[MIN][X] = _maxFs + 1 + _maxNo + 1 + _buff.back().size();
-			_idx[MIN][Y] = _buff.size();
-			_idx[MAX][X] = _maxFs + 1 + _maxNo + 1 + _buff.back().size();
-			_idx[MAX][Y] = _buff.size();
+			for (int i = 0; i < 2; i++) {
+				_idx[i][X] = _maxFs + 1 + _maxNo + 1 + _buff.back().size();
+				_idx[i][Y] = _buff.size();
+			}
 
 			break;
 
@@ -558,10 +558,10 @@ void Console::pop() {
 				_prompt.pop_back();
 			}
 
-			_idx[MIN][X] = (_ps1 + _prompt).size();
-			_idx[MIN][Y] = state::line - 1;
-			_idx[MAX][X] = (_ps1 + _prompt).size();
-			_idx[MAX][Y] = state::line - 1;
+			for (int i = 0; i < 2; i++) {
+				_idx[i][X] = (_ps1 + _prompt).size();
+				_idx[i][Y] = state::line - 1;
+			}
 
 			break;
 	}
