@@ -347,6 +347,13 @@ void Console::render() {
 		_hl[(l * state::ln) + (i * dir)] = true;
 	}
 
+	// line number
+	if (state::hlLineNo) {
+		for (int i = 0; i < _maxNo + 1; i++) {
+			_hl[_maxFs + 1 + (l * state::ln) + i] = true;
+		}
+	}
+
 	glActiveTexture(_tex);
 	glBindTexture(GL_TEXTURE_2D, _tex);
 

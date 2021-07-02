@@ -11,6 +11,8 @@ namespace state {
 		line,
 		ln;
 
+	extern unsigned int hlLineNo;
+
 	extern unsigned int fps;
 
 	extern unsigned int tabWd;
