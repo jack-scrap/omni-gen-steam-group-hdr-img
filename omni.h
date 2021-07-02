@@ -46,6 +46,7 @@ namespace omni {
 		"save",
 		"run",
 		"next",
+		"update",
 		"quit"
 	};
 

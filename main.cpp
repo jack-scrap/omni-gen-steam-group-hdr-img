@@ -28,6 +28,8 @@ Console* console;
 
 Cam cam;
 
+extern bool boot;
+
 int main(int argc, char** argv) {
 	cam._pos = {
 		1000.0, 1000.0, 1000.0
@@ -35,8 +37,6 @@ int main(int argc, char** argv) {
 	cam._scale = {
 		50, 50, 50
 	};
-
-	bool boot;
 
 	// initialize
 	std::map<std::string, std::string> setting = util::cfg::parse<std::string>("player/cfg/init.cfg");

@@ -13,6 +13,8 @@
 #include "scn.h"
 #include "omni.h"
 
+bool boot;
+
 void dispatch(Console* console, std::string name) {
 	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(name);
 
@@ -493,6 +495,41 @@ void Console::exec() {
 				}
 
 				_prompt = "Loaded stage `" + std::string("init") + "`, level `" + std::to_string(0) + "`";
+			}
+
+			if (_cmd == "update") {
+				if (tok[1] == "skip_boot") {
+					boot = !(tok[2] == "y");
+				}
+
+				if (tok[1] == "speed") {
+					state::speed = std::stoi(tok[2]);
+				}
+
+				if (tok[1] == "wd") {
+					layout::view[X] = std::stoi(tok[2]);
+					layout::view[Y] = state::line * layout::dim[Y];
+				}
+
+				if (tok[1] == "fps") {
+					state::fps = std::stoi(tok[2]);
+				}
+
+				if (tok[1] == "line_count") {
+					state::line = std::stoi(tok[2]);
+				}
+
+				if (tok[1] == "line_width") {
+					state::ln = std::stoi(tok[2]);
+				}
+
+				if (tok[1] == "tab_wd") {
+					state::tabWd = std::stoi(tok[2]);
+				}
+
+				if (tok[1] == "time_format") {
+					state::format = tok[2];
+				}
 			}
 
 			if (_cmd == "quit") {
