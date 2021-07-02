@@ -50,6 +50,17 @@ namespace omni {
 		"quit"
 	};
 
+	static std::vector<std::string> var = {
+		"skip_boot",
+		"speed",
+		"wd",
+		"fps",
+		"line_count",
+		"line_width",
+		"tab_wd",
+		"time_format"
+	};
+
 	enum type {
 		SCALAR,
 		ARRAY,
