@@ -117,7 +117,7 @@ Console::Console(std::string cwd, std::string name, std::vector<std::string> buf
 			_name += post;
 		}
 
-		_scr = (char*) malloc(sizeof (char) * state::line * state::ln);
+		_scr = (char*) malloc(state::line * state::ln *sizeof (char));
 		_hl = (bool*) calloc(state::line * state::ln, sizeof (bool));
 
 		// file system
