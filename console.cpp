@@ -118,7 +118,7 @@ Console::Console(std::string cwd, std::string name, std::vector<std::string> buf
 		}
 
 		_scr = (char*) malloc(sizeof (char) * state::line * state::ln);
-		_hl = (bool*) malloc(sizeof (bool) * state::line * state::ln);
+		_hl = (bool*) calloc(state::line * state::ln, sizeof (bool));
 
 		// file system
 		std::sort(_tree.begin(), _tree.end());
@@ -325,12 +325,6 @@ void Console::render() {
 	}
 
 	/* highlighting */
-	for (int l = 0; l < state::line; l++) {
-		for (int i = 0; i < state::ln; i++) {
-			_hl[(l * state::ln) + i] = false;
-		}
-	}
-
 	// line
 	int dir = 0;
 	if (_idx[MAX][X] > _idx[MIN][X]) {
