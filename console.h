@@ -59,13 +59,6 @@ class Console {
 					0, 0
 				}
 			},
-			_idx[2][2] = {
-				{
-					0, 0
-				}, {
-					0, 0
-				}
-			},
 			_l = 0;
 
 		std::string _cwd;

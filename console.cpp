@@ -56,7 +56,7 @@ void Console::scrub(unsigned int dir) {
 			break;
 
 		case R:
-			if (_curs[MIN][X] < _buff[_idx[MIN][Y] - 1].size()) {
+			if (_curs[MIN][X] < _buff[_curs[MIN][Y] - 1].size()) {
 				for (int i = 0; i < 2; i++) {
 					_curs[i][X]++;
 				}
@@ -86,8 +86,8 @@ void Console::scrub(unsigned int dir) {
 	}
 
 	for (int i = 0; i < 2; i++) {
-		_idx[i][X] = _maxFs + 1 + _maxNo + 1 + _curs[i][X];
-		_idx[i][Y] = _curs[i][Y];
+		_curs[i][X] = _maxFs + 1 + _maxNo + 1 + _curs[i][X];
+		_curs[i][Y] = _curs[i][Y];
 	}
 }
 
@@ -134,26 +134,26 @@ Console::Console(std::string cwd, std::string name, std::vector<std::string> buf
 		// index
 		switch (_mode) {
 			case FS:
-				_idx[MIN][X] = 0;
-				_idx[MIN][Y] = 1 + _l;
-				_idx[MAX][X] = 0;
-				_idx[MAX][Y] = 1 + _l;
+				_curs[MIN][X] = 0;
+				_curs[MIN][Y] = 1 + _l;
+				_curs[MAX][X] = 0;
+				_curs[MAX][Y] = 1 + _l;
 
 				break;
 
 			case EDITOR:
-				_idx[MIN][X] = _maxFs + 1 + _maxNo + 1 + _buff.back().size();
-				_idx[MIN][Y] = 1 + _buff.size() - 1;
-				_idx[MAX][X] = _maxFs + 1 + _maxNo + 1 + _buff.back().size();
-				_idx[MAX][Y] = 1 + _buff.size() - 1;
+				_curs[MIN][X] = _maxFs + 1 + _maxNo + 1 + _buff.back().size();
+				_curs[MIN][Y] = 1 + _buff.size() - 1;
+				_curs[MAX][X] = _maxFs + 1 + _maxNo + 1 + _buff.back().size();
+				_curs[MAX][Y] = 1 + _buff.size() - 1;
 
 				break;
 
 			case PROMPT:
-				_idx[MIN][X] = (_ps1 + _prompt).size();
-				_idx[MIN][Y] = state::line - 1;
-				_idx[MAX][X] = (_ps1 + _prompt).size();
-				_idx[MAX][Y] = state::line - 1;
+				_curs[MIN][X] = (_ps1 + _prompt).size();
+				_curs[MIN][Y] = state::line - 1;
+				_curs[MAX][X] = (_ps1 + _prompt).size();
+				_curs[MAX][Y] = state::line - 1;
 
 				break;
 		}
@@ -327,17 +327,17 @@ void Console::render() {
 	/* highlighting */
 	// line
 	int dir = 0;
-	if (_idx[MAX][X] > _idx[MIN][X]) {
+	if (_curs[MAX][X] > _curs[MIN][X]) {
 		dir = 1;
 	}
-	if (_idx[MAX][X] < _idx[MIN][X]) {
+	if (_curs[MAX][X] < _curs[MIN][X]) {
 		dir = -1;
 	}
 
 	unsigned int
-		l = _idx[MIN][Y],
-		delta = abs((int) _idx[MAX][X] - (int) _idx[MIN][X]);
-	for (int i = _idx[MIN][X]; i < _idx[MIN][X] + delta; i++) {
+		l = _curs[MIN][Y],
+		delta = abs((int) _curs[MAX][X] - (int) _curs[MIN][X]);
+	for (int i = _curs[MIN][X]; i < _curs[MIN][X] + delta; i++) {
 		_hl[(l * state::ln) + (i * dir)] = true;
 	}
 
@@ -365,15 +365,15 @@ void Console::render() {
 	}
 
 	if (
-		_idx[MIN][X] < state::ln &&
-		_idx[MIN][Y] < state::line &&
-		_idx[MAX][X] < state::ln &&
-		_idx[MAX][Y] < state::line
+		_curs[MIN][X] < state::ln &&
+		_curs[MIN][Y] < state::line &&
+		_curs[MAX][X] < state::ln &&
+		_curs[MAX][Y] < state::line
 	) {
-		glTexSubImage2D(GL_TEXTURE_2D, 0, _idx[MIN][X] * layout::dim[X], _idx[MIN][Y] * layout::dim[Y], layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _block->pixels);
+		glTexSubImage2D(GL_TEXTURE_2D, 0, _curs[MIN][X] * layout::dim[X], _curs[MIN][Y] * layout::dim[Y], layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _block->pixels);
 		SDL_FillRect(_block, &_blockRect, SDL_MapRGBA(_block->format, col[true][R], col[true][G], col[true][B], 255));
 
-		glTexSubImage2D(GL_TEXTURE_2D, 0, _idx[MAX][X] * layout::dim[X], _idx[MAX][Y] * layout::dim[Y], layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _block->pixels);
+		glTexSubImage2D(GL_TEXTURE_2D, 0, _curs[MAX][X] * layout::dim[X], _curs[MAX][Y] * layout::dim[Y], layout::dim[X], layout::dim[Y], GL_BGRA, GL_UNSIGNED_BYTE, _block->pixels);
 		SDL_FillRect(_block, &_blockRect, SDL_MapRGBA(_block->format, col[true][R], col[true][G], col[true][B], 255));
 	}
 
@@ -391,8 +391,8 @@ void Console::push(char c) {
 			}
 
 			for (int i = 0; i < 2; i++) {
-				_idx[i][X] = _maxFs + 1 + _maxNo + 1 + _buff.back().size();
-				_idx[i][Y] = _buff.size();
+				_curs[i][X] = _maxFs + 1 + _maxNo + 1 + _buff.back().size();
+				_curs[i][Y] = _buff.size();
 			}
 
 			break;
@@ -401,8 +401,8 @@ void Console::push(char c) {
 			_prompt.push_back(c);
 
 			for (int i = 0; i < 2; i++) {
-				_idx[i][X] = _ps1.size() + _prompt.size();
-				_idx[i][Y] = state::line - 1;
+				_curs[i][X] = _ps1.size() + _prompt.size();
+				_curs[i][Y] = state::line - 1;
 			}
 
 			break;
@@ -429,8 +429,8 @@ void Console::newline() {
 	_buff.push_back({});
 
 	for (int i = 0; i < 2; i++) {
-		_idx[i][X] = _maxFs + 1 + _maxNo + 1;
-		_idx[i][Y] = 1 + _buff.size() - 1;
+		_curs[i][X] = _maxFs + 1 + _maxNo + 1;
+		_curs[i][Y] = 1 + _buff.size() - 1;
 	}
 
 	render();
@@ -571,8 +571,8 @@ void Console::exec() {
 		}
 
 		for (int i = 0; i < 2; i++) {
-			_idx[i][X] = (_ps1 + _prompt).size();
-			_idx[i][Y] = state::line - 1;
+			_curs[i][X] = (_ps1 + _prompt).size();
+			_curs[i][Y] = state::line - 1;
 		}
 
 		render();
@@ -593,8 +593,8 @@ void Console::pop() {
 			}
 
 			for (int i = 0; i < 2; i++) {
-				_idx[i][X] = _maxFs + 1 + _maxNo + 1 + _buff.back().size();
-				_idx[i][Y] = _buff.size();
+				_curs[i][X] = _maxFs + 1 + _maxNo + 1 + _buff.back().size();
+				_curs[i][Y] = _buff.size();
 			}
 
 			break;
@@ -605,8 +605,8 @@ void Console::pop() {
 			}
 
 			for (int i = 0; i < 2; i++) {
-				_idx[i][X] = (_ps1 + _prompt).size();
-				_idx[i][Y] = state::line - 1;
+				_curs[i][X] = (_ps1 + _prompt).size();
+				_curs[i][Y] = state::line - 1;
 			}
 
 			break;

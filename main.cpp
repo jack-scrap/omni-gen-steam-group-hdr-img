@@ -222,8 +222,8 @@ int main(int argc, char** argv) {
 						console->_mode = Console::FS;
 
 						for (int i = 0; i < 2; i++) {
-							console->_idx[i][X] = 0;
-							console->_idx[i][Y] = 1 + console->_l;
+							console->_curs[i][X] = 0;
+							console->_curs[i][Y] = 1 + console->_l;
 						}
 
 						console->render();
@@ -234,8 +234,8 @@ int main(int argc, char** argv) {
 						console->_mode = Console::EDITOR;
 
 						for (int i = 0; i < 2; i++) {
-							console->_idx[i][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff.back().size();
-							console->_idx[i][Y] = console->_buff.size();
+							console->_curs[i][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff.back().size();
+							console->_curs[i][Y] = console->_buff.size();
 						}
 
 						console->render();
@@ -246,8 +246,8 @@ int main(int argc, char** argv) {
 						console->_mode = Console::PROMPT;
 
 						for (int i = 0; i < 2; i++) {
-							console->_idx[i][X] = (console->_ps1 + console->_prompt).size();
-							console->_idx[i][Y] = state::line - 1;
+							console->_curs[i][X] = (console->_ps1 + console->_prompt).size();
+							console->_curs[i][Y] = state::line - 1;
 						}
 
 						console->render();
@@ -274,8 +274,8 @@ int main(int argc, char** argv) {
 						}
 
 						for (int i = 0; i < 2; i++) {
-							console->_idx[i][X] = 0;
-							console->_idx[i][Y] = 1 + console->_l;
+							console->_curs[i][X] = 0;
+							console->_curs[i][Y] = 1 + console->_l;
 						}
 
 						for (int l = 0; l < console->_tree.size(); l++) {
@@ -529,31 +529,31 @@ int main(int argc, char** argv) {
 								if (console->_sel == Console::LINE) {
 									switch (e.key.keysym.sym) {
 										case SDLK_LEFT:
-											if (console->_idx[MAX][X] > console->_maxFs + 1 + console->_maxNo + 1) {
-												console->_idx[MAX][X]--;
+											if (console->_curs[MAX][X] > console->_maxFs + 1 + console->_maxNo + 1) {
+												console->_curs[MAX][X]--;
 											}
 
 											break;
 
 										case SDLK_RIGHT:
-											if (console->_idx[MAX][X] < console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[MAX][Y] - 1].size()) {
-												console->_idx[MAX][X]++;
+											if (console->_curs[MAX][X] < console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_curs[MAX][Y] - 1].size()) {
+												console->_curs[MAX][X]++;
 											}
 
 											break;
 
 										case SDLK_DOWN:
-											if (console->_idx[MAX][Y] < console->_buff.size()) {
-												console->_idx[MAX][Y]++;
-												console->_idx[MAX][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[MIN][Y] - 1].size();
+											if (console->_curs[MAX][Y] < console->_buff.size()) {
+												console->_curs[MAX][Y]++;
+												console->_curs[MAX][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_curs[MIN][Y] - 1].size();
 											}
 
 											break;
 
 										case SDLK_UP:
-											if (console->_idx[MAX][Y] > 1) {
-												console->_idx[MAX][Y]--;
-												console->_idx[MAX][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_idx[MIN][Y] - 1].size();
+											if (console->_curs[MAX][Y] > 1) {
+												console->_curs[MAX][Y]--;
+												console->_curs[MAX][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_curs[MIN][Y] - 1].size();
 											}
 
 											break;
