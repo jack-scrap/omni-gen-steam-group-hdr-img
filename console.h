@@ -47,6 +47,8 @@ class Console {
 
 		bool _w;
 
+		std::vector<std::string> _clip;
+
 	public:
 		unsigned int
 			_mode,
