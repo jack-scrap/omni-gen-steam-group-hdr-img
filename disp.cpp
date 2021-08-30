@@ -1,4 +1,5 @@
 #include <thread>
+#include <SDL2/SDL_image.h>
 #include <glm/gtc/type_ptr.hpp>
 
 #include "disp.h"
@@ -6,6 +7,7 @@
 #include "scn.h"
 #include "line.h"
 #include "mesh.h"
+#include "omni.h"
 
 Disp::Disp(const char* title, glm::vec2 res, glm::vec3 bg) :
 	_t(0) {
@@ -23,6 +25,31 @@ Disp::Disp(const char* title, glm::vec2 res, glm::vec3 bg) :
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
 		_win = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _res[X], _res[Y], SDL_WINDOW_OPENGL);
+
+		SDL_Renderer* rend = SDL_CreateRenderer(_win, -1, 0);
+
+		_map = IMG_Load("res/map.bmp");
+		SDL_Texture* texSdl = SDL_CreateTextureFromSurface(rend, _map);
+
+		unsigned int chan = _map->format->BytesPerPixel;
+		GLenum fmt;
+		if (chan == 3) {
+			if (_map->format->Rmask == 0x000000ff) {
+				fmt = GL_RGB;
+			} else {
+				fmt = GL_BGR;
+			}
+		} else if (chan == 4) {
+			if (_map->format->Rmask == 0x000000ff) {
+				fmt = GL_RGBA;
+			} else {
+				fmt = GL_BGRA;
+			}
+		} else {
+			omni::err("Image not truecolor");
+		}
+
+		SDL_RenderCopy(rend, texSdl, NULL, NULL);
 
 		_ctx = SDL_GL_CreateContext(_win);
 

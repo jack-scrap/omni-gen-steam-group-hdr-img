@@ -17,6 +17,8 @@ class Disp {
 
 		SDL_Window* _win;
 
+		SDL_Surface* _map;
+
 		unsigned int _res[2];
 
 		unsigned int _t;

@@ -11,7 +11,7 @@ DEP_HDR=$(patsubst %, %.h, $(HDR))
 OBJ_STATIC=$(patsubst %, %.o, $(STATIC))
 OBJ_DYNA=$(patsubst %, lib%.so, $(DYNA))
 
-LDSDL+=-lSDL2 -lSDL2_ttf
+LDSDL+=-lSDL2 -lSDL2_ttf -lSDL2_image
 LDGL+=-lGLEW -lGL
 LDPY+=-L/usr/lib/python3.6/config-3.6m-x86_64-linux-gnu -L/usr/lib -lpython3.6m -pthread -ldl -lutil -lm -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -I/usr/include/python3.6m -I/usr/include/python3.6m -g -fdebug-prefix-map=/build/python3.6-0aiVHW/python3.6-3.6.9=. -specs=/usr/share/dpkg/no-pie-compile.specs -fstack-protector -DNDEBUG -g -fwrapv -O3 -fPIC
 LDLIB+=-L. $(patsubst %, -l%, $(DYNA))
