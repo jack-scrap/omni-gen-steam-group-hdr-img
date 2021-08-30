@@ -18,9 +18,8 @@ Disp::Disp(const char* title, glm::vec2 res, glm::vec3 bg) :
 		SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
 		SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
 		SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
-		SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
 
-		SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 32);
+		SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 24);
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
 		_win = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _res[X], _res[Y], SDL_WINDOW_OPENGL);
