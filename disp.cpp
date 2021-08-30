@@ -8,6 +8,7 @@
 #include "line.h"
 #include "mesh.h"
 #include "omni.h"
+#include "layout.h"
 
 Disp::Disp(const char* title, glm::vec2 res, glm::vec3 bg) :
 	_t(0) {
@@ -26,31 +27,6 @@ Disp::Disp(const char* title, glm::vec2 res, glm::vec3 bg) :
 
 		_win = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _res[X], _res[Y], SDL_WINDOW_OPENGL);
 
-		SDL_Renderer* rend = SDL_CreateRenderer(_win, -1, 0);
-
-		_map = IMG_Load("res/map.bmp");
-		SDL_Texture* texSdl = SDL_CreateTextureFromSurface(rend, _map);
-
-		unsigned int chan = _map->format->BytesPerPixel;
-		GLenum fmt;
-		if (chan == 3) {
-			if (_map->format->Rmask == 0x000000ff) {
-				fmt = GL_RGB;
-			} else {
-				fmt = GL_BGR;
-			}
-		} else if (chan == 4) {
-			if (_map->format->Rmask == 0x000000ff) {
-				fmt = GL_RGBA;
-			} else {
-				fmt = GL_BGRA;
-			}
-		} else {
-			omni::err("Image not truecolor");
-		}
-
-		SDL_RenderCopy(rend, texSdl, NULL, NULL);
-
 		_ctx = SDL_GL_CreateContext(_win);
 
 		GLenum status = glewInit();
@@ -58,9 +34,16 @@ Disp::Disp(const char* title, glm::vec2 res, glm::vec3 bg) :
 			std::cerr << "Error: GLEW failed to initialize" << std::endl;
 		}
 
-		glClearColor(bg[R] / 255.0, bg[G] / 255.0, bg[B] / 255.0, 1);
-
 		glEnable(GL_DEPTH_TEST);
+
+		SDL_Renderer* rend = SDL_CreateRenderer(_win, -1, 0);
+
+		_map = IMG_Load("res/map.bmp");
+		SDL_Texture* texSdl = SDL_CreateTextureFromSurface(rend, _map);
+
+		SDL_RenderCopy(rend, texSdl, NULL, NULL);
+
+		glClearColor(bg[R] / 255.0, bg[G] / 255.0, bg[B] / 255.0, 1);
 
 		_open = true;
 	}
@@ -85,6 +68,8 @@ void Disp::draw() {
 	}
 
 	glViewport(0, 0, layout::res[Y], layout::view[Y]);
+
+	glDisable(GL_DEPTH_TEST);
 
 	console->draw();
 

@@ -1,132 +1,66 @@
 #pragma once
 
-#include <SDL2/SDL_ttf.h>
-#include <glm/glm.hpp>
+#include <cstdlib>
+#include <GL/glew.h>
 
+#include "prog.h"
 #include "layout.h"
-#include "state.h"
-#include "math.h"
-#include "util.h"
 
 class Console {
 	private:
-		std::vector<GLfloat> _st = util::mesh::plane(glm::vec2(1, 1));
+		char
+			* _canv = (char*) calloc(state::console[X] * state::console[Y], sizeof (char)),
 
-		GLuint _id[3];
+			* _data = (char*) calloc(state::console[X] * layout::dim[X] * state::console[Y] * layout::dim[Y] * 3, sizeof (char));
 
-		GLint _attr[2];
+		std::string _buff = "asdf";
 
-		Prog _prog;
-
-		TTF_Font* font;
-
-		SDL_Surface
-			* _canv = SDL_CreateRGBSurface(0, layout::res[X], layout::res[Y], 4 * sizeof (long int), 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000),
-			* _block = SDL_CreateRGBSurface(0, layout::dim[X], layout::dim[Y], 4 * sizeof (long int), 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
-
-		SDL_Rect
-			_canvRect = {
-				0,
-				0,
-				state::ln * layout::dim[X],
-				layout::view[Y]
+		GLfloat
+			_vtc[2 * 2 * 2] = {
+				-1.0, -1.0,
+				1.0, -1.0,
+				-1.0, 1.0,
+				1.0, 1.0
 			},
-
-			_blockRect = {
-				0,
-				0,
-				layout::dim[X],
-				layout::dim[Y]
+			_st[2 * 2 * 2] = {
+				0.0, 0.0,
+				1.0, 0.0,
+				0.0, 1.0,
+				1.0, 1.0
 			};
 
-		std::vector<std::vector<SDL_Surface*>>
-			_map,
-			_no;
+		GLushort _idc[2 * 3] = {
+			0, 1, 2,
+			2, 1, 3
+		};
+
+		GLuint
+			_vao,
+
+			_vbo,
+			_stbo,
+
+			_ibo;
+
+		GLint
+			_attrPos,
+			_attrSt;
 
 		GLuint _tex;
 
-		bool _w;
-
-		std::vector<std::string> _clip;
-
-	public:
-		unsigned int
-			_mode,
-			_sel,
-
-			_curs[2][2] = {
-				{
-					0, 0
-				}, {
-					0, 0
-				}
-			},
-			_l = 0;
-
-		std::string _cwd;
-
-		std::vector<std::map<std::string, std::string>> _tree;
-
-		std::vector<std::string> _buff;
-		std::string _name;
-
-		std::string _prompt;
-
-		char* _scr;
-		bool* _hl;
-
-		unsigned int
-			_maxFs = 0,
-			_maxNo = 0;
-
-		const std::string _ps1 = "[] ";
-
-		enum mode {
-			FS,
-			EDITOR,
-			PROMPT
-		};
-
-		enum sel {
-			IDX,
-			LINE
-		};
+		Prog _prog;
 
 		enum id {
-			VAO,
-
-			VBO,
-
-			STBO
-		};
-
-		enum attr {
 			POS,
 			ST
 		};
 
-		enum dir {
-			R,
-			L,
-			D,
-			U
-		};
+	public:
+		Console();
 
-		Console(std::string cwd, std::string name, std::vector<std::string> buff);
-
-		void scrub(unsigned int dir);
-
-		void render();
-
-		void push(char c);
-
-		void enter();
-
-		void newline();
-
-		void exec();
-
-		void pop();
+		void print(char c, bool b, Coord st);
 
 		void draw();
+
+		unsigned int idxStatic(Coord st, unsigned int bound[2]);
 };

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <sstream>
 #include <dirent.h>
+#include <glm/glm.hpp>
 #include <glm/gtx/string_cast.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <sys/stat.h>
@@ -14,6 +15,7 @@
 #include "dict.h"
 #include "line.h"
 #include "omni.h"
+#include "layout.h"
 
 template <typename T>
 T util::fs::rd(std::string name) {
@@ -74,6 +76,12 @@ void util::fs::write(std::string name, std::vector<std::string> buff) {
 	}
 
 	f.close();
+}
+
+void util::fs::del(std::string name) {
+	if (remove(name.c_str()) != 0) {
+		omni::err("Couldn't delete file `" + name + "`");
+	}
 }
 
 std::vector<std::map<std::string, std::string>> util::fs::ls(std::string name) {
@@ -1126,6 +1134,25 @@ std::map<std::string, std::string> util::cfg::parse<std::string>(std::string nam
 	return _;
 }
 
+
+int util::math::delta(int min, int max) {
+	return max - min;
+}
+
+int util::math::norm(int lhs, int rhs) {
+	int _ = 0;
+
+	int delta = rhs - lhs;
+	if (delta > 0) {
+		_ = 1;
+	}
+	if (delta < 0) {
+		_ = -1;
+	}
+
+	return _;
+}
+
 std::vector<std::string> util::log(unsigned int loc, unsigned int maxFs) {
 	std::vector<std::string> buff;
 
@@ -1183,7 +1210,7 @@ GLuint util::tex::spray(Obj* obj) {
 	glGenTextures(1, &cbo);
 	glBindTexture(GL_TEXTURE_2D, cbo);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 1000, 1000, 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*) 0);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 1000, 1000, 0, GL_RGB, GL_UNSIGNED_BYTE, (GLvoid*) 0);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);

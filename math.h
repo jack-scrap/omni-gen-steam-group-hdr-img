@@ -18,3 +18,9 @@ enum col {
 	B,
 	A
 };
+
+typedef struct {
+	unsigned int
+		_x,
+		_y;
+} Coord;

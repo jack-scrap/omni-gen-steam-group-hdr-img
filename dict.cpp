@@ -7,6 +7,7 @@
 #include "idx.h"
 #include "scn.h"
 #include "omni.h"
+#include "util.h"
 
 Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 	Dict* _ = (Dict*) malloc(sizeof (Dict));

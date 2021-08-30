@@ -21,6 +21,7 @@
 #include "cam.h"
 #include "omni.h"
 #include "col.h"
+#include "layout.h"
 #include "stb_image.h"
 
 Disp* disp;
@@ -28,7 +29,7 @@ Console* console;
 
 Cam cam;
 
-extern bool boot;
+bool boot = false;
 
 int main(int argc, char** argv) {
 	cam._pos = {
@@ -42,6 +43,14 @@ int main(int argc, char** argv) {
 	std::map<std::string, std::string> setting = util::cfg::parse<std::string>("player/cfg/init.cfg");
 
 	for (const auto& [key, val] : setting) {
+		if (key == "line_count") {
+			state::console[Y] = std::stoi(val);
+		}
+
+		if (key == "line_width") {
+			state::console[X] = std::stoi(val);
+		}
+
 		if (key == "skip_boot") {
 			boot = !(val == "y");
 		}
@@ -111,7 +120,7 @@ int main(int argc, char** argv) {
 		name = "player/doc/intro.txt";
 	}
 
-	console = new Console("player", name, util::fs::rd<std::vector<std::string>>(name));
+	console = new Console();
 	scn::init(stage, lvl);
 
 	if (boot) {
@@ -211,371 +220,6 @@ int main(int argc, char** argv) {
 	glm::vec3 prev;
 	while (disp->_open) {
 		while (SDL_PollEvent(&e)) {
-			if (e.type == SDL_KEYDOWN) {
-				switch (e.key.keysym.sym) {
-					case SDLK_F4:
-						asdf._asdf++;
-
-						break;
-
-					case SDLK_F1:
-						console->_mode = Console::FS;
-
-						for (int i = 0; i < 2; i++) {
-							console->_curs[i][X] = 0;
-							console->_curs[i][Y] = 1 + console->_l;
-						}
-
-						console->render();
-
-						break;
-
-					case SDLK_F2:
-						console->_mode = Console::EDITOR;
-
-						for (int i = 0; i < 2; i++) {
-							console->_curs[i][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff.back().size();
-							console->_curs[i][Y] = console->_buff.size();
-						}
-
-						console->render();
-
-						break;
-
-					case SDLK_F3:
-						console->_mode = Console::PROMPT;
-
-						for (int i = 0; i < 2; i++) {
-							console->_curs[i][X] = (console->_ps1 + console->_prompt).size();
-							console->_curs[i][Y] = state::line - 1;
-						}
-
-						console->render();
-
-						break;
-				}
-
-				switch (console->_mode) {
-					case Console::FS:
-						switch (e.key.keysym.sym) {
-							case SDLK_DOWN:
-								if (console->_l < console->_tree.size() - 1) {
-									console->_l++;
-								}
-
-								break;
-
-							case SDLK_UP:
-								if (console->_l > 0) {
-									console->_l--;
-								}
-
-								break;
-						}
-
-						for (int i = 0; i < 2; i++) {
-							console->_curs[i][X] = 0;
-							console->_curs[i][Y] = 1 + console->_l;
-						}
-
-						for (int l = 0; l < console->_tree.size(); l++) {
-							for (int i = 0; i < console->_maxFs; i++) {
-								console->_hl[((1 + l) * state::ln) + i] = false;
-							}
-						}
-
-						for (int i = 0; i < console->_maxFs; i++) {
-							console->_hl[((1 + console->_l) * state::ln) + i] = true;
-						}
-
-						console->render();
-
-						break;
-
-					case Console::EDITOR:
-					case Console::PROMPT:
-						// modifier
-						if (e.key.keysym.mod & (KMOD_LSHIFT | KMOD_RSHIFT)) {
-							if (e.key.keysym.sym >= SDLK_a && e.key.keysym.sym <= SDLK_z) {
-								console->push((char) (e.key.keysym.sym - 32));
-							} else if (e.key.keysym.sym >= SDLK_0 && e.key.keysym.sym <= SDLK_9) {
-								char c;
-								switch (e.key.keysym.sym) {
-									case SDLK_1:
-										c = '!';
-
-										break;
-
-									case SDLK_2:
-										c = '@';
-
-										break;
-
-									case SDLK_3:
-										c = '#';
-
-										break;
-
-									case SDLK_4:
-										c = '$';
-
-										break;
-
-									case SDLK_5:
-										c = '%';
-
-										break;
-
-									case SDLK_6:
-										c = '^';
-
-										break;
-
-									case SDLK_7:
-										c = '&';
-
-										break;
-
-									case SDLK_8:
-										c = '*';
-
-										break;
-
-									case SDLK_9:
-										c = '(';
-
-										break;
-
-									case SDLK_0:
-										c = ')';
-
-										break;
-								}
-
-								console->push((char) c);
-							} else {
-								switch (e.key.keysym.sym) {
-									case SDLK_BACKQUOTE:
-										console->push('~');
-
-										break;
-
-									case SDLK_MINUS:
-										console->push('_');
-
-										break;
-
-									case SDLK_EQUALS:
-										console->push('+');
-
-										break;
-
-										// bracket
-									case SDLK_LEFTBRACKET:
-										console->push('{');
-
-										break;
-
-									case SDLK_RIGHTBRACKET:
-										console->push('}');
-
-										break;
-
-									case SDLK_BACKSLASH:
-										console->push('|');
-
-										break;
-
-									case SDLK_SEMICOLON:
-										console->push(':');
-
-										break;
-
-									case SDLK_QUOTE:
-										console->push('"');
-
-										break;
-
-									case SDLK_COMMA:
-										console->push('<');
-
-										break;
-
-									case SDLK_PERIOD:
-										console->push('>');
-
-										break;
-
-									case SDLK_SLASH:
-										console->push('?');
-
-										break;
-								}
-							}
-						} else {
-							if (e.key.keysym.sym >= SDLK_a && e.key.keysym.sym <= SDLK_z) {
-								console->push((char) e.key.keysym.sym);
-							} else if (e.key.keysym.sym >= SDLK_0 && e.key.keysym.sym <= SDLK_9) {
-								console->push((char) e.key.keysym.sym);
-							} else {
-								switch (e.key.keysym.sym) {
-									case SDLK_SPACE:
-										console->push(' ');
-
-										break;
-
-									case SDLK_TAB:
-										for (int i = 0; i < state::tabWd; i++) {
-											console->push(' ');
-										}
-
-										break;
-
-									case SDLK_BACKQUOTE:
-										console->push('`');
-
-										break;
-
-									case SDLK_MINUS:
-										console->push('-');
-
-										break;
-
-									case SDLK_EQUALS:
-										console->push('=');
-
-										break;
-
-									// bracket
-									case SDLK_LEFTBRACKET:
-										console->push('[');
-
-										break;
-
-									case SDLK_RIGHTBRACKET:
-										console->push(']');
-
-										break;
-
-									case SDLK_BACKSLASH:
-										console->push('\\');
-
-										break;
-
-									case SDLK_SEMICOLON:
-										console->push(';');
-
-										break;
-
-									case SDLK_QUOTE:
-										console->push('\'');
-
-										break;
-
-									case SDLK_COMMA:
-										console->push(',');
-
-										break;
-
-									case SDLK_PERIOD:
-										console->push('.');
-
-										break;
-
-									case SDLK_SLASH:
-										console->push('/');
-
-										break;
-
-									case SDLK_RETURN:
-										console->enter();
-
-										break;
-
-									case SDLK_BACKSPACE:
-										console->pop();
-
-										break;
-								}
-
-								// index
-								if (console->_sel == Console::IDX) {
-									switch (e.key.keysym.sym) {
-										case SDLK_LEFT:
-											console->scrub(Console::L);
-
-											break;
-
-										case SDLK_RIGHT:
-											console->scrub(Console::R);
-
-											break;
-
-										case SDLK_DOWN:
-											console->scrub(Console::D);
-
-											break;
-
-										case SDLK_UP:
-											console->scrub(Console::U);
-
-											break;
-									}
-
-									console->render();
-								}
-
-								// line
-								if (console->_sel == Console::LINE) {
-									switch (e.key.keysym.sym) {
-										case SDLK_LEFT:
-											if (console->_curs[MAX][X] > console->_maxFs + 1 + console->_maxNo + 1) {
-												console->_curs[MAX][X]--;
-											}
-
-											break;
-
-										case SDLK_RIGHT:
-											if (console->_curs[MAX][X] < console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_curs[MAX][Y] - 1].size()) {
-												console->_curs[MAX][X]++;
-											}
-
-											break;
-
-										case SDLK_DOWN:
-											if (console->_curs[MAX][Y] < console->_buff.size()) {
-												console->_curs[MAX][Y]++;
-												console->_curs[MAX][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_curs[MIN][Y] - 1].size();
-											}
-
-											break;
-
-										case SDLK_UP:
-											if (console->_curs[MAX][Y] > 1) {
-												console->_curs[MAX][Y]--;
-												console->_curs[MAX][X] = console->_maxFs + 1 + console->_maxNo + 1 + console->_buff[console->_curs[MIN][Y] - 1].size();
-											}
-
-											break;
-									}
-
-									console->render();
-								}
-							}
-						}
-
-						if (e.key.keysym.mod & (KMOD_ALT)) {
-							console->_sel = Console::LINE;
-						}
-
-						if (e.key.keysym.sym == SDLK_ESCAPE) {
-							console->_sel = Console::IDX;
-						}
-
-						break;
-				}
-			}
-
 			if (e.type == SDL_MOUSEBUTTONDOWN) {
 				prev = cam._pos;
 

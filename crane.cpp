@@ -11,6 +11,8 @@
 #include "math.h"
 #include "state.h"
 #include "omni.h"
+#include "util.h"
+#include "layout.h"
 
 GLfloat Crane::_speed = 0.2;
 

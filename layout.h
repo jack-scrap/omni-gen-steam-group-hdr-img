@@ -6,9 +6,15 @@
 #include "obj.h"
 
 namespace layout {
-	static unsigned int dim[2] = {
-		16, 32
-	};
+	static unsigned int
+		dim[2] = {
+			16,
+			32
+		},
+		map[2] = {
+			16,
+			8
+		};
 
 	extern unsigned int view[2];
 

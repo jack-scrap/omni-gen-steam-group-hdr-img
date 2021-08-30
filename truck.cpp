@@ -6,6 +6,8 @@
 #include "scn.h"
 #include "state.h"
 #include "omni.h"
+#include "util.h"
+#include "layout.h"
 
 GLfloat Truck::_vtx[3] = {
 	0.0, 0.0, 0.0

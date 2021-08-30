@@ -21,6 +21,7 @@
 #include "street_sign.h"
 #include "road.h"
 #include "i_beam.h"
+#include "util.h"
 
 Var** data;
 Var** goal;

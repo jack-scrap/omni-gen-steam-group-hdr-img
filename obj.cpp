@@ -21,6 +21,7 @@
 #include "state.h"
 #include "phys.h"
 #include "omni.h"
+#include "layout.h"
 
 #include "stb_image.h"
 

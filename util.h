@@ -29,6 +29,8 @@ namespace util {
 
 		void write(std::string name, std::vector<std::string> buff);
 
+		void del(std::string name);
+
 		std::vector<std::map<std::string, std::string>> ls(std::string name);
 
 		std::string name(std::string buff);
@@ -135,6 +137,12 @@ namespace util {
 
 	namespace tex {
 		GLuint spray(Obj* obj);
+	}
+
+	namespace math {
+		int delta(int min, int max);
+
+		int norm(int lhs, int rhs);
 	}
 
 	std::vector<std::string> log(unsigned int loc, unsigned int maxFs);
