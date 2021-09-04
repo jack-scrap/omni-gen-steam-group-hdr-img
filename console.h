@@ -12,7 +12,7 @@ class Console {
 		char
 			* _canv = (char*) calloc(state::console[X] * state::console[Y], sizeof (char)),
 
-			* _data = (char*) calloc(state::console[X] * layout::dim[X] * state::console[Y] * layout::dim[Y] * 3, sizeof (char));
+			* _data = (char*) calloc(state::console[X] * layout::glyph[X] * state::console[Y] * layout::glyph[Y] * 3, sizeof (char));
 
 		std::string _buffName;
 

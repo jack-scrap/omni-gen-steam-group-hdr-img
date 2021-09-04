@@ -56,7 +56,7 @@ Console::Console(std::string fName, std::string cwd) :
 		glGenTextures(1, &_tex);
 		glBindTexture(GL_TEXTURE_2D, _tex);
 
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, state::console[X] * layout::dim[X], state::console[Y] * layout::dim[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, _data);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, state::console[X] * layout::glyph[X], state::console[Y] * layout::glyph[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, _data);
 
 		glGenerateMipmap(GL_TEXTURE_2D);
 
@@ -101,13 +101,13 @@ void Console::print(char c, bool b, Coord st) {
 			c / 16
 		},
 
-		sz = layout::map[X] * layout::map[Y] * layout::dim[X] * layout::dim[Y],
+		sz = layout::map[X] * layout::map[Y] * layout::glyph[X] * layout::glyph[Y],
 		stride[2] = {
-			layout::dim[X],
-			layout::map[X] * layout::dim[X] * layout::dim[Y]
+			layout::glyph[X],
+			layout::map[X] * layout::glyph[X] * layout::glyph[Y]
 		};
 
-	glTexSubImage2D(GL_TEXTURE_2D, 0, st._x * layout::dim[X], st._y * layout::dim[Y], layout::dim[X], layout::dim[Y], GL_BGR, GL_UNSIGNED_BYTE, &(((char*) disp->_map->pixels)[((b * sz) + (idx[Y] * stride[Y]) + (idx[X] * stride[X])) * 3]));
+	glTexSubImage2D(GL_TEXTURE_2D, 0, st._x * layout::glyph[X], st._y * layout::glyph[Y], layout::glyph[X], layout::glyph[Y], GL_BGR, GL_UNSIGNED_BYTE, &(((char*) disp->_map->pixels)[((b * sz) + (idx[Y] * stride[Y]) + (idx[X] * stride[X])) * 3]));
 }
 
 void Console::draw() {

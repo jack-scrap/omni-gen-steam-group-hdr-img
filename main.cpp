@@ -61,7 +61,7 @@ int main(int argc, char** argv) {
 
 		if (key == "wd") {
 			layout::view[X] = std::stoi(val);
-			layout::view[Y] = state::line * layout::dim[Y];
+			layout::view[Y] = state::line * layout::glyph[Y];
 		}
 
 		if (key == "fps") {
@@ -85,11 +85,11 @@ int main(int argc, char** argv) {
 		}
 	}
 
-	layout::res[X] = state::ln * layout::dim[X];
+	layout::res[X] = state::ln * layout::glyph[X];
 	layout::res[Y] = layout::view[Y];
 
 	disp = new Disp("Omni", {
-		layout::view[X] + (state::ln * layout::dim[X]), layout::view[Y]
+		layout::view[X] + (state::ln * layout::glyph[X]), layout::view[Y]
 	}, col[false]);
 
 	std::string stage;

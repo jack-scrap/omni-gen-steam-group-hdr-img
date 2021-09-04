@@ -7,7 +7,7 @@
 
 namespace layout {
 	static unsigned int
-		dim[2] = {
+		glyph[2] = {
 			16,
 			32
 		},
@@ -42,7 +42,7 @@ namespace layout {
 			idx[Z] + (margin * 2) + (margin * 2 * 2) + (stroke * 2)
 		},
 
-		glyph[2] = {
+		letter[2] = {
 			0.8,
 			1
 		};

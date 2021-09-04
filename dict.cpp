@@ -14,8 +14,8 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 
 	Obj* child[deser.size()];
 
-	glm::vec3 start = glm::vec3(0.0, 0.0, layout::glyph[Y] + (layout::margin * 2 * 2)) + glm::vec3(layout::overhead, 0.0, layout::overhead);
-	GLfloat szPair = layout::stride[Z] + (layout::margin * 2) + (layout::stroke * 2) + layout::glyph[Z] + (layout::margin * 2 * 2);
+	glm::vec3 start = glm::vec3(0.0, 0.0, layout::letter[Y] + (layout::margin * 2 * 2)) + glm::vec3(layout::overhead, 0.0, layout::overhead);
+	GLfloat szPair = layout::stride[Z] + (layout::margin * 2) + (layout::stroke * 2) + layout::letter[Z] + (layout::margin * 2 * 2);
 
 	unsigned int i = 0;
 	GLfloat max[2] = {
