@@ -26,7 +26,18 @@ Console::Console(std::string fName, std::string cwd, unsigned int res[2]) :
 		}
 
 		_canv = (char*) calloc(_res[X] * _res[Y], sizeof (char));
+		_hl = (char*) calloc(_res[X] * _res[Y], sizeof (bool));
+
 		_data = (char*) calloc(_res[X] * layout::glyph[X] * _res[Y] * layout::glyph[Y] * 3, sizeof (char));
+
+		// cursor
+		for (int y = 0; y < 100; y++) {
+			for (int x = 0; x < 100; x++) {
+				_block[y][x][0] = col[true].b;
+				_block[y][x][1] = col[true].g;
+				_block[y][x][2] = col[true].r;
+			}
+		}
 
 		open(fName);
 
@@ -69,6 +80,8 @@ Console::Console(std::string fName, std::string cwd, unsigned int res[2]) :
 		glGenerateMipmap(GL_TEXTURE_2D);
 
 		fmt();
+		hl();
+
 		render();
 
 		_prog.unUse();
@@ -347,6 +360,236 @@ void Console::changeDir(std::string dir) {
 	_cursFs = 0;
 }
 
+void Console::hl() {
+	for (int y = 0; y < _res[Y]; y++) {
+		for (int x = 0; x < _res[X]; x++) {
+			_hl[idxStatic({
+				x,
+				y
+			}, _res)] = false;
+		}
+	}
+
+	unsigned int loc[2] = {
+		0
+	};
+
+	/* status bar */
+	for (int i = 0; i < _res[X]; i++) {
+		unsigned int idx = idxStatic({
+			i,
+			0
+		}, _res);
+		_hl[idx] = true;
+	}
+
+	const unsigned int boundFrame[2] = {
+		_res[X],
+		_res[Y] - 1 - 1
+	};
+
+	unsigned int maxFs = 0;
+	for (int i = 0; i < _tree.size(); i++) {
+		std::string fmt = _tree[i]["name"];
+		if (_tree[i]["type"] == "dir") {
+			fmt += "/";
+		}
+
+		if (fmt.size() > maxFs) {
+			maxFs = fmt.size();
+		}
+	}
+	maxFs += 1;
+
+	loc[X] += maxFs;
+
+	unsigned int maxNo = std::to_string(_buff.size()).size() + 1;
+	int
+		l = 0,
+		y = 0;
+	while (l < boundFrame[Y]) {
+		if (l < _buff.size()) {
+			int
+				c = 0,
+				x = 0;
+			while (c < maxNo) {
+				unsigned int idx = idxStatic({
+					loc[X] + x,
+					loc[Y] + y
+				}, _res);
+				_hl[idx] = !_hl[idx];
+
+				c++;
+				x++;
+			}
+		}
+
+		l++;
+		y++;
+	}
+
+	if (state::hlLineNo) {
+		int
+			delta = util::math::delta(_cursEditor[MIN][Y], _cursEditor[MAX][Y]),
+			norm = util::math::norm(_cursEditor[MIN][Y], _cursEditor[MAX][Y]);
+
+		for (int l = 0; l < abs(delta) + 1; l++) {
+			for (int c = 0; c < maxNo; c++) {
+				unsigned int idx = idxStatic({
+					loc[X] + c,
+					loc[Y] + _cursEditor[MIN][Y] + (l * norm)
+				}, _res);
+
+				_hl[idx] = !_hl[idx];
+			}
+		}
+	}
+
+	/* cursor */
+	loc[X] += maxNo;
+
+	// editor
+	unsigned int boundEditor[2] = {
+		boundFrame[X] - (maxFs + maxNo),
+		boundFrame[Y]
+	};
+
+	/* cursor */
+	switch (_mode) {
+		case EDITOR: {
+			int
+				delta = util::math::delta(_cursEditor[MIN][X] + _cursEditor[MIN][Y], _cursEditor[MAX][X] + _cursEditor[MAX][Y]),
+				norm = util::math::norm(idxDeterm(_buff, {
+					_cursEditor[MIN][X],
+					_cursEditor[MIN][Y]
+				}), idxDeterm(_buff, {
+					_cursEditor[MAX][X],
+					_cursEditor[MAX][Y]
+				})),
+
+				deltaConting = util::math::delta(idxDeterm(_buff, {
+					_cursEditor[MIN][X],
+					_cursEditor[MIN][Y]
+				}), idxDeterm(_buff, {
+					_cursEditor[MAX][X],
+					_cursEditor[MAX][Y]
+				}));
+
+			unsigned int st[2];
+			for (int i = 0; i < 2; i++) {
+				st[i] = _cursEditor[MIN][i];
+			}
+			for (int i = 0; i < abs(deltaConting) + 1; i++) {
+				unsigned int clamped[2];
+				for (int i = 0; i < 2; i++) {
+					if (st[i] < boundEditor[i] - 1) {
+						clamped[i] = st[i];
+					} else {
+						clamped[i] = boundEditor[i] - 1;
+					}
+				}
+
+				_hl[idxStatic({
+					loc[X] + clamped[X],
+					loc[Y] + clamped[Y]
+				}, _res)] = true;
+
+				if (norm == 1) {
+					if (st[X] < _buff[st[Y]].size() - 1) {
+						st[X]++;
+					} else {
+						if (st[Y] != _cursEditor[MAX][Y]) {
+							st[Y]++;
+							st[X] = 0;
+						}
+					}
+				}
+				if (norm == -1) {
+					if (st[X] > 0) {
+						st[X]--;
+					} else {
+						if (st[Y] != _cursEditor[MAX][Y]) {
+							st[Y]--;
+							st[X] = _buff[st[Y]].size() - 1;
+						}
+					}
+				}
+			}
+
+			// block
+			for (int r = 0; r < 2; r++) {
+				if (_cursEditor[r][X] == _buff[_cursEditor[r][Y]].size()) {
+					unsigned int clamped[2];
+					if (loc[X] + _cursEditor[r][X] < _res[X]) {
+						clamped[X] = loc[X] + _cursEditor[r][X];
+					} else {
+						clamped[X] = _res[X] - 1;
+					}
+					if (loc[Y] + _cursEditor[r][Y] < boundFrame[Y] + 1) {
+						clamped[Y] = loc[Y] + _cursEditor[r][Y];
+					} else {
+						clamped[Y] = boundFrame[Y];
+					}
+
+					glTexSubImage2D(GL_TEXTURE_2D, 0, clamped[X] * layout::glyph[X], clamped[Y] * layout::glyph[Y], layout::glyph[X], layout::glyph[Y], GL_BGR, GL_UNSIGNED_BYTE, _block);
+				}
+			}
+
+			break;
+		}
+
+		case PROMPT: {
+			int
+				delta = util::math::delta(_cursPrompt[MIN], _cursPrompt[MAX]),
+				norm = util::math::norm(_cursPrompt[MIN], _cursPrompt[MAX]);
+
+			for (int i = 0; i < abs(delta) + 1; i++) {
+				unsigned int idx = idxStatic({
+					_ps1.size() + _cursPrompt[MIN] + (i * norm),
+					_res[Y] - 1
+				}, _res);
+
+				_hl[idx] = !_hl[idx];
+			}
+
+			// block
+			for (int r = 0; r < 2; r++) {
+				unsigned int cursLocal;
+				if (_ps1.size() + _cursPrompt[r] < _res[X]) {
+					cursLocal = _ps1.size() + _cursPrompt[r];
+				} else {
+					cursLocal = _res[X] - 1;
+				}
+
+				if (_cursPrompt[r] == _prompt.size()) {
+					glTexSubImage2D(GL_TEXTURE_2D, 0, cursLocal * layout::glyph[X], (_res[Y] - 1) * layout::glyph[Y], layout::glyph[X], layout::glyph[Y], GL_BGR, GL_UNSIGNED_BYTE, _block);
+				}
+			}
+
+			break;
+		}
+
+		case FS: {
+			unsigned int cursLocal;
+			if (_cursFs < boundFrame[Y] - 1) {
+				cursLocal = _cursFs;
+			} else {
+				cursLocal = boundFrame[Y] - 1;
+			}
+
+			for (int i = 0; i < maxFs; i++) {
+				unsigned int idx = idxStatic({
+						i,
+						cursLocal
+						}, _res);
+				_hl[idx] = !_hl[idx];
+			}
+
+			break;
+		}
+	}
+}
+
 void Console::print(char c, bool b, Coord st) {
 	unsigned int
 		idx[2] = {
@@ -379,6 +622,15 @@ unsigned int Console::idxStatic(Coord st, unsigned int bound[2]) {
 	return (st._y * bound[X]) + st._x;
 }
 
+unsigned int Console::idxDeterm(std::vector<std::string> buff, Coord st) {
+	unsigned int _ = 0;
+	for (int i = 0; i < st._y; i++) {
+		_ += _buff[i].size();
+	}
+	_ += st._x;
+
+	return _;
+}
 
 bool Console::numeric(std::map<std::string, std::string> lhs, std::map<std::string, std::string> rhs) {
 	std::string::iterator it[2] = {

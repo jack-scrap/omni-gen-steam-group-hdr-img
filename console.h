@@ -11,8 +11,11 @@ class Console {
 	private:
 		char
 			* _canv,
+			* _hl,
 
 			* _data;
+
+		unsigned char _block[100][100][3];
 
 		std::string _buffName;
 
@@ -97,11 +100,15 @@ class Console {
 
 		void changeDir(std::string dir);
 
+		void hl();
+
 		void print(char c, bool b, Coord st);
 
 		void draw();
 
 		unsigned int idxStatic(Coord st, unsigned int bound[2]);
+
+		unsigned int idxDeterm(std::vector<std::string> buff, Coord st);
 
 		static bool numeric(std::map<std::string, std::string> lhs, std::map<std::string, std::string> rhs);
 		
