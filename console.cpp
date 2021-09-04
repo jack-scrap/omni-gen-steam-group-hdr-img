@@ -751,9 +751,13 @@ void Console::hl() {
 			loc[X] = _ps1.size();
 			loc[Y] = btm;
 
-			for (int i = 0; i < 2; i++) {
+			int
+				delta = util::math::delta(_cursPrompt[MIN], _cursPrompt[MAX]),
+				norm = util::math::norm(_cursPrompt[MIN], _cursPrompt[MAX]);
+
+			for (int i = 0; i < 1 + abs(delta); i++) {
 				unsigned int idx = idxStatic({
-					loc[X] + _cursPrompt[i],
+					loc[X] + _cursPrompt[MIN] + (i * norm),
 					loc[Y]
 				}, _res);
 
