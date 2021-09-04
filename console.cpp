@@ -655,10 +655,12 @@ void Console::hl() {
 		_hl[idx] = true;
 	}
 
-	const unsigned int boundFrame[2] = {
-		_res[X],
-		_res[Y] - 1 - 1
-	};
+	const unsigned int
+		boundFrame[2] = {
+			_res[X],
+			_res[Y] - 1 - 1
+		},
+		btm = _res[Y] - 1;
 
 	/* file system */
 	unsigned int maxFs = 0;
@@ -722,9 +724,6 @@ void Console::hl() {
 	}
 
 	/* cursor */
-	loc[X] = 0;
-	loc[Y] = 1;
-
 	// editor
 	unsigned int boundEditor[2] = {
 		boundFrame[X] - (maxFs + maxNo),
@@ -732,7 +731,26 @@ void Console::hl() {
 	};
 
 	switch (_mode) {
+		case PROMPT: {
+			loc[X] = _ps1.size();
+			loc[Y] = btm;
+
+			for (int i = 0; i < 2; i++) {
+				unsigned int idx = idxStatic({
+					loc[X] + _cursPrompt[i],
+					loc[Y]
+				}, _res);
+
+				_hl[idx] = !_hl[idx];
+			}
+
+			break;
+		}
+
 		case FS: {
+			loc[X] = 0;
+			loc[Y] = 1;
+
 			for (int c = 0; c < maxFs; c++) {
 				unsigned int idx = idxStatic({
 					loc[X] + c,
