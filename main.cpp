@@ -656,6 +656,7 @@ int main(int argc, char** argv) {
 				}
 
 				console->clear();
+
 				console->fmt();
 				console->hl();
 
