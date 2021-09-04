@@ -731,6 +731,22 @@ void Console::hl() {
 	};
 
 	switch (_mode) {
+		case EDITOR: {
+			loc[X] = maxFs + maxNo;
+			loc[Y] = 1;
+
+			for (int i = 0; i < 2; i++) {
+				unsigned int idx = idxStatic({
+					loc[X] + _cursEditor[i][X],
+					loc[Y] + _cursEditor[i][Y]
+				}, _res);
+
+				_hl[idx] = !_hl[idx];
+			}
+
+			break;
+		}
+
 		case PROMPT: {
 			loc[X] = _ps1.size();
 			loc[Y] = btm;
