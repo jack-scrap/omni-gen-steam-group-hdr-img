@@ -454,7 +454,6 @@ void Console::hl() {
 		boundFrame[Y]
 	};
 
-	/* cursor */
 	switch (_mode) {
 		case EDITOR: {
 			int
