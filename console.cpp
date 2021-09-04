@@ -166,7 +166,11 @@ void Console::fmt() {
 		x++;
 	}
 
-	std::string time = "asdf";
+	time(&_raw);
+	_info = localtime(&_raw);
+	strftime(_timeFmt, 64, state::format.c_str(), _info);
+
+	std::string time = std::string(_timeFmt);
 
 	while (x < _res[X] - time.size()) {
 		_canv[idxStatic({
