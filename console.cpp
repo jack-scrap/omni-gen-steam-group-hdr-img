@@ -722,7 +722,8 @@ void Console::hl() {
 	}
 
 	/* cursor */
-	loc[X] += maxNo;
+	loc[X] = 0;
+	loc[Y] = 1;
 
 	// editor
 	unsigned int boundEditor[2] = {
@@ -731,132 +732,13 @@ void Console::hl() {
 	};
 
 	switch (_mode) {
-		case EDITOR: {
-			int
-				delta = util::math::delta(_cursEditor[MIN][X] + _cursEditor[MIN][Y], _cursEditor[MAX][X] + _cursEditor[MAX][Y]),
-				norm = util::math::norm(idxDeterm(_buff, {
-					_cursEditor[MIN][X],
-					_cursEditor[MIN][Y]
-				}), idxDeterm(_buff, {
-					_cursEditor[MAX][X],
-					_cursEditor[MAX][Y]
-				})),
-
-				deltaConting = util::math::delta(idxDeterm(_buff, {
-					_cursEditor[MIN][X],
-					_cursEditor[MIN][Y]
-				}), idxDeterm(_buff, {
-					_cursEditor[MAX][X],
-					_cursEditor[MAX][Y]
-				}));
-
-			unsigned int st[2];
-			for (int i = 0; i < 2; i++) {
-				st[i] = _cursEditor[MIN][i];
-			}
-			for (int i = 0; i < abs(deltaConting) + 1; i++) {
-				unsigned int clamped[2];
-				for (int i = 0; i < 2; i++) {
-					if (st[i] < boundEditor[i] - 1) {
-						clamped[i] = st[i];
-					} else {
-						clamped[i] = boundEditor[i] - 1;
-					}
-				}
-
-				_hl[idxStatic({
-					loc[X] + clamped[X],
-					loc[Y] + clamped[Y]
-				}, _res)] = true;
-
-				if (norm == 1) {
-					if (st[X] < _buff[st[Y]].size() - 1) {
-						st[X]++;
-					} else {
-						if (st[Y] != _cursEditor[MAX][Y]) {
-							st[Y]++;
-							st[X] = 0;
-						}
-					}
-				}
-				if (norm == -1) {
-					if (st[X] > 0) {
-						st[X]--;
-					} else {
-						if (st[Y] != _cursEditor[MAX][Y]) {
-							st[Y]--;
-							st[X] = _buff[st[Y]].size() - 1;
-						}
-					}
-				}
-			}
-
-			// block
-			for (int r = 0; r < 2; r++) {
-				if (_cursEditor[r][X] == _buff[_cursEditor[r][Y]].size()) {
-					unsigned int clamped[2];
-					if (loc[X] + _cursEditor[r][X] < _res[X]) {
-						clamped[X] = loc[X] + _cursEditor[r][X];
-					} else {
-						clamped[X] = _res[X] - 1;
-					}
-					if (loc[Y] + _cursEditor[r][Y] < boundFrame[Y] + 1) {
-						clamped[Y] = loc[Y] + _cursEditor[r][Y];
-					} else {
-						clamped[Y] = boundFrame[Y];
-					}
-
-					glTexSubImage2D(GL_TEXTURE_2D, 0, clamped[X] * layout::glyph[X], clamped[Y] * layout::glyph[Y], layout::glyph[X], layout::glyph[Y], GL_BGR, GL_UNSIGNED_BYTE, _block);
-				}
-			}
-
-			break;
-		}
-
-		case PROMPT: {
-			int
-				delta = util::math::delta(_cursPrompt[MIN], _cursPrompt[MAX]),
-				norm = util::math::norm(_cursPrompt[MIN], _cursPrompt[MAX]);
-
-			for (int i = 0; i < abs(delta) + 1; i++) {
+		case FS: {
+			for (int c = 0; c < maxFs; c++) {
 				unsigned int idx = idxStatic({
-					_ps1.size() + _cursPrompt[MIN] + (i * norm),
-					_res[Y] - 1
+					loc[X] + c,
+					loc[Y] + _cursFs
 				}, _res);
 
-				_hl[idx] = !_hl[idx];
-			}
-
-			// block
-			for (int r = 0; r < 2; r++) {
-				unsigned int cursLocal;
-				if (_ps1.size() + _cursPrompt[r] < _res[X]) {
-					cursLocal = _ps1.size() + _cursPrompt[r];
-				} else {
-					cursLocal = _res[X] - 1;
-				}
-
-				if (_cursPrompt[r] == _prompt.size()) {
-					glTexSubImage2D(GL_TEXTURE_2D, 0, cursLocal * layout::glyph[X], (_res[Y] - 1) * layout::glyph[Y], layout::glyph[X], layout::glyph[Y], GL_BGR, GL_UNSIGNED_BYTE, _block);
-				}
-			}
-
-			break;
-		}
-
-		case FS: {
-			unsigned int cursLocal;
-			if (_cursFs < boundFrame[Y] - 1) {
-				cursLocal = _cursFs;
-			} else {
-				cursLocal = boundFrame[Y] - 1;
-			}
-
-			for (int i = 0; i < maxFs; i++) {
-				unsigned int idx = idxStatic({
-						i,
-						cursLocal
-						}, _res);
 				_hl[idx] = !_hl[idx];
 			}
 
