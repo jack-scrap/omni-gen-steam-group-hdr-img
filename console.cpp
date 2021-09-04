@@ -200,6 +200,52 @@ void Console::fmt() {
 		boundPrompt = _res[X] - _ps1.size(),
 		btm = _res[Y] - 1;
 
+	/* file system */
+	unsigned int maxFs = 0;
+	for (int i = 0; i < _tree.size(); i++) {
+		std::string line = _tree[i]["name"];
+
+		if (_tree[i]["type"] == "dir") {
+			line += "/";
+		}
+
+		if (line.size() > maxFs) {
+			maxFs = line.size();
+		}
+	}
+	maxFs += 1; // pad
+
+	std::vector<std::string> entryName;
+	for (int i = 0; i < _tree.size(); i++) {
+		std::string line = _tree[i]["name"];
+
+		if (_tree[i]["type"] == "dir") {
+			line += "/";
+		}
+
+		int c = line.size();
+		while (c < maxFs) {
+			line += ' ';
+
+			c++;
+		}
+
+		entryName.push_back(line);
+	}
+
+	fmtBuff(entryName, {
+		loc[X],
+		loc[Y]
+	}, {
+		maxFs,
+		boundFrame[Y]
+	}, {
+		0,
+		_cursFs < boundFrame[Y] ? 0 : _cursFs - (boundFrame[Y] - 1)
+	});
+
+	loc[X] = maxFs;
+
 	/* editor */
 	fmtBuff(_buff, {
 		loc[X],
