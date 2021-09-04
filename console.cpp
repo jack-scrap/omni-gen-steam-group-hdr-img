@@ -735,14 +735,23 @@ void Console::hl() {
 			loc[X] = maxFs + maxNo;
 			loc[Y] = 1;
 
-			for (int i = 0; i < 2; i++) {
-				unsigned int idx = idxStatic({
-					loc[X] + _cursEditor[i][X],
-					loc[Y] + _cursEditor[i][Y]
-				}, _res);
+			int
+				delta = util::math::delta(_cursEditor[MIN][X] + _cursEditor[MIN][Y], _cursEditor[MAX][X] + _cursEditor[MAX][Y]),
+				norm = util::math::norm(idxDeterm(_buff, {
+					_cursEditor[MIN][X],
+					_cursEditor[MIN][Y]
+				}), idxDeterm(_buff, {
+					_cursEditor[MAX][X],
+					_cursEditor[MAX][Y]
+				})),
 
-				_hl[idx] = true;
-			}
+				deltaConting = util::math::delta(idxDeterm(_buff, {
+					_cursEditor[MIN][X],
+					_cursEditor[MIN][Y]
+				}), idxDeterm(_buff, {
+					_cursEditor[MAX][X],
+					_cursEditor[MAX][Y]
+				}));
 
 			break;
 		}
