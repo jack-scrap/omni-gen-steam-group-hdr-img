@@ -660,6 +660,7 @@ void Console::hl() {
 		_res[Y] - 1 - 1
 	};
 
+	/* file system */
 	unsigned int maxFs = 0;
 	for (int i = 0; i < _tree.size(); i++) {
 		std::string fmt = _tree[i]["name"];
@@ -675,6 +676,8 @@ void Console::hl() {
 
 	loc[X] += maxFs;
 
+	/* editor */
+	// line number
 	unsigned int maxNo = std::to_string(_buff.size()).size() + 1;
 	int
 		l = 0,
