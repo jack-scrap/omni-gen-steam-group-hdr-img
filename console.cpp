@@ -741,7 +741,7 @@ void Console::hl() {
 					loc[Y] + _cursEditor[i][Y]
 				}, _res);
 
-				_hl[idx] = !_hl[idx];
+				_hl[idx] = true;
 			}
 
 			break;
@@ -757,7 +757,7 @@ void Console::hl() {
 					loc[Y]
 				}, _res);
 
-				_hl[idx] = !_hl[idx];
+				_hl[idx] = true;
 			}
 
 			break;
