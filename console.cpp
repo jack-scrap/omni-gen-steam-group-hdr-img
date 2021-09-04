@@ -19,7 +19,7 @@
 #include "math.h"
 
 Console::Console(std::string fName, std::string cwd) :
-	_prog("text", "text") {
+	_prog("console", "tex") {
 		open(fName);
 
 		changeDir(_cwd);
