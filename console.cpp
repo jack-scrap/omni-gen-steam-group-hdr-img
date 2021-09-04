@@ -325,6 +325,8 @@ void Console::fmt() {
 }
 
 void Console::render() {
+	glBindTexture(GL_TEXTURE_2D, _tex);
+
 	for (int l = 0; l < _res[Y]; l++) {
 		for (int c = 0; c < _res[X]; c++) {
 			Coord st = {
@@ -337,6 +339,8 @@ void Console::render() {
 			}
 		}
 	}
+
+	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void Console::open(std::string fName) {
