@@ -90,12 +90,12 @@ Console::Console(std::string fName, std::string cwd, unsigned int res[2]) :
 
 		glGenerateMipmap(GL_TEXTURE_2D);
 
+		_prog.unUse();
+
 		fmt();
 		hl();
 
 		render();
-
-		_prog.unUse();
 	}
 
 void Console::fmtBuff(std::vector<std::string> buff, Coord loc, Coord view, Coord ptr) {
