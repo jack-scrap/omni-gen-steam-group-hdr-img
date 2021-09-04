@@ -344,7 +344,7 @@ void Console::render() {
 			};
 			unsigned int idx = idxStatic(st, _res);
 			if (_canv[idx]) {
-				print(_canv[idx], false, st);
+				print(_canv[idx], _hl[idx], st);
 			}
 		}
 	}
