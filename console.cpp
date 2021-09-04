@@ -43,6 +43,17 @@ Console::Console(std::string fName, std::string cwd, unsigned int res[2]) :
 
 		changeDir(_cwd);
 
+		_cursEditor[MIN][X] = _buff.back().size() - 1 + 1;
+		_cursEditor[MIN][Y] = _buff.size() - 1;
+		for (int i = 0; i < 2; i++) {
+			_cursEditor[MAX][i] = _cursEditor[MIN][i];
+		}
+
+		_cursPrompt[MIN] = _prompt.size();
+		_cursPrompt[MAX] = _cursPrompt[MIN];
+
+		_cursFs = 0;
+
 		glGenVertexArrays(1, &_vao);
 		glBindVertexArray(_vao);
 
