@@ -19,6 +19,7 @@
 #include "math.h"
 
 Console::Console(std::string fName, std::string cwd, unsigned int res[2]) :
+	_cwd(cwd),
 	_prog("console", "tex") {
 		for (int i = 0; i < 2; i++) {
 			_res[i] = res[i];
