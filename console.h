@@ -22,6 +22,9 @@ class Console {
 
 		std::vector<std::map<std::string, std::string>> _tree;
 
+		const std::string _ps1 = "[] ";
+		std::string _prompt;
+
 		unsigned int
 			_cursEditor[2][2],
 			_cursPrompt[2],

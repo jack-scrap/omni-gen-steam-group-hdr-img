@@ -192,10 +192,13 @@ void Console::fmt() {
 
 	loc[Y] += 1;
 
-	const unsigned int boundFrame[2] = {
-		_res[X],
-		_res[Y] - 1 - 1
-	};
+	const unsigned int
+		boundFrame[2] = {
+			_res[X],
+			_res[Y] - 1 - 1
+		},
+		boundPrompt = _res[X] - _ps1.size(),
+		btm = _res[Y] - 1;
 
 	/* editor */
 	fmtBuff(_buff, {
@@ -206,6 +209,37 @@ void Console::fmt() {
 		boundFrame[Y]
 	}, {
 		0,
+		0
+	});
+
+	/* command-line */
+	loc[X] = 0;
+
+	fmtBuff({
+		_ps1,
+	}, {
+		loc[X],
+		btm
+	}, {
+		_ps1.size(),
+		1
+	}, {
+		0,
+		0
+	});
+
+	loc[X] += _ps1.size();
+
+	fmtBuff({
+		_prompt,
+	}, {
+		loc[X],
+		btm
+	}, {
+		boundPrompt,
+		1
+	}, {
+		_cursPrompt[_rngPrompt] < boundPrompt ? 0 : _cursPrompt[_rngPrompt] - (boundPrompt - 1),
 		0
 	});
 }
