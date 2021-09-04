@@ -287,7 +287,7 @@ void Console::fmt() {
 		_cursFs < boundFrame[Y] ? 0 : _cursFs - (boundFrame[Y] - 1)
 	});
 
-	loc[X] = maxFs;
+	loc[X] += maxFs;
 
 	/* editor */
 	fmtBuff(_buff, {
