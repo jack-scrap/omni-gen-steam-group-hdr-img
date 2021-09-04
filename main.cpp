@@ -40,15 +40,17 @@ int main(int argc, char** argv) {
 	};
 
 	// initialize
+	unsigned int res[2];
+
 	std::map<std::string, std::string> setting = util::cfg::parse<std::string>("player/cfg/init.cfg");
 
 	for (const auto& [key, val] : setting) {
 		if (key == "line_count") {
-			state::console[Y] = std::stoi(val);
+			res[Y] = std::stoi(val);
 		}
 
 		if (key == "line_width") {
-			state::console[X] = std::stoi(val);
+			res[X] = std::stoi(val);
 		}
 
 		if (key == "skip_boot") {
@@ -120,7 +122,7 @@ int main(int argc, char** argv) {
 		name = "player/doc/intro.txt";
 	}
 
-	console = new Console("player/script/init/0/main.py", "player");
+	console = new Console("player/script/init/0/main.py", "player", res);
 	scn::init(stage, lvl);
 
 	if (boot) {

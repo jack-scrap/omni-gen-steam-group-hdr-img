@@ -18,8 +18,15 @@
 #include "layout.h"
 #include "math.h"
 
-Console::Console(std::string fName, std::string cwd) :
+Console::Console(std::string fName, std::string cwd, unsigned int res[2]) :
 	_prog("console", "tex") {
+		for (int i = 0; i < 2; i++) {
+			_res[i] = res[i];
+		}
+
+		_canv = (char*) calloc(_res[X] * _res[Y], sizeof (char));
+		_data = (char*) calloc(_res[X] * layout::glyph[X] * _res[Y] * layout::glyph[Y] * 3, sizeof (char));
+
 		open(fName);
 
 		changeDir(_cwd);
@@ -56,7 +63,7 @@ Console::Console(std::string fName, std::string cwd) :
 		glGenTextures(1, &_tex);
 		glBindTexture(GL_TEXTURE_2D, _tex);
 
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, state::console[X] * layout::glyph[X], state::console[Y] * layout::glyph[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, _data);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, _res[X] * layout::glyph[X], _res[Y] * layout::glyph[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, _data);
 
 		glGenerateMipmap(GL_TEXTURE_2D);
 

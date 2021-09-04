@@ -1,7 +1,5 @@
 #include "state.h"
 
-unsigned int state::console[2];
-
 unsigned int state::line;
 unsigned int state::ln;
 

@@ -10,9 +10,9 @@
 class Console {
 	private:
 		char
-			* _canv = (char*) calloc(state::console[X] * state::console[Y], sizeof (char)),
+			* _canv,
 
-			* _data = (char*) calloc(state::console[X] * layout::glyph[X] * state::console[Y] * layout::glyph[Y] * 3, sizeof (char));
+			* _data;
 
 		std::string _buffName;
 
@@ -72,7 +72,9 @@ class Console {
 		};
 
 	public:
-		Console(std::string fName, std::string cwd);
+		unsigned int _res[2];
+
+		Console(std::string fName, std::string cwd, unsigned int res[2]);
 
 		void open(std::string fName);
 
