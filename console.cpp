@@ -106,15 +106,98 @@ void Console::fmtBuff(std::vector<std::string> buff, Coord loc, Coord view, Coor
 
 void Console::fmt() {
 	unsigned int loc[2] = {
-		0,
-		1
+		0
 	};
+
+	/* status bar */
+	std::string modeStr;
+	switch (_mode) {
+		case EDITOR:
+			modeStr = "EDITOR";
+
+			break;
+
+		case PROMPT:
+			modeStr = "PROMPT";
+
+			break;
+
+		case FS:
+			modeStr = "FS";
+
+			break;
+	}
+
+	int
+		i = 0,
+		x = 0;
+	while (
+		i < modeStr.size() &&
+		x < _res[X]
+	) {
+		_canv[idxStatic({
+			x,
+			0
+		}, _res)] = modeStr[i];
+
+		i++;
+		x++;
+	}
+
+	_canv[idxStatic({
+		x,
+		0
+	}, _res)] = ' ';
+	x++;
+
+	std::string base = util::fs::name(_buffName);
+	i = 0;
+	while (
+		i < base.size() &&
+		x < _res[X]
+	) {
+		_canv[idxStatic({
+			x,
+			0
+		}, _res)] = base[i];
+
+		i++;
+		x++;
+	}
+
+	std::string time = "asdf";
+
+	while (x < _res[X] - time.size()) {
+		_canv[idxStatic({
+			x,
+			0
+		}, _res)] = ' ';
+
+		x++;
+	}
+
+	i = 0;
+	while (
+		i < time.size() &&
+		x < _res[X]
+	) {
+		_canv[idxStatic({
+			x,
+			0
+		}, _res)] = time[i];
+
+		i++;
+		x++;
+	}
+
+	loc[Y] += 1;
 
 	const unsigned int boundFrame[2] = {
 		_res[X],
 		_res[Y] - 1 - 1
 	};
 
+	/* editor */
 	fmtBuff(_buff, {
 		loc[X],
 		loc[Y]

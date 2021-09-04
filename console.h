@@ -31,6 +31,12 @@ class Console {
 			_rngEditor,
 			_rngPrompt;
 
+		unsigned int _mode;
+
+		time_t _raw;
+		tm* _info;
+		char _timeFmt[64];
+
 		GLfloat
 			_vtc[2 * 2 * 2] = {
 				-1.0, -1.0,
@@ -93,4 +99,10 @@ class Console {
 		unsigned int idxStatic(Coord st, unsigned int bound[2]);
 
 		static bool numeric(std::map<std::string, std::string> lhs, std::map<std::string, std::string> rhs);
+		
+		enum mode {
+			EDITOR,
+			PROMPT,
+			FS
+		};
 };
