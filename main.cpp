@@ -222,6 +222,446 @@ int main(int argc, char** argv) {
 	glm::vec3 prev;
 	while (disp->_open) {
 		while (SDL_PollEvent(&e)) {
+			if (e.type == SDL_KEYDOWN) {
+				if (!SDL_GetModState()) {
+					// text
+					if (
+						e.key.keysym.sym >= SDLK_a &&
+						e.key.keysym.sym <= SDLK_z
+					) {
+						console->ins(e.key.keysym.sym);
+					}
+
+					if ((
+						e.key.keysym.sym >= SDLK_0 &&
+						e.key.keysym.sym <= SDLK_9
+					)) {
+						console->ins(e.key.keysym.sym);
+					}
+
+					if ((e.key.keysym.sym == SDLK_SPACE) || (
+						e.key.keysym.sym == SDLK_COMMA ||
+						e.key.keysym.sym == SDLK_PERIOD ||
+						e.key.keysym.sym == SDLK_SLASH ||
+
+						e.key.keysym.sym == SDLK_SEMICOLON ||
+						e.key.keysym.sym == SDLK_QUOTE ||
+
+						e.key.keysym.sym == SDLK_LEFTBRACKET ||
+						e.key.keysym.sym == SDLK_RIGHTBRACKET ||
+						e.key.keysym.sym == SDLK_BACKSLASH ||
+
+						e.key.keysym.sym == SDLK_MINUS ||
+						e.key.keysym.sym == SDLK_EQUALS ||
+
+						e.key.keysym.sym == SDLK_BACKQUOTE
+					)) {
+						console->ins(e.key.keysym.sym);
+					}
+
+					// control
+					if (e.key.keysym.sym == SDLK_BACKSPACE) {
+						console->del();
+					}
+
+					if (e.key.keysym.sym == SDLK_RETURN) {
+						switch (console->_mode) {
+							case Console::EDITOR:
+								console->newLine();
+
+								break;
+
+							case Console::PROMPT:
+								console->exec();
+
+								break;
+
+							case Console::FS:
+								if (console->_tree[console->_cursFs]["type"] == "file") {
+									console->open(console->_cwd + "/" + console->_tree[console->_cursFs]["name"]);
+								}
+
+								if (console->_tree[console->_cursFs]["type"] == "dir") {
+									console->changeDir(console->_cwd + "/" + console->_tree[console->_cursFs]["name"]);
+								}
+
+								break;
+						}
+					}
+
+					// mode
+					if (e.key.keysym.sym == SDLK_F1) {
+						console->switchMode(Console::EDITOR);
+					}
+
+					if (e.key.keysym.sym == SDLK_F2) {
+						console->switchMode(Console::PROMPT);
+					}
+
+					if (e.key.keysym.sym == SDLK_F3) {
+						console->switchMode(Console::FS);
+					}
+
+					if (e.key.keysym.sym == SDLK_ESCAPE) {
+						switch (console->_mode) {
+							case Console::EDITOR:
+								console->_rngEditor = false;
+
+								break;
+
+							case Console::PROMPT:
+								console->_rngPrompt = false;
+
+								break;
+						}
+					}
+
+					// navigation
+					switch (console->_mode) {
+						case Console::EDITOR:
+							if (e.key.keysym.sym == SDLK_RIGHT) {
+								if (console->_cursEditor[console->_rngEditor][X] < console->_buff[console->_cursEditor[console->_rngEditor][Y]].size()) {
+									console->_cursEditor[console->_rngEditor][X]++;
+								}
+							}
+
+							if (e.key.keysym.sym == SDLK_LEFT) {
+								if (console->_cursEditor[console->_rngEditor][X] > 0) {
+									console->_cursEditor[console->_rngEditor][X]--;
+								}
+							}
+
+							if (e.key.keysym.sym == SDLK_DOWN) {
+								if (console->_cursEditor[console->_rngEditor][X] == console->_buff[console->_cursEditor[console->_rngEditor][Y]].size()) {
+									if (console->_cursEditor[console->_rngEditor][Y] < console->_buff.size() - 1) {
+										console->_cursEditor[console->_rngEditor][Y]++;
+
+										console->_cursEditor[console->_rngEditor][X] = console->_buff[console->_cursEditor[console->_rngEditor][Y]].size();
+									}
+								} else {
+									if (console->_cursEditor[console->_rngEditor][Y] < console->_buff.size() - 1) {
+										console->_cursEditor[console->_rngEditor][Y]++;
+
+										if (console->_cursEditor[console->_rngEditor][X] > console->_buff[console->_cursEditor[console->_rngEditor][Y]].size()) {
+											console->_cursEditor[console->_rngEditor][X] = console->_buff[console->_cursEditor[console->_rngEditor][Y]].size();
+										}
+									}
+								}
+
+							}
+
+							if (e.key.keysym.sym == SDLK_UP) {
+								if (console->_cursEditor[console->_rngEditor][X] == console->_buff[console->_cursEditor[console->_rngEditor][Y]].size()) {
+									if (console->_cursEditor[console->_rngEditor][Y] > 0) {
+										console->_cursEditor[console->_rngEditor][Y]--;
+
+										console->_cursEditor[console->_rngEditor][X] = console->_buff[console->_cursEditor[console->_rngEditor][Y]].size();
+									}
+								} else {
+									if (console->_cursEditor[console->_rngEditor][Y] > 0) {
+										console->_cursEditor[console->_rngEditor][Y]--;
+
+										if (console->_cursEditor[console->_rngEditor][X] > console->_buff[console->_cursEditor[console->_rngEditor][Y]].size()) {
+											console->_cursEditor[console->_rngEditor][X] = console->_buff[console->_cursEditor[console->_rngEditor][Y]].size();
+										}
+									}
+								}
+							}
+
+							break;
+
+						case Console::PROMPT:
+							if (e.key.keysym.sym == SDLK_RIGHT) {
+								if (console->_cursPrompt[console->_rngPrompt] < console->_prompt.size()) {
+									console->_cursPrompt[console->_rngPrompt]++;
+								}
+							}
+
+							if (e.key.keysym.sym == SDLK_LEFT) {
+								if (console->_cursPrompt[console->_rngPrompt] > 0) {
+									console->_cursPrompt[console->_rngPrompt]--;
+								}
+							}
+
+							break;
+
+						case Console::FS:
+							if (e.key.keysym.sym == SDLK_DOWN) {
+								if (console->_cursFs < console->_tree.size() - 1) {
+									console->_cursFs++;
+								}
+							}
+
+							if (e.key.keysym.sym == SDLK_UP) {
+								if (console->_cursFs > 0) {
+									console->_cursFs--;
+								}
+							}
+
+							break;
+					}
+				} else {
+					if (e.key.keysym.mod & (KMOD_LSHIFT | KMOD_RSHIFT)) {
+						// text
+						if (
+							e.key.keysym.sym >= SDLK_a &&
+							e.key.keysym.sym <= SDLK_z
+						) {
+							char c = e.key.keysym.sym;
+
+							c -= 32;
+
+							console->ins(c);
+						}
+
+						if (
+							e.key.keysym.sym >= SDLK_0 &&
+							e.key.keysym.sym <= SDLK_9
+						) {
+							char c;
+							switch (e.key.keysym.sym) {
+								case SDLK_0:
+									c = ')';
+
+									break;
+
+								case SDLK_1:
+									c = '!';
+
+									break;
+
+								case SDLK_2:
+									c = '@';
+
+									break;
+
+								case SDLK_3:
+									c = '#';
+
+									break;
+
+								case SDLK_4:
+									c = '$';
+
+									break;
+
+								case SDLK_5:
+									c = '%';
+
+									break;
+
+								case SDLK_6:
+									c = '^';
+
+									break;
+
+								case SDLK_7:
+									c = '&';
+
+									break;
+
+								case SDLK_8:
+									c = '*';
+
+									break;
+
+								case SDLK_9:
+									c = '(';
+
+									break;
+							}
+
+							console->ins(c);
+						}
+
+						if ((e.key.keysym.sym == SDLK_SPACE) || (
+							e.key.keysym.sym == SDLK_COMMA ||
+							e.key.keysym.sym == SDLK_PERIOD ||
+							e.key.keysym.sym == SDLK_SLASH ||
+
+							e.key.keysym.sym == SDLK_SEMICOLON ||
+							e.key.keysym.sym == SDLK_QUOTE ||
+
+							e.key.keysym.sym == SDLK_LEFTBRACKET ||
+							e.key.keysym.sym == SDLK_RIGHTBRACKET ||
+							e.key.keysym.sym == SDLK_BACKSLASH ||
+
+							e.key.keysym.sym == SDLK_MINUS ||
+							e.key.keysym.sym == SDLK_EQUALS ||
+
+							e.key.keysym.sym == SDLK_BACKQUOTE
+						)) {
+							char c;
+							switch (e.key.keysym.sym) {
+								case SDLK_BACKQUOTE:
+									c = '~';
+
+									break;
+
+								case SDLK_COMMA:
+									c = '<';
+
+									break;
+
+								case SDLK_PERIOD:
+									c = '>';
+
+									break;
+
+								case SDLK_SLASH:
+									c = '?';
+
+									break;
+
+								case SDLK_SEMICOLON:
+									c = ':';
+
+									break;
+
+								case SDLK_QUOTE:
+									c = '"';
+
+									break;
+
+								case SDLK_LEFTBRACKET:
+									c = '{';
+
+									break;
+
+								case SDLK_RIGHTBRACKET:
+									c = '}';
+
+									break;
+
+								case SDLK_BACKSLASH:
+									c = '|';
+
+									break;
+
+								case SDLK_MINUS:
+									c = '_';
+
+									break;
+
+								case SDLK_EQUALS:
+									c = '+';
+
+									break;
+							}
+
+							console->ins(c);
+						}
+					}
+
+					if (e.key.keysym.mod & (KMOD_LALT | KMOD_RALT)) {
+						switch (console->_mode) {
+							case Console::EDITOR:
+								console->_rngEditor = true;
+
+								break;
+
+							case Console::PROMPT:
+								console->_rngPrompt = true;
+
+								break;
+						}
+					}
+
+					if (e.key.keysym.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
+						switch (e.key.keysym.sym) {
+							case SDLK_c:
+								switch (console->_mode) {
+									case Console::EDITOR: {
+										console->_clip.clear();
+
+										unsigned int idx[2];
+										for (int i = 0; i < 2; i++) {
+											idx[i] = console->_cursEditor[MIN][i];
+										}
+										while (idx[Y] < console->_cursEditor[MAX][Y]) {
+											console->_clip.push_back(std::string(console->_buff[idx[Y]].begin() + idx[X], console->_buff[idx[Y]].end()));
+
+											idx[Y]++;
+											idx[X] = 0;
+										}
+
+										console->_clip.push_back(std::string(console->_buff[idx[Y]].begin(), console->_buff[idx[Y]].begin() + console->_cursEditor[MAX][X] + 1));
+
+										break;
+									}
+
+									case Console::PROMPT:
+										console->_clip = {
+											std::string(console->_prompt.begin() + console->_cursPrompt[MIN], console->_prompt.begin() + console->_cursPrompt[MAX] + 1)
+										};
+
+										break;
+								}
+
+								break;
+
+							case SDLK_v:
+								switch (console->_mode) {
+									case Console::EDITOR:
+										console->del();
+
+										console->_buff[console->_cursEditor[console->_rngEditor][Y]].insert(console->_cursEditor[MIN][X], console->_clip[0]);
+
+										break;
+
+									case Console::PROMPT:
+										console->del();
+
+										console->_prompt.insert(console->_cursPrompt[MIN], console->_clip[0]);
+
+										break;
+								}
+
+								break;
+
+							case SDLK_x:
+								switch (console->_mode) {
+									case Console::EDITOR:
+										console->_clip = {
+											std::string(console->_buff[console->_cursEditor[Y][console->_rngEditor]].begin() + console->_cursEditor[MIN][X], console->_buff[console->_cursEditor[Y][console->_rngEditor]].begin() + console->_cursEditor[MAX][X] + 1)
+										};
+
+										console->del();
+
+										break;
+
+									case Console::PROMPT:
+										console->_clip = {
+											std::string(console->_prompt.begin() + console->_cursPrompt[MIN], console->_prompt.begin() + console->_cursPrompt[MAX] + 1)
+										};
+
+										console->del();
+
+										break;
+								}
+
+								break;
+						}
+					}
+				}
+
+				if (!console->_rngEditor) {
+					for (int r = 0; r < 2; r++) {
+						console->_cursEditor[MAX][r] = console->_cursEditor[MIN][r];
+					}
+				}
+
+				if (!console->_rngPrompt) {
+					console->_cursPrompt[MAX] = console->_cursPrompt[MIN];
+				}
+
+				console->clear();
+				console->fmt();
+				console->hl();
+
+				console->render();
+			}
+
 			if (e.type == SDL_MOUSEBUTTONDOWN) {
 				prev = cam._pos;
 

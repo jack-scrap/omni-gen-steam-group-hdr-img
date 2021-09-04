@@ -19,25 +19,7 @@ class Console {
 
 		std::string _buffName;
 
-		std::vector<std::string> _buff;
-
-		std::string _cwd;
-
-		std::vector<std::map<std::string, std::string>> _tree;
-
 		const std::string _ps1 = "[] ";
-		std::string _prompt;
-
-		unsigned int
-			_cursEditor[2][2],
-			_cursPrompt[2],
-			_cursFs;
-
-		bool
-			_rngEditor,
-			_rngPrompt;
-
-		unsigned int _mode;
 
 		time_t _raw;
 		tm* _info;
@@ -84,6 +66,27 @@ class Console {
 		};
 
 	public:
+		std::string _cwd;
+
+		std::string _prompt;
+
+		std::vector<std::map<std::string, std::string>> _tree;
+
+		unsigned int _mode;
+
+		unsigned int
+			_cursEditor[2][2],
+			_cursPrompt[2],
+			_cursFs;
+
+		bool
+			_rngEditor,
+			_rngPrompt;
+
+		std::vector<std::string> _buff;
+
+		std::vector<std::string> _clip;
+
 		unsigned int _res[2];
 
 		Console(std::string fName, std::string cwd, unsigned int res[2]);
@@ -99,6 +102,16 @@ class Console {
 		void open(std::string fName);
 
 		void changeDir(std::string dir);
+
+		void switchMode(unsigned int mode);
+
+		void ins(char c);
+
+		void newLine();
+
+		void del();
+
+		void exec();
 
 		void hl();
 

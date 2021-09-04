@@ -144,8 +144,6 @@ void Console::clear() {
 }
 
 void Console::fmt() {
-	clear();
-
 	unsigned int loc[2] = {
 		0
 	};
@@ -376,6 +374,226 @@ void Console::changeDir(std::string dir) {
 	std::sort(_tree.begin(), _tree.end(), numeric);
 
 	_cursFs = 0;
+}
+
+void Console::switchMode(unsigned int mode) {
+	_mode = mode;
+
+	fmt();
+}
+
+void Console::ins(char c) {
+	switch (_mode) {
+		case EDITOR:
+			if (_rngEditor) {
+				del();
+
+				_buff[_cursEditor[MIN][Y]].insert(_buff[_cursEditor[MIN][Y]].begin() + _cursEditor[MIN][X], c);
+			} else {
+				if (_cursEditor[_rngEditor][X] == _buff[_cursEditor[_rngEditor][Y]].size()) {
+					_buff[_cursEditor[_rngEditor][Y]].push_back(c);
+
+					_cursEditor[_rngEditor][X] = _buff[_cursEditor[_rngEditor][Y]].size();
+				} else {
+					_buff[_cursEditor[_rngEditor][Y]][_cursEditor[_rngEditor][X]] = c;
+				}
+			}
+
+			break;
+
+		case PROMPT:
+			if (_rngPrompt) {
+				del();
+
+				_prompt.insert(_prompt.begin() + _cursPrompt[MIN], c);
+			} else {
+				if (_cursPrompt[_rngPrompt] == _prompt.size()) {
+					_prompt.push_back(c);
+
+					_cursPrompt[_rngPrompt] = _prompt.size();
+				} else {
+					_prompt[_cursPrompt[_rngPrompt]] = c;
+				}
+			}
+
+			break;
+	}
+}
+
+void Console::newLine() {
+	std::string tail = std::string(_buff[_cursEditor[MIN][Y]].begin() + _cursEditor[MIN][X], _buff[_cursEditor[MIN][Y]].end());
+
+	_buff[_cursEditor[MIN][Y]].erase(_buff[_cursEditor[MIN][Y]].begin() + _cursEditor[MIN][X], _buff[_cursEditor[MIN][Y]].end());
+
+	if (
+		_cursEditor[MIN][Y] == _buff.size() - 1 &&
+		_cursEditor[MIN][X] == _buff[_cursEditor[MIN][Y]].size()
+	) {
+		_buff.push_back(tail);
+	} else {
+		_buff.insert(_buff.begin() + _cursEditor[MIN][Y] + 1, tail);
+	}
+
+	for (int i = 0; i < 2; i++) {
+		_cursEditor[i][Y]++;
+		_cursEditor[i][X] = 0;
+	}
+}
+
+void Console::del() {
+	switch (_mode) {
+		case EDITOR: {
+			if (_rngEditor) {
+				unsigned int idx[2];
+				for (int i = 0; i < 2; i++) {
+					idx[i] = _cursEditor[MIN][i];
+				}
+				unsigned l = idx[Y];
+
+				while (idx[Y] < _cursEditor[MAX][Y]) {
+					if (idx[X]) {
+						_buff[l].erase(_buff[l].begin() + _cursEditor[MIN][X], _buff[l].end());
+
+						l++;
+					} else {
+						_buff.erase(_buff.begin() + l);
+					}
+
+					idx[Y]++;
+					idx[X] = 0;
+				}
+
+				_buff[l].erase(_buff[l].begin() + idx[X], _buff[l].begin() + _cursEditor[MAX][X] + 1);
+
+				for (int i = 0; i < 2; i++) {
+					_cursEditor[MAX][i] = _cursEditor[MIN][i];
+				}
+			} else {
+				if (_buff[_cursEditor[_rngEditor][Y]].size()) {
+					if (_cursEditor[_rngEditor][X] == _buff[_cursEditor[_rngEditor][Y]].size()) {
+						_buff[_cursEditor[_rngEditor][Y]].pop_back();
+					} else {
+						_buff[_cursEditor[_rngEditor][Y]].erase(_buff[_cursEditor[_rngEditor][Y]].begin() + _cursEditor[MIN][X], _buff[_cursEditor[_rngEditor][Y]].begin() + _cursEditor[MAX][X] + 1);
+					}
+				} else {
+					if (_buff.size() > 1) {
+						if (_cursEditor[_rngEditor][Y] == _buff.size() - 1) {
+							_buff.pop_back();
+						}
+					}
+				}
+
+				for (int r = 0; r < 2; r++) {
+					if (!(_cursEditor[r][Y] < _buff.size())) {
+						_cursEditor[r][Y]--;
+					}
+
+					if (_cursEditor[r][X] > _buff[_cursEditor[r][Y]].size()) {
+						_cursEditor[r][X] = _buff[_cursEditor[r][Y]].size();
+					}
+				}
+			}
+
+			break;
+		}
+
+		case PROMPT:
+			if (_rngPrompt) {
+				unsigned int
+					floor,
+					roof;
+				if (_cursPrompt[MIN] < _cursPrompt[MAX]) {
+					floor = _cursPrompt[MIN];
+					roof = _cursPrompt[MAX];
+				}
+				if (_cursPrompt[MIN] > _cursPrompt[MAX]) {
+					floor = _cursPrompt[MAX];
+					roof = _cursPrompt[MIN];
+				}
+
+				roof += 1;
+
+				if (!(roof < _prompt.size())) {
+					roof = _prompt.size();
+				}
+
+				_prompt.erase(_prompt.begin() + floor, _prompt.begin() + roof);
+
+				_cursPrompt[MAX] = _cursPrompt[MIN];
+			} else {
+				if (_cursPrompt[_rngPrompt] == _prompt.size()) {
+					if (_prompt.size()) {
+						_prompt.pop_back();
+					}
+				} else {
+					_prompt.erase(_prompt.begin() + _cursPrompt[_rngPrompt]);
+				}
+			}
+
+			if (!(_cursPrompt[MIN] < _prompt.size())) {
+				_cursPrompt[MIN] = _prompt.size();
+			}
+			_cursPrompt[MAX] = _cursPrompt[MIN];
+
+			break;
+	}
+}
+
+void Console::exec() {
+	if (_prompt.size()) {
+		std::vector<std::string> tok = util::str::split(_prompt, ' ');
+
+		std::string cmd = tok[0];
+
+		if (std::find(omni::lib.begin(), omni::lib.end(), cmd) != omni::lib.end()) {
+			if (cmd == "open") {
+				if (tok.size() == 1 + 1) {
+					open(tok[1]);
+				} else {
+					omni::err("Incorrect number of arguments to command `" + cmd + "`");
+				}
+			}
+
+			if (cmd == "write") {
+				if (tok.size() <= 1 + 1) {
+					std::string name;
+					if (tok.size() == 1) {
+						name = _buffName;
+					} else {
+						name = tok[1];
+					}
+
+					util::fs::write(name, _buff);
+				} else {
+					omni::err("Incorrect number of arguments to command `" + cmd + "`");
+				}
+			}
+
+			if (cmd == "del") {
+				if (tok.size() <= 1 + 1) {
+					std::string name;
+					if (tok.size() == 1) {
+						name = _buffName;
+					} else {
+						name = tok[1];
+					}
+
+					util::fs::del(name);
+				} else {
+					omni::err("Incorrect number of arguments to command `" + cmd + "`");
+				}
+			}
+		} else {
+			omni::err("Command `" + cmd + "` not found");
+		}
+	}
+
+	_prompt.clear();
+
+	_cursPrompt[MIN] = _prompt.size();
+	_cursPrompt[MAX] = _cursPrompt[MIN];
+
+	fmt();
 }
 
 void Console::hl() {
