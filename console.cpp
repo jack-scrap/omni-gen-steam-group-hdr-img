@@ -31,8 +31,8 @@ Console::Console(std::string fName, std::string cwd, unsigned int res[2]) :
 		_data = (char*) calloc(_res[X] * layout::glyph[X] * _res[Y] * layout::glyph[Y] * 3, sizeof (char));
 
 		// cursor
-		for (int y = 0; y < 100; y++) {
-			for (int x = 0; x < 100; x++) {
+		for (int y = 0; y < 32 * 3; y++) {
+			for (int x = 0; x < 16 * 3; x++) {
 				_block[y][x][0] = col[true].b;
 				_block[y][x][1] = col[true].g;
 				_block[y][x][2] = col[true].r;
