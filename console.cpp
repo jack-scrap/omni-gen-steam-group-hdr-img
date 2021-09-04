@@ -675,6 +675,7 @@ void Console::hl() {
 	maxFs += 1;
 
 	loc[X] += maxFs;
+	loc[Y] = 1;
 
 	/* editor */
 	// line number
