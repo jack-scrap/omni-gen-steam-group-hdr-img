@@ -85,6 +85,8 @@ class Console {
 
 		Console(std::string fName, std::string cwd, unsigned int res[2]);
 
+		void clear();
+
 		void fmtBuff(std::vector<std::string> buff, Coord loc, Coord view, Coord ptr);
 
 		void fmt();
