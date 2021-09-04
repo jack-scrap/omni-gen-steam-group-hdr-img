@@ -76,6 +76,10 @@ class Console {
 
 		Console(std::string fName, std::string cwd, unsigned int res[2]);
 
+		void fmt();
+
+		void render();
+
 		void open(std::string fName);
 
 		void changeDir(std::string dir);

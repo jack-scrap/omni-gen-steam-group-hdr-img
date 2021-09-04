@@ -67,15 +67,39 @@ Console::Console(std::string fName, std::string cwd, unsigned int res[2]) :
 
 		glGenerateMipmap(GL_TEXTURE_2D);
 
-		for (int c = 0; c < _buff[0].size(); c++) {
-			print(_buff[0][c], false, {
-				c,
-				0
-			});
-		}
+		fmt();
+		render();
 
 		_prog.unUse();
 	}
+
+void Console::fmt() {
+	for (int l = 0; l < _buff.size(); l++) {
+		for (int c = 0; c < _buff[l].size(); c++) {
+			unsigned int idx = idxStatic({
+				c,
+				l
+			}, _res);
+
+			_canv[idx] = _buff[l][c];
+		}
+	}
+}
+
+void Console::render() {
+	for (int l = 0; l < _res[Y]; l++) {
+		for (int c = 0; c < _res[X]; c++) {
+			Coord st = {
+				c,
+				l
+			};
+			unsigned int idx = idxStatic(st, _res);
+			if (_canv[idx]) {
+				print(_canv[idx], false, st);
+			}
+		}
+	}
+}
 
 void Console::open(std::string fName) {
 	_buffName = fName;
