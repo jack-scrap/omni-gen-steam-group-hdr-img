@@ -290,6 +290,39 @@ void Console::fmt() {
 	loc[X] += maxFs;
 
 	/* editor */
+	// line numbers
+	unsigned int maxNo = std::to_string(_buff.size()).size();
+	maxNo += 1; // pad
+
+	std::vector<std::string> pre;
+	for (int i = _cursEditor[_rngEditor][Y] < boundFrame[Y] ? 0 : _cursEditor[_rngEditor][Y] - (boundFrame[Y] - 1); i < _buff.size(); i++) {
+		std::string line;
+
+		unsigned int start = 0;
+
+		std::string no = std::to_string(start + i);
+
+		line += no;
+
+		no += ' ';
+
+		pre.push_back(no);
+	}
+
+	fmtBuff(pre, {
+		loc[X],
+		loc[Y]
+	}, {
+		maxNo,
+		boundFrame[Y]
+	}, {
+		0,
+		0
+	});
+
+	loc[X] += maxNo;
+
+	// buffer
 	fmtBuff(_buff, {
 		loc[X],
 		loc[Y]
