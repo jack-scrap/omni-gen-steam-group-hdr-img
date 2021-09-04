@@ -298,12 +298,12 @@ void Console::fmt() {
 	for (int i = _cursEditor[_rngEditor][Y] < boundFrame[Y] ? 0 : _cursEditor[_rngEditor][Y] - (boundFrame[Y] - 1); i < _buff.size(); i++) {
 		std::string line;
 
-		unsigned int start = 0;
+		unsigned int base = 0;
 		if (state::initIdx) {
-			start = 1;
+			base = 1;
 		}
 
-		std::string no = std::to_string(start + i);
+		std::string no = std::to_string(base + i);
 
 		line += no;
 
