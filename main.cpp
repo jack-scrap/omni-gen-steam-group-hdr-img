@@ -120,7 +120,7 @@ int main(int argc, char** argv) {
 		name = "player/doc/intro.txt";
 	}
 
-	console = new Console();
+	console = new Console("player/script/init/0/main.py", "player");
 	scn::init(stage, lvl);
 
 	if (boot) {

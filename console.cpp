@@ -18,8 +18,12 @@
 #include "layout.h"
 #include "math.h"
 
-Console::Console() :
+Console::Console(std::string fName, std::string cwd) :
 	_prog("text", "text") {
+		open(fName);
+
+		changeDir(_cwd);
+
 		glGenVertexArrays(1, &_vao);
 		glBindVertexArray(_vao);
 
@@ -56,8 +60,8 @@ Console::Console() :
 
 		glGenerateMipmap(GL_TEXTURE_2D);
 
-		for (int c = 0; c < _buff.size(); c++) {
-			print(_buff[c], false, {
+		for (int c = 0; c < _buff[0].size(); c++) {
+			print(_buff[0][c], false, {
 				c,
 				0
 			});
@@ -65,6 +69,30 @@ Console::Console() :
 
 		_prog.unUse();
 	}
+
+void Console::open(std::string fName) {
+	_buffName = fName;
+
+	_buff = util::fs::rd<std::vector<std::string>>(_buffName);
+}
+
+void Console::changeDir(std::string dir) {
+	_cwd = dir;
+
+	_tree = util::fs::ls(_cwd);
+
+	for (int i = 0; i < _tree.size(); i++) {
+		if (_tree[i]["name"] == "..") {
+			if (_cwd == "player") {
+				_tree.erase(_tree.begin() + i);
+			}
+		}
+	}
+
+	std::sort(_tree.begin(), _tree.end(), numeric);
+
+	_cursFs = 0;
+}
 
 void Console::print(char c, bool b, Coord st) {
 	unsigned int
@@ -96,4 +124,39 @@ void Console::draw() {
 
 unsigned int Console::idxStatic(Coord st, unsigned int bound[2]) {
 	return (st._y * bound[X]) + st._x;
+}
+
+
+bool Console::numeric(std::map<std::string, std::string> lhs, std::map<std::string, std::string> rhs) {
+	std::string::iterator it[2] = {
+		lhs["name"].begin(),
+		rhs["name"].begin()
+	};
+
+	if (
+		std::isdigit(lhs["name"][0]) &&
+		std::isdigit(rhs["name"][0])
+	) {
+		int n[2];
+
+		std::stringstream ss(lhs["name"]);
+		ss >> n[0];
+
+		ss.clear();
+		ss.str(rhs["name"]);
+		ss >> n[1];
+
+		if (n[0] != n[1]) {
+			return n[0] < n[1];
+		}
+
+		it[0] = std::find_if(lhs["name"].begin(), lhs["name"].end(), [](char c) {
+			return !std::isdigit(c);
+		});
+		it[1] = std::find_if(rhs["name"].begin(), rhs["name"].end(), [](char c) {
+			return !std::isdigit(c);
+		});
+	}
+
+	return std::lexicographical_compare(it[0], lhs["name"].end(), it[1], rhs["name"].end());
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdlib>
+#include <map>
 #include <GL/glew.h>
 
 #include "prog.h"
@@ -13,7 +14,22 @@ class Console {
 
 			* _data = (char*) calloc(state::console[X] * layout::dim[X] * state::console[Y] * layout::dim[Y] * 3, sizeof (char));
 
-		std::string _buff = "asdf";
+		std::string _buffName;
+
+		std::vector<std::string> _buff;
+
+		std::string _cwd;
+
+		std::vector<std::map<std::string, std::string>> _tree;
+
+		unsigned int
+			_cursEditor[2][2],
+			_cursPrompt[2],
+			_cursFs;
+
+		bool
+			_rngEditor,
+			_rngPrompt;
 
 		GLfloat
 			_vtc[2 * 2 * 2] = {
@@ -56,11 +72,17 @@ class Console {
 		};
 
 	public:
-		Console();
+		Console(std::string fName, std::string cwd);
+
+		void open(std::string fName);
+
+		void changeDir(std::string dir);
 
 		void print(char c, bool b, Coord st);
 
 		void draw();
 
 		unsigned int idxStatic(Coord st, unsigned int bound[2]);
+
+		static bool numeric(std::map<std::string, std::string> lhs, std::map<std::string, std::string> rhs);
 };
