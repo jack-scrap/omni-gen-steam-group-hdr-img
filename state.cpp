@@ -3,6 +3,8 @@
 unsigned int state::line;
 unsigned int state::ln;
 
+unsigned int state::initIdx = 0;
+
 unsigned int state::hlLineNo;
 
 unsigned int state::fps;

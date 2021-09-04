@@ -53,6 +53,10 @@ int main(int argc, char** argv) {
 			res[X] = std::stoi(val);
 		}
 
+		if (key == "begin_index_at_one") {
+			state::initIdx = val == "y";
+		}
+
 		if (key == "skip_boot") {
 			boot = !(val == "y");
 		}

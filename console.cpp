@@ -299,6 +299,9 @@ void Console::fmt() {
 		std::string line;
 
 		unsigned int start = 0;
+		if (state::initIdx) {
+			start = 1;
+		}
 
 		std::string no = std::to_string(start + i);
 
