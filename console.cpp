@@ -121,10 +121,13 @@ void Console::fmtBuff(std::vector<std::string> buff, Coord loc, Coord view, Coor
 void Console::clear() {
 	for (int y = 0; y < _res[Y]; y++) {
 		for (int x = 0; x < _res[X]; x++) {
-			_canv[idxStatic({
+			unsigned int idx = idxStatic({
 				x,
 				y
-			}, _res)] = 0;
+			}, _res);
+
+			_canv[idx] = 0;
+			_hl[idx] = false;
 		}
 	}
 }
