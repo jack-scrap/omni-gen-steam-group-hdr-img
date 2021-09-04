@@ -73,17 +73,58 @@ Console::Console(std::string fName, std::string cwd, unsigned int res[2]) :
 		_prog.unUse();
 	}
 
-void Console::fmt() {
-	for (int l = 0; l < _buff.size(); l++) {
-		for (int c = 0; c < _buff[l].size(); c++) {
-			unsigned int idx = idxStatic({
-				c,
-				l
-			}, _res);
+void Console::fmtBuff(std::vector<std::string> buff, Coord loc, Coord view, Coord ptr) {
+	int
+		l = ptr._y,
+		y = 0;
+	while (
+		l < buff.size() &&
+		y < view._y &&
+		y < _res[Y]
+	) {
+		int
+			c = ptr._x,
+			x = 0;
+		while (
+			c < buff[l].size() &&
+			x < view._x &&
+			x < _res[X]
+		) {
+			_canv[idxStatic({
+				loc._x + x,
+				loc._y + y
+			}, _res)] = buff[l][c];
 
-			_canv[idx] = _buff[l][c];
+			c++;
+			x++;
 		}
+
+		l++;
+		y++;
 	}
+}
+
+void Console::fmt() {
+	unsigned int loc[2] = {
+		0,
+		1
+	};
+
+	const unsigned int boundFrame[2] = {
+		_res[X],
+		_res[Y] - 1 - 1
+	};
+
+	fmtBuff(_buff, {
+		loc[X],
+		loc[Y]
+	}, {
+		boundFrame[X],
+		boundFrame[Y]
+	}, {
+		0,
+		0
+	});
 }
 
 void Console::render() {
