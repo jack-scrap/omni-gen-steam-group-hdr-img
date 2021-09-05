@@ -720,7 +720,7 @@ void Console::hl() {
 					loc[X] + x,
 					loc[Y] + y
 				}, _res);
-				_hl[idx] = !_hl[idx];
+				_hl[idx] = true;
 
 				c++;
 				x++;
