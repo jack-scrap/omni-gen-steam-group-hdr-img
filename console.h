@@ -124,6 +124,8 @@ class Console {
 
 		unsigned int idxDeterm(std::vector<std::string> buff, Coord st);
 
+		unsigned int clamp(unsigned int i, unsigned int roof);
+
 		static bool numeric(std::map<std::string, std::string> lhs, std::map<std::string, std::string> rhs);
 		
 		enum mode {
