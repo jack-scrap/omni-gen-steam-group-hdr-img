@@ -1039,6 +1039,23 @@ bool util::cfg::no(std::string buff) {
 	return _;
 }
 
+bool util::cfg::boolean(std::string buff) {
+	bool _ = true;
+
+	if (buff.size() != 1) {
+		_ = false;
+	}
+
+	if (
+		buff[0] != 'n' ||
+		buff[0] != 'y'
+	) {
+		_ = false;
+	}
+
+	return _;
+}
+
 template <typename T>
 std::map<std::string, T> util::cfg::parse(std::string name) {
 }

@@ -131,6 +131,8 @@ namespace util {
 
 		bool no(std::string buff);
 
+		bool boolean(std::string buff);
+
 		template <typename T>
 		std::map<std::string, T> parse(std::string name);
 	}
