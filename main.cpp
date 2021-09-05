@@ -83,6 +83,10 @@ int main(int argc, char** argv) {
 			state::tabWd = std::stoi(it->second);
 		}
 
+		if (it->first == "hl_line_no") {
+			state::hlLineNo = it->second == "y";
+		}
+
 		if (it->first == "hl_active_line") {
 			state::hlActiveLine = it->second == "y";
 		}

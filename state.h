@@ -13,6 +13,7 @@ namespace state {
 
 	extern unsigned int initIdx;
 
+	extern unsigned int hlLineNo;
 	extern unsigned int hlActiveLine;
 
 	extern unsigned int fps;

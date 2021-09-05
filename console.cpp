@@ -707,28 +707,31 @@ void Console::hl() {
 	/* editor */
 	// line number
 	unsigned int maxNo = std::to_string(_buff.size()).size() + 1;
-	int
-		l = 0,
-		y = 0;
-	while (l < boundFrame[Y]) {
-		if (l < _buff.size()) {
-			int
-				c = 0,
-				x = 0;
-			while (c < maxNo) {
-				unsigned int idx = idxStatic({
-					loc[X] + x,
-					loc[Y] + y
-				}, _res);
-				_hl[idx] = true;
 
-				c++;
-				x++;
+	if (state::hlLineNo) {
+		int
+			l = 0,
+			y = 0;
+		while (l < boundFrame[Y]) {
+			if (l < _buff.size()) {
+				int
+					c = 0,
+					x = 0;
+				while (c < maxNo) {
+					unsigned int idx = idxStatic({
+						loc[X] + x,
+						loc[Y] + y
+					}, _res);
+					_hl[idx] = true;
+
+					c++;
+					x++;
+				}
 			}
-		}
 
-		l++;
-		y++;
+			l++;
+			y++;
+		}
 	}
 
 	if (state::hlActiveLine) {
