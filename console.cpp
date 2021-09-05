@@ -105,6 +105,8 @@ Console::Console(std::string fName, std::string cwd, unsigned int res[2]) :
 
 		glGenerateMipmap(GL_TEXTURE_2D);
 
+		glBindTexture(GL_TEXTURE_2D, 0);
+
 		_prog.unUse();
 
 		fmt();
@@ -145,6 +147,8 @@ void Console::fmtBuff(std::vector<std::string> buff, Coord loc, Coord view, Coor
 }
 
 void Console::clear() {
+	glBindTexture(GL_TEXTURE_2D, _tex);
+
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, _res[X] * layout::glyph[X], _res[Y] * layout::glyph[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, _blank);
 
 	for (int y = 0; y < _res[Y]; y++) {
@@ -158,6 +162,8 @@ void Console::clear() {
 			_hl[idx] = false;
 		}
 	}
+
+	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void Console::fmt() {
@@ -650,6 +656,8 @@ void Console::exec() {
 }
 
 void Console::hl() {
+	glBindTexture(GL_TEXTURE_2D, _tex);
+
 	for (int y = 0; y < _res[Y]; y++) {
 		for (int x = 0; x < _res[X]; x++) {
 			_hl[idxStatic({
@@ -881,6 +889,8 @@ void Console::hl() {
 			break;
 		}
 	}
+
+	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void Console::print(char c, bool b, Coord st) {
