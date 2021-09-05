@@ -44,51 +44,51 @@ int main(int argc, char** argv) {
 
 	std::map<std::string, std::string> setting = util::cfg::parse<std::string>("player/cfg/init.cfg");
 
-	for (const auto& [key, val] : setting) {
+	for (std::map<std::string, std::string>::iterator it = setting.begin(); it != setting.end(); ++it) {
 		// init
-		if (key == "skip_boot") {
-			boot = !(val == "y");
+		if (it->first == "skip_boot") {
+			boot = !(it->second == "y");
 		}
 
-		if (key == "speed") {
-			state::speed = std::stoi(val);
+		if (it->first == "speed") {
+			state::speed = std::stoi(it->second);
 		}
 
 		// display
-		if (key == "wd") {
-			layout::view[X] = std::stoi(val);
+		if (it->first == "wd") {
+			layout::view[X] = std::stoi(it->second);
 			layout::view[Y] = state::line * layout::glyph[Y];
 		}
 
-		if (key == "fps") {
-			state::fps = std::stoi(val);
+		if (it->first == "fps") {
+			state::fps = std::stoi(it->second);
 		}
 
-		if (key == "begin_index_at_one") {
-			state::initIdx = val == "y";
+		if (it->first == "begin_index_at_one") {
+			state::initIdx = it->second == "y";
 		}
 
 		// console
-		if (key == "line_count") {
-			res[Y] = std::stoi(val);
-			state::line = std::stoi(val);
+		if (it->first == "line_count") {
+			res[Y] = std::stoi(it->second);
+			state::line = std::stoi(it->second);
 		}
 
-		if (key == "line_width") {
-			res[X] = std::stoi(val);
-			state::ln = std::stoi(val);
+		if (it->first == "line_width") {
+			res[X] = std::stoi(it->second);
+			state::ln = std::stoi(it->second);
 		}
 
-		if (key == "tab_wd") {
-			state::tabWd = std::stoi(val);
+		if (it->first == "tab_wd") {
+			state::tabWd = std::stoi(it->second);
 		}
 
-		if (key == "hl_active_line") {
-			state::hlActiveLine = val == "y";
+		if (it->first == "hl_active_line") {
+			state::hlActiveLine = it->second == "y";
 		}
 
-		if (key == "time_format") {
-			state::format = val;
+		if (it->first == "time_format") {
+			state::format = it->second;
 		}
 	}
 
