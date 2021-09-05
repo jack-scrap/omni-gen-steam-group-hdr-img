@@ -45,18 +45,7 @@ int main(int argc, char** argv) {
 	std::map<std::string, std::string> setting = util::cfg::parse<std::string>("player/cfg/init.cfg");
 
 	for (const auto& [key, val] : setting) {
-		if (key == "line_count") {
-			res[Y] = std::stoi(val);
-		}
-
-		if (key == "line_width") {
-			res[X] = std::stoi(val);
-		}
-
-		if (key == "begin_index_at_one") {
-			state::initIdx = val == "y";
-		}
-
+		// init
 		if (key == "skip_boot") {
 			boot = !(val == "y");
 		}
@@ -65,6 +54,7 @@ int main(int argc, char** argv) {
 			state::speed = std::stoi(val);
 		}
 
+		// display
 		if (key == "wd") {
 			layout::view[X] = std::stoi(val);
 			layout::view[Y] = state::line * layout::glyph[Y];
@@ -74,8 +64,21 @@ int main(int argc, char** argv) {
 			state::fps = std::stoi(val);
 		}
 
+		if (key == "begin_index_at_one") {
+			state::initIdx = val == "y";
+		}
+
+		// console
+		if (key == "line_count") {
+			res[Y] = std::stoi(val);
+		}
+
 		if (key == "line_count") {
 			state::line = std::stoi(val);
+		}
+
+		if (key == "line_width") {
+			res[X] = std::stoi(val);
 		}
 
 		if (key == "line_width") {
