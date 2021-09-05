@@ -848,10 +848,15 @@ void Console::hl() {
 			loc[X] = 0;
 			loc[Y] = 1;
 
+			unsigned int clamped = _cursFs;
+			if (!(clamped < boundFrame[Y] - 1)) {
+				clamped = boundFrame[Y] - 1;
+			}
+
 			for (int c = 0; c < maxFs; c++) {
 				unsigned int idx = idxStatic({
 					loc[X] + c,
-					loc[Y] + _cursFs
+					loc[Y] + clamped
 				}, _res);
 
 				_hl[idx] = !_hl[idx];
