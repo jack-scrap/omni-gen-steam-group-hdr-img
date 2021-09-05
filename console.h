@@ -16,7 +16,7 @@ class Console {
 			* _data,
 			* _blank;
 
-		unsigned char _block[32 * 3][16 * 3][3];
+		unsigned char _block[100][100][3];
 
 		std::string _buffName;
 

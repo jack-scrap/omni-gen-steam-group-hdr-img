@@ -46,8 +46,8 @@ Console::Console(std::string fName, std::string cwd, unsigned int res[2]) :
 		}
 
 		// cursor
-		for (int y = 0; y < 32 * 3; y++) {
-			for (int x = 0; x < 16 * 3; x++) {
+		for (int y = 0; y < 100; y++) {
+			for (int x = 0; x < 100; x++) {
 				_block[y][x][0] = col[true].b;
 				_block[y][x][1] = col[true].g;
 				_block[y][x][2] = col[true].r;
