@@ -39,9 +39,9 @@ Disp::Disp(const char* title, glm::vec2 res, glm::vec3 bg) :
 		SDL_Renderer* rend = SDL_CreateRenderer(_win, -1, 0);
 
 		_map = IMG_Load("res/map.bmp");
-		SDL_Texture* texSdl = SDL_CreateTextureFromSurface(rend, _map);
+		SDL_Texture* tex = SDL_CreateTextureFromSurface(rend, _map);
 
-		SDL_RenderCopy(rend, texSdl, NULL, NULL);
+		SDL_RenderCopy(rend, tex, NULL, NULL);
 
 		glClearColor(bg[R] / 255.0, bg[G] / 255.0, bg[B] / 255.0, 1);
 
