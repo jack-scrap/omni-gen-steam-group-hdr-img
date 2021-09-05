@@ -758,6 +758,13 @@ void Console::hl() {
 				st[i] = _cursEditor[MIN][i];
 			}
 			for (int i = 0; i < 1 + abs(deltaConting); i++) {
+				unsigned int idx = idxStatic({
+					loc[X] + st[X],
+					loc[Y] + st[Y]
+				}, _res);
+
+				_hl[idx] = true;
+
 				if (st[X] < _buff[st[Y]].size()) {
 					st[X]++;
 				} else {
