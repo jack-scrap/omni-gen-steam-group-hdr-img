@@ -766,19 +766,23 @@ void Console::hl() {
 				_hl[idx] = true;
 
 				if (norm == 1) {
-					if (st[X] < _buff[st[Y]].size()) {
+					if (st[X] < _buff[st[Y]].size() - 1) {
 						st[X]++;
 					} else {
-						st[Y]++;
-						st[X] = 0;
+						if (st[Y] != _cursEditor[MAX][Y]) {
+							st[Y]++;
+							st[X] = 0;
+						}
 					}
 				}
 				if (norm == -1) {
 					if (st[X] > 0) {
 						st[X]--;
 					} else {
-						st[Y]--;
-						st[X] = _buff[st[Y]].size();
+						if (st[Y] != _cursEditor[MAX][Y]) {
+							st[Y]--;
+							st[X] = _buff[st[Y]].size() - 1;
+						}
 					}
 				}
 			}
