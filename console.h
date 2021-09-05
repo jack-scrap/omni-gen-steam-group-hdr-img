@@ -88,9 +88,7 @@ class Console {
 
 		std::vector<std::string> _clip;
 
-		unsigned int _res[2];
-
-		Console(std::string fName, std::string cwd, unsigned int res[2]);
+		Console(std::string fName, std::string cwd);
 
 		void clear();
 
@@ -120,7 +118,7 @@ class Console {
 
 		void draw();
 
-		unsigned int idxStatic(Coord st, unsigned int bound[2]);
+		unsigned int idxStatic(Coord st, Coord bound);
 
 		unsigned int idxDeterm(std::vector<std::string> buff, Coord st);
 

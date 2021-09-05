@@ -17,17 +17,14 @@
 #include "stb_image.h"
 #include "layout.h"
 #include "math.h"
+#include "state.h"
 
-Console::Console(std::string fName, std::string cwd, unsigned int res[2]) :
+Console::Console(std::string fName, std::string cwd) :
 	_mode(EDITOR),
 	_cwd(cwd),
 	_prog("console", "tex") {
-		for (int i = 0; i < 2; i++) {
-			_res[i] = res[i];
-		}
-
-		_canv = (char*) calloc(_res[X] * _res[Y], sizeof (char));
-		_hl = (char*) calloc(_res[X] * _res[Y], sizeof (bool));
+		_canv = (char*) calloc(state::ln * state::line, sizeof (char));
+		_hl = (char*) calloc(state::ln * state::line, sizeof (bool));
 
 		_data = (char*) calloc(layout::canv[X] * layout::canv[Y] * 3, sizeof (char));
 		_blank = (char*) calloc(layout::canv[X] * layout::canv[Y] * 3, sizeof (char));
@@ -37,7 +34,10 @@ Console::Console(std::string fName, std::string cwd, unsigned int res[2]) :
 				unsigned idx = idxStatic({
 					x,
 					y
-				}, layout::canv) * 3;
+				}, {
+					layout::canv[X],
+					layout::canv[Y]
+				}) * 3;
 
 				_blank[idx] = col[false].b;
 				_blank[idx + 1] = col[false].g;
@@ -101,7 +101,7 @@ Console::Console(std::string fName, std::string cwd, unsigned int res[2]) :
 		glGenTextures(1, &_tex);
 		glBindTexture(GL_TEXTURE_2D, _tex);
 
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, _res[X] * layout::glyph[X], _res[Y] * layout::glyph[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, _blank);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, state::ln * layout::glyph[X], state::line * layout::glyph[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, _blank);
 
 		glGenerateMipmap(GL_TEXTURE_2D);
 
@@ -122,7 +122,7 @@ void Console::fmtBuff(std::vector<std::string> buff, Coord loc, Coord view, Coor
 	while (
 		l < buff.size() &&
 		y < view._y &&
-		y < _res[Y]
+		y < state::line
 	) {
 		int
 			c = ptr._x,
@@ -130,12 +130,15 @@ void Console::fmtBuff(std::vector<std::string> buff, Coord loc, Coord view, Coor
 		while (
 			c < buff[l].size() &&
 			x < view._x &&
-			x < _res[X]
+			x < state::ln
 		) {
 			_canv[idxStatic({
 				loc._x + x,
 				loc._y + y
-			}, _res)] = buff[l][c];
+			}, {
+				state::ln,
+				state::line
+			})] = buff[l][c];
 
 			c++;
 			x++;
@@ -149,14 +152,17 @@ void Console::fmtBuff(std::vector<std::string> buff, Coord loc, Coord view, Coor
 void Console::clear() {
 	glBindTexture(GL_TEXTURE_2D, _tex);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, _res[X] * layout::glyph[X], _res[Y] * layout::glyph[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, _blank);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, state::ln * layout::glyph[X], state::line * layout::glyph[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, _blank);
 
-	for (int y = 0; y < _res[Y]; y++) {
-		for (int x = 0; x < _res[X]; x++) {
+	for (int y = 0; y < state::line; y++) {
+		for (int x = 0; x < state::ln; x++) {
 			unsigned int idx = idxStatic({
 				x,
 				y
-			}, _res);
+			}, {
+				state::ln,
+				state::line
+			});
 
 			_canv[idx] = 0;
 			_hl[idx] = false;
@@ -195,12 +201,15 @@ void Console::fmt() {
 		x = 0;
 	while (
 		i < modeStr.size() &&
-		x < _res[X]
+		x < state::ln
 	) {
 		_canv[idxStatic({
 			x,
 			0
-		}, _res)] = modeStr[i];
+		}, {
+			state::ln,
+			state::line
+		})] = modeStr[i];
 
 		i++;
 		x++;
@@ -209,19 +218,25 @@ void Console::fmt() {
 	_canv[idxStatic({
 		x,
 		0
-	}, _res)] = ' ';
+	}, {
+		state::ln,
+		state::line
+	})] = ' ';
 	x++;
 
 	std::string base = util::fs::name(_buffName);
 	i = 0;
 	while (
 		i < base.size() &&
-		x < _res[X]
+		x < state::ln
 	) {
 		_canv[idxStatic({
 			x,
 			0
-		}, _res)] = base[i];
+		}, {
+			state::ln,
+			state::line
+		})] = base[i];
 
 		i++;
 		x++;
@@ -233,11 +248,14 @@ void Console::fmt() {
 
 	std::string time = std::string(_timeFmt);
 
-	while (x < _res[X] - time.size()) {
+	while (x < state::ln - time.size()) {
 		_canv[idxStatic({
 			x,
 			0
-		}, _res)] = ' ';
+		}, {
+			state::ln,
+			state::line
+		})] = ' ';
 
 		x++;
 	}
@@ -245,12 +263,15 @@ void Console::fmt() {
 	i = 0;
 	while (
 		i < time.size() &&
-		x < _res[X]
+		x < state::ln
 	) {
 		_canv[idxStatic({
 			x,
 			0
-		}, _res)] = time[i];
+		}, {
+			state::ln,
+			state::line
+		})] = time[i];
 
 		i++;
 		x++;
@@ -260,11 +281,11 @@ void Console::fmt() {
 
 	const unsigned int
 		boundFrame[2] = {
-			_res[X],
-			_res[Y] - 1 - 1
+			state::ln,
+			state::line - 1 - 1
 		},
-		boundPrompt = _res[X] - _ps1.size(),
-		btm = _res[Y] - 1;
+		boundPrompt = state::ln - _ps1.size(),
+		btm = state::line - 1;
 
 	/* file system */
 	unsigned int maxFs = 0;
@@ -395,13 +416,16 @@ void Console::fmt() {
 void Console::render() {
 	glBindTexture(GL_TEXTURE_2D, _tex);
 
-	for (int l = 0; l < _res[Y]; l++) {
-		for (int c = 0; c < _res[X]; c++) {
+	for (int l = 0; l < state::line; l++) {
+		for (int c = 0; c < state::ln; c++) {
 			Coord st = {
 				c,
 				l
 			};
-			unsigned int idx = idxStatic(st, _res);
+			unsigned int idx = idxStatic(st, {
+				state::ln,
+				state::line
+			});
 			if (_canv[idx]) {
 				print(_canv[idx], _hl[idx], st);
 			}
@@ -658,12 +682,15 @@ void Console::exec() {
 void Console::hl() {
 	glBindTexture(GL_TEXTURE_2D, _tex);
 
-	for (int y = 0; y < _res[Y]; y++) {
-		for (int x = 0; x < _res[X]; x++) {
+	for (int y = 0; y < state::line; y++) {
+		for (int x = 0; x < state::ln; x++) {
 			_hl[idxStatic({
 				x,
 				y
-			}, _res)] = false;
+			}, {
+				state::ln,
+				state::line
+			})] = false;
 		}
 	}
 
@@ -672,20 +699,23 @@ void Console::hl() {
 	};
 
 	/* status bar */
-	for (int i = 0; i < _res[X]; i++) {
+	for (int i = 0; i < state::ln; i++) {
 		unsigned int idx = idxStatic({
 			i,
 			0
-		}, _res);
+		}, {
+			state::ln,
+			state::line
+		});
 		_hl[idx] = true;
 	}
 
 	const unsigned int
 		boundFrame[2] = {
-			_res[X],
-			_res[Y] - 1 - 1
+			state::ln,
+			state::line - 1 - 1
 		},
-		btm = _res[Y] - 1;
+		btm = state::line - 1;
 
 	/* file system */
 	unsigned int maxFs = 0;
@@ -721,7 +751,10 @@ void Console::hl() {
 					unsigned int idx = idxStatic({
 						loc[X] + x,
 						loc[Y] + y
-					}, _res);
+					}, {
+						state::ln,
+						state::line
+					});
 					_hl[idx] = true;
 
 					c++;
@@ -744,7 +777,10 @@ void Console::hl() {
 				unsigned int idx = idxStatic({
 					loc[X] + c,
 					loc[Y] + _cursEditor[MIN][Y] + (l * norm)
-				}, _res);
+				}, {
+					state::ln,
+					state::line
+				});
 
 				_hl[idx] = !_hl[idx];
 			}
@@ -789,7 +825,10 @@ void Console::hl() {
 				unsigned int idx = idxStatic({
 					loc[X] + st[X],
 					loc[Y] + st[Y]
-				}, _res);
+				}, {
+					state::ln,
+					state::line
+				});
 
 				_hl[idx] = true;
 
@@ -819,7 +858,7 @@ void Console::hl() {
 			for (int r = 0; r < 2; r++) {
 				if (_cursEditor[r][X] == _buff[_cursEditor[r][Y]].size()) {
 					unsigned int clamped[2] = {
-						clamp(loc[X] + _cursEditor[r][X], _res[X] - 1),
+						clamp(loc[X] + _cursEditor[r][X], state::ln - 1),
 						clamp(loc[Y] + _cursEditor[r][Y], boundFrame[Y])
 					};
 
@@ -842,17 +881,20 @@ void Console::hl() {
 				unsigned int idx = idxStatic({
 					loc[X] + _cursPrompt[MIN] + (i * norm),
 					loc[Y]
-				}, _res);
+				}, {
+					state::ln,
+					state::line
+				});
 
 				_hl[idx] = true;
 			}
 
 			// block
 			for (int r = 0; r < 2; r++) {
-				unsigned int clamped = clamp(_ps1.size() + _cursPrompt[r], _res[X] - 1);
+				unsigned int clamped = clamp(_ps1.size() + _cursPrompt[r], state::ln - 1);
 
 				if (_cursPrompt[r] == _prompt.size()) {
-					glTexSubImage2D(GL_TEXTURE_2D, 0, clamped * layout::glyph[X], (_res[Y] - 1) * layout::glyph[Y], layout::glyph[X], layout::glyph[Y], GL_BGR, GL_UNSIGNED_BYTE, _block);
+					glTexSubImage2D(GL_TEXTURE_2D, 0, clamped * layout::glyph[X], (state::line - 1) * layout::glyph[Y], layout::glyph[X], layout::glyph[Y], GL_BGR, GL_UNSIGNED_BYTE, _block);
 				}
 			}
 
@@ -867,7 +909,10 @@ void Console::hl() {
 				unsigned int idx = idxStatic({
 					loc[X] + c,
 					loc[Y] + clamp(_cursFs, boundFrame[Y] - 1)
-				}, _res);
+				}, {
+					state::ln,
+					state::line
+				});
 
 				_hl[idx] = !_hl[idx];
 			}
@@ -907,8 +952,8 @@ void Console::draw() {
 	glBindVertexArray(0);
 }
 
-unsigned int Console::idxStatic(Coord st, unsigned int bound[2]) {
-	return (st._y * bound[X]) + st._x;
+unsigned int Console::idxStatic(Coord st, Coord bound) {
+	return (st._y * bound._x) + st._x;
 }
 
 unsigned int Console::idxDeterm(std::vector<std::string> buff, Coord st) {

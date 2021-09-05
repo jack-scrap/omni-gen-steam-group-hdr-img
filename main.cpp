@@ -40,8 +40,6 @@ int main(int argc, char** argv) {
 	};
 
 	// initialize
-	unsigned int res[2];
-
 	std::map<std::string, std::string> setting = util::cfg::lex("player/cfg/init.cfg");
 
 	for (std::map<std::string, std::string>::iterator it = setting.begin(); it != setting.end(); ++it) {
@@ -70,12 +68,10 @@ int main(int argc, char** argv) {
 
 		// console
 		if (it->first == "line_count") {
-			res[Y] = std::stoi(it->second);
 			state::line = std::stoi(it->second);
 		}
 
 		if (it->first == "line_width") {
-			res[X] = std::stoi(it->second);
 			state::ln = std::stoi(it->second);
 		}
 
@@ -99,9 +95,8 @@ int main(int argc, char** argv) {
 	layout::res[X] = state::ln * layout::glyph[X];
 	layout::res[Y] = layout::view[Y];
 
-	for (int i = 0; i < 2; i++) {
-		layout::canv[i] = res[i] * layout::glyph[i];
-	}
+	layout::canv[X] = state::ln * layout::glyph[X];
+	layout::canv[Y] = state::line * layout::glyph[Y];
 
 	disp = new Disp("Omni", {
 		layout::view[X] + (state::ln * layout::glyph[X]), layout::view[Y]
@@ -135,7 +130,7 @@ int main(int argc, char** argv) {
 		name = "player/doc/intro.txt";
 	}
 
-	console = new Console("player/script/init/0/main.py", "player", res);
+	console = new Console("player/script/init/0/main.py", "player");
 	scn::init(stage, lvl);
 
 	if (boot) {
