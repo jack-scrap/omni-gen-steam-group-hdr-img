@@ -753,6 +753,19 @@ void Console::hl() {
 					_cursEditor[MAX][Y]
 				}));
 
+			unsigned int st[2];
+			for (int i = 0; i < 2; i++) {
+				st[i] = _cursEditor[MIN][i];
+			}
+			for (int i = 0; i < 1 + abs(deltaConting); i++) {
+				if (st[X] < _buff[st[Y]].size()) {
+					st[X]++;
+				} else {
+					st[Y]++;
+					st[X] = 0;
+				}
+			}
+
 			break;
 		}
 
