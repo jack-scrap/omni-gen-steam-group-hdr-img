@@ -787,6 +787,25 @@ void Console::hl() {
 				}
 			}
 
+			// block
+			for (int r = 0; r < 2; r++) {
+				if (_cursEditor[r][X] == _buff[_cursEditor[r][Y]].size()) {
+					unsigned int clamped[2];
+					if (loc[X] + _cursEditor[r][X] < _res[X]) {
+						clamped[X] = loc[X] + _cursEditor[r][X];
+					} else {
+						clamped[X] = _res[X] - 1;
+					}
+					if (loc[Y] + _cursEditor[r][Y] < boundFrame[Y] + 1) {
+						clamped[Y] = loc[Y] + _cursEditor[r][Y];
+					} else {
+						clamped[Y] = boundFrame[Y];
+					}
+
+					glTexSubImage2D(GL_TEXTURE_2D, 0, clamped[X] * layout::glyph[X], clamped[Y] * layout::glyph[Y], layout::glyph[X], layout::glyph[Y], GL_BGR, GL_UNSIGNED_BYTE, _block);
+				}
+			}
+
 			break;
 		}
 
@@ -805,6 +824,20 @@ void Console::hl() {
 				}, _res);
 
 				_hl[idx] = true;
+			}
+
+			// block
+			for (int r = 0; r < 2; r++) {
+				unsigned int cursLocal;
+				if (_ps1.size() + _cursPrompt[r] < _res[X]) {
+					cursLocal = _ps1.size() + _cursPrompt[r];
+				} else {
+					cursLocal = _res[X] - 1;
+				}
+
+				if (_cursPrompt[r] == _prompt.size()) {
+					glTexSubImage2D(GL_TEXTURE_2D, 0, cursLocal * layout::glyph[X], (_res[Y] - 1) * layout::glyph[Y], layout::glyph[X], layout::glyph[Y], GL_BGR, GL_UNSIGNED_BYTE, _block);
+				}
 			}
 
 			break;
