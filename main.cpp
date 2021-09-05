@@ -71,17 +71,11 @@ int main(int argc, char** argv) {
 		// console
 		if (key == "line_count") {
 			res[Y] = std::stoi(val);
-		}
-
-		if (key == "line_count") {
 			state::line = std::stoi(val);
 		}
 
 		if (key == "line_width") {
 			res[X] = std::stoi(val);
-		}
-
-		if (key == "line_width") {
 			state::ln = std::stoi(val);
 		}
 
