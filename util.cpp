@@ -988,28 +988,7 @@ Cone* util::json::bound::area(nlohmann::json deser) {
 	return _;
 }
 
-std::string util::cfg::key(std::string buff) {
-	std::string _;
-
-	int i = 0;
-	while (i < buff.size()) {
-		if (buff[i] == '[') {
-			i++;
-
-			while (buff[i] != ']') {
-				_.push_back(buff[i]);
-
-				i++;
-			}
-		}
-
-		i++;
-	}
-
-	return _;
-}
-
-bool util::cfg::var(std::string buff) {
+bool util::cfg::parse::var(std::string buff) {
 	bool _ = true;
 	for (int i = 0; i < buff.size(); i++) {
 		if (
@@ -1026,7 +1005,7 @@ bool util::cfg::var(std::string buff) {
 	return _;
 }
 
-bool util::cfg::no(std::string buff) {
+bool util::cfg::parse::no(std::string buff) {
 	bool _ = true;
 	for (int i = 0; i < buff.size(); i++) {
 		if (!isdigit(buff[i])) {
@@ -1039,7 +1018,7 @@ bool util::cfg::no(std::string buff) {
 	return _;
 }
 
-bool util::cfg::boolean(std::string buff) {
+bool util::cfg::parse::boolean(std::string buff) {
 	bool _ = true;
 
 	if (buff.size() != 1) {
@@ -1131,7 +1110,7 @@ std::map<std::string, std::string> util::cfg::lex(std::string name) {
 				omni::err("Inappropriate token `" + ast[1] + "`");
 			}
 
-			if (!cfg::var(ast[0])) {
+			if (!cfg::parse::var(ast[0])) {
 				omni::err("Inappropriate key `" + ast[0] + "`, can only be alpha-numeric with `_` separator");
 
 				break;
@@ -1139,6 +1118,27 @@ std::map<std::string, std::string> util::cfg::lex(std::string name) {
 
 			_[ast[0]] = ast[2];
 		}
+	}
+
+	return _;
+}
+
+std::string util::cfg::key(std::string buff) {
+	std::string _;
+
+	int i = 0;
+	while (i < buff.size()) {
+		if (buff[i] == '[') {
+			i++;
+
+			while (buff[i] != ']') {
+				_.push_back(buff[i]);
+
+				i++;
+			}
+		}
+
+		i++;
 	}
 
 	return _;

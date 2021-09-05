@@ -125,15 +125,17 @@ namespace util {
 	}
 
 	namespace cfg {
-		std::string key(std::string buff);
+		namespace parse {
+			bool var(std::string buff);
 
-		bool var(std::string buff);
+			bool no(std::string buff);
 
-		bool no(std::string buff);
-
-		bool boolean(std::string buff);
+			bool boolean(std::string buff);
+		}
 
 		std::map<std::string, std::string> lex(std::string name);
+
+		std::string key(std::string buff);
 	}
 
 	namespace tex {
