@@ -846,15 +846,10 @@ void Console::hl() {
 
 			// block
 			for (int r = 0; r < 2; r++) {
-				unsigned int cursLocal;
-				if (_ps1.size() + _cursPrompt[r] < _res[X]) {
-					cursLocal = _ps1.size() + _cursPrompt[r];
-				} else {
-					cursLocal = _res[X] - 1;
-				}
+				unsigned int clamped = clamp(_ps1.size() + _cursPrompt[r], _res[X] - 1);
 
 				if (_cursPrompt[r] == _prompt.size()) {
-					glTexSubImage2D(GL_TEXTURE_2D, 0, cursLocal * layout::glyph[X], (_res[Y] - 1) * layout::glyph[Y], layout::glyph[X], layout::glyph[Y], GL_BGR, GL_UNSIGNED_BYTE, _block);
+					glTexSubImage2D(GL_TEXTURE_2D, 0, clamped * layout::glyph[X], (_res[Y] - 1) * layout::glyph[Y], layout::glyph[X], layout::glyph[Y], GL_BGR, GL_UNSIGNED_BYTE, _block);
 				}
 			}
 
