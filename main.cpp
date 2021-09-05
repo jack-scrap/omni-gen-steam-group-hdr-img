@@ -83,8 +83,8 @@ int main(int argc, char** argv) {
 			state::tabWd = std::stoi(val);
 		}
 
-		if (key == "hl_line_no") {
-			state::hlLineNo = val == "y";
+		if (key == "hl_active_line") {
+			state::hlActiveLine = val == "y";
 		}
 
 		if (key == "time_format") {

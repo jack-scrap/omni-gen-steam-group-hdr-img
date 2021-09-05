@@ -5,7 +5,7 @@ unsigned int state::ln;
 
 unsigned int state::initIdx = 0;
 
-unsigned int state::hlLineNo;
+unsigned int state::hlActiveLine;
 
 unsigned int state::fps;
 

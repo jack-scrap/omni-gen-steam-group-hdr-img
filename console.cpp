@@ -731,7 +731,7 @@ void Console::hl() {
 		y++;
 	}
 
-	if (state::hlLineNo) {
+	if (state::hlActiveLine) {
 		int
 			delta = util::math::delta(_cursEditor[MIN][Y], _cursEditor[MAX][Y]),
 			norm = util::math::norm(_cursEditor[MIN][Y], _cursEditor[MAX][Y]);
