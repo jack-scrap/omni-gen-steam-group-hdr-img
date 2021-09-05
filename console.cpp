@@ -30,6 +30,7 @@ Console::Console(std::string fName, std::string cwd, unsigned int res[2]) :
 		_hl = (char*) calloc(_res[X] * _res[Y], sizeof (bool));
 
 		_data = (char*) calloc(_res[X] * layout::glyph[X] * _res[Y] * layout::glyph[Y] * 3, sizeof (char));
+		_blank = (char*) calloc(_res[X] * layout::glyph[X] * _res[Y] * layout::glyph[Y] * 3, sizeof (char));
 
 		// cursor
 		for (int y = 0; y < 32 * 3; y++) {
@@ -87,7 +88,7 @@ Console::Console(std::string fName, std::string cwd, unsigned int res[2]) :
 		glGenTextures(1, &_tex);
 		glBindTexture(GL_TEXTURE_2D, _tex);
 
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, _res[X] * layout::glyph[X], _res[Y] * layout::glyph[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, _data);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, _res[X] * layout::glyph[X], _res[Y] * layout::glyph[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, _blank);
 
 		glGenerateMipmap(GL_TEXTURE_2D);
 
@@ -131,6 +132,8 @@ void Console::fmtBuff(std::vector<std::string> buff, Coord loc, Coord view, Coor
 }
 
 void Console::clear() {
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, _res[X] * layout::glyph[X], _res[Y] * layout::glyph[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, _blank);
+
 	for (int y = 0; y < _res[Y]; y++) {
 		for (int x = 0; x < _res[X]; x++) {
 			unsigned int idx = idxStatic({

@@ -13,7 +13,8 @@ class Console {
 			* _canv,
 			* _hl,
 
-			* _data;
+			* _data,
+			* _blank;
 
 		unsigned char _block[32 * 3][16 * 3][3];
 
