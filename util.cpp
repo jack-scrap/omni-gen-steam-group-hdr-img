@@ -1023,13 +1023,13 @@ bool util::cfg::parse::boolean(std::string buff) {
 
 	if (buff.size() != 1) {
 		_ = false;
-	}
-
-	if (
-		buff[0] != 'n' ||
-		buff[0] != 'y'
-	) {
-		_ = false;
+	} else {
+		if (
+			buff[0] != 'n' ||
+			buff[0] != 'y'
+		) {
+			_ = false;
+		}
 	}
 
 	return _;
