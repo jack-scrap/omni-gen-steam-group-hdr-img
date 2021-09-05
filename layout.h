@@ -20,6 +20,8 @@ namespace layout {
 
 	extern unsigned int res[2];
 
+	extern unsigned int canv[2];
+
 	static GLfloat bound = abs(-1.0 - 1.0);
 
 	static constexpr GLfloat

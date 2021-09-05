@@ -29,8 +29,21 @@ Console::Console(std::string fName, std::string cwd, unsigned int res[2]) :
 		_canv = (char*) calloc(_res[X] * _res[Y], sizeof (char));
 		_hl = (char*) calloc(_res[X] * _res[Y], sizeof (bool));
 
-		_data = (char*) calloc(_res[X] * layout::glyph[X] * _res[Y] * layout::glyph[Y] * 3, sizeof (char));
-		_blank = (char*) calloc(_res[X] * layout::glyph[X] * _res[Y] * layout::glyph[Y] * 3, sizeof (char));
+		_data = (char*) calloc(layout::canv[X] * layout::canv[Y] * 3, sizeof (char));
+		_blank = (char*) calloc(layout::canv[X] * layout::canv[Y] * 3, sizeof (char));
+
+		for (int y = 0; y < layout::canv[Y]; y++) {
+			for (int x = 0; x < layout::canv[X]; x++) {
+				unsigned idx = idxStatic({
+					x,
+					y
+				}, layout::canv) * 3;
+
+				_blank[idx] = col[false].b;
+				_blank[idx + 1] = col[false].g;
+				_blank[idx + 2] = col[false].r;
+			}
+		}
 
 		// cursor
 		for (int y = 0; y < 32 * 3; y++) {

@@ -94,6 +94,10 @@ int main(int argc, char** argv) {
 	layout::res[X] = state::ln * layout::glyph[X];
 	layout::res[Y] = layout::view[Y];
 
+	for (int i = 0; i < 2; i++) {
+		layout::canv[i] = res[i] * layout::glyph[i];
+	}
+
 	disp = new Disp("Omni", {
 		layout::view[X] + (state::ln * layout::glyph[X]), layout::view[Y]
 	}, col[false]);
