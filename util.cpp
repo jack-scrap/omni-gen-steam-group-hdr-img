@@ -1011,7 +1011,6 @@ std::string util::cfg::key(std::string buff) {
 
 bool util::cfg::var(std::string buff) {
 	bool _ = true;
-
 	for (int i = 0; i < buff.size(); i++) {
 		if (
 			!isdigit(buff[i]) &&
@@ -1029,7 +1028,6 @@ bool util::cfg::var(std::string buff) {
 
 bool util::cfg::no(std::string buff) {
 	bool _ = true;
-
 	for (int i = 0; i < buff.size(); i++) {
 		if (!isdigit(buff[i])) {
 			_ = false;
