@@ -765,11 +765,21 @@ void Console::hl() {
 
 				_hl[idx] = true;
 
-				if (st[X] < _buff[st[Y]].size()) {
-					st[X]++;
-				} else {
-					st[Y]++;
-					st[X] = 0;
+				if (norm == 1) {
+					if (st[X] < _buff[st[Y]].size()) {
+						st[X]++;
+					} else {
+						st[Y]++;
+						st[X] = 0;
+					}
+				}
+				if (norm == -1) {
+					if (st[X] > 0) {
+						st[X]--;
+					} else {
+						st[Y]--;
+						st[X] = _buff[st[Y]].size();
+					}
 				}
 			}
 
