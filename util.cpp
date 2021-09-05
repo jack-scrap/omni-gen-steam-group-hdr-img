@@ -1056,12 +1056,7 @@ bool util::cfg::boolean(std::string buff) {
 	return _;
 }
 
-template <typename T>
-std::map<std::string, T> util::cfg::parse(std::string name) {
-}
-
-template <>
-std::map<std::string, std::string> util::cfg::parse<std::string>(std::string name) {
+std::map<std::string, std::string> util::cfg::lex(std::string name) {
 	std::map<std::string, std::string> _;
 
 	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(name);
@@ -1148,7 +1143,6 @@ std::map<std::string, std::string> util::cfg::parse<std::string>(std::string nam
 
 	return _;
 }
-
 
 int util::math::delta(int min, int max) {
 	return max - min;

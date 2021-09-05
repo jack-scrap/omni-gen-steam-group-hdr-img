@@ -133,8 +133,7 @@ namespace util {
 
 		bool boolean(std::string buff);
 
-		template <typename T>
-		std::map<std::string, T> parse(std::string name);
+		std::map<std::string, std::string> lex(std::string name);
 	}
 
 	namespace tex {

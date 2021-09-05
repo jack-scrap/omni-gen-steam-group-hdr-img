@@ -42,7 +42,7 @@ int main(int argc, char** argv) {
 	// initialize
 	unsigned int res[2];
 
-	std::map<std::string, std::string> setting = util::cfg::parse<std::string>("player/cfg/init.cfg");
+	std::map<std::string, std::string> setting = util::cfg::lex("player/cfg/init.cfg");
 
 	for (std::map<std::string, std::string>::iterator it = setting.begin(); it != setting.end(); ++it) {
 		// init
