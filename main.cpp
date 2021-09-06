@@ -219,6 +219,7 @@ int main(int argc, char** argv) {
 
 		glDrawArrays(GL_QUADS, 0, 2 + 2 * 3);
 
+		glBindTexture(GL_TEXTURE_2D, 0);
 		prog.unUse();
 
 		disp->update();

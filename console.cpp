@@ -106,7 +106,6 @@ Console::Console(std::string fName, std::string cwd) :
 		glGenerateMipmap(GL_TEXTURE_2D);
 
 		glBindTexture(GL_TEXTURE_2D, 0);
-
 		_prog.unUse();
 
 		fmt();
@@ -948,6 +947,7 @@ void Console::draw() {
 
 	glDrawElements(GL_TRIANGLES, 2 * 3, GL_UNSIGNED_SHORT, (GLvoid*) 0);
 
+	glBindTexture(GL_TEXTURE_2D, 0);
 	_prog.unUse();
 	glBindVertexArray(0);
 }

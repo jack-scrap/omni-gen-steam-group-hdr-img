@@ -212,6 +212,7 @@ Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::s
 	glVertexAttribPointer(_->_attr[Obj::ST], 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 	glEnableVertexAttribArray(_->_attr[Obj::ST]);
 
+	glBindTexture(GL_TEXTURE_2D, 0);
 	_->_prog.unUse();
 
 	return _;
@@ -421,6 +422,7 @@ void objDraw(Obj* obj, unsigned int type) {
 
 	glDrawElements(prim, obj->_mesh->_noPrim, GL_UNSIGNED_SHORT, (GLvoid*) 0);
 
+	glBindTexture(GL_TEXTURE_2D, 0);
 	obj->_prog.unUse();
 	glBindVertexArray(0);
 
