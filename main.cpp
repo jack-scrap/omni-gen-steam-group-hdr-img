@@ -1,5 +1,4 @@
 #define GLM_ENABLE_EXPERIMENTAL
-#define STB_IMAGE_IMPLEMENTATION
 
 #include <iostream>
 #include <dlfcn.h>
@@ -22,7 +21,6 @@
 #include "omni.h"
 #include "col.h"
 #include "layout.h"
-#include "stb_image.h"
 
 Disp* disp;
 Console* console;

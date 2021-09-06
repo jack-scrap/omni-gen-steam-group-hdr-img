@@ -14,7 +14,6 @@
 #include "disp.h"
 #include "util.h"
 #include "col.h"
-#include "stb_image.h"
 #include "layout.h"
 #include "math.h"
 #include "state.h"
