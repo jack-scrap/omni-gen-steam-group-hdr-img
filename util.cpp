@@ -990,6 +990,7 @@ Cone* util::json::bound::area(nlohmann::json deser) {
 
 bool util::cfg::parse::var(std::string buff) {
 	bool _ = true;
+
 	for (int i = 0; i < buff.size(); i++) {
 		if (
 			!isdigit(buff[i]) &&
