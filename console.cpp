@@ -561,6 +561,10 @@ void Console::del() {
 					if (_buff.size() > 1) {
 						if (_cursEditor[_rngEditor][Y] == _buff.size() - 1) {
 							_buff.pop_back();
+
+							_cursEditor[_rngEditor][Y]--;
+
+							console->_cursEditor[console->_rngEditor][X] = console->_buff[console->_cursEditor[console->_rngEditor][Y]].size();
 						}
 					}
 				}
