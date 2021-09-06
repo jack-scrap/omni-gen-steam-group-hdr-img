@@ -142,21 +142,36 @@ int main(int argc, char** argv) {
 		glGenBuffers(1, &vbo);
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
-		GLfloat vtc[4 * 3 * 2] = {
+		GLfloat vtc[] = {
 			-0.26, -0.26,
-			-0.26, 0.16,
-			-0.16, 0.26,
-			-0.16, -0.26,
-
-			-0.16, -0.26,
 			0.16, -0.26,
-			0.16, 0.26,
-			-0.16, 0.26,
+			0.06, -0.10,
+			-0.10, -0.10,
+
+			0.16, -0.26,
+			0.26, -0.16,
+			0.10, -0.06,
+			0.06, -0.10,
 
 			0.26, -0.16,
 			0.26, 0.26,
-			0.16, 0.26,
-			0.16, -0.26
+			0.10, 0.10,
+			0.10, -0.06,
+
+			0.26, 0.26,
+			-0.16, 0.26,
+			-0.06, 0.10,
+			0.10, 0.10,
+
+			-0.16, 0.26,
+			-0.26, 0.16,
+			-0.10, 0.06,
+			-0.06, 0.10,
+
+			-0.10, 0.06,
+			-0.26, 0.16,
+			-0.26, -0.26,
+			-0.10, -0.10
 		};
 		glBufferData(GL_ARRAY_BUFFER, sizeof vtc, vtc, GL_STATIC_DRAW);
 
@@ -176,15 +191,18 @@ int main(int argc, char** argv) {
 		prog.use();
 
 		glUniform1ui(uniActive, true);
-		GLfloat resFloat[2];
-		for (int i = 0; i < 2; i++) {
-			resFloat[i] = disp->_res[i];
-		}
-		glUniform2fv(uniRes, 1, resFloat);
+		glUniform2i(uniRes, disp->_res[X], disp->_res[Y]);
 
+		prog.unUse();
+
+		// draw
 		disp->clear();
 
-		glDrawArrays(GL_QUADS, 0, 4 * 3);
+		prog.use();
+
+		glDrawArrays(GL_QUADS, 0, (2 + 3) * 2 * 2 * 3);
+
+		prog.unUse();
 
 		disp->update();
 
