@@ -131,6 +131,8 @@ namespace util {
 			int no(std::string buff);
 
 			bool boolean(std::string buff);
+
+			std::string str(std::string buff);
 		}
 
 		std::map<std::string, std::string> lex(std::string name);

@@ -1039,6 +1039,25 @@ bool util::cfg::parse::boolean(std::string buff) {
 	return _;
 }
 
+std::string util::cfg::parse::str(std::string buff) {
+	int i = 0;
+
+	// opening quote
+	i++;
+
+	std::string _;
+	while (buff[i] != '\'') {
+		_.push_back(buff[i]);
+
+		i++;
+	}
+
+	// closing quote
+	i++;
+
+	return _;
+}
+
 std::map<std::string, std::string> util::cfg::lex(std::string name) {
 	std::map<std::string, std::string> _;
 
@@ -1061,6 +1080,7 @@ std::map<std::string, std::string> util::cfg::lex(std::string name) {
 				std::string tok;
 
 				// opening quote
+				tok.push_back(line[i]);
 				i++;
 
 				while (
@@ -1073,6 +1093,7 @@ std::map<std::string, std::string> util::cfg::lex(std::string name) {
 				}
 
 				// closing quote
+				tok.push_back(line[i]);
 				i++;
 
 				ast.push_back(tok);

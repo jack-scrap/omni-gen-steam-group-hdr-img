@@ -88,7 +88,7 @@ int main(int argc, char** argv) {
 		}
 
 		if (it->first == "time_format") {
-			state::format = it->second;
+			state::format = util::cfg::parse::str(it->second);
 		}
 	}
 
