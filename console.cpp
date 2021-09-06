@@ -450,7 +450,7 @@ void Console::changeDir(std::string dir) {
 		}
 	}
 
-	std::sort(_tree.begin(), _tree.end(), numeric);
+	std::sort(_tree.begin(), _tree.end(), lexicoEntry);
 
 	_cursFs = 0;
 }
@@ -982,7 +982,7 @@ void Console::getTime() {
 	strftime(_timeFmt, 64, state::format.c_str(), _info);
 }
 
-bool Console::numeric(std::map<std::string, std::string> lhs, std::map<std::string, std::string> rhs) {
+bool Console::lexicoEntry(std::map<std::string, std::string> lhs, std::map<std::string, std::string> rhs) {
 	std::string::iterator it[2] = {
 		lhs["name"].begin(),
 		rhs["name"].begin()
