@@ -59,9 +59,9 @@ void Disp::update() {
 void Disp::draw() {
 	clear();
 
-	glEnable(GL_DEPTH_TEST);
-
 	glViewport(layout::res[X], 0, layout::view[X], layout::view[Y]);
+
+	glEnable(GL_DEPTH_TEST);
 
 	for (int i = 0; i < scn::obj.size(); i++) {
 		objDraw(scn::obj[i], scn::objType[i]);
