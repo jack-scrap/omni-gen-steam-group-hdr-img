@@ -107,6 +107,10 @@ Console::Console(std::string fName, std::string cwd) :
 		glBindTexture(GL_TEXTURE_2D, 0);
 		_prog.unUse();
 
+		time(&_raw);
+		_info = localtime(&_raw);
+		strftime(_timeFmt, 64, state::format.c_str(), _info);
+
 		fmt();
 		hl();
 
@@ -239,10 +243,6 @@ void Console::fmt() {
 		i++;
 		x++;
 	}
-
-	time(&_raw);
-	_info = localtime(&_raw);
-	strftime(_timeFmt, 64, state::format.c_str(), _info);
 
 	std::string time = std::string(_timeFmt);
 
