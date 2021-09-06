@@ -45,46 +45,46 @@ int main(int argc, char** argv) {
 	for (std::map<std::string, std::string>::iterator it = setting.begin(); it != setting.end(); ++it) {
 		// init
 		if (it->first == "skip_boot") {
-			boot = !(it->second == "y");
+			boot = !util::cfg::parse::boolean(it->second);
 		}
 
 		if (it->first == "speed") {
-			state::speed = std::stoi(it->second);
+			state::speed = util::cfg::parse::no(it->second);
 		}
 
 		// display
 		if (it->first == "wd") {
-			layout::view[X] = std::stoi(it->second);
+			layout::view[X] = util::cfg::parse::no(it->second);
 			layout::view[Y] = state::line * layout::glyph[Y];
 		}
 
 		if (it->first == "fps") {
-			state::fps = std::stoi(it->second);
+			state::fps = util::cfg::parse::no(it->second);
 		}
 
 		if (it->first == "begin_index_at_one") {
-			state::initIdx = it->second == "y";
+			state::initIdx = util::cfg::parse::boolean(it->second);
 		}
 
 		// console
 		if (it->first == "line_count") {
-			state::line = std::stoi(it->second);
+			state::line = util::cfg::parse::no(it->second);
 		}
 
 		if (it->first == "line_width") {
-			state::ln = std::stoi(it->second);
+			state::ln = util::cfg::parse::no(it->second);
 		}
 
 		if (it->first == "tab_wd") {
-			state::tabWd = std::stoi(it->second);
+			state::tabWd = util::cfg::parse::no(it->second);
 		}
 
 		if (it->first == "hl_line_no") {
-			state::hlLineNo = it->second == "y";
+			state::hlLineNo = util::cfg::parse::boolean(it->second);
 		}
 
 		if (it->first == "hl_active_line") {
-			state::hlActiveLine = it->second == "y";
+			state::hlActiveLine = util::cfg::parse::boolean(it->second);
 		}
 
 		if (it->first == "time_format") {

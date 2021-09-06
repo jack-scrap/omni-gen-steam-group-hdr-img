@@ -1005,31 +1005,34 @@ bool util::cfg::parse::var(std::string buff) {
 	return _;
 }
 
-bool util::cfg::parse::no(std::string buff) {
-	bool _ = true;
+int util::cfg::parse::no(std::string buff) {
 	for (int i = 0; i < buff.size(); i++) {
-		if (!isdigit(buff[i])) {
-			_ = false;
-
-			break;
-		}
+		omni::assertion(isdigit(buff[i]), "Value `" + buff + "` invalid");
 	}
 
-	return _;
+	return std::stoi(buff);
 }
 
 bool util::cfg::parse::boolean(std::string buff) {
-	bool _ = true;
+	omni::assertion(buff.size() == 1, "Value `" + buff + "` invalid");
 
-	if (buff.size() != 1) {
-		_ = false;
-	} else {
-		if (
-			buff[0] != 'n' ||
-			buff[0] != 'y'
-		) {
+	omni::assertion(
+		buff[0] == 'n' ||
+		buff[0] == 'y',
+		"Value `" + buff + "` invalid"
+	);
+
+	bool _;
+	switch (buff[0]) {
+		case 'n':
 			_ = false;
-		}
+
+			break;
+
+		case 'y':
+			_ = true;
+
+			break;
 	}
 
 	return _;
