@@ -22,10 +22,6 @@ class Console {
 
 		const std::string _ps1 = "[] ";
 
-		time_t _raw;
-		tm* _info;
-		char _timeFmt[64];
-
 		GLfloat
 			_vtc[2 * 2 * 2] = {
 				-1.0, -1.0,
@@ -87,6 +83,10 @@ class Console {
 		std::vector<std::string> _buff;
 
 		std::vector<std::string> _clip;
+
+		time_t _raw;
+		tm* _info;
+		char _timeFmt[64];
 
 		Console(std::string fName, std::string cwd);
 

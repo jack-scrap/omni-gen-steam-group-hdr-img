@@ -29,6 +29,16 @@ Cam cam;
 
 bool boot = false;
 
+uint32_t epoch(uint32_t inter, void* param) {
+	time(&console->_raw);
+	console->_info = localtime(&console->_raw);
+	strftime(console->_timeFmt, 64, state::format.c_str(), console->_info);
+
+	console->fmt();
+
+	return 1000;
+}
+
 int main(int argc, char** argv) {
 	cam._pos = {
 		1000.0, 1000.0, 1000.0
@@ -130,6 +140,8 @@ int main(int argc, char** argv) {
 
 	console = new Console("player/script/init/0/main.py", "player");
 	scn::init(stage, lvl);
+
+	SDL_AddTimer(0, epoch, NULL);
 
 	if (boot) {
 		GLuint vao;

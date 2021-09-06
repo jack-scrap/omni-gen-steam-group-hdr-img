@@ -71,6 +71,7 @@ void Disp::draw() {
 
 	glDisable(GL_DEPTH_TEST);
 
+	console->render();
 	console->draw();
 
 	update();
