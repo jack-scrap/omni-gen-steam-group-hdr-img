@@ -30,10 +30,7 @@ Cam cam;
 bool boot = false;
 
 uint32_t epoch(uint32_t inter, void* param) {
-	time(&console->_raw);
-	console->_info = localtime(&console->_raw);
-	strftime(console->_timeFmt, 64, state::format.c_str(), console->_info);
-
+	console->getTime();
 	console->fmt();
 
 	return 1000;

@@ -107,9 +107,7 @@ Console::Console(std::string fName, std::string cwd) :
 		glBindTexture(GL_TEXTURE_2D, 0);
 		_prog.unUse();
 
-		time(&_raw);
-		_info = localtime(&_raw);
-		strftime(_timeFmt, 64, state::format.c_str(), _info);
+		getTime();
 
 		fmt();
 		hl();
@@ -976,6 +974,12 @@ unsigned int Console::clamp(unsigned int i, unsigned int roof) {
 	}
 
 	return _;
+}
+
+void Console::getTime() {
+	time(&_raw);
+	_info = localtime(&_raw);
+	strftime(_timeFmt, 64, state::format.c_str(), _info);
 }
 
 bool Console::numeric(std::map<std::string, std::string> lhs, std::map<std::string, std::string> rhs) {
