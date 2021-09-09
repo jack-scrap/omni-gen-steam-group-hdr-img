@@ -20,7 +20,6 @@ enum col {
 };
 
 typedef struct {
-	unsigned int
-		_x,
-		_y;
+	unsigned int _x;
+	unsigned int _y;
 } Coord;

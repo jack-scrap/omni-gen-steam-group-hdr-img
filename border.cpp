@@ -39,10 +39,9 @@ Border* borderMk(glm::vec2 sz, glm::vec3 loc, glm::vec3 rot) {
 		}
 	}
 
-	GLushort
-		strip[3 * 2 * 2 * 2],
+	GLushort strip[3 * 2 * 2 * 2];
 
-		rect[2 * 2 * 2 * 2];
+	GLushort rect[2 * 2 * 2 * 2];
 
 	// rect
 	int c = 0;
@@ -73,12 +72,11 @@ Border* borderMk(glm::vec2 sz, glm::vec3 loc, glm::vec3 rot) {
 	for (int q = 0; q < 2 * 2; q++) {
 		for (int t = 0; t < 2; t++) {
 			for (int i = 0; i < 3; i++) {
-				int
-					start = (far * 2) + (2 * t),
-					step = (i * (t ? -1 : 1)),
-					last = (3 * (t && i == 2)),
+				int start = (far * 2) + (2 * t);
+				int step = (i * (t ? -1 : 1));
+				int last = (3 * (t && i == 2));
 
-					idx  = start + step + last;
+				int idx  = start + step + last;
 
 				strip[((q * 2 * 3) + (t * 3)) + i] = rect[(q * (2 * 2)) + idx];
 			}
@@ -125,10 +123,9 @@ Border* borderMk(glm::vec2 sz, Obj** child, unsigned int noChild, glm::vec3 loc,
 		}
 	}
 
-	GLushort
-		strip[3 * 2 * 2 * 2],
+	GLushort strip[3 * 2 * 2 * 2];
 
-		rect[2 * 2 * 2 * 2];
+	GLushort rect[2 * 2 * 2 * 2];
 
 		// rect
 		int c = 0;
@@ -159,12 +156,11 @@ Border* borderMk(glm::vec2 sz, Obj** child, unsigned int noChild, glm::vec3 loc,
 		for (int q = 0; q < 2 * 2; q++) {
 			for (int t = 0; t < 2; t++) {
 				for (int i = 0; i < 3; i++) {
-					int
-						start = (far * 2) + (2 * t),
-						step = (i * (t ? -1 : 1)),
-						last = (3 * (t && i == 2)),
+					int start = (far * 2) + (2 * t);
+					int step = (i * (t ? -1 : 1));
+					int last = (3 * (t && i == 2));
 
-						idx  = start + step + last;
+					int idx  = start + step + last;
 
 					strip[((q * 2 * 3) + (t * 3)) + i] = rect[(q * (2 * 2)) + idx];
 				}

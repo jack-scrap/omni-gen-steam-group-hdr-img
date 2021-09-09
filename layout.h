@@ -6,15 +6,14 @@
 #include "obj.h"
 
 namespace layout {
-	static unsigned int
-		glyph[2] = {
-			16,
-			32
-		},
-		map[2] = {
-			16,
-			8
-		};
+	static unsigned int glyph[2] = {
+		16,
+		32
+	};
+	static unsigned int map[2] = {
+		16,
+		8
+	};
 
 	extern unsigned int view[2];
 
@@ -24,30 +23,29 @@ namespace layout {
 
 	static GLfloat bound = abs(-1.0 - 1.0);
 
-	static constexpr GLfloat
-		idx[3] = {
-			2,
-			2,
-			4
-		},
+	static constexpr GLfloat idx[3] = {
+		2,
+		2,
+		4
+	};
 
-		pad = 0.16,
-		margin = 0.16,
-		stroke = pad * 2,
+	static constexpr GLfloat pad = 0.16;
+	static constexpr GLfloat margin = 0.16;
+	static constexpr GLfloat stroke = pad * 2;
 
-		offset = stroke + margin,
-		overhead = stroke * 2,
+	static constexpr GLfloat offset = stroke + margin;
+	static constexpr GLfloat overhead = stroke * 2;
 
-		stride[3] = {
-			idx[X] + (margin * 2) + (margin * 2 * 2) + (stroke * 2),
-			idx[Y],
-			idx[Z] + (margin * 2) + (margin * 2 * 2) + (stroke * 2)
-		},
+	static constexpr GLfloat stride[3] = {
+		idx[X] + (margin * 2) + (margin * 2 * 2) + (stroke * 2),
+		idx[Y],
+		idx[Z] + (margin * 2) + (margin * 2 * 2) + (stroke * 2)
+	};
 
-		letter[2] = {
-			0.8,
-			1
-		};
+	static constexpr GLfloat letter[2] = {
+		0.8,
+		1
+	};
 
 	glm::vec2 item(glm::vec2 bound);
 	glm::vec2 sz(glm::vec2 dim);

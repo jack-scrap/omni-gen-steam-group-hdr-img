@@ -7,9 +7,8 @@
 #include "array.h"
 #include "util.h"
 
-unsigned int
-	CargoShip::_x = 10,
-	CargoShip::_y = 4;
+unsigned int CargoShip::_x = 10;
+unsigned int CargoShip::_y = 4;
 
 GLfloat CargoShip::_speed = 0.1;
 

@@ -9,12 +9,11 @@
 
 class Console {
 	private:
-		char
-			* _canv,
-			* _hl,
+		char* _canv;
+		char* _hl;
 
-			* _data,
-			* _blank;
+		char* _data;
+		char* _blank;
 
 		unsigned char _block[100][100][3];
 
@@ -22,36 +21,33 @@ class Console {
 
 		const std::string _ps1 = "[] ";
 
-		GLfloat
-			_vtc[2 * 2 * 2] = {
-				-1.0, -1.0,
-				1.0, -1.0,
-				-1.0, 1.0,
-				1.0, 1.0
-			},
-			_st[2 * 2 * 2] = {
-				0.0, 0.0,
-				1.0, 0.0,
-				0.0, 1.0,
-				1.0, 1.0
-			};
+		GLfloat _vtc[2 * 2 * 2] = {
+			-1.0, -1.0,
+			1.0, -1.0,
+			-1.0, 1.0,
+			1.0, 1.0
+		};
+		GLfloat _st[2 * 2 * 2] = {
+			0.0, 0.0,
+			1.0, 0.0,
+			0.0, 1.0,
+			1.0, 1.0
+		};
 
 		GLushort _idc[2 * 3] = {
 			0, 1, 2,
 			2, 1, 3
 		};
 
-		GLuint
-			_vao,
+		GLuint _vao;
 
-			_vbo,
-			_stbo,
+		GLuint _vbo;
+		GLuint _stbo;
 
-			_ibo;
+		GLuint _ibo;
 
-		GLint
-			_attrPos,
-			_attrSt;
+		GLint _attrPos;
+		GLint _attrSt;
 
 		GLuint _tex;
 
@@ -71,14 +67,12 @@ class Console {
 
 		unsigned int _mode;
 
-		unsigned int
-			_cursEditor[2][2],
-			_cursPrompt[2],
-			_cursFs;
+		unsigned int _cursEditor[2][2];
+		unsigned int _cursPrompt[2];
+		unsigned int _cursFs;
 
-		bool
-			_rngEditor,
-			_rngPrompt;
+		bool _rngEditor;
+		bool _rngPrompt;
 
 		std::vector<std::string> _buff;
 

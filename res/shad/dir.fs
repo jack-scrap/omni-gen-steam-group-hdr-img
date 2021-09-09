@@ -4,9 +4,8 @@ in vec3 _pos;
 
 uniform bool active;
 
-vec3
-	ambient = vec3(0.2, 0.2, 0.2),
-	sun = vec3(1.0, 1.0, 1.0);
+vec3 ambient = vec3(0.2, 0.2, 0.2);
+vec3 sun = vec3(1.0, 1.0, 1.0);
 
 vec3[2] col = vec3[2](
 	vec3(38, 38, 38),

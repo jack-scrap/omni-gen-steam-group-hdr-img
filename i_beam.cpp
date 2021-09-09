@@ -39,9 +39,8 @@ Obj* iBeamMk(glm::vec3 loc, glm::vec3 rot) {
 
 	_->_prog.use();
 
-	GLint
-		uniAxis = glGetUniformLocation(_->_prog._id, "axis"),
-		uniLn = glGetUniformLocation(_->_prog._id, "ln");
+	GLint uniAxis = glGetUniformLocation(_->_prog._id, "axis");
+	GLint uniLn = glGetUniformLocation(_->_prog._id, "ln");
 
 	glUniform1ui(uniAxis, X);
 	glUniform1f(uniLn, 3.0);

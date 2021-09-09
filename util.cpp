@@ -304,21 +304,20 @@ std::vector<GLfloat> util::mesh::gen::norm(std::vector<glm::vec3> vtc) {
 	std::vector<GLfloat> _;
 
 	// get edges
-	glm::vec3
-		u = vtc[1] - vtc[0],
-		v = vtc[2] - vtc[0];
+	glm::vec3 u = vtc[1] - vtc[0];
+	glm::vec3 v = vtc[2] - vtc[0];
 
-		// calculate cross product
-		glm::vec3 orth = glm::cross(u, v);
+	// calculate cross product
+	glm::vec3 orth = glm::cross(u, v);
 
-		// normalize
-		glm::vec3 norm = glm::normalize(orth);
+	// normalize
+	glm::vec3 norm = glm::normalize(orth);
 
-		for (int a = 0; a < 3; a++) {
-			_.push_back(norm[a]);
-		}
+	for (int a = 0; a < 3; a++) {
+		_.push_back(norm[a]);
+	}
 
-		return _;
+	return _;
 }
 
 std::vector<GLushort> util::mesh::rd::idc(std::string name, unsigned int attr) {
@@ -357,11 +356,10 @@ bool util::phys::coll(Obj* p, Obj* q, glm::mat4 modelP, glm::mat4 modelQ) {
 	bool _ = true;
 
 	for (int a = 0; a < 3; a++) {
-		glm::vec3
-			vtxPMin = glm::vec3(0.0),
-			vtxPMax = glm::vec3(0.0),
-			vtxQMin = glm::vec3(0.0),
-			vtxQMax = glm::vec3(0.0);
+		glm::vec3 vtxPMin = glm::vec3(0.0);
+		glm::vec3 vtxPMax = glm::vec3(0.0);
+		glm::vec3 vtxQMin = glm::vec3(0.0);
+		glm::vec3 vtxQMax = glm::vec3(0.0);
 
 		vtxPMin[a] = p->_aabb[a][MIN];
 		vtxPMin = glm::vec3(modelP * glm::vec4(vtxPMin, 1.0));

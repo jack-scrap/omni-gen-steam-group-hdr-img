@@ -11,10 +11,9 @@ typedef struct {
 
 typedef struct {
 	void* _ptr;
-	unsigned int
-		_x,
-		_y,
-		_z;
+	unsigned int _x;
+	unsigned int _y;
+	unsigned int _z;
 } CBuff;
 
 typedef struct {

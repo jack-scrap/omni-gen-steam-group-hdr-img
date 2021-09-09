@@ -49,9 +49,8 @@ Shad::Shad(std::string name, unsigned int stage) {
 
 Prog::Prog(std::string nameVtx, std::string nameFrag) {
 	// shader
-	Shad
-		vtx(nameVtx, 0),
-		frag(nameFrag, 1);
+	Shad vtx(nameVtx, 0);
+	Shad frag(nameFrag, 1);
 
 	// program
 	_id = glCreateProgram();
@@ -62,10 +61,9 @@ Prog::Prog(std::string nameVtx, std::string nameFrag) {
 
 Prog::Prog(std::string nameVtx, std::string nameGeom, std::string nameFrag) {
 	// shader
-	Shad
-		vtx(nameVtx, 0),
-		geom(nameGeom, 2),
-		frag(nameFrag, 1);
+	Shad vtx(nameVtx, 0);
+	Shad geom(nameGeom, 2);
+	Shad frag(nameFrag, 1);
 
 	// program
 	_id = glCreateProgram();

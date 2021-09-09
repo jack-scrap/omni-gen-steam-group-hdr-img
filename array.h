@@ -10,9 +10,8 @@
 typedef struct {
 	Idx** _data;
 
-	unsigned int
-		_x,
-		_y;
+	unsigned int _x;
+	unsigned int _y;
 
 	float _loc[3];
 

@@ -17,18 +17,16 @@ typedef struct Obj {
 
 	bool _active;
 
-	glm::mat4
-		_model,
-		_view,
-		_proj,
+	glm::mat4 _model;
+	glm::mat4 _view;
+	glm::mat4 _proj;
 
-		_acc;
+	glm::mat4 _acc;
 
 	Prog _prog;
 
-	GLint
-		_attr[3],
-		* _uni;
+	GLint _attr[3];
+	GLint* _uni;
 
 	GLfloat _aabb[3][2];
 

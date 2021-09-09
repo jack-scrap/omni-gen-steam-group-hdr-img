@@ -178,10 +178,9 @@ Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::s
 	Obj* _ = objMk(vtc, idc, noPrim, vtx, frag, active, loc, rot);
 
 	// texture
-	int
-		wd,
-		ht,
-		chan;
+	int wd;
+	int ht;
+	int chan;
 	GLubyte* data = stbi_load("res/dirt.jpg", &wd, &ht, &chan, 0);
 
 	if (data) {
@@ -222,10 +221,9 @@ Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::s
 	Obj* _ = objMk(vtc, idc, noPrim, vtx, frag, active, child, noChild, loc, rot);
 
 	// texture
-	int
-		wd,
-		ht,
-		chan;
+	int wd;
+	int ht;
+	int chan;
 	GLubyte* data = stbi_load("res/dirt.jpg", &wd, &ht, &chan, 0);
 
 	if (data) {
@@ -328,15 +326,14 @@ void objAcc(Obj* obj, glm::mat4 prev) {
 }
 
 void objAnim(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
-	glm::vec3
-		locMax = glm::abs(loc),
-		rotMax = glm::abs(rot),
+	glm::vec3 locMax = glm::abs(loc);
+	glm::vec3 rotMax = glm::abs(rot);
 
-		locInc = (loc / glm::vec3(state::fps)) * glm::vec3(state::speed),
-		rotInc = (rot / glm::vec3(state::fps)) * glm::vec3(state::speed),
+	glm::vec3 locInc = (loc / glm::vec3(state::fps)) * glm::vec3(state::speed);
+	glm::vec3 rotInc = (rot / glm::vec3(state::fps)) * glm::vec3(state::speed);
 
-		locFrame = glm::vec3(0.0),
-		rotFrame = glm::vec3(0.0);
+	glm::vec3 locFrame = glm::vec3(0.0);
+	glm::vec3 rotFrame = glm::vec3(0.0);
 
 	while (
 		glm::any(glm::lessThan(locFrame, locMax)) ||

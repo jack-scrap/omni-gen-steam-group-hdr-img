@@ -116,17 +116,15 @@ Console::Console(std::string fName, std::string cwd) :
 	}
 
 void Console::fmtBuff(std::vector<std::string> buff, Coord loc, Coord view, Coord ptr) {
-	int
-		l = ptr._y,
-		y = 0;
+	int l = ptr._y;
+	int y = 0;
 	while (
 		l < buff.size() &&
 		y < view._y &&
 		y < state::line
 	) {
-		int
-			c = ptr._x,
-			x = 0;
+		int c = ptr._x;
+		int x = 0;
 		while (
 			c < buff[l].size() &&
 			x < view._x &&
@@ -196,9 +194,8 @@ void Console::fmt() {
 			break;
 	}
 
-	int
-		i = 0,
-		x = 0;
+	int i = 0;
+	int x = 0;
 	while (
 		i < modeStr.size() &&
 		x < state::ln
@@ -275,13 +272,12 @@ void Console::fmt() {
 
 	loc[Y] += 1;
 
-	const unsigned int
-		boundFrame[2] = {
-			state::ln,
-			state::line - 1 - 1
-		},
-		boundPrompt = state::ln - _ps1.size(),
-		btm = state::line - 1;
+	const unsigned int boundFrame[2] = {
+		state::ln,
+		state::line - 1 - 1
+	};
+	const unsigned int boundPrompt = state::ln - _ps1.size();
+	const unsigned int btm = state::line - 1;
 
 	/* file system */
 	unsigned int maxFs = 0;
@@ -582,9 +578,8 @@ void Console::del() {
 
 		case PROMPT:
 			if (_rngPrompt) {
-				unsigned int
-					floor,
-					roof;
+				unsigned int floor;
+				unsigned int roof;
 				if (_cursPrompt[MIN] < _cursPrompt[MAX]) {
 					floor = _cursPrompt[MIN];
 					roof = _cursPrompt[MAX];
@@ -710,12 +705,11 @@ void Console::hl() {
 		_hl[idx] = true;
 	}
 
-	const unsigned int
-		boundFrame[2] = {
-			state::ln,
-			state::line - 1 - 1
-		},
-		btm = state::line - 1;
+	const unsigned int boundFrame[2] = {
+		state::ln,
+		state::line - 1 - 1
+	};
+	const unsigned int btm = state::line - 1;
 
 	/* file system */
 	unsigned int maxFs = 0;
@@ -739,14 +733,12 @@ void Console::hl() {
 	unsigned int maxNo = std::to_string(_buff.size()).size() + 1;
 
 	if (state::hlLineNo) {
-		int
-			l = 0,
-			y = 0;
+		int l = 0;
+		int y = 0;
 		while (l < boundFrame[Y]) {
 			if (l < _buff.size()) {
-				int
-					c = 0,
-					x = 0;
+				int c = 0;
+				int x = 0;
 				while (c < maxNo) {
 					unsigned int idx = idxStatic({
 						loc[X] + x,
@@ -925,17 +917,16 @@ void Console::hl() {
 }
 
 void Console::print(char c, bool b, Coord st) {
-	unsigned int
-		idx[2] = {
-			c % 16,
-			c / 16
-		},
+	unsigned int idx[2] = {
+		c % 16,
+		c / 16
+	};
 
-		sz = layout::map[X] * layout::map[Y] * layout::glyph[X] * layout::glyph[Y],
-		stride[2] = {
-			layout::glyph[X],
-			layout::map[X] * layout::glyph[X] * layout::glyph[Y]
-		};
+	unsigned int sz = layout::map[X] * layout::map[Y] * layout::glyph[X] * layout::glyph[Y];
+	unsigned int stride[2] = {
+		layout::glyph[X],
+		layout::map[X] * layout::glyph[X] * layout::glyph[Y]
+	};
 
 	glTexSubImage2D(GL_TEXTURE_2D, 0, st._x * layout::glyph[X], st._y * layout::glyph[Y], layout::glyph[X], layout::glyph[Y], GL_BGR, GL_UNSIGNED_BYTE, &(((char*) disp->_map->pixels)[((b * sz) + (idx[Y] * stride[Y]) + (idx[X] * stride[X])) * 3]));
 }

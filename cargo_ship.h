@@ -9,9 +9,8 @@ typedef struct CargoShip {
 
 	Obj* _parent;
 
-	static unsigned int
-		_x,
-		_y;
+	static unsigned int _x;
+	static unsigned int _y;
 
 	static GLfloat _speed;
 
