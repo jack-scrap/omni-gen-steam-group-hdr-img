@@ -407,7 +407,6 @@ void objDraw(Obj* obj, unsigned int type) {
 
 	glBindVertexArray(obj->_mesh->_id[Mesh::VAO]);
 	obj->_prog.use();
-
 	glBindTexture(GL_TEXTURE_2D, obj->_tex);
 
 	glUniformMatrix4fv(obj->_uni[Obj::MODEL], 1, GL_FALSE, glm::value_ptr(obj->_acc));
