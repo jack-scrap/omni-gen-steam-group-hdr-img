@@ -1,5 +1,4 @@
 #define GLM_ENABLE_EXPERIMENTAL
-#define STB_IMAGE_IMPLEMENTATION
 
 #include <stdio.h>
 #include <cmath>
@@ -7,6 +6,7 @@
 #include <chrono>
 #include <vector>
 #include <cmath>
+#include <SDL2/SDL_image.h>
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -22,8 +22,6 @@
 #include "phys.h"
 #include "omni.h"
 #include "layout.h"
-
-#include "stb_image.h"
 
 Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
 	// initialize
@@ -178,16 +176,13 @@ Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::s
 	Obj* _ = objMk(vtc, idc, noPrim, vtx, frag, active, loc, rot);
 
 	// texture
-	int wd;
-	int ht;
-	int chan;
-	GLubyte* data = stbi_load("res/dirt.jpg", &wd, &ht, &chan, 0);
+	SDL_Surface* tex = IMG_Load("res/dirt.jpg");
 
-	if (data) {
+	if (tex->pixels) {
 		glGenTextures(1, &_->_tex);
 		glBindTexture(GL_TEXTURE_2D, _->_tex);
 
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, wd, ht, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, tex->w, tex->h, 0, GL_RGB, GL_UNSIGNED_BYTE, tex->pixels);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
 		glGenerateMipmap(GL_TEXTURE_2D);
@@ -220,16 +215,13 @@ Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::s
 	Obj* _ = objMk(vtc, idc, noPrim, vtx, frag, active, child, noChild, loc, rot);
 
 	// texture
-	int wd;
-	int ht;
-	int chan;
-	GLubyte* data = stbi_load("res/dirt.jpg", &wd, &ht, &chan, 0);
+	SDL_Surface* tex = IMG_Load("res/dirt.jpg");
 
-	if (data) {
+	if (tex->pixels) {
 		glGenTextures(1, &_->_tex);
 		glBindTexture(GL_TEXTURE_2D, _->_tex);
 
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, wd, ht, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, tex->w, tex->h, 0, GL_RGB, GL_UNSIGNED_BYTE, tex->pixels);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
 		glGenerateMipmap(GL_TEXTURE_2D);
