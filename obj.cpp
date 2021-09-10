@@ -176,7 +176,7 @@ Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::s
 	Obj* _ = objMk(vtc, idc, noPrim, vtx, frag, active, loc, rot);
 
 	// texture
-	SDL_Surface* tex = IMG_Load("res/dirt.jpg");
+	SDL_Surface* tex = IMG_Load("res/map.bmp");
 
 	if (tex->pixels) {
 		glGenTextures(1, &_->_tex);
@@ -215,7 +215,7 @@ Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::s
 	Obj* _ = objMk(vtc, idc, noPrim, vtx, frag, active, child, noChild, loc, rot);
 
 	// texture
-	SDL_Surface* tex = IMG_Load("res/dirt.jpg");
+	SDL_Surface* tex = IMG_Load("res/map.bmp");
 
 	if (tex->pixels) {
 		glGenTextures(1, &_->_tex);
