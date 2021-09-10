@@ -201,8 +201,6 @@ Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::s
 	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh->_id[Mesh::STBO]);
 	glBufferData(GL_ARRAY_BUFFER, noPrim * 2 * sizeof (GLfloat), st, GL_STATIC_DRAW);
 
-	glBindVertexArray(0);
-
 	_->_prog.use();
 
 	// attribute
@@ -213,6 +211,7 @@ Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::s
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 	_->_prog.unUse();
+	glBindVertexArray(0);
 
 	return _;
 }
@@ -244,8 +243,6 @@ Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::s
 	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh->_id[Mesh::STBO]);
 	glBufferData(GL_ARRAY_BUFFER, noPrim * 2 * sizeof (GLfloat), st, GL_STATIC_DRAW);
 
-	glBindVertexArray(0);
-
 	_->_prog.use();
 
 	// attribute
@@ -254,7 +251,9 @@ Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::s
 	glVertexAttribPointer(_->_attr[Obj::ST], 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 	glEnableVertexAttribArray(_->_attr[Obj::ST]);
 
+	glBindVertexArray(0);
 	_->_prog.unUse();
+	glBindVertexArray(0);
 
 	return _;
 }
