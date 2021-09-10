@@ -39,21 +39,15 @@ class Console {
 			2, 1, 3
 		};
 
-		GLuint _vao;
+		GLuint _id[4];
 
-		GLuint _vbo;
-		GLuint _stbo;
-
-		GLuint _ibo;
-
-		GLint _attrPos;
-		GLint _attrSt;
+		GLint _attr[2];
 
 		GLuint _tex;
 
 		Prog _prog;
 
-		enum id {
+		enum attr {
 			POS,
 			ST
 		};

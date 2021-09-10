@@ -68,33 +68,33 @@ Console::Console(std::string fName, std::string cwd) :
 
 		_cursFs = 0;
 
-		glGenVertexArrays(1, &_vao);
-		glBindVertexArray(_vao);
+		glGenVertexArrays(1, &_id[Mesh::VAO]);
+		glBindVertexArray(_id[Mesh::VAO]);
 
-		glGenBuffers(1, &_vbo);
-		glBindBuffer(GL_ARRAY_BUFFER, _vbo);
+		glGenBuffers(1, &_id[Mesh::VBO]);
+		glBindBuffer(GL_ARRAY_BUFFER, _id[Mesh::VBO]);
 		glBufferData(GL_ARRAY_BUFFER, 2 * 2 * 2 * sizeof (GLfloat), _vtc, GL_STATIC_DRAW);
 
-		glGenBuffers(1, &_stbo);
-		glBindBuffer(GL_ARRAY_BUFFER, _stbo);
+		glGenBuffers(1, &_id[Mesh::STBO]);
+		glBindBuffer(GL_ARRAY_BUFFER, _id[Mesh::STBO]);
 		glBufferData(GL_ARRAY_BUFFER, 2 * 2 * 2 * sizeof (GLfloat), _st, GL_STATIC_DRAW);
 
-		glGenBuffers(1, &_ibo);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ibo);
+		glGenBuffers(1, &_id[Mesh::IBO]);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _id[Mesh::IBO]);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, 2 * 3 * sizeof (GLushort), _idc, GL_STATIC_DRAW);
 
 		_prog.use();
 
 		// attribute
-		glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-		_attrPos = glGetAttribLocation(_prog._id, "pos");
-		glVertexAttribPointer(_attrPos, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
-		glEnableVertexAttribArray(_attrPos);
+		glBindBuffer(GL_ARRAY_BUFFER, _id[Mesh::VBO]);
+		_attr[POS] = glGetAttribLocation(_prog._id, "pos");
+		glVertexAttribPointer(_attr[POS], 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+		glEnableVertexAttribArray(_attr[POS]);
 
-		glBindBuffer(GL_ARRAY_BUFFER, _stbo);
-		_attrSt = glGetAttribLocation(_prog._id, "st");
-		glVertexAttribPointer(_attrSt, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
-		glEnableVertexAttribArray(_attrSt);
+		glBindBuffer(GL_ARRAY_BUFFER, _id[Mesh::STBO]);
+		_attr[ST] = glGetAttribLocation(_prog._id, "st");
+		glVertexAttribPointer(_attr[ST], 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+		glEnableVertexAttribArray(_attr[ST]);
 
 		// texture
 		glGenTextures(1, &_tex);
@@ -932,7 +932,7 @@ void Console::print(char c, bool b, Coord st) {
 }
 
 void Console::draw() {
-	glBindVertexArray(_vao);
+	glBindVertexArray(_id[Mesh::VAO]);
 	_prog.use();
 
 	glBindTexture(GL_TEXTURE_2D, _tex);
