@@ -334,7 +334,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 		}
 
 		if (entry["name"] == "i_beam") {
-			Obj* _ = iBeamMk(loc, rot);
+			Obj* _ = iBeamMk(entry["sz"], entry["axis"], loc, rot);
 
 			obj.push_back(_);
 			objType.push_back(Mesh::LINE);

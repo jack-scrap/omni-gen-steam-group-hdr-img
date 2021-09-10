@@ -34,7 +34,7 @@ GLushort IBeam::_idc[3][2] = {
 	}
 };
 
-Obj* iBeamMk(glm::vec3 loc, glm::vec3 rot) {
+Obj* iBeamMk(GLfloat sz, unsigned int axis, glm::vec3 loc, glm::vec3 rot) {
 	Obj* _ = lineMk((GLfloat*) IBeam::_vtc, (GLushort*) IBeam::_idc, sizeof IBeam::_idc / sizeof (GLushort), "main", "beam", "dir", false, loc, rot);
 
 	_->_prog.use();
@@ -42,7 +42,7 @@ Obj* iBeamMk(glm::vec3 loc, glm::vec3 rot) {
 	_->_uni[IBeam::AXIS] = glGetUniformLocation(_->_prog._id, "axis");
 	_->_uni[IBeam::LN] = glGetUniformLocation(_->_prog._id, "ln");
 
-	glUniform1ui(_->_uni[IBeam::AXIS], X);
+	glUniform1ui(_->_uni[IBeam::AXIS], axis);
 	glUniform1f(_->_uni[IBeam::LN], 3.0);
 
 	_->_prog.unUse();
