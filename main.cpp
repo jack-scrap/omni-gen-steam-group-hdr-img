@@ -217,7 +217,6 @@ int main(int argc, char** argv) {
 	}
 
 	SDL_Event e;
-	glm::vec3 prev;
 	while (disp->_open) {
 		while (SDL_PollEvent(&e)) {
 			if (e.type == SDL_KEYDOWN) {
@@ -662,30 +661,30 @@ int main(int argc, char** argv) {
 			}
 
 			if (e.type == SDL_MOUSEBUTTONDOWN) {
-				prev = cam._pos;
-
 				SDL_GetMouseState(&cam._begin[0], &cam._begin[1]);
 
 				cam._drag = true;
 			}
 
 			if (e.type == SDL_MOUSEBUTTONUP) {
-				cam._drag = false;
+				cam._pos += cam._deltaVec;
+				cam._deltaVec = glm::vec3(0.0);
 
-				prev = cam._pos;
+				cam._drag = false;
 			}
 
 			if (e.type == SDL_MOUSEMOTION) {
 				if (cam._drag) {
 					SDL_GetMouseState(&cam._curr[0], &cam._curr[1]);
 
-					cam._delta[0] = cam._curr[0] - cam._begin[0];
-					cam._delta[1] = cam._curr[1] - cam._begin[1];
+					for (int i = 0; i < 2; i++) {
+						cam._delta[i] = cam._curr[i] - cam._begin[i];
+					}
 
-					cam._pos[0] = prev[0] + cam._delta[0];
-					cam._pos[2] = prev[0] - cam._delta[0];
+					cam._deltaVec[X] = cam._delta[X];
+					cam._deltaVec[Z] = -(cam._delta[X]);
 
-					cam._pos[1] = prev[1] + cam._delta[1];
+					cam._deltaVec[Y] = -(cam._delta[Y]);
 				}
 			}
 
