@@ -913,16 +913,36 @@ void Console::hl() {
 		}
 	}
 
-	for (int y = 0; y < 7; y++) {
-		for (int x = 0; x < 7; x++) {
-			_hl[idxStatic({
-				x,
-				y
-			}, {
-				state::ln,
-				state::line
-			})] = true;
+	Coord floor = {
+		0,
+		0
+	};
+	Coord roof = {
+		3,
+		2
+	};
+
+	int delta = idxDeterm(roof, _buff) - idxDeterm(floor, _buff);
+
+	int i = 0;
+	Coord st = floor;
+	while (i < delta) {
+		_hl[idxStatic({
+			loc[X] + st._x,
+			loc[Y] + st._y
+		}, {
+			state::ln,
+			state::line
+		})] = true;
+
+		if (st._x < _buff[st._y].size() - 1) {
+			st._x++;
+		} else {
+			st._y++;
+			st._x = 0;
 		}
+
+		i++;
 	}
 
 	glBindTexture(GL_TEXTURE_2D, 0);
