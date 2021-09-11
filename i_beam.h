@@ -16,4 +16,4 @@ typedef struct IBeam {
 	};
 } IBeam;
 
-Obj* iBeamMk(glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
+Obj* iBeamMk(GLfloat sz, unsigned int axis, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));

@@ -43,6 +43,12 @@ int main(int argc, char** argv) {
 	cam._scale = {
 		50, 50, 50
 	};
+	cam._prevPos = {
+		0.0, 0.0, 0.0
+	};
+	cam._deltaPos = {
+		0.0, 0.0, 0.0
+	};
 
 	// initialize
 	std::map<std::string, std::string> setting = util::cfg::lex("player/cfg/init.cfg");
@@ -217,7 +223,6 @@ int main(int argc, char** argv) {
 	}
 
 	SDL_Event e;
-	glm::vec3 prev;
 	while (disp->_open) {
 		while (SDL_PollEvent(&e)) {
 			if (e.type == SDL_KEYDOWN) {
@@ -662,7 +667,7 @@ int main(int argc, char** argv) {
 			}
 
 			if (e.type == SDL_MOUSEBUTTONDOWN) {
-				prev = cam._pos;
+				cam._prevPos = cam._pos;
 
 				SDL_GetMouseState(&cam._begin[0], &cam._begin[1]);
 
@@ -670,22 +675,25 @@ int main(int argc, char** argv) {
 			}
 
 			if (e.type == SDL_MOUSEBUTTONUP) {
-				cam._drag = false;
+				cam._pos = cam._prevPos + cam._deltaPos;
 
-				prev = cam._pos;
+				cam._drag = false;
 			}
 
 			if (e.type == SDL_MOUSEMOTION) {
 				if (cam._drag) {
 					SDL_GetMouseState(&cam._curr[0], &cam._curr[1]);
 
-					cam._delta[0] = cam._curr[0] - cam._begin[0];
-					cam._delta[1] = cam._curr[1] - cam._begin[1];
+					for (int i = 0; i < 2; i++) {
+						cam._delta[i] = cam._curr[i] - cam._begin[i];
+					}
 
-					cam._pos[0] = prev[0] + cam._delta[0];
-					cam._pos[2] = prev[0] - cam._delta[0];
+					cam._deltaPos[X] = cam._delta[X];
+					cam._deltaPos[Z] = -(cam._delta[X]);
 
-					cam._pos[1] = prev[1] + cam._delta[1];
+					cam._deltaPos[Y] = -(cam._delta[Y]);
+
+					cam._pos = cam._prevPos + cam._deltaPos;
 				}
 			}
 

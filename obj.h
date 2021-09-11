@@ -28,7 +28,9 @@ typedef struct Obj {
 	GLint _attr[3];
 	GLint* _uni;
 
-	GLfloat _aabb[3][2];
+	GLfloat _aabb[3][2] = {
+		0.0
+	};
 
 	struct Obj** _child;
 	unsigned int _noChild;

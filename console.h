@@ -21,39 +21,33 @@ class Console {
 
 		const std::string _ps1 = "[] ";
 
-		GLfloat _vtc[2 * 2 * 2] = {
+		GLfloat _vtc[2 * 2][2] = {
 			-1.0, -1.0,
 			1.0, -1.0,
 			-1.0, 1.0,
 			1.0, 1.0
 		};
-		GLfloat _st[2 * 2 * 2] = {
+		GLfloat _st[2 * 2][2] = {
 			0.0, 0.0,
 			1.0, 0.0,
 			0.0, 1.0,
 			1.0, 1.0
 		};
 
-		GLushort _idc[2 * 3] = {
+		GLushort _idc[2][3] = {
 			0, 1, 2,
 			2, 1, 3
 		};
 
-		GLuint _vao;
+		GLuint _id[4];
 
-		GLuint _vbo;
-		GLuint _stbo;
-
-		GLuint _ibo;
-
-		GLint _attrPos;
-		GLint _attrSt;
+		GLint _attr[2];
 
 		GLuint _tex;
 
 		Prog _prog;
 
-		enum id {
+		enum attr {
 			POS,
 			ST
 		};
