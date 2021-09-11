@@ -791,13 +791,18 @@ void Console::hl() {
 			loc[X] = maxFs + maxNo;
 			loc[Y] = 1;
 
+			int deltaCoord[2];
+			for (int i = 0; i < 2; i++) {
+				deltaCoord[i] = _cursEditor[MAX][i] - _cursEditor[MIN][i];
+			}
+
 			Coord st = {
 				_cursEditor[MIN][X],
 				_cursEditor[MIN][Y]
 			};
 			while (
-				st._x < _cursEditor[MAX][X] ||
-				st._y < _cursEditor[MAX][Y]
+				st._x < _cursEditor[MIN][X] + abs(deltaCoord[X]) ||
+				st._y < _cursEditor[MIN][Y] + abs(deltaCoord[Y])
 			) {
 				_hl[idxStatic({
 					loc[X] + st._x,
