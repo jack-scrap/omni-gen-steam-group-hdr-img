@@ -4,7 +4,7 @@ layout (lines) in;
 
 layout (triangle_strip, max_vertices = 12) out;
 
-out vec3 _posNoTrans;
+out vec3 _model;
 out vec3 _mag;
 
 uniform mat4
@@ -36,7 +36,7 @@ void main() {
 					gl_in[i].gl_Position.xyz + ((b + ((bool(z) ? 1 : -1) * (wd / 2))) * vec3(orth.x, 0.0, orth.y) * pad * 2),
 					1.0
 				);
-				_posNoTrans = gl_in[i].gl_Position.xyz + (b * vec3(orth.x, 0.0, orth.y) * pad * 2);
+				_model = gl_in[i].gl_Position.xyz + (b * vec3(orth.x, 0.0, orth.y) * pad * 2);
 				_mag = vec3(hyp(gl_Position.xz));
 
 				EmitVertex();
