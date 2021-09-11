@@ -809,11 +809,15 @@ void Console::hl() {
 				_cursEditor[MIN][Y]
 			};
 			unsigned int i = 0;
+			unsigned int startScal = idxDeterm({
+				_cursEditor[MIN][X],
+				_cursEditor[MIN][Y]
+			}, _buff);
 			while (i < abs(deltaScal)) {
-				Coord st = coordDeterm(i, _buff);
+				Coord st = coordDeterm(startScal + i, _buff);
 				_hl[idxStatic({
-					loc[X] + start._x + st._x,
-					loc[Y] + start._y + st._y
+					loc[X] + st._x,
+					loc[Y] + st._y
 				}, {
 					state::ln,
 					state::line
