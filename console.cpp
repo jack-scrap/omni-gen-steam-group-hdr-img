@@ -934,6 +934,13 @@ unsigned int Console::idxDeterm(Coord st, std::vector<std::string> buff) {
 	return _;
 }
 
+Coord Console::coordStatic(unsigned int idx, Coord bound) {
+	return {
+		idx % bound._x,
+		idx / bound._x
+	};
+}
+
 Coord Console::coordDeterm(unsigned int idx, std::vector<std::string> buff) {
 	Coord _ = {
 		0,
