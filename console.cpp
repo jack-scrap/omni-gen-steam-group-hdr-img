@@ -804,28 +804,22 @@ void Console::hl() {
 				deltaCoord[i] = _cursEditor[MAX][i] - _cursEditor[MIN][i];
 			}
 
-			Coord st = {
+			Coord start = {
 				_cursEditor[MIN][X],
 				_cursEditor[MIN][Y]
 			};
 			unsigned int i = 0;
 			while (i < abs(deltaScal)) {
+				Coord st = coordDeterm(i, _buff);
 				_hl[idxStatic({
-					loc[X] + st._x,
-					loc[Y] + st._y
+					loc[X] + start._x + st._x,
+					loc[Y] + start._y + st._y
 				}, {
 					state::ln,
 					state::line
 				})] = true;
 
 				i++;
-
-				if (st._x < _buff[st._y].size()) {
-					st._x++;
-				} else {
-					st._y++;
-					st._x = 0;
-				}
 			}
 
 			// block
@@ -936,6 +930,27 @@ unsigned int Console::idxDeterm(Coord st, std::vector<std::string> buff) {
 		_ += _buff[i].size();
 	}
 	_ += st._x;
+
+	return _;
+}
+
+Coord Console::coordDeterm(unsigned int idx, std::vector<std::string> buff) {
+	Coord _ = {
+		0,
+		0
+	};
+
+	int i = 0;
+	while (i < idx) {
+		if (_._x < buff[_._y].size() - 1) {
+			_._x++;
+		} else {
+			_._y++;
+			_._x = 0;
+		}
+
+		i++;
+	}
 
 	return _;
 }
