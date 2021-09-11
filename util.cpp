@@ -1263,33 +1263,37 @@ GLuint util::tex::spray() {
 	}
 
 	// draw
-	GLfloat vtc[3 * 3] = {
-		0.0, 0.0, 0.0,
-		0.6, 0.0, 0.0,
-		0.0, 0.6, 0.0
-	};
+	std::vector<GLfloat> vtc = util::mesh::rd::vtc("glyph/0");
 
-	GLushort idc[3] = {
-		0, 1, 2
-	};
+	std::vector<GLushort> idc = util::mesh::rd::idc("glyph/0", Obj::POS);
 
-	Mesh* mesh = meshMk(vtc, idc, 3);
+	Mesh* mesh = meshMk(&vtc[0], &idc[0], idc.size());
 
 	Prog prog("asdf", "asdf");
 
 	prog.use();
 
+	// attribute
 	glBindBuffer(GL_ARRAY_BUFFER, mesh->_id[Mesh::VBO]);
 	GLint attrPos = glGetAttribLocation(prog._id, "pos");
 	glVertexAttribPointer(attrPos, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 	glEnableVertexAttribArray(attrPos);
+
+	// uniform
+	glm::mat4 model = glm::mat4(1.0);
+
+	model = glm::rotate(model, (GLfloat) (M_PI / 2), glm::vec3(1, 0, 0));
+
+	GLint uniModel = glGetUniformLocation(prog._id, "model");
+
+	glUniformMatrix4fv(uniModel, 1, GL_FALSE, glm::value_ptr(model));
 
 	prog.unUse();
 
 	glBindVertexArray(mesh->_id[Mesh::VAO]);
 	prog.use();
 
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	glDrawElements(GL_TRIANGLES, idc.size(), GL_UNSIGNED_SHORT, (GLvoid*) 0);
 
 	prog.unUse();
 	glBindVertexArray(0);
