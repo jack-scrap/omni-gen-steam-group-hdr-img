@@ -43,6 +43,9 @@ int main(int argc, char** argv) {
 	cam._scale = {
 		50, 50, 50
 	};
+	cam._deltaVec = {
+		0.0, 0.0, 0.0
+	};
 
 	// initialize
 	std::map<std::string, std::string> setting = util::cfg::lex("player/cfg/init.cfg");

@@ -6,7 +6,7 @@ struct Cam {
 	glm::vec3 _pos;
 	glm::vec3 _scale;
 
-	glm::vec3 _deltaVec = glm::vec3(0.0);
+	glm::vec3 _deltaVec;
 
 	bool _drag = false;
 
