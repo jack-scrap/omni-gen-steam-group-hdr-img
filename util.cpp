@@ -1263,36 +1263,30 @@ GLuint util::tex::spray() {
 	}
 
 	// draw
-	GLuint vao;
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
-
 	GLfloat vtc[3 * 3] = {
 		0.0, 0.0, 0.0,
 		0.6, 0.0, 0.0,
 		0.0, 0.6, 0.0
 	};
 
-	GLuint vbo;
-	glGenBuffers(1, &vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof vtc, vtc, GL_STATIC_DRAW);
+	GLushort idc[3] = {
+		0, 1, 2
+	};
+
+	Mesh* mesh = meshMk(vtc, idc, 3);
 
 	Prog prog("asdf", "asdf");
 
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	GLint attrPos = glGetAttribLocation(prog._id, "pos");
-	glVertexAttribPointer(attrPos, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
-	glEnableVertexAttribArray(attrPos);
-
 	prog.use();
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
-	glEnableVertexAttribArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, mesh->_id[Mesh::VBO]);
+	GLint attrPos = glGetAttribLocation(prog._id, "pos");
+	glVertexAttribPointer(attrPos, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+	glEnableVertexAttribArray(attrPos);
 
 	prog.unUse();
 
-	glBindVertexArray(vao);
+	glBindVertexArray(mesh->_id[Mesh::VAO]);
 	prog.use();
 
 	glDrawArrays(GL_TRIANGLES, 0, 3);

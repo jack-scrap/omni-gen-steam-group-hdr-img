@@ -420,7 +420,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 		2, 1, 3
 	};
 
-	Obj* plane = objMk(vtc, st, idc, sizeof idc / sizeof *idc, "obj", "tex", true);
+	Obj* plane = objMk(vtc, st, idc, sizeof idc / sizeof *idc, "obj", "tex", true, glm::vec3(0.0, 0.0, 15.0));
 
 	obj.push_back(plane);
 }
