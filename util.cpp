@@ -1262,19 +1262,19 @@ GLuint util::tex::spray() {
 		omni::err("Framebuffer not complete");
 	}
 
-	// draw
+	// create
 	std::vector<GLfloat> vtc = util::mesh::rd::vtc("glyph/0");
 
 	std::vector<GLushort> idc = util::mesh::rd::idc("glyph/0", Obj::POS);
 
-	Mesh* mesh = meshMk(&vtc[0], &idc[0], idc.size());
+	Mesh* c = meshMk(&vtc[0], &idc[0], idc.size());
 
-	Prog prog("asdf", "asdf");
+	Prog prog("glyph", "solid");
 
 	prog.use();
 
 	// attribute
-	glBindBuffer(GL_ARRAY_BUFFER, mesh->_id[Mesh::VBO]);
+	glBindBuffer(GL_ARRAY_BUFFER, c->_id[Mesh::VBO]);
 	GLint attrPos = glGetAttribLocation(prog._id, "pos");
 	glVertexAttribPointer(attrPos, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 	glEnableVertexAttribArray(attrPos);
@@ -1285,12 +1285,15 @@ GLuint util::tex::spray() {
 	model = glm::rotate(model, (GLfloat) (M_PI / 2), glm::vec3(1, 0, 0));
 
 	GLint uniModel = glGetUniformLocation(prog._id, "model");
+	GLint uniActive = glGetUniformLocation(prog._id, "active");
 
 	glUniformMatrix4fv(uniModel, 1, GL_FALSE, glm::value_ptr(model));
+	glUniform1ui(uniActive, true);
 
+	// draw
 	prog.unUse();
 
-	glBindVertexArray(mesh->_id[Mesh::VAO]);
+	glBindVertexArray(c->_id[Mesh::VAO]);
 	prog.use();
 
 	glDrawElements(GL_TRIANGLES, idc.size(), GL_UNSIGNED_SHORT, (GLvoid*) 0);
