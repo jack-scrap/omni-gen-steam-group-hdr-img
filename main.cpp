@@ -227,7 +227,6 @@ int main(int argc, char** argv) {
 		while (SDL_PollEvent(&e)) {
 			if (e.type == SDL_KEYDOWN) {
 				if (!SDL_GetModState()) {
-					// text
 					if (
 						e.key.keysym.sym >= SDLK_a &&
 						e.key.keysym.sym <= SDLK_z
