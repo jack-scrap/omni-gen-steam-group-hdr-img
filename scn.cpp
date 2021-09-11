@@ -400,29 +400,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 	obj.push_back(_->_parent);
 	objType.push_back(Mesh::OBJ);
-
-	GLfloat vtc[2 * 2 * 3] = {
-		-20.0, -20.0, 0.0,
-		20.0, -20.0, 0.0,
-		-20.0, 20.0, 0.0,
-		20.0, 20.0, 0.0
-	};
-
-	GLfloat st[2 * 2 * 2] = {
-		0.0, 0.0,
-		1.0, 0.0,
-		0.0, 1.0,
-		1.0, 1.0
-	};
-
-	GLushort idc[2 * 3] = {
-		0, 1, 2,
-		2, 1, 3
-	};
-
-	Obj* plane = objMk(vtc, st, idc, sizeof idc / sizeof *idc, "obj", "tex", true, glm::vec3(0.0, 0.0, 15.0));
-
-	obj.push_back(plane);
 }
 
 Asdf asdf = {
