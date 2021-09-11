@@ -791,58 +791,27 @@ void Console::hl() {
 			loc[X] = maxFs + maxNo;
 			loc[Y] = 1;
 
-			int
-				delta = util::math::delta(_cursEditor[MIN][X] + _cursEditor[MIN][Y], _cursEditor[MAX][X] + _cursEditor[MAX][Y]),
-				norm = util::math::norm(idxDeterm({
-					_cursEditor[MIN][X],
-					_cursEditor[MIN][Y]
-				}, _buff), idxDeterm({
-					_cursEditor[MAX][X],
-					_cursEditor[MAX][Y]
-				}, _buff)),
-
-				deltaConting = util::math::delta(idxDeterm({
-					_cursEditor[MIN][X],
-					_cursEditor[MIN][Y]
-				}, _buff), idxDeterm({
-					_cursEditor[MAX][X],
-					_cursEditor[MAX][Y]
-				}, _buff));
-
-			unsigned int st[2];
-			for (int i = 0; i < 2; i++) {
-				st[i] = _cursEditor[MIN][i];
-			}
-			for (int i = 0; i < 1 + abs(deltaConting); i++) {
-				unsigned int idx = idxStatic({
-					loc[X] + st[X],
-					loc[Y] + st[Y]
+			Coord st = {
+				_cursEditor[MIN][X],
+				_cursEditor[MIN][Y]
+			};
+			while (
+				st._x < _cursEditor[MAX][X] ||
+				st._y < _cursEditor[MAX][Y]
+			) {
+				_hl[idxStatic({
+					loc[X] + st._x,
+					loc[Y] + st._y
 				}, {
 					state::ln,
 					state::line
-				});
+				})] = true;
 
-				_hl[idx] = true;
-
-				if (norm == 1) {
-					if (st[X] < _buff[st[Y]].size() - 1) {
-						st[X]++;
-					} else {
-						if (st[Y] != _cursEditor[MAX][Y]) {
-							st[Y]++;
-							st[X] = 0;
-						}
-					}
-				}
-				if (norm == -1) {
-					if (st[X] > 0) {
-						st[X]--;
-					} else {
-						if (st[Y] != _cursEditor[MAX][Y]) {
-							st[Y]--;
-							st[X] = _buff[st[Y]].size() - 1;
-						}
-					}
+				if (st._x < _buff[st._y].size()) {
+					st._x++;
+				} else {
+					st._y++;
+					st._x = 0;
 				}
 			}
 
@@ -910,36 +879,6 @@ void Console::hl() {
 			}
 
 			break;
-		}
-	}
-
-	Coord floor = {
-		0,
-		0
-	};
-	Coord roof = {
-		3,
-		2
-	};
-
-	Coord st = floor;
-	while (
-		st._x < roof._x ||
-		st._y < roof._y
-	) {
-		_hl[idxStatic({
-			loc[X] + st._x,
-			loc[Y] + st._y
-		}, {
-			state::ln,
-			state::line
-		})] = true;
-
-		if (st._x < _buff[st._y].size()) {
-			st._x++;
-		} else {
-			st._y++;
-			st._x = 0;
 		}
 	}
 
