@@ -922,11 +922,11 @@ void Console::hl() {
 		2
 	};
 
-	int delta = idxDeterm(roof, _buff) - idxDeterm(floor, _buff);
-
-	int i = 0;
 	Coord st = floor;
-	while (i < delta) {
+	while (
+		st._x < roof._x ||
+		st._y < roof._y
+	) {
 		_hl[idxStatic({
 			loc[X] + st._x,
 			loc[Y] + st._y
@@ -935,14 +935,12 @@ void Console::hl() {
 			state::line
 		})] = true;
 
-		if (st._x < _buff[st._y].size() - 1) {
+		if (st._x < _buff[st._y].size()) {
 			st._x++;
 		} else {
 			st._y++;
 			st._x = 0;
 		}
-
-		i++;
 	}
 
 	glBindTexture(GL_TEXTURE_2D, 0);
