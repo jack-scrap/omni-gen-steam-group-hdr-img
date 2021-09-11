@@ -383,7 +383,7 @@ void objDraw(Obj* obj, unsigned int type) {
 			break;
 	};
 
-	obj->_view = glm::lookAt(cam._pos + cam._deltaVec, cam._pos + cam._deltaVec + glm::vec3(-1000.0, -1000.0, -1000.0), glm::vec3(0, 1, 0));
+	obj->_view = glm::lookAt(cam._pos + cam._deltaPos, cam._pos + cam._deltaPos + glm::vec3(-1000.0, -1000.0, -1000.0), glm::vec3(0, 1, 0));
 	obj->_view = glm::scale(obj->_view, cam._scale);
 
 	glBindVertexArray(obj->_mesh->_id[Mesh::VAO]);

@@ -43,7 +43,7 @@ int main(int argc, char** argv) {
 	cam._scale = {
 		50, 50, 50
 	};
-	cam._deltaVec = {
+	cam._deltaPos = {
 		0.0, 0.0, 0.0
 	};
 
@@ -670,8 +670,8 @@ int main(int argc, char** argv) {
 			}
 
 			if (e.type == SDL_MOUSEBUTTONUP) {
-				cam._pos += cam._deltaVec;
-				cam._deltaVec = glm::vec3(0.0);
+				cam._pos += cam._deltaPos;
+				cam._deltaPos = glm::vec3(0.0);
 
 				cam._drag = false;
 			}
@@ -684,10 +684,10 @@ int main(int argc, char** argv) {
 						cam._delta[i] = cam._curr[i] - cam._begin[i];
 					}
 
-					cam._deltaVec[X] = cam._delta[X];
-					cam._deltaVec[Z] = -(cam._delta[X]);
+					cam._deltaPos[X] = cam._delta[X];
+					cam._deltaPos[Z] = -(cam._delta[X]);
 
-					cam._deltaVec[Y] = -(cam._delta[Y]);
+					cam._deltaPos[Y] = -(cam._delta[Y]);
 				}
 			}
 
