@@ -43,7 +43,7 @@ int main(int argc, char** argv) {
 	cam._scale = {
 		50, 50, 50
 	};
-	cam._prev = {
+	cam._prevPos = {
 		0.0, 0.0, 0.0
 	};
 	cam._deltaPos = {
@@ -667,7 +667,7 @@ int main(int argc, char** argv) {
 			}
 
 			if (e.type == SDL_MOUSEBUTTONDOWN) {
-				cam._prev = cam._pos;
+				cam._prevPos = cam._pos;
 
 				SDL_GetMouseState(&cam._begin[0], &cam._begin[1]);
 
@@ -675,7 +675,7 @@ int main(int argc, char** argv) {
 			}
 
 			if (e.type == SDL_MOUSEBUTTONUP) {
-				cam._pos = cam._prev + cam._deltaPos;
+				cam._pos = cam._prevPos + cam._deltaPos;
 
 				cam._drag = false;
 			}
@@ -693,7 +693,7 @@ int main(int argc, char** argv) {
 
 					cam._deltaPos[Y] = -(cam._delta[Y]);
 
-					cam._pos = cam._prev + cam._deltaPos;
+					cam._pos = cam._prevPos + cam._deltaPos;
 				}
 			}
 
