@@ -913,6 +913,18 @@ void Console::hl() {
 		}
 	}
 
+	for (int y = 0; y < 7; y++) {
+		for (int x = 0; x < 7; x++) {
+			_hl[idxStatic({
+				x,
+				y
+			}, {
+				state::ln,
+				state::line
+			})] = true;
+		}
+	}
+
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
