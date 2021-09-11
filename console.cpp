@@ -799,12 +799,7 @@ void Console::hl() {
 				_cursEditor[MIN][Y]
 			}, _buff);
 
-			int deltaCoord[2];
-			for (int i = 0; i < 2; i++) {
-				deltaCoord[i] = _cursEditor[MAX][i] - _cursEditor[MIN][i];
-			}
-
-			int deltaAsdf = idxDeterm({
+			int deltaCoord = idxDeterm({
 				_cursEditor[MAX][X],
 				_cursEditor[MAX][Y]
 			}, _buff) - idxDeterm({
@@ -813,10 +808,10 @@ void Console::hl() {
 			}, _buff);
 
 			int norm = 0;
-			if (deltaAsdf > 0) {
+			if (deltaCoord > 0) {
 				norm = 1;
 			}
-			if (deltaAsdf < 0) {
+			if (deltaCoord < 0) {
 				norm = -1;
 			}
 
