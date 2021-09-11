@@ -141,7 +141,7 @@ namespace util {
 	}
 
 	namespace tex {
-		GLuint spray();
+		GLuint spray(char c);
 	}
 
 	namespace math {

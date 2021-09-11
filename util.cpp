@@ -1232,7 +1232,7 @@ std::string util::now(std::string format) {
 	return std::string(out);
 }
 
-GLuint util::tex::spray() {
+GLuint util::tex::spray(char c) {
 	/* framebuffer */
 	GLuint fbo;
 	glGenFramebuffers(1, &fbo);
@@ -1263,18 +1263,18 @@ GLuint util::tex::spray() {
 	}
 
 	// create
-	std::vector<GLfloat> vtc = util::mesh::rd::vtc("glyph/0");
+	std::vector<GLfloat> vtc = util::mesh::rd::vtc("glyph/" + std::string(1, c));
 
-	std::vector<GLushort> idc = util::mesh::rd::idc("glyph/0", Obj::POS);
+	std::vector<GLushort> idc = util::mesh::rd::idc("glyph/" + std::string(1, c), Obj::POS);
 
-	Mesh* c = meshMk(&vtc[0], &idc[0], idc.size());
+	Mesh* mesh = meshMk(&vtc[0], &idc[0], idc.size());
 
 	Prog prog("glyph", "solid");
 
 	prog.use();
 
 	// attribute
-	glBindBuffer(GL_ARRAY_BUFFER, c->_id[Mesh::VBO]);
+	glBindBuffer(GL_ARRAY_BUFFER, mesh->_id[Mesh::VBO]);
 	GLint attrPos = glGetAttribLocation(prog._id, "pos");
 	glVertexAttribPointer(attrPos, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 	glEnableVertexAttribArray(attrPos);
@@ -1297,7 +1297,7 @@ GLuint util::tex::spray() {
 	// draw
 	prog.unUse();
 
-	glBindVertexArray(c->_id[Mesh::VAO]);
+	glBindVertexArray(mesh->_id[Mesh::VAO]);
 	prog.use();
 
 	glDrawElements(GL_TRIANGLES, idc.size(), GL_UNSIGNED_SHORT, (GLvoid*) 0);
