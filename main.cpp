@@ -666,11 +666,18 @@ int main(int argc, char** argv) {
 			}
 
 			if (e.type == SDL_MOUSEBUTTONDOWN) {
-				cam._prevPos = cam._pos;
-
 				SDL_GetMouseState(&cam._begin[0], &cam._begin[1]);
 
-				cam._drag = true;
+				if (
+					cam._begin[X] > layout::res[X] &&
+					cam._begin[Y] > 0 &&
+					cam._begin[X] < layout::res[X] + layout::view[X] &&
+					cam._begin[Y] < 0 + layout::view[Y]
+				) {
+					cam._prevPos = cam._pos;
+
+					cam._drag = true;
+				}
 			}
 
 			if (e.type == SDL_MOUSEBUTTONUP) {
