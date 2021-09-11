@@ -793,21 +793,21 @@ void Console::hl() {
 
 			int
 				delta = util::math::delta(_cursEditor[MIN][X] + _cursEditor[MIN][Y], _cursEditor[MAX][X] + _cursEditor[MAX][Y]),
-				norm = util::math::norm(idxDeterm(_buff, {
+				norm = util::math::norm(idxDeterm({
 					_cursEditor[MIN][X],
 					_cursEditor[MIN][Y]
-				}), idxDeterm(_buff, {
+				}, _buff), idxDeterm({
 					_cursEditor[MAX][X],
 					_cursEditor[MAX][Y]
-				})),
+				}, _buff)),
 
-				deltaConting = util::math::delta(idxDeterm(_buff, {
+				deltaConting = util::math::delta(idxDeterm({
 					_cursEditor[MIN][X],
 					_cursEditor[MIN][Y]
-				}), idxDeterm(_buff, {
+				}, _buff), idxDeterm({
 					_cursEditor[MAX][X],
 					_cursEditor[MAX][Y]
-				}));
+				}, _buff));
 
 			unsigned int st[2];
 			for (int i = 0; i < 2; i++) {
@@ -960,7 +960,7 @@ unsigned int Console::idxStatic(Coord st, Coord bound) {
 	return (st._y * bound._x) + st._x;
 }
 
-unsigned int Console::idxDeterm(std::vector<std::string> buff, Coord st) {
+unsigned int Console::idxDeterm(Coord st, std::vector<std::string> buff) {
 	unsigned int _ = 0;
 	for (int i = 0; i < st._y; i++) {
 		_ += _buff[i].size();

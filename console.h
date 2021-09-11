@@ -108,7 +108,7 @@ class Console {
 
 		unsigned int idxStatic(Coord st, Coord bound);
 
-		unsigned int idxDeterm(std::vector<std::string> buff, Coord st);
+		unsigned int idxDeterm(Coord st, std::vector<std::string> buff);
 
 		unsigned int clamp(unsigned int i, unsigned int roof);
 
