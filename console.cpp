@@ -804,6 +804,22 @@ void Console::hl() {
 				deltaCoord[i] = _cursEditor[MAX][i] - _cursEditor[MIN][i];
 			}
 
+			int deltaAsdf = idxDeterm({
+				_cursEditor[MAX][X],
+				_cursEditor[MAX][Y]
+			}, _buff) - idxDeterm({
+				_cursEditor[MIN][X],
+				_cursEditor[MIN][Y]
+			}, _buff);
+
+			int norm = 0;
+			if (deltaAsdf > 0) {
+				norm = 1;
+			}
+			if (deltaAsdf < 0) {
+				norm = -1;
+			}
+
 			Coord start = {
 				_cursEditor[MIN][X],
 				_cursEditor[MIN][Y]
@@ -814,7 +830,7 @@ void Console::hl() {
 				_cursEditor[MIN][Y]
 			}, _buff);
 			while (i < abs(deltaScal)) {
-				Coord st = coordDeterm(startScal + i, _buff);
+				Coord st = coordDeterm(startScal + (i * norm), _buff);
 				_hl[idxStatic({
 					loc[X] + st._x,
 					loc[Y] + st._y
