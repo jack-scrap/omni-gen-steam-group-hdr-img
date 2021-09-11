@@ -216,7 +216,7 @@ Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::s
 
 	Obj* cube = objMk(vtc, idc, 2 * 3, "obj", "solid", true);
 
-	_->_tex = util::tex::spray(cube);
+	_->_tex = util::tex::spray();
 
 	glBindVertexArray(_->_mesh->_id[Mesh::VAO]);
 

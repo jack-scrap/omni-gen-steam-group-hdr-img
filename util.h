@@ -141,7 +141,7 @@ namespace util {
 	}
 
 	namespace tex {
-		GLuint spray(Obj* obj);
+		GLuint spray();
 	}
 
 	namespace math {

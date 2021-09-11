@@ -1232,7 +1232,7 @@ std::string util::now(std::string format) {
 	return std::string(out);
 }
 
-GLuint util::tex::spray(Obj* obj) {
+GLuint util::tex::spray() {
 	/* framebuffer */
 	GLuint fbo;
 	glGenFramebuffers(1, &fbo);
@@ -1262,7 +1262,43 @@ GLuint util::tex::spray(Obj* obj) {
 		omni::err("Framebuffer not complete");
 	}
 
-	/* objDraw(obj, Mesh::OBJ); */
+	// draw
+	GLuint vao;
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
+
+	GLfloat vtc[3 * 3] = {
+		0.0, 0.0, 0.0,
+		0.6, 0.0, 0.0,
+		0.0, 0.6, 0.0
+	};
+
+	GLuint vbo;
+	glGenBuffers(1, &vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof vtc, vtc, GL_STATIC_DRAW);
+
+	Prog prog("asdf", "asdf");
+
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	GLint attrPos = glGetAttribLocation(prog._id, "pos");
+	glVertexAttribPointer(attrPos, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+	glEnableVertexAttribArray(attrPos);
+
+	prog.use();
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+	glEnableVertexAttribArray(0);
+
+	prog.unUse();
+
+	glBindVertexArray(vao);
+	prog.use();
+
+	glDrawArrays(GL_TRIANGLES, 0, 3);
+
+	prog.unUse();
+	glBindVertexArray(0);
 
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 	glBindTexture(GL_TEXTURE_2D, 0);
