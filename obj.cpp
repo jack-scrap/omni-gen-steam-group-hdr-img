@@ -39,7 +39,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 	_->_model = glm::mat4(1.0);
 	_->_model *= glm::translate(glm::mat4(1.0), loc);
 	_->_model *= util::matr::rot(glm::mat4(1.0), rot);
-	_->_view = glm::lookAt(cam._pos + cam._deltaPos, cam._pos + cam._deltaPos + glm::vec3(-1000.0, -1000.0, -1000.0), glm::vec3(0, 1, 0));
+	_->_view = glm::lookAt(cam._pos, cam._pos + glm::vec3(-1000.0, -1000.0, -1000.0), glm::vec3(0, 1, 0));
 	_->_proj = glm::ortho(-(layout::view[X] / 2.0), layout::view[X] / 2.0, -(layout::view[Y] / 2.0), layout::view[Y] / 2.0, 0.1, 10000.0);
 	_->_acc = glm::mat4(1.0);
 
@@ -101,7 +101,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 	_->_model = glm::mat4(1.0);
 	_->_model *= glm::translate(glm::mat4(1.0), loc);
 	_->_model *= util::matr::rot(glm::mat4(1.0), rot);
-	_->_view = glm::lookAt(cam._pos + cam._deltaPos, cam._pos + cam._deltaPos + glm::vec3(-1000.0, -1000.0, -1000.0), glm::vec3(0, 1, 0));
+	_->_view = glm::lookAt(cam._pos, cam._pos + glm::vec3(-1000.0, -1000.0, -1000.0), glm::vec3(0, 1, 0));
 	_->_proj = glm::ortho(-(layout::view[X] / 2.0), layout::view[X] / 2.0, -(layout::view[Y] / 2.0), layout::view[Y] / 2.0, 0.1, 10000.0);
 	_->_acc = glm::mat4(1.0);
 
@@ -256,7 +256,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 	_->_model = glm::mat4(1.0);
 	_->_model *= glm::translate(glm::mat4(1.0), loc);
 	_->_model *= util::matr::rot(glm::mat4(1.0), rot);
-	_->_view = glm::lookAt(cam._pos + cam._deltaPos, cam._pos + cam._deltaPos + glm::vec3(-1000.0, -1000.0, -1000.0), glm::vec3(0, 1, 0));
+	_->_view = glm::lookAt(cam._pos, cam._pos + glm::vec3(-1000.0, -1000.0, -1000.0), glm::vec3(0, 1, 0));
 	_->_proj = glm::ortho(-(layout::view[X] / 2.0), layout::view[X] / 2.0, -(layout::view[Y] / 2.0), layout::view[Y] / 2.0, 0.1, 10000.0);
 	_->_acc = glm::mat4(1.0);
 
@@ -383,7 +383,7 @@ void objDraw(Obj* obj, unsigned int type) {
 			break;
 	};
 
-	obj->_view = glm::lookAt(cam._pos + cam._deltaPos, cam._pos + cam._deltaPos + glm::vec3(-1000.0, -1000.0, -1000.0), glm::vec3(0, 1, 0));
+	obj->_view = glm::lookAt(cam._pos, cam._pos + glm::vec3(-1000.0, -1000.0, -1000.0), glm::vec3(0, 1, 0));
 	obj->_view = glm::scale(obj->_view, cam._scale);
 
 	glBindVertexArray(obj->_mesh->_id[Mesh::VAO]);
