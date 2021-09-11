@@ -401,11 +401,3 @@ void scn::init(std::string stage, unsigned int lvl) {
 	obj.push_back(_->_parent);
 	objType.push_back(Mesh::OBJ);
 }
-
-Asdf asdf = {
-	3
-};
-
-Asdf* asdfGet() {
-	return &asdf;
-}

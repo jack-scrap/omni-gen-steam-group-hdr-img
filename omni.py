@@ -329,26 +329,3 @@ _pathGet.restype = _CArr
 _pathGet.argtypes = None
 
 path = _pathGet()
-
-class _Hjkl(Structure):
-	_fields_ = [
-		('_asdf', c_int)
-	]
-
-class _Asdf():
-	def __init__(self):
-		self._asdf = 0
-
-	@property
-	def asdf(self):
-		asdf = _asdfGet()
-
-		self._asdf = asdf.contents._asdf
-
-		return self._asdf
-
-_asdfGet = _scn.asdfGet
-_asdfGet.restype = POINTER(_Hjkl)
-_asdfGet.argtypes = None
-
-asdf = _Asdf()
