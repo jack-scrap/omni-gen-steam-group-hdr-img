@@ -142,7 +142,7 @@ int main(int argc, char** argv) {
 	}
 
 	console = new Console("player/script/init/0/main.py", "player");
-	scn::init(stage, lvl);
+	/* scn::init(stage, lvl); */
 
 	SDL_AddTimer(0, epoch, NULL);
 
@@ -221,501 +221,542 @@ int main(int argc, char** argv) {
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(3000));
 	}
+	
+	GLuint vao;
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
+
+	GLfloat vtc[3 * 3] = {
+		0.0, 0.0, 0.0,
+		0.6, 0.0, 0.0,
+		0.0, 0.6, 0.0
+	};
+
+	GLuint vbo;
+	glGenBuffers(1, &vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof vtc, vtc, GL_STATIC_DRAW);
+
+	Prog prog("asdf", "asdf");
+
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	GLint attrPos = glGetAttribLocation(prog._id, "pos");
+	glVertexAttribPointer(attrPos, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+	glEnableVertexAttribArray(attrPos);
+
+	prog.use();
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+	glEnableVertexAttribArray(0);
+
+	prog.unUse();
 
 	SDL_Event e;
 	while (disp->_open) {
 		while (SDL_PollEvent(&e)) {
-			if (e.type == SDL_KEYDOWN) {
-				if (!SDL_GetModState()) {
-					if (
-						e.key.keysym.sym >= SDLK_a &&
-						e.key.keysym.sym <= SDLK_z
-					) {
-						console->ins(e.key.keysym.sym);
-					}
-
-					if ((
-						e.key.keysym.sym >= SDLK_0 &&
-						e.key.keysym.sym <= SDLK_9
-					)) {
-						console->ins(e.key.keysym.sym);
-					}
-
-					if ((e.key.keysym.sym == SDLK_SPACE) || (
-						e.key.keysym.sym == SDLK_COMMA ||
-						e.key.keysym.sym == SDLK_PERIOD ||
-						e.key.keysym.sym == SDLK_SLASH ||
-
-						e.key.keysym.sym == SDLK_SEMICOLON ||
-						e.key.keysym.sym == SDLK_QUOTE ||
-
-						e.key.keysym.sym == SDLK_LEFTBRACKET ||
-						e.key.keysym.sym == SDLK_RIGHTBRACKET ||
-						e.key.keysym.sym == SDLK_BACKSLASH ||
-
-						e.key.keysym.sym == SDLK_MINUS ||
-						e.key.keysym.sym == SDLK_EQUALS ||
-
-						e.key.keysym.sym == SDLK_BACKQUOTE
-					)) {
-						console->ins(e.key.keysym.sym);
-					}
-
-					// control
-					if (e.key.keysym.sym == SDLK_BACKSPACE) {
-						console->del();
-					}
-
-					if (e.key.keysym.sym == SDLK_RETURN) {
-						switch (console->_mode) {
-							case Console::EDITOR:
-								console->newLine();
-
-								break;
-
-							case Console::PROMPT:
-								console->exec();
-
-								break;
-
-							case Console::FS:
-								if (console->_tree[console->_cursFs]["type"] == "file") {
-									console->open(console->_cwd + "/" + console->_tree[console->_cursFs]["name"]);
-								}
-
-								if (console->_tree[console->_cursFs]["type"] == "dir") {
-									console->changeDir(console->_cwd + "/" + console->_tree[console->_cursFs]["name"]);
-								}
-
-								break;
-						}
-					}
-
-					// mode
-					if (e.key.keysym.sym == SDLK_F1) {
-						console->switchMode(Console::EDITOR);
-					}
-
-					if (e.key.keysym.sym == SDLK_F2) {
-						console->switchMode(Console::PROMPT);
-					}
-
-					if (e.key.keysym.sym == SDLK_F3) {
-						console->switchMode(Console::FS);
-					}
-
-					if (e.key.keysym.sym == SDLK_ESCAPE) {
-						switch (console->_mode) {
-							case Console::EDITOR:
-								console->_rngEditor = false;
-
-								break;
-
-							case Console::PROMPT:
-								console->_rngPrompt = false;
-
-								break;
-						}
-					}
-
-					// navigation
-					switch (console->_mode) {
-						case Console::EDITOR:
-							if (e.key.keysym.sym == SDLK_RIGHT) {
-								if (console->_cursEditor[console->_rngEditor][X] < console->_buff[console->_cursEditor[console->_rngEditor][Y]].size()) {
-									console->_cursEditor[console->_rngEditor][X]++;
-								}
-							}
-
-							if (e.key.keysym.sym == SDLK_LEFT) {
-								if (console->_cursEditor[console->_rngEditor][X] > 0) {
-									console->_cursEditor[console->_rngEditor][X]--;
-								}
-							}
-
-							if (e.key.keysym.sym == SDLK_DOWN) {
-								if (console->_cursEditor[console->_rngEditor][X] == console->_buff[console->_cursEditor[console->_rngEditor][Y]].size()) {
-									if (console->_cursEditor[console->_rngEditor][Y] < console->_buff.size() - 1) {
-										console->_cursEditor[console->_rngEditor][Y]++;
-
-										console->_cursEditor[console->_rngEditor][X] = console->_buff[console->_cursEditor[console->_rngEditor][Y]].size();
-									}
-								} else {
-									if (console->_cursEditor[console->_rngEditor][Y] < console->_buff.size() - 1) {
-										console->_cursEditor[console->_rngEditor][Y]++;
-
-										if (console->_cursEditor[console->_rngEditor][X] > console->_buff[console->_cursEditor[console->_rngEditor][Y]].size()) {
-											console->_cursEditor[console->_rngEditor][X] = console->_buff[console->_cursEditor[console->_rngEditor][Y]].size();
-										}
-									}
-								}
-
-							}
-
-							if (e.key.keysym.sym == SDLK_UP) {
-								if (console->_cursEditor[console->_rngEditor][X] == console->_buff[console->_cursEditor[console->_rngEditor][Y]].size()) {
-									if (console->_cursEditor[console->_rngEditor][Y] > 0) {
-										console->_cursEditor[console->_rngEditor][Y]--;
-
-										console->_cursEditor[console->_rngEditor][X] = console->_buff[console->_cursEditor[console->_rngEditor][Y]].size();
-									}
-								} else {
-									if (console->_cursEditor[console->_rngEditor][Y] > 0) {
-										console->_cursEditor[console->_rngEditor][Y]--;
-
-										if (console->_cursEditor[console->_rngEditor][X] > console->_buff[console->_cursEditor[console->_rngEditor][Y]].size()) {
-											console->_cursEditor[console->_rngEditor][X] = console->_buff[console->_cursEditor[console->_rngEditor][Y]].size();
-										}
-									}
-								}
-							}
+		/* 	if (e.type == SDL_KEYDOWN) { */
+		/* 		if (!SDL_GetModState()) { */
+		/* 			if ( */
+		/* 				e.key.keysym.sym >= SDLK_a && */
+		/* 				e.key.keysym.sym <= SDLK_z */
+		/* 			) { */
+		/* 				console->ins(e.key.keysym.sym); */
+		/* 			} */
+
+		/* 			if (( */
+		/* 				e.key.keysym.sym >= SDLK_0 && */
+		/* 				e.key.keysym.sym <= SDLK_9 */
+		/* 			)) { */
+		/* 				console->ins(e.key.keysym.sym); */
+		/* 			} */
+
+		/* 			if ((e.key.keysym.sym == SDLK_SPACE) || ( */
+		/* 				e.key.keysym.sym == SDLK_COMMA || */
+		/* 				e.key.keysym.sym == SDLK_PERIOD || */
+		/* 				e.key.keysym.sym == SDLK_SLASH || */
+
+		/* 				e.key.keysym.sym == SDLK_SEMICOLON || */
+		/* 				e.key.keysym.sym == SDLK_QUOTE || */
+
+		/* 				e.key.keysym.sym == SDLK_LEFTBRACKET || */
+		/* 				e.key.keysym.sym == SDLK_RIGHTBRACKET || */
+		/* 				e.key.keysym.sym == SDLK_BACKSLASH || */
+
+		/* 				e.key.keysym.sym == SDLK_MINUS || */
+		/* 				e.key.keysym.sym == SDLK_EQUALS || */
+
+		/* 				e.key.keysym.sym == SDLK_BACKQUOTE */
+		/* 			)) { */
+		/* 				console->ins(e.key.keysym.sym); */
+		/* 			} */
+
+		/* 			// control */
+		/* 			if (e.key.keysym.sym == SDLK_BACKSPACE) { */
+		/* 				console->del(); */
+		/* 			} */
+
+		/* 			if (e.key.keysym.sym == SDLK_RETURN) { */
+		/* 				switch (console->_mode) { */
+		/* 					case Console::EDITOR: */
+		/* 						console->newLine(); */
+
+		/* 						break; */
+
+		/* 					case Console::PROMPT: */
+		/* 						console->exec(); */
+
+		/* 						break; */
+
+		/* 					case Console::FS: */
+		/* 						if (console->_tree[console->_cursFs]["type"] == "file") { */
+		/* 							console->open(console->_cwd + "/" + console->_tree[console->_cursFs]["name"]); */
+		/* 						} */
+
+		/* 						if (console->_tree[console->_cursFs]["type"] == "dir") { */
+		/* 							console->changeDir(console->_cwd + "/" + console->_tree[console->_cursFs]["name"]); */
+		/* 						} */
+
+		/* 						break; */
+		/* 				} */
+		/* 			} */
+
+		/* 			// mode */
+		/* 			if (e.key.keysym.sym == SDLK_F1) { */
+		/* 				console->switchMode(Console::EDITOR); */
+		/* 			} */
+
+		/* 			if (e.key.keysym.sym == SDLK_F2) { */
+		/* 				console->switchMode(Console::PROMPT); */
+		/* 			} */
+
+		/* 			if (e.key.keysym.sym == SDLK_F3) { */
+		/* 				console->switchMode(Console::FS); */
+		/* 			} */
+
+		/* 			if (e.key.keysym.sym == SDLK_ESCAPE) { */
+		/* 				switch (console->_mode) { */
+		/* 					case Console::EDITOR: */
+		/* 						console->_rngEditor = false; */
+
+		/* 						break; */
+
+		/* 					case Console::PROMPT: */
+		/* 						console->_rngPrompt = false; */
+
+		/* 						break; */
+		/* 				} */
+		/* 			} */
+
+		/* 			// navigation */
+		/* 			switch (console->_mode) { */
+		/* 				case Console::EDITOR: */
+		/* 					if (e.key.keysym.sym == SDLK_RIGHT) { */
+		/* 						if (console->_cursEditor[console->_rngEditor][X] < console->_buff[console->_cursEditor[console->_rngEditor][Y]].size()) { */
+		/* 							console->_cursEditor[console->_rngEditor][X]++; */
+		/* 						} */
+		/* 					} */
+
+		/* 					if (e.key.keysym.sym == SDLK_LEFT) { */
+		/* 						if (console->_cursEditor[console->_rngEditor][X] > 0) { */
+		/* 							console->_cursEditor[console->_rngEditor][X]--; */
+		/* 						} */
+		/* 					} */
+
+		/* 					if (e.key.keysym.sym == SDLK_DOWN) { */
+		/* 						if (console->_cursEditor[console->_rngEditor][X] == console->_buff[console->_cursEditor[console->_rngEditor][Y]].size()) { */
+		/* 							if (console->_cursEditor[console->_rngEditor][Y] < console->_buff.size() - 1) { */
+		/* 								console->_cursEditor[console->_rngEditor][Y]++; */
+
+		/* 								console->_cursEditor[console->_rngEditor][X] = console->_buff[console->_cursEditor[console->_rngEditor][Y]].size(); */
+		/* 							} */
+		/* 						} else { */
+		/* 							if (console->_cursEditor[console->_rngEditor][Y] < console->_buff.size() - 1) { */
+		/* 								console->_cursEditor[console->_rngEditor][Y]++; */
+
+		/* 								if (console->_cursEditor[console->_rngEditor][X] > console->_buff[console->_cursEditor[console->_rngEditor][Y]].size()) { */
+		/* 									console->_cursEditor[console->_rngEditor][X] = console->_buff[console->_cursEditor[console->_rngEditor][Y]].size(); */
+		/* 								} */
+		/* 							} */
+		/* 						} */
+
+		/* 					} */
+
+		/* 					if (e.key.keysym.sym == SDLK_UP) { */
+		/* 						if (console->_cursEditor[console->_rngEditor][X] == console->_buff[console->_cursEditor[console->_rngEditor][Y]].size()) { */
+		/* 							if (console->_cursEditor[console->_rngEditor][Y] > 0) { */
+		/* 								console->_cursEditor[console->_rngEditor][Y]--; */
+
+		/* 								console->_cursEditor[console->_rngEditor][X] = console->_buff[console->_cursEditor[console->_rngEditor][Y]].size(); */
+		/* 							} */
+		/* 						} else { */
+		/* 							if (console->_cursEditor[console->_rngEditor][Y] > 0) { */
+		/* 								console->_cursEditor[console->_rngEditor][Y]--; */
+
+		/* 								if (console->_cursEditor[console->_rngEditor][X] > console->_buff[console->_cursEditor[console->_rngEditor][Y]].size()) { */
+		/* 									console->_cursEditor[console->_rngEditor][X] = console->_buff[console->_cursEditor[console->_rngEditor][Y]].size(); */
+		/* 								} */
+		/* 							} */
+		/* 						} */
+		/* 					} */
 
-							break;
+		/* 					break; */
 
-						case Console::PROMPT:
-							if (e.key.keysym.sym == SDLK_RIGHT) {
-								if (console->_cursPrompt[console->_rngPrompt] < console->_prompt.size()) {
-									console->_cursPrompt[console->_rngPrompt]++;
-								}
-							}
+		/* 				case Console::PROMPT: */
+		/* 					if (e.key.keysym.sym == SDLK_RIGHT) { */
+		/* 						if (console->_cursPrompt[console->_rngPrompt] < console->_prompt.size()) { */
+		/* 							console->_cursPrompt[console->_rngPrompt]++; */
+		/* 						} */
+		/* 					} */
 
-							if (e.key.keysym.sym == SDLK_LEFT) {
-								if (console->_cursPrompt[console->_rngPrompt] > 0) {
-									console->_cursPrompt[console->_rngPrompt]--;
-								}
-							}
+		/* 					if (e.key.keysym.sym == SDLK_LEFT) { */
+		/* 						if (console->_cursPrompt[console->_rngPrompt] > 0) { */
+		/* 							console->_cursPrompt[console->_rngPrompt]--; */
+		/* 						} */
+		/* 					} */
 
-							break;
+		/* 					break; */
 
-						case Console::FS:
-							if (e.key.keysym.sym == SDLK_DOWN) {
-								if (console->_cursFs < console->_tree.size() - 1) {
-									console->_cursFs++;
-								}
-							}
+		/* 				case Console::FS: */
+		/* 					if (e.key.keysym.sym == SDLK_DOWN) { */
+		/* 						if (console->_cursFs < console->_tree.size() - 1) { */
+		/* 							console->_cursFs++; */
+		/* 						} */
+		/* 					} */
 
-							if (e.key.keysym.sym == SDLK_UP) {
-								if (console->_cursFs > 0) {
-									console->_cursFs--;
-								}
-							}
+		/* 					if (e.key.keysym.sym == SDLK_UP) { */
+		/* 						if (console->_cursFs > 0) { */
+		/* 							console->_cursFs--; */
+		/* 						} */
+		/* 					} */
 
-							break;
-					}
-				} else {
-					if (e.key.keysym.mod & (KMOD_LSHIFT | KMOD_RSHIFT)) {
-						// text
-						if (
-							e.key.keysym.sym >= SDLK_a &&
-							e.key.keysym.sym <= SDLK_z
-						) {
-							char c = e.key.keysym.sym;
+		/* 					break; */
+		/* 			} */
+		/* 		} else { */
+		/* 			if (e.key.keysym.mod & (KMOD_LSHIFT | KMOD_RSHIFT)) { */
+		/* 				// text */
+		/* 				if ( */
+		/* 					e.key.keysym.sym >= SDLK_a && */
+		/* 					e.key.keysym.sym <= SDLK_z */
+		/* 				) { */
+		/* 					char c = e.key.keysym.sym; */
 
-							c -= 32;
+		/* 					c -= 32; */
 
-							console->ins(c);
-						}
+		/* 					console->ins(c); */
+		/* 				} */
 
-						if (
-							e.key.keysym.sym >= SDLK_0 &&
-							e.key.keysym.sym <= SDLK_9
-						) {
-							char c;
-							switch (e.key.keysym.sym) {
-								case SDLK_0:
-									c = ')';
+		/* 				if ( */
+		/* 					e.key.keysym.sym >= SDLK_0 && */
+		/* 					e.key.keysym.sym <= SDLK_9 */
+		/* 				) { */
+		/* 					char c; */
+		/* 					switch (e.key.keysym.sym) { */
+		/* 						case SDLK_0: */
+		/* 							c = ')'; */
 
-									break;
+		/* 							break; */
 
-								case SDLK_1:
-									c = '!';
+		/* 						case SDLK_1: */
+		/* 							c = '!'; */
 
-									break;
+		/* 							break; */
 
-								case SDLK_2:
-									c = '@';
+		/* 						case SDLK_2: */
+		/* 							c = '@'; */
 
-									break;
+		/* 							break; */
 
-								case SDLK_3:
-									c = '#';
+		/* 						case SDLK_3: */
+		/* 							c = '#'; */
 
-									break;
+		/* 							break; */
 
-								case SDLK_4:
-									c = '$';
+		/* 						case SDLK_4: */
+		/* 							c = '$'; */
 
-									break;
+		/* 							break; */
 
-								case SDLK_5:
-									c = '%';
+		/* 						case SDLK_5: */
+		/* 							c = '%'; */
 
-									break;
+		/* 							break; */
 
-								case SDLK_6:
-									c = '^';
+		/* 						case SDLK_6: */
+		/* 							c = '^'; */
 
-									break;
+		/* 							break; */
 
-								case SDLK_7:
-									c = '&';
+		/* 						case SDLK_7: */
+		/* 							c = '&'; */
 
-									break;
+		/* 							break; */
 
-								case SDLK_8:
-									c = '*';
+		/* 						case SDLK_8: */
+		/* 							c = '*'; */
 
-									break;
+		/* 							break; */
 
-								case SDLK_9:
-									c = '(';
+		/* 						case SDLK_9: */
+		/* 							c = '('; */
 
-									break;
-							}
+		/* 							break; */
+		/* 					} */
 
-							console->ins(c);
-						}
+		/* 					console->ins(c); */
+		/* 				} */
 
-						if ((e.key.keysym.sym == SDLK_SPACE) || (
-							e.key.keysym.sym == SDLK_COMMA ||
-							e.key.keysym.sym == SDLK_PERIOD ||
-							e.key.keysym.sym == SDLK_SLASH ||
+		/* 				if ((e.key.keysym.sym == SDLK_SPACE) || ( */
+		/* 					e.key.keysym.sym == SDLK_COMMA || */
+		/* 					e.key.keysym.sym == SDLK_PERIOD || */
+		/* 					e.key.keysym.sym == SDLK_SLASH || */
 
-							e.key.keysym.sym == SDLK_SEMICOLON ||
-							e.key.keysym.sym == SDLK_QUOTE ||
+		/* 					e.key.keysym.sym == SDLK_SEMICOLON || */
+		/* 					e.key.keysym.sym == SDLK_QUOTE || */
 
-							e.key.keysym.sym == SDLK_LEFTBRACKET ||
-							e.key.keysym.sym == SDLK_RIGHTBRACKET ||
-							e.key.keysym.sym == SDLK_BACKSLASH ||
+		/* 					e.key.keysym.sym == SDLK_LEFTBRACKET || */
+		/* 					e.key.keysym.sym == SDLK_RIGHTBRACKET || */
+		/* 					e.key.keysym.sym == SDLK_BACKSLASH || */
 
-							e.key.keysym.sym == SDLK_MINUS ||
-							e.key.keysym.sym == SDLK_EQUALS ||
+		/* 					e.key.keysym.sym == SDLK_MINUS || */
+		/* 					e.key.keysym.sym == SDLK_EQUALS || */
 
-							e.key.keysym.sym == SDLK_BACKQUOTE
-						)) {
-							char c;
-							switch (e.key.keysym.sym) {
-								case SDLK_BACKQUOTE:
-									c = '~';
+		/* 					e.key.keysym.sym == SDLK_BACKQUOTE */
+		/* 				)) { */
+		/* 					char c; */
+		/* 					switch (e.key.keysym.sym) { */
+		/* 						case SDLK_BACKQUOTE: */
+		/* 							c = '~'; */
 
-									break;
+		/* 							break; */
 
-								case SDLK_COMMA:
-									c = '<';
+		/* 						case SDLK_COMMA: */
+		/* 							c = '<'; */
 
-									break;
+		/* 							break; */
 
-								case SDLK_PERIOD:
-									c = '>';
+		/* 						case SDLK_PERIOD: */
+		/* 							c = '>'; */
 
-									break;
+		/* 							break; */
 
-								case SDLK_SLASH:
-									c = '?';
+		/* 						case SDLK_SLASH: */
+		/* 							c = '?'; */
 
-									break;
+		/* 							break; */
 
-								case SDLK_SEMICOLON:
-									c = ':';
+		/* 						case SDLK_SEMICOLON: */
+		/* 							c = ':'; */
 
-									break;
+		/* 							break; */
 
-								case SDLK_QUOTE:
-									c = '"';
+		/* 						case SDLK_QUOTE: */
+		/* 							c = '"'; */
 
-									break;
+		/* 							break; */
 
-								case SDLK_LEFTBRACKET:
-									c = '{';
+		/* 						case SDLK_LEFTBRACKET: */
+		/* 							c = '{'; */
 
-									break;
+		/* 							break; */
 
-								case SDLK_RIGHTBRACKET:
-									c = '}';
+		/* 						case SDLK_RIGHTBRACKET: */
+		/* 							c = '}'; */
 
-									break;
+		/* 							break; */
 
-								case SDLK_BACKSLASH:
-									c = '|';
+		/* 						case SDLK_BACKSLASH: */
+		/* 							c = '|'; */
 
-									break;
+		/* 							break; */
 
-								case SDLK_MINUS:
-									c = '_';
+		/* 						case SDLK_MINUS: */
+		/* 							c = '_'; */
 
-									break;
+		/* 							break; */
 
-								case SDLK_EQUALS:
-									c = '+';
+		/* 						case SDLK_EQUALS: */
+		/* 							c = '+'; */
 
-									break;
-							}
+		/* 							break; */
+		/* 					} */
 
-							console->ins(c);
-						}
-					}
+		/* 					console->ins(c); */
+		/* 				} */
+		/* 			} */
 
-					if (e.key.keysym.mod & (KMOD_LALT | KMOD_RALT)) {
-						switch (console->_mode) {
-							case Console::EDITOR:
-								console->_rngEditor = true;
+		/* 			if (e.key.keysym.mod & (KMOD_LALT | KMOD_RALT)) { */
+		/* 				switch (console->_mode) { */
+		/* 					case Console::EDITOR: */
+		/* 						console->_rngEditor = true; */
 
-								break;
+		/* 						break; */
 
-							case Console::PROMPT:
-								console->_rngPrompt = true;
+		/* 					case Console::PROMPT: */
+		/* 						console->_rngPrompt = true; */
 
-								break;
-						}
-					}
+		/* 						break; */
+		/* 				} */
+		/* 			} */
 
-					if (e.key.keysym.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
-						switch (e.key.keysym.sym) {
-							case SDLK_c:
-								switch (console->_mode) {
-									case Console::EDITOR: {
-										console->_clip.clear();
+		/* 			if (e.key.keysym.mod & (KMOD_LCTRL | KMOD_RCTRL)) { */
+		/* 				switch (e.key.keysym.sym) { */
+		/* 					case SDLK_c: */
+		/* 						switch (console->_mode) { */
+		/* 							case Console::EDITOR: { */
+		/* 								console->_clip.clear(); */
 
-										unsigned int idx[2];
-										for (int i = 0; i < 2; i++) {
-											idx[i] = console->_cursEditor[MIN][i];
-										}
-										while (idx[Y] < console->_cursEditor[MAX][Y]) {
-											console->_clip.push_back(std::string(console->_buff[idx[Y]].begin() + idx[X], console->_buff[idx[Y]].end()));
+		/* 								unsigned int idx[2]; */
+		/* 								for (int i = 0; i < 2; i++) { */
+		/* 									idx[i] = console->_cursEditor[MIN][i]; */
+		/* 								} */
+		/* 								while (idx[Y] < console->_cursEditor[MAX][Y]) { */
+		/* 									console->_clip.push_back(std::string(console->_buff[idx[Y]].begin() + idx[X], console->_buff[idx[Y]].end())); */
 
-											idx[Y]++;
-											idx[X] = 0;
-										}
+		/* 									idx[Y]++; */
+		/* 									idx[X] = 0; */
+		/* 								} */
 
-										console->_clip.push_back(std::string(console->_buff[idx[Y]].begin(), console->_buff[idx[Y]].begin() + console->_cursEditor[MAX][X] + 1));
+		/* 								console->_clip.push_back(std::string(console->_buff[idx[Y]].begin(), console->_buff[idx[Y]].begin() + console->_cursEditor[MAX][X] + 1)); */
 
-										break;
-									}
+		/* 								break; */
+		/* 							} */
 
-									case Console::PROMPT:
-										console->_clip = {
-											std::string(console->_prompt.begin() + console->_cursPrompt[MIN], console->_prompt.begin() + console->_cursPrompt[MAX] + 1)
-										};
+		/* 							case Console::PROMPT: */
+		/* 								console->_clip = { */
+		/* 									std::string(console->_prompt.begin() + console->_cursPrompt[MIN], console->_prompt.begin() + console->_cursPrompt[MAX] + 1) */
+		/* 								}; */
 
-										break;
-								}
+		/* 								break; */
+		/* 						} */
 
-								break;
+		/* 						break; */
 
-							case SDLK_v:
-								switch (console->_mode) {
-									case Console::EDITOR:
-										console->del();
+		/* 					case SDLK_v: */
+		/* 						switch (console->_mode) { */
+		/* 							case Console::EDITOR: */
+		/* 								console->del(); */
 
-										console->_buff[console->_cursEditor[console->_rngEditor][Y]].insert(console->_cursEditor[MIN][X], console->_clip[0]);
+		/* 								console->_buff[console->_cursEditor[console->_rngEditor][Y]].insert(console->_cursEditor[MIN][X], console->_clip[0]); */
 
-										break;
+		/* 								break; */
 
-									case Console::PROMPT:
-										console->del();
+		/* 							case Console::PROMPT: */
+		/* 								console->del(); */
 
-										console->_prompt.insert(console->_cursPrompt[MIN], console->_clip[0]);
+		/* 								console->_prompt.insert(console->_cursPrompt[MIN], console->_clip[0]); */
 
-										break;
-								}
+		/* 								break; */
+		/* 						} */
 
-								break;
+		/* 						break; */
 
-							case SDLK_x:
-								switch (console->_mode) {
-									case Console::EDITOR:
-										console->_clip = {
-											std::string(console->_buff[console->_cursEditor[Y][console->_rngEditor]].begin() + console->_cursEditor[MIN][X], console->_buff[console->_cursEditor[Y][console->_rngEditor]].begin() + console->_cursEditor[MAX][X] + 1)
-										};
+		/* 					case SDLK_x: */
+		/* 						switch (console->_mode) { */
+		/* 							case Console::EDITOR: */
+		/* 								console->_clip = { */
+		/* 									std::string(console->_buff[console->_cursEditor[Y][console->_rngEditor]].begin() + console->_cursEditor[MIN][X], console->_buff[console->_cursEditor[Y][console->_rngEditor]].begin() + console->_cursEditor[MAX][X] + 1) */
+		/* 								}; */
 
-										console->del();
+		/* 								console->del(); */
 
-										break;
+		/* 								break; */
 
-									case Console::PROMPT:
-										console->_clip = {
-											std::string(console->_prompt.begin() + console->_cursPrompt[MIN], console->_prompt.begin() + console->_cursPrompt[MAX] + 1)
-										};
+		/* 							case Console::PROMPT: */
+		/* 								console->_clip = { */
+		/* 									std::string(console->_prompt.begin() + console->_cursPrompt[MIN], console->_prompt.begin() + console->_cursPrompt[MAX] + 1) */
+		/* 								}; */
 
-										console->del();
+		/* 								console->del(); */
 
-										break;
-								}
+		/* 								break; */
+		/* 						} */
 
-								break;
-						}
-					}
-				}
+		/* 						break; */
+		/* 				} */
+		/* 			} */
+		/* 		} */
 
-				if (!console->_rngEditor) {
-					for (int r = 0; r < 2; r++) {
-						console->_cursEditor[MAX][r] = console->_cursEditor[MIN][r];
-					}
-				}
+		/* 		if (!console->_rngEditor) { */
+		/* 			for (int r = 0; r < 2; r++) { */
+		/* 				console->_cursEditor[MAX][r] = console->_cursEditor[MIN][r]; */
+		/* 			} */
+		/* 		} */
 
-				if (!console->_rngPrompt) {
-					console->_cursPrompt[MAX] = console->_cursPrompt[MIN];
-				}
+		/* 		if (!console->_rngPrompt) { */
+		/* 			console->_cursPrompt[MAX] = console->_cursPrompt[MIN]; */
+		/* 		} */
 
-				console->clear();
+		/* 		console->clear(); */
 
-				console->fmt();
-				console->hl();
+		/* 		console->fmt(); */
+		/* 		console->hl(); */
 
-				console->render();
-			}
+		/* 		console->render(); */
+		/* 	} */
 
-			if (e.type == SDL_MOUSEBUTTONDOWN) {
-				cam._prevPos = cam._pos;
+		/* 	if (e.type == SDL_MOUSEBUTTONDOWN) { */
+		/* 		cam._prevPos = cam._pos; */
 
-				SDL_GetMouseState(&cam._begin[0], &cam._begin[1]);
+		/* 		SDL_GetMouseState(&cam._begin[0], &cam._begin[1]); */
 
-				cam._drag = true;
-			}
+		/* 		cam._drag = true; */
+		/* 	} */
 
-			if (e.type == SDL_MOUSEBUTTONUP) {
-				cam._pos = cam._prevPos + cam._deltaPos;
+		/* 	if (e.type == SDL_MOUSEBUTTONUP) { */
+		/* 		cam._pos = cam._prevPos + cam._deltaPos; */
 
-				cam._drag = false;
-			}
+		/* 		cam._drag = false; */
+		/* 	} */
 
-			if (e.type == SDL_MOUSEMOTION) {
-				if (cam._drag) {
-					SDL_GetMouseState(&cam._curr[0], &cam._curr[1]);
+		/* 	if (e.type == SDL_MOUSEMOTION) { */
+		/* 		if (cam._drag) { */
+		/* 			SDL_GetMouseState(&cam._curr[0], &cam._curr[1]); */
 
-					for (int i = 0; i < 2; i++) {
-						cam._delta[i] = cam._curr[i] - cam._begin[i];
-					}
+		/* 			for (int i = 0; i < 2; i++) { */
+		/* 				cam._delta[i] = cam._curr[i] - cam._begin[i]; */
+		/* 			} */
 
-					cam._deltaPos[X] = cam._delta[X];
-					cam._deltaPos[Z] = -(cam._delta[X]);
+		/* 			cam._deltaPos[X] = cam._delta[X]; */
+		/* 			cam._deltaPos[Z] = -(cam._delta[X]); */
 
-					cam._deltaPos[Y] = -(cam._delta[Y]);
+		/* 			cam._deltaPos[Y] = -(cam._delta[Y]); */
 
-					cam._pos = cam._prevPos + cam._deltaPos;
-				}
-			}
+		/* 			cam._pos = cam._prevPos + cam._deltaPos; */
+		/* 		} */
+		/* 	} */
 
-			if (e.type == SDL_MOUSEWHEEL) {
-				if (e.wheel.y > 0) {
-					if (glm::all(glm::lessThan(cam._scale, glm::vec3(100.0, 100.0, 100.0)))) {
-						cam._scale += glm::vec3(10.0, 10.0, 10.0);
-					}
-				}
+		/* 	if (e.type == SDL_MOUSEWHEEL) { */
+		/* 		if (e.wheel.y > 0) { */
+		/* 			if (glm::all(glm::lessThan(cam._scale, glm::vec3(100.0, 100.0, 100.0)))) { */
+		/* 				cam._scale += glm::vec3(10.0, 10.0, 10.0); */
+		/* 			} */
+		/* 		} */
 
-				if (e.wheel.y < 0) {
-					if (glm::all(glm::greaterThan(cam._scale, glm::vec3(20.0, 20.0, 20.0)))) {
-						cam._scale -= glm::vec3(10.0, 10.0, 10.0);
-					}
-				}
-			}
+		/* 		if (e.wheel.y < 0) { */
+		/* 			if (glm::all(glm::greaterThan(cam._scale, glm::vec3(20.0, 20.0, 20.0)))) { */
+		/* 				cam._scale -= glm::vec3(10.0, 10.0, 10.0); */
+		/* 			} */
+		/* 		} */
+		/* 	} */
 
 			if (e.type == SDL_QUIT) {
 				disp->_open = false;
 			}
 		}
 
-		disp->draw();
+		disp->clear();
+
+		glBindVertexArray(vao);
+		prog.use();
+
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+
+		prog.unUse();
+		glBindVertexArray(0);
+
+		disp->update();
+
+		/* disp->draw(); */
 	}
 
 	return 0;
