@@ -791,6 +791,14 @@ void Console::hl() {
 			loc[X] = maxFs + maxNo;
 			loc[Y] = 1;
 
+			int deltaScal = idxDeterm({
+				_cursEditor[MAX][X],
+				_cursEditor[MAX][Y]
+			}, _buff) - idxDeterm({
+				_cursEditor[MIN][X],
+				_cursEditor[MIN][Y]
+			}, _buff);
+
 			int deltaCoord[2];
 			for (int i = 0; i < 2; i++) {
 				deltaCoord[i] = _cursEditor[MAX][i] - _cursEditor[MIN][i];
@@ -800,10 +808,8 @@ void Console::hl() {
 				_cursEditor[MIN][X],
 				_cursEditor[MIN][Y]
 			};
-			while (
-				st._x < _cursEditor[MIN][X] + abs(deltaCoord[X]) ||
-				st._y < _cursEditor[MIN][Y] + abs(deltaCoord[Y])
-			) {
+			unsigned int i = 0;
+			while (i < abs(deltaScal)) {
 				_hl[idxStatic({
 					loc[X] + st._x,
 					loc[Y] + st._y
@@ -811,6 +817,8 @@ void Console::hl() {
 					state::ln,
 					state::line
 				})] = true;
+
+				i++;
 
 				if (st._x < _buff[st._y].size()) {
 					st._x++;
