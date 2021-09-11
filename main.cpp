@@ -715,7 +715,24 @@ int main(int argc, char** argv) {
 			}
 		}
 
-		disp->draw();
+		disp->clear();
+
+		glViewport(layout::res[X], 0, layout::view[X], layout::view[Y]);
+
+		glEnable(GL_DEPTH_TEST);
+
+		for (int i = 0; i < scn::obj.size(); i++) {
+			objDraw(scn::obj[i], scn::objType[i]);
+		}
+
+		glViewport(0, 0, layout::res[Y], layout::view[Y]);
+
+		glDisable(GL_DEPTH_TEST);
+
+		console->render();
+		console->draw();
+
+		disp->update();
 	}
 
 	return 0;

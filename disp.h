@@ -32,7 +32,5 @@ class Disp {
 
 		void update();
 
-		void draw();
-
 		~Disp();
 };
