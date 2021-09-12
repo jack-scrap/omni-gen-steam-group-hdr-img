@@ -163,21 +163,21 @@ int main(int argc, char** argv) {
 		};
 		glBufferData(GL_ARRAY_BUFFER, sizeof vtc, vtc, GL_STATIC_DRAW);
 
-		// shader
+		/* shader */
 		Prog prog("logo", "solid");
 
-		/// attribute
+		prog.use();
+
+		// attribute
 		GLint attrPos = glGetAttribLocation(prog._id, "pos");
 		glVertexAttribPointer(attrPos, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 		glEnableVertexAttribArray(attrPos);
 
-		/// uniform
+		// uniform
 		GLint uniActive = glGetUniformLocation(prog._id, "active");
 		GLint uniRes = glGetUniformLocation(prog._id, "res");
 
 		// initialize
-		prog.use();
-
 		glUniform1ui(uniActive, true);
 		glUniform2i(uniRes, disp->_res[X], disp->_res[Y]);
 
