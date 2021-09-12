@@ -13,12 +13,12 @@ class Disp {
 	private:
 		SDL_GLContext _ctx;
 
-	public:
-		bool _open = false;
-
 		SDL_Window* _win;
 
 		SDL_Renderer* _rend;
+
+	public:
+		bool _open = false;
 
 		SDL_Surface* _map;
 
