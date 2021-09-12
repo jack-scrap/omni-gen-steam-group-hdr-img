@@ -166,56 +166,6 @@ Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::s
 	Obj* _ = objMk(vtc, idc, noPrim, vtx, frag, active, loc, rot);
 
 	// texture
-	/* SDL_Surface* tex = IMG_Load("res/map.bmp"); */
-
-	/* if (tex->pixels) { */
-	/* 	glGenTextures(1, &_->_tex); */
-	/* 	glBindTexture(GL_TEXTURE_2D, _->_tex); */
-
-	/* 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, tex->w, tex->h, 0, GL_RGB, GL_UNSIGNED_BYTE, tex->pixels); */
-	/* 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER); */
-	/* 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER); */
-	/* 	glGenerateMipmap(GL_TEXTURE_2D); */
-	/* } else { */
-	/* 	omni::err("Texture failed to load"); */
-	/* } */
-
-	GLfloat vtcCube[2 * 2 * 2 * 3];
-	int i = 0;
-	for (int z = 0; z < 2; z++) {
-		for (int y = 0; y < 2; y++) {
-			for (int x = 0; x < 2; x++) {
-				vtc[i] = x ? 1 : -1;
-				vtc[i + 1] = y ? 1 : -1;
-				vtc[i + 2] = z ? 1 : -1;
-
-				i += 3;
-			}
-		}
-	}
-
-	GLuint idcCube[3 * 2 * 3 * 2] = {
-		1, 0, 3,
-		3, 0, 2,
-
-		4, 5, 6,
-		6, 5, 7,
-
-		5, 1, 7,
-		7, 1, 3,
-
-		0, 4, 2,
-		2, 4, 6,
-
-		0, 1, 4,
-		4, 1, 5,
-
-		3, 2, 7,
-		7, 2, 6
-	};
-
-	Obj* cube = objMk(vtc, idc, 2 * 3, "obj", "solid", true);
-
 	_->_tex = util::tex::spray('0');
 
 	glBindVertexArray(_->_mesh->_id[Mesh::VAO]);
@@ -243,19 +193,7 @@ Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::s
 	Obj* _ = objMk(vtc, idc, noPrim, vtx, frag, active, child, noChild, loc, rot);
 
 	// texture
-	SDL_Surface* tex = IMG_Load("res/map.bmp");
-
-	if (tex->pixels) {
-		glGenTextures(1, &_->_tex);
-		glBindTexture(GL_TEXTURE_2D, _->_tex);
-
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, tex->w, tex->h, 0, GL_RGB, GL_UNSIGNED_BYTE, tex->pixels);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-		glGenerateMipmap(GL_TEXTURE_2D);
-	} else {
-		omni::err("Texture failed to load");
-	}
+	_->_tex = util::tex::spray('0');
 
 	glBindVertexArray(_->_mesh->_id[Mesh::VAO]);
 
