@@ -43,9 +43,7 @@ int main(int argc, char** argv) {
 	cam._scale = {
 		50, 50, 50
 	};
-	cam._prevPos = {
-		0.0, 0.0, 0.0
-	};
+	cam._prevPos = cam._pos;
 	cam._deltaPos = {
 		0.0, 0.0, 0.0
 	};
