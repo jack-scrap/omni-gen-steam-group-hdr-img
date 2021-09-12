@@ -19,7 +19,6 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 
 	unsigned int i = 0;
 	GLfloat max[2] = {
-		0.0,
 		0.0
 	};
 	for (const auto& pair : deser.items()) {
