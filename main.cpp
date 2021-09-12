@@ -87,11 +87,11 @@ int main(int argc, char** argv) {
 		}
 	}
 
-	layout::res[X] = state::ln * layout::glyph[X];
-	layout::res[Y] = layout::view[Y];
-
 	layout::canv[X] = state::ln * layout::glyph[X];
 	layout::canv[Y] = state::line * layout::glyph[Y];
+
+	layout::res[X] = state::ln * layout::glyph[X];
+	layout::res[Y] = layout::view[Y];
 
 	disp = new Disp("Omni", {
 		layout::view[X] + (state::ln * layout::glyph[X]), layout::view[Y]
