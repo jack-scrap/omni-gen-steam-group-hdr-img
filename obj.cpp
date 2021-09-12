@@ -209,7 +209,7 @@ Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::s
 	glVertexAttribPointer(_->_attr[Obj::ST], 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 	glEnableVertexAttribArray(_->_attr[Obj::ST]);
 
-	glBindVertexArray(0);
+	glBindTexture(GL_TEXTURE_2D, 0);
 	_->_prog.unUse();
 	glBindVertexArray(0);
 
