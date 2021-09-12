@@ -10,8 +10,8 @@ unsigned int state::hlActiveLine;
 
 unsigned int state::fps;
 
-unsigned int state::speed;
-
 unsigned int state::tabWd;
+
+unsigned int state::speed;
 
 std::string state::format;
