@@ -818,6 +818,14 @@ void Console::hl() {
 			}, _buff);
 			while (i < 1 + abs(delta)) {
 				Coord st = coordDeterm(startScal + (i * norm), _buff);
+
+				if (
+					i == 1 + abs(delta) - 1 &&
+					_cursEditor[MAX][X] == _buff[_cursEditor[MAX][Y]].size()
+				) {
+					break;
+				}
+
 				_hl[idxStatic({
 					loc[X] + st._x,
 					loc[Y] + st._y
