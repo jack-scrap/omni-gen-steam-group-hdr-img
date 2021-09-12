@@ -7,9 +7,8 @@
 typedef struct {
 	char _c;
 
-	GLuint
-		_id[1],
-		_tex;
+	GLuint _id[1];
+	GLuint _tex;
 
 	Obj* _parent;
 
