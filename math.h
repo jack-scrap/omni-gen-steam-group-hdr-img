@@ -1,5 +1,10 @@
 #pragma once
 
+typedef struct {
+	unsigned int _x;
+	unsigned int _y;
+} Coord;
+
 enum axes {
 	X,
 	Y,
@@ -18,8 +23,3 @@ enum col {
 	B,
 	A
 };
-
-typedef struct {
-	unsigned int _x;
-	unsigned int _y;
-} Coord;
