@@ -647,7 +647,7 @@ int main(int argc, char** argv) {
 					cam._begin[X] > layout::res[X] &&
 					cam._begin[Y] > 0 &&
 					cam._begin[X] < layout::res[X] + layout::view[X] &&
-					cam._begin[Y] < 0 + layout::view[Y]
+					cam._begin[Y] < layout::view[Y]
 				) {
 					cam._posPrev = cam._pos;
 
