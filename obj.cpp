@@ -32,6 +32,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 	_->_child = nullptr;
 	_->_noChild = 0;
 	_->_v = 0.0;
+	_->_tex = 0;
 
 	_->_mesh = meshMk(vtc, idc, noPrim);
 
@@ -94,6 +95,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 		_->_child[i] = child[i];
 	}
 	_->_v = 0.0;
+	_->_tex = 0;
 
 	_->_mesh = meshMk(vtc, idc, noPrim);
 
@@ -225,6 +227,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 	_->_child = nullptr;
 	_->_noChild = 0;
 	_->_v = 0.0;
+	_->_tex = 0;
 
 	_->_mesh = meshMk(vtc, idc, noPrim);
 
