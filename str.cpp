@@ -5,15 +5,15 @@
 #include "str.h"
 #include "layout.h"
 
-Str* strMk(std::string str, glm::vec3 loc, glm::vec3 rot) {
+Str* strMk(std::string buff, glm::vec3 loc, glm::vec3 rot) {
 	Str* _ = (Str*) malloc(sizeof (Str));
 
-	Obj* child[str.size() - 1];
-	for (int i = 0; i < str.size() - 1; i++) {
-		child[i] = objMk(std::string("glyph/") + str[i + 1], "obj", "solid", true, glm::vec3((i + 1) * (layout::letter[X] + layout::stroke), 0.0, 0.0));
+	Obj* child[buff.size() - 1];
+	for (int i = 0; i < buff.size() - 1; i++) {
+		child[i] = objMk(std::string("glyph/") + buff[i + 1], "obj", "solid", true, glm::vec3((i + 1) * (layout::letter[X] + layout::stroke), 0.0, 0.0));
 	}
 
-	_->_parent = objMk(std::string("glyph/") + str[0], "obj", "solid", true, child, sizeof child / sizeof *child, loc);
+	_->_parent = objMk(std::string("glyph/") + buff[0], "obj", "solid", true, child, sizeof child / sizeof *child, loc);
 
 	return _;
 }
