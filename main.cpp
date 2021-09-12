@@ -1,5 +1,3 @@
-#define GLM_ENABLE_EXPERIMENTAL
-
 #include <iostream>
 #include <dlfcn.h>
 #include <thread>
@@ -9,7 +7,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <glm/gtc/type_ptr.hpp>
-#include <glm/gtx/string_cast.hpp>
 
 #include "scn.h"
 #include "util.h"
