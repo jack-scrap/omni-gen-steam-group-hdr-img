@@ -13,9 +13,9 @@
 typedef struct Obj {
 	Mesh* _mesh;
 
-	GLfloat _v;
-
 	bool _active;
+
+	GLfloat _v;
 
 	glm::mat4 _model;
 	glm::mat4 _view;
@@ -28,14 +28,14 @@ typedef struct Obj {
 	GLint _attr[3];
 	GLint* _uni;
 
+	GLuint _tex;
+
 	GLfloat _aabb[3][2] = {
 		0.0
 	};
 
 	struct Obj** _child;
 	unsigned int _noChild;
-
-	GLuint _tex;
 
 	enum attr {
 		POS,
