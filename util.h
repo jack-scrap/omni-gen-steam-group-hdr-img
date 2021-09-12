@@ -15,6 +15,7 @@
 #include "lim.h"
 #include "cone.h"
 #include "street_sign.h"
+#include "math.h"
 
 namespace util {
 	namespace fs {
@@ -148,6 +149,16 @@ namespace util {
 		int delta(int min, int max);
 
 		int norm(int lhs, int rhs);
+
+		namespace idx {
+			unsigned int arr(Coord st, Coord bound);
+			unsigned int determ(Coord st, std::vector<std::string> buff);
+		}
+
+		namespace coord {
+			Coord arr(unsigned int idx, Coord bound);
+			Coord determ(unsigned int idx, std::vector<std::string> buff);
+		}
 	}
 
 	std::vector<std::string> log(unsigned int loc, unsigned int maxFs);

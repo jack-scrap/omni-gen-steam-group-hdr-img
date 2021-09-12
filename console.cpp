@@ -30,7 +30,7 @@ Console::Console(std::string fName, std::string cwd) :
 
 		for (int y = 0; y < layout::canv[Y]; y++) {
 			for (int x = 0; x < layout::canv[X]; x++) {
-				unsigned idx = idxStatic({
+				unsigned idx = util::math::idx::arr({
 					x,
 					y
 				}, {
@@ -130,7 +130,7 @@ void Console::fmtBuff(std::vector<std::string> buff, Coord loc, Coord view, Coor
 			x < view._x &&
 			x < state::ln
 		) {
-			_canv[idxStatic({
+			_canv[util::math::idx::arr({
 				loc._x + x,
 				loc._y + y
 			}, {
@@ -154,7 +154,7 @@ void Console::clear() {
 
 	for (int y = 0; y < state::line; y++) {
 		for (int x = 0; x < state::ln; x++) {
-			unsigned int idx = idxStatic({
+			unsigned int idx = util::math::idx::arr({
 				x,
 				y
 			}, {
@@ -200,7 +200,7 @@ void Console::fmt() {
 		i < modeStr.size() &&
 		x < state::ln
 	) {
-		_canv[idxStatic({
+		_canv[util::math::idx::arr({
 			x,
 			0
 		}, {
@@ -212,7 +212,7 @@ void Console::fmt() {
 		x++;
 	}
 
-	_canv[idxStatic({
+	_canv[util::math::idx::arr({
 		x,
 		0
 	}, {
@@ -227,7 +227,7 @@ void Console::fmt() {
 		i < base.size() &&
 		x < state::ln
 	) {
-		_canv[idxStatic({
+		_canv[util::math::idx::arr({
 			x,
 			0
 		}, {
@@ -242,7 +242,7 @@ void Console::fmt() {
 	std::string time = std::string(_timeFmt);
 
 	while (x < state::ln - time.size()) {
-		_canv[idxStatic({
+		_canv[util::math::idx::arr({
 			x,
 			0
 		}, {
@@ -258,7 +258,7 @@ void Console::fmt() {
 		i < time.size() &&
 		x < state::ln
 	) {
-		_canv[idxStatic({
+		_canv[util::math::idx::arr({
 			x,
 			0
 		}, {
@@ -414,7 +414,7 @@ void Console::render() {
 				c,
 				l
 			};
-			unsigned int idx = idxStatic(st, {
+			unsigned int idx = util::math::idx::arr(st, {
 				state::ln,
 				state::line
 			});
@@ -679,7 +679,7 @@ void Console::hl() {
 
 	for (int y = 0; y < state::line; y++) {
 		for (int x = 0; x < state::ln; x++) {
-			_hl[idxStatic({
+			_hl[util::math::idx::arr({
 				x,
 				y
 			}, {
@@ -695,7 +695,7 @@ void Console::hl() {
 
 	/* status bar */
 	for (int i = 0; i < state::ln; i++) {
-		unsigned int idx = idxStatic({
+		unsigned int idx = util::math::idx::arr({
 			i,
 			0
 		}, {
@@ -740,7 +740,7 @@ void Console::hl() {
 				int c = 0;
 				int x = 0;
 				while (c < maxNo) {
-					unsigned int idx = idxStatic({
+					unsigned int idx = util::math::idx::arr({
 						loc[X] + x,
 						loc[Y] + y
 					}, {
@@ -766,7 +766,7 @@ void Console::hl() {
 
 		for (int l = 0; l < abs(delta) + 1; l++) {
 			for (int c = 0; c < maxNo; c++) {
-				unsigned int idx = idxStatic({
+				unsigned int idx = util::math::idx::arr({
 					loc[X] + c,
 					loc[Y] + _cursEditor[MIN][Y] + (l * norm)
 				}, {
@@ -791,10 +791,10 @@ void Console::hl() {
 			loc[X] = maxFs + maxNo;
 			loc[Y] = 1;
 
-			int delta = idxDeterm({
+			int delta = util::math::idx::determ({
 				_cursEditor[MAX][X],
 				_cursEditor[MAX][Y]
-			}, _buff) - idxDeterm({
+			}, _buff) - util::math::idx::determ({
 				_cursEditor[MIN][X],
 				_cursEditor[MIN][Y]
 			}, _buff);
@@ -812,12 +812,12 @@ void Console::hl() {
 				_cursEditor[MIN][Y]
 			};
 			unsigned int i = 0;
-			unsigned int startScal = idxDeterm({
+			unsigned int startScal = util::math::idx::determ({
 				_cursEditor[MIN][X],
 				_cursEditor[MIN][Y]
 			}, _buff);
 			while (i < 1 + abs(delta)) {
-				Coord st = coordDeterm(startScal + (i * norm), _buff);
+				Coord st = util::math::coord::determ(startScal + (i * norm), _buff);
 
 				if (
 					i == 1 + abs(delta) - 1 &&
@@ -826,7 +826,7 @@ void Console::hl() {
 					break;
 				}
 
-				_hl[idxStatic({
+				_hl[util::math::idx::arr({
 					loc[X] + st._x,
 					loc[Y] + st._y
 				}, {
@@ -861,7 +861,7 @@ void Console::hl() {
 				norm = util::math::norm(_cursPrompt[MIN], _cursPrompt[MAX]);
 
 			for (int i = 0; i < 1 + abs(delta); i++) {
-				unsigned int idx = idxStatic({
+				unsigned int idx = util::math::idx::arr({
 					loc[X] + _cursPrompt[MIN] + (i * norm),
 					loc[Y]
 				}, {
@@ -889,7 +889,7 @@ void Console::hl() {
 			loc[Y] = 1;
 
 			for (int c = 0; c < maxFs; c++) {
-				unsigned int idx = idxStatic({
+				unsigned int idx = util::math::idx::arr({
 					loc[X] + c,
 					loc[Y] + clamp(_cursFs, boundFrame[Y] - 1)
 				}, {
@@ -933,48 +933,6 @@ void Console::draw() {
 	glBindTexture(GL_TEXTURE_2D, 0);
 	_prog.unUse();
 	glBindVertexArray(0);
-}
-
-unsigned int Console::idxStatic(Coord st, Coord bound) {
-	return (st._y * bound._x) + st._x;
-}
-
-unsigned int Console::idxDeterm(Coord st, std::vector<std::string> buff) {
-	unsigned int _ = 0;
-	for (int i = 0; i < st._y; i++) {
-		_ += _buff[i].size();
-	}
-	_ += st._x;
-
-	return _;
-}
-
-Coord Console::coordStatic(unsigned int idx, Coord bound) {
-	return {
-		idx % bound._x,
-		idx / bound._x
-	};
-}
-
-Coord Console::coordDeterm(unsigned int idx, std::vector<std::string> buff) {
-	Coord _ = {
-		0,
-		0
-	};
-
-	int i = 0;
-	while (i < idx) {
-		if (_._x < buff[_._y].size() - 1) {
-			_._x++;
-		} else {
-			_._y++;
-			_._x = 0;
-		}
-
-		i++;
-	}
-
-	return _;
 }
 
 unsigned int Console::clamp(unsigned int i, unsigned int roof) {

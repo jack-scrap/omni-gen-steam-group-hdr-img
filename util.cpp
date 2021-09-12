@@ -1185,6 +1185,48 @@ int util::math::norm(int lhs, int rhs) {
 	return _;
 }
 
+unsigned int util::math::idx::arr(Coord st, Coord bound) {
+	return (st._y * bound._x) + st._x;
+}
+
+unsigned int util::math::idx::determ(Coord st, std::vector<std::string> buff) {
+	unsigned int _ = 0;
+	for (int i = 0; i < st._y; i++) {
+		_ += buff[i].size();
+	}
+	_ += st._x;
+
+	return _;
+}
+
+Coord util::math::coord::arr(unsigned int idx, Coord bound) {
+	return {
+		idx % bound._x,
+		idx / bound._x
+	};
+}
+
+Coord util::math::coord::determ(unsigned int idx, std::vector<std::string> buff) {
+	Coord _ = {
+		0,
+		0
+	};
+
+	int i = 0;
+	while (i < idx) {
+		if (_._x < buff[_._y].size() - 1) {
+			_._x++;
+		} else {
+			_._y++;
+			_._x = 0;
+		}
+
+		i++;
+	}
+
+	return _;
+}
+
 std::vector<std::string> util::log(unsigned int loc, unsigned int maxFs) {
 	std::vector<std::string> buff;
 

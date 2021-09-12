@@ -106,14 +106,6 @@ class Console {
 
 		void draw();
 
-		unsigned int idxStatic(Coord st, Coord bound);
-
-		unsigned int idxDeterm(Coord st, std::vector<std::string> buff);
-
-		Coord coordStatic(unsigned int idx, Coord bound);
-
-		Coord coordDeterm(unsigned int idx, std::vector<std::string> buff);
-
 		unsigned int clamp(unsigned int i, unsigned int roof);
 
 		void getTime();
