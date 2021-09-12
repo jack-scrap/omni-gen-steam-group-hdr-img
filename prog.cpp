@@ -11,20 +11,20 @@ Shad::Shad(std::string name, unsigned int stage) {
 	GLenum type;
 	switch (stage) {
 		case 0:
-			ext = "vs";
 			type = GL_VERTEX_SHADER;
+			ext = "vs";
 
 			break;
 
 		case 1:
-			ext = "fs";
 			type = GL_FRAGMENT_SHADER;
+			ext = "fs";
 
 			break;
 
 		case 2:
-			ext = "gs";
 			type = GL_GEOMETRY_SHADER;
+			ext = "gs";
 
 			break;
 	}
