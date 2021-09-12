@@ -114,6 +114,7 @@ Console::Console(std::string fName, std::string cwd) :
 		glBindTexture(GL_TEXTURE_2D, 0);
 		_prog.unUse();
 
+		// draw
 		getTime();
 
 		fmt();
@@ -121,6 +122,7 @@ Console::Console(std::string fName, std::string cwd) :
 
 		render();
 
+		// timer
 		SDL_AddTimer(0, epoch, NULL);
 	}
 
