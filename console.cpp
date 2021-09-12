@@ -908,10 +908,10 @@ void Console::hl() {
 }
 
 void Console::print(char c, bool b, Coord st) {
-	unsigned int idx[2] = {
-		c % 16,
-		c / 16
-	};
+	Coord idx = util::math::coord::arr(c, {
+		16,
+		16
+	});
 
 	unsigned int sz = layout::map[X] * layout::map[Y] * layout::glyph[X] * layout::glyph[Y];
 	unsigned int stride[2] = {
@@ -919,7 +919,7 @@ void Console::print(char c, bool b, Coord st) {
 		layout::map[X] * layout::glyph[X] * layout::glyph[Y]
 	};
 
-	glTexSubImage2D(GL_TEXTURE_2D, 0, st._x * layout::glyph[X], st._y * layout::glyph[Y], layout::glyph[X], layout::glyph[Y], GL_BGR, GL_UNSIGNED_BYTE, &(((char*) disp->_map->pixels)[((b * sz) + (idx[Y] * stride[Y]) + (idx[X] * stride[X])) * 3]));
+	glTexSubImage2D(GL_TEXTURE_2D, 0, st._x * layout::glyph[X], st._y * layout::glyph[Y], layout::glyph[X], layout::glyph[Y], GL_BGR, GL_UNSIGNED_BYTE, &(((char*) disp->_map->pixels)[((b * sz) + (idx._y * stride[Y]) + (idx._x * stride[X])) * 3]));
 }
 
 void Console::draw() {
