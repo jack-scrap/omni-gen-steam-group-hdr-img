@@ -18,9 +18,9 @@ typedef struct Truck {
 		M_PI / 2
 	};
 
-	Obj* _parent;
-
 	GLuint _uni[2];
+
+	Obj* _parent;
 
 	static GLfloat _vtx[3];
 	static GLushort _idx[1];
