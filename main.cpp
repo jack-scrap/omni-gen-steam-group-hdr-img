@@ -125,7 +125,7 @@ int main(int argc, char** argv) {
 		name = "player/doc/intro.txt";
 	}
 
-	console = new Console("player/script/init/0/main.py", "player");
+	console = new Console(name, "player");
 	scn::init(stage, lvl);
 
 	SDL_AddTimer(0, epoch, NULL);
