@@ -43,8 +43,8 @@ int main(int argc, char** argv) {
 	cam._scale = {
 		50, 50, 50
 	};
-	cam._prevPos = cam._pos;
-	cam._deltaPos = {
+	cam._posPrev = cam._pos;
+	cam._posDelta = {
 		0.0, 0.0, 0.0
 	};
 
@@ -672,14 +672,14 @@ int main(int argc, char** argv) {
 					cam._begin[X] < layout::res[X] + layout::view[X] &&
 					cam._begin[Y] < 0 + layout::view[Y]
 				) {
-					cam._prevPos = cam._pos;
+					cam._posPrev = cam._pos;
 
 					cam._drag = true;
 				}
 			}
 
 			if (e.type == SDL_MOUSEBUTTONUP) {
-				cam._pos = cam._prevPos + cam._deltaPos;
+				cam._pos = cam._posPrev + cam._posDelta;
 
 				cam._drag = false;
 			}
@@ -692,12 +692,12 @@ int main(int argc, char** argv) {
 						cam._delta[i] = cam._curr[i] - cam._begin[i];
 					}
 
-					cam._deltaPos[X] = cam._delta[X];
-					cam._deltaPos[Z] = -(cam._delta[X]);
+					cam._posDelta[X] = cam._delta[X];
+					cam._posDelta[Z] = -(cam._delta[X]);
 
-					cam._deltaPos[Y] = -(cam._delta[Y]);
+					cam._posDelta[Y] = -(cam._delta[Y]);
 
-					cam._pos = cam._prevPos + cam._deltaPos;
+					cam._pos = cam._posPrev + cam._posDelta;
 				}
 			}
 

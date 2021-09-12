@@ -6,8 +6,8 @@ struct Cam {
 	glm::vec3 _pos;
 	glm::vec3 _scale;
 
-	glm::vec3 _prevPos;
-	glm::vec3 _deltaPos;
+	glm::vec3 _posPrev;
+	glm::vec3 _posDelta;
 
 	bool _drag = false;
 
