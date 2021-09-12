@@ -159,10 +159,6 @@ void Console::fmtBuff(std::vector<std::string> buff, Coord loc, Coord view, Coor
 }
 
 void Console::clear() {
-	glBindTexture(GL_TEXTURE_2D, _tex);
-
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, state::ln * layout::glyph[X], state::line * layout::glyph[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, _blank);
-
 	for (int y = 0; y < state::line; y++) {
 		for (int x = 0; x < state::ln; x++) {
 			unsigned int idx = util::math::idx::arr({
@@ -177,6 +173,10 @@ void Console::clear() {
 			_hl[idx] = false;
 		}
 	}
+
+	glBindTexture(GL_TEXTURE_2D, _tex);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, state::ln * layout::glyph[X], state::line * layout::glyph[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, _blank);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
