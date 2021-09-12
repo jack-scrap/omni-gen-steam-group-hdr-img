@@ -34,17 +34,6 @@ uint32_t epoch(uint32_t inter, void* param) {
 }
 
 int main(int argc, char** argv) {
-	cam._pos = {
-		1000.0, 1000.0, 1000.0
-	};
-	cam._scale = {
-		50, 50, 50
-	};
-	cam._posPrev = cam._pos;
-	cam._posDelta = {
-		0.0, 0.0, 0.0
-	};
-
 	// initialize
 	std::map<std::string, std::string> setting = util::cfg::lex("player/cfg/init.cfg");
 
