@@ -9,9 +9,9 @@ struct Cam {
 	glm::vec3 _posPrev;
 	glm::vec3 _posDelta;
 
-	bool _drag = false;
-
 	int _begin[2];
 	int _curr[2];
 	int _delta[2];
+
+	bool _drag = false;
 };
