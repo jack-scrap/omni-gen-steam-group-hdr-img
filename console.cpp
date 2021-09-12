@@ -816,7 +816,7 @@ void Console::hl() {
 				_cursEditor[MIN][X],
 				_cursEditor[MIN][Y]
 			}, _buff);
-			while (i < abs(delta)) {
+			while (i < 1 + abs(delta)) {
 				Coord st = coordDeterm(startScal + (i * norm), _buff);
 				_hl[idxStatic({
 					loc[X] + st._x,
