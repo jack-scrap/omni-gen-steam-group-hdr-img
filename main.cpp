@@ -26,13 +26,6 @@ Cam cam;
 
 bool boot = false;
 
-uint32_t epoch(uint32_t inter, void* param) {
-	console->getTime();
-	console->fmt();
-
-	return 1000;
-}
-
 int main(int argc, char** argv) {
 	// initialize
 	std::map<std::string, std::string> setting = util::cfg::lex("player/cfg/init.cfg");
@@ -127,8 +120,6 @@ int main(int argc, char** argv) {
 
 	console = new Console(name, "player");
 	scn::init(stage, lvl);
-
-	SDL_AddTimer(0, epoch, NULL);
 
 	if (boot) {
 		GLuint vao;

@@ -18,6 +18,13 @@
 #include "math.h"
 #include "state.h"
 
+uint32_t epoch(uint32_t inter, void* param) {
+	console->getTime();
+	console->fmt();
+
+	return 1000;
+}
+
 Console::Console(std::string fName, std::string cwd) :
 	_mode(EDITOR),
 	_cwd(cwd),
@@ -113,6 +120,8 @@ Console::Console(std::string fName, std::string cwd) :
 		hl();
 
 		render();
+
+		SDL_AddTimer(0, epoch, NULL);
 	}
 
 void Console::fmtBuff(std::vector<std::string> buff, Coord loc, Coord view, Coord ptr) {
