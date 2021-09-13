@@ -20,3 +20,7 @@ Mesh* meshMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim) {
 
 	return _;
 }
+
+void meshDel(Mesh* mesh) {
+	free(mesh);
+}

@@ -25,3 +25,5 @@ typedef struct Mesh {
 } Mesh;
 
 Mesh* meshMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim);
+
+void meshDel(Mesh* mesh);
