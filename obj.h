@@ -70,6 +70,8 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 
 Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, std::string geom, std::string frag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
 
+void objDel(Obj* obj);
+
 void objAcc(Obj* obj, glm::mat4 prev);
 
 void objAnim(Obj* obj, glm::vec3 loc, glm::vec3 rot);

@@ -275,6 +275,19 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 	return _;
 }
 
+void objDel(Obj* obj) {
+	meshDel(obj->_mesh);
+
+	free(obj->_uni);
+
+	for (int i = 0; i < obj->_noChild; i++) {
+		objDel(obj->_child[i]);
+	}
+	free(obj->_child);
+
+	free(obj);
+}
+
 void objAcc(Obj* obj, glm::mat4 prev) {
 	obj->_acc = prev * obj->_model;
 
