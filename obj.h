@@ -34,7 +34,7 @@ typedef struct Obj {
 		0.0
 	};
 
-	struct Obj** _child;
+	Obj** _child;
 	unsigned int _noChild;
 
 	enum attr {
