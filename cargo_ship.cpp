@@ -57,6 +57,14 @@ CargoShip* cargoShipMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	return _;
 }
 
+void cargoShipDel(CargoShip* cargoShip) {
+	arrayDel(cargoShip->_data);
+
+	objDel(cargoShip->_parent);
+
+	free(cargoShip);
+}
+
 void cargoShipMv(CargoShip* cargoShip, float delta) {
 	glm::vec3 dest = glm::vec3(delta, 0.0, 0.0);
 
