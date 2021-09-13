@@ -86,6 +86,14 @@ Crane* craneMk(Cont* init, glm::vec3 loc, glm::vec3 rot) {
 	return _;
 }
 
+void craneDel(Crane* crane) {
+	contDel(crane->_data);
+
+	objDel(crane->_parent);
+
+	free(crane);
+}
+
 void craneAnim(Crane* crane, glm::vec3 loc) {
 	for (int i = 0; i < 2 * 2; i++) {
 		crane->_parent->_child[1 + 1 + (2 * 2 * 2 * 2) + i]->_active = true;
