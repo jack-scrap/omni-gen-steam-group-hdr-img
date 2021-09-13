@@ -25,6 +25,17 @@ Node* nodeMk(char* data, int no, Node** child, unsigned int noChild) {
 	return _;
 }
 
+void nodeDel(Node* node) {
+	free(node->_data);
+
+	for (int i = 0; i < node->_noChild; i++) {
+		nodeDel(node->_child[i]);
+	}
+	free(node->_child);
+
+	free(node);
+}
+
 void nodeDepth(Node* node, unsigned int* depth) {
 	(*depth)++;
 

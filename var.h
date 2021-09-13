@@ -6,3 +6,5 @@ typedef struct {
 } Var;
 
 Var* varMk(char* name, void* ptr);
+
+void varDel(Var* var);

@@ -104,6 +104,14 @@ Truck* truckMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	return _;
 }
 
+void truckDel(Truck* truck) {
+	arrayDel(truck->_data);
+
+	objDel(truck->_parent);
+
+	free(truck);
+}
+
 void truckAnim(Truck* truck, glm::vec3 loc, glm::vec3 rot) {
 	for (int i = 0; i < 2; i++) {
 		truck->_parent->_child[4 + (truck->_data->_x * 2 * 2) + i]->_active = true;

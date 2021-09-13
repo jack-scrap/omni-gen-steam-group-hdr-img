@@ -17,6 +17,8 @@ Node* nodeMk(char* data, int no);
 
 Node* nodeMk(char* data, int no, Node** child, unsigned int noChild);
 
+void nodeDel(Node* node);
+
 void nodeDepth(Node* node, unsigned int* depth);
 
 void nodeMax(Node* node, unsigned int* no);

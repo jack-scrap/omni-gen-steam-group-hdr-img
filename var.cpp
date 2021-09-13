@@ -10,3 +10,10 @@ Var* varMk(char* id, void* ptr) {
 
 	return _;
 }
+
+void varDel(Var* var) {
+	free(var->_id);
+	free(var->_ptr);
+
+	free(var);
+}
