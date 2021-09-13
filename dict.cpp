@@ -68,3 +68,9 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 	
 	return _;
 }
+
+void dictDel(Dict* dict) {
+	objDel(dict->_parent);
+
+	free(dict);
+}
