@@ -395,9 +395,4 @@ void scn::init(std::string stage, unsigned int lvl) {
 		obj.push_back(_->_parent);
 		objType.push_back(Mesh::OBJ);
 	}
-
-	Dict* _ = dictMk(deser["asdf"]);
-
-	obj.push_back(_->_parent);
-	objType.push_back(Mesh::OBJ);
 }
