@@ -121,6 +121,19 @@ Array* arrayMk(char* init, unsigned int x, unsigned int y, std::string name, glm
 	return _;
 }
 
+void arrayDel(Array* array) {
+	for (int y = 0; y < array->_y; y++) {
+		for (int x = 0; x < array->_x; x++) {
+			idxDel(array->_data[(y * array->_x) + x]);
+		}
+	}
+	free(array->_data);
+
+	objDel(array->_parent);
+
+	free(array);
+}
+
 bool arrayEq(Array* lhs, Array* rhs) {
 	bool _ = true;
 
