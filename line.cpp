@@ -9,3 +9,9 @@
 Obj* lineMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string nameVtx, std::string nameGeom, std::string nameFrag, bool active, glm::vec3 loc, glm::vec3 rot) {
 	return objMk(vtc, idc, noPrim, nameVtx, nameGeom, nameFrag, active, loc, rot);
 }
+
+void limDel(Lim* lim) {
+	objDel(lim->_parent);
+
+	free(lim);
+}

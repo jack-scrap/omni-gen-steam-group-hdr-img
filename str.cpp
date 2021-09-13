@@ -17,3 +17,9 @@ Str* strMk(std::string buff, glm::vec3 loc, glm::vec3 rot) {
 
 	return _;
 }
+
+void strDel(Str* str) {
+	objDel(str->_parent);
+
+	free(str);
+}

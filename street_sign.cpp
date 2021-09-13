@@ -18,6 +18,12 @@ StreetSign* streetSignMk(CArr pass, glm::vec3 loc, glm::vec3 rot) {
 	return _;
 }
 
+void streetSignDel(StreetSign* streetSign) {
+	objDel(streetSign->_parent);
+
+	free(streetSign);
+}
+
 void streetSignToggle(StreetSign* streetSign, unsigned int i) {
 	((bool*) streetSign->_pass._ptr)[i] = !((bool*) streetSign->_pass._ptr)[i];
 
