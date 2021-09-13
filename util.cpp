@@ -1322,15 +1322,8 @@ GLuint util::tex::spray(char c) {
 	glEnableVertexAttribArray(attrPos);
 
 	// uniform
-	glm::mat4 model = glm::mat4(1.0);
-
-	model = glm::rotate(model, (GLfloat) (M_PI / 2), glm::vec3(1, 0, 0));
-
-	GLint uniModel = glGetUniformLocation(prog._id, "model");
 	GLint uniRes = glGetUniformLocation(prog._id, "res");
 	GLint uniActive = glGetUniformLocation(prog._id, "active");
-
-	glUniformMatrix4fv(uniModel, 1, GL_FALSE, glm::value_ptr(model));
 
 	glUniform2i(uniRes, disp->_res[X], disp->_res[Y]);
 
