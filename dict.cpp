@@ -68,7 +68,7 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 
 	// scope
 	Border* scope = borderMk({
-		(layout::margin * 2) + (maxX * layout::stride[Z]),
+		(layout::margin * 2) + (layout::stroke * 2) + (layout::margin * 2 * 2) + (maxX * layout::stride[X]),
 		(layout::margin * 2) + (deser.size() * szPair)
 	}, child, sizeof child / sizeof *child);
 
