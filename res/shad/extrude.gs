@@ -6,10 +6,9 @@ layout (triangle_strip, max_vertices = 30) out;
 
 out vec3 _pos;
 
-uniform mat4
-	model,
-	view,
-	proj;
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 proj;
 
 uniform unsigned int axis;
 uniform float fac;

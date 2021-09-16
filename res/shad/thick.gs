@@ -7,10 +7,9 @@ layout (triangle_strip, max_vertices = 4) out;
 out vec3 _local;
 out vec3 _mag;
 
-uniform mat4
-	model,
-	view,
-	proj;
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 proj;
 
 float pad = 0.16;
 

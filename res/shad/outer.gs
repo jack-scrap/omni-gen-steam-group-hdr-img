@@ -4,20 +4,18 @@ layout (points) in;
 
 layout (triangle_strip, max_vertices = 32) out;
 
-uniform mat4
-	model,
-	view,
-	proj;
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 proj;
 
 uniform unsigned int sz;
 
 out vec3 _pos;
 
-float
-	pad = 0.16,
-	stroke = pad * 2,
+float pad = 0.16;
+float stroke = pad * 2;
 
-	thick = -(0.2 * 2);
+float thick = -(0.2 * 2);
 
 float[2] idx = float[2](
 	2,

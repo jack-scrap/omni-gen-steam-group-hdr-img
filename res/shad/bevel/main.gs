@@ -6,16 +6,14 @@ layout (triangle_strip, max_vertices = 32) out;
 
 out vec3 _local;
 
-uniform mat4
-	model,
-	view,
-	proj;
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 proj;
 
-float
-	fac = 0.1,
-	pad = 0.16,
+float fac = 0.1;
+float pad = 0.16;
 
-	side = 1 - (2 * fac);
+float side = 1 - (2 * fac);
 
 void main() {
 	// front, back

@@ -7,14 +7,12 @@ layout (triangle_strip, max_vertices = 12) out;
 out vec3 _local;
 out vec3 _mag;
 
-uniform mat4
-	model,
-	view,
-	proj;
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 proj;
 
-float
-	pad = 0.16,
-	wd = 16.0;
+float pad = 0.16;
+float wd = 16.0;
 
 vec2 norm(vec2 vec) {
 	return normalize(vec2(-vec.y, vec.x));
