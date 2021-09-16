@@ -380,8 +380,8 @@ void Console::fmt() {
 		boundFrame[X],
 		boundFrame[Y]
 	}, {
-		0,
-		0
+		(loc[X] + _cursEditor[_rngEditor][X]) - (util::math::clamp(loc[X] + _cursEditor[_rngEditor][X], 1, boundFrame[X])),
+		(loc[Y] + _cursEditor[_rngEditor][Y]) - (util::math::clamp(loc[Y] + _cursEditor[_rngEditor][Y], 1, boundFrame[Y]))
 	});
 
 	/* command-line */
