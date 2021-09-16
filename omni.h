@@ -47,7 +47,6 @@ namespace omni {
 		"del",
 		"next",
 		"update",
-		"set",
 		"quit"
 	};
 
