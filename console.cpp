@@ -31,6 +31,46 @@ void dispatch(std::string fName) {
 	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(fName);
 
 	PyRun_SimpleString(util::str::join(buff).c_str());
+
+	bool eq = true;
+	for (int i = 0; i < noData; i++) {
+		switch (type[i]) {
+			case omni::SCALAR:
+				if (!idxEq((Idx*) data[i]->_ptr, (Idx*) goal[i]->_ptr)) {
+					eq = false;
+				}
+
+				break;
+
+			case omni::ARRAY:
+				if (!arrayEq((Array*) data[i]->_ptr, (Array*) goal[i]->_ptr)) {
+					eq = false;
+				}
+
+				break;
+		}
+	}
+	
+	if (eq) {
+		std::string log = "log/" + util::fs::base(fName) + ".log";
+
+		console->_buff = util::log(console->_buff.size());
+
+		nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("player.json"));
+
+		unsigned int rank = serial["rank"];
+		rank++;
+
+		nlohmann::json data = {
+			{
+				"rank", rank
+			}
+		};
+
+		std::string deser = data.dump();
+
+		util::fs::write("player.json", util::str::split(deser, '\n'));
+	}
 }
 
 Console::Console(std::string fName, std::string cwd) :
