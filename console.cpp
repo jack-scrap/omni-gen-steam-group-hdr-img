@@ -2,6 +2,8 @@
 #include <iostream>
 #include <algorithm>
 #include <sstream>
+#include <thread>
+#include <Python.h>
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -23,6 +25,12 @@ uint32_t epoch(uint32_t inter, void* param) {
 	console->fmt();
 
 	return 1000;
+}
+
+void dispatch(std::string fName) {
+	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(fName);
+
+	PyRun_SimpleString(util::str::join(buff).c_str());
 }
 
 Console::Console(std::string fName, std::string cwd) :
@@ -670,6 +678,16 @@ void Console::exec() {
 					util::fs::del(name);
 				} else {
 					omni::err("Incorrect number of arguments to command `" + cmd + "`");
+				}
+			}
+
+			if (cmd == "run") {
+				if (tok.size() > 1) {
+					std::thread t(dispatch, tok[1]);
+					t.detach();
+				} else {
+					std::thread t(dispatch, _buffName);
+					t.detach();
 				}
 			}
 
