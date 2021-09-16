@@ -38,7 +38,7 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 		}
 
 		if (pair.value().type() == nlohmann::json::value_t::array) {
-			char* init = (char*) malloc(pair.value().size() * sizeof (char));
+			char* init = (char*) malloc(pair.value().size());
 			unsigned int sz = pair.value().size();
 			for (int i = 0; i < sz; i++) {
 				init[i] = (char) ((int) pair.value()[i]);

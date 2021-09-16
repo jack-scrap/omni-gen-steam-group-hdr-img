@@ -458,7 +458,7 @@ char* util::json::id(nlohmann::json deser) {
 	std::string buff = deser.get<std::string>();
 
 	unsigned int no = buff.size();
-	char* _ = (char*) malloc((no + 1) * sizeof (char));
+	char* _ = (char*) malloc((no + 1));
 	for (int i = 0; i < no; i++) {
 		_[i] = buff[i];
 	}
@@ -530,7 +530,7 @@ CBuff util::json::str(nlohmann::json deser) {
 
 	_._x = buff.size();
 
-		_._ptr = (char*) malloc(_._x * sizeof (char));
+		_._ptr = (char*) malloc(_._x);
 
 	for (int i = 0; i < buff.size(); i++) {
 		((char*) _._ptr)[i] = buff[i];
@@ -545,7 +545,7 @@ CBuff util::json::array::array(nlohmann::json deser) {
 	_._x = deser.size();
 	_._y = 1;
 	_._z = 1;
-	_._ptr = (char*) malloc(_._x * sizeof (char));
+	_._ptr = (char*) malloc(_._x);
 	int c = 0;
 	for (int i = 0; i < _._x; i++) {
 		omni::assertion(util::json::ascii(deser[i]), std::string("Data at index [") + std::to_string(i) + std::string("] not ASCII applicable"));
@@ -564,7 +564,7 @@ CBuff util::json::array::matr(nlohmann::json deser) {
 	_._x = deser[0].size();
 	_._y = deser.size();
 	_._z = 1;
-	_._ptr = (char*) malloc(_._x * _._y * sizeof (char));
+	_._ptr = (char*) malloc(_._x * _._y);
 	int c = 0;
 	for (int j = 0; j < _._y; j++) {
 		for (int i = 0; i < _._x; i++) {
@@ -585,7 +585,7 @@ CBuff util::json::array::tens(nlohmann::json deser) {
 	_._x = deser[0][0].size();
 	_._y = deser[0].size();
 	_._z = deser.size();
-	_._ptr = (char*) malloc(_._x * _._y * _._x * sizeof (char));
+	_._ptr = (char*) malloc(_._x * _._y * _._x);
 	int c = 0;
 	for (int k = 0; k < _._y; k++) {
 		for (int j = 0; j < _._y; j++) {
