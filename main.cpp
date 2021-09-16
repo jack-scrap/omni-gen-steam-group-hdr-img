@@ -42,7 +42,7 @@ int main(int argc, char** argv) {
 		}
 
 		// display
-		if (it->first == "wd") {
+		if (it->first == "screen_wd") {
 			layout::view[X] = util::cfg::parse::no(it->second);
 			layout::view[Y] = state::line * layout::glyph[Y];
 		}
