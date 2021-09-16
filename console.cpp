@@ -672,6 +672,10 @@ void Console::exec() {
 					omni::err("Incorrect number of arguments to command `" + cmd + "`");
 				}
 			}
+
+			if (cmd == "quit") {
+				exit(0);
+			}
 		} else {
 			omni::err("Command `" + cmd + "` not found");
 		}
