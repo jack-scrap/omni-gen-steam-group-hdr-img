@@ -411,7 +411,7 @@ void Console::fmt() {
 		boundPrompt,
 		1
 	}, {
-		_cursPrompt[_rngPrompt] < boundPrompt ? 0 : _cursPrompt[_rngPrompt] - (boundPrompt - 1),
+		_cursPrompt[_rngPrompt] - clamp(_cursPrompt[_rngPrompt], boundPrompt - 1),
 		0
 	});
 }
