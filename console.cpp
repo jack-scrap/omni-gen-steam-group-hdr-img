@@ -771,9 +771,8 @@ void Console::hl() {
 	}
 
 	if (state::hlActiveLine) {
-		int
-			delta = util::math::delta(_cursEditor[MIN][Y], _cursEditor[MAX][Y]),
-			norm = util::math::norm(_cursEditor[MIN][Y], _cursEditor[MAX][Y]);
+		int delta = util::math::delta(_cursEditor[MIN][Y], _cursEditor[MAX][Y]);
+		int norm = util::math::norm(_cursEditor[MIN][Y], _cursEditor[MAX][Y]);
 
 		for (int l = 0; l < abs(delta) + 1; l++) {
 			for (int c = 0; c < maxNo; c++) {
@@ -867,9 +866,8 @@ void Console::hl() {
 			loc[X] = _ps1.size();
 			loc[Y] = btm;
 
-			int
-				delta = util::math::delta(_cursPrompt[MIN], _cursPrompt[MAX]),
-				norm = util::math::norm(_cursPrompt[MIN], _cursPrompt[MAX]);
+			int delta = util::math::delta(_cursPrompt[MIN], _cursPrompt[MAX]);
+			int norm = util::math::norm(_cursPrompt[MIN], _cursPrompt[MAX]);
 
 			for (int i = 0; i < 1 + abs(delta); i++) {
 				unsigned int idx = util::math::idx::arr({
