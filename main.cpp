@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include <vector>
 #include <string>
+#include <Python.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <glm/gtc/type_ptr.hpp>
@@ -120,6 +121,11 @@ int main(int argc, char** argv) {
 
 	console = new Console(name, "player");
 	scn::init(stage, lvl);
+
+	Py_Initialize();
+
+	PyObject* path = PySys_GetObject("path");
+	PyList_Append(path, PyUnicode_FromString("."));
 
 	if (boot) {
 		GLuint vao;

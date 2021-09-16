@@ -59,7 +59,7 @@ lib%.so: %.o
 	$(CXX) $(CXXFLAGS) -shared $< -o $@
 
 main.o: main.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@ $(LDPY)
 
 omni: $(OBJ_STATIC) $(OBJ_DYNA) $(DEP_HDR)
 	$(CXX) $(CXXFLAGS) $(OBJ_STATIC) -o $@ $(LDSDL) $(LDGL) $(LDPY) $(LDLIB)
