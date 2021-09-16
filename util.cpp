@@ -1185,6 +1185,15 @@ int util::math::norm(int lhs, int rhs) {
 	return _;
 }
 
+unsigned int util::math::clamp(unsigned int i, unsigned int roof) {
+	unsigned int _ = i;
+	if (!(_ < roof)) {
+		_ = roof;
+	}
+
+	return _;
+}
+
 unsigned int util::math::idx::arr(Coord st, Coord bound) {
 	return (st._y * bound._x) + st._x;
 }

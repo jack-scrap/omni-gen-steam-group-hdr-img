@@ -106,8 +106,6 @@ class Console {
 
 		void draw();
 
-		unsigned int clamp(unsigned int i, unsigned int roof);
-
 		void getTime();
 
 		static bool lexicoEntry(std::map<std::string, std::string> lhs, std::map<std::string, std::string> rhs);

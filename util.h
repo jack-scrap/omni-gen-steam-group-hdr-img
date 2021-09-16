@@ -150,6 +150,8 @@ namespace util {
 
 		int norm(int lhs, int rhs);
 
+		unsigned int clamp(unsigned int i, unsigned int roof);
+
 		namespace idx {
 			unsigned int arr(Coord st, Coord bound);
 			unsigned int determ(Coord st, std::vector<std::string> buff);

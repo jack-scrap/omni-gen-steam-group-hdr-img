@@ -411,7 +411,7 @@ void Console::fmt() {
 		boundPrompt,
 		1
 	}, {
-		_cursPrompt[_rngPrompt] - clamp(_cursPrompt[_rngPrompt], boundPrompt - 1),
+		_cursPrompt[_rngPrompt] - util::math::clamp(_cursPrompt[_rngPrompt], boundPrompt - 1),
 		0
 	});
 }
@@ -851,8 +851,8 @@ void Console::hl() {
 			for (int r = 0; r < 2; r++) {
 				if (_cursEditor[r][X] == _buff[_cursEditor[r][Y]].size()) {
 					unsigned int clamped[2] = {
-						clamp(loc[X] + _cursEditor[r][X], state::ln - 1),
-						clamp(loc[Y] + _cursEditor[r][Y], boundFrame[Y])
+						util::math::clamp(loc[X] + _cursEditor[r][X], state::ln - 1),
+						util::math::clamp(loc[Y] + _cursEditor[r][Y], boundFrame[Y])
 					};
 
 					glTexSubImage2D(GL_TEXTURE_2D, 0, clamped[X] * layout::glyph[X], clamped[Y] * layout::glyph[Y], layout::glyph[X], layout::glyph[Y], GL_BGR, GL_UNSIGNED_BYTE, _block);
@@ -883,7 +883,7 @@ void Console::hl() {
 
 			// block
 			for (int r = 0; r < 2; r++) {
-				unsigned int clamped = clamp(_ps1.size() + _cursPrompt[r], state::ln - 1);
+				unsigned int clamped = util::math::clamp(_ps1.size() + _cursPrompt[r], state::ln - 1);
 
 				if (_cursPrompt[r] == _prompt.size()) {
 					glTexSubImage2D(GL_TEXTURE_2D, 0, clamped * layout::glyph[X], (state::line - 1) * layout::glyph[Y], layout::glyph[X], layout::glyph[Y], GL_BGR, GL_UNSIGNED_BYTE, _block);
@@ -900,7 +900,7 @@ void Console::hl() {
 			for (int c = 0; c < maxFs; c++) {
 				unsigned int idx = util::math::idx::arr({
 					loc[X] + c,
-					loc[Y] + clamp(_cursFs, boundFrame[Y] - 1)
+					loc[Y] + util::math::clamp(_cursFs, boundFrame[Y] - 1)
 				}, {
 					state::ln,
 					state::line
@@ -942,15 +942,6 @@ void Console::draw() {
 	glBindTexture(GL_TEXTURE_2D, 0);
 	_prog.unUse();
 	glBindVertexArray(0);
-}
-
-unsigned int Console::clamp(unsigned int i, unsigned int roof) {
-	unsigned int _ = i;
-	if (!(_ < roof)) {
-		_ = roof;
-	}
-
-	return _;
 }
 
 void Console::getTime() {
