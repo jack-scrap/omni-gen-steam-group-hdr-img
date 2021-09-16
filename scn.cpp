@@ -177,24 +177,24 @@ void scn::init(std::string stage, unsigned int lvl) {
 		}
 
 		if (entry["name"] == "crane") {
-			Cont* init;
-			if (entry.contains("data")) {
-				char c = util::json::byte(entry["data"]);
-				init = contMk(c);
-			} else {
-				init = nullptr;
-			}
+			/* Cont* init; */
+			/* if (entry.contains("data")) { */
+			/* 	char c = util::json::byte(entry["data"]); */
+			/* 	init = contMk(c); */
+			/* } else { */
+			/* 	init = nullptr; */
+			/* } */
 
-			Crane* _ = craneMk(init, loc, rot);
+			/* Crane* _ = craneMk(init, loc, rot); */
 
-			omni::assertion(!util::phys::collGround(_->_parent), "Crane clipping into ground plane");
+			/* omni::assertion(!util::phys::collGround(_->_parent), "Crane clipping into ground plane"); */
 
-			crane._sz += sizeof (Crane*);
-			crane._ptr = (Crane**) realloc(crane._ptr, crane._sz);
-			((Crane**) crane._ptr)[crane._sz - sizeof (Crane*)] = _;
+			/* crane._sz += sizeof (Crane*); */
+			/* crane._ptr = (Crane**) realloc(crane._ptr, crane._sz); */
+			/* ((Crane**) crane._ptr)[crane._sz - sizeof (Crane*)] = _; */
 
-			obj.push_back(_->_parent);
-			objType.push_back(Mesh::OBJ);
+			/* obj.push_back(_->_parent); */
+			/* objType.push_back(Mesh::OBJ); */
 		}
 
 		if (entry["name"] == "cargo_ship") {
@@ -311,8 +311,8 @@ void scn::init(std::string stage, unsigned int lvl) {
 				break;
 		}
 
-		obj.push_back(_);
-		objType.push_back(Mesh::OBJ);
+/* 		obj.push_back(_); */
+/* 		objType.push_back(Mesh::OBJ); */
 	}
 
 	// prop
@@ -359,8 +359,8 @@ void scn::init(std::string stage, unsigned int lvl) {
 					((Lim**) boundRng._ptr)[i] = _;
 					i++;
 
-					obj.push_back(_->_parent);
-					objType.push_back(Mesh::LINE);
+/* 					obj.push_back(_->_parent); */
+/* 					objType.push_back(Mesh::LINE); */
 				}	
 			}	
 		}
@@ -396,4 +396,12 @@ void scn::init(std::string stage, unsigned int lvl) {
 		obj.push_back(_->_parent);
 		objType.push_back(Mesh::OBJ);
 	}
+
+	// test
+	nlohmann::json deserDict = deser["asdf"];
+
+	Dict* _ = dictMk(deserDict);
+
+	obj.push_back(_->_parent);
+	objType.push_back(Mesh::OBJ);
 }
