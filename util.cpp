@@ -1329,9 +1329,9 @@ GLuint util::tex::spray(char c) {
 
 	glUniform1ui(uniActive, true);
 
-	// draw
 	prog.unUse();
 
+	// draw
 	glBindVertexArray(mesh->_id[Mesh::VAO]);
 	prog.use();
 
