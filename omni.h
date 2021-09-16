@@ -42,12 +42,12 @@ namespace omni {
 
 	static std::vector<std::string> lib = {
 		"open",
-		"set",
+		"run",
 		"save",
 		"del",
-		"run",
 		"next",
 		"update",
+		"set",
 		"quit"
 	};
 
