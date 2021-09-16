@@ -1274,7 +1274,7 @@ std::string util::now(std::string format) {
 	return std::string(out);
 }
 
-GLuint util::tex::spray(char c) {
+GLuint util::tex::spray(std::string tex) {
 	/* framebuffer */
 	GLuint fbo;
 	glGenFramebuffers(1, &fbo);
@@ -1305,9 +1305,9 @@ GLuint util::tex::spray(char c) {
 	}
 
 	// create
-	std::vector<GLfloat> vtc = util::mesh::rd::vtc("glyph/" + std::string(1, c));
+	std::vector<GLfloat> vtc = util::mesh::rd::vtc(tex);
 
-	std::vector<GLushort> idc = util::mesh::rd::idc("glyph/" + std::string(1, c), Obj::POS);
+	std::vector<GLushort> idc = util::mesh::rd::idc(tex, Obj::POS);
 
 	Mesh* mesh = meshMk(&vtc[0], &idc[0], idc.size());
 
