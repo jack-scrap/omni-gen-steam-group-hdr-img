@@ -44,6 +44,7 @@ namespace omni {
 		"open",
 		"set",
 		"save",
+		"del",
 		"run",
 		"next",
 		"update",

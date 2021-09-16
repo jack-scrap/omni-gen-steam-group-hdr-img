@@ -643,7 +643,7 @@ void Console::exec() {
 				}
 			}
 
-			if (cmd == "write") {
+			if (cmd == "save") {
 				if (tok.size() <= 1 + 1) {
 					std::string name;
 					if (tok.size() == 1) {
