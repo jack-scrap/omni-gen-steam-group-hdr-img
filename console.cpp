@@ -19,6 +19,7 @@
 #include "layout.h"
 #include "math.h"
 #include "state.h"
+#include "dict.h"
 
 uint32_t epoch(uint32_t inter, void* param) {
 	console->getTime();
@@ -44,6 +45,13 @@ void dispatch(std::string fName) {
 
 			case omni::ARRAY:
 				if (!arrayEq((Array*) data[i]->_ptr, (Array*) goal[i]->_ptr)) {
+					eq = false;
+				}
+
+				break;
+
+			case omni::DICT:
+				if (!dictEq((Dict*) data[i]->_ptr, (Dict*) goal[i]->_ptr)) {
 					eq = false;
 				}
 
