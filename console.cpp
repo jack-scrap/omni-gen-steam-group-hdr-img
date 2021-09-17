@@ -699,6 +699,17 @@ void Console::exec() {
 				}
 			}
 
+			if (cmd == "new") {
+				if (tok.size() == 1 + 1) {
+					_buffName = tok[1];
+					_buff = {
+						""
+					};
+				} else {
+					omni::err("Incorrect number of arguments to command `" + cmd + "`");
+				}
+			}
+
 			if (cmd == "save") {
 				if (tok.size() <= 1 + 1) {
 					std::string name;

@@ -42,6 +42,7 @@ namespace omni {
 
 	static std::vector<std::string> lib = {
 		"open",
+		"new",
 		"run",
 		"save",
 		"del",
