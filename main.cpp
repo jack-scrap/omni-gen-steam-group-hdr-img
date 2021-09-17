@@ -222,7 +222,8 @@ int main(int argc, char** argv) {
 						console->ins(e.key.keysym.sym);
 					}
 
-					if ((e.key.keysym.sym == SDLK_COMMA ||
+					if (
+						e.key.keysym.sym == SDLK_COMMA ||
 						e.key.keysym.sym == SDLK_PERIOD ||
 						e.key.keysym.sym == SDLK_SLASH ||
 
@@ -237,7 +238,7 @@ int main(int argc, char** argv) {
 						e.key.keysym.sym == SDLK_EQUALS ||
 
 						e.key.keysym.sym == SDLK_BACKQUOTE
-					)) {
+					) {
 						console->ins(e.key.keysym.sym);
 					}
 
@@ -467,7 +468,7 @@ int main(int argc, char** argv) {
 							console->ins(c);
 						}
 
-						if ((e.key.keysym.sym == SDLK_SPACE) || (
+						if (
 							e.key.keysym.sym == SDLK_COMMA ||
 							e.key.keysym.sym == SDLK_PERIOD ||
 							e.key.keysym.sym == SDLK_SLASH ||
@@ -483,7 +484,7 @@ int main(int argc, char** argv) {
 							e.key.keysym.sym == SDLK_EQUALS ||
 
 							e.key.keysym.sym == SDLK_BACKQUOTE
-						)) {
+						) {
 							char c;
 							switch (e.key.keysym.sym) {
 								case SDLK_BACKQUOTE:
