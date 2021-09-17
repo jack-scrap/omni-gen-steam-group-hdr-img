@@ -97,6 +97,10 @@ bool dictEq(Dict* lhs, Dict* rhs) {
 	bool _ = true;
 
 	for (int i = 0; i < lhs->_no; i++) {
+		if (!_) {
+			break;
+		}
+
 		switch (lhs->_type[i]) {
 			case omni::SCALAR:
 				if (!idxEq((Idx*) lhs->_data[i], (Idx*) rhs->_data[i])) {
