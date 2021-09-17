@@ -27,6 +27,9 @@ Cam cam;
 
 bool boot = false;
 
+extern std::string stage;
+extern unsigned int lvl;
+
 int main(int argc, char** argv) {
 	// initialize
 	std::map<std::string, std::string> setting = util::cfg::lex("player/cfg/init.cfg");
@@ -91,8 +94,6 @@ int main(int argc, char** argv) {
 		layout::view[X] + (state::lineWd * layout::glyph[X]), layout::view[Y]
 	}, col[false]);
 
-	std::string stage;
-	unsigned int lvl;
 	if (argc > 1) {
 		omni::assertion(omni::stage.find(argv[1]) != omni::stage.end(), "Could not initialize; no corresponding section `" + std::string(argv[1]) + "`");
 

@@ -21,6 +21,9 @@
 #include "state.h"
 #include "dict.h"
 
+std::string stage;
+unsigned int lvl;
+
 uint32_t epoch(uint32_t inter, void* param) {
 	console->getTime();
 	console->fmt();
@@ -788,6 +791,22 @@ void Console::exec() {
 				} else {
 					std::thread t(dispatch, _buffName);
 					t.detach();
+				}
+			}
+
+			if (cmd == "next") {
+				if (eq) {
+					lvl++;
+
+					std::string name = "player/script/" + stage + "/" + std::to_string(lvl) + "/main.py";
+
+					console->open(name);
+
+					scn::init(stage, lvl);
+
+					eq = false;
+				} else {
+					omni::err("Couldn't proceed -- current level not complete");
 				}
 			}
 
