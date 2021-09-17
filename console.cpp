@@ -458,7 +458,7 @@ void Console::fmt() {
 		boundFrame[Y]
 	}, {
 		(loc[X] + _cursEditor[_rngEditor][X]) - (util::math::clamp(loc[X] + _cursEditor[_rngEditor][X], 1, boundFrame[X] - 1)),
-		(loc[Y] + _cursEditor[_rngEditor][Y]) - (util::math::clamp(loc[Y] + _cursEditor[_rngEditor][Y], 1, boundFrame[Y]))
+		(_cursEditor[_rngEditor][Y]) - (util::math::clamp(_cursEditor[_rngEditor][Y], 1, boundFrame[Y] - 1))
 	});
 
 	/* command-line */
