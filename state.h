@@ -7,8 +7,8 @@
 #include "math.h"
 
 namespace state {
-	extern unsigned int line;
-	extern unsigned int ln;
+	extern unsigned int lineCnt;
+	extern unsigned int lineWd;
 
 	extern unsigned int initIdx;
 

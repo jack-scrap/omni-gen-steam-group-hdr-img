@@ -85,8 +85,8 @@ Console::Console(std::string fName, std::string cwd) :
 	_mode(EDITOR),
 	_cwd(cwd),
 	_prog("console", "tex") {
-		_canv = (char*) calloc(state::ln * state::line, sizeof (char));
-		_hl = (char*) calloc(state::ln * state::line, sizeof (bool));
+		_canv = (char*) calloc(state::lineWd * state::lineCnt, sizeof (char));
+		_hl = (char*) calloc(state::lineWd * state::lineCnt, sizeof (bool));
 
 		_data = (char*) calloc(layout::canv[X] * layout::canv[Y] * 3, sizeof (char));
 		_blank = (char*) calloc(layout::canv[X] * layout::canv[Y] * 3, sizeof (char));
@@ -163,7 +163,7 @@ Console::Console(std::string fName, std::string cwd) :
 		glGenTextures(1, &_tex);
 		glBindTexture(GL_TEXTURE_2D, _tex);
 
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, state::ln * layout::glyph[X], state::line * layout::glyph[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, _blank);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, state::lineWd * layout::glyph[X], state::lineCnt * layout::glyph[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, _blank);
 
 		glGenerateMipmap(GL_TEXTURE_2D);
 
@@ -188,28 +188,28 @@ void Console::fmtBuff(std::vector<std::string> buff, Coord loc, Coord view, Coor
 	while (
 		l < buff.size() &&
 		y < view._y &&
-		y < state::line
+		y < state::lineCnt
 	) {
 		int c = ptr._x;
 		int x = 0;
 		while (
 			c < buff[l].size() &&
 			x < view._x &&
-			x < state::ln
+			x < state::lineWd
 		) {
 			if (buff[l][c] == '\t') {
 				int t = 0;
 				while (
 					t < state::tabWd &&
 					x < view._x &&
-					x < state::ln
+					x < state::lineWd
 				) {
 					_canv[util::math::idx::arr({
 						loc._x + x,
 						loc._y + y
 					}, {
-						state::ln,
-						state::line
+						state::lineWd,
+						state::lineCnt
 					})] = ' ';
 
 					t++;
@@ -220,8 +220,8 @@ void Console::fmtBuff(std::vector<std::string> buff, Coord loc, Coord view, Coor
 					loc._x + x,
 					loc._y + y
 				}, {
-					state::ln,
-					state::line
+					state::lineWd,
+					state::lineCnt
 				})] = buff[l][c];
 
 				x++;
@@ -236,14 +236,14 @@ void Console::fmtBuff(std::vector<std::string> buff, Coord loc, Coord view, Coor
 }
 
 void Console::clear() {
-	for (int y = 0; y < state::line; y++) {
-		for (int x = 0; x < state::ln; x++) {
+	for (int y = 0; y < state::lineCnt; y++) {
+		for (int x = 0; x < state::lineWd; x++) {
 			unsigned int idx = util::math::idx::arr({
 				x,
 				y
 			}, {
-				state::ln,
-				state::line
+				state::lineWd,
+				state::lineCnt
 			});
 
 			_canv[idx] = 0;
@@ -253,7 +253,7 @@ void Console::clear() {
 
 	glBindTexture(GL_TEXTURE_2D, _tex);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, state::ln * layout::glyph[X], state::line * layout::glyph[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, _blank);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, state::lineWd * layout::glyph[X], state::lineCnt * layout::glyph[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, _blank);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
@@ -286,14 +286,14 @@ void Console::fmt() {
 	int x = 0;
 	while (
 		i < modeStr.size() &&
-		x < state::ln
+		x < state::lineWd
 	) {
 		_canv[util::math::idx::arr({
 			x,
 			0
 		}, {
-			state::ln,
-			state::line
+			state::lineWd,
+			state::lineCnt
 		})] = modeStr[i];
 
 		i++;
@@ -304,8 +304,8 @@ void Console::fmt() {
 		x,
 		0
 	}, {
-		state::ln,
-		state::line
+		state::lineWd,
+		state::lineCnt
 	})] = ' ';
 	x++;
 
@@ -313,14 +313,14 @@ void Console::fmt() {
 	i = 0;
 	while (
 		i < base.size() &&
-		x < state::ln
+		x < state::lineWd
 	) {
 		_canv[util::math::idx::arr({
 			x,
 			0
 		}, {
-			state::ln,
-			state::line
+			state::lineWd,
+			state::lineCnt
 		})] = base[i];
 
 		i++;
@@ -329,13 +329,13 @@ void Console::fmt() {
 
 	std::string time = std::string(_timeFmt);
 
-	while (x < state::ln - time.size()) {
+	while (x < state::lineWd - time.size()) {
 		_canv[util::math::idx::arr({
 			x,
 			0
 		}, {
-			state::ln,
-			state::line
+			state::lineWd,
+			state::lineCnt
 		})] = ' ';
 
 		x++;
@@ -344,14 +344,14 @@ void Console::fmt() {
 	i = 0;
 	while (
 		i < time.size() &&
-		x < state::ln
+		x < state::lineWd
 	) {
 		_canv[util::math::idx::arr({
 			x,
 			0
 		}, {
-			state::ln,
-			state::line
+			state::lineWd,
+			state::lineCnt
 		})] = time[i];
 
 		i++;
@@ -361,11 +361,11 @@ void Console::fmt() {
 	loc[Y] += 1;
 
 	const unsigned int boundFrame[2] = {
-		state::ln,
-		state::line - 1 - 1
+		state::lineWd,
+		state::lineCnt - 1 - 1
 	};
-	const unsigned int boundPrompt = state::ln - _ps1.size();
-	const unsigned int btm = state::line - 1;
+	const unsigned int boundPrompt = state::lineWd - _ps1.size();
+	const unsigned int btm = state::lineCnt - 1;
 
 	/* file system */
 	unsigned int maxFs = 0;
@@ -496,15 +496,15 @@ void Console::fmt() {
 void Console::render() {
 	glBindTexture(GL_TEXTURE_2D, _tex);
 
-	for (int l = 0; l < state::line; l++) {
-		for (int c = 0; c < state::ln; c++) {
+	for (int l = 0; l < state::lineCnt; l++) {
+		for (int c = 0; c < state::lineWd; c++) {
 			Coord st = {
 				c,
 				l
 			};
 			unsigned int idx = util::math::idx::arr(st, {
-				state::ln,
-				state::line
+				state::lineWd,
+				state::lineCnt
 			});
 			if (_canv[idx]) {
 				print(_canv[idx], _hl[idx], st);
@@ -814,14 +814,14 @@ void Console::exec() {
 void Console::hl() {
 	glBindTexture(GL_TEXTURE_2D, _tex);
 
-	for (int y = 0; y < state::line; y++) {
-		for (int x = 0; x < state::ln; x++) {
+	for (int y = 0; y < state::lineCnt; y++) {
+		for (int x = 0; x < state::lineWd; x++) {
 			_hl[util::math::idx::arr({
 				x,
 				y
 			}, {
-				state::ln,
-				state::line
+				state::lineWd,
+				state::lineCnt
 			})] = false;
 		}
 	}
@@ -831,22 +831,22 @@ void Console::hl() {
 	};
 
 	/* status bar */
-	for (int i = 0; i < state::ln; i++) {
+	for (int i = 0; i < state::lineWd; i++) {
 		unsigned int idx = util::math::idx::arr({
 			i,
 			0
 		}, {
-			state::ln,
-			state::line
+			state::lineWd,
+			state::lineCnt
 		});
 		_hl[idx] = true;
 	}
 
 	const unsigned int boundFrame[2] = {
-		state::ln,
-		state::line - 1 - 1
+		state::lineWd,
+		state::lineCnt - 1 - 1
 	};
-	const unsigned int btm = state::line - 1;
+	const unsigned int btm = state::lineCnt - 1;
 
 	/* file system */
 	unsigned int maxFs = 0;
@@ -881,8 +881,8 @@ void Console::hl() {
 						loc[X] + x,
 						loc[Y] + y
 					}, {
-						state::ln,
-						state::line
+						state::lineWd,
+						state::lineCnt
 					});
 					_hl[idx] = true;
 
@@ -906,8 +906,8 @@ void Console::hl() {
 					loc[X] + c,
 					loc[Y] + _cursEditor[MIN][Y] + (l * norm)
 				}, {
-					state::ln,
-					state::line
+					state::lineWd,
+					state::lineCnt
 				});
 
 				_hl[idx] = !_hl[idx];
@@ -966,8 +966,8 @@ void Console::hl() {
 					loc[X] + st._x,
 					loc[Y] + st._y
 				}, {
-					state::ln,
-					state::line
+					state::lineWd,
+					state::lineCnt
 				})] = true;
 
 				i++;
@@ -1000,8 +1000,8 @@ void Console::hl() {
 					loc[X] + _cursPrompt[MIN] + (i * norm),
 					loc[Y]
 				}, {
-					state::ln,
-					state::line
+					state::lineWd,
+					state::lineCnt
 				});
 
 				_hl[idx] = true;
@@ -1009,10 +1009,10 @@ void Console::hl() {
 
 			// block
 			for (int r = 0; r < 2; r++) {
-				unsigned int clamped = util::math::clamp(loc[X] + _cursPrompt[r], 1, state::ln - 1);
+				unsigned int clamped = util::math::clamp(loc[X] + _cursPrompt[r], 1, state::lineWd - 1);
 
 				if (_cursPrompt[r] == _prompt.size()) {
-					glTexSubImage2D(GL_TEXTURE_2D, 0, clamped * layout::glyph[X], (state::line - 1) * layout::glyph[Y], layout::glyph[X], layout::glyph[Y], GL_BGR, GL_UNSIGNED_BYTE, _block);
+					glTexSubImage2D(GL_TEXTURE_2D, 0, clamped * layout::glyph[X], (state::lineCnt - 1) * layout::glyph[Y], layout::glyph[X], layout::glyph[Y], GL_BGR, GL_UNSIGNED_BYTE, _block);
 				}
 			}
 
@@ -1028,8 +1028,8 @@ void Console::hl() {
 					loc[X] + c,
 					loc[Y] + util::math::clamp(_cursFs, 1, boundFrame[Y] - 1)
 				}, {
-					state::ln,
-					state::line
+					state::lineWd,
+					state::lineCnt
 				});
 
 				_hl[idx] = !_hl[idx];

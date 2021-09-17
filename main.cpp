@@ -44,7 +44,7 @@ int main(int argc, char** argv) {
 		// display
 		if (it->first == "screen_wd") {
 			layout::view[X] = util::cfg::parse::no(it->second);
-			layout::view[Y] = state::line * layout::glyph[Y];
+			layout::view[Y] = state::lineCnt * layout::glyph[Y];
 		}
 
 		if (it->first == "fps") {
@@ -57,11 +57,11 @@ int main(int argc, char** argv) {
 
 		// console
 		if (it->first == "line_count") {
-			state::line = util::cfg::parse::no(it->second);
+			state::lineCnt = util::cfg::parse::no(it->second);
 		}
 
 		if (it->first == "line_width") {
-			state::ln = util::cfg::parse::no(it->second);
+			state::lineWd = util::cfg::parse::no(it->second);
 		}
 
 		if (it->first == "tab_wd") {
@@ -81,14 +81,14 @@ int main(int argc, char** argv) {
 		}
 	}
 
-	layout::canv[X] = state::ln * layout::glyph[X];
-	layout::canv[Y] = state::line * layout::glyph[Y];
+	layout::canv[X] = state::lineWd * layout::glyph[X];
+	layout::canv[Y] = state::lineCnt * layout::glyph[Y];
 
-	layout::res[X] = state::ln * layout::glyph[X];
+	layout::res[X] = state::lineWd * layout::glyph[X];
 	layout::res[Y] = layout::view[Y];
 
 	disp = new Disp("Omni", {
-		layout::view[X] + (state::ln * layout::glyph[X]), layout::view[Y]
+		layout::view[X] + (state::lineWd * layout::glyph[X]), layout::view[Y]
 	}, col[false]);
 
 	std::string stage;

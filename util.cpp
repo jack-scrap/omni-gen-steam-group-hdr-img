@@ -1272,7 +1272,7 @@ std::vector<std::string> util::log(unsigned int loc) {
 	buff.push_back(head);
 
 	std::string lb;
-	for (int i = 0; i < state::ln; i++) {
+	for (int i = 0; i < state::lineWd; i++) {
 		lb.push_back('=');
 	}
 	buff.push_back(lb);
@@ -1280,12 +1280,12 @@ std::vector<std::string> util::log(unsigned int loc) {
 	std::string key = "LOC: ";
 	std::string val = std::to_string(loc);
 
-	std::string pair = util::str::pad(key, state::ln - val.size());
+	std::string pair = util::str::pad(key, state::lineWd - val.size());
 	pair += val;
 
 	buff.push_back(pair);
 
-	for (int i = buff.size(); i < state::line - 2 - 1 - 2 - 1; i++) {
+	for (int i = buff.size(); i < state::lineCnt - 2 - 1 - 2 - 1; i++) {
 		buff.push_back("");
 	}
 
@@ -1304,7 +1304,7 @@ std::string util::now(std::string format) {
 
 	struct tm* info = localtime(&epoch);
 
-	char out[state::ln];
+	char out[state::lineWd];
 	strftime(out, sizeof out / sizeof *out, format.c_str(), info);
 
 	return std::string(out);
