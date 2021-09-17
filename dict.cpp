@@ -29,9 +29,9 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 
 			_->_type[i] = omni::SCALAR;
 
-			Idx* _ = idxMk(i, init, 1, pair.key(), start + glm::vec3(0.0, 0.0, i * szPair));
+			Idx* idx = idxMk(i, init, 1, pair.key(), start + glm::vec3(0.0, 0.0, i * szPair));
 
-			child[i] = _->_parent;
+			child[i] = idx->_parent;
 		}
 
 		if (pair.value().type() == nlohmann::json::value_t::array) {
@@ -43,9 +43,9 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 
 			_->_type[i] = omni::ARRAY;
 
-			Array* _ = arrayMk(init, sz, pair.key(), X, start + glm::vec3(0.0, 0.0, i * szPair));
+			Array* array = arrayMk(init, sz, pair.key(), X, start + glm::vec3(0.0, 0.0, i * szPair));
 
-			child[i] = _->_parent;
+			child[i] = array->_parent;
 		}
 
 		i++;
