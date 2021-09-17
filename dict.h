@@ -7,6 +7,8 @@
 #include "var.h"
 
 typedef struct {
+	unsigned int _no;
+
 	Obj* _parent;
 } Dict;
 

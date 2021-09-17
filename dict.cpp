@@ -11,8 +11,10 @@
 
 Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 	Dict* _ = (Dict*) malloc(sizeof (Dict));
+	
+	_->_no = deser.size();
 
-	Obj* child[deser.size()];
+	Obj* child[_->_no];
 
 	glm::vec3 start = glm::vec3(0.0, 0.0, layout::letter[Y] + (layout::margin * 2 * 2)) + glm::vec3(layout::overhead, 0.0, layout::overhead);
 
