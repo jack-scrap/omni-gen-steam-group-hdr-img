@@ -767,7 +767,11 @@ void Console::exec() {
 			}
 
 			if (cmd == "quit") {
-				exit(0);
+				if (!_diff) {
+					exit(0);
+				} else {
+					omni::err("Buffer not saved");
+				}
 			}
 		} else {
 			omni::err("Command `" + cmd + "` not found");
