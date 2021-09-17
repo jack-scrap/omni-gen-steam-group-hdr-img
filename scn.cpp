@@ -129,24 +129,19 @@ void scn::init(std::string stage, unsigned int lvl) {
 		free(data[i]);
 		free(goal[i]);
 	}
-	free(data);
-	free(goal);
 
 	// vehicle
 	for (int i = 0; i < crane._sz; i += sizeof (Crane*)) {
 		craneDel(((Crane**) crane._ptr)[i]);
 	}
-	free(crane._ptr);
 
 	for (int i = 0; i < truck._sz; i += sizeof (Truck*)) {
 		truckDel(((Truck**) truck._ptr)[i]);
 	}
-	free(truck._ptr);
 
 	for (int i = 0; i < cargoShip._sz; i += sizeof (CargoShip*)) {
 		cargoShipDel(((CargoShip**) cargoShip._ptr)[i]);
 	}
-	free(cargoShip._ptr);
 
 	obj.clear();
 
@@ -154,12 +149,10 @@ void scn::init(std::string stage, unsigned int lvl) {
 	for (int i = 0; i < boundRng._sz; i += sizeof (Lim*)) {
 		limDel(((Lim**) boundRng._ptr)[i]);
 	}
-	free(boundRng._ptr);
 
 	for (int i = 0; i < boundArea._sz; i += sizeof (Cone*)) {
 		coneDel(((Cone**) boundArea._ptr)[i]);
 	}
-	free(boundArea._ptr);
 
 	/* allocate */
 	for (const auto& entry : deser["vehicle"]) {
