@@ -457,7 +457,7 @@ void Console::fmt() {
 		boundFrame[X],
 		boundFrame[Y]
 	}, {
-		(loc[X] + _cursEditor[_rngEditor][X]) - (util::math::clamp(loc[X] + _cursEditor[_rngEditor][X], 1, boundFrame[X])),
+		(loc[X] + _cursEditor[_rngEditor][X]) - (util::math::clamp(loc[X] + _cursEditor[_rngEditor][X], 1, boundFrame[X] - 1)),
 		(loc[Y] + _cursEditor[_rngEditor][Y]) - (util::math::clamp(loc[Y] + _cursEditor[_rngEditor][Y], 1, boundFrame[Y]))
 	});
 
@@ -973,7 +973,7 @@ void Console::hl() {
 			for (int r = 0; r < 2; r++) {
 				if (_cursEditor[r][X] == _buff[_cursEditor[r][Y]].size()) {
 					unsigned int clamped[2] = {
-						util::math::clamp(loc[X] + _cursEditor[r][X], 1, boundFrame[X]),
+						util::math::clamp(loc[X] + _cursEditor[r][X], 1, boundFrame[X] - 1),
 						util::math::clamp(loc[Y] + _cursEditor[r][Y], 1, boundFrame[Y])
 					};
 
