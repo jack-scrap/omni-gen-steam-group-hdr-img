@@ -8,6 +8,7 @@
 
 typedef struct {
 	unsigned int _no;
+	unsigned int* _type;
 
 	Obj* _parent;
 } Dict;

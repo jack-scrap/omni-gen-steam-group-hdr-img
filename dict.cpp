@@ -13,6 +13,7 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 	Dict* _ = (Dict*) malloc(sizeof (Dict));
 	
 	_->_no = deser.size();
+	_->_type = (unsigned int*) malloc(_->_no * sizeof (unsigned int));
 
 	Obj* child[_->_no];
 
@@ -26,6 +27,8 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 			char* init = (char*) malloc(sizeof (char));
 			init[0] = util::json::byte(pair.value());
 
+			_->_type[i] = omni::SCALAR;
+
 			Idx* _ = idxMk(i, init, 1, pair.key(), start + glm::vec3(0.0, 0.0, i * szPair));
 
 			child[i] = _->_parent;
@@ -37,6 +40,8 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 			for (int i = 0; i < sz; i++) {
 				init[i] = (char) ((int) pair.value()[i]);
 			}
+
+			_->_type[i] = omni::ARRAY;
 
 			Array* _ = arrayMk(init, sz, pair.key(), X, start + glm::vec3(0.0, 0.0, i * szPair));
 
