@@ -148,9 +148,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 	}
 	free(cargoShip._ptr);
 
-	for (void* _ : obj) {
-		objDel((Obj*) _);
-	}
 	obj.clear();
 
 	// bound
