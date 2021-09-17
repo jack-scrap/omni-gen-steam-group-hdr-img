@@ -7,9 +7,9 @@
 #include "var.h"
 
 typedef struct {
-	unsigned int _no;
 	void** _data;
 	unsigned int* _type;
+	unsigned int _no;
 
 	Obj* _parent;
 } Dict;
