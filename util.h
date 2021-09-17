@@ -20,25 +20,25 @@
 namespace util {
 	namespace fs {
 		template <typename T>
-		T rd(std::string name);
+		T rd(std::string fName);
 
 		template <>
-		std::string rd(std::string name);
+		std::string rd(std::string fName);
 
 		template <>
-		std::vector<std::string> rd(std::string name);
+		std::vector<std::string> rd(std::string fName);
 
-		void write(std::string name, std::vector<std::string> buff);
+		void write(std::string fName, std::vector<std::string> buff);
 
-		void del(std::string name);
+		void del(std::string fName);
 
-		std::vector<std::map<std::string, std::string>> ls(std::string name);
+		std::vector<std::map<std::string, std::string>> ls(std::string fName);
 
 		std::string name(std::string buff);
 
 		std::string base(std::string buff);
 
-		std::string perm(std::string name);
+		std::string perm(std::string fName);
 	}
 
 	namespace mesh {
@@ -58,10 +58,10 @@ namespace util {
 		}
 
 		namespace rd {
-			std::vector<GLfloat> vtc(std::string name);
-			std::vector<GLfloat> st(std::string name);
-			std::vector<GLfloat> norm(std::string name);
-			std::vector<GLushort> idc(std::string name, unsigned int attr);
+			std::vector<GLfloat> vtc(std::string fName);
+			std::vector<GLfloat> st(std::string fName);
+			std::vector<GLfloat> norm(std::string fName);
+			std::vector<GLushort> idc(std::string fName, unsigned int attr);
 		}
 	}
 

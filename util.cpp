@@ -18,16 +18,16 @@
 #include "layout.h"
 
 template <typename T>
-T util::fs::rd(std::string name) {
+T util::fs::rd(std::string fName) {
 }
 
 template <>
-std::string util::fs::rd<std::string>(std::string name) {
+std::string util::fs::rd<std::string>(std::string fName) {
 	std::ifstream in;
-	in.open(name);
+	in.open(fName);
 
 	if (in.fail()) {
-		omni::err("Could not open " + name + "; file not found");
+		omni::err("Could not open " + fName + "; file not found");
 	}
 
 	std::string cont;
@@ -41,12 +41,12 @@ std::string util::fs::rd<std::string>(std::string name) {
 }
 
 template <>
-std::vector<std::string> util::fs::rd<std::vector<std::string>>(std::string name) {
+std::vector<std::string> util::fs::rd<std::vector<std::string>>(std::string fName) {
 	std::ifstream in;
-	in.open("./" + name);
+	in.open("./" + fName);
 
 	if (in.fail()) {
-		omni::err("Could not open " + name + "; file not found");
+		omni::err("Could not open " + fName + "; file not found");
 	}
 
 	std::vector<std::string> cont;
@@ -59,17 +59,17 @@ std::vector<std::string> util::fs::rd<std::vector<std::string>>(std::string name
 	return cont;
 }
 
-void util::fs::write(std::string name, std::vector<std::string> buff) {
-	std::string stat = util::fs::perm(name);
+void util::fs::write(std::string fName, std::vector<std::string> buff) {
+	std::string stat = util::fs::perm(fName);
 
 	if (stat[1] != 'w') {
-		omni::err("Could not write " + name + "; file read-only");
+		omni::err("Could not write " + fName + "; file read-only");
 
 		return;
 	}
 
 	std::ofstream f;
-	f.open(name);
+	f.open(fName);
 
 	for (const std::string& line : buff) {
 		f << line + '\n';
@@ -78,16 +78,16 @@ void util::fs::write(std::string name, std::vector<std::string> buff) {
 	f.close();
 }
 
-void util::fs::del(std::string name) {
-	if (remove(name.c_str()) != 0) {
-		omni::err("Couldn't delete file `" + name + "`");
+void util::fs::del(std::string fName) {
+	if (remove(fName.c_str()) != 0) {
+		omni::err("Couldn't delete file `" + fName + "`");
 	}
 }
 
-std::vector<std::map<std::string, std::string>> util::fs::ls(std::string name) {
+std::vector<std::map<std::string, std::string>> util::fs::ls(std::string fName) {
 	std::vector<std::map<std::string, std::string>> tree;
 
-	std::string path = "./" + name;
+	std::string path = "./" + fName;
 	auto dir = opendir(path.c_str());
 
 	if (!dir) {
@@ -116,7 +116,7 @@ std::vector<std::map<std::string, std::string>> util::fs::ls(std::string name) {
 					}
 				});
 			} else {
-				if (name != ".") {
+				if (fName != ".") {
 					tree.push_back({
 						{
 							"name",
@@ -150,11 +150,11 @@ std::string util::fs::base(std::string buff) {
 	return util::str::split(f, '.')[0];
 }
 
-std::string util::fs::perm(std::string name) {
+std::string util::fs::perm(std::string fName) {
 	std::string _;
 
 	struct stat f;
-	if (stat(name.c_str(), &f) < 0) {
+	if (stat(fName.c_str(), &f) < 0) {
 		return _;
 	}
 
@@ -178,16 +178,16 @@ std::vector<GLfloat> util::mesh::plane(glm::vec2 sz) {
 	return _;
 }
 
-std::vector<GLfloat> util::mesh::rd::vtc(std::string name) {
+std::vector<GLfloat> util::mesh::rd::vtc(std::string fName) {
 	std::vector<GLfloat> _;
 
-	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>("res/obj/" + name + ".obj");
+	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>("res/obj/" + fName + ".obj");
 
 	for (int l = 0; l < buff.size(); l++) {
 		std::vector<std::string> tok = util::str::split(buff[l], ' ');
 
 		if (tok[0] == "v") {
-			omni::assertion(tok.size() == 1 + 3, std::string("Could not load object `" ) + name + std::string("`; inappropriate size of vertex position at [" ) + std::to_string(l) + std::string("]"));
+			omni::assertion(tok.size() == 1 + 3, std::string("Could not load object `" ) + fName + std::string("`; inappropriate size of vertex position at [" ) + std::to_string(l) + std::string("]"));
 
 			for (int i = 1; i < 1 + 3; i++) {
 				_.push_back(std::stof(tok[i]));
@@ -198,16 +198,16 @@ std::vector<GLfloat> util::mesh::rd::vtc(std::string name) {
 	return _;
 }
 
-std::vector<GLfloat> util::mesh::rd::st(std::string name) {
+std::vector<GLfloat> util::mesh::rd::st(std::string fName) {
 	std::vector<GLfloat> _;
 
-	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>("res/obj/" + name + ".obj");
+	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>("res/obj/" + fName + ".obj");
 
 	for (int l = 0; l < buff.size(); l++) {
 		std::vector<std::string> tok = util::str::split(buff[l], ' ');
 
 		if (tok[0] == "vt") {
-			omni::assertion(tok.size() == 1 + 2, std::string("Could not load object `" ) + name + std::string("`; inappropriate size of texture coordinate at [" ) + std::to_string(l) + std::string("]"));
+			omni::assertion(tok.size() == 1 + 2, std::string("Could not load object `" ) + fName + std::string("`; inappropriate size of texture coordinate at [" ) + std::to_string(l) + std::string("]"));
 
 			for (int i = 1; i < 1 + 2; i++) {
 				_.push_back(std::stof(tok[i]));
@@ -218,16 +218,16 @@ std::vector<GLfloat> util::mesh::rd::st(std::string name) {
 	return _;
 }
 
-std::vector<GLfloat> util::mesh::rd::norm(std::string name) {
+std::vector<GLfloat> util::mesh::rd::norm(std::string fName) {
 	std::vector<GLfloat> _;
 
-	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>("res/obj/" + name + ".obj");
+	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>("res/obj/" + fName + ".obj");
 
 	for (int l = 0; l < buff.size(); l++) {
 		std::vector<std::string> tok = util::str::split(buff[l], ' ');
 
 		if (tok[0] == "vn") {
-			omni::assertion(tok.size() == 1 + 3, std::string("Could not load object `" ) + name + std::string("`; inappropriate size of normal at [" ) + std::to_string(l) + std::string("]"));
+			omni::assertion(tok.size() == 1 + 3, std::string("Could not load object `" ) + fName + std::string("`; inappropriate size of normal at [" ) + std::to_string(l) + std::string("]"));
 
 			for (int i = 1; i < 1 + 3; i++) {
 				_.push_back(std::stof(tok[i]));
@@ -320,16 +320,16 @@ std::vector<GLfloat> util::mesh::gen::norm(std::vector<glm::vec3> vtc) {
 	return _;
 }
 
-std::vector<GLushort> util::mesh::rd::idc(std::string name, unsigned int attr) {
+std::vector<GLushort> util::mesh::rd::idc(std::string fName, unsigned int attr) {
 	std::vector<GLushort> _;
 
-	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>("res/obj/" + name + ".obj");
+	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>("res/obj/" + fName + ".obj");
 
 	for (int l = 0; l < buff.size(); l++) {
 		std::vector<std::string> tok = util::str::split(buff[l], ' ');
 
 		if (tok[0] == "f") {
-			omni::assertion(tok.size() == 1 + 3, std::string("Could not load object `" ) + name + std::string("`; inappropriate number of indices for triangle primitive at [" ) + std::to_string(l) + std::string("]"));
+			omni::assertion(tok.size() == 1 + 3, std::string("Could not load object `" ) + fName + std::string("`; inappropriate number of indices for triangle primitive at [" ) + std::to_string(l) + std::string("]"));
 
 			for (int i = 1; i < 1 + 3; i++) {
 				std::vector<std::string> type = util::str::split(tok[i], '/');
