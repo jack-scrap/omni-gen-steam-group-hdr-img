@@ -222,8 +222,7 @@ int main(int argc, char** argv) {
 						console->ins(e.key.keysym.sym);
 					}
 
-					if ((e.key.keysym.sym == SDLK_SPACE) || (
-						e.key.keysym.sym == SDLK_COMMA ||
+					if ((e.key.keysym.sym == SDLK_COMMA ||
 						e.key.keysym.sym == SDLK_PERIOD ||
 						e.key.keysym.sym == SDLK_SLASH ||
 
@@ -240,6 +239,17 @@ int main(int argc, char** argv) {
 						e.key.keysym.sym == SDLK_BACKQUOTE
 					)) {
 						console->ins(e.key.keysym.sym);
+					}
+
+					// whitespace
+					if (e.key.keysym.sym == SDLK_SPACE) {
+						console->ins(e.key.keysym.sym);
+					}
+
+					if (e.key.keysym.sym == SDLK_TAB) {
+						for (int i = 0; i < state::tabWd; i++) {
+							console->ins(' ');
+						}
 					}
 
 					// control
