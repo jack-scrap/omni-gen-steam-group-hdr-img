@@ -197,16 +197,37 @@ void Console::fmtBuff(std::vector<std::string> buff, Coord loc, Coord view, Coor
 			x < view._x &&
 			x < state::ln
 		) {
-			_canv[util::math::idx::arr({
-				loc._x + x,
-				loc._y + y
-			}, {
-				state::ln,
-				state::line
-			})] = buff[l][c];
+			if (buff[l][c] == '\t') {
+				int t = 0;
+				while (
+					t < state::tabWd &&
+					x < view._x &&
+					x < state::ln
+				) {
+					_canv[util::math::idx::arr({
+						loc._x + x,
+						loc._y + y
+					}, {
+						state::ln,
+						state::line
+					})] = ' ';
+
+					t++;
+					x++;
+				}
+			} else {
+				_canv[util::math::idx::arr({
+					loc._x + x,
+					loc._y + y
+				}, {
+					state::ln,
+					state::line
+				})] = buff[l][c];
+
+				x++;
+			}
 
 			c++;
-			x++;
 		}
 
 		l++;

@@ -248,9 +248,7 @@ int main(int argc, char** argv) {
 					}
 
 					if (e.key.keysym.sym == SDLK_TAB) {
-						for (int i = 0; i < state::tabWd; i++) {
-							console->ins(' ');
-						}
+						console->ins('\t');
 					}
 
 					// control
