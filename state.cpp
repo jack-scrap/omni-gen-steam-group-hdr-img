@@ -12,6 +12,6 @@ unsigned int state::fps;
 
 unsigned int state::tabWd = 2;
 
-unsigned int state::speed;
+unsigned int state::speed = 3;
 
 std::string state::format;
