@@ -1217,6 +1217,23 @@ unsigned int util::math::idx::determ(Coord st, std::vector<std::string> buff) {
 	return _;
 }
 
+unsigned int util::math::idx::expand(std::string line, unsigned int idx) {
+	unsigned int _ = 0;
+
+	unsigned int c = 0;
+	while (c < idx) {
+		if (line[c] == '\t') {
+			_ += state::tabWd;
+		} else {
+			_++;
+		}
+
+		c++;
+	}
+
+	return _;
+}
+
 Coord util::math::coord::arr(unsigned int idx, Coord bound) {
 	return {
 		idx % bound._x,

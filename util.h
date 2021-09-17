@@ -155,6 +155,8 @@ namespace util {
 		namespace idx {
 			unsigned int arr(Coord st, Coord bound);
 			unsigned int determ(Coord st, std::vector<std::string> buff);
+
+			unsigned int expand(std::string line, unsigned int idx);
 		}
 
 		namespace coord {
