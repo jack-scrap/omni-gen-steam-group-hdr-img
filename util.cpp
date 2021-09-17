@@ -26,10 +26,6 @@ std::string util::fs::rd<std::string>(std::string fName) {
 	std::ifstream in;
 	in.open(fName);
 
-	if (in.fail()) {
-		omni::err("Could not open " + fName + "; file not found");
-	}
-
 	std::string cont;
 	for (std::string l; std::getline(in, l);) {
 		cont += l + "\n";
@@ -45,10 +41,6 @@ std::vector<std::string> util::fs::rd<std::vector<std::string>>(std::string fNam
 	std::ifstream in;
 	in.open("./" + fName);
 
-	if (in.fail()) {
-		omni::err("Could not open " + fName + "; file not found");
-	}
-
 	std::vector<std::string> cont;
 	for (std::string l; std::getline(in, l);) {
 		cont.push_back(l);
@@ -57,6 +49,17 @@ std::vector<std::string> util::fs::rd<std::vector<std::string>>(std::string fNam
 	in.close();
 
 	return cont;
+}
+
+bool util::fs::exist(std::string fName) {
+	std::ifstream in;
+	in.open("./" + fName);
+
+	bool _ = in.good();
+
+	in.close();
+
+	return _;
 }
 
 void util::fs::write(std::string fName, std::vector<std::string> buff) {

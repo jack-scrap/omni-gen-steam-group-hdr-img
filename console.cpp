@@ -516,9 +516,13 @@ void Console::render() {
 }
 
 void Console::open(std::string fName) {
-	_buffName = fName;
+	if (util::fs::exist(fName)) {
+		_buffName = fName;
 
-	_buff = util::fs::rd<std::vector<std::string>>(_buffName);
+		_buff = util::fs::rd<std::vector<std::string>>(_buffName);
+	} else {
+		omni::err("Could not open " + fName + "; file not found");
+	}
 }
 
 void Console::changeDir(std::string dir) {
