@@ -541,6 +541,8 @@ void Console::ins(char c) {
 				}
 			}
 
+			_diff = true;
+
 			break;
 
 		case PROMPT:
@@ -580,6 +582,8 @@ void Console::newLine() {
 		_cursEditor[i][Y]++;
 		_cursEditor[i][X] = 0;
 	}
+
+	_diff = true;
 }
 
 void Console::del() {
@@ -640,6 +644,8 @@ void Console::del() {
 				}
 			}
 
+			_diff = true;
+
 			break;
 		}
 
@@ -693,7 +699,11 @@ void Console::exec() {
 		if (std::find(omni::lib.begin(), omni::lib.end(), cmd) != omni::lib.end()) {
 			if (cmd == "open") {
 				if (tok.size() == 1 + 1) {
-					open(tok[1]);
+					if (!_diff) {
+						open(tok[1]);
+					} else {
+						omni::err("Buffer not saved");
+					}
 				} else {
 					omni::err("Incorrect number of arguments to command `" + cmd + "`");
 				}
@@ -701,10 +711,14 @@ void Console::exec() {
 
 			if (cmd == "new") {
 				if (tok.size() == 1 + 1) {
-					_buffName = tok[1];
-					_buff = {
-						""
-					};
+					if (!_diff) {
+						_buffName = tok[1];
+						_buff = {
+							""
+						};
+					} else {
+						omni::err("Buffer not saved");
+					}
 				} else {
 					omni::err("Incorrect number of arguments to command `" + cmd + "`");
 				}
@@ -720,6 +734,8 @@ void Console::exec() {
 					}
 
 					util::fs::write(name, _buff);
+
+					_diff = false;
 				} else {
 					omni::err("Incorrect number of arguments to command `" + cmd + "`");
 				}

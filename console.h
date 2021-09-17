@@ -21,6 +21,8 @@ class Console {
 
 		const std::string _ps1 = "[] ";
 
+		bool _diff = false;
+
 		GLfloat _vtc[2 * 2][2] = {
 			-1.0, -1.0,
 			1.0, -1.0,
