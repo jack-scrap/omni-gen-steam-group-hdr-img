@@ -30,6 +30,16 @@ glm::vec2 layout::bordered(glm::vec2 bound) {
 	return margined(margined(bound) + margined(glm::vec2(stroke * 2, stroke * 2)));
 }
 
+glm::vec2 layout::center(glm::vec2 bound) {
+	glm::vec2 _;
+
+	for (int i = 0; i < 2; i++) {
+		_[i] = bound[i] / 2;
+	}
+
+	return _;
+}
+
 glm::vec3 layout::center(Obj* obj) {
 	glm::vec3 bound;
 	for (int a = 0; a < 3; a++) {
