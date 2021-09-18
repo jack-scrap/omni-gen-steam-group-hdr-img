@@ -16,10 +16,10 @@ glm::vec2 layout::item(glm::vec2 bound) {
 	return _;
 }
 
-glm::vec2 layout::sz(glm::vec2 dim) {
+glm::vec2 layout::sz(glm::vec2 bound) {
 	return glm::vec2(
-		(dim[X] * stride[X]) + (pad * 2),
-		(dim[Y] * stride[Z]) + (pad * 2)
+		(bound[X] * stride[X]) + (pad * 2),
+		(bound[Y] * stride[Z]) + (pad * 2)
 	);
 }
 
