@@ -21,13 +21,13 @@ Lim* limMk(unsigned int axis, GLfloat val, unsigned int status) {
 	for (int b = 0; b < 2; b++) {
 		switch (axis) {
 			case X:
-				vtc[b][X] = val;
+				vtc[b][X] = _->_val;
 				vtc[b][Z] = (b ? 1 : -1) * 100.0;
 				
 				break;
 
 			case Z:
-				vtc[b][Z] = val;
+				vtc[b][Z] = _->_val;
 				vtc[b][X] = (b ? 1 : -1) * 100.0;
 
 				break;
