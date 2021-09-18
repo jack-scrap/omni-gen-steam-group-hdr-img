@@ -69,12 +69,12 @@ Idx* idxMk(unsigned int i, char* c, unsigned int sz, std::string name, glm::vec3
 		child[1] = nullptr;
 	}
 
+	// data
 	glm::vec2 stride = layout::bordered({
 		layout::idx[X],
 		layout::idx[Z]
 	});
 
-	// data
 	for (int i = 0; i < _->_sz; i++) {
 		Cont* byte = contMk(c[i], glm::vec3((layout::stroke * 2) + (layout::idx[X] / 2), 1.0, (layout::stroke * 2) + (layout::idx[Z] / 2)) + glm::vec3(0.0, i * stride[Y], 0.0));
 
