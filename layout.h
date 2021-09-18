@@ -33,7 +33,7 @@ namespace layout {
 	static constexpr GLfloat margin = 0.16;
 	static constexpr GLfloat stroke = pad * 2;
 
-	static constexpr GLfloat overhead = stroke * 2;
+	static constexpr GLfloat overhead = stroke + margin + margin;
 	static constexpr GLfloat offset = stroke + margin;
 
 	static constexpr GLfloat letter[2] = {
