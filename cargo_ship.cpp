@@ -16,7 +16,7 @@ CargoShip* cargoShipMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	CargoShip* _ = (CargoShip*) malloc(sizeof (CargoShip));
 
 	// bed
-	glm::vec2 sz = layout::sz({
+	glm::vec2 sz = layout::array({
 		_->_x,
 		_->_y
 	});

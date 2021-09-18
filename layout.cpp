@@ -16,7 +16,7 @@ glm::vec2 layout::item(glm::vec2 bound) {
 	return _;
 }
 
-glm::vec2 layout::sz(glm::vec2 bound) {
+glm::vec2 layout::array(glm::vec2 bound) {
 	return glm::vec2(
 		(bound[X] * stride[X]) + (pad * 2),
 		(bound[Y] * stride[Z]) + (pad * 2)
