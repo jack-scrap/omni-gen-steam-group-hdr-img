@@ -28,7 +28,7 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 		layout::idx[Z]
 	});
 
-	GLfloat szPair = stride[Z] + (layout::margin * 2) + (layout::stroke * 2) + (layout::letter[Y] + (layout::margin * 2)) + (layout::margin * 2 * 2);
+	GLfloat stridePair = stride[Z] + (layout::margin * 2) + (layout::stroke * 2) + (layout::letter[Y] + (layout::margin * 2)) + (layout::margin * 2 * 2);
 
 	unsigned int i = 0;
 	for (const auto& pair : deser.items()) {
@@ -36,7 +36,7 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 			char* init = (char*) malloc(sizeof (char));
 			init[0] = util::json::byte(pair.value());
 
-			Idx* idx = idxMk(i, init, 1, pair.key(), start + glm::vec3(0.0, 0.0, i * szPair));
+			Idx* idx = idxMk(i, init, 1, pair.key(), start + glm::vec3(0.0, 0.0, i * stridePair));
 
 			_->_data[i] = idx;
 			_->_type[i] = omni::SCALAR;
@@ -51,7 +51,7 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 				init[i] = (char) ((int) pair.value()[i]);
 			}
 
-			Array* array = arrayMk(init, sz, pair.key(), X, start + glm::vec3(0.0, 0.0, i * szPair));
+			Array* array = arrayMk(init, sz, pair.key(), X, start + glm::vec3(0.0, 0.0, i * stridePair));
 
 			_->_data[i] = array;
 			_->_type[i] = omni::ARRAY;
@@ -87,7 +87,7 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 	// scope
 	Border* scope = borderMk(layout::margined({
 		(layout::stroke * 2) + (layout::margin * 2 * 2) + (maxX * stride[X]),
-		(deser.size() * szPair)
+		(deser.size() * stridePair)
 	}), child, sizeof child / sizeof *child);
 
 	_->_parent = scope->_parent;
