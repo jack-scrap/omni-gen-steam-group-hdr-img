@@ -26,6 +26,10 @@ glm::vec2 layout::margined(glm::vec2 bound) {
 	return _;
 }
 
+glm::vec2 layout::bordered(glm::vec2 bound) {
+	return margined(margined(bound) + margined(glm::vec2(stroke * 2, stroke * 2)));
+}
+
 glm::vec2 layout::array(glm::vec2 bound) {
 	return glm::vec2(
 		(bound[X] * stride[X]) + (pad * 2),

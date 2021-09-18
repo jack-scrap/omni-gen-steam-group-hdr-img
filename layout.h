@@ -50,6 +50,8 @@ namespace layout {
 	glm::vec2 padded(glm::vec2 bound);
 	glm::vec2 margined(glm::vec2 bound);
 
+	glm::vec2 bordered(glm::vec2 bound);
+
 	glm::vec2 array(glm::vec2 bound);
 
 	glm::vec3 center(Obj* obj);
