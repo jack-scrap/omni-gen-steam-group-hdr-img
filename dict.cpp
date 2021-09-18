@@ -20,7 +20,12 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 
 	glm::vec3 start = glm::vec3(0.0, 0.0, layout::letter[Y] + (layout::margin * 2 * 2)) + glm::vec3(layout::overhead, 0.0, layout::overhead);
 
-	GLfloat szPair = layout::stride[Z] + (layout::margin * 2) + (layout::stroke * 2) + (layout::letter[Y] + (layout::margin * 2)) + (layout::margin * 2 * 2);
+	glm::vec2 stride = layout::bordered({
+		layout::idx[X],
+		layout::idx[Z]
+	});
+
+	GLfloat szPair = stride[Z] + (layout::margin * 2) + (layout::stroke * 2) + (layout::letter[Y] + (layout::margin * 2)) + (layout::margin * 2 * 2);
 
 	unsigned int i = 0;
 	for (const auto& pair : deser.items()) {
@@ -78,7 +83,7 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 
 	// scope
 	Border* scope = borderMk(layout::margined({
-		(layout::stroke * 2) + (layout::margin * 2 * 2) + (maxX * layout::stride[X]),
+		(layout::stroke * 2) + (layout::margin * 2 * 2) + (maxX * stride[X]),
 		(deser.size() * szPair)
 	}), child, sizeof child / sizeof *child);
 

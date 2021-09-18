@@ -36,12 +36,6 @@ namespace layout {
 	static constexpr GLfloat overhead = stroke * 2;
 	static constexpr GLfloat offset = stroke + margin;
 
-	static constexpr GLfloat stride[3] = {
-		(margin * 2) + idx[X] + (margin * 2) + (stroke * 2) + (margin * 2),
-		idx[Y],
-		(margin * 2) + idx[Z] + (margin * 2) + (margin * 2) + (stroke * 2) + (margin * 2)
-	};
-
 	static constexpr GLfloat letter[2] = {
 		0.8,
 		1

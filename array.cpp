@@ -19,12 +19,17 @@ Array* arrayMk(char* init, unsigned int x, std::string name, unsigned int axis, 
 	unsigned int noChild = 1 + (_->_x * _->_y);
 	Obj** child = (Obj**) malloc(noChild * sizeof (Obj*));
 
+	glm::vec2 stride = layout::bordered({
+		layout::idx[X],
+		layout::idx[Z]
+	});
+
 	int c = 0;
 	glm::vec3 overhead = glm::vec3(layout::overhead, 0.0, layout::overhead);
 	for (int i = 0; i < _->_x; i++) {
 		Idx* idx;
 		glm::vec3 offset = glm::vec3(0.0);
-		offset[axis] = i * layout::stride[axis];
+		offset[axis] = i * stride[axis];
 		if (init[c]) {
 			idx = idxMk(c, &init[c], 1, "", overhead + offset);
 		} else {
@@ -58,11 +63,6 @@ Array* arrayMk(char* init, unsigned int x, std::string name, unsigned int axis, 
 			break;
 	}
 
-	glm::vec2 stride = layout::bordered({
-		layout::idx[X],
-		layout::idx[Z]
-	});
-
 	Border* scope = borderMk(layout::margined({
 		_->_x * stride[X],
 		_->_y * stride[Y]
@@ -95,12 +95,17 @@ Array* arrayMk(char* init, unsigned int x, unsigned int y, std::string name, glm
 	// data
 	_->_data = (Idx**) malloc(_->_x * _->_y * sizeof (Idx*));
 
+	glm::vec2 stride = layout::bordered({
+		layout::idx[X],
+		layout::idx[Z]
+	});
+
 	int c = 0;
 	glm::vec3 overhead = glm::vec3(layout::overhead, 0.0, layout::overhead);
 	for (int j = 0; j < _->_y; j++) {
 		for (int i = 0; i < _->_x; i++) {
 			Idx* idx;
-			glm::vec3 offset = overhead + glm::vec3(i * layout::stride[X], 0.0, j * layout::stride[Z]);
+			glm::vec3 offset = overhead + glm::vec3(i * stride[X], 0.0, j * stride[Z]);
 			if (init[c]) {
 				idx = idxMk(c, &init[c], 1, "", offset);
 			} else {
@@ -113,11 +118,6 @@ Array* arrayMk(char* init, unsigned int x, unsigned int y, std::string name, glm
 			c++;
 		}
 	}
-
-	glm::vec2 stride = layout::bordered({
-		layout::idx[X],
-		layout::idx[Z]
-	});
 
 	Border* scope = borderMk(layout::margined({
 		_->_x * stride[X],
