@@ -57,7 +57,16 @@ Array* arrayMk(char* init, unsigned int x, std::string name, unsigned int axis, 
 
 			break;
 	}
-	Border* scope = borderMk(layout::margined(layout::array(bound)), child, noChild, loc, rot);
+
+	glm::vec2 stride = layout::bordered({
+		layout::idx[X],
+		layout::idx[Z]
+	});
+
+	Border* scope = borderMk(layout::margined({
+		_->_x * stride[X],
+		_->_y * stride[Y]
+	}), child, noChild, loc, rot);
 
 	_->_parent = scope->_parent;
 
@@ -105,10 +114,15 @@ Array* arrayMk(char* init, unsigned int x, unsigned int y, std::string name, glm
 		}
 	}
 
-	Border* scope = borderMk(layout::margined(layout::array({
-		_->_x,
-		_->_y
-	})), child, noChild, loc, rot);
+	glm::vec2 stride = layout::bordered({
+		layout::idx[X],
+		layout::idx[Z]
+	});
+
+	Border* scope = borderMk(layout::margined({
+		_->_x * stride[X],
+		_->_y * stride[Y]
+	}), child, noChild, loc, rot);
 
 	_->_parent = scope->_parent;
 

@@ -16,9 +16,14 @@ CargoShip* cargoShipMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	CargoShip* _ = (CargoShip*) malloc(sizeof (CargoShip));
 
 	// bed
-	glm::vec2 bound = layout::array({
-		_->_x,
-		_->_y
+	glm::vec2 stride = layout::bordered({
+		layout::idx[X],
+		layout::idx[Z]
+	});
+
+	glm::vec2 bound = layout::margined({
+		_->_x * stride[X],
+		_->_y * stride[Y]
 	});
 
 	GLfloat vtc[2 * 2][3];
