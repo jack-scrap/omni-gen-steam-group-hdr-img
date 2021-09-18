@@ -172,6 +172,49 @@ void scn::init(std::string stage, unsigned int lvl) {
 	}
 
 	/* allocate */
+	// data
+	noData = deser["data"].size();
+
+	type = (unsigned int*) malloc(noData * sizeof (unsigned int*));
+
+	// initial
+	Scope init = util::json::scope(deser["data"]);
+	data = init._ptr;
+
+	// desired
+	Scope desired = util::json::scope(deser["goal"]);
+	goal = desired._ptr;
+
+	for (int i = 0; i < init._no; i++) {
+		omni::assertion(init._type[i] == desired._type[i], std::string("Data `") + data[i]->_id + std::string("` not comparable"));
+	}
+
+	type = init._type;
+
+	for (int i = 0; i < noData; i++) {
+		Obj* _;
+
+		switch (type[i]) {
+			case omni::SCALAR:
+				_ = ((Idx*) data[i]->_ptr)->_parent;
+
+				break;
+
+			case omni::ARRAY:
+				_ = ((Array*) data[i]->_ptr)->_parent;
+
+				break;
+
+			case omni::DICT:
+				_ = ((Dict*) data[i]->_ptr)->_parent;
+
+				break;
+		}
+
+		obj.push_back(_);
+		objType.push_back(Mesh::OBJ);
+	}
+
 	for (const auto& entry : deser["vehicle"]) {
 		glm::vec3 loc = glm::vec3(0.0);
 		if (entry.contains("loc")) {
@@ -279,49 +322,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 		}
 	}
 
-	/* data */
-	noData = deser["data"].size();
-
-	type = (unsigned int*) malloc(noData * sizeof (unsigned int*));
-
-	// initial
-	Scope init = util::json::scope(deser["data"]);
-	data = init._ptr;
-
-	// desired
-	Scope desired = util::json::scope(deser["goal"]);
-	goal = desired._ptr;
-
-	for (int i = 0; i < init._no; i++) {
-		omni::assertion(init._type[i] == desired._type[i], std::string("Data `") + data[i]->_id + std::string("` not comparable"));
-	}
-
-	type = init._type;
-
-	for (int i = 0; i < noData; i++) {
-		Obj* _;
-
-		switch (type[i]) {
-			case omni::SCALAR:
-				_ = ((Idx*) data[i]->_ptr)->_parent;
-
-				break;
-
-			case omni::ARRAY:
-				_ = ((Array*) data[i]->_ptr)->_parent;
-
-				break;
-
-			case omni::DICT:
-				_ = ((Dict*) data[i]->_ptr)->_parent;
-
-				break;
-		}
-
-		obj.push_back(_);
-		objType.push_back(Mesh::OBJ);
-	}
-
 	// prop
 	for (const nlohmann::json::object_t& entry : deser["prop"]["static"]) {
 		Obj* _ = util::json::prop(entry);
@@ -389,7 +389,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 		}
 	}
 
-	// control flow
+	// control-flow
 	streetSign._sz = deser["ctrl"].size();
 	streetSign._ptr = (StreetSign**) malloc(streetSign._sz * sizeof (StreetSign*));
 
