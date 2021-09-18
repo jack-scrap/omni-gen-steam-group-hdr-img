@@ -6,6 +6,16 @@ unsigned int layout::res[2];
 
 unsigned int layout::canv[2];
 
+glm::vec2 layout::padded(glm::vec2 bound) {
+	glm::vec2 _;
+
+	for (int i = 0; i < 2; i++) {
+		_[i] = bound[i] + (pad * 2);
+	}
+
+	return _;
+}
+
 glm::vec2 layout::margined(glm::vec2 bound) {
 	glm::vec2 _;
 
