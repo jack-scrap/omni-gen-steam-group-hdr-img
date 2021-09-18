@@ -73,7 +73,7 @@ CArr cargoShipGet() {
 }
 
 std::vector<Obj*> scn::obj;
-std::vector<unsigned int> scn::objType;
+std::vector<unsigned int> scn::prim;
 
 CArr streetSign = {
 	(StreetSign**) malloc(0),
@@ -212,7 +212,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 		}
 
 		obj.push_back(_);
-		objType.push_back(Mesh::OBJ);
+		prim.push_back(Mesh::OBJ);
 	}
 
 	for (const auto& entry : deser["vehicle"]) {
@@ -244,7 +244,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 			((Crane**) crane._ptr)[crane._sz - sizeof (Crane*)] = _;
 
 			obj.push_back(_->_parent);
-			objType.push_back(Mesh::OBJ);
+			prim.push_back(Mesh::OBJ);
 		}
 
 		if (entry["name"] == "cargo_ship") {
@@ -258,7 +258,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 			((CargoShip**) cargoShip._ptr)[cargoShip._sz - sizeof (CargoShip*)] = _;
 
 			obj.push_back(_->_parent);
-			objType.push_back(Mesh::OBJ);
+			prim.push_back(Mesh::OBJ);
 		}
 
 		if (entry["name"] == "truck") {
@@ -283,13 +283,13 @@ void scn::init(std::string stage, unsigned int lvl) {
 			((Truck**) truck._ptr)[truck._sz - sizeof (Truck*)] = _;
 
 			obj.push_back(_->_parent);
-			objType.push_back(Mesh::OBJ);
+			prim.push_back(Mesh::OBJ);
 
 			obj.push_back(_->_parent->_child[Truck::BED]);
-			objType.push_back(Mesh::PT);
+			prim.push_back(Mesh::PT);
 
 			obj.push_back(_->_parent->_child[Truck::OUTER]);
-			objType.push_back(Mesh::PT);
+			prim.push_back(Mesh::PT);
 		}
 	}
 
@@ -318,7 +318,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 		for (Obj* seg : _) {
 			obj.push_back(seg);
-			objType.push_back(Mesh::LINE);
+			prim.push_back(Mesh::LINE);
 		}
 	}
 
@@ -327,7 +327,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 		Obj* _ = util::json::prop(entry);
 
 		obj.push_back(_);
-		objType.push_back(Mesh::OBJ);
+		prim.push_back(Mesh::OBJ);
 	}
 
 	for (nlohmann::json entry : deser["prop"]["dyna"]) {
@@ -345,7 +345,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 			Obj* _ = iBeamMk(entry["sz"], entry["axis"], loc, rot);
 
 			obj.push_back(_);
-			objType.push_back(Mesh::LINE);
+			prim.push_back(Mesh::LINE);
 		}
 	}
 
@@ -367,7 +367,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 					i++;
 
 					obj.push_back(_->_parent);
-					objType.push_back(Mesh::LINE);
+					prim.push_back(Mesh::LINE);
 				}	
 			}	
 		}
@@ -381,10 +381,10 @@ void scn::init(std::string stage, unsigned int lvl) {
 				i++;
 
 				obj.push_back(_->_parent);
-				objType.push_back(Mesh::OBJ);
+				prim.push_back(Mesh::OBJ);
 
 				obj.push_back(_->_parent->_child[0]);
-				objType.push_back(Mesh::PT);
+				prim.push_back(Mesh::PT);
 			}
 		}
 	}
@@ -401,6 +401,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 		i++;
 
 		obj.push_back(_->_parent);
-		objType.push_back(Mesh::OBJ);
+		prim.push_back(Mesh::OBJ);
 	}
 }

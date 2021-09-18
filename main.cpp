@@ -727,7 +727,7 @@ int main(int argc, char** argv) {
 		glEnable(GL_DEPTH_TEST);
 
 		for (int i = 0; i < scn::obj.size(); i++) {
-			objDraw(scn::obj[i], scn::objType[i]);
+			objDraw(scn::obj[i], scn::prim[i]);
 		}
 
 		disp->update();

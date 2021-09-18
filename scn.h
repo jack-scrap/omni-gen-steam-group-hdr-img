@@ -60,7 +60,7 @@ extern "C" CArr pathGet();
 
 namespace scn {
 	extern std::vector<Obj*> obj;
-	extern std::vector<unsigned int> objType;
+	extern std::vector<unsigned int> prim;
 
 	void init(std::string stage, unsigned int lvl);
 }
