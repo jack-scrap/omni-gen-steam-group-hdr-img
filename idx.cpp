@@ -17,7 +17,7 @@ Idx* idxMk(unsigned int i, std::string name, glm::vec3 loc, glm::vec3 rot) {
 
 	Obj* child[str.size() + 1];
 
-	glm::vec3 overhead = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2);
+	glm::vec3 overhead = glm::vec3(layout::overhead, 0.0, layout::overhead);
 	glm::vec3 center = glm::vec3(layout::idx[X] / 2, 0.0, layout::idx[Z] / 2) + (glm::vec3(str.size() - 1) * glm::vec3(-((layout::letter[X] + (layout::margin * 2 * 2)) / 2), 0.0, 0.0));
 	for (int i = 0; i < str.size(); i++) {
 		glm::vec3 offset = glm::vec3(i * (layout::stroke + layout::letter[X]), 0.0, 0.0);
@@ -52,7 +52,7 @@ Idx* idxMk(unsigned int i, char* c, unsigned int sz, std::string name, glm::vec3
 
 	Obj* child[str.size() + _->_sz + 1];
 
-	glm::vec3 overhead = glm::vec3(layout::stroke * 2, 0.0, layout::stroke * 2);
+	glm::vec3 overhead = glm::vec3(layout::overhead, 0.0, layout::overhead);
 	glm::vec3 center = glm::vec3(layout::idx[X] / 2, 0.0, layout::idx[Z] / 2);
 	for (int i = 0; i < str.size(); i++) {
 		glm::vec3 offset = glm::vec3(i * (layout::stroke + layout::letter[X]), 0.0, 0.0);
