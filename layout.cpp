@@ -10,7 +10,7 @@ glm::vec2 layout::margined(glm::vec2 bound) {
 	glm::vec2 _;
 
 	for (int i = 0; i < 2; i++) {
-		_[i] = bound[i] + (margin * 2 * 2);
+		_[i] = bound[i] + (margin * 2);
 	}
 
 	return _;
