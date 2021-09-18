@@ -25,15 +25,14 @@ Array* arrayMk(char* init, unsigned int x, std::string name, unsigned int axis, 
 	});
 
 	int c = 0;
-	glm::vec3 overhead = glm::vec3(layout::overhead, 0.0, layout::overhead);
 	for (int i = 0; i < _->_x; i++) {
 		Idx* idx;
 		glm::vec3 offset = glm::vec3(0.0);
 		offset[axis] = i * stride[axis];
 		if (init[c]) {
-			idx = idxMk(c, &init[c], 1, "", overhead + offset);
+			idx = idxMk(c, &init[c], 1, "", glm::vec3(layout::overhead, 0.0, layout::overhead) + offset);
 		} else {
-			idx = idxMk(c, "", overhead + offset);
+			idx = idxMk(c, "", glm::vec3(layout::overhead, 0.0, layout::overhead) + offset);
 		}
 
 		_->_data[c] = idx;
@@ -101,11 +100,10 @@ Array* arrayMk(char* init, unsigned int x, unsigned int y, std::string name, glm
 	});
 
 	int c = 0;
-	glm::vec3 overhead = glm::vec3(layout::overhead, 0.0, layout::overhead);
 	for (int j = 0; j < _->_y; j++) {
 		for (int i = 0; i < _->_x; i++) {
 			Idx* idx;
-			glm::vec3 offset = overhead + glm::vec3(i * stride[X], 0.0, j * stride[Z]);
+			glm::vec3 offset = glm::vec3(layout::overhead, 0.0, layout::overhead) + glm::vec3(i * stride[X], 0.0, j * stride[Z]);
 			if (init[c]) {
 				idx = idxMk(c, &init[c], 1, "", offset);
 			} else {
