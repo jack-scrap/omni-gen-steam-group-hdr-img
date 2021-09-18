@@ -16,7 +16,7 @@ CargoShip* cargoShipMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	CargoShip* _ = (CargoShip*) malloc(sizeof (CargoShip));
 
 	// bed
-	glm::vec2 sz = layout::array({
+	glm::vec2 bound = layout::array({
 		_->_x,
 		_->_y
 	});
@@ -24,9 +24,9 @@ CargoShip* cargoShipMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	GLfloat vtc[2 * 2][3];
 	for (int y = 0; y < 2; y++) {
 		for (int x = 0; x < 2; x++) {
-			vtc[(y * 2) + x][0] = x * sz[X];
+			vtc[(y * 2) + x][0] = x * bound[X];
 			vtc[(y * 2) + x][1] = 0.0;
-			vtc[(y * 2) + x][2] = y * sz[Y];
+			vtc[(y * 2) + x][2] = y * bound[Y];
 		}
 	}
 
@@ -35,7 +35,7 @@ CargoShip* cargoShipMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 
 	Obj* child[2];
 
-	child[CargoShip::BED] = objMk((GLfloat*) vtc, (GLushort*) idc, 2 * 3, "obj", "dir", false, glm::vec3(-(sz[X] / 2), 0.0, -(sz[Y] / 2)));
+	child[CargoShip::BED] = objMk((GLfloat*) vtc, (GLushort*) idc, 2 * 3, "obj", "dir", false, glm::vec3(-(bound[X] / 2), 0.0, -(bound[Y] / 2)));
 
 	// data
 	_->_data = init;

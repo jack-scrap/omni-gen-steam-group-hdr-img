@@ -45,19 +45,19 @@ Array* arrayMk(char* init, unsigned int x, std::string name, unsigned int axis, 
 		child[0] = nullptr;
 	}
 
-	glm::vec2 sz;
+	glm::vec2 bound;
 	switch (axis) {
 		case X:
-			sz = glm::vec2(_->_x, _->_y);
+			bound = glm::vec2(_->_x, _->_y);
 
 			break;
 
 		case Z:
-			sz = glm::vec2(_->_y, _->_x);
+			bound = glm::vec2(_->_y, _->_x);
 
 			break;
 	}
-	Border* scope = borderMk(layout::margined(layout::array(sz)), child, noChild, loc, rot);
+	Border* scope = borderMk(layout::margined(layout::array(bound)), child, noChild, loc, rot);
 
 	_->_parent = scope->_parent;
 

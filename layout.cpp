@@ -34,16 +34,16 @@ glm::vec2 layout::array(glm::vec2 bound) {
 }
 
 glm::vec3 layout::center(Obj* obj) {
-	glm::vec3 sz;
+	glm::vec3 bound;
 	for (int a = 0; a < 3; a++) {
-		sz[a] = obj->_aabb[a][MAX] - obj->_aabb[a][MIN];
+		bound[a] = obj->_aabb[a][MAX] - obj->_aabb[a][MIN];
 	}
 
 	glm::vec3 _;
 	for (int a = 0; a < 3; a++) {
-		sz[a] = obj->_aabb[a][MAX] - obj->_aabb[a][MIN];
+		bound[a] = obj->_aabb[a][MAX] - obj->_aabb[a][MIN];
 
-		_[a] = -(sz[a] / 2);
+		_[a] = -(bound[a] / 2);
 	}
 
 	return _;
