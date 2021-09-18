@@ -18,7 +18,10 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 
 	Obj* child[_->_no];
 
-	glm::vec3 start = glm::vec3(0.0, 0.0, layout::letter[Y] + (layout::margin * 2 * 2)) + glm::vec3(layout::overhead, 0.0, layout::overhead);
+	glm::vec3 start = glm::vec3(layout::overhead, 0.0, layout::overhead + layout::margined({
+		0.0,
+		layout::letter
+	})[Y]);
 
 	glm::vec2 stride = layout::bordered({
 		layout::idx[X],
