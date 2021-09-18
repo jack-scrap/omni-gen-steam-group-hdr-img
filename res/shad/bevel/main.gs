@@ -4,7 +4,7 @@ layout (points) in;
 
 layout (triangle_strip, max_vertices = 32) out;
 
-out vec3 _local;
+out vec3 _obj;
 
 uniform mat4 model;
 uniform mat4 view;
@@ -28,7 +28,7 @@ void main() {
 
 				gl_Position = proj * view * model * vec4(gl_in[0].gl_Position.xyz + pos, 1.0);
 
-				_local = gl_in[0].gl_Position.xyz + pos;
+				_obj = gl_in[0].gl_Position.xyz + pos;
 
 				EmitVertex();
 			}
@@ -49,7 +49,7 @@ void main() {
 
 				gl_Position = proj * view * model * vec4(gl_in[0].gl_Position.xyz + pos, 1.0);
 
-				_local = gl_in[0].gl_Position.xyz + pos;
+				_obj = gl_in[0].gl_Position.xyz + pos;
 
 				EmitVertex();
 			}
@@ -75,7 +75,7 @@ void main() {
 
 					gl_Position = proj * view * model * vec4(gl_in[0].gl_Position.xyz + pos, 1.0);
 
-					_local = gl_in[0].gl_Position.xyz + pos;
+					_obj = gl_in[0].gl_Position.xyz + pos;
 
 					EmitVertex();
 				}

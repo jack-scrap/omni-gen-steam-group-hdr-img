@@ -4,7 +4,7 @@ layout (lines) in;
 
 layout (triangle_strip, max_vertices = 4) out;
 
-out vec3 _local;
+out vec3 _obj;
 out vec3 _mag;
 
 uniform mat4 model;
@@ -32,7 +32,7 @@ void main() {
 				gl_in[i].gl_Position.xyz + (b * vec3(orth.x, 0.0, orth.y) * pad * 2),
 				1.0
 			);
-			_local = gl_in[i].gl_Position.xyz + (b * vec3(orth.x, 0.0, orth.y) * pad * 2);
+			_obj = gl_in[i].gl_Position.xyz + (b * vec3(orth.x, 0.0, orth.y) * pad * 2);
 			_mag = vec3(hyp(gl_Position.xz));
 
 			EmitVertex();

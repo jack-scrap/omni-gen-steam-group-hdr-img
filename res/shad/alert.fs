@@ -1,6 +1,6 @@
 #version 400
 
-in vec3 _local;
+in vec3 _obj;
 
 uniform unsigned int t;
 uniform bool active;
@@ -12,7 +12,7 @@ vec3[2] col = vec3[2](
 
 void main() {
 	if (active) {
-		if (mod(_local.x + _local.z + _local.y + (float(t) / 50.0), 2.0) > 1.0) {
+		if (mod(_obj.x + _obj.z + _obj.y + (float(t) / 50.0), 2.0) > 1.0) {
 			gl_FragColor = vec4(col[int(true)] / 255.0, 1.0);
 		} else {
 			discard;

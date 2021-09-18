@@ -3,7 +3,7 @@
 in vec3 pos;
 in vec2 st;
 out vec3 _pos;
-out vec3 _local;
+out vec3 _obj;
 out vec2 _st;
 
 uniform mat4 model;
@@ -14,6 +14,6 @@ void main() {
 	gl_Position = proj * view * model * vec4(pos, 1.0);
 
 	_pos = vec3(proj * view * model * vec4(pos, 1.0));
-	_local = pos;
+	_obj = pos;
 	_st = st;
 }
