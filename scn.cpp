@@ -126,8 +126,25 @@ void scn::init(std::string stage, unsigned int lvl) {
 	/* de-allocate */
 	// data
 	for (int i = 0; i < noData; i++) {
-		free(data[i]);
-		free(goal[i]);
+		switch (type[i]) {
+			case omni::SCALAR:
+				idxDel((Idx*) data[i]);
+				idxDel((Idx*) goal[i]);
+
+				break;
+
+			case omni::ARRAY:
+				arrayDel((Array*) data[i]);
+				arrayDel((Array*) goal[i]);
+
+				break;
+
+			case omni::DICT:
+				dictDel((Dict*) data[i]);
+				dictDel((Dict*) goal[i]);
+
+				break;
+		}
 	}
 
 	// vehicle
