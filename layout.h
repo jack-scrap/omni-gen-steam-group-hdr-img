@@ -47,7 +47,7 @@ namespace layout {
 		1
 	};
 
-	glm::vec2 item(glm::vec2 bound);
+	glm::vec2 margined(glm::vec2 bound);
 	glm::vec2 array(glm::vec2 bound);
 
 	glm::vec3 center(Obj* obj);

@@ -32,7 +32,7 @@ Idx* idxMk(unsigned int i, std::string name, glm::vec3 loc, glm::vec3 rot) {
 		child[str.size()] = nullptr;
 	}
 
-	Border* scope = borderMk(layout::item({
+	Border* scope = borderMk(layout::margined({
 		layout::idx[X],
 		layout::idx[Z]
 	}), child, sizeof child / sizeof *child, loc, rot);
@@ -77,7 +77,7 @@ Idx* idxMk(unsigned int i, char* c, unsigned int sz, std::string name, glm::vec3
 	}
 
 	Border* scope = borderMk(
-	layout::item({
+	layout::margined({
 		layout::idx[X],
 		layout::idx[Z]
 	}), child, sizeof child / sizeof *child, loc, rot);
