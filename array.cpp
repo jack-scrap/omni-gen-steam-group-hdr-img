@@ -57,7 +57,7 @@ Array* arrayMk(char* init, unsigned int x, std::string name, unsigned int axis, 
 
 			break;
 	}
-	Border* scope = borderMk(layout::array(sz), child, noChild, loc, rot);
+	Border* scope = borderMk(layout::margined(layout::array(sz)), child, noChild, loc, rot);
 
 	_->_parent = scope->_parent;
 
@@ -105,10 +105,10 @@ Array* arrayMk(char* init, unsigned int x, unsigned int y, std::string name, glm
 		}
 	}
 
-	Border* scope = borderMk(layout::array({
+	Border* scope = borderMk(layout::margined(layout::array({
 		_->_x,
 		_->_y
-	}), child, noChild, loc, rot);
+	})), child, noChild, loc, rot);
 
 	_->_parent = scope->_parent;
 
