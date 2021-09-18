@@ -4,15 +4,15 @@
 #include "state.h"
 #include "util.h"
 
-Border* borderMk(glm::vec2 sz, glm::vec3 loc, glm::vec3 rot) {
+Border* borderMk(glm::vec2 bound, glm::vec3 loc, glm::vec3 rot) {
 	Border* _ = (Border*) malloc(sizeof (Border));
 
-	_->_sz = sz;
+	_->_bound = bound;
 
 	GLfloat vtc[2 * 2 * 3 * 2];
 
 	std::vector<GLfloat> outer = util::mesh::rect::pos({
-		sz[X] + (layout::stroke * 2), sz[Y] + (layout::stroke * 2)
+		bound[X] + (layout::stroke * 2), bound[Y] + (layout::stroke * 2)
 	}, Z, false);
 	int i = 0;
 	for (int y = 0; y < 2; y++) {
@@ -26,7 +26,7 @@ Border* borderMk(glm::vec2 sz, glm::vec3 loc, glm::vec3 rot) {
 	}
 
 	std::vector<GLfloat> inner = util::mesh::rect::pos({
-		sz[X], sz[Y]
+		bound[X], bound[Y]
 	}, Z, false);
 	i = 0;
 	for (int y = 0; y < 2; y++) {
@@ -88,15 +88,15 @@ Border* borderMk(glm::vec2 sz, glm::vec3 loc, glm::vec3 rot) {
 	return _;
 }
 
-Border* borderMk(glm::vec2 sz, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
+Border* borderMk(glm::vec2 bound, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
 	Border* _ = (Border*) malloc(sizeof (Border));
 
-	_->_sz = sz;
+	_->_bound = bound;
 
 	GLfloat vtc[2 * 2 * 3 * 2];
 
 	std::vector<GLfloat> outer = util::mesh::rect::pos({
-		sz[X] + (layout::stroke * 2), sz[Y] + (layout::stroke * 2)
+		bound[X] + (layout::stroke * 2), bound[Y] + (layout::stroke * 2)
 	}, Z, false);
 	int i = 0;
 	for (int y = 0; y < 2; y++) {
@@ -110,7 +110,7 @@ Border* borderMk(glm::vec2 sz, Obj** child, unsigned int noChild, glm::vec3 loc,
 	}
 
 	std::vector<GLfloat> inner = util::mesh::rect::pos({
-		sz[X], sz[Y]
+		bound[X], bound[Y]
 	}, Z, false);
 	i = 0;
 	for (int y = 0; y < 2; y++) {
