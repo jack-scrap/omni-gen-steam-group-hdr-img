@@ -2,10 +2,10 @@ CXX=g++
 
 CXXFLAGS=-std=c++11 -Wno-narrowing
 
-HDR=cam.h col.h math.h phys.h
-
 STATIC=main.c disp.c util.c mesh.c console.c var.c str.c border.c node.c cont.c idx.c array.c dict.c lim.c cone.c road.c state.c layout.c i_beam.c omni.c
 DYNA=scn.c prog.c obj.c line.c pt.c crane.c truck.c cargo_ship.c street_sign.c
+
+HDR=cam.h col.h math.h phys.h
 
 OBJ_STATIC=$(patsubst %.c, %.o, $(STATIC))
 OBJ_DYNA=$(patsubst %.c, lib%.so, $(DYNA))
