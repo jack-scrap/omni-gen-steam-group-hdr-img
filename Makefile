@@ -2,19 +2,18 @@ CXX=g++
 
 CXXFLAGS=-std=c++11 -Wno-narrowing
 
-HDR=cam col math phys
+HDR=cam.h col.h math.h phys.h
 
-STATIC=main disp util mesh console var str border node cont idx array dict lim cone road state layout i_beam omni
-DYNA=scn prog obj line pt crane truck cargo_ship street_sign
+STATIC=main.c disp.c util.c mesh.c console.c var.c str.c border.c node.c cont.c idx.c array.c dict.c lim.c cone.c road.c state.c layout.c i_beam.c omni.c
+DYNA=scn.c prog.c obj.c line.c pt.c crane.c truck.c cargo_ship.c street_sign.c
 
-DEP_HDR=$(patsubst %, %.h, $(HDR))
-OBJ_STATIC=$(patsubst %, %.o, $(STATIC))
-OBJ_DYNA=$(patsubst %, lib%.so, $(DYNA))
+OBJ_STATIC=$(patsubst %.c, %.o, $(STATIC))
+OBJ_DYNA=$(patsubst %.c, lib%.so, $(DYNA))
 
 LDSDL+=-lSDL2 -lSDL2_ttf -lSDL2_image
 LDGL+=-lGLEW -lGL
 LDPY+=-L/usr/lib/python3.6/config-3.6m-x86_64-linux-gnu -L/usr/lib -lpython3.6m -pthread -ldl -lutil -lm -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -I/usr/include/python3.6m -I/usr/include/python3.6m -g -fdebug-prefix-map=/build/python3.6-0aiVHW/python3.6-3.6.9=. -specs=/usr/share/dpkg/no-pie-compile.specs -fstack-protector -DNDEBUG -g -fwrapv -O3 -fPIC
-LDLIB+=-L. $(patsubst %, -l%, $(DYNA))
+LDLIB+=-L. $(patsubst %.c, -l%, $(DYNA))
 
 STAGE=init ctrl_flow thread path matrix
 
@@ -61,7 +60,7 @@ lib%.so: %.o
 main.o: main.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@ $(LDPY)
 
-omni: $(OBJ_STATIC) $(OBJ_DYNA) $(DEP_HDR)
+omni: $(OBJ_STATIC) $(OBJ_DYNA) $(HDR)
 	$(CXX) $(CXXFLAGS) $(OBJ_STATIC) -o $@ $(LDSDL) $(LDGL) $(LDPY) $(LDLIB)
 
 ro:
