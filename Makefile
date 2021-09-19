@@ -2,6 +2,11 @@ CXX=g++
 
 CXXFLAGS=-std=c++11 -Wno-narrowing
 
+LDSDL+=-lSDL2 -lSDL2_ttf -lSDL2_image
+LDGL+=-lGLEW -lGL
+LDPY+=-L/usr/lib/python3.6/config-3.6m-x86_64-linux-gnu -L/usr/lib -lpython3.6m -pthread -ldl -lutil -lm -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -I/usr/include/python3.6m -I/usr/include/python3.6m -g -fdebug-prefix-map=/build/python3.6-0aiVHW/python3.6-3.6.9=. -specs=/usr/share/dpkg/no-pie-compile.specs -fstack-protector -DNDEBUG -g -fwrapv -O3 -fPIC
+LDLIB+=-L. $(patsubst %.c, -l%, $(DYNA))
+
 STATIC=main.c disp.c util.c mesh.c console.c var.c str.c border.c node.c cont.c idx.c array.c dict.c lim.c cone.c road.c state.c layout.c i_beam.c omni.c
 DYNA=scn.c prog.c obj.c line.c pt.c crane.c truck.c cargo_ship.c street_sign.c
 
@@ -9,11 +14,6 @@ HDR=cam.h col.h math.h phys.h
 
 OBJ_STATIC=$(patsubst %.c, %.o, $(STATIC))
 OBJ_DYNA=$(patsubst %.c, lib%.so, $(DYNA))
-
-LDSDL+=-lSDL2 -lSDL2_ttf -lSDL2_image
-LDGL+=-lGLEW -lGL
-LDPY+=-L/usr/lib/python3.6/config-3.6m-x86_64-linux-gnu -L/usr/lib -lpython3.6m -pthread -ldl -lutil -lm -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -I/usr/include/python3.6m -I/usr/include/python3.6m -g -fdebug-prefix-map=/build/python3.6-0aiVHW/python3.6-3.6.9=. -specs=/usr/share/dpkg/no-pie-compile.specs -fstack-protector -DNDEBUG -g -fwrapv -O3 -fPIC
-LDLIB+=-L. $(patsubst %.c, -l%, $(DYNA))
 
 STAGE=init ctrl_flow thread path matrix
 
