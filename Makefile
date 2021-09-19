@@ -20,6 +20,9 @@ STAGE=init ctrl_flow thread path matrix
 
 all: omni ro mk_stage
 
+main.o: main.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@ $(LDPY)
+
 %.o: %.cpp %.h
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
@@ -55,9 +58,6 @@ street_sign.o: street_sign.cpp street_sign.h
 
 lib%.so: %.o
 	$(CXX) $(CXXFLAGS) -shared $< -o $@
-
-main.o: main.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@ $(LDPY)
 
 omni: $(OBJ_STATIC) $(OBJ_DYNA) $(HDR)
 	$(CXX) $(CXXFLAGS) $(OBJ_STATIC) -o $@ $(LDSDL) $(LDGL) $(LDPY) $(LDLIB)
