@@ -17,7 +17,7 @@ LDLIB+=-L. $(patsubst %.c, -l%, $(DYNA))
 
 STAGE=init ctrl_flow thread path matrix
 
-.PHONY: ro mk_stage clean
+.PHONY: all ro mk_stage clean
 
 all: omni ro mk_stage
 
