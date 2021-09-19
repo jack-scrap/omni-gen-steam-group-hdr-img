@@ -9,11 +9,11 @@
 
 typedef struct Truck {
 	Array* _data;
-	GLfloat _loc[3];
+	float _loc[3];
 
 	float _ang;
 
-	GLfloat _rngWheel[2] = {
+	float _rngWheel[2] = {
 		-(M_PI / 2),
 		M_PI / 2
 	};

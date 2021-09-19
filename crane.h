@@ -7,13 +7,13 @@
 
 typedef struct Crane {
 	Cont* _data;
-	GLfloat _loc[3];
+	float _loc[3];
 
-	GLfloat _rngHead[2] = {
+	float _rngHead[2] = {
 		-3.0,
 		3.0
 	};
-	GLfloat _rngClaw[2] = {
+	float _rngClaw[2] = {
 		0.0,
 		13.8
 	};

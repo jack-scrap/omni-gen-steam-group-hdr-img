@@ -5,7 +5,7 @@
 
 typedef struct CargoShip {
 	Array* _data;
-	GLfloat _loc[3];
+	float _loc[3];
 
 	Obj* _parent;
 
