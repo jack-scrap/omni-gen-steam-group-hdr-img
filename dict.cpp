@@ -16,11 +16,24 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 	_->_data = (void**) malloc(_->_no * sizeof (void*));
 	_->_type = (unsigned int*) malloc(_->_no * sizeof (unsigned int));
 
+	Obj* child[deser.size()];
+
+	// data
+	int i = 0;
+	for (const auto& entry : deser.items()) {
+		char init = (int) entry.value();
+
+		Idx* _ = idxMk(0, &init, 1, entry.key());
+
+		child[i] = _->_parent;
+		i++;
+	}
+
 	// scope
 	Border* scope = borderMk(layout::margined({
-		0.0,
-		0.0
-	}));
+		10.0,
+		10.0
+	}), child, sizeof child / sizeof *child);
 
 	_->_parent = scope->_parent;
 
