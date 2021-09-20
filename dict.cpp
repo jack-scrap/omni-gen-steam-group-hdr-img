@@ -18,7 +18,12 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 
 	Obj* child[deser.size()];
 
-	glm::vec2 stride = layout::bordered({
+	glm::vec2 strideLetter = layout::margined(layout::margined({
+		0.0,
+		layout::letter[Y]
+	}));
+
+	glm::vec2 strideIdx = layout::bordered({
 		layout::idx[X],
 		layout::idx[Z]
 	});
@@ -28,7 +33,7 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 	for (const auto& entry : deser.items()) {
 		char init = (int) entry.value();
 
-		Idx* _ = idxMk(0, &init, 1, entry.key(), glm::vec3(layout::overhead, 0.0, layout::overhead));
+		Idx* _ = idxMk(0, &init, 1, entry.key(), glm::vec3(layout::overhead, 0.0, layout::overhead + strideLetter[Y]));
 
 		child[i] = _->_parent;
 		i++;
