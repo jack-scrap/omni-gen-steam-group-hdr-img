@@ -18,6 +18,11 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 
 	Obj* child[deser.size()];
 
+	glm::vec2 stride = layout::bordered({
+		layout::idx[X],
+		layout::idx[Z]
+	});
+
 	// data
 	int i = 0;
 	for (const auto& entry : deser.items()) {
