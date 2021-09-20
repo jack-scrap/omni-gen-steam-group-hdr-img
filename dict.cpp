@@ -34,7 +34,7 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 		layout::idx[Z]
 	});
 
-	GLfloat stridePair = stride[Z] + (layout::margin * 2) + (layout::stroke * 2) + (layout::letter[Y] + (layout::margin * 2)) + (layout::margin * 2 * 2);
+	GLfloat stridePair = stride[Y] + (layout::margin * 2) + (layout::stroke * 2) + (layout::letter[Y] + (layout::margin * 2)) + (layout::margin * 2 * 2);
 
 	unsigned int i = 0;
 	for (const auto& pair : deser.items()) {
