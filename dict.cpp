@@ -28,12 +28,14 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 		layout::idx[Z]
 	});
 
+	glm::vec2 overhead = glm::vec2(layout::overhead, layout::overhead + strideLetter[Y]);
+
 	// data
 	int i = 0;
 	for (const auto& entry : deser.items()) {
 		char init = (int) entry.value();
 
-		Idx* _ = idxMk(0, &init, 1, entry.key(), glm::vec3(layout::overhead, 0.0, layout::overhead + strideLetter[Y]));
+		Idx* _ = idxMk(0, &init, 1, entry.key(), glm::vec3(overhead[X], 0.0, overhead[Y]));
 
 		child[i] = _->_parent;
 		i++;
