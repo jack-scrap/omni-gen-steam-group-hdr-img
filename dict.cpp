@@ -28,7 +28,7 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 	for (const auto& entry : deser.items()) {
 		char init = (int) entry.value();
 
-		Idx* _ = idxMk(0, &init, 1, entry.key());
+		Idx* _ = idxMk(0, &init, 1, entry.key(), glm::vec3(layout::overhead, 0.0, layout::overhead));
 
 		child[i] = _->_parent;
 		i++;
