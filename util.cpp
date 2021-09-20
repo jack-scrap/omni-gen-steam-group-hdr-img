@@ -697,6 +697,17 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val) {
 
 			break;
 		}
+
+		// dictionary
+		case nlohmann::json::value_t::object: {
+			Dict* val = dictMk({{"asdf", 3}, {"hjkl", 7}});
+
+			omni::assertion(!(util::phys::collGround(val->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
+
+			_ = varMk(id, val);
+
+			break;
+		}
 	}
 
 	return _;
@@ -791,6 +802,17 @@ Scope util::json::scope(nlohmann::json deser) {
 						break;
 					}
 				}
+
+				break;
+			}
+
+			// dictionary
+			case nlohmann::json::value_t::object: {
+				Var* var = util::json::var(pair.key(), pair.value());
+
+				((Var**) _._ptr)[i] = var;
+				((unsigned int*) _._type)[i] = omni::DICT;
+				i++;
 
 				break;
 			}

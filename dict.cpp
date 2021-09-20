@@ -12,92 +12,18 @@
 Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 	Dict* _ = (Dict*) malloc(sizeof (Dict));
 	
-	_->_no = deser.size();
+	_->_no = 1;
 	_->_data = (void**) malloc(_->_no * sizeof (void*));
 	_->_type = (unsigned int*) malloc(_->_no * sizeof (unsigned int));
 
-	Obj* child[_->_no];
-
-	glm::vec2 letter = layout::margined({
-		layout::letter[X],
-		layout::letter[Y]
-	});
-
-	glm::vec3 start = glm::vec3(
-		layout::overhead,
-		0.0,
-		layout::overhead
-	) + glm::vec3(letter[X], 0.0, letter[Y]);
-
-	glm::vec2 stride = layout::bordered({
-		layout::idx[X],
-		layout::idx[Z]
-	});
-
-	GLfloat stridePair = stride[Y] + (layout::margin * 2) + (layout::stroke * 2) + (layout::letter[Y] + (layout::margin * 2)) + (layout::margin * 2 * 2);
-
-	unsigned int i = 0;
-	for (const auto& pair : deser.items()) {
-		if (pair.value().type() == nlohmann::json::value_t::number_unsigned) {
-			char* init = (char*) malloc(sizeof (char));
-			init[0] = util::json::byte(pair.value());
-
-			Idx* idx = idxMk(i, init, 1, pair.key(), start + glm::vec3(0.0, 0.0, i * stridePair));
-
-			_->_data[i] = idx;
-			_->_type[i] = omni::SCALAR;
-
-			child[i] = idx->_parent;
-		}
-
-		if (pair.value().type() == nlohmann::json::value_t::array) {
-			char* init = (char*) malloc(pair.value().size());
-			unsigned int sz = pair.value().size();
-			for (int i = 0; i < sz; i++) {
-				init[i] = (char) ((int) pair.value()[i]);
-			}
-
-			Array* array = arrayMk(init, sz, pair.key(), X, start + glm::vec3(0.0, 0.0, i * stridePair));
-
-			_->_data[i] = array;
-			_->_type[i] = omni::ARRAY;
-
-			child[i] = array->_parent;
-		}
-
-		i++;
-	}
-
-	unsigned int maxX = 0;
-	for (const auto& pair : deser.items()) {
-		if (pair.value().size() > maxX) {
-			maxX = pair.value().size();
-		}
-	}
-
-	unsigned int totalZ = 0;
-	for (const auto& pair : deser.items()) {
-		if (pair.value().type() == nlohmann::json::value_t::number_unsigned) {
-			totalZ++;
-		}
-
-		if (pair.value().type() == nlohmann::json::value_t::array) {
-			if (pair.value()[0].type() == nlohmann::json::value_t::array) {
-				totalZ += pair.value().size();
-			} else {
-				totalZ++;
-			}
-		}
-	}
-
 	// scope
 	Border* scope = borderMk(layout::margined({
-		(layout::stroke * 2) + (layout::margin * 2 * 2) + (maxX * stride[X]),
-		(deser.size() * stridePair)
-	}), child, sizeof child / sizeof *child);
+		0.0,
+		0.0
+	}));
 
 	_->_parent = scope->_parent;
-	
+
 	return _;
 }
 
