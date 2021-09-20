@@ -31,8 +31,8 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 
 	// scope
 	Border* scope = borderMk(layout::margined({
-		10.0,
-		10.0
+		20.0,
+		20.0
 	}), child, sizeof child / sizeof *child);
 
 	_->_parent = scope->_parent;
