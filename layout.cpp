@@ -30,6 +30,10 @@ glm::vec2 layout::bordered(glm::vec2 bound) {
 	return margined(margined(bound) + margined(glm::vec2(stroke * 2, stroke * 2)));
 }
 
+glm::vec2 layout::var(glm::vec2 bound) {
+	return bordered(margined(glm::vec2(0.0, layout::letter[Y])) + bound);
+}
+
 glm::vec2 layout::center(glm::vec2 bound) {
 	glm::vec2 _;
 
