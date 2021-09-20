@@ -1,7 +1,19 @@
 {
 	"data": {
+		"state": {
+			"block": {
+				"asdf": 0,
+				"hjkl": 1
+			}
+		}
 	},
 	"goal": {
+		"state": {
+			"block": {
+				"asdf": 1,
+				"hjkl": 0
+			}
+		}
 	},
 	"vehicle": [
 	],
