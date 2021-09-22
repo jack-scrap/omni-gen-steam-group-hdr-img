@@ -71,4 +71,4 @@ mk_stage:
 	done
 
 clean:
-	rm *.o *.so $(PROG)
+	rm *.o *.so omni
