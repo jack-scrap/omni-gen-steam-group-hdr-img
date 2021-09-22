@@ -171,6 +171,7 @@ Console::Console(std::string fName, std::string cwd) :
 		glGenerateMipmap(GL_TEXTURE_2D);
 
 		glBindTexture(GL_TEXTURE_2D, 0);
+
 		_prog.unUse();
 
 		// draw
