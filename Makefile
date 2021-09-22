@@ -5,15 +5,15 @@ CXXFLAGS=-std=c++11 -Wno-narrowing
 LDSDL+=-lSDL2 -lSDL2_ttf -lSDL2_image
 LDGL+=-lGLEW -lGL
 LDPY+=-L/usr/lib/python3.6/config-3.6m-x86_64-linux-gnu -L/usr/lib -lpython3.6m -pthread -ldl -lutil -lm -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -I/usr/include/python3.6m -I/usr/include/python3.6m -g -fdebug-prefix-map=/build/python3.6-0aiVHW/python3.6-3.6.9=. -specs=/usr/share/dpkg/no-pie-compile.specs -fstack-protector -DNDEBUG -g -fwrapv -O3 -fPIC
-LDLIB+=-L. $(patsubst %.c, -l%, $(DYNA))
+LDLIB+=-L. $(patsubst %.cpp, -l%, $(DYNA))
 
-STATIC=main.c disp.c util.c mesh.c console.c var.c str.c border.c node.c cont.c idx.c array.c dict.c lim.c cone.c road.c state.c layout.c i_beam.c omni.c
-DYNA=scn.c prog.c obj.c line.c pt.c crane.c truck.c cargo_ship.c street_sign.c
+STATIC=main.cpp disp.cpp util.cpp mesh.cpp console.cpp var.cpp str.cpp border.cpp node.cpp cont.cpp idx.cpp array.cpp dict.cpp lim.cpp cone.cpp road.cpp state.cpp layout.cpp i_beam.cpp omni.cpp
+DYNA=scn.cpp prog.cpp obj.cpp line.cpp pt.cpp crane.cpp truck.cpp cargo_ship.cpp street_sign.cpp
 
 HDR=cam.h col.h math.h phys.h
 
-OBJ_STATIC=$(patsubst %.c, %.o, $(STATIC))
-OBJ_DYNA=$(patsubst %.c, lib%.so, $(DYNA))
+OBJ_STATIC=$(patsubst %.cpp, %.o, $(STATIC))
+OBJ_DYNA=$(patsubst %.cpp, lib%.so, $(DYNA))
 
 STAGE=init ctrl_flow thread path matrix
 
