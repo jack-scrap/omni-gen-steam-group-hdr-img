@@ -6,17 +6,7 @@ unsigned int layout::res[2];
 
 unsigned int layout::canv[2];
 
-glm::vec2 layout::padded(glm::vec2 bound) {
-	glm::vec2 _;
-
-	for (int i = 0; i < 2; i++) {
-		_[i] = bound[i] + (pad * 2);
-	}
-
-	return _;
-}
-
-glm::vec2 layout::margined(glm::vec2 bound) {
+glm::vec2 layout::item(glm::vec2 bound) {
 	glm::vec2 _;
 
 	for (int i = 0; i < 2; i++) {
@@ -27,7 +17,7 @@ glm::vec2 layout::margined(glm::vec2 bound) {
 }
 
 glm::vec2 layout::bordered(glm::vec2 bound) {
-	return margined(margined(bound) + margined(glm::vec2(stroke * 2, stroke * 2)));
+	return item(item(bound) + item(glm::vec2(stroke * 2, stroke * 2)));
 }
 
 glm::vec2 layout::center(glm::vec2 bound) {

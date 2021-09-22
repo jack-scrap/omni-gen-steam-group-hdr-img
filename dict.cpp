@@ -18,7 +18,7 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 
 	Obj* child[_->_no];
 
-	glm::vec2 letter = layout::margined({
+	glm::vec2 letter = layout::item({
 		layout::letter[X],
 		layout::letter[Y]
 	});
@@ -91,7 +91,7 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 	}
 
 	// scope
-	Border* scope = borderMk(layout::margined({
+	Border* scope = borderMk(layout::item({
 		(layout::stroke * 2) + (layout::margin * 2 * 2) + (maxX * stride[X]),
 		(deser.size() * stridePair)
 	}), child, sizeof child / sizeof *child);
