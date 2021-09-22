@@ -142,7 +142,10 @@ std::vector<std::map<std::string, std::string>> util::fs::ls(std::string fName) 
 std::string util::fs::name(std::string buff) {
 	std::vector<std::string> name = util::str::split(buff, '/');
 
-	std::string f = name[name.size() - 1];
+	std::string f;
+	if (name.size()) {
+		f = name[name.size() - 1];
+	}
 
 	return f;
 }
