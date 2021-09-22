@@ -1,4 +1,5 @@
 CXX=g++
+
 CXXFLAGS=-std=c++11 -Wno-narrowing
 
 LDSDL+=-lSDL2 -lSDL2_ttf -lSDL2_image
