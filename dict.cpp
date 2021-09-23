@@ -64,7 +64,24 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 					maxX = layout::bordered(glm::vec2(init._x * strideIdx[X], 0.0))[X];
 				}
 
-				glm::vec2 sz = layout::bordered(glm::vec2(0.0, strideLetter[Y] + (strideIdx[Y])));
+				glm::vec2 sz = layout::bordered(glm::vec2(0.0, strideLetter[Y] + strideIdx[Y]));
+
+				accY += sz[Y];
+			}
+
+			// matrix
+			if (entry.value()[0].type() == nlohmann::json::value_t::array) {
+				CBuff init = util::json::array::matr(entry.value());
+
+				Array* _ = arrayMk((char*) init._ptr, init._x, init._y, entry.key(), glm::vec3(overhead[X], 0.0, overhead[Y]) + glm::vec3(0.0, 0.0, accY));
+
+				child[i] = _->_parent;
+
+				if (layout::bordered(glm::vec2(init._x * strideIdx[X], 0.0))[X] > maxX) {
+					maxX = layout::bordered(glm::vec2(init._x * strideIdx[X], 0.0))[X];
+				}
+
+				glm::vec2 sz = layout::bordered(glm::vec2(0.0, strideLetter[Y] + (init._y * strideIdx[Y])));
 
 				accY += sz[Y];
 			}
