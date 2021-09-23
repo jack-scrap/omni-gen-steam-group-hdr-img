@@ -77,19 +77,45 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 
 					// matrix
 					case nlohmann::json::value_t::array: {
-						CBuff init = util::json::array::matr(entry.value());
+						switch (entry.value()[0][0].type()) {
+							// 2D
+							case nlohmann::json::value_t::number_unsigned: {
+								CBuff init = util::json::array::matr(entry.value());
 
-						Array* _ = arrayMk((char*) init._ptr, init._x, init._y, entry.key(), glm::vec3(overhead[X], 0.0, overhead[Y]) + glm::vec3(0.0, 0.0, accY));
+								Array* _ = arrayMk((char*) init._ptr, init._x, init._y, entry.key(), glm::vec3(overhead[X], 0.0, overhead[Y]) + glm::vec3(0.0, 0.0, accY));
 
-						child[i] = _->_parent;
+								child[i] = _->_parent;
 
-						if (layout::bordered(glm::vec2(init._x * strideIdx[X], 0.0))[X] > maxX) {
-							maxX = layout::bordered(glm::vec2(init._x * strideIdx[X], 0.0))[X];
+								if (layout::bordered(glm::vec2(init._x * strideIdx[X], 0.0))[X] > maxX) {
+									maxX = layout::bordered(glm::vec2(init._x * strideIdx[X], 0.0))[X];
+								}
+
+								glm::vec2 sz = layout::bordered(glm::vec2(0.0, strideLetter[Y] + (init._y * strideIdx[Y])));
+
+								accY += sz[Y];
+
+								break;
+							}
+
+							// 3D
+							case nlohmann::json::value_t::array: {
+								CBuff init = util::json::array::tens(entry.value());
+
+								Array* _ = arrayMk((char*) init._ptr, init._x, init._y, entry.key(), glm::vec3(overhead[X], 0.0, overhead[Y]) + glm::vec3(0.0, 0.0, accY));
+
+								child[i] = _->_parent;
+
+								if (layout::bordered(glm::vec2(init._x * strideIdx[X], 0.0))[X] > maxX) {
+									maxX = layout::bordered(glm::vec2(init._x * strideIdx[X], 0.0))[X];
+								}
+
+								glm::vec2 sz = layout::bordered(glm::vec2(0.0, strideLetter[Y] + (init._y * strideIdx[Y])));
+
+								accY += sz[Y];
+
+								break;
+							}
 						}
-
-						glm::vec2 sz = layout::bordered(glm::vec2(0.0, strideLetter[Y] + (init._y * strideIdx[Y])));
-
-						accY += sz[Y];
 
 						break;
 					}
