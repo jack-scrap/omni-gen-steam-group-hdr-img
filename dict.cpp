@@ -23,10 +23,10 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 		layout::letter[Y]
 	}));
 
-	glm::vec2 strideIdx = layout::bordered({
+	glm::vec2 strideIdx = layout::item(layout::bordered({
 		layout::idx[X],
 		layout::idx[Z]
-	});
+	}));
 
 	glm::vec2 overhead = glm::vec2(layout::overhead, layout::overhead + strideLetter[Y]);
 
@@ -64,7 +64,9 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 					maxX = init._x * strideIdx[X];
 				}
 
-				accY += strideLetter[Y] + strideIdx[Y];
+				glm::vec2 sz = layout::bordered(glm::vec2(0.0, strideLetter[Y] + (1 * strideIdx[Y])));
+
+				accY += sz[Y];
 			}
 		}
 

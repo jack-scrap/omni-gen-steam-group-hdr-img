@@ -17,7 +17,7 @@ glm::vec2 layout::item(glm::vec2 bound) {
 }
 
 glm::vec2 layout::bordered(glm::vec2 bound) {
-	return item(item(bound) + item(glm::vec2(stroke * 2, stroke * 2)));
+	return item(bound) + item(glm::vec2(stroke * 2, stroke * 2));
 }
 
 glm::vec2 layout::var(glm::vec2 bound) {
