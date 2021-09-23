@@ -33,6 +33,7 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 	// data
 	int i = 0;
 	for (const auto& entry : deser.items()) {
+		// scalar
 		if (entry.value().type() == nlohmann::json::value_t::number_integer) {
 			char init = (int) entry.value();
 
@@ -42,6 +43,20 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 			);
 
 			Idx* _ = idxMk(0, &init, 1, entry.key(), glm::vec3(overhead[X], 0.0, overhead[Y]) + glm::vec3(0.0, 0.0, i * var[Y]));
+
+			child[i] = _->_parent;
+		}
+
+		// array
+		if (entry.value().type() == nlohmann::json::value_t::array) {
+			CBuff init = util::json::array::array(entry.value());
+
+			glm::vec2 var = glm::vec2(
+				strideIdx[X],
+				strideLetter[Y] + strideIdx[Y]
+			);
+
+			Array* _ = arrayMk((char*) init._ptr, init._x, init._y, entry.key(), glm::vec3(overhead[X], 0.0, overhead[Y]) + glm::vec3(0.0, 0.0, i * var[Y]));
 
 			child[i] = _->_parent;
 		}
