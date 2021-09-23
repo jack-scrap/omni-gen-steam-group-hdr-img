@@ -38,7 +38,7 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 			char init = (int) entry.value();
 
 			glm::vec2 var = glm::vec2(
-				strideIdx[X],
+				0.0,
 				strideLetter[Y] + strideIdx[Y]
 			);
 
@@ -52,7 +52,7 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 			CBuff init = util::json::array::array(entry.value());
 
 			glm::vec2 var = glm::vec2(
-				strideIdx[X],
+				0.0,
 				strideLetter[Y] + strideIdx[Y]
 			);
 
