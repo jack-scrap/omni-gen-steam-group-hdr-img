@@ -140,9 +140,12 @@ std::vector<std::map<std::string, std::string>> util::fs::ls(std::string fName) 
 }
 
 std::string util::fs::name(std::string buff) {
-	std::vector<std::string> name = util::str::split(buff, '/');
+	std::vector<std::string> tok = util::str::split(buff, '/');
 
-	std::string f = name[name.size() - 1];
+	std::string f;
+	if (tok.size()) {
+		f = tok.back();
+	}
 
 	return f;
 }

@@ -70,7 +70,9 @@ class Console {
 		bool _rngEditor;
 		bool _rngPrompt;
 
-		std::vector<std::string> _buff;
+		std::vector<std::string> _buff = {
+			""
+		};
 
 		std::vector<std::string> _clip;
 

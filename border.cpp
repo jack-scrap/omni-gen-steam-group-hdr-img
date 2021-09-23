@@ -95,7 +95,7 @@ Border* borderMk(glm::vec2 bound, Obj** child, unsigned int noChild, glm::vec3 l
 
 	GLfloat vtc[2 * 2 * 3 * 2];
 
-	std::vector<GLfloat> outer = util::mesh::rect::pos(layout::margined({
+	std::vector<GLfloat> outer = util::mesh::rect::pos(layout::item({
 		bound[X] + (layout::stroke * 2),
 		bound[Y] + (layout::stroke * 2)
 	}), Z, false);
@@ -110,7 +110,7 @@ Border* borderMk(glm::vec2 bound, Obj** child, unsigned int noChild, glm::vec3 l
 		}
 	}
 
-	std::vector<GLfloat> inner = util::mesh::rect::pos(layout::margined({
+	std::vector<GLfloat> inner = util::mesh::rect::pos(layout::item({
 		bound[X], bound[Y]
 	}), Z, false);
 	i = 0;
