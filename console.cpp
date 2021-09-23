@@ -67,7 +67,7 @@ void dispatch(std::string fName) {
 
 		console->_buff = util::log(console->_buff.size());
 
-		nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("player.json"));
+		nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("stat.json"));
 
 		unsigned int rank = serial["rank"];
 		rank++;
@@ -80,7 +80,7 @@ void dispatch(std::string fName) {
 
 		std::string deser = data.dump();
 
-		util::fs::write("player.json", util::str::split(deser, '\n'));
+		util::fs::write("stat.json", util::str::split(deser, '\n'));
 	}
 }
 
