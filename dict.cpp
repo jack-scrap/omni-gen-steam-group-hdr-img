@@ -35,7 +35,7 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 	int i = 0;
 	for (const auto& entry : deser.items()) {
 		// scalar
-		if (entry.value().type() == nlohmann::json::value_t::number_integer) {
+		if (entry.value().type() == nlohmann::json::value_t::number_unsigned) {
 			char init = (int) entry.value();
 
 			Idx* _ = idxMk(0, &init, 1, entry.key(), glm::vec3(overhead[X], 0.0, overhead[Y]) + glm::vec3(0.0, 0.0, acc));
