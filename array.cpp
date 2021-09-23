@@ -28,7 +28,16 @@ Array* arrayMk(char* init, unsigned int x, std::string name, unsigned int axis, 
 	for (int i = 0; i < _->_x; i++) {
 		Idx* idx;
 		glm::vec3 offset = glm::vec3(0.0);
-		offset[axis] = i * stride[axis];
+
+		unsigned int orth;
+		if (axis == X) {
+			orth = Y;
+		}
+		if (axis == Z) {
+			orth = X;
+		}
+		offset[axis] = i * stride[orth];
+
 		if (init[c]) {
 			idx = idxMk(c, &init[c], 1, "", glm::vec3(layout::overhead, 0.0, layout::overhead) + offset);
 		} else {
