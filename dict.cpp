@@ -11,8 +11,8 @@
 
 Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 	Dict* _ = (Dict*) malloc(sizeof (Dict));
-	
-	_->_no = 1;
+
+	_->_no = deser.size();
 	_->_data = (void**) malloc(_->_no * sizeof (void*));
 	_->_type = (unsigned int*) malloc(_->_no * sizeof (unsigned int));
 
