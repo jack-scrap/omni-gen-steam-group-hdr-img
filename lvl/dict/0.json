@@ -2,7 +2,7 @@
 	"data": {
 		"state": {
 			"block": {
-				"asdf": [
+				"key": [
 					[
 						0,
 						1
@@ -11,7 +11,7 @@
 						0
 					]
 				],
-				"hjkl": [
+				"other_key": [
 					[
 						1,
 						0
@@ -26,7 +26,7 @@
 	"goal": {
 		"state": {
 			"block": {
-				"asdf": [
+				"key": [
 					[
 						1,
 						0
@@ -35,7 +35,7 @@
 						1
 					]
 				],
-				"hjkl": [
+				"other_key": [
 					[
 						0,
 						1
