@@ -48,6 +48,9 @@
 		}
 	},
 	"vehicle": [
+		{
+			"name": "crane"
+		}
 	],
 	"bound": {
 		"rng": [
