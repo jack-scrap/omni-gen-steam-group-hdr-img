@@ -31,34 +31,29 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 	glm::vec2 overhead = glm::vec2(layout::overhead, layout::overhead + strideLetter[Y]);
 
 	// data
+	GLfloat acc = 0.0;
 	int i = 0;
 	for (const auto& entry : deser.items()) {
 		// scalar
 		if (entry.value().type() == nlohmann::json::value_t::number_integer) {
 			char init = (int) entry.value();
 
-			glm::vec2 var = glm::vec2(
-				0.0,
-				strideLetter[Y] + strideIdx[Y]
-			);
-
-			Idx* _ = idxMk(0, &init, 1, entry.key(), glm::vec3(overhead[X], 0.0, overhead[Y]) + glm::vec3(0.0, 0.0, i * var[Y]));
+			Idx* _ = idxMk(0, &init, 1, entry.key(), glm::vec3(overhead[X], 0.0, overhead[Y]) + glm::vec3(0.0, 0.0, acc));
 
 			child[i] = _->_parent;
+
+			acc += strideLetter[Y] + strideIdx[Y];
 		}
 
 		// array
 		if (entry.value().type() == nlohmann::json::value_t::array) {
 			CBuff init = util::json::array::array(entry.value());
 
-			glm::vec2 var = glm::vec2(
-				0.0,
-				strideLetter[Y] + strideIdx[Y]
-			);
-
-			Array* _ = arrayMk((char*) init._ptr, init._x, init._y, entry.key(), glm::vec3(overhead[X], 0.0, overhead[Y]) + glm::vec3(0.0, 0.0, i * var[Y]));
+			Array* _ = arrayMk((char*) init._ptr, init._x, init._y, entry.key(), glm::vec3(overhead[X], 0.0, overhead[Y]) + glm::vec3(0.0, 0.0, acc));
 
 			child[i] = _->_parent;
+
+			acc += strideLetter[Y] + strideIdx[Y];
 		}
 
 		i++;
