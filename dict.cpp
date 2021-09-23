@@ -44,6 +44,9 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 
 				child[i] = idx->_parent;
 
+				((Idx**) _->_data)[i] = idx;
+				_->_type[i] = omni::SCALAR;
+
 				if (strideIdx[X] > maxX) {
 					maxX = strideIdx[X];
 				}
@@ -63,6 +66,9 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 						Array* array = arrayMk((char*) init._ptr, init._x, entry.key(), X, glm::vec3(overhead[X], 0.0, overhead[Y]) + glm::vec3(0.0, 0.0, accY));
 
 						child[i] = array->_parent;
+
+						((Array**) _->_data)[i] = array;
+						_->_type[i] = omni::ARRAY;
 
 						if (layout::bordered(glm::vec2(init._x * strideIdx[X], 0.0))[X] > maxX) {
 							maxX = layout::bordered(glm::vec2(init._x * strideIdx[X], 0.0))[X];
@@ -86,6 +92,9 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 
 								child[i] = array->_parent;
 
+								((Array**) _->_data)[i] = array;
+								_->_type[i] = omni::ARRAY;
+
 								if (layout::bordered(glm::vec2(init._x * strideIdx[X], 0.0))[X] > maxX) {
 									maxX = layout::bordered(glm::vec2(init._x * strideIdx[X], 0.0))[X];
 								}
@@ -104,6 +113,9 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 								Array* array = arrayMk((char*) init._ptr, init._x, init._y, entry.key(), glm::vec3(overhead[X], 0.0, overhead[Y]) + glm::vec3(0.0, 0.0, accY));
 
 								child[i] = array->_parent;
+
+								((Array**) _->_data)[i] = array;
+								_->_type[i] = omni::ARRAY;
 
 								if (layout::bordered(glm::vec2(init._x * strideIdx[X], 0.0))[X] > maxX) {
 									maxX = layout::bordered(glm::vec2(init._x * strideIdx[X], 0.0))[X];
