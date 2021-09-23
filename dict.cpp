@@ -60,8 +60,8 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 
 				child[i] = _->_parent;
 
-				if (init._x * strideIdx[X] > maxX) {
-					maxX = init._x * strideIdx[X];
+				if (layout::bordered(glm::vec2(init._x * strideIdx[X], 0.0))[X] > maxX) {
+					maxX = layout::bordered(glm::vec2(init._x * strideIdx[X], 0.0))[X];
 				}
 
 				glm::vec2 sz = layout::bordered(glm::vec2(0.0, strideLetter[Y] + (1 * strideIdx[Y])));
