@@ -31,8 +31,8 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 	glm::vec2 overhead = glm::vec2(layout::overhead, layout::overhead + strideLetter[Y]);
 
 	// data
-	GLfloat acc = 0.0;
 	int i = 0;
+	GLfloat acc = 0.0;
 	for (const auto& entry : deser.items()) {
 		// scalar
 		if (entry.value().type() == nlohmann::json::value_t::number_unsigned) {
