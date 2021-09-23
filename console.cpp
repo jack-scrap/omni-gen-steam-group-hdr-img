@@ -897,7 +897,8 @@ void Console::hl() {
 
 	/* editor */
 	// line number
-	unsigned int maxNo = std::to_string(_buff.size()).size() + 1;
+	unsigned int maxNo = std::to_string(_buff.size()).size();
+	maxNo += 1; // pad
 
 	if (state::hlLineNo) {
 		int l = 0;
