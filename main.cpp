@@ -55,7 +55,7 @@ int main(int argc, char** argv) {
 		}
 
 		if (it->first == "begin_index_at_one") {
-			state::initIdx = util::cfg::parse::boolean(it->second);
+			state::baseNo = util::cfg::parse::boolean(it->second);
 		}
 
 		// console

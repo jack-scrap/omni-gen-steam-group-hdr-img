@@ -10,7 +10,7 @@ namespace state {
 	extern unsigned int lineCnt;
 	extern unsigned int lineWd;
 
-	extern unsigned int initIdx;
+	extern unsigned int baseNo;
 
 	extern unsigned int hlLineNo;
 	extern unsigned int hlActiveLine;

@@ -419,7 +419,7 @@ void Console::fmt() {
 
 	/* editor */
 	// line numbers
-	unsigned int maxNo = std::to_string(state::initIdx + _buff.size() - 1).size();
+	unsigned int maxNo = std::to_string(state::baseNo + _buff.size() - 1).size();
 	maxNo += 1; // pad
 
 	std::vector<std::string> pre;
@@ -427,7 +427,7 @@ void Console::fmt() {
 		std::string line;
 
 		unsigned int base = 0;
-		if (state::initIdx) {
+		if (state::baseNo) {
 			base = 1;
 		}
 
@@ -897,7 +897,7 @@ void Console::hl() {
 
 	/* editor */
 	// line number
-	unsigned int maxNo = std::to_string(state::initIdx + _buff.size() - 1).size();
+	unsigned int maxNo = std::to_string(state::baseNo + _buff.size() - 1).size();
 	maxNo += 1; // pad
 
 	if (state::hlLineNo) {
