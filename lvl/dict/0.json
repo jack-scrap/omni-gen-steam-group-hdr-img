@@ -2,16 +2,28 @@
 	"data": {
 		"state": {
 			"block": {
-				"asdf": 0,
-				"hjkl": 1
+				"key": [
+					0,
+					1
+				],
+				"other_key": [
+					1,
+					0
+				]
 			}
 		}
 	},
 	"goal": {
 		"state": {
 			"block": {
-				"asdf": 1,
-				"hjkl": 0
+				"key": [
+					1,
+					0
+				],
+				"other_key": [
+					0,
+					1
+				]
 			}
 		}
 	},
