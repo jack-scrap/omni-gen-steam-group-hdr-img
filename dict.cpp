@@ -9,14 +9,14 @@
 #include "omni.h"
 #include "util.h"
 
-Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
+Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	Dict* _ = (Dict*) malloc(sizeof (Dict));
 
 	_->_no = deser.size();
 	_->_data = (void**) malloc(_->_no * sizeof (void*));
 	_->_type = (unsigned int*) malloc(_->_no * sizeof (unsigned int));
 
-	Obj* child[deser.size()];
+	Obj* child[1 + deser.size()];
 
 	glm::vec2 strideLetter = layout::item(layout::item({
 		0.0,
@@ -42,7 +42,7 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 
 				Idx* idx = idxMk(0, &init, 1, entry.key(), glm::vec3(overhead[X], 0.0, overhead[Y]) + glm::vec3(0.0, 0.0, accY));
 
-				child[i] = idx->_parent;
+				child[1 + i] = idx->_parent;
 
 				((Idx**) _->_data)[i] = idx;
 				_->_type[i] = omni::SCALAR;
@@ -65,7 +65,7 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 
 						Array* array = arrayMk((char*) init._ptr, init._x, entry.key(), X, glm::vec3(overhead[X], 0.0, overhead[Y]) + glm::vec3(0.0, 0.0, accY));
 
-						child[i] = array->_parent;
+						child[1 + i] = array->_parent;
 
 						((Array**) _->_data)[i] = array;
 						_->_type[i] = omni::ARRAY;
@@ -90,7 +90,7 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 
 								Array* array = arrayMk((char*) init._ptr, init._x, init._y, entry.key(), glm::vec3(overhead[X], 0.0, overhead[Y]) + glm::vec3(0.0, 0.0, accY));
 
-								child[i] = array->_parent;
+								child[1 + i] = array->_parent;
 
 								((Array**) _->_data)[i] = array;
 								_->_type[i] = omni::ARRAY;
@@ -112,7 +112,7 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 
 								Array* array = arrayMk((char*) init._ptr, init._x, init._y, entry.key(), glm::vec3(overhead[X], 0.0, overhead[Y]) + glm::vec3(0.0, 0.0, accY));
 
-								child[i] = array->_parent;
+								child[1 + i] = array->_parent;
 
 								((Array**) _->_data)[i] = array;
 								_->_type[i] = omni::ARRAY;
@@ -138,6 +138,14 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 		}
 
 		i++;
+	}
+
+	// identifier
+	if (!name.empty()) {
+		Str* id = strMk(name, glm::vec3(0.0, 0.0, -(layout::margin * 2)));
+		child[0] = id->_parent;
+	} else {
+		child[0] = nullptr;
 	}
 
 	// scope
