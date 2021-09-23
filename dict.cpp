@@ -52,17 +52,20 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 
 		// array
 		if (entry.value().type() == nlohmann::json::value_t::array) {
-			CBuff init = util::json::array::array(entry.value());
+			// 1D
+			if (entry.value()[0].type() == nlohmann::json::value_t::number_unsigned) {
+				CBuff init = util::json::array::array(entry.value());
 
-			Array* _ = arrayMk((char*) init._ptr, init._x, init._y, entry.key(), glm::vec3(overhead[X], 0.0, overhead[Y]) + glm::vec3(0.0, 0.0, accY));
+				Array* _ = arrayMk((char*) init._ptr, init._x, entry.key(), X, glm::vec3(overhead[X], 0.0, overhead[Y]) + glm::vec3(0.0, 0.0, accY));
 
-			child[i] = _->_parent;
+				child[i] = _->_parent;
 
-			if (init._x * strideIdx[X] > maxX) {
-				maxX = init._x * strideIdx[X];
+				if (init._x * strideIdx[X] > maxX) {
+					maxX = init._x * strideIdx[X];
+				}
+
+				accY += strideLetter[Y] + strideIdx[Y];
 			}
-
-			accY += strideLetter[Y] + strideIdx[Y];
 		}
 
 		i++;
