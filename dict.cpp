@@ -64,7 +64,7 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 					maxX = layout::bordered(glm::vec2(init._x * strideIdx[X], 0.0))[X];
 				}
 
-				glm::vec2 sz = layout::bordered(glm::vec2(0.0, strideLetter[Y] + (1 * strideIdx[Y])));
+				glm::vec2 sz = layout::bordered(glm::vec2(0.0, strideLetter[Y] + (strideIdx[Y])));
 
 				accY += sz[Y];
 			}
