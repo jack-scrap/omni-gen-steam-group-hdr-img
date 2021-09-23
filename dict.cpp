@@ -32,6 +32,7 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 
 	// data
 	int i = 0;
+	GLfloat maxX = 0.0;
 	GLfloat accY = 0.0;
 	for (const auto& entry : deser.items()) {
 		// scalar
@@ -41,6 +42,10 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 			Idx* _ = idxMk(0, &init, 1, entry.key(), glm::vec3(overhead[X], 0.0, overhead[Y]) + glm::vec3(0.0, 0.0, accY));
 
 			child[i] = _->_parent;
+
+			if (strideIdx[X] > maxX) {
+				maxX = strideIdx[X];
+			}
 
 			accY += strideLetter[Y] + strideIdx[Y];
 		}
@@ -53,6 +58,10 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 
 			child[i] = _->_parent;
 
+			if (init._x * strideIdx[X] > maxX) {
+				maxX = init._x * strideIdx[X];
+			}
+
 			accY += strideLetter[Y] + strideIdx[Y];
 		}
 
@@ -61,7 +70,7 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 
 	// scope
 	Border* scope = borderMk({
-		20.0,
+		maxX,
 		accY
 	}, child, sizeof child / sizeof *child);
 
