@@ -700,7 +700,8 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val) {
 
 		// dictionary
 		case nlohmann::json::value_t::object: {
-			Dict* val = dictMk({{"asdf", 3}, {"hjkl", 7}});
+			nlohmann::json block = val["block"];
+			Dict* val = dictMk(block);
 
 			omni::assertion(!(util::phys::collGround(val->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
