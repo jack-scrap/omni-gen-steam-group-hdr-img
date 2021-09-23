@@ -35,6 +35,13 @@ class _Array(Structure):
 		('_loc', c_float * 3)
 	]
 
+class _Dict(Structure):
+    _fields_ = [
+        ('_data', POINTER(c_void_p)),
+        ('_type', POINTER(c_uint)),
+        ('_no', c_uint)
+    ]
+
 class _Var(Structure):
 	_fields_ = [
 		('_id', c_char_p),
@@ -81,6 +88,13 @@ for i in range(_noData):
 
 		data[id] = array
 		goal[id] = array
+
+	if _type[i] == 2:
+                ptr = cast(_data[i].contents._ptr, POINTER(_Dict))
+                dict = _Dict(ptr.contents._data, ptr.contents._type, ptr.contents._no)
+
+                data[id] = dict
+                goal[id] = dict
 
 # bound
 class _Lim(Structure):
