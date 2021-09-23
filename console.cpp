@@ -433,9 +433,11 @@ void Console::fmt() {
 
 		std::string no = std::to_string(base + i);
 
-		line += no;
+		for (int i = no.size(); i < maxNo; i++) {
+			no += ' ';
+		}
 
-		no += ' ';
+		line += no;
 
 		pre.push_back(no);
 	}
