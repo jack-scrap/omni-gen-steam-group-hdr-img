@@ -37,7 +37,7 @@ Dict* dictMk(nlohmann::json deser, glm::vec3 loc, glm::vec3 rot) {
 
 		glm::vec2 var = glm::vec2(
 			strideIdx[X],
-			strideIdx[Y] + strideLetter[Y]
+			strideLetter[Y] + strideIdx[Y]
 		);
 
 		Idx* _ = idxMk(0, &init, 1, entry.key(), glm::vec3(overhead[X], 0.0, overhead[Y]) + glm::vec3(0.0, 0.0, i * var[Y]));
