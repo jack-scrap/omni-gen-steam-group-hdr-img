@@ -17,13 +17,12 @@ bvec2 dir = bvec2(true, true);
 float ht = 0.16;
 
 vec3 norm(vec3[3] tri) {
-	vec3
-		u = tri[1] - tri[0],
-		v = tri[2] - tri[0],
+	vec3 u = tri[1] - tri[0];
+	vec3 v = tri[2] - tri[0];
 
-		orth = cross(u, v),
+	vec3 orth = cross(u, v),
 
-		_ = normalize(orth);
+	vec3 _ = normalize(orth);
 
 	return _;
 }
