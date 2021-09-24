@@ -43,6 +43,30 @@ vec3[2] bevel(vec3[3] strip, float fac) {
 	);
 }
 
+vec2 item(vec2 bound) {
+	vec2 _;
+
+	for (int i = 0; i < 2; i++) {
+		_[i] = bound[i] + (pad * 2);
+	}
+
+	return _;
+}
+
+vec2 padded(vec2 bound) {
+	vec2 _;
+
+	for (int i = 0; i < 2; i++) {
+		_[i] = bound[i] + (pad * 2);
+	}
+
+	return _;
+}
+
+vec2 bordered(vec2 bound) {
+	return item(bound) + padded(vec2(stroke * 2, stroke * 2));
+}
+
 void main() {
 	// generate quad
 	vec3[2 * 2] quad;

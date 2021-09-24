@@ -22,6 +22,30 @@ float[2] idx = float[2](
 	4
 );
 
+vec2 item(vec2 bound) {
+	vec2 _;
+
+	for (int i = 0; i < 2; i++) {
+		_[i] = bound[i] + (pad * 2);
+	}
+
+	return _;
+}
+
+vec2 padded(vec2 bound) {
+	vec2 _;
+
+	for (int i = 0; i < 2; i++) {
+		_[i] = bound[i] + (pad * 2);
+	}
+
+	return _;
+}
+
+vec2 bordered(vec2 bound) {
+	return item(bound) + padded(vec2(stroke * 2, stroke * 2));
+}
+
 vec3[2] bevel(vec3[3] strip, float fac) {
 	vec3
 		u = strip[2] - strip[0],
