@@ -13,6 +13,7 @@ uniform unsigned int sz;
 out vec3 _pos;
 
 float pad = 0.16;
+float margin = 0.16;
 float stroke = pad * 2;
 
 float ht = -(0.2 * 2);
@@ -48,7 +49,7 @@ vec2 item(vec2 bound) {
 	vec2 _;
 
 	for (int i = 0; i < 2; i++) {
-		_[i] = bound[i] + (pad * 2);
+		_[i] = bound[i] + (margin * 2);
 	}
 
 	return _;
