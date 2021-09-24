@@ -61,14 +61,16 @@ vec3[2] bevel(vec3[3] strip, float fac) {
 
 void main() {
 	// generate quad
+	vec2 strideIdx = bordered(vec2(idx[0], idx[2]));
+
 	vec3[2 * 2] quad;
 	int i = 0;
 	for (int y = 0; y < 2; y++) {
 		for (int x = 0; x < 2; x++) {
 			quad[i] = vec3(
-				(bool(x) ? 1 : -1) * ((idx[0] / 2) + stroke),
+				(bool(x) ? 1 : -1) * ((strideIdx[0] / 2) + stroke),
 				0.0,
-				-(y * ((idx[1] * sz) + stroke))
+				-(y * item(bordered(vec2(0.0, sz * strideIdx[1])))[1])
 			);
 
 			i++;
