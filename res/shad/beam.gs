@@ -14,7 +14,7 @@ uniform unsigned int axis;
 uniform float ln;
 
 bvec2 dir = bvec2(true, true);
-float thick = 0.16;
+float ht = 0.16;
 
 vec3 norm(vec3[3] tri) {
 	vec3
@@ -47,7 +47,7 @@ void main() {
 	vec3 vtc[2 * 2 * 2];
 	for (int b = 0; b < 2; b++) {
 		for (int i = 0; i < 2 * 2; i++) {
-			vtc[(b * 2 * 2) + i] = rect[i] + ((bool(b) ? 1 : -1) * int(dir[b]) * face * thick);
+			vtc[(b * 2 * 2) + i] = rect[i] + ((bool(b) ? 1 : -1) * int(dir[b]) * face * ht);
 		}
 	}
 

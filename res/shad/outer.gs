@@ -15,7 +15,7 @@ out vec3 _pos;
 float pad = 0.16;
 float stroke = pad * 2;
 
-float thick = -(0.2 * 2);
+float ht = -(0.2 * 2);
 
 float[2] idx = float[2](
 	2,
@@ -103,7 +103,7 @@ void main() {
 		vec3[3] tri = vec3[3](
 			beveled[i],
 			beveled[i + 1],
-			beveled[i + 1] + vec3(0.0, thick, 0.0)
+			beveled[i + 1] + vec3(0.0, ht, 0.0)
 		);
 
 		for (int p = 0; p < 2; p++) {
@@ -111,7 +111,7 @@ void main() {
 				unsigned int idx = idcStrip[(i + p) % roof];
 
 				gl_Position = proj * view * model * vec4(
-					beveled[idx] + (y * vec3(0.0, thick, 0.0)) + (norm(tri)),
+					beveled[idx] + (y * vec3(0.0, ht, 0.0)) + (norm(tri)),
 					1.0
 				);
 				_pos = gl_Position.xyz;
