@@ -74,10 +74,24 @@ Array* arrayMk(char* init, unsigned int x, std::string name, unsigned int axis, 
 			break;
 	}
 
-	Border* scope = borderMk({
-		_->_x * stride[X],
-		_->_y * stride[Y]
-	}, child, noChild, loc, rot);
+	Border* scope;
+	switch (axis) {
+		case X:
+			scope = borderMk({
+				_->_x * stride[X],
+				_->_y * stride[Y]
+			}, child, noChild, loc, rot);
+
+			break;
+
+		case Z:
+			scope = borderMk({
+				_->_y * stride[X],
+				_->_x * stride[Y]
+			}, child, noChild, loc, rot);
+
+			break;
+	}
 
 	_->_parent = scope->_parent;
 
