@@ -88,7 +88,7 @@ void main() {
 
 	// index
 	const unsigned int roof = (2 * 2) + 1 + 1;
-	unsigned int[roof] idcStrip = unsigned int[roof](
+	unsigned int[roof] stripIdc = unsigned int[roof](
 		0,
 		2,
 		3,
@@ -108,7 +108,7 @@ void main() {
 
 		for (int p = 0; p < 2; p++) {
 			for (int y = 0; y < 2; y++) {
-				unsigned int idx = idcStrip[(i + p) % roof];
+				unsigned int idx = stripIdc[(i + p) % roof];
 
 				gl_Position = proj * view * model * vec4(
 					beveled[idx] + (y * vec3(0.0, ht, 0.0)) + (norm(tri)),
