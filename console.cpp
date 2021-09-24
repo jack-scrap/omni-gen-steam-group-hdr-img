@@ -31,7 +31,7 @@ uint32_t epoch(uint32_t inter, void* param) {
 	return 1000;
 }
 
-void dispatch(std::string fName) {
+void dispatch(std::string fName, unsigned int ptrEditorX) {
 	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(fName);
 
 	PyRun_SimpleString(util::str::join(buff).c_str());
@@ -65,7 +65,7 @@ void dispatch(std::string fName) {
 	if (eq) {
 		std::string log = "log/" + util::fs::base(fName) + ".log";
 
-		console->_buff = util::log(console->_buff.size());
+		console->_buff = util::log(console->_buff.size(), ptrEditorX);
 
 		nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("stat.json"));
 
@@ -796,11 +796,29 @@ void Console::exec() {
 			}
 
 			if (cmd == "run") {
+				unsigned int maxFs = 0;
+				for (int i = 0; i < _tree.size(); i++) {
+					std::string line = _tree[i]["name"];
+
+					if (_tree[i]["type"] == "dir") {
+						line += "/";
+					}
+
+					if (line.size() > maxFs) {
+						maxFs = line.size();
+					}
+				}
+
+				maxFs += 1; // pad
+
+				unsigned int maxNo = std::to_string(state::baseNo + _buff.size() - 1).size();
+				maxNo += 1; // pad
+
 				if (tok.size() > 1) {
-					std::thread t(dispatch, tok[1]);
+					std::thread t(dispatch, tok[1], maxFs + maxNo);
 					t.detach();
 				} else {
-					std::thread t(dispatch, _buffName);
+					std::thread t(dispatch, _buffName, maxFs + maxNo);
 					t.detach();
 				}
 			}

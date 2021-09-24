@@ -1291,14 +1291,14 @@ Coord util::math::coord::determ(unsigned int idx, std::vector<std::string> buff)
 	return _;
 }
 
-std::vector<std::string> util::log(unsigned int loc) {
+std::vector<std::string> util::log(unsigned int loc, unsigned int ptrEditorX) {
 	std::vector<std::string> buff;
 
 	std::string head = "Level complete";
 	buff.push_back(head);
 
 	std::string lb;
-	for (int i = 0; i < state::lineWd; i++) {
+	for (int i = ptrEditorX; i < state::lineWd - 1; i++) {
 		lb.push_back('=');
 	}
 	buff.push_back(lb);
@@ -1306,7 +1306,7 @@ std::vector<std::string> util::log(unsigned int loc) {
 	std::string key = "LOC: ";
 	std::string val = std::to_string(loc);
 
-	std::string pair = util::str::pad(key, state::lineWd - val.size());
+	std::string pair = util::str::pad(key, (state::lineWd - ptrEditorX - 1) - val.size());
 	pair += val;
 
 	buff.push_back(pair);
