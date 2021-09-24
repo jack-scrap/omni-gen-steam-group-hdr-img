@@ -17,7 +17,8 @@ float stroke = pad * 2;
 
 float ht = -(0.2 * 2);
 
-float[2] idx = float[2](
+float[3] idx = float[3](
+	2,
 	2,
 	4
 );
