@@ -12,13 +12,13 @@ uniform unsigned int sz;
 
 out vec3 _pos;
 
-float pad = 0.16;
-float margin = 0.16;
-float stroke = pad * 2;
+const float pad = 0.16;
+const float margin = 0.16;
+const float stroke = pad * 2;
 
-float ht = -(0.2 * 2);
+const float ht = -(0.2 * 2);
 
-float[3] idx = float[3](
+const float[3] idx = float[3](
 	2,
 	2,
 	4
