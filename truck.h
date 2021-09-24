@@ -25,6 +25,9 @@ typedef struct Truck {
 	static GLfloat _vtx[3];
 	static GLushort _idx[1];
 
+	static GLfloat _vtc[2 * 2][3];
+	static GLushort _idc[2][3];
+
 	static GLfloat _speed;
 
 	enum {
