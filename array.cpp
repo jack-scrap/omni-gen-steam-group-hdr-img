@@ -27,21 +27,24 @@ Array* arrayMk(char* init, unsigned int x, std::string name, unsigned int axis, 
 	int c = 0;
 	for (int i = 0; i < _->_x; i++) {
 		Idx* idx;
-		glm::vec3 offset = glm::vec3(0.0);
 
-		unsigned int orth;
-		if (axis == X) {
-			orth = Y;
+		glm::vec3 offset;
+		switch (axis) {
+			case X:
+				offset = glm::vec3(stride[X], 0.0, 0.0);
+
+				break;
+
+			case Z:
+				offset = glm::vec3(0.0, 0.0, stride[Y]);
+
+				break;
 		}
-		if (axis == Z) {
-			orth = X;
-		}
-		offset[axis] = i * stride[orth];
 
 		if (init[c]) {
-			idx = idxMk(c, &init[c], 1, "", glm::vec3(layout::overhead, 0.0, layout::overhead) + offset);
+			idx = idxMk(c, &init[c], 1, "", glm::vec3(layout::overhead, 0.0, layout::overhead) + glm::vec3(0.0, 0.0, c * stride[Y]));
 		} else {
-			idx = idxMk(c, "", glm::vec3(layout::overhead, 0.0, layout::overhead) + offset);
+			idx = idxMk(c, "", glm::vec3(layout::overhead, 0.0, layout::overhead) + glm::vec3(0.0, 0.0, c * stride[Y]));
 		}
 
 		_->_data[c] = idx;
