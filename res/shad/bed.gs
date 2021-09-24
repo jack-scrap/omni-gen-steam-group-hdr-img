@@ -78,7 +78,7 @@ void main() {
 
 	// index
 	const unsigned int roof = (2 * 2) + 1 + 1;
-	unsigned int[roof] idcStrip = unsigned int[roof](
+	unsigned int[roof] stripIdc = unsigned int[roof](
 		0,
 		2,
 		3,
@@ -89,7 +89,7 @@ void main() {
 
 	/* draw */
 	// face
-	unsigned int idcFace[(2 * 2) + 2] = unsigned int[(2 * 2) + 2](
+	unsigned int faceIdc[(2 * 2) + 2] = unsigned int[(2 * 2) + 2](
 		0,
 		1,
 		2,
@@ -100,7 +100,7 @@ void main() {
 
 	for (int y = 0; y < 2; y++) {
 		for (int i = 0; i < (2 * 2) + 2; i++) {
-			unsigned int idx = idcFace[i];
+			unsigned int idx = faceIdc[i];
 
 			gl_Position = proj * view * model * vec4(
 				beveled[idx] + (y * vec3(0.0, ht, 0.0)),
@@ -118,7 +118,7 @@ void main() {
 	for (int i = 0; i < roof - 1; i++) {
 		for (int p = 0; p < 2; p++) {
 			for (int y = 0; y < 2; y++) {
-				unsigned int idx = idcStrip[(i + p) % roof];
+				unsigned int idx = stripIdc[(i + p) % roof];
 
 				gl_Position = proj * view * model * vec4(
 					beveled[idx] + (y * vec3(0.0, ht, 0.0)),
