@@ -862,18 +862,6 @@ void Console::exec() {
 void Console::hl() {
 	glBindTexture(GL_TEXTURE_2D, _tex);
 
-	for (int y = 0; y < state::lineCnt; y++) {
-		for (int x = 0; x < state::lineWd; x++) {
-			_hl[util::math::idx::arr({
-				x,
-				y
-			}, {
-				state::lineWd,
-				state::lineCnt
-			})] = false;
-		}
-	}
-
 	unsigned int loc[2] = {
 		0
 	};
