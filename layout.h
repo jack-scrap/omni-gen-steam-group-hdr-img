@@ -41,9 +41,9 @@ namespace layout {
 		1
 	};
 
-	glm::vec2 item(glm::vec2 bound);
+	GLfloat item(GLfloat bound);
 
-	glm::vec2 bordered(glm::vec2 bound);
+	GLfloat bordered(GLfloat bound);
 
 	glm::vec2 var(glm::vec2 bound);
 

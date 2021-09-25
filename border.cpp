@@ -95,10 +95,10 @@ Border* borderMk(glm::vec2 bound, Obj** child, unsigned int noChild, glm::vec3 l
 
 	GLfloat vtc[2 * 2 * 3 * 2];
 
-	std::vector<GLfloat> outer = util::mesh::rect::pos(layout::item({
-		bound[X] + (layout::stroke * 2),
-		bound[Y] + (layout::stroke * 2)
-	}), Z, false);
+	std::vector<GLfloat> outer = util::mesh::rect::pos({
+		layout::item(bound[X] + (layout::stroke * 2)),
+		layout::item(bound[Y] + (layout::stroke * 2))
+	}, Z, false);
 	int i = 0;
 	for (int y = 0; y < 2; y++) {
 		for (int x = 0; x < 2; x++) {
@@ -110,9 +110,10 @@ Border* borderMk(glm::vec2 bound, Obj** child, unsigned int noChild, glm::vec3 l
 		}
 	}
 
-	std::vector<GLfloat> inner = util::mesh::rect::pos(layout::item({
-		bound[X], bound[Y]
-	}), Z, false);
+	std::vector<GLfloat> inner = util::mesh::rect::pos({
+		layout::item(bound[X]),
+		layout::item(bound[Y])
+	}, Z, false);
 	i = 0;
 	for (int y = 0; y < 2; y++) {
 		for (int x = 0; x < 2; x++) {

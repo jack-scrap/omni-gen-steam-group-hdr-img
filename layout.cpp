@@ -6,22 +6,18 @@ unsigned int layout::res[2];
 
 unsigned int layout::canv[2];
 
-glm::vec2 layout::item(glm::vec2 bound) {
-	glm::vec2 _;
-
-	for (int i = 0; i < 2; i++) {
-		_[i] = bound[i] + (margin * 2);
-	}
+GLfloat layout::item(GLfloat bound) {
+	GLfloat _ = bound + (margin * 2);
 
 	return _;
 }
 
-glm::vec2 layout::bordered(glm::vec2 bound) {
-	return item(bound) + item(glm::vec2(stroke * 2, stroke * 2));
+GLfloat layout::bordered(GLfloat bound) {
+	return item(bound) + item(stroke * 2);
 }
 
 glm::vec2 layout::var(glm::vec2 bound) {
-	return bordered(item(glm::vec2(0.0, layout::letter[Y])) + bound);
+	return glm::vec2(bordered(bound[X]), bordered(bound[Y] + item(letter[Y])));
 }
 
 glm::vec2 layout::center(glm::vec2 bound) {

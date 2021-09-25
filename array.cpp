@@ -19,10 +19,10 @@ Array* arrayMk(char* init, unsigned int x, std::string name, unsigned int axis, 
 	unsigned int noChild = 1 + (_->_x * _->_y);
 	Obj** child = (Obj**) malloc(noChild * sizeof (Obj*));
 
-	glm::vec2 stride = layout::item(layout::bordered({
-		layout::idx[X],
-		layout::idx[Z]
-	}));
+	glm::vec2 stride = {
+		layout::item(layout::bordered(layout::idx[X])),
+		layout::item(layout::bordered(layout::idx[Z]))
+	};
 
 	int c = 0;
 	for (int i = 0; i < _->_x; i++) {
@@ -120,10 +120,10 @@ Array* arrayMk(char* init, unsigned int x, unsigned int y, std::string name, glm
 	// data
 	_->_data = (Idx**) malloc(_->_x * _->_y * sizeof (Idx*));
 
-	glm::vec2 stride = layout::item(layout::bordered({
-		layout::idx[X],
-		layout::idx[Z]
-	}));
+	glm::vec2 stride = {
+		layout::item(layout::bordered(layout::idx[X])),
+		layout::item(layout::bordered(layout::idx[Z]))
+	};
 
 	int c = 0;
 	for (int j = 0; j < _->_y; j++) {

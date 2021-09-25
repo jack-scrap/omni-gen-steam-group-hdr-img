@@ -24,28 +24,20 @@ const float[3] idx = float[3](
 	4
 );
 
-vec2 item(vec2 bound) {
-	vec2 _;
-
-	for (int i = 0; i < 2; i++) {
-		_[i] = bound[i] + (margin * 2);
-	}
+float item(float bound) {
+	float _ = bound + (margin * 2);
 
 	return _;
 }
 
-vec2 padded(vec2 bound) {
-	vec2 _;
-
-	for (int i = 0; i < 2; i++) {
-		_[i] = bound[i] + (pad * 2);
-	}
+float padded(float bound) {
+	float _ = bound + (pad * 2);
 
 	return _;
 }
 
-vec2 bordered(vec2 bound) {
-	return item(bound) + padded(vec2(stroke * 2, stroke * 2));
+float bordered(float bound) {
+	return item(bound) + padded(stroke * 2);
 }
 
 vec3[2] bevel(vec3[3] strip, float fac) {
@@ -60,7 +52,7 @@ vec3[2] bevel(vec3[3] strip, float fac) {
 
 void main() {
 	// generate quad
-	vec2 strideIdx = bordered(vec2(idx[0], idx[2]));
+	vec2 strideIdx = vec2(bordered(idx[0]), bordered(idx[2]));
 
 	vec3[2 * 2] quad;
 	int i = 0;
@@ -69,7 +61,7 @@ void main() {
 			quad[i] = vec3(
 				(bool(x) ? 1 : -1) * ((strideIdx[0] / 2) + stroke),
 				0.0,
-				-(y * item(bordered(vec2(0.0, sz * strideIdx[1])))[1])
+				-(y * item(bordered(sz * strideIdx[1])))
 			);
 
 			i++;

@@ -18,15 +18,15 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 
 	Obj* child[1 + deser.size()];
 
-	glm::vec2 strideLetter = layout::item(layout::item({
-		0.0,
-		layout::letter[Y]
-	}));
+	glm::vec2 strideLetter = {
+		layout::item(layout::item(0.0)),
+		layout::item(layout::item(layout::letter[Y]))
+	};
 
-	glm::vec2 strideIdx = layout::item(layout::bordered({
-		layout::idx[X],
-		layout::idx[Z]
-	}));
+	glm::vec2 strideIdx = {
+		layout::item(layout::bordered(layout::idx[X])),
+		layout::item(layout::bordered(layout::idx[Z]))
+	};
 
 	glm::vec2 overhead = glm::vec2(layout::overhead, layout::overhead + strideLetter[Y]);
 
@@ -70,13 +70,13 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 						((Array**) _->_data)[i] = array;
 						_->_type[i] = omni::ARRAY;
 
-						if (layout::bordered(glm::vec2(init._x * strideIdx[X], 0.0))[X] > maxX) {
-							maxX = layout::bordered(glm::vec2(init._x * strideIdx[X], 0.0))[X];
+						if (layout::bordered(init._x * strideIdx[X]) > maxX) {
+							maxX = layout::bordered(init._x * strideIdx[X]);
 						}
 
-						glm::vec2 sz = layout::bordered(glm::vec2(0.0, strideLetter[Y] + strideIdx[Y]));
+						GLfloat szY = layout::bordered(strideLetter[Y] + strideIdx[Y]);
 
-						accY += sz[Y];
+						accY += szY;
 
 						break;
 					}
@@ -95,13 +95,13 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 								((Array**) _->_data)[i] = array;
 								_->_type[i] = omni::ARRAY;
 
-								if (layout::bordered(glm::vec2(init._x * strideIdx[X], 0.0))[X] > maxX) {
-									maxX = layout::bordered(glm::vec2(init._x * strideIdx[X], 0.0))[X];
+								if (layout::bordered(init._x * strideIdx[X]) > maxX) {
+									maxX = layout::bordered(init._x * strideIdx[X]);
 								}
 
-								glm::vec2 sz = layout::bordered(glm::vec2(0.0, strideLetter[Y] + (init._y * strideIdx[Y])));
+								GLfloat szY = layout::bordered(strideLetter[Y] + (init._y * strideIdx[Y]));
 
-								accY += sz[Y];
+								accY += szY;
 
 								break;
 							}
@@ -117,11 +117,11 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 								((Array**) _->_data)[i] = array;
 								_->_type[i] = omni::ARRAY;
 
-								if (layout::bordered(glm::vec2(init._x * strideIdx[X], 0.0))[X] > maxX) {
-									maxX = layout::bordered(glm::vec2(init._x * strideIdx[X], 0.0))[X];
+								if (layout::bordered(init._x * strideIdx[X]) > maxX) {
+									maxX = layout::bordered(init._x * strideIdx[X]);
 								}
 
-								glm::vec2 sz = layout::bordered(glm::vec2(0.0, strideLetter[Y] + (init._y * strideIdx[Y])));
+								glm::vec2 sz = glm::vec2(layout::bordered(0.0), layout::bordered(strideLetter[Y] + (init._y * strideIdx[Y])));
 
 								accY += sz[Y];
 

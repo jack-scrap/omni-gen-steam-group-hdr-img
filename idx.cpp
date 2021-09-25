@@ -33,10 +33,10 @@ Idx* idxMk(unsigned int i, std::string name, glm::vec3 loc, glm::vec3 rot) {
 		child[str.size()] = nullptr;
 	}
 
-	Border* scope = borderMk(layout::item({
-		layout::idx[X],
-		layout::idx[Z]
-	}), child, sizeof child / sizeof *child, loc, rot);
+	Border* scope = borderMk({
+		layout::item(layout::idx[X]),
+		layout::item(layout::idx[Z])
+	}, child, sizeof child / sizeof *child, loc, rot);
 	_->_parent = scope->_parent;
 
 	return _;
@@ -70,10 +70,10 @@ Idx* idxMk(unsigned int i, char* c, unsigned int sz, std::string name, glm::vec3
 	}
 
 	// data
-	glm::vec2 stride = layout::item(layout::bordered({
-		layout::idx[X],
-		layout::idx[Z]
-	}));
+	glm::vec2 stride = {
+		layout::item(layout::bordered(layout::idx[X])),
+		layout::item(layout::bordered(layout::idx[Z]))
+	};
 
 	for (int i = 0; i < _->_sz; i++) {
 		Cont* byte = contMk(c[i], glm::vec3((layout::stroke * 2) + (layout::idx[X] / 2), 1.0, (layout::stroke * 2) + (layout::idx[Z] / 2)) + glm::vec3(0.0, i * stride[Y], 0.0));
@@ -83,10 +83,10 @@ Idx* idxMk(unsigned int i, char* c, unsigned int sz, std::string name, glm::vec3
 		child[2 + i] = byte->_parent;
 	}
 
-	Border* scope = borderMk(layout::item({
-		layout::idx[X],
-		layout::idx[Z]
-	}), child, sizeof child / sizeof *child, loc, rot);
+	Border* scope = borderMk({
+		layout::item(layout::idx[X]),
+		layout::item(layout::idx[Z])
+	}, child, sizeof child / sizeof *child, loc, rot);
 	_->_parent = scope->_parent;
 
 	return _;
