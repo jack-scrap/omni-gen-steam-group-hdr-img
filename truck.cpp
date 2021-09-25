@@ -86,7 +86,7 @@ Truck* truckMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 				objMk("rim", "obj", "dir", true)
 			};
 
-			child[4 + i] = objMk("wheel", "obj", "dir", false, rim, sizeof rim / sizeof *rim, overhead + glm::vec3(x * -(layout::idx[Z] + (layout::margin * 2) + (layout::stroke * 2) + (layout::margin * 2)), -(1.0 + (0.2 * 2) + 0.2), (z ? 1 : -1) * ((layout::idx[X] / 2) + layout::margin + layout::margin + layout::stroke + layout::margin + layout::margin) - (0.8 / 2)), glm::vec3(0.0, z * M_PI, 0.0));
+			child[4 + i] = objMk("wheel", "obj", "dir", false, rim, sizeof rim / sizeof *rim, overhead + glm::vec3(x * -(layout::bordered(layout::idx[Z])), -(1.0 + (0.2 * 2) + 0.2), (z ? 1 : -1) * (layout::bordered(layout::idx[X]) / 2)), glm::vec3(0.0, z * M_PI, 0.0));
 
 			i++;
 		}
