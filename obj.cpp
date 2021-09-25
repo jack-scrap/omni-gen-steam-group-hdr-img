@@ -148,7 +148,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 
 Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
 	std::vector<GLfloat> vtc = util::mesh::rd::vtc(name);
-	std::vector<GLushort> idc = util::mesh::rd::idc(name, 0);
+	std::vector<GLushort> idc = util::mesh::rd::idc(name, Obj::POS);
 
 	Obj* _ = objMk(&vtc[0], &idc[0], idc.size(), vtx, frag, active, loc, rot);
 
@@ -157,7 +157,7 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm
 
 Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
 	std::vector<GLfloat> vtc = util::mesh::rd::vtc(name);
-	std::vector<GLushort> idc = util::mesh::rd::idc(name, 0);
+	std::vector<GLushort> idc = util::mesh::rd::idc(name, Obj::POS);
 
 	Obj* _ = objMk(&vtc[0], &idc[0], idc.size(), vtx, frag, active, child, noChild, loc, rot);
 
