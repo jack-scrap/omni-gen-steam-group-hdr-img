@@ -34,6 +34,9 @@ Disp::Disp(const char* title, glm::vec2 res, glm::vec3 bg) :
 			std::cerr << "Error: GLEW failed to initialize" << std::endl;
 		}
 
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_BACK);
+
 		_rend = SDL_CreateRenderer(_win, -1, 0);
 
 		_map = IMG_Load("res/map.bmp");
