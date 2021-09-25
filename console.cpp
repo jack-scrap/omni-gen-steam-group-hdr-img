@@ -904,7 +904,7 @@ void Console::hl() {
 	loc[Y] = 1;
 
 	/* editor */
-	// line number
+	// line numbers
 	unsigned int maxNo = std::to_string(state::baseNo + _buff.size() - 1).size();
 	maxNo += 1; // pad
 
