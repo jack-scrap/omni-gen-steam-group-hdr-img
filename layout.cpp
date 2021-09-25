@@ -6,14 +6,14 @@ unsigned int layout::res[2];
 
 unsigned int layout::canv[2];
 
-GLfloat layout::item(GLfloat bound) {
-	GLfloat _ = bound + (margin * 2);
+GLfloat layout::padded(GLfloat bound) {
+	GLfloat _ = bound + (pad * 2);
 
 	return _;
 }
 
-GLfloat layout::padded(GLfloat bound) {
-	GLfloat _ = bound + (pad * 2);
+GLfloat layout::item(GLfloat bound) {
+	GLfloat _ = bound + (margin * 2);
 
 	return _;
 }
