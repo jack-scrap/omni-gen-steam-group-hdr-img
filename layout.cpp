@@ -12,6 +12,12 @@ GLfloat layout::item(GLfloat bound) {
 	return _;
 }
 
+GLfloat layout::padded(GLfloat bound) {
+	GLfloat _ = bound + (pad * 2);
+
+	return _;
+}
+
 GLfloat layout::bordered(GLfloat bound) {
 	return item(bound) + item(stroke * 2);
 }

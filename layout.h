@@ -42,6 +42,7 @@ namespace layout {
 	};
 
 	GLfloat item(GLfloat bound);
+	GLfloat padded(GLfloat bound);
 
 	GLfloat bordered(GLfloat bound);
 
