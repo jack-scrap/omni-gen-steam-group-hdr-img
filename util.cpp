@@ -87,11 +87,11 @@ void util::fs::del(std::string fName) {
 	}
 }
 
-std::vector<std::map<std::string, std::string>> util::fs::ls(std::string fName) {
+std::vector<std::map<std::string, std::string>> util::fs::ls(std::string path) {
 	std::vector<std::map<std::string, std::string>> tree;
 
-	std::string path = "./" + fName;
-	auto dir = opendir(path.c_str());
+	std::string full = "./" + path;
+	auto dir = opendir(full.c_str());
 
 	if (!dir) {
 		omni::err(omni::ERR_FS_OPEN_DIR);
@@ -119,7 +119,7 @@ std::vector<std::map<std::string, std::string>> util::fs::ls(std::string fName) 
 					}
 				});
 			} else {
-				if (fName != ".") {
+				if (path != ".") {
 					tree.push_back({
 						{
 							"name",

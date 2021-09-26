@@ -34,7 +34,7 @@ namespace util {
 
 		void del(std::string fName);
 
-		std::vector<std::map<std::string, std::string>> ls(std::string fName);
+		std::vector<std::map<std::string, std::string>> ls(std::string path);
 
 		std::string name(std::string buff);
 
