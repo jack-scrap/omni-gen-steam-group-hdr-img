@@ -717,6 +717,8 @@ int main(int argc, char** argv) {
 		prog.unUse();
 		glBindVertexArray(0);
 
+		meshDel(mesh);
+
 		disp->update();
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(3000));

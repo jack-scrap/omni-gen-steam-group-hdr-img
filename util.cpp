@@ -1404,6 +1404,8 @@ GLuint util::tex::spray(std::string tex) {
 	prog.unUse();
 	glBindVertexArray(0);
 
+	meshDel(mesh);
+
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
