@@ -10,7 +10,7 @@ vec3 sun = vec3(1.0, 1.0, 1.0);
 void main() {
 	vec3 normFace = normalize(cross(dFdx(_pos), dFdy(_pos)));
 
-	float i = max(dot(normFace, normalize(sun)), 0.0);
+	float ins = max(dot(normFace, normalize(sun)), 0.0);
 
-	gl_FragColor = vec4(i * texture(tex, _st).rgb, 1.0);
+	gl_FragColor = vec4(ins * texture(tex, _st).rgb, 1.0);
 }
