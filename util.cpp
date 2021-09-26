@@ -1394,6 +1394,8 @@ GLuint util::tex::spray(std::string tex) {
 	prog.unUse();
 
 	// draw
+	disp->clear();
+
 	glBindVertexArray(mesh->_id[Mesh::VAO]);
 	prog.use();
 
