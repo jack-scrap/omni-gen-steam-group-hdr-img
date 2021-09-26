@@ -38,9 +38,9 @@ namespace util {
 
 		std::string perm(std::string fName);
 
-		std::string name(std::string buff);
+		std::string name(std::string path);
 
-		std::string base(std::string buff);
+		std::string base(std::string path);
 	}
 
 	namespace mesh {

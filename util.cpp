@@ -155,8 +155,8 @@ std::string util::fs::perm(std::string fName) {
 	return _;
 }
 
-std::string util::fs::name(std::string buff) {
-	std::vector<std::string> tok = util::str::split(buff, '/');
+std::string util::fs::name(std::string path) {
+	std::vector<std::string> tok = util::str::split(path, '/');
 
 	std::string f;
 	if (tok.size()) {
@@ -166,8 +166,8 @@ std::string util::fs::name(std::string buff) {
 	return f;
 }
 
-std::string util::fs::base(std::string buff) {
-	std::string f = util::fs::name(buff);
+std::string util::fs::base(std::string path) {
+	std::string f = util::fs::name(path);
 
 	return util::str::split(f, '.')[0];
 }
