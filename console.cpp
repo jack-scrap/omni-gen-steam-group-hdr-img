@@ -814,8 +814,6 @@ void Console::exec() {
 				unsigned int maxNo = std::to_string(state::baseNo + _buff.size() - 1).size();
 				maxNo += 1; // pad
 
-				console->clear();
-
 				if (tok.size() > 1) {
 					std::thread t(dispatch, tok[1], maxFs + maxNo);
 					t.detach();
