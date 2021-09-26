@@ -139,6 +139,22 @@ std::vector<std::map<std::string, std::string>> util::fs::ls(std::string path) {
 	return tree;
 }
 
+
+std::string util::fs::perm(std::string fName) {
+	std::string _;
+
+	struct stat f;
+	if (stat(fName.c_str(), &f) < 0) {
+		return _;
+	}
+
+	_.push_back(f.st_mode & S_IRUSR ? 'r' : '-');
+	_.push_back(f.st_mode & S_IWUSR ? 'w' : '-');
+	_.push_back(f.st_mode & S_IXUSR ? 'x' : '-');
+
+	return _;
+}
+
 std::string util::fs::name(std::string buff) {
 	std::vector<std::string> tok = util::str::split(buff, '/');
 
@@ -154,21 +170,6 @@ std::string util::fs::base(std::string buff) {
 	std::string f = util::fs::name(buff);
 
 	return util::str::split(f, '.')[0];
-}
-
-std::string util::fs::perm(std::string fName) {
-	std::string _;
-
-	struct stat f;
-	if (stat(fName.c_str(), &f) < 0) {
-		return _;
-	}
-
-	_.push_back(f.st_mode & S_IRUSR ? 'r' : '-');
-	_.push_back(f.st_mode & S_IWUSR ? 'w' : '-');
-	_.push_back(f.st_mode & S_IXUSR ? 'x' : '-');
-
-	return _;
 }
 
 std::vector<GLfloat> util::mesh::plane(glm::vec2 bound) {

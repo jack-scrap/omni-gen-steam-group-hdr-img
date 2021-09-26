@@ -36,11 +36,11 @@ namespace util {
 
 		std::vector<std::map<std::string, std::string>> ls(std::string path);
 
+		std::string perm(std::string fName);
+
 		std::string name(std::string buff);
 
 		std::string base(std::string buff);
-
-		std::string perm(std::string fName);
 	}
 
 	namespace mesh {
