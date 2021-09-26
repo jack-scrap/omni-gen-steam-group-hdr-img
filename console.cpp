@@ -123,12 +123,6 @@ Console::Console(std::string fName, std::string cwd) :
 
 		changeDir(_cwd);
 
-		_cursEditor[MIN][X] = _buff.back().size() - 1 + 1;
-		_cursEditor[MIN][Y] = _buff.size() - 1;
-		for (int i = 0; i < 2; i++) {
-			_cursEditor[MAX][i] = _cursEditor[MIN][i];
-		}
-
 		_cursPrompt[MIN] = _prompt.size();
 		_cursPrompt[MAX] = _cursPrompt[MIN];
 
@@ -537,6 +531,12 @@ void Console::open(std::string fName) {
 	} else {
 		omni::err(omni::ERR_FS_OPEN_FILE);
 	}
+
+	_cursEditor[MIN][X] = _buff.back().size() - 1 + 1;
+	_cursEditor[MIN][Y] = _buff.size() - 1;
+	for (int i = 0; i < 2; i++) {
+		_cursEditor[MAX][i] = _cursEditor[MIN][i];
+	}
 }
 
 void Console::changeDir(std::string dir) {
@@ -760,6 +760,12 @@ void Console::exec() {
 					}
 				} else {
 					omni::err(omni::ERR_ARG_CNT);
+				}
+
+				_cursEditor[MIN][X] = _buff.back().size() - 1 + 1;
+				_cursEditor[MIN][Y] = _buff.size() - 1;
+				for (int i = 0; i < 2; i++) {
+					_cursEditor[MAX][i] = _cursEditor[MIN][i];
 				}
 			}
 
