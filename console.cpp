@@ -522,8 +522,8 @@ void Console::render() {
 }
 
 void Console::open(std::string fName) {
-	if (util::fs::exist(fName)) {
-		_buffName = fName;
+	if (util::fs::exist("player/" + fName)) {
+		_buffName = "player/" + fName;
 
 		std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(_buffName);
 
@@ -751,7 +751,7 @@ void Console::exec() {
 			if (cmd == "new") {
 				if (tok.size() == 1 + 1) {
 					if (!_diff) {
-						_buffName = tok[1];
+						_buffName = "player/" + tok[1];
 						_buff = {
 							""
 						};
@@ -829,7 +829,7 @@ void Console::exec() {
 				if (eq) {
 					lvl++;
 
-					std::string name = "player/script/" + stage + "/" + std::to_string(lvl) + "/main.py";
+					std::string name = "script/" + stage + "/" + std::to_string(lvl) + "/main.py";
 
 					console->open(name);
 

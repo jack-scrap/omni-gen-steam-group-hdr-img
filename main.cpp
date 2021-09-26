@@ -618,9 +618,9 @@ int main(int argc, char** argv) {
 
 	std::string name;
 	if (argc > 1) {
-		name = "player/script/" + stage + "/" + std::to_string(lvl) + "/main.py";
+		name = "script/" + stage + "/" + std::to_string(lvl) + "/main.py";
 	} else {
-		name = "player/doc/intro.txt";
+		name = "doc/intro.txt";
 	}
 
 	console = new Console(name, "player");
