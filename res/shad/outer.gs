@@ -25,12 +25,17 @@ const float[3] idx = float[3](
 );
 
 vec3 norm(vec3[3] tri) {
+	// get edges
 	vec3 u = tri[1] - tri[0];
 	vec3 v = tri[2] - tri[0];
 
+	// calculate cross product
 	vec3 orth = cross(u, v);
 
-	return normalize(orth);
+	// normalize
+	vec3 norm = normalize(orth);
+
+	return norm;
 }
 
 vec3[2] bevel(vec3[3] strip, float fac) {

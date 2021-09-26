@@ -17,14 +17,17 @@ bvec2 dir = bvec2(true, true);
 float ht = 0.16;
 
 vec3 norm(vec3[3] tri) {
+	// get edges
 	vec3 u = tri[1] - tri[0];
 	vec3 v = tri[2] - tri[0];
 
+	// calculate cross product
 	vec3 orth = cross(u, v),
 
-	vec3 _ = normalize(orth);
+			 // normalize
+	vec3 norm = normalize(orth);
 
-	return _;
+	return norm;
 }
 
 void main() {
