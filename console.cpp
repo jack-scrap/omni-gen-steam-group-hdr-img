@@ -532,8 +532,15 @@ void Console::open(std::string fName) {
 		omni::err(omni::ERR_FS_OPEN_FILE);
 	}
 
-	_cursEditor[MIN][X] = _buff.back().size() - 1 + 1;
-	_cursEditor[MIN][Y] = _buff.size() - 1;
+	if (util::fs::perm(_buffName)[1] == 'w') {
+		_cursEditor[MIN][X] = _buff.back().size() - 1 + 1;
+		_cursEditor[MIN][Y] = _buff.size() - 1;
+	} else {
+		for (int i = 0; i < 2; i++) {
+			_cursEditor[MIN][i] = 0;
+		}
+	}
+
 	for (int i = 0; i < 2; i++) {
 		_cursEditor[MAX][i] = _cursEditor[MIN][i];
 	}
