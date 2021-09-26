@@ -15,5 +15,5 @@ void main() {
 
 	_pos = vec3(proj * view * model * vec4(pos, 1.0));
 	_obj = pos;
-	_st = st;
+	_st = vec2(0.0, 1.0) + (st * vec2(1, -1));
 }
