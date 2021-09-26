@@ -633,35 +633,35 @@ int main(int argc, char** argv) {
 
 	if (boot) {
 		GLfloat vtc[] = {
-			-0.26, -0.26,
-			0.16, -0.26,
-			-0.10, -0.10,
-			0.06, -0.10,
+			-0.26, 0.0, -0.26,
+			0.16, 0.0, -0.26,
+			-0.10, 0.0, -0.10,
+			0.06, 0.0, -0.10,
 
-			0.16, -0.26,
-			0.26, -0.16,
-			0.06, -0.10,
-			0.10, -0.06,
+			0.16, 0.0, -0.26,
+			0.26, 0.0, -0.16,
+			0.06, 0.0, -0.10,
+			0.10, 0.0, -0.06,
 
-			0.26, -0.16,
-			0.26, 0.26,
-			0.10, -0.06,
-			0.10, 0.10,
+			0.26, 0.0, -0.16,
+			0.26, 0.0, 0.26,
+			0.10, 0.0, -0.06,
+			0.10, 0.0, 0.10,
 
-			0.26, 0.26,
-			-0.16, 0.26,
-			0.10, 0.10,
-			-0.06, 0.10,
+			0.26, 0.0, 0.26,
+			-0.16, 0.0, 0.26,
+			0.10, 0.0, 0.10,
+			-0.06, 0.0, 0.10,
 
-			-0.16, 0.26,
-			-0.26, 0.16,
-			-0.06, 0.10,
-			-0.10, 0.06,
+			-0.16, 0.0, 0.26,
+			-0.26, 0.0, 0.16,
+			-0.06, 0.0, 0.10,
+			-0.10, 0.0, 0.06,
 
-			-0.10, 0.06,
-			-0.26, 0.16,
-			-0.10, -0.10,
-			-0.26, -0.26
+			-0.10, 0.0, 0.06,
+			-0.26, 0.0, 0.16,
+			-0.10, 0.0, -0.10,
+			-0.26, 0.0, -0.26
 		};
 
 		GLushort idc[] = {
@@ -686,14 +686,14 @@ int main(int argc, char** argv) {
 
 		Mesh* mesh = meshMk(vtc, idc, sizeof idc / sizeof *idc);
 
-		Prog prog("logo", "solid");
+		Prog prog("glyph", "solid");
 
 		prog.use();
 
 		// attribute
 		glBindBuffer(GL_ARRAY_BUFFER, mesh->_id[Mesh::VBO]);
 		GLint attrPos = glGetAttribLocation(prog._id, "pos");
-		glVertexAttribPointer(attrPos, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+		glVertexAttribPointer(attrPos, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 		glEnableVertexAttribArray(attrPos);
 
 		// uniform
