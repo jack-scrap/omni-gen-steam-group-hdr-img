@@ -1,6 +1,6 @@
 #version 400
 
-in vec2 pos;
+in vec3 pos;
 
 uniform ivec2 res;
 
