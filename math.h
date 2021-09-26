@@ -13,13 +13,13 @@ enum {
 };
 
 enum {
-	MIN,
-	MAX
-};
-
-enum {
 	R,
 	G,
 	B,
 	A
+};
+
+enum {
+	MIN,
+	MAX
 };
