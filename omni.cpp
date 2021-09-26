@@ -21,7 +21,7 @@ void omni::err(unsigned int err) {
 			break;
 
 		case ERR_FS_DEL_FILE:
-			msg = "Couldn't delete file";
+			msg = "Could not delete file";
 
 			break;
 
@@ -56,7 +56,7 @@ void omni::err(unsigned int err) {
 			break;
 
 		case ERR_LVL_NOT_FIN:
-			msg = "Couldn't proceed -- current level not complete";
+			msg = "Could not proceed -- current level not complete";
 
 			break;
 
