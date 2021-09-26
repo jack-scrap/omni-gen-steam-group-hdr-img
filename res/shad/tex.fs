@@ -12,5 +12,5 @@ void main() {
 
 	float i = max(dot(normFace, normalize(sun)), 0.0);
 
-	gl_FragColor = vec4(vec3(i) * texture(tex, _st).rgb, 1.0);
+	gl_FragColor = vec4(i * texture(tex, _st).rgb, 1.0);
 }
