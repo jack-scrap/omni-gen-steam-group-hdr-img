@@ -64,7 +64,7 @@ omni: $(OBJ_STATIC) $(OBJ_DYNA) $(HDR)
 	$(CXX) $(CXXFLAGS) $(OBJ_STATIC) -o $@ $(LDSDL) $(LDGL) $(LDPY) $(LDLIB)
 
 ro:
-	chmod -w player/doc
+	chmod -w -R player/doc
 
 mk_stage:
 	for DIR in $(STAGE) ; do \
