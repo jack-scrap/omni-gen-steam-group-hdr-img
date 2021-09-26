@@ -42,8 +42,8 @@ Shad::Shad(std::string name, unsigned int stage) {
 	glGetShaderiv(_id, GL_COMPILE_STATUS, &succ);
 	if (!succ) {
 		glGetShaderInfoLog(_id, 512, NULL, err);
-		omni::err("Shader compilation failed...");
-		omni::err(std::string(err));
+		omni::err(omni::ERR_SHADER);
+		std::cout << err << std::endl;
 	}
 }
 

@@ -535,7 +535,7 @@ void Console::open(std::string fName) {
 			};
 		}
 	} else {
-		omni::err("Could not open " + fName + "; file not found");
+		omni::err(omni::ERR_FS_OPEN_FILE);
 	}
 }
 
@@ -741,10 +741,10 @@ void Console::exec() {
 					if (!_diff) {
 						open(tok[1]);
 					} else {
-						omni::err("Buffer not saved");
+						omni::err(omni::ERR_BUFF_DIFF);
 					}
 				} else {
-					omni::err("Incorrect number of arguments to command `" + cmd + "`");
+					omni::err(omni::ERR_ARG_CNT);
 				}
 			}
 
@@ -756,10 +756,10 @@ void Console::exec() {
 							""
 						};
 					} else {
-						omni::err("Buffer not saved");
+						omni::err(omni::ERR_BUFF_DIFF);
 					}
 				} else {
-					omni::err("Incorrect number of arguments to command `" + cmd + "`");
+					omni::err(omni::ERR_ARG_CNT);
 				}
 			}
 
@@ -776,7 +776,7 @@ void Console::exec() {
 
 					_diff = false;
 				} else {
-					omni::err("Incorrect number of arguments to command `" + cmd + "`");
+					omni::err(omni::ERR_ARG_CNT);
 				}
 			}
 
@@ -791,7 +791,7 @@ void Console::exec() {
 
 					util::fs::del(name);
 				} else {
-					omni::err("Incorrect number of arguments to command `" + cmd + "`");
+					omni::err(omni::ERR_ARG_CNT);
 				}
 			}
 
@@ -837,7 +837,7 @@ void Console::exec() {
 
 					eq = false;
 				} else {
-					omni::err("Couldn't proceed -- current level not complete");
+					omni::err(omni::ERR_LVL_NOT_FIN);
 				}
 			}
 
@@ -845,11 +845,11 @@ void Console::exec() {
 				if (!_diff) {
 					exit(0);
 				} else {
-					omni::err("Buffer not saved");
+					omni::err(omni::ERR_BUFF_DIFF);
 				}
 			}
 		} else {
-			omni::err("Command `" + cmd + "` not found");
+			omni::err(omni::ERR_NO_CMD);
 		}
 	}
 

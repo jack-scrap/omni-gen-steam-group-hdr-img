@@ -5,7 +5,7 @@
 #include <map>
 
 namespace omni {
-	void err(std::string msg);
+	void err(unsigned int err);
 
 	void assertion(bool cond, std::string msg);
 
@@ -65,5 +65,34 @@ namespace omni {
 		SCALAR,
 		ARRAY,
 		DICT
+	};
+
+	enum err {
+		ERR_FS_RO,
+		ERR_FS_OPEN_FILE,
+		ERR_FS_DEL_FILE,
+		ERR_FS_OPEN_DIR,
+
+		ERR_BUFF_DIFF,
+
+		ERR_TOK,
+		ERR_TOK_CNT,
+		ERR_CFG_KEY,
+
+		ERR_NO_CMD,
+		ERR_ARG_CNT,
+
+		ERR_LVL_NOT_FIN,
+
+		ERR_OBJ_CLIP,
+
+		ERR_CRANE_HEAD_RNG,
+		ERR_CRANE_CLAW_RNG,
+
+		ERR_TRUCK_WHEEL_RNG,
+
+		ERR_SHADER,
+
+		ERR_FRAME_BUFF
 	};
 }

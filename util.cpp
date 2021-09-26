@@ -66,7 +66,7 @@ void util::fs::write(std::string fName, std::vector<std::string> buff) {
 	std::string stat = util::fs::perm(fName);
 
 	if (stat[1] != 'w') {
-		omni::err("Could not write " + fName + "; file read-only");
+		omni::err(omni::ERR_FS_RO);
 
 		return;
 	}
@@ -83,7 +83,7 @@ void util::fs::write(std::string fName, std::vector<std::string> buff) {
 
 void util::fs::del(std::string fName) {
 	if (remove(fName.c_str()) != 0) {
-		omni::err("Couldn't delete file `" + fName + "`");
+		omni::err(omni::ERR_FS_DEL_FILE);
 	}
 }
 
@@ -94,7 +94,7 @@ std::vector<std::map<std::string, std::string>> util::fs::ls(std::string fName) 
 	auto dir = opendir(path.c_str());
 
 	if (!dir) {
-		omni::err("Could not open directory " + path);
+		omni::err(omni::ERR_FS_OPEN_DIR);
 	}
 
 	while (auto entity = readdir(dir)) {
@@ -1155,15 +1155,15 @@ std::map<std::string, std::string> util::cfg::lex(std::string name) {
 
 			// error
 			if (ast.size() != 3) {
-				omni::err("Inappropriate number of tokens in config entry `" + ast[0] + "`");
+				omni::err(omni::ERR_TOK_CNT);
 			}
 
 			if (ast[1] != "=") {
-				omni::err("Inappropriate token `" + ast[1] + "`");
+				omni::err(omni::ERR_TOK);
 			}
 
 			if (!cfg::parse::var(ast[0])) {
-				omni::err("Inappropriate key `" + ast[0] + "`, can only be alpha-numeric with `_` separator");
+				omni::err(omni::ERR_CFG_KEY);
 
 				break;
 			}
@@ -1363,7 +1363,7 @@ GLuint util::tex::spray(std::string tex) {
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, cbo, 0);
 
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-		omni::err("Framebuffer not complete");
+		omni::err(omni::ERR_FRAME_BUFF);
 	}
 
 	// create

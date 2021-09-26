@@ -387,7 +387,7 @@ void objMv(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
 	if (!coll) {
 		objAnim(obj, loc, rot);
 	} else {
-		omni::err("Cannot move; objects clipping");
+		omni::err(omni::ERR_OBJ_CLIP);
 	}
 }
 
