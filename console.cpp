@@ -87,7 +87,7 @@ void dispatch(std::string fName, unsigned int ptrEditorX) {
 Console::Console(std::string fName, std::string cwd) :
 	_mode(EDITOR),
 	_cwd(cwd),
-	_prog("console", "tex") {
+	_prog("console", "console") {
 		_canv = (char*) calloc(state::lineWd * state::lineCnt, sizeof (char));
 		_hl = (char*) calloc(state::lineWd * state::lineCnt, sizeof (bool));
 
