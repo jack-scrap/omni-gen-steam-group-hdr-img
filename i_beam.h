@@ -10,7 +10,7 @@ typedef struct IBeam {
 
 	GLint _uni[2];
 
-	enum uni {
+	enum {
 		AXIS,
 		LN
 	};

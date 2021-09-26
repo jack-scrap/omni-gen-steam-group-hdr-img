@@ -5,19 +5,19 @@ typedef struct {
 	unsigned int _y;
 } Coord;
 
-enum axes {
+enum {
 	X,
 	Y,
 	Z,
 	W
 };
 
-enum rng {
+enum {
 	MIN,
 	MAX
 };
 
-enum col {
+enum {
 	R,
 	G,
 	B,

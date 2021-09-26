@@ -7,7 +7,7 @@ typedef struct Mesh {
 
 	unsigned int _noPrim;
 
-	enum id {
+	enum {
 		VAO,
 
 		VBO,
@@ -17,7 +17,7 @@ typedef struct Mesh {
 		STBO
 	};
 
-	enum type {
+	enum {
 		PT,
 		LINE,
 		OBJ

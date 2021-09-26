@@ -61,13 +61,13 @@ namespace omni {
 		"time_format"
 	};
 
-	enum type {
+	enum {
 		SCALAR,
 		ARRAY,
 		DICT
 	};
 
-	enum err {
+	enum {
 		ERR_FS_RO,
 		ERR_FS_OPEN_FILE,
 		ERR_FS_DEL_FILE,

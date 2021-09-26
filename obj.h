@@ -37,13 +37,13 @@ typedef struct Obj {
 	Obj** _child;
 	unsigned int _noChild;
 
-	enum attr {
+	enum {
 		POS,
 		ST,
 		NORM
 	};
 
-	enum uni {
+	enum {
 		MODEL,
 		VIEW,
 		PROJ,

@@ -12,7 +12,7 @@ typedef struct {
 
 	Obj* _parent;
 
-	enum id {
+	enum {
 		ST
 	};
 } Cont;

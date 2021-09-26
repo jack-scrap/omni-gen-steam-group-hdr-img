@@ -49,7 +49,7 @@ class Console {
 
 		Prog _prog;
 
-		enum attr {
+		enum {
 			POS,
 			ST
 		};
@@ -114,7 +114,7 @@ class Console {
 
 		static bool lexicoEntry(std::map<std::string, std::string> lhs, std::map<std::string, std::string> rhs);
 		
-		enum mode {
+		enum {
 			EDITOR,
 			PROMPT,
 			FS
