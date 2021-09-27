@@ -91,10 +91,7 @@ namespace omni {
 
 		ERR_OBJ_CLIP,
 
-		ERR_CRANE_HEAD_RNG,
-		ERR_CRANE_CLAW_RNG,
-
-		ERR_TRUCK_WHEEL_RNG,
+		ERR_MV_RNG,
 
 		ERR_SHADER,
 

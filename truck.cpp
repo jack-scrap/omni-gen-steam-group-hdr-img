@@ -150,7 +150,9 @@ void truckTurn(Truck* truck, float delta) {
 			objAnim(truck->_parent->_child[z * 2], glm::vec3(0.0), glm::vec3(0.0, delta, 0.0));
 		}
 	} else {
-		omni::err(omni::ERR_TRUCK_WHEEL_RNG);
+		omni::err(omni::ERR_MV_RNG, {
+			"truck wheels"
+		});
 	}
 
 	// offset

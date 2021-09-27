@@ -75,18 +75,8 @@ void omni::err(unsigned int err, std::vector<std::string> arg) {
 
 			break;
 
-		case ERR_CRANE_HEAD_RNG:
-			msg = "Cannot move crane head; translation exceeds range";
-
-			break;
-
-		case ERR_CRANE_CLAW_RNG:
-			msg = "Cannot move crane claw; translation exceeds range";
-
-			break;
-
-		case ERR_TRUCK_WHEEL_RNG:
-			msg = "Cannot turn truck; rotation of wheels exceeds range";
+		case ERR_MV_RNG:
+			msg = "Cannot move " + arg[0] + "; translation exceeds range";
 
 			break;
 
