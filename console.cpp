@@ -820,7 +820,7 @@ void Console::exec() {
 
 			if (cmd == "new_dir") {
 				if (!util::fs::exist(tok[1])) {
-					mkdir(tok[1].c_str(), 0700);
+					mkdir(tok[1].c_str(), S_IRWXU);
 				} else {
 					omni::err(omni::ERR_FS_DIR_EXIST);
 				}
