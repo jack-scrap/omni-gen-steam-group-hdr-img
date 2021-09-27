@@ -37,12 +37,3 @@ Regardless of whether an exception is thrown, a `finally` block can be provided 
 finally:
 	print('Text')
 ```
-
-# TODO
-Code can be semantically valid and pass execution, but other cases and logical requirements may still exist.
-
-An example is the arithmetic case of division by 0.
-
-`3 / 0`
-
-Though semantically valid, division by `0` is not possible, and an exception will be thrown in the program.
