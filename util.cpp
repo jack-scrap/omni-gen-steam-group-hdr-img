@@ -66,7 +66,9 @@ void util::fs::write(std::string fName, std::vector<std::string> buff) {
 	std::string stat = util::fs::perm(fName);
 
 	if (stat[1] != 'w') {
-		omni::err(omni::ERR_FS_RO);
+		omni::err(omni::ERR_FS_RO, {
+			fName
+		});
 
 		return;
 	}
@@ -83,7 +85,9 @@ void util::fs::write(std::string fName, std::vector<std::string> buff) {
 
 void util::fs::del(std::string fName) {
 	if (remove(fName.c_str()) != 0) {
-		omni::err(omni::ERR_FS_DEL_FILE);
+		omni::err(omni::ERR_FS_DEL_FILE, {
+			fName
+		});
 	}
 }
 
@@ -94,7 +98,9 @@ std::vector<std::map<std::string, std::string>> util::fs::ls(std::string path) {
 	auto dir = opendir(full.c_str());
 
 	if (!dir) {
-		omni::err(omni::ERR_FS_OPEN_DIR);
+		omni::err(omni::ERR_FS_OPEN_DIR, {
+			path
+		});
 	}
 
 	while (auto entity = readdir(dir)) {
@@ -1160,11 +1166,15 @@ std::map<std::string, std::string> util::cfg::lex(std::string name) {
 			}
 
 			if (ast[1] != "=") {
-				omni::err(omni::ERR_TOK);
+				omni::err(omni::ERR_TOK, {
+					ast[1]
+				});
 			}
 
 			if (!cfg::parse::var(ast[0])) {
-				omni::err(omni::ERR_CFG_KEY);
+				omni::err(omni::ERR_CFG_KEY, {
+					ast[0]
+				});
 
 				break;
 			}

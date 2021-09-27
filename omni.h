@@ -5,7 +5,7 @@
 #include <map>
 
 namespace omni {
-	void err(unsigned int err);
+	void err(unsigned int err, std::vector<std::string> arg = {});
 
 	void assertion(bool cond, std::string msg);
 

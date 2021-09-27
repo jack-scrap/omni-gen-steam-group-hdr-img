@@ -2,16 +2,16 @@
 
 #include "omni.h"
 
-void omni::err(unsigned int err) {
+void omni::err(unsigned int err, std::vector<std::string> arg) {
 	std::string msg;
 	switch (err) {
 		case ERR_FS_RO:
-			msg = "Could not write; file read-only";
+			msg = "Could not write `" + arg[0] + "`; file read-only";
 
 			break;
 
 		case ERR_FS_OPEN_FILE:
-			msg = "Could not open; file not found";
+			msg = "Could not open `" + arg[0] + "`; file not found";
 
 			break;
 
@@ -21,12 +21,12 @@ void omni::err(unsigned int err) {
 			break;
 
 		case ERR_FS_DEL_FILE:
-			msg = "Could not delete file";
+			msg = "Could not delete file `" + arg[0] + "`";
 
 			break;
 
 		case ERR_FS_OPEN_DIR:
-			msg = "Could not open directory";
+			msg = "Could not open directory `" + arg[0] + "`";
 
 			break;
 
@@ -36,22 +36,22 @@ void omni::err(unsigned int err) {
 			break;
 
 		case ERR_TOK:
-			msg = "Inappropriate token";
+			msg = "Inappropriate token `" + arg[0] + "`";
 
 			break;
 
 		case ERR_CFG_KEY:
-			msg = "Inappropriate key, can only be alpha-numeric with `_` separator";
+			msg = "Inappropriate key `" + arg[0] + "`, can only be alpha-numeric with `_` separator";
 
 			break;
 
 		case ERR_NO_CMD:
-			msg = "Command not found";
+			msg = "Command `" + arg[0] + "` not found";
 
 			break;
 
 		case ERR_ARG_CNT:
-			msg = "Incorrect number of arguments to command";
+			msg = "Incorrect number of arguments to command `" + arg[0] + "`";
 
 			break;
 

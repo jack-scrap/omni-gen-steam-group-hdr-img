@@ -529,7 +529,9 @@ void Console::open(std::string fName) {
 			};
 		}
 	} else {
-		omni::err(omni::ERR_FS_OPEN_FILE);
+		omni::err(omni::ERR_FS_OPEN_FILE, {
+			fName
+		});
 	}
 
 	if (util::fs::perm(_buffName)[1] == 'w') {
@@ -751,7 +753,9 @@ void Console::exec() {
 						omni::err(omni::ERR_BUFF_DIFF);
 					}
 				} else {
-					omni::err(omni::ERR_ARG_CNT);
+					omni::err(omni::ERR_ARG_CNT, {
+						cmd
+					});
 				}
 			}
 
@@ -766,7 +770,9 @@ void Console::exec() {
 						omni::err(omni::ERR_BUFF_DIFF);
 					}
 				} else {
-					omni::err(omni::ERR_ARG_CNT);
+					omni::err(omni::ERR_ARG_CNT, {
+						cmd
+					});
 				}
 
 				_cursEditor[MIN][X] = _buff.back().size() - 1 + 1;
@@ -789,7 +795,9 @@ void Console::exec() {
 
 					_diff = false;
 				} else {
-					omni::err(omni::ERR_ARG_CNT);
+					omni::err(omni::ERR_ARG_CNT, {
+						cmd
+					});
 				}
 			}
 
@@ -804,7 +812,9 @@ void Console::exec() {
 
 					util::fs::del(name);
 				} else {
-					omni::err(omni::ERR_ARG_CNT);
+					omni::err(omni::ERR_ARG_CNT, {
+						cmd
+					});
 				}
 			}
 
@@ -860,7 +870,9 @@ void Console::exec() {
 				}
 			}
 		} else {
-			omni::err(omni::ERR_NO_CMD);
+			omni::err(omni::ERR_NO_CMD, {
+				cmd
+			});
 		}
 	}
 
