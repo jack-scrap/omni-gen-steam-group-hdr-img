@@ -818,6 +818,14 @@ void Console::exec() {
 				}
 			}
 
+			if (cmd == "new_dir") {
+				if (!util::fs::exist(tok[1])) {
+					mkdir(tok[1].c_str(), 0700);
+				} else {
+					omni::err(omni::ERR_FS_DIR_EXIST);
+				}
+			}
+
 			if (cmd == "run") {
 				unsigned int maxFs = 0;
 				for (int i = 0; i < _tree.size(); i++) {

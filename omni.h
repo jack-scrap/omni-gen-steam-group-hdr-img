@@ -43,6 +43,7 @@ namespace omni {
 	static std::vector<std::string> lib = {
 		"open",
 		"new",
+		"new_dir",
 		"run",
 		"save",
 		"del",
@@ -72,6 +73,7 @@ namespace omni {
 		ERR_FS_OPEN_FILE,
 		ERR_FS_DEL_FILE,
 		ERR_FS_OPEN_DIR,
+		ERR_FS_DIR_EXIST,
 
 		ERR_BUFF_DIFF,
 

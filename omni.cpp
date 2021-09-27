@@ -30,6 +30,11 @@ void omni::err(unsigned int err, std::vector<std::string> arg) {
 
 			break;
 
+		case ERR_FS_DIR_EXIST:
+			msg = "Could not create directory `" + arg[0] + "`; already present";
+
+			break;
+
 		case ERR_TOK_CNT:
 			msg = "Inappropriate number of tokens in config entry";
 
