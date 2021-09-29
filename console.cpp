@@ -522,8 +522,8 @@ void Console::render() {
 }
 
 void Console::open(std::string fName) {
-	if (util::fs::exist("player/" + fName)) {
-		_buffName = "player/" + fName;
+	if (util::fs::exist(_home + fName)) {
+		_buffName = _home + fName;
 
 		std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(_buffName);
 
@@ -557,11 +557,11 @@ void Console::open(std::string fName) {
 void Console::changeDir(std::string dir) {
 	_cwd = dir;
 
-	_tree = util::fs::ls(_cwd);
+	_tree = util::fs::ls(_home + _cwd);
 
 	for (int i = 0; i < _tree.size(); i++) {
 		if (_tree[i]["name"] == "..") {
-			if (_cwd == "player") {
+			if (_cwd == ".") {
 				_tree.erase(_tree.begin() + i);
 			}
 		}
@@ -768,7 +768,7 @@ void Console::exec() {
 			if (cmd == "new") {
 				if (tok.size() == 1 + 1) {
 					if (!_diff) {
-						_buffName = "player/" + tok[1];
+						_buffName = _home + tok[1];
 						_buff = {
 							""
 						};

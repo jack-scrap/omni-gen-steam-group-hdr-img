@@ -629,7 +629,7 @@ int main(int argc, char** argv) {
 		name = "doc/intro.txt";
 	}
 
-	console = new Console(name, "player");
+	console = new Console(name, ".");
 	scn::init(stage, lvl);
 
 	Py_Initialize();
