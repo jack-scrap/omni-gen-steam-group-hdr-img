@@ -15,28 +15,28 @@ namespace omni {
 			0
 		}, {
 			"array",
-			1
-		}, {
-			"str",
-			2
-		}, {
-			"dict",
-			3
-		}, {
-			"matrix",
-			4
-		}, {
-			"vec",
 			5
 		}, {
+			"str",
+			10
+		}, {
+			"dict",
+			20
+		}, {
+			"matrix",
+			30
+		}, {
+			"vec",
+			45
+		}, {
 			"ctrl_flow",
-			6
+			60
 		}, {
 			"path",
-			7
+			80
 		}, {
 			"thread",
-			8
+			100
 		}
 	};
 
