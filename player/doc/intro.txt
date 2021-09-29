@@ -1,4 +1,4 @@
-Hello. asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
+Hello.
 
 This guide will run you through programming for Omni corporation.
 
