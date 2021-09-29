@@ -12,10 +12,10 @@ namespace omni {
 	static std::map<std::string, unsigned int> stage = {
 		{
 			"init",
-				0
+			0
 		}, {
 			"array",
-				1
+			1
 		}, {
 			"str",
 			2
