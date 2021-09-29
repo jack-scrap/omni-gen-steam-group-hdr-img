@@ -21,7 +21,7 @@ class Console {
 
 		const std::string _ps1 = "[] ";
 
-		const std::string _home = "player/";
+		const std::string _home = "player";
 
 		bool _diff = false;
 
