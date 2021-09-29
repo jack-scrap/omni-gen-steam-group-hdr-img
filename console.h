@@ -82,7 +82,7 @@ class Console {
 		tm* _info;
 		char _timeFmt[64];
 
-		Console(std::string fName, std::string cwd);
+		Console(std::string fName, std::string dir);
 
 		void clear();
 
