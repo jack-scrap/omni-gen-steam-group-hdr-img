@@ -80,12 +80,12 @@ namespace omni {
 
 		ERR_BUFF_DIFF,
 
+		ERR_NO_CMD,
+		ERR_ARG_CNT,
+
 		ERR_TOK,
 		ERR_TOK_CNT,
 		ERR_CFG_KEY,
-
-		ERR_NO_CMD,
-		ERR_ARG_CNT,
 
 		ERR_LVL_NOT_FIN,
 

@@ -35,8 +35,13 @@ void omni::err(unsigned int err, std::vector<std::string> arg) {
 
 			break;
 
-		case ERR_TOK_CNT:
-			msg = "Inappropriate number of tokens in config entry";
+		case ERR_NO_CMD:
+			msg = "Command `" + arg[0] + "` not found";
+
+			break;
+
+		case ERR_ARG_CNT:
+			msg = "Incorrect number of arguments to command `" + arg[0] + "`";
 
 			break;
 
@@ -45,18 +50,13 @@ void omni::err(unsigned int err, std::vector<std::string> arg) {
 
 			break;
 
+		case ERR_TOK_CNT:
+			msg = "Inappropriate number of tokens in config entry";
+
+			break;
+
 		case ERR_CFG_KEY:
 			msg = "Inappropriate key `" + arg[0] + "`, can only be alpha-numeric with `_` separator";
-
-			break;
-
-		case ERR_NO_CMD:
-			msg = "Command `" + arg[0] + "` not found";
-
-			break;
-
-		case ERR_ARG_CNT:
-			msg = "Incorrect number of arguments to command `" + arg[0] + "`";
 
 			break;
 
