@@ -797,7 +797,7 @@ void Console::exec() {
 						name = tok[1];
 					}
 
-					util::fs::write(name, _buff);
+					util::fs::write(_home + "/" + _cwd + "/" + name, _buff);
 
 					_diff = false;
 				} else {
