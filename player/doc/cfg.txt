@@ -1,3 +1,10 @@
+Config files assign values to various system settings on startup.
+
+Files are scanned one assignment per-line.
+
+Separated by the assignment operator with the key preceeding and the value following, the format is `key = value`.
+
+# Keys
 `skip_boot`          - Whether to play boot sequence on startup
 
 `screen_wd`          - Width of display viewport
