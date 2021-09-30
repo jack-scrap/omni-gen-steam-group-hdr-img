@@ -550,10 +550,6 @@ int main(int argc, char** argv) {
 				boot = !util::cfg::parse::boolean(it->second);
 			}
 
-			if (it->first == "speed") {
-				state::speed = util::cfg::parse::no(it->second);
-			}
-
 			// display
 			if (it->first == "screen_wd") {
 				layout::view[X] = util::cfg::parse::no(it->second);
@@ -562,6 +558,10 @@ int main(int argc, char** argv) {
 
 			if (it->first == "fps") {
 				state::fps = util::cfg::parse::no(it->second);
+			}
+
+			if (it->first == "speed") {
+				state::speed = util::cfg::parse::no(it->second);
 			}
 
 			if (it->first == "begin_index_at_one") {
