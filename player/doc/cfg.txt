@@ -8,7 +8,7 @@ Separated by the assignment operator with the key preceeding and the value follo
 `skip_boot`          - Whether to play boot sequence on startup
 
 `screen_wd`          - Width of display viewport
-`fps`                - Frames per second
+`fps`                - Target frames per second
 `speed`              - Global speed of transformations
 
 `begin_index_at_one` - Whether to begin indexing line numbers at `0` or `1`
