@@ -1,0 +1,17 @@
+`skip_boot`          - Whether to play boot sequence on startup
+
+`screen_wd`          - Width of display viewport
+`fps`                - Frames per second
+`speed`              - Global speed of transformations
+
+`begin_index_at_one` - Whether to begin indexing line numbers at `0` or `1`
+`line_count`         - Maximum number of lines visible within console
+`line_width`         - Maximum number of characters visible per-line in console
+
+`tab_wd`             - Number of tab characters produced on key press
+`tab_expand`         - Convert tab characters to space characters, based on `tab_width`
+
+`hl_line_no`         - Highlight line numbers
+`hl_active_line`     - Highlight active lines, opposite highlighting set by `hl_line_no`
+
+`time_format`        - Format of time in status bar
