@@ -22,3 +22,29 @@ Separated by the assignment operator with the key preceeding and the value follo
 `hl_active_line`     - Highlight active lines, opposite highlighting set by `hl_line_no`
 
 `time_format`        - Format of time in status bar
+
+# Values
+Values take one of 4 forms -- booleans, numbers and strings.
+
+## Booleans
+Booleans simply take the value "no" or "yes".
+
+`n` - No
+`n` - Yes
+
+## Numbers
+Numbers are provided in decimal format.
+
+`3`
+
+## Strings
+Strings are enclosed in double quotes.
+
+`"Text"`
+
+## Restrictions
+Additional restrictions may exist.
+
+For example, some keys may require that numbers are positive, and negative values cannot be provided.
+
+Should an invalid value be required, the program will fail to boot.
