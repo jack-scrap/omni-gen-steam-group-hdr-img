@@ -551,7 +551,7 @@ int main(int argc, char** argv) {
 			}
 
 			// display
-			if (it->first == "screen_wd") {
+			if (it->first == "screen_width") {
 				layout::view[X] = util::cfg::parse::no(it->second);
 				layout::view[Y] = state::lineCnt * layout::glyph[Y];
 			}
@@ -577,7 +577,7 @@ int main(int argc, char** argv) {
 				state::lineWd = util::cfg::parse::no(it->second);
 			}
 
-			if (it->first == "tab_wd") {
+			if (it->first == "tab_width") {
 				state::tabWd = util::cfg::parse::no(it->second);
 			}
 

@@ -53,13 +53,13 @@ namespace omni {
 
 	static std::vector<std::string> var = {
 		"skip_boot",
-		"screen_wd",
+		"screen_width",
 		"fps",
 		"speed",
 		"begin_index_at_one",
 		"line_count",
 		"line_width",
-		"tab_wd",
+		"tab_width",
 		"tab_expand",
 		"hl_line_no",
 		"hl_active_line",
