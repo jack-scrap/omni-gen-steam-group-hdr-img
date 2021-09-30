@@ -63,14 +63,16 @@ bool util::fs::exist(std::string fName) {
 }
 
 void util::fs::write(std::string fName, std::vector<std::string> buff) {
-	std::string stat = util::fs::perm(fName);
+	if (util::fs::exist(fName)) {
+		std::string stat = util::fs::perm(fName);
 
-	if (stat[1] != 'w') {
-		omni::err(omni::ERR_FS_RO, {
-			fName
-		});
+		if (stat[1] != 'w') {
+			omni::err(omni::ERR_FS_RO, {
+				fName
+			});
 
-		return;
+			return;
+		}
 	}
 
 	std::ofstream f;
