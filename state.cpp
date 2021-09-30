@@ -3,7 +3,7 @@
 unsigned int state::lineCnt;
 unsigned int state::lineWd;
 
-unsigned int state::baseNo = 0;
+unsigned int state::baseNo = 1;
 
 unsigned int state::hlLineNo = true;
 unsigned int state::hlActiveLine;
