@@ -75,7 +75,13 @@ void handle() {
 				}
 
 				if (e.key.keysym.sym == SDLK_TAB) {
-					console->ins('\t');
+					if (state::expandTab) {
+						for (int i = 0; i < state::tabWd; i++) {
+							console->ins(' ');
+						}
+					} else {
+						console->ins('\t');
+					}
 				}
 
 				// control
@@ -573,6 +579,10 @@ int main(int argc, char** argv) {
 
 			if (it->first == "tab_wd") {
 				state::tabWd = util::cfg::parse::no(it->second);
+			}
+
+			if (it->first == "tab_expand") {
+				state::expandTab = util::cfg::parse::boolean(it->second);
 			}
 
 			if (it->first == "hl_line_no") {

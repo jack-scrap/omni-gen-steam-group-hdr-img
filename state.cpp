@@ -11,6 +11,7 @@ unsigned int state::hlActiveLine;
 unsigned int state::fps;
 
 unsigned int state::tabWd = 2;
+bool state::expandTab = false;
 
 unsigned int state::speed = 3;
 

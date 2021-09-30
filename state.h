@@ -16,6 +16,7 @@ namespace state {
 	extern unsigned int hlActiveLine;
 
 	extern unsigned int tabWd;
+	extern bool expandTab;
 
 	extern unsigned int fps;
 

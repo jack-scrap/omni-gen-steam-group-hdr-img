@@ -60,6 +60,7 @@ namespace omni {
 		"line_count",
 		"line_width",
 		"tab_wd",
+		"tab_expand",
 		"hl_line_no",
 		"hl_active_line",
 		"time_format"
