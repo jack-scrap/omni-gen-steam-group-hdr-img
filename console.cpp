@@ -797,7 +797,13 @@ void Console::exec() {
 						name = tok[1];
 					}
 
+					bool refresh = !util::fs::exist(name);
+
 					util::fs::write(_home + "/" + _cwd + "/" + name, _buff);
+
+					if (refresh) {
+						_tree = util::fs::ls(_home + "/" + _cwd);
+					}
 
 					_diff = false;
 				} else {
@@ -817,6 +823,8 @@ void Console::exec() {
 					}
 
 					util::fs::del(name);
+
+					_tree = util::fs::ls(_home + "/" + _cwd);
 				} else {
 					omni::err(omni::ERR_ARG_CNT, {
 						cmd
@@ -830,6 +838,8 @@ void Console::exec() {
 				} else {
 					omni::err(omni::ERR_FS_DIR_EXIST);
 				}
+
+				_tree = util::fs::ls(_home + "/" + _cwd);
 			}
 
 			if (cmd == "run") {
