@@ -15,7 +15,7 @@ HDR=cam.h col.h math.h phys.h
 OBJ_STATIC=$(patsubst %.cpp, %.o, $(STATIC))
 OBJ_LIBS=$(patsubst %.cpp, lib%.so, $(LIBS))
 
-STAGE=init ctrl_flow thread path matrix
+STAGE=init array str dict matrix vec ctrl_flow path thread
 
 .PHONY: all ro mk_stage clean
 
