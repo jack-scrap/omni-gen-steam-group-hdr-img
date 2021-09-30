@@ -2,12 +2,12 @@ Config files assign values to various system settings on startup.
 
 Files are scanned one assignment per-line.
 
-Separated by the assignment operator with the key preceeding and the value following, the format is `key = value`.
+Separated by the assignment operator with the key preceeding and the value following, the form is `key = value`.
 
 # Keys
 `skip_boot`          - Whether to play boot sequence on startup
 
-`screen_wd`          - Width of display viewport
+`screen_width`       - Width of display viewport
 `fps`                - Target frames per second
 `speed`              - Global speed of transformations
 
@@ -15,7 +15,7 @@ Separated by the assignment operator with the key preceeding and the value follo
 `line_count`         - Maximum number of lines visible within console
 `line_width`         - Maximum number of characters visible per-line in console
 
-`tab_wd`             - Number of tab characters produced on key press
+`tab_width`          - Number of tab characters produced on key press
 `tab_expand`         - Convert tab characters to space characters, based on `tab_width`
 
 `hl_line_no`         - Highlight line numbers
