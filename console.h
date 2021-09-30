@@ -86,9 +86,9 @@ class Console {
 
 		void clear();
 
-		void fmtBuff(std::vector<std::string> buff, Coord loc, Coord view, Coord ptr);
+		void fmt(std::vector<std::string> buff, Coord loc, Coord view, Coord ptr);
 
-		void fmt();
+		void fmtScr();
 
 		void render();
 

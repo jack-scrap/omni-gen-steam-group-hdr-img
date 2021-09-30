@@ -26,7 +26,7 @@ unsigned int lvl;
 
 uint32_t epoch(uint32_t inter, void* param) {
 	console->getTime();
-	console->fmt();
+	console->fmtScr();
 
 	return 1000;
 }
@@ -171,7 +171,7 @@ Console::Console(std::string fName, std::string dir) :
 		// draw
 		getTime();
 
-		fmt();
+		fmtScr();
 		hl();
 
 		render();
@@ -180,7 +180,7 @@ Console::Console(std::string fName, std::string dir) :
 		SDL_AddTimer(0, epoch, NULL);
 	}
 
-void Console::fmtBuff(std::vector<std::string> buff, Coord loc, Coord view, Coord ptr) {
+void Console::fmt(std::vector<std::string> buff, Coord loc, Coord view, Coord ptr) {
 	int l = ptr._y;
 	int y = 0;
 	while (
@@ -256,7 +256,7 @@ void Console::clear() {
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-void Console::fmt() {
+void Console::fmtScr() {
 	unsigned int loc[2] = {
 		0
 	};
@@ -399,7 +399,7 @@ void Console::fmt() {
 		entryName.push_back(line);
 	}
 
-	fmtBuff(entryName, {
+	fmt(entryName, {
 		loc[X],
 		loc[Y]
 	}, {
@@ -437,7 +437,7 @@ void Console::fmt() {
 		pre.push_back(no);
 	}
 
-	fmtBuff(pre, {
+	fmt(pre, {
 		loc[X],
 		loc[Y]
 	}, {
@@ -456,7 +456,7 @@ void Console::fmt() {
 		boundFrame[Y]
 	};
 
-	fmtBuff(_buff, {
+	fmt(_buff, {
 		loc[X],
 		loc[Y]
 	}, {
@@ -470,7 +470,7 @@ void Console::fmt() {
 	/* command-line */
 	loc[X] = 0;
 
-	fmtBuff({
+	fmt({
 		_ps1,
 	}, {
 		loc[X],
@@ -485,7 +485,7 @@ void Console::fmt() {
 
 	loc[X] += _ps1.size();
 
-	fmtBuff({
+	fmt({
 		_prompt,
 	}, {
 		loc[X],
@@ -575,7 +575,7 @@ void Console::changeDir(std::string dir) {
 void Console::switchMode(unsigned int mode) {
 	_mode = mode;
 
-	fmt();
+	fmtScr();
 }
 
 void Console::ins(char c) {
@@ -895,7 +895,7 @@ void Console::exec() {
 	_cursPrompt[MIN] = _prompt.size();
 	_cursPrompt[MAX] = _cursPrompt[MIN];
 
-	fmt();
+	fmtScr();
 }
 
 void Console::hl() {
