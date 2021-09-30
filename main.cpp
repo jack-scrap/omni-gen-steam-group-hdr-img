@@ -541,65 +541,71 @@ void handle() {
 
 int main(int argc, char** argv) {
 	// initialize
-	std::map<std::string, std::string> setting = util::cfg::lex("player/cfg/init.cfg");
+	std::vector<std::map<std::string, std::string>> dir = util::fs::ls("player/cfg");
 
-	for (std::map<std::string, std::string>::iterator it = setting.begin(); it != setting.end(); ++it) {
-		if (std::find(omni::var.begin(), omni::var.end(), it->first) != omni::var.end()) {
-			// init
-			if (it->first == "skip_boot") {
-				boot = !util::cfg::parse::boolean(it->second);
-			}
+	for (int i = 0; i < dir.size(); i++) {
+		if (dir[i]["name"] != ".."){
+			std::map<std::string, std::string> setting = util::cfg::lex("player/cfg" + std::string("/") + dir[i]["name"]);
 
-			// display
-			if (it->first == "screen_width") {
-				layout::view[X] = util::cfg::parse::no(it->second);
-				layout::view[Y] = state::lineCnt * layout::glyph[Y];
-			}
+			for (std::map<std::string, std::string>::iterator it = setting.begin(); it != setting.end(); ++it) {
+				if (std::find(omni::var.begin(), omni::var.end(), it->first) != omni::var.end()) {
+					// init
+					if (it->first == "skip_boot") {
+						boot = !util::cfg::parse::boolean(it->second);
+					}
 
-			if (it->first == "fps") {
-				state::fps = util::cfg::parse::no(it->second);
-			}
+					// display
+					if (it->first == "screen_width") {
+						layout::view[X] = util::cfg::parse::no(it->second);
+						layout::view[Y] = state::lineCnt * layout::glyph[Y];
+					}
 
-			if (it->first == "speed") {
-				state::speed = util::cfg::parse::no(it->second);
-			}
+					if (it->first == "fps") {
+						state::fps = util::cfg::parse::no(it->second);
+					}
 
-			if (it->first == "begin_index_at_one") {
-				state::baseNo = util::cfg::parse::boolean(it->second);
-			}
+					if (it->first == "speed") {
+						state::speed = util::cfg::parse::no(it->second);
+					}
 
-			// console
-			if (it->first == "line_count") {
-				state::lineCnt = util::cfg::parse::no(it->second);
-			}
+					if (it->first == "begin_index_at_one") {
+						state::baseNo = util::cfg::parse::boolean(it->second);
+					}
 
-			if (it->first == "line_width") {
-				state::lineWd = util::cfg::parse::no(it->second);
-			}
+					// console
+					if (it->first == "line_count") {
+						state::lineCnt = util::cfg::parse::no(it->second);
+					}
 
-			if (it->first == "tab_width") {
-				state::tabWd = util::cfg::parse::no(it->second);
-			}
+					if (it->first == "line_width") {
+						state::lineWd = util::cfg::parse::no(it->second);
+					}
 
-			if (it->first == "tab_expand") {
-				state::expandTab = util::cfg::parse::boolean(it->second);
-			}
+					if (it->first == "tab_width") {
+						state::tabWd = util::cfg::parse::no(it->second);
+					}
 
-			if (it->first == "hl_line_no") {
-				state::hlLineNo = util::cfg::parse::boolean(it->second);
-			}
+					if (it->first == "tab_expand") {
+						state::expandTab = util::cfg::parse::boolean(it->second);
+					}
 
-			if (it->first == "hl_active_line") {
-				state::hlActiveLine = util::cfg::parse::boolean(it->second);
-			}
+					if (it->first == "hl_line_no") {
+						state::hlLineNo = util::cfg::parse::boolean(it->second);
+					}
 
-			if (it->first == "time_format") {
-				state::format = util::cfg::parse::str(it->second);
+					if (it->first == "hl_active_line") {
+						state::hlActiveLine = util::cfg::parse::boolean(it->second);
+					}
+
+					if (it->first == "time_format") {
+						state::format = util::cfg::parse::str(it->second);
+					}
+				} else {
+					omni::err(omni::ERR_CFG_KEY, {
+							it->first
+							});
+				}
 			}
-		} else {
-			omni::err(omni::ERR_CFG_KEY, {
-				it->first
-			});
 		}
 	}
 
