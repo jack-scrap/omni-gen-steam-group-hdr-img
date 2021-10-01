@@ -6,7 +6,7 @@ Separated by the assignment operator with the key preceeding and the value follo
 
 # Keys
 | Name                 | Operation                                                         | Type    |
-|----------------------|-------------------------------------------------------------------|---------|
+| -------------------- | ----------------------------------------------------------------- | ------- |
 | `skip_boot`          | Whether to play boot sequence on startup                          | Boolean |
 | `screen_width`       | Width of display viewport                                         | Number  |
 | `fps`                | Target frames per second                                          | Number  |
