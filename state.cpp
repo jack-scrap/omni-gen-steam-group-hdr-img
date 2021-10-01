@@ -15,4 +15,6 @@ bool state::expandTab = false;
 
 unsigned int state::speed = 3;
 
+unsigned int state::showFilePerm = false;
+
 std::string state::format;

@@ -21,6 +21,8 @@ Separated by the assignment operator with the key preceeding and the value follo
 `hl_line_no`         - Highlight line numbers
 `hl_active_line`     - Highlight active lines, opposite highlighting set by `hl_line_no`
 
+`show_file_perm`     - Dispplay file permissions in status bar
+
 `time_format`        - Format of time in status bar
 
 # Values

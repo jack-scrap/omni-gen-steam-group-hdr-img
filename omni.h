@@ -63,6 +63,7 @@ namespace omni {
 		"tab_expand",
 		"hl_line_no",
 		"hl_active_line",
+		"show_file_perm",
 		"time_format"
 	};
 

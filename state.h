@@ -22,5 +22,7 @@ namespace state {
 
 	extern unsigned int speed;
 
+	extern unsigned int showFilePerm;
+
 	extern std::string format;
 }

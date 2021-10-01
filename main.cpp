@@ -597,6 +597,10 @@ int main(int argc, char** argv) {
 						state::hlActiveLine = util::cfg::parse::boolean(it->second);
 					}
 
+					if (it->first == "show_file_perm") {
+						state::showFilePerm = util::cfg::parse::boolean(it->second);
+					}
+
 					if (it->first == "time_format") {
 						state::format = util::cfg::parse::str(it->second);
 					}

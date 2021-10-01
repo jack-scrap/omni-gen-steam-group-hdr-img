@@ -312,14 +312,16 @@ void Console::fmtScr() {
 	fInfo += util::fs::name(_buffName);
 	fInfo += ' '; // pad
 
-	std::string perm = util::fs::perm(_buffName);
+	if (state::showFilePerm) {
+		std::string perm = util::fs::perm(_buffName);
 
-	// wrap
-	perm.insert(0, "[");
-	perm.push_back(']');
+		// wrap
+		perm.insert(0, "[");
+		perm.push_back(']');
 
-	fInfo += perm;
-	fInfo += ' '; // pad
+		fInfo += perm;
+		fInfo += ' '; // pad
+	}
 
 	i = 0;
 	while (
