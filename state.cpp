@@ -1,7 +1,7 @@
 #include "state.h"
 
-unsigned int state::lineCnt;
-unsigned int state::lineWd;
+unsigned int state::lineCnt = 0;
+unsigned int state::lineWd = 0;
 
 unsigned int state::baseNo = 1;
 
