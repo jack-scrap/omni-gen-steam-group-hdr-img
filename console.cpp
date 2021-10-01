@@ -307,10 +307,23 @@ void Console::fmtScr() {
 	})] = ' ';
 	x++;
 
-	std::string base = util::fs::name(_buffName);
+	std::string fInfo;
+
+	fInfo += util::fs::name(_buffName);
+	fInfo += ' '; // pad
+
+	std::string perm = util::fs::perm(_buffName);
+
+	// wrap
+	perm.insert(0, "[");
+	perm.push_back(']');
+
+	fInfo += perm;
+	fInfo += ' '; // pad
+
 	i = 0;
 	while (
-		i < base.size() &&
+		i < fInfo.size() &&
 		x < state::lineWd
 	) {
 		_canv[util::math::idx::arr({
@@ -319,7 +332,7 @@ void Console::fmtScr() {
 		}, {
 			state::lineWd,
 			state::lineCnt
-		})] = base[i];
+		})] = fInfo[i];
 
 		i++;
 		x++;
