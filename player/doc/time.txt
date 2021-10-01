@@ -1,3 +1,11 @@
+"Unix time" defines the number of elapsed seconds since Jan 1 1970.
+In order to convert this number into a readable format, special characters preceeded with "%" can be provided to calculate and format specific time constructs.
+
+Definitions are provided in a continuous string -- "%m %d, %y".
+
+Below is a complete list of defined patterns.
+
+# Patterns
 | Pattern        | Description                                                                                                                                                                                                                            | Example                  |
 | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
 | "%a"           | National abbreviated weekday                                                                                                                                                                                                           | "Mon"                    |
@@ -5,8 +13,8 @@
 | "%b" / "%h"    | National abbreviated month                                                                                                                                                                                                             | "Sep"                    |
 | "%B"           | National full month                                                                                                                                                                                                                    | "September"              |
 | "%c"           | National representation of date and time                                                                                                                                                                                               | Mon Spe 22 12:50:32 2011 |
-| "%d"           | Day of the month (zero-padded (01-31))                                                                                                                                                                                                   | "22"                     |
-| "%e"           | Day of the month (space-padded (1-31))                                                                                                                                                                                                  | "22"                     |
+| "%d"           | Day of the month (zero-padded (01-31))                                                                                                                                                                                                 | "22"                     |
+| "%e"           | Day of the month (space-padded (1-31))                                                                                                                                                                                                 | "22"                     |
 | "%D"           | Short MM/DD/YY date. Equivalent to "%m/%d/%y"                                                                                                                                                                                          | "07/30/09"               |
 | "%F"           | Short YYYY-MM-DD date. Equivalent to %Y-%m-%d                                                                                                                                                                                          | "2011-09-22"             |
 | "%g"           | Week-based year (last two digits (00-99))                                                                                                                                                                                              | "16"                     |
