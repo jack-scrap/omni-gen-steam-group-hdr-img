@@ -64,6 +64,7 @@ namespace omni {
 		"hl_line_no",
 		"hl_active_line",
 		"show_file_perm",
+		"show_diff",
 		"time_format"
 	};
 

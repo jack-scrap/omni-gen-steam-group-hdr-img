@@ -17,4 +17,6 @@ unsigned int state::speed = 3;
 
 unsigned int state::showFilePerm = false;
 
+unsigned int state::showDiff = false;
+
 std::string state::format;

@@ -601,6 +601,10 @@ int main(int argc, char** argv) {
 						state::showFilePerm = util::cfg::parse::boolean(it->second);
 					}
 
+					if (it->first == "show_diff") {
+						state::showDiff = util::cfg::parse::boolean(it->second);
+					}
+
 					if (it->first == "time_format") {
 						state::format = util::cfg::parse::str(it->second);
 					}

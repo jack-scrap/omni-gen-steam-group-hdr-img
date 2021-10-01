@@ -323,9 +323,11 @@ void Console::fmtScr() {
 		fInfo += ' '; // pad
 	}
 
-	if (_diff) {
-		fInfo += '+';
-		fInfo += ' '; // pad
+	if (state::showDiff) {
+		if (_diff) {
+			fInfo += '+';
+			fInfo += ' '; // pad
+		}
 	}
 
 	i = 0;
