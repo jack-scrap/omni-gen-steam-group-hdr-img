@@ -323,6 +323,11 @@ void Console::fmtScr() {
 		fInfo += ' '; // pad
 	}
 
+	if (_diff) {
+		fInfo += '+';
+		fInfo += ' '; // pad
+	}
+
 	i = 0;
 	while (
 		i < fInfo.size() &&
