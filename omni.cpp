@@ -55,6 +55,11 @@ void omni::err(unsigned int err, std::vector<std::string> arg) {
 
 			break;
 
+		case ERR_CFG_NO_KEY:
+			msg = "Config key `" + arg[0] + "` not found";
+
+			break;
+
 		case ERR_CFG_KEY:
 			msg = "Inappropriate key `" + arg[0] + "`, can only be alpha-numeric with `_` separator";
 

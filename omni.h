@@ -88,6 +88,7 @@ namespace omni {
 
 		ERR_TOK,
 		ERR_TOK_CNT,
+		ERR_CFG_NO_KEY,
 		ERR_CFG_KEY,
 
 		ERR_LVL_NOT_FIN,

@@ -609,9 +609,9 @@ int main(int argc, char** argv) {
 						state::format = util::cfg::parse::str(it->second);
 					}
 				} else {
-					omni::err(omni::ERR_CFG_KEY, {
-							it->first
-							});
+					omni::err(omni::ERR_CFG_NO_KEY, {
+						it->first
+					});
 				}
 			}
 		}
