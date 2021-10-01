@@ -6,7 +6,7 @@ unsigned int state::lineWd;
 unsigned int state::baseNo = 1;
 
 unsigned int state::hlLineNo = true;
-unsigned int state::hlActiveLine;
+unsigned int state::hlActiveLine = false;
 
 unsigned int state::fps;
 
