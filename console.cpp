@@ -325,7 +325,7 @@ void Console::fmtScr() {
 
 	if (state::showDiff) {
 		if (_diff) {
-			fInfo += '+';
+			fInfo += '~';
 			fInfo += ' '; // pad
 		}
 	}
