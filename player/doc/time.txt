@@ -5,7 +5,6 @@ Definitions are provided in a continuous string -- "%m %d, %y".
 
 Below is a complete list of defined patterns.
 
-# Patterns
 | Pattern        | Description                                                                                                                                                                                                                            | Example                  |
 | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
 | "%a"           | National abbreviated weekday                                                                                                                                                                                                           | "Mon"                    |
