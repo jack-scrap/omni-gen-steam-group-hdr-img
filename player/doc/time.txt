@@ -3,9 +3,9 @@ In order to convert this number into a readable format, special characters prece
 
 Definitions are provided in a continuous string -- "%m %d, %y".
 
-Below is a complete list of defined patterns.
+Below is a complete list of defined tokens and their expansions.
 
-| Pattern        | Description                                                                                                                                                                                                                            | Example                  |
+| Token          | Description                                                                                                                                                                                                                            | Example                  |
 | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
 | "%a"           | National abbreviated weekday                                                                                                                                                                                                           | "Mon"                    |
 | "%A"           | National full weekday                                                                                                                                                                                                                  | "Monday"                 |
