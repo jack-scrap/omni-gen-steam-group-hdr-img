@@ -69,6 +69,7 @@ ro:
 mk_stage:
 	for DIR in $(STAGE) ; do \
 		mkdir -p player/script/$$DIR ; \
+		chmod -w -R player/script/$$DIR ; \
 	done
 
 clean:
