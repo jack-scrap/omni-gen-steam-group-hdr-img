@@ -854,6 +854,10 @@ void Console::exec() {
 				}
 			}
 
+			if (cmd == "rename") {
+				rename(tok[1].c_str(), tok[2].c_str());
+			}
+
 			if (cmd == "new_dir") {
 				if (!util::fs::exist(tok[1])) {
 					mkdir(tok[1].c_str(), S_IRWXU);
