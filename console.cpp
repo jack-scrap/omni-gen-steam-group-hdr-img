@@ -936,6 +936,20 @@ void Console::exec() {
 				}
 			}
 
+			if (cmd == "set") {
+				if (tok.size() == 1 + 1 + 1) {
+					std::string name = "script/" + tok[1] + "/" + tok[2] + "/main.py";
+
+					console->open(name);
+
+					scn::init(tok[1], std::stoi(tok[2]));
+				} else {
+					omni::err(omni::ERR_ARG_CNT, {
+						cmd
+					});
+				}
+			}
+
 			if (cmd == "next") {
 				if (eq) {
 					lvl++;

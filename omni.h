@@ -49,6 +49,7 @@ namespace omni {
 		"del",
 		"rename",
 		"copy",
+		"set",
 		"next",
 		"quit"
 	};
