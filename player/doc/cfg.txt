@@ -32,9 +32,11 @@ Booleans simply take the value "no" or "yes".
 `y` - Yes
 
 ## Numbers
-Numbers are provided in decimal format.
+Numbers can be provided whole or with decimal precision.
 
 `3`
+
+`3.712`
 
 ## Strings
 Strings are enclosed in double quotes.
