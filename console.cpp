@@ -557,7 +557,7 @@ void Console::open(std::string fName) {
 			};
 		}
 	} else {
-		omni::err(omni::ERR_FS_OPEN_FILE, {
+		omni::err(omni::ERR_FS_NO_FILE, {
 			fName
 		});
 	}

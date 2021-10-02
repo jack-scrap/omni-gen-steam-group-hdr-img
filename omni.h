@@ -78,7 +78,7 @@ namespace omni {
 
 	enum {
 		ERR_FS_RO,
-		ERR_FS_OPEN_FILE,
+		ERR_FS_NO_FILE,
 		ERR_FS_DEL_FILE,
 		ERR_FS_OPEN_DIR,
 		ERR_FS_DIR_EXIST,
