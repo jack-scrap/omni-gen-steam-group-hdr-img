@@ -78,7 +78,7 @@ void dispatch(std::string fName, unsigned int ptrEditorX) {
 			}
 		};
 
-		std::string deser = data.dump();
+		std::string deser = data.dump(1, '\t');
 
 		util::fs::write("stat.json", util::str::split(deser, '\n'));
 	}
