@@ -40,18 +40,41 @@ namespace omni {
 		}
 	};
 
-	static std::vector<std::string> lib = {
-		"open",
-		"new",
-		"new_dir",
-		"run",
-		"save",
-		"del",
-		"rename",
-		"copy",
-		"set",
-		"next",
-		"quit"
+	static std::map<std::string, unsigned int> lib = {
+		{
+			"open",
+			1
+		}, {
+			"new",
+			1
+		}, {
+			"new_dir",
+			1
+		}, {
+			"run",
+			0
+		}, {
+			"save",
+			1
+		}, {
+			"del",
+			1
+		}, {
+			"rename",
+			2
+		}, {
+			"copy",
+			2
+		}, {
+			"set",
+			2
+		}, {
+			"next",
+			0
+		}, {
+			"quit",
+			0
+		}
 	};
 
 	static std::vector<std::string> var = {

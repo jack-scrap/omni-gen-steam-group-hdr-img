@@ -772,9 +772,9 @@ void Console::exec() {
 
 		std::string cmd = tok[0];
 
-		if (std::find(omni::lib.begin(), omni::lib.end(), cmd) != omni::lib.end()) {
+		if (omni::lib.find(cmd) != omni::lib.end()) {
 			if (cmd == "open") {
-				if (tok.size() == 1 + 1) {
+				if (tok.size() == 1 + omni::lib[cmd]) {
 					if (!_diff) {
 						open(tok[1]);
 					} else {
@@ -788,7 +788,7 @@ void Console::exec() {
 			}
 
 			if (cmd == "new") {
-				if (tok.size() == 1 + 1) {
+				if (tok.size() == 1 + omni::lib[cmd]) {
 					if (!_diff) {
 						_buffName = _home + "/" + tok[1];
 						_buff = {
@@ -811,7 +811,7 @@ void Console::exec() {
 			}
 
 			if (cmd == "save") {
-				if (tok.size() <= 1 + 1) {
+				if (tok.size() <= 1 + omni::lib[cmd]) {
 					std::string name;
 					if (tok.size() == 1) {
 						name = _buffName;
@@ -836,7 +836,7 @@ void Console::exec() {
 			}
 
 			if (cmd == "del") {
-				if (tok.size() <= 1 + 1) {
+				if (tok.size() <= 1 + omni::lib[cmd]) {
 					std::string name;
 					if (tok.size() == 1) {
 						name = _buffName;
@@ -855,7 +855,7 @@ void Console::exec() {
 			}
 
 			if (cmd == "rename") {
-				if (tok.size() == 1 + 2) {
+				if (tok.size() == 1 + omni::lib[cmd]) {
 					if (util::fs::exist(_home + "/" + _cwd + "/" + tok[1])) {
 						rename((_home + "/" + _cwd + "/" + tok[1]).c_str(), (_home + "/" + _cwd + "/" + tok[2]).c_str());
 					} else {
@@ -873,7 +873,7 @@ void Console::exec() {
 			}
 
 			if (cmd == "copy") {
-				if (tok.size() == 1 + 2) {
+				if (tok.size() == 1 + omni::lib[cmd]) {
 					if (util::fs::exist(_home + "/" + _cwd + "/" + tok[1])) {
 						std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(_home + "/" +  _cwd + "/" + tok[1]);
 
@@ -893,7 +893,7 @@ void Console::exec() {
 			}
 
 			if (cmd == "new_dir") {
-				if (tok.size() == 1 + 1) {
+				if (tok.size() == 1 + omni::lib[cmd]) {
 					if (!util::fs::exist(tok[1])) {
 						mkdir(tok[1].c_str(), S_IRWXU);
 					} else {
@@ -909,35 +909,41 @@ void Console::exec() {
 			}
 
 			if (cmd == "run") {
-				unsigned int maxFs = 0;
-				for (int i = 0; i < _tree.size(); i++) {
-					std::string line = _tree[i]["name"];
+				if (tok.size() == 1 + omni::lib[cmd]) {
+					unsigned int maxFs = 0;
+					for (int i = 0; i < _tree.size(); i++) {
+						std::string line = _tree[i]["name"];
 
-					if (_tree[i]["type"] == "dir") {
-						line += "/";
+						if (_tree[i]["type"] == "dir") {
+							line += "/";
+						}
+
+						if (line.size() > maxFs) {
+							maxFs = line.size();
+						}
 					}
 
-					if (line.size() > maxFs) {
-						maxFs = line.size();
+					maxFs += 1; // pad
+
+					unsigned int maxNo = std::to_string(state::baseNo + _buff.size() - 1).size();
+					maxNo += 1; // pad
+
+					if (tok.size() > 1) {
+						std::thread t(dispatch, tok[1], maxFs + maxNo);
+						t.detach();
+					} else {
+						std::thread t(dispatch, _buffName, maxFs + maxNo);
+						t.detach();
 					}
-				}
-
-				maxFs += 1; // pad
-
-				unsigned int maxNo = std::to_string(state::baseNo + _buff.size() - 1).size();
-				maxNo += 1; // pad
-
-				if (tok.size() > 1) {
-					std::thread t(dispatch, tok[1], maxFs + maxNo);
-					t.detach();
 				} else {
-					std::thread t(dispatch, _buffName, maxFs + maxNo);
-					t.detach();
+					omni::err(omni::ERR_ARG_CNT, {
+						cmd
+					});
 				}
 			}
 
 			if (cmd == "set") {
-				if (tok.size() == 1 + 1 + 1) {
+				if (tok.size() == 1 + omni::lib[cmd]) {
 					std::string name = "script/" + tok[1] + "/" + tok[2] + "/main.py";
 
 					scn::init(tok[1], std::stoi(tok[2]));
@@ -951,26 +957,38 @@ void Console::exec() {
 			}
 
 			if (cmd == "next") {
-				if (eq) {
-					lvl++;
+				if (tok.size() == 1 + omni::lib[cmd]) {
+					if (eq) {
+						lvl++;
 
-					std::string name = "script/" + stage + "/" + std::to_string(lvl) + "/main.py";
+						std::string name = "script/" + stage + "/" + std::to_string(lvl) + "/main.py";
 
-					scn::init(stage, lvl);
+						scn::init(stage, lvl);
 
-					console->open(name);
+						console->open(name);
 
-					eq = false;
+						eq = false;
+					} else {
+						omni::err(omni::ERR_LVL_NOT_FIN);
+					}
 				} else {
-					omni::err(omni::ERR_LVL_NOT_FIN);
+					omni::err(omni::ERR_ARG_CNT, {
+						cmd
+					});
 				}
 			}
 
 			if (cmd == "quit") {
-				if (!_diff) {
-					exit(0);
+				if (tok.size() == omni::lib[cmd]) {
+					if (!_diff) {
+						exit(0);
+					} else {
+						omni::err(omni::ERR_BUFF_DIFF);
+					}
 				} else {
-					omni::err(omni::ERR_BUFF_DIFF);
+					omni::err(omni::ERR_ARG_CNT, {
+						cmd
+					});
 				}
 			}
 		} else {
