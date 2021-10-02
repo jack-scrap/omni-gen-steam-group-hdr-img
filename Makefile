@@ -68,7 +68,7 @@ ro:
 
 mk_stage:
 	for DIR in $(STAGE) ; do \
-		mkdir -p lvl/$$DIR ; \
+		mkdir -p player/script/$$DIR ; \
 	done
 
 clean:
