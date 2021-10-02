@@ -15,6 +15,8 @@ bool state::expandTab = false;
 
 unsigned int state::speed = 3;
 
+std::string state::startDir = ".";
+
 unsigned int state::showFilePerm = false;
 
 unsigned int state::showDiff = false;

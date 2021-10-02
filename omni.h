@@ -63,6 +63,7 @@ namespace omni {
 		"line_width",
 		"tab_width",
 		"tab_expand",
+		"start_dir",
 		"hl_line_no",
 		"hl_active_line",
 		"show_file_perm",

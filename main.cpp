@@ -589,6 +589,10 @@ int main(int argc, char** argv) {
 						state::expandTab = util::cfg::parse::boolean(it->second);
 					}
 
+					if (it->first == "start_dir") {
+						state::startDir = util::cfg::parse::str(it->second);
+					}
+
 					if (it->first == "hl_line_no") {
 						state::hlLineNo = util::cfg::parse::boolean(it->second);
 					}
@@ -653,7 +657,7 @@ int main(int argc, char** argv) {
 		name = "doc/intro.txt";
 	}
 
-	console = new Console(name, ".");
+	console = new Console(name, state::startDir);
 	scn::init(stage, lvl);
 
 	Py_Initialize();
