@@ -855,7 +855,15 @@ void Console::exec() {
 			}
 
 			if (cmd == "rename") {
-				rename(tok[1].c_str(), tok[2].c_str());
+				if (tok.size() == 1 + 2) {
+					rename((_home + "/" + _cwd + "/" + tok[1]).c_str(), (_home + "/" + _cwd + "/" + tok[2]).c_str());
+				} else {
+					omni::err(omni::ERR_ARG_CNT, {
+						cmd
+					});
+				}
+
+				_tree = util::fs::ls(_home + "/" + _cwd);
 			}
 
 			if (cmd == "new_dir") {
