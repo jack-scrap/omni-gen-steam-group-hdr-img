@@ -866,6 +866,20 @@ void Console::exec() {
 				_tree = util::fs::ls(_home + "/" + _cwd);
 			}
 
+			if (cmd == "copy") {
+				if (tok.size() == 1 + 2) {
+					std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(_home + "/" +  _cwd + "/" + tok[1]);
+
+					util::fs::write(_home + "/" +  _cwd + "/" + tok[2], buff);
+				} else {
+					omni::err(omni::ERR_ARG_CNT, {
+						cmd
+					});
+				}
+
+				_tree = util::fs::ls(_home + "/" + _cwd);
+			}
+
 			if (cmd == "new_dir") {
 				if (!util::fs::exist(tok[1])) {
 					mkdir(tok[1].c_str(), S_IRWXU);
