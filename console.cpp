@@ -856,7 +856,13 @@ void Console::exec() {
 
 			if (cmd == "rename") {
 				if (tok.size() == 1 + 2) {
-					rename((_home + "/" + _cwd + "/" + tok[1]).c_str(), (_home + "/" + _cwd + "/" + tok[2]).c_str());
+					if (util::fs::exist(_home + "/" + _cwd + "/" + tok[1])) {
+						rename((_home + "/" + _cwd + "/" + tok[1]).c_str(), (_home + "/" + _cwd + "/" + tok[2]).c_str());
+					} else {
+						omni::err(omni::ERR_FS_NO_FILE, {
+							tok[1]
+						});
+					}
 				} else {
 					omni::err(omni::ERR_ARG_CNT, {
 						cmd
@@ -868,9 +874,15 @@ void Console::exec() {
 
 			if (cmd == "copy") {
 				if (tok.size() == 1 + 2) {
-					std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(_home + "/" +  _cwd + "/" + tok[1]);
+					if (util::fs::exist(_home + "/" + _cwd + "/" + tok[1])) {
+						std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(_home + "/" +  _cwd + "/" + tok[1]);
 
-					util::fs::write(_home + "/" +  _cwd + "/" + tok[2], buff);
+						util::fs::write(_home + "/" +  _cwd + "/" + tok[2], buff);
+					} else {
+						omni::err(omni::ERR_FS_NO_FILE, {
+							tok[1]
+						});
+					}
 				} else {
 					omni::err(omni::ERR_ARG_CNT, {
 						cmd
