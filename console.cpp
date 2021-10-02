@@ -940,9 +940,9 @@ void Console::exec() {
 				if (tok.size() == 1 + 1 + 1) {
 					std::string name = "script/" + tok[1] + "/" + tok[2] + "/main.py";
 
-					console->open(name);
-
 					scn::init(tok[1], std::stoi(tok[2]));
+
+					console->open(name);
 				} else {
 					omni::err(omni::ERR_ARG_CNT, {
 						cmd
@@ -956,9 +956,9 @@ void Console::exec() {
 
 					std::string name = "script/" + stage + "/" + std::to_string(lvl) + "/main.py";
 
-					console->open(name);
-
 					scn::init(stage, lvl);
+
+					console->open(name);
 
 					eq = false;
 				} else {
