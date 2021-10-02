@@ -631,6 +631,13 @@ int main(int argc, char** argv) {
 		layout::view[X] + (state::lineWd * layout::glyph[X]), layout::view[Y]
 	}, col[false]);
 
+	nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("stat.json"));
+	for (std::map<std::string, unsigned int>::iterator it = omni::stage.begin(); it != omni::stage.end(); ++it) {
+		if (serial["rank"] >= it->second) {
+			chmod(std::string("player/script/" + it->first).c_str(), S_IRWXU | S_IRWXG | S_IRWXO);
+		}
+	}
+
 	if (argc > 1) {
 		omni::assertion(omni::stage.find(argv[1]) != omni::stage.end(), "Could not initialize; no corresponding section `" + std::string(argv[1]) + "`");
 
