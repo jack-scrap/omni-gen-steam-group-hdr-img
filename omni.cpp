@@ -41,7 +41,7 @@ void omni::err(unsigned int err, std::vector<std::string> arg) {
 			break;
 
 		case ERR_ARG_CNT:
-			msg = "Incorrect number of arguments to command `" + arg[0] + "`";
+			msg = "Incorrect number of arguments to command `" + arg[0] + "`, " + arg[1] + " required";
 
 			break;
 

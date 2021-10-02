@@ -922,7 +922,8 @@ void Console::exec() {
 				}
 			} else {
 				omni::err(omni::ERR_ARG_CNT, {
-					cmd
+					cmd,
+					std::to_string(omni::lib[cmd])
 				});
 			}
 		} else {
