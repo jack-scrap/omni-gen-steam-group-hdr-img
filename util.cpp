@@ -39,7 +39,7 @@ std::string util::fs::rd<std::string>(std::string fName) {
 template <>
 std::vector<std::string> util::fs::rd<std::vector<std::string>>(std::string fName) {
 	std::ifstream in;
-	in.open("./" + fName);
+	in.open(std::string(".") + std::string("/") + fName);
 
 	std::vector<std::string> cont;
 	for (std::string l; std::getline(in, l);) {
@@ -53,7 +53,7 @@ std::vector<std::string> util::fs::rd<std::vector<std::string>>(std::string fNam
 
 bool util::fs::exist(std::string fName) {
 	std::ifstream in;
-	in.open("./" + fName);
+	in.open(std::string(".") + std::string("/") + fName);
 
 	bool _ = in.good();
 
@@ -96,7 +96,7 @@ void util::fs::del(std::string fName) {
 std::vector<std::map<std::string, std::string>> util::fs::ls(std::string path) {
 	std::vector<std::map<std::string, std::string>> tree;
 
-	std::string full = "./" + path;
+	std::string full = std::string(".") + std::string("/") + path;
 	auto dir = opendir(full.c_str());
 
 	if (!dir) {
