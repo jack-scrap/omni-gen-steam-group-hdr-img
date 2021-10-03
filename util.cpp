@@ -1044,7 +1044,7 @@ bool util::cfg::parse::var(std::string buff) {
 
 int util::cfg::parse::whole(std::string buff) {
 	for (int i = 0; i < buff.size(); i++) {
-		omni::assertion(isdigit(buff[i]), "Value `" + buff + "` invalid");
+		omni::assertion(isdigit(buff[i]), "Value `" + buff + "` invalid, whole number required");
 	}
 
 	return std::stoi(buff);
@@ -1074,19 +1074,15 @@ float util::cfg::parse::prec(std::string buff) {
 		}
 	}
 
-	omni::assertion(valid, "Value `" + buff + "` invalid");
+	omni::assertion(valid, "Value `" + buff + "` invalid, number with dot precision required");
 
 	return std::stof(buff);
 }
 
 bool util::cfg::parse::boolean(std::string buff) {
-	omni::assertion(buff.size() == 1, "Value `" + buff + "` invalid");
+	omni::assertion(buff.size() == 1, "Value `" + buff + "` invalid, boolean required");
 
-	omni::assertion(
-		buff[0] == 'n' ||
-		buff[0] == 'y',
-		"Value `" + buff + "` invalid"
-	);
+	omni::assertion(buff[0] == 'n' || buff[0] == 'y', "Value `" + buff + "` invalid, boolean required");
 
 	bool _;
 	switch (buff[0]) {
