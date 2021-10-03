@@ -839,7 +839,6 @@ Scope util::json::scope(nlohmann::json deser) {
 
 glm::vec3 util::json::vec(nlohmann::json deser) {
 	glm::vec3 _;
-
 	for (int a = 0; a < 3; a++) {
 		_[a] = deser[a];
 	}
