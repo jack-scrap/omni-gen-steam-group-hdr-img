@@ -13,7 +13,7 @@ unsigned int state::fps = 15;
 unsigned int state::tabWd = 2;
 bool state::expandTab = false;
 
-unsigned int state::speed = 3;
+float state::speed = 3;
 
 std::string state::startDir = ".";
 
