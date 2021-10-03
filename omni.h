@@ -82,6 +82,7 @@ namespace omni {
 		"screen_width",
 		"fps",
 		"speed",
+		"anim",
 		"begin_index_at_one",
 		"line_count",
 		"line_width",

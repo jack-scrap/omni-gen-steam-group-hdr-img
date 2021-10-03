@@ -21,6 +21,7 @@ namespace state {
 	extern unsigned int fps;
 
 	extern float speed;
+	extern bool anim;
 
 	extern std::string startDir;
 

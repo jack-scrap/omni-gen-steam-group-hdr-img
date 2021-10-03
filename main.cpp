@@ -568,6 +568,10 @@ int main(int argc, char** argv) {
 						state::speed = util::cfg::parse::prec(it->second);
 					}
 
+					if (it->first == "anim") {
+						state::anim = util::cfg::parse::boolean(it->second);
+					}
+
 					if (it->first == "begin_index_at_one") {
 						state::baseNo = util::cfg::parse::boolean(it->second);
 					}

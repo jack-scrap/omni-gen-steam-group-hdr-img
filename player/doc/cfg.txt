@@ -11,6 +11,7 @@ Separated by the assignment operator with the key preceeding and the value follo
 | `screen_width`       | Width of display viewport                                         | Number  |
 | `fps`                | Target frames per second                                          | Number  |
 | `speed`              | Global speed of transformations                                   | Number  |
+| `anim`               | Interpolate between destination or move instantly                 | Boolean |
 | `begin_index_at_one` | Whether to begin indexing line numbers at `0` or `1`              | Boolean |
 | `line_count`         | Maximum number of lines visible within console                    | Number  |
 | `line_width`         | Maximum number of characters visible per-line in console          | Number  |

@@ -351,20 +351,28 @@ void objAnim(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
 
 	glm::vec3 locFrame = glm::vec3(0.0);
 	glm::vec3 rotFrame = glm::vec3(0.0);
-	while (
-		glm::any(glm::lessThan(locFrame, locMax)) ||
-		glm::any(glm::lessThan(rotFrame, rotMax))
-	) {
+	if (state::anim) {
+		while (
+			glm::any(glm::lessThan(locFrame, locMax)) ||
+			glm::any(glm::lessThan(rotFrame, rotMax))
+		) {
+			glm::mat4 trans = glm::mat4(1.0);
+			trans = glm::translate(trans, locInc);
+			trans = util::matr::rot(trans, rotInc);
+
+			objAcc(obj, obj->_acc * trans);
+
+			locFrame += glm::abs(locInc);
+			rotFrame += glm::abs(rotInc);
+
+			std::this_thread::sleep_for(std::chrono::milliseconds(1000 / state::fps));
+		}
+	} else {
 		glm::mat4 trans = glm::mat4(1.0);
-		trans = glm::translate(trans, locInc);
-		trans = util::matr::rot(trans, rotInc);
+		trans = glm::translate(trans, locMax);
+		trans = util::matr::rot(trans, rotMax);
 
 		objAcc(obj, obj->_acc * trans);
-
-		locFrame += glm::abs(locInc);
-		rotFrame += glm::abs(rotInc);
-
-		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / state::fps));
 	}
 }
 

@@ -14,6 +14,7 @@ unsigned int state::tabWd = 2;
 bool state::expandTab = false;
 
 float state::speed = 3;
+bool state::anim = true;
 
 std::string state::startDir = ".";
 
