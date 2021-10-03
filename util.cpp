@@ -1042,12 +1042,41 @@ bool util::cfg::parse::var(std::string buff) {
 	return _;
 }
 
-int util::cfg::parse::no(std::string buff) {
+int util::cfg::parse::whole(std::string buff) {
 	for (int i = 0; i < buff.size(); i++) {
 		omni::assertion(isdigit(buff[i]), "Value `" + buff + "` invalid");
 	}
 
 	return std::stoi(buff);
+}
+
+float util::cfg::parse::prec(std::string buff) {
+	bool valid = true;
+	unsigned int dot = 0;
+	for (int i = 0; i < buff.size(); i++) {
+		if (buff[i] == '.') {
+			dot++;
+		}
+
+		if (
+			!isdigit(buff[i]) &&
+			buff[i] != '.'
+		) {
+			valid = false;
+
+			break;
+		}
+
+		if (dot > 1) {
+			valid = false;
+
+			break;
+		}
+	}
+
+	omni::assertion(valid, "Value `" + buff + "` invalid");
+
+	return std::stof(buff);
 }
 
 bool util::cfg::parse::boolean(std::string buff) {

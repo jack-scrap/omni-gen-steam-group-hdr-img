@@ -556,16 +556,16 @@ int main(int argc, char** argv) {
 
 					// display
 					if (it->first == "screen_width") {
-						layout::view[X] = util::cfg::parse::no(it->second);
+						layout::view[X] = util::cfg::parse::whole(it->second);
 						layout::view[Y] = state::lineCnt * layout::glyph[Y];
 					}
 
 					if (it->first == "fps") {
-						state::fps = util::cfg::parse::no(it->second);
+						state::fps = util::cfg::parse::whole(it->second);
 					}
 
 					if (it->first == "speed") {
-						state::speed = util::cfg::parse::no(it->second);
+						state::speed = util::cfg::parse::prec(it->second);
 					}
 
 					if (it->first == "begin_index_at_one") {
@@ -574,15 +574,15 @@ int main(int argc, char** argv) {
 
 					// console
 					if (it->first == "line_count") {
-						state::lineCnt = util::cfg::parse::no(it->second);
+						state::lineCnt = util::cfg::parse::whole(it->second);
 					}
 
 					if (it->first == "line_width") {
-						state::lineWd = util::cfg::parse::no(it->second);
+						state::lineWd = util::cfg::parse::whole(it->second);
 					}
 
 					if (it->first == "tab_width") {
-						state::tabWd = util::cfg::parse::no(it->second);
+						state::tabWd = util::cfg::parse::whole(it->second);
 					}
 
 					if (it->first == "tab_expand") {

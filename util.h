@@ -131,9 +131,11 @@ namespace util {
 		namespace parse {
 			bool var(std::string buff);
 
-			int no(std::string buff);
-
 			bool boolean(std::string buff);
+
+			int whole(std::string buff);
+
+			float prec(std::string buff);
 
 			std::string str(std::string buff);
 		}
