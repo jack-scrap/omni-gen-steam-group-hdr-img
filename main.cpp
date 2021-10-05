@@ -556,16 +556,28 @@ int main(int argc, char** argv) {
 
 					// display
 					if (it->first == "screen_width") {
+						int val = util::cfg::parse::whole(it->second);
+
+						omni::assertion(val >= 0, std::string("Value `") + std::to_string(val) + std::string("` invalid for option `") + it->first + std::string("`; number must be positive"));
+
 						layout::view[X] = util::cfg::parse::whole(it->second);
 						layout::view[Y] = state::lineCnt * layout::glyph[Y];
 					}
 
 					if (it->first == "fps") {
-						state::fps = util::cfg::parse::whole(it->second);
+						int val = util::cfg::parse::whole(it->second);
+
+						omni::assertion(val >= 0, std::string("Value `") + std::to_string(val) + std::string("` invalid for option `") + it->first + std::string("`; number must be positive"));
+
+						state::fps = val;
 					}
 
 					if (it->first == "speed") {
-						state::speed = util::cfg::parse::prec(it->second);
+						int val = util::cfg::parse::prec(it->second);
+
+						omni::assertion(val >= 0, std::string("Value `") + std::to_string(val) + std::string("` invalid for option `") + it->first + std::string("`; number must be positive"));
+
+						state::speed = val;
 					}
 
 					if (it->first == "anim") {
@@ -578,15 +590,27 @@ int main(int argc, char** argv) {
 
 					// console
 					if (it->first == "line_count") {
-						state::lineCnt = util::cfg::parse::whole(it->second);
+						int val = util::cfg::parse::whole(it->second);
+
+						omni::assertion(val >= 0, std::string("Value `") + std::to_string(val) + std::string("` invalid for option `") + it->first + std::string("`; number must be positive"));
+
+						state::lineCnt = val;
 					}
 
 					if (it->first == "line_width") {
-						state::lineWd = util::cfg::parse::whole(it->second);
+						int val = util::cfg::parse::whole(it->second);
+
+						omni::assertion(val >= 0, std::string("Value `") + std::to_string(val) + std::string("` invalid for option `") + it->first + std::string("`; number must be positive"));
+
+						state::lineWd = val;
 					}
 
 					if (it->first == "tab_width") {
-						state::tabWd = util::cfg::parse::whole(it->second);
+						int val = util::cfg::parse::whole(it->second);
+
+						omni::assertion(val >= 0, std::string("Value `") + std::to_string(val) + std::string("` invalid for option `") + it->first + std::string("`; number must be positive"));
+
+						state::tabWd = val;
 					}
 
 					if (it->first == "tab_expand") {
