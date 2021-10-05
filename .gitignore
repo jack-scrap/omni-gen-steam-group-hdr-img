@@ -1,4 +1,5 @@
-script
+player/script
+player/cfg
 
 *.log
 stat.json
