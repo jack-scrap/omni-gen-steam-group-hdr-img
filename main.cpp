@@ -769,7 +769,7 @@ int main(int argc, char** argv) {
 		GLint uniRes = glGetUniformLocation(prog._id, "res");
 		GLint uniActive = glGetUniformLocation(prog._id, "active");
 
-		glUniform2i(uniRes, disp->_res[X], disp->_res[Y]);
+		glUniform2ui(uniRes, disp->_res[X], disp->_res[Y]);
 
 		glUniform1ui(uniActive, true);
 
