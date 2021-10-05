@@ -63,8 +63,8 @@ bool util::fs::exist(std::string fName) {
 }
 
 void util::fs::write(std::string fName, std::vector<std::string> buff) {
-	if (util::fs::exist(fName)) {
-		std::string stat = util::fs::perm(fName);
+	if (exist(fName)) {
+		std::string stat = perm(fName);
 
 		if (stat[1] != 'w') {
 			omni::err(omni::ERR_FS_RO, {
@@ -164,7 +164,7 @@ std::string util::fs::perm(std::string fName) {
 }
 
 std::string util::fs::name(std::string path) {
-	std::vector<std::string> tok = util::str::split(path, '/');
+	std::vector<std::string> tok = str::split(path, '/');
 
 	std::string f;
 	if (tok.size()) {
@@ -175,9 +175,9 @@ std::string util::fs::name(std::string path) {
 }
 
 std::string util::fs::base(std::string path) {
-	std::string f = util::fs::name(path);
+	std::string f = name(path);
 
-	return util::str::split(f, '.')[0];
+	return str::split(f, '.')[0];
 }
 
 std::vector<GLfloat> util::mesh::plane(glm::vec2 bound) {
@@ -196,10 +196,10 @@ std::vector<GLfloat> util::mesh::plane(glm::vec2 bound) {
 std::vector<GLfloat> util::mesh::rd::vtc(std::string fName) {
 	std::vector<GLfloat> _;
 
-	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>("res/obj/" + fName + ".obj");
+	std::vector<std::string> buff = fs::rd<std::vector<std::string>>("res/obj/" + fName + ".obj");
 
 	for (int l = 0; l < buff.size(); l++) {
-		std::vector<std::string> tok = util::str::split(buff[l], ' ');
+		std::vector<std::string> tok = str::split(buff[l], ' ');
 
 		if (tok[0] == "v") {
 			omni::assertion(tok.size() == 1 + 3, std::string("Couldn't load object `" ) + fName + std::string("`; inappropriate size of vertex position at [" ) + std::to_string(l) + std::string("]"));
@@ -216,10 +216,10 @@ std::vector<GLfloat> util::mesh::rd::vtc(std::string fName) {
 std::vector<GLfloat> util::mesh::rd::st(std::string fName) {
 	std::vector<GLfloat> _;
 
-	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>("res/obj/" + fName + ".obj");
+	std::vector<std::string> buff = fs::rd<std::vector<std::string>>("res/obj/" + fName + ".obj");
 
 	for (int l = 0; l < buff.size(); l++) {
-		std::vector<std::string> tok = util::str::split(buff[l], ' ');
+		std::vector<std::string> tok = str::split(buff[l], ' ');
 
 		if (tok[0] == "vt") {
 			omni::assertion(tok.size() == 1 + 2, std::string("Couldn't load object `" ) + fName + std::string("`; inappropriate size of texture coordinate at [" ) + std::to_string(l) + std::string("]"));
@@ -236,10 +236,10 @@ std::vector<GLfloat> util::mesh::rd::st(std::string fName) {
 std::vector<GLfloat> util::mesh::rd::norm(std::string fName) {
 	std::vector<GLfloat> _;
 
-	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>("res/obj/" + fName + ".obj");
+	std::vector<std::string> buff = fs::rd<std::vector<std::string>>("res/obj/" + fName + ".obj");
 
 	for (int l = 0; l < buff.size(); l++) {
-		std::vector<std::string> tok = util::str::split(buff[l], ' ');
+		std::vector<std::string> tok = str::split(buff[l], ' ');
 
 		if (tok[0] == "vn") {
 			omni::assertion(tok.size() == 1 + 3, std::string("Couldn't load object `" ) + fName + std::string("`; inappropriate size of normal at [" ) + std::to_string(l) + std::string("]"));
@@ -338,16 +338,16 @@ std::vector<GLfloat> util::mesh::gen::norm(std::vector<glm::vec3> vtc) {
 std::vector<GLushort> util::mesh::rd::idc(std::string fName, unsigned int attr) {
 	std::vector<GLushort> _;
 
-	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>("res/obj/" + fName + ".obj");
+	std::vector<std::string> buff = fs::rd<std::vector<std::string>>("res/obj/" + fName + ".obj");
 
 	for (int l = 0; l < buff.size(); l++) {
-		std::vector<std::string> tok = util::str::split(buff[l], ' ');
+		std::vector<std::string> tok = str::split(buff[l], ' ');
 
 		if (tok[0] == "f") {
 			omni::assertion(tok.size() == 1 + 3, std::string("Couldn't load object `" ) + fName + std::string("`; inappropriate number of indices for triangle primitive at [" ) + std::to_string(l) + std::string("]"));
 
 			for (int i = 1; i < 1 + 3; i++) {
-				std::vector<std::string> type = util::str::split(tok[i], '/');
+				std::vector<std::string> type = str::split(tok[i], '/');
 
 				_.push_back(std::stoi(type[attr]) - 1);
 			}
@@ -434,7 +434,7 @@ bool util::phys::coll(glm::vec3 vtx, Obj* bound, glm::mat4 modelVtx, glm::mat4 m
 }
 
 bool util::phys::collGround(Obj* obj, glm::mat4 model) {
-	glm::vec3 btm = util::matr::apply(glm::vec3(0.0, obj->_aabb[Y][MIN], 0.0), model);
+	glm::vec3 btm = matr::apply(glm::vec3(0.0, obj->_aabb[Y][MIN], 0.0), model);
 
 	return btm[Y] < 0.0;
 }
@@ -483,7 +483,7 @@ char* util::json::id(nlohmann::json deser) {
 }
 
 char util::json::byte(nlohmann::json deser) {
-	omni::assertion(util::json::ascii(deser), std::string("Data not ASCII applicable"));
+	omni::assertion(ascii(deser), std::string("Data not ASCII applicable"));
 
 	return (char) ((int) deser);
 }
@@ -563,7 +563,7 @@ CBuff util::json::array::array(nlohmann::json deser) {
 	_._ptr = (char*) malloc(_._x);
 	int c = 0;
 	for (int i = 0; i < _._x; i++) {
-		omni::assertion(util::json::ascii(deser[i]), std::string("Data at index [") + std::to_string(i) + std::string("] not ASCII applicable"));
+		omni::assertion(ascii(deser[i]), std::string("Data at index [") + std::to_string(i) + std::string("] not ASCII applicable"));
 
 		((char*) _._ptr)[c] = (char) ((int) deser[i]);
 
@@ -583,7 +583,7 @@ CBuff util::json::array::matr(nlohmann::json deser) {
 	int c = 0;
 	for (int j = 0; j < _._y; j++) {
 		for (int i = 0; i < _._x; i++) {
-			omni::assertion(util::json::ascii(deser[j][i]), std::string("Data at index [") + std::to_string(j) + "][" + std::to_string(i) + std::string("] not ASCII applicable"));
+			omni::assertion(ascii(deser[j][i]), std::string("Data at index [") + std::to_string(j) + "][" + std::to_string(i) + std::string("] not ASCII applicable"));
 
 			((char*) _._ptr)[c] = (char) ((int) deser[j][i]);
 
@@ -605,7 +605,7 @@ CBuff util::json::array::tens(nlohmann::json deser) {
 	for (int k = 0; k < _._y; k++) {
 		for (int j = 0; j < _._y; j++) {
 			for (int i = 0; i < _._x; i++) {
-				omni::assertion(util::json::ascii(deser[k][j][i]), std::string("Data at index [") + std::to_string(j) + "][" + std::to_string(i) + std::string("] not ASCII applicable"));
+				omni::assertion(ascii(deser[k][j][i]), std::string("Data at index [") + std::to_string(j) + "][" + std::to_string(i) + std::string("] not ASCII applicable"));
 
 				((char*) _._ptr)[c] = (char) ((int) deser[k][j][i]);
 
@@ -620,28 +620,28 @@ CBuff util::json::array::tens(nlohmann::json deser) {
 Var* util::json::var(nlohmann::json key, nlohmann::json val) {
 	Var* _;
 
-	char* id = util::json::id(key);
+	char* name = id(key);
 
 	glm::vec3 loc = glm::vec3(0.0);
 	if (val.contains("loc")) {
-		loc = util::json::vec(val["loc"]);
+		loc = vec(val["loc"]);
 	}
 
 	glm::vec3 rot = glm::vec3(0.0);
 	if (val.contains("rot")) {
-		rot = util::json::vec(val["rot"]);
+		rot = vec(val["rot"]);
 	}
 
 	switch (val["block"].type()) {
 		// scalar
 		case nlohmann::json::value_t::number_unsigned: {
-			char init = util::json::byte(val["block"]);
+			char init = byte(val["block"]);
 
 			Idx* idx = idxMk(0, &init, 1, key, loc, rot);
 
-			omni::assertion(!(util::phys::collGround(idx->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
+			omni::assertion(!(phys::collGround(idx->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
-			_ = varMk(id, idx);
+			_ = varMk(name, idx);
 
 			break;
 		}
@@ -651,13 +651,13 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val) {
 			switch (val["block"][0].type()) {
 				// 1D
 				case nlohmann::json::value_t::number_unsigned: {
-					CBuff init = util::json::array::array(val["block"]);
+					CBuff init = array::array(val["block"]);
 
 					Array* val = arrayMk((char*) init._ptr, init._x, key, X, loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
 
-					omni::assertion(!(util::phys::collGround(val->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
+					omni::assertion(!(phys::collGround(val->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
-					_ = varMk(id, val);
+					_ = varMk(name, val);
 
 					break;
 				}
@@ -667,26 +667,26 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val) {
 					switch (val["block"][0][0].type()) {
 						// 2D
 						case nlohmann::json::value_t::number_unsigned: {
-							CBuff init = util::json::array::matr(val["block"]);
+							CBuff init = array::matr(val["block"]);
 
 							Array* val = arrayMk((char*) init._ptr, init._x, init._y, key, loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
 
-							omni::assertion(!(util::phys::collGround(val->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
+							omni::assertion(!(phys::collGround(val->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
-							_ = varMk(id, val);
+							_ = varMk(name, val);
 
 							break;
 						}
 
 						// 3D
 						case nlohmann::json::value_t::array: {
-							CBuff init = util::json::array::tens(val["block"]);
+							CBuff init = array::tens(val["block"]);
 
 							Array* val = arrayMk((char*) init._ptr, init._x, init._y, key, loc, rot);
 
-							omni::assertion(!(util::phys::collGround(val->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
+							omni::assertion(!(phys::collGround(val->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
-							_ = varMk(id, val);
+							_ = varMk(name, val);
 
 							break;
 						}
@@ -699,13 +699,13 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val) {
 
 		// string
 		case nlohmann::json::value_t::string: {
-			CBuff init = util::json::str(val["block"]);
+			CBuff init = str(val["block"]);
 
 			Array* val = arrayMk((char*) init._ptr, init._x, key, X, loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
 
-			omni::assertion(!(util::phys::collGround(val->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
+			omni::assertion(!(phys::collGround(val->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
-			_ = varMk(id, val);
+			_ = varMk(name, val);
 
 			break;
 		}
@@ -715,9 +715,9 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val) {
 			nlohmann::json block = val["block"];
 			Dict* val = dictMk(block);
 
-			omni::assertion(!(util::phys::collGround(val->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
+			omni::assertion(!(phys::collGround(val->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
-			_ = varMk(id, val);
+			_ = varMk(name, val);
 
 			break;
 		}
@@ -735,24 +735,24 @@ Scope util::json::scope(nlohmann::json deser) {
 
 	unsigned int i = 0;
 	for (const auto& pair : deser.items()) {
-		char* id = util::json::id(pair.key());
+		char* name = id(pair.key());
 
 		glm::vec3 loc = glm::vec3(0.0);
 		if (pair.value().contains("loc")) {
-			loc = util::json::vec(pair.value()["loc"]);
+			loc = vec(pair.value()["loc"]);
 		}
 
 		glm::vec3 rot = glm::vec3(0.0);
 		if (pair.value().contains("rot")) {
-			rot = util::json::vec(pair.value()["rot"]);
+			rot = vec(pair.value()["rot"]);
 		}
 
 		switch (pair.value()["block"].type()) {
 			// scalar
 			case nlohmann::json::value_t::number_unsigned: {
-				Var* var = util::json::var(pair.key(), pair.value());
+				Var* item = var(pair.key(), pair.value());
 
-				((Var**) _._ptr)[i] = var;
+				((Var**) _._ptr)[i] = item;
 				((unsigned int*) _._type)[i] = omni::SCALAR;
 				i++;
 	
@@ -761,9 +761,9 @@ Scope util::json::scope(nlohmann::json deser) {
 
 			// string
 			case nlohmann::json::value_t::string: {
-				Var* var = util::json::var(pair.key(), pair.value());
+				Var* item = var(pair.key(), pair.value());
 
-				((Var**) _._ptr)[i] = var;
+				((Var**) _._ptr)[i] = item;
 				((unsigned int*) _._type)[i] = omni::ARRAY;
 				i++;
 
@@ -772,14 +772,14 @@ Scope util::json::scope(nlohmann::json deser) {
 
 			// array
 			case nlohmann::json::value_t::array: {
-				omni::assertion(util::json::array::euclid(pair.value()["block"], 0), std::string("Depth of `") + pair.key() + std::string("` exceeds 3 dimensions"));
+				omni::assertion(array::euclid(pair.value()["block"], 0), std::string("Depth of `") + pair.key() + std::string("` exceeds 3 dimensions"));
 
 				switch (pair.value()["block"][0].type()) {
 					// 1D
 					case nlohmann::json::value_t::number_unsigned: {
-						Var* var = util::json::var(pair.key(), pair.value());
+						Var* item = var(pair.key(), pair.value());
 
-						((Var**) _._ptr)[i] = var;
+						((Var**) _._ptr)[i] = item;
 						((unsigned int*) _._type)[i] = omni::ARRAY;
 						i++;
 
@@ -791,9 +791,9 @@ Scope util::json::scope(nlohmann::json deser) {
 						switch (pair.value()["block"][0][0].type()) {
 							// 2D
 							case nlohmann::json::value_t::number_unsigned: {
-								Var* var = util::json::var(pair.key(), pair.value());
+								Var* item = var(pair.key(), pair.value());
 
-								((Var**) _._ptr)[i] = var;
+								((Var**) _._ptr)[i] = item;
 								((unsigned int*) _._type)[i] = omni::ARRAY;
 								i++;
 
@@ -802,9 +802,9 @@ Scope util::json::scope(nlohmann::json deser) {
 
 							// 3D
 							case nlohmann::json::value_t::array: {
-								Var* var = util::json::var(pair.key(), pair.value());
+								Var* item = json::var(pair.key(), pair.value());
 
-								((Var**) _._ptr)[i] = var;
+								((Var**) _._ptr)[i] = item;
 								((unsigned int*) _._type)[i] = omni::ARRAY;
 								i++;
 
@@ -821,9 +821,9 @@ Scope util::json::scope(nlohmann::json deser) {
 
 			// dictionary
 			case nlohmann::json::value_t::object: {
-				Var* var = util::json::var(pair.key(), pair.value());
+				Var* item = var(pair.key(), pair.value());
 
-				((Var**) _._ptr)[i] = var;
+				((Var**) _._ptr)[i] = item;
 				((unsigned int*) _._type)[i] = omni::DICT;
 				i++;
 
@@ -847,7 +847,7 @@ glm::vec3 util::json::vec(nlohmann::json deser) {
 }
 
 StreetSign* util::json::streetSign(nlohmann::json deser) {
-	std::vector<bool> pass = util::json::ls<bool>(deser["pass"]);
+	std::vector<bool> pass = ls<bool>(deser["pass"]);
 
 	unsigned int no = pass.size();
 	bool* array = (bool*) malloc(no * sizeof (bool));
@@ -857,12 +857,12 @@ StreetSign* util::json::streetSign(nlohmann::json deser) {
 
 	glm::vec3 loc = glm::vec3(0.0);
 	if (deser.contains("loc")) {
-		loc = util::json::vec(deser["loc"]);
+		loc = vec(deser["loc"]);
 	}
 
 	glm::vec3 rot = glm::vec3(0.0);
 	if (deser.contains("rot")) {
-		rot = util::json::vec(deser["rot"]);
+		rot = vec(deser["rot"]);
 	}
 
 	StreetSign* _ = streetSignMk({
@@ -870,7 +870,7 @@ StreetSign* util::json::streetSign(nlohmann::json deser) {
 		no
 	}, loc, rot);
 
-	omni::assertion(!util::phys::collGround(_->_parent), "Street sign clipping into ground plane");
+	omni::assertion(!phys::collGround(_->_parent), "Street sign clipping into ground plane");
 
 	return _;
 }
@@ -958,17 +958,17 @@ std::vector<T> util::json::ls(nlohmann::json deser) {
 Obj* util::json::prop(nlohmann::json deser) {
 	glm::vec3 loc = glm::vec3(0.0);
 	if (deser.contains("loc")) {
-		loc = util::json::vec(deser["loc"]);
+		loc = vec(deser["loc"]);
 	}
 
 	glm::vec3 rot = glm::vec3(0.0);
 	if (deser.contains("rot")) {
-		rot = util::json::vec(deser["rot"]);
+		rot = vec(deser["rot"]);
 	}
 
 	Obj* _ = objMk(deser["name"], "obj", "dir", false, loc, rot);
 
-	omni::assertion(!util::phys::collGround(_), std::string("Prop `") + std::string(deser["name"]) + std::string("` clipping into ground plane"));
+	omni::assertion(!phys::collGround(_), std::string("Prop `") + std::string(deser["name"]) + std::string("` clipping into ground plane"));
 
 	return _;
 }
@@ -998,7 +998,7 @@ Lim* util::json::bound::lim(nlohmann::json val) {
 
 	Lim* _ = limMk(axis, val["val"], status);
 
-	omni::assertion(!util::phys::collGround(_->_parent), "Limit clipping into ground plane");
+	omni::assertion(!phys::collGround(_->_parent), "Limit clipping into ground plane");
 
 	return _;
 }
@@ -1013,12 +1013,12 @@ Cone* util::json::bound::area(nlohmann::json deser) {
 
 	glm::vec3 loc = glm::vec3(0.0);
 	if (deser.contains("loc")) {
-		loc = util::json::vec(deser["loc"]);
+		loc = vec(deser["loc"]);
 	}
 
 	Cone* _ = coneMk(init, loc);
 
-	omni::assertion(!util::phys::collGround(_->_parent), "Cone clipping into ground plane");
+	omni::assertion(!phys::collGround(_->_parent), "Cone clipping into ground plane");
 
 	return _;
 }
@@ -1121,7 +1121,7 @@ std::string util::cfg::parse::str(std::string buff) {
 std::map<std::string, std::string> util::cfg::lex(std::string name) {
 	std::map<std::string, std::string> _;
 
-	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(name);
+	std::vector<std::string> buff = fs::rd<std::vector<std::string>>(name);
 	for (const std::string& line : buff) {
 		std::vector<std::string> ast;
 
@@ -1343,7 +1343,7 @@ std::vector<std::string> util::log(unsigned int loc, unsigned int ptrEditorX) {
 	std::string key = "LOC: ";
 	std::string val = std::to_string(loc);
 
-	std::string pair = util::str::pad(key, (state::lineWd - ptrEditorX - 1) - val.size());
+	std::string pair = str::pad(key, (state::lineWd - ptrEditorX - 1) - val.size());
 	pair += val;
 
 	buff.push_back(pair);
@@ -1353,7 +1353,7 @@ std::vector<std::string> util::log(unsigned int loc, unsigned int ptrEditorX) {
 	}
 
 	buff.push_back("");
-	buff.push_back(util::now(state::format));
+	buff.push_back(now(state::format));
 
 	buff.push_back("");
 	buff.push_back("Enter `next` to proceed");
@@ -1404,9 +1404,9 @@ GLuint util::tex::spray(std::string tex) {
 	}
 
 	// create
-	std::vector<GLfloat> vtc = util::mesh::rd::vtc(tex);
+	std::vector<GLfloat> vtc = mesh::rd::vtc(tex);
 
-	std::vector<GLushort> idc = util::mesh::rd::idc(tex, Obj::POS);
+	std::vector<GLushort> idc = mesh::rd::idc(tex, Obj::POS);
 
 	Mesh* mesh = meshMk(&vtc[0], &idc[0], idc.size());
 
