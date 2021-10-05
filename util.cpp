@@ -237,8 +237,9 @@ std::vector<std::string> util::fs::path::entry(std::vector<std::string> tok) {
 }
 
 std::string util::fs::path::build(std::vector<std::string> entry) {
-	std::string _;
+	entry.insert(entry.begin(), ".");
 
+	std::string _;
 	for (int i = 0; i < entry.size(); i++) {
 		std::string part = entry[i];
 
