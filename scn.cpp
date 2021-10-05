@@ -4,7 +4,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <thread>
 #include <chrono>
-#include <nlohmann/json.hpp>
+#include "json.hpp"
 
 #include "scn.h"
 #include "layout.h"

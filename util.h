@@ -7,7 +7,7 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <nlohmann/json.hpp>
+#include "json.hpp"
 
 #include "obj.h"
 #include "c_buff.h"

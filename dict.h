@@ -1,6 +1,6 @@
 #pragma once
 
-#include <nlohmann/json.hpp>
+#include "json.hpp"
 
 #include "obj.h"
 #include "var.h"
