@@ -6,7 +6,7 @@ void omni::err(unsigned int err, std::vector<std::string> arg) {
 	std::string msg;
 	switch (err) {
 		case ERR_FS_RO:
-			msg = "Could not write `" + arg[0] + "`; file read-only";
+			msg = "Couldn't write `" + arg[0] + "`; file read-only";
 
 			break;
 
@@ -21,17 +21,17 @@ void omni::err(unsigned int err, std::vector<std::string> arg) {
 			break;
 
 		case ERR_FS_DEL_FILE:
-			msg = "Could not delete file `" + arg[0] + "`";
+			msg = "Couldn't delete file `" + arg[0] + "`";
 
 			break;
 
 		case ERR_FS_OPEN_DIR:
-			msg = "Could not open directory `" + arg[0] + "`";
+			msg = "Couldn't open directory `" + arg[0] + "`";
 
 			break;
 
 		case ERR_FS_DIR_EXIST:
-			msg = "Could not create directory `" + arg[0] + "`; already present";
+			msg = "Couldn't create directory `" + arg[0] + "`; already present";
 
 			break;
 
@@ -66,7 +66,7 @@ void omni::err(unsigned int err, std::vector<std::string> arg) {
 			break;
 
 		case ERR_LVL_NOT_FIN:
-			msg = "Could not proceed -- current level not complete";
+			msg = "Couldn't proceed -- current level not complete";
 
 			break;
 

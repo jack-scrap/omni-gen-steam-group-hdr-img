@@ -202,7 +202,7 @@ std::vector<GLfloat> util::mesh::rd::vtc(std::string fName) {
 		std::vector<std::string> tok = util::str::split(buff[l], ' ');
 
 		if (tok[0] == "v") {
-			omni::assertion(tok.size() == 1 + 3, std::string("Could not load object `" ) + fName + std::string("`; inappropriate size of vertex position at [" ) + std::to_string(l) + std::string("]"));
+			omni::assertion(tok.size() == 1 + 3, std::string("Couldn't load object `" ) + fName + std::string("`; inappropriate size of vertex position at [" ) + std::to_string(l) + std::string("]"));
 
 			for (int i = 1; i < 1 + 3; i++) {
 				_.push_back(std::stof(tok[i]));
@@ -222,7 +222,7 @@ std::vector<GLfloat> util::mesh::rd::st(std::string fName) {
 		std::vector<std::string> tok = util::str::split(buff[l], ' ');
 
 		if (tok[0] == "vt") {
-			omni::assertion(tok.size() == 1 + 2, std::string("Could not load object `" ) + fName + std::string("`; inappropriate size of texture coordinate at [" ) + std::to_string(l) + std::string("]"));
+			omni::assertion(tok.size() == 1 + 2, std::string("Couldn't load object `" ) + fName + std::string("`; inappropriate size of texture coordinate at [" ) + std::to_string(l) + std::string("]"));
 
 			for (int i = 1; i < 1 + 2; i++) {
 				_.push_back(std::stof(tok[i]));
@@ -242,7 +242,7 @@ std::vector<GLfloat> util::mesh::rd::norm(std::string fName) {
 		std::vector<std::string> tok = util::str::split(buff[l], ' ');
 
 		if (tok[0] == "vn") {
-			omni::assertion(tok.size() == 1 + 3, std::string("Could not load object `" ) + fName + std::string("`; inappropriate size of normal at [" ) + std::to_string(l) + std::string("]"));
+			omni::assertion(tok.size() == 1 + 3, std::string("Couldn't load object `" ) + fName + std::string("`; inappropriate size of normal at [" ) + std::to_string(l) + std::string("]"));
 
 			for (int i = 1; i < 1 + 3; i++) {
 				_.push_back(std::stof(tok[i]));
@@ -344,7 +344,7 @@ std::vector<GLushort> util::mesh::rd::idc(std::string fName, unsigned int attr) 
 		std::vector<std::string> tok = util::str::split(buff[l], ' ');
 
 		if (tok[0] == "f") {
-			omni::assertion(tok.size() == 1 + 3, std::string("Could not load object `" ) + fName + std::string("`; inappropriate number of indices for triangle primitive at [" ) + std::to_string(l) + std::string("]"));
+			omni::assertion(tok.size() == 1 + 3, std::string("Couldn't load object `" ) + fName + std::string("`; inappropriate number of indices for triangle primitive at [" ) + std::to_string(l) + std::string("]"));
 
 			for (int i = 1; i < 1 + 3; i++) {
 				std::vector<std::string> type = util::str::split(tok[i], '/');
