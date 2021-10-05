@@ -1043,7 +1043,7 @@ bool util::cfg::parse::var(std::string buff) {
 
 int util::cfg::parse::whole(std::string buff) {
 	for (int i = 0; i < buff.size(); i++) {
-		omni::assertion(isdigit(buff[i]), "Value `" + buff + "` invalid, whole number required");
+		omni::assertion(isdigit(buff[i]) || buff[i] == '-', "Value `" + buff + "` invalid, whole number required");
 	}
 
 	return std::stoi(buff);
