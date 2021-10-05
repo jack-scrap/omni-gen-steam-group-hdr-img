@@ -795,10 +795,16 @@ void Console::exec() {
 
 				if (cmd == "save") {
 					std::string fName;
-					if (tok.size() == 1) {
-						fName = _buffName;
-					} else {
-						fName = tok[1];
+					switch (tok.size()) {
+						case 1:
+							fName = _buffName;
+
+							break;
+
+						case 1 + 1:
+							fName = tok[1];
+
+							break;
 					}
 
 					bool refresh = !util::fs::exist(fName);
@@ -814,10 +820,16 @@ void Console::exec() {
 
 				if (cmd == "del") {
 					std::string fName;
-					if (tok.size() == 1) {
-						fName = _buffName;
-					} else {
-						fName = tok[1];
+					switch (tok.size()) {
+						case 1:
+							fName = _buffName;
+
+							break;
+
+						case 1 + 1:
+							fName = tok[1];
+
+							break;
 					}
 
 					util::fs::del(fName);
@@ -881,10 +893,16 @@ void Console::exec() {
 					maxNo += 1; // pad
 
 					std::string fName;
-					if (tok.size() == 1) {
-						fName = _buffName;
-					} else {
-						fName = tok[1];
+					switch (tok.size()) {
+						case 1:
+							fName = _buffName;
+
+							break;
+
+						case 1 + 1:
+							fName = tok[1];
+
+							break;
 					}
 
 					std::thread t(dispatch, fName, maxFs + maxNo);
