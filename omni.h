@@ -60,10 +60,12 @@ namespace omni {
 			}
 		}, {
 			"save", {
+				0,
 				1
 			}
 		}, {
 			"del", {
+				0,
 				1
 			}
 		}, {

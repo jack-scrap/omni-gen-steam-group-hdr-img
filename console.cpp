@@ -830,8 +830,8 @@ void Console::exec() {
 						rename((_home + "/" + _cwd + "/" + tok[1]).c_str(), (_home + "/" + _cwd + "/" + tok[2]).c_str());
 					} else {
 						omni::err(omni::ERR_FS_NO_FILE, {
-								tok[1]
-								});
+							tok[1]
+						});
 					}
 
 					_tree = util::fs::ls(_home + "/" + _cwd);
