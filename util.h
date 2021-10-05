@@ -41,6 +41,26 @@ namespace util {
 		std::string name(std::string path);
 
 		std::string base(std::string path);
+
+		namespace path {
+			const std::string sep = "/";
+
+			const std::string home = "~";
+			const std::string homeExpand = "asdf";
+
+			const std::string curr = ".";
+			const std::string prev = "..";
+
+			std::vector<std::string> tok(std::string buff);
+
+			std::vector<std::string> entry(std::vector<std::string> tok);
+
+			std::string build(std::vector<std::string> entry);
+
+			std::string append(std::string lhs, std::string rhs);
+
+			std::string prune(std::string path, std::string name);
+		}
 	}
 
 	namespace mesh {

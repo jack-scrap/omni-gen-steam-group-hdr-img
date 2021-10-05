@@ -35,6 +35,11 @@ void omni::err(unsigned int err, std::vector<std::string> arg) {
 
 			break;
 
+		case ERR_FS_ROOT_DIR:
+			msg = "Couldn't traverse parent directory -- at root";
+
+			break;
+
 		case ERR_NO_CMD:
 			msg = "Command `" + arg[0] + "` not found";
 

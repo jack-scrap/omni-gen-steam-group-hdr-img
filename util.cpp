@@ -180,6 +180,112 @@ std::string util::fs::base(std::string path) {
 	return str::split(f, '.')[0];
 }
 
+std::vector<std::string> util::fs::path::tok(std::string buff) {
+	std::vector<std::string> _;
+
+	unsigned int i = 0;
+	while (i < buff.size()) {
+		if (buff[i] == sep[0]) {
+			_.push_back(std::string(1, buff[i]));
+
+			i++;
+		} else {
+			if (buff[i] == home[0]) {
+				_.push_back(home);
+
+				i++;
+			} else {
+				std::string entry;
+				while (
+					buff[i] != sep[0] &&
+					i < buff.size()
+				) {
+					entry.push_back(buff[i]);
+
+					i++;
+				}
+
+				_.push_back(entry);
+			}
+		}
+	}
+
+	return _;
+}
+
+std::vector<std::string> util::fs::path::entry(std::vector<std::string> tok) {
+	std::vector<std::string> _;
+
+	for (int i = 0; i < tok.size(); i++) {
+		if (tok[i] != sep) {
+			if (tok[i] == home) {
+				_.push_back(homeExpand);
+			} else if (tok[i] == curr) {
+			} else if (tok[i] == prev) {
+				if (_.size()) {
+					_.pop_back();
+				} else {
+					omni::err(omni::ERR_FS_ROOT_DIR);
+				}
+			} else {
+				_.push_back(tok[i]);
+			}
+		}
+	}
+
+	return _;
+}
+
+std::string util::fs::path::build(std::vector<std::string> entry) {
+	std::string _;
+
+	for (int i = 0; i < entry.size(); i++) {
+		std::string part = entry[i];
+
+		if (i < entry.size() - 1) {
+			part.push_back(sep[0]);
+		}
+
+		_ += part;
+	}
+
+	return _;
+}
+
+std::string util::fs::path::append(std::string lhs, std::string rhs) {
+	std::string _;
+
+	std::vector<std::string> entryTotal;
+
+	std::vector<std::string> entryLhs = entry(tok(lhs));
+	std::vector<std::string> entryRhs = entry(tok(rhs));
+
+	for (int i = 0; i < entryLhs.size(); i++) {
+		entryTotal.push_back(entryLhs[i]);
+	}
+
+	for (int i = 0; i < entryRhs.size(); i++) {
+		entryTotal.push_back(entryRhs[i]);
+	}
+
+	return build(entryTotal);
+}
+
+std::string util::fs::path::prune(std::string path, std::string name) {
+	std::vector<std::string> entryOld = entry(tok(path));
+
+	std::vector<std::string> entryNew;
+	for (int i = 0; i < entryOld.size(); i++) {
+		if (entryOld[i] == name) {
+			break;
+		}
+
+		entryNew.push_back(entryOld[i]);
+	}
+
+	return build(entryNew);
+}
+
 std::vector<GLfloat> util::mesh::plane(glm::vec2 bound) {
 	std::vector<GLfloat> _;
 
