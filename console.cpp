@@ -880,13 +880,15 @@ void Console::exec() {
 					unsigned int maxNo = std::to_string(state::baseNo + _buff.size() - 1).size();
 					maxNo += 1; // pad
 
-					if (tok.size() > 1) {
-						std::thread t(dispatch, tok[1], maxFs + maxNo);
-						t.detach();
+					std::string name;
+					if (tok.size() == 1) {
+						name = _buffName;
 					} else {
-						std::thread t(dispatch, _buffName, maxFs + maxNo);
-						t.detach();
+						name = tok[1];
 					}
+
+					std::thread t(dispatch, name, maxFs + maxNo);
+					t.detach();
 				}
 
 				if (cmd == "set") {
