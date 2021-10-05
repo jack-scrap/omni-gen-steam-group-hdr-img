@@ -755,7 +755,7 @@ int main(int argc, char** argv) {
 
 		Mesh* mesh = meshMk(vtc, idc, sizeof idc / sizeof *idc);
 
-		Prog prog("glyph", "solid");
+		Prog prog("logo", "solid");
 
 		prog.use();
 

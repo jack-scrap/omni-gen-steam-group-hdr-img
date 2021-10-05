@@ -1517,7 +1517,7 @@ GLuint util::tex::spray(std::string tex) {
 
 	Mesh* mesh = meshMk(&vtc[0], &idc[0], idc.size());
 
-	Prog prog("glyph", "solid");
+	Prog prog("logo", "solid");
 
 	prog.use();
 
