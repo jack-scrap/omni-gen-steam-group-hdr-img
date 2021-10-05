@@ -773,7 +773,7 @@ void Console::exec() {
 		std::string cmd = tok[0];
 
 		if (omni::lib.find(cmd) != omni::lib.end()) {
-			if (tok.size() == 1 + omni::lib[cmd]) {
+			if (std::find(omni::lib[cmd].begin(), omni::lib[cmd].end(), tok.size() - 1) != omni::lib[cmd].end()) {
 				if (cmd == "open") {
 					if (!_diff) {
 						open(tok[1]);
@@ -922,8 +922,7 @@ void Console::exec() {
 				}
 			} else {
 				omni::err(omni::ERR_ARG_CNT, {
-					cmd,
-					std::to_string(omni::lib[cmd])
+					cmd
 				});
 			}
 		} else {

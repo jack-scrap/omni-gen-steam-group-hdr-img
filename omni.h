@@ -40,40 +40,51 @@ namespace omni {
 		}
 	};
 
-	static std::map<std::string, unsigned int> lib = {
+	static std::map<std::string, std::vector<unsigned int>> lib = {
 		{
-			"open",
-			1
+			"open", {
+				1
+			}
 		}, {
-			"new",
-			1
+			"new", {
+				1
+			}
 		}, {
-			"new_dir",
-			1
+			"new_dir", {
+				1
+			}
 		}, {
-			"run",
-			0
+			"run", {
+				0
+			}
 		}, {
-			"save",
-			1
+			"save", {
+				1
+			}
 		}, {
-			"del",
-			1
+			"del", {
+				1
+			}
 		}, {
-			"rename",
-			2
+			"rename", {
+				2
+			}
 		}, {
-			"copy",
-			2
+			"copy", {
+				2
+			}
 		}, {
-			"set",
-			2
+			"set", {
+				2
+			}
 		}, {
-			"next",
-			0
+			"next", {
+				0
+			}
 		}, {
-			"quit",
-			0
+			"quit", {
+				0
+			}
 		}
 	};
 
