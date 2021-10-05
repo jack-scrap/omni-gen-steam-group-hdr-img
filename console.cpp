@@ -794,16 +794,16 @@ void Console::exec() {
 				}
 
 				if (cmd == "save") {
-					std::string name;
+					std::string fName;
 					if (tok.size() == 1) {
-						name = _buffName;
+						fName = _buffName;
 					} else {
-						name = tok[1];
+						fName = tok[1];
 					}
 
-					bool refresh = !util::fs::exist(name);
+					bool refresh = !util::fs::exist(fName);
 
-					util::fs::write(_home + "/" + _cwd + "/" + name, _buff);
+					util::fs::write(_home + "/" + _cwd + "/" + fName, _buff);
 
 					if (refresh) {
 						_tree = util::fs::ls(_home + "/" + _cwd);
@@ -813,14 +813,14 @@ void Console::exec() {
 				}
 
 				if (cmd == "del") {
-					std::string name;
+					std::string fName;
 					if (tok.size() == 1) {
-						name = _buffName;
+						fName = _buffName;
 					} else {
-						name = tok[1];
+						fName = tok[1];
 					}
 
-					util::fs::del(name);
+					util::fs::del(fName);
 
 					_tree = util::fs::ls(_home + "/" + _cwd);
 				}
@@ -880,34 +880,34 @@ void Console::exec() {
 					unsigned int maxNo = std::to_string(state::baseNo + _buff.size() - 1).size();
 					maxNo += 1; // pad
 
-					std::string name;
+					std::string fName;
 					if (tok.size() == 1) {
-						name = _buffName;
+						fName = _buffName;
 					} else {
-						name = tok[1];
+						fName = tok[1];
 					}
 
-					std::thread t(dispatch, name, maxFs + maxNo);
+					std::thread t(dispatch, fName, maxFs + maxNo);
 					t.detach();
 				}
 
 				if (cmd == "set") {
-					std::string name = "script/" + tok[1] + "/" + tok[2] + "/main.py";
+					std::string path = "script/" + tok[1] + "/" + tok[2] + "/main.py";
 
 					scn::init(tok[1], std::stoi(tok[2]));
 
-					console->open(name);
+					console->open(path);
 				}
 
 				if (cmd == "next") {
 					if (eq) {
 						lvl++;
 
-						std::string name = "script/" + stage + "/" + std::to_string(lvl) + "/main.py";
+						std::string fName = "script/" + stage + "/" + std::to_string(lvl) + "/main.py";
 
 						scn::init(stage, lvl);
 
-						console->open(name);
+						console->open(fName);
 
 						eq = false;
 					} else {
