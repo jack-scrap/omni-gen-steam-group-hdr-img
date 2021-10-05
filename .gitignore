@@ -1,6 +1,7 @@
 script
 
 *.log
+stat.json
 
 *.o
 *.so
