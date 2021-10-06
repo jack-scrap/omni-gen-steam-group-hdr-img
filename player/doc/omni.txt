@@ -16,17 +16,26 @@
 ## Prompt
 `*command* *argument* ...`
 
-[Enter] -                  Run
+[Enter]     -              Run
 [Backspace] -              Delete
 
 # Display
 [Left Mouse Button] -      Pan camera
-[Scroll Wheel] -           Zoom
+[Scroll Wheel]      -      Zoom
 
 # Command
-`save` -                   Write buffer to disk
-`open` -                   Open in editor
-`run` -                    Execute
+`open` -    Open file in editor
+`new` -     Create new file
+`new_dir` - Create new directory
+`save` -    Write buffer to disk
+`del` -     Delete file
+`rename` -  Change file name
+`copy` -    Duplicate file
+`set` -     Reset level
+`next` -    Proceed to next available level
+`run`  -    Execute
+`quit` -    Exit
+
 `import omni`
 
 # Data
@@ -39,8 +48,8 @@
 
 ### Navigation
 `.zoom(delta)` - Move forward, back
-`.pan(delta)` -  Move head left and right
-`.ped(delta)` -  Move head up and down
+`.pan(delta)` -  Move head right, left
+`.ped(delta)` -  Move head up, down
 
 `.grab()` - Grab, insert container
 
