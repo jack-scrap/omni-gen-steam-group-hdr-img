@@ -24,17 +24,64 @@
 [Scroll Wheel]      -      Zoom
 
 # Command
-`open` -    Open file in editor
-`new` -     Create new file
-`new_dir` - Create new directory
-`save` -    Write buffer to disk
-`del` -     Delete file
-`rename` -  Change file name
-`copy` -    Duplicate file
-`set` -     Reset level
-`next` -    Proceed to next available level
-`run`  -    Execute
-`quit` -    Exit
+## open
+Open file in editor.
+
+`open file_name`
+
+## new
+Create new file of specified name, open in editor.
+
+`new file_name`
+
+## new_dir
+Create new directory.
+
+`new_dir dir_name`
+
+## save
+Write buffer to disk.
+
+`save` - Save current buffer to name of current buffer
+`save file_name` - Save current buffer to specified file name
+
+## del
+Delete existing file or directory.
+
+`del` - Delete file matching name of current buffer
+`del file_name` - Delete entry of specified name
+
+## rename
+Change name of file or directory.
+
+`rename new_file_name` - Rename entry name of current buffer to specified name
+`rename old_file_name new_file_name` - Rename specified entry name to second specified name
+
+## copy
+Duplicate existing file or directory.
+	
+`copy existing_file_name new_file_name` - Copy specified entry name to second specified entry name
+
+## set
+Change to specified section, level.
+
+`set section lvl`
+
+## next
+Proceed to next available level.
+
+`next`
+
+## run
+Execute script file.
+
+`run` - Execute file name matching current buffer
+`run fileName` - Execute specified file name
+
+## quit
+Exit program.
+
+`quit`
 
 `import omni`
 
