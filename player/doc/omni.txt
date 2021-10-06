@@ -83,41 +83,42 @@ Exit program.
 
 `quit`
 
+# Script
 `import omni`
 
-# Data
+## Data
 `omni.data`
 
-# Vehicles
-## Crane
+## Vehicles
+### Crane
 `._data` - Data
 `._loc` - Location
 
-### Navigation
+#### Navigation
 `.zoom(delta)` - Move forward, back
 `.pan(delta)` -  Move head right, left
 `.ped(delta)` -  Move head up, down
 
 `.grab()` - Grab, insert container
 
-## Truck
+### Truck
 This allows for complete freedom of movement without being restricted to an axis.
 
 `._data` - Data
 `._loc` - Location
 
-### Navigation
+#### Navigation
 `.mv(delta)` -   Move forward, back
 
 `.turn(delta)` - Turn left, right
 
-## Ship
+### Ship
 `zoom(delta)` - Move forward, back
 
 `._data` - Data
 `._loc` -  Location
 
-# Data
+## Data
 Data sets can be accessed by key.
 
 `state`
@@ -140,7 +141,7 @@ Both initial and the desired state is provided.
 
 `.goal`
 
-# Bounds
+## Bounds
 Bounds are provided.
 
 `.bounds`
