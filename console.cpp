@@ -771,12 +771,13 @@ void Console::exec() {
 		std::vector<std::string> tok = util::str::split(_prompt, ' ');
 
 		std::string cmd = tok[0];
+		std::vector<std::string> arg = std::vector<std::string>(tok.begin() + 1, tok.end());
 
 		if (omni::lib.find(cmd) != omni::lib.end()) {
-			if (std::find(omni::lib[cmd].begin(), omni::lib[cmd].end(), tok.size() - 1) != omni::lib[cmd].end()) {
+			if (std::find(omni::lib[cmd].begin(), omni::lib[cmd].end(), arg.size()) != omni::lib[cmd].end()) {
 				if (cmd == "open") {
 					if (!_diff) {
-						open(tok[1]);
+						open(arg[0]);
 					} else {
 						omni::err(omni::ERR_BUFF_DIFF);
 					}
@@ -784,7 +785,7 @@ void Console::exec() {
 
 				if (cmd == "new") {
 					if (!_diff) {
-						_buffName = tok[1];
+						_buffName = arg[0];
 						_buff = {
 							""
 						};
@@ -794,8 +795,8 @@ void Console::exec() {
 				}
 
 				if (cmd == "new_dir") {
-					if (!util::fs::exist(tok[1])) {
-						mkdir(tok[1].c_str(), S_IRWXU);
+					if (!util::fs::exist(arg[0])) {
+						mkdir(arg[0].c_str(), S_IRWXU);
 					} else {
 						omni::err(omni::ERR_FS_DIR_EXIST);
 					}
@@ -805,14 +806,14 @@ void Console::exec() {
 
 				if (cmd == "save") {
 					std::string fName;
-					switch (tok.size()) {
-						case 1:
+					switch (arg.size()) {
+						case 0:
 							fName = _buffName;
 
 							break;
 
-						case 1 + 1:
-							fName = tok[1];
+						case 1:
+							fName = arg[0];
 
 							break;
 					}
@@ -830,14 +831,14 @@ void Console::exec() {
 
 				if (cmd == "del") {
 					std::string fName;
-					switch (tok.size()) {
-						case 1:
+					switch (arg.size()) {
+						case 0:
 							fName = _buffName;
 
 							break;
 
-						case 1 + 1:
-							fName = tok[1];
+						case 1:
+							fName = arg[0];
 
 							break;
 					}
@@ -849,20 +850,20 @@ void Console::exec() {
 
 				if (cmd == "rename") {
 					std::string fName;
-					switch (tok.size()) {
-						case 1 + 1:
+					switch (arg.size()) {
+						case 1:
 							fName = _buffName;
 
 							break;
 
-						case 1 + 2:
-							fName = tok[1];
+						case 2:
+							fName = arg[0];
 
 							break;
 					}
 
 					if (util::fs::exist(_home + "/" + _cwd + "/" + fName)) {
-						rename((_home + "/" + _cwd + "/" + fName).c_str(), (_home + "/" + _cwd + "/" + tok.back()).c_str());
+						rename((_home + "/" + _cwd + "/" + fName).c_str(), (_home + "/" + _cwd + "/" + arg.back()).c_str());
 					} else {
 						omni::err(omni::ERR_FS_NO_FILE, {
 							fName
@@ -874,22 +875,22 @@ void Console::exec() {
 
 				if (cmd == "copy") {
 					std::string fName;
-					switch (tok.size()) {
-						case 1 + 1:
+					switch (arg.size()) {
+						case 1:
 							fName = _buffName;
 
 							break;
 
-						case 1 + 2:
-							fName = tok[1];
+						case 2:
+							fName = arg[0];
 
 							break;
 					}
 
 					if (util::fs::exist(_home + "/" + _cwd + "/" + fName)) {
-						std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(_home + "/" +  _cwd + "/" + tok[1]);
+						std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(_home + "/" +  _cwd + "/" + arg[0]);
 
-						util::fs::write(_home + "/" +  _cwd + "/" + tok.back(), buff);
+						util::fs::write(_home + "/" +  _cwd + "/" + arg.back(), buff);
 					} else {
 						omni::err(omni::ERR_FS_NO_FILE, {
 							fName
@@ -919,14 +920,14 @@ void Console::exec() {
 					maxNo += 1; // pad
 
 					std::string fName;
-					switch (tok.size()) {
-						case 1:
+					switch (arg.size()) {
+						case 0:
 							fName = _buffName;
 
 							break;
 
-						case 1 + 1:
-							fName = tok[1];
+						case 1:
+							fName = arg[0];
 
 							break;
 					}
@@ -942,9 +943,9 @@ void Console::exec() {
 				}
 
 				if (cmd == "set") {
-					std::string path = "script/" + tok[1] + "/" + tok[2] + "/main.py";
+					std::string path = "script/" + arg[0] + "/" + arg[1] + "/main.py";
 
-					scn::init(tok[1], std::stoi(tok[2]));
+					scn::init(arg[0], std::stoi(arg[1]));
 
 					console->open(path);
 				}
