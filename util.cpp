@@ -241,13 +241,13 @@ std::string util::fs::path::build(std::vector<std::string> entry) {
 
 	std::string _;
 	for (int i = 0; i < entry.size(); i++) {
-		std::string part = entry[i];
+		std::string val = entry[i];
 
 		if (i < entry.size() - 1) {
-			part.push_back(sep[0]);
+			val.push_back(sep[0]);
 		}
 
-		_ += part;
+		_ += val;
 	}
 
 	return _;
