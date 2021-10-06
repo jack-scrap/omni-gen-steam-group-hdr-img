@@ -793,6 +793,16 @@ void Console::exec() {
 					}
 				}
 
+				if (cmd == "new_dir") {
+					if (!util::fs::exist(tok[1])) {
+						mkdir(tok[1].c_str(), S_IRWXU);
+					} else {
+						omni::err(omni::ERR_FS_DIR_EXIST);
+					}
+
+					_tree = util::fs::ls(_home + "/" + _cwd);
+				}
+
 				if (cmd == "save") {
 					std::string fName;
 					switch (tok.size()) {
@@ -871,16 +881,6 @@ void Console::exec() {
 						omni::err(omni::ERR_FS_NO_FILE, {
 								tok[1]
 								});
-					}
-
-					_tree = util::fs::ls(_home + "/" + _cwd);
-				}
-
-				if (cmd == "new_dir") {
-					if (!util::fs::exist(tok[1])) {
-						mkdir(tok[1].c_str(), S_IRWXU);
-					} else {
-						omni::err(omni::ERR_FS_DIR_EXIST);
 					}
 
 					_tree = util::fs::ls(_home + "/" + _cwd);

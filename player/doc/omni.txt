@@ -62,6 +62,12 @@ Duplicate existing file or directory.
 	
 `copy existing_file_name new_file_name` - Copy specified entry name to second specified entry name
 
+## run
+Execute script file.
+
+`run` - Execute file name matching current buffer
+`run fileName` - Execute specified file name
+
 ## set
 Change to specified section, level.
 
@@ -71,12 +77,6 @@ Change to specified section, level.
 Proceed to next available level.
 
 `next`
-
-## run
-Execute script file.
-
-`run` - Execute file name matching current buffer
-`run fileName` - Execute specified file name
 
 ## quit
 Exit program.

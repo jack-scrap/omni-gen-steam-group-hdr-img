@@ -54,11 +54,6 @@ namespace omni {
 				1
 			}
 		}, {
-			"run", {
-				0,
-				1
-			}
-		}, {
 			"save", {
 				0,
 				1
@@ -76,6 +71,11 @@ namespace omni {
 		}, {
 			"copy", {
 				2
+			}
+		}, {
+			"run", {
+				0,
+					1
 			}
 		}, {
 			"set", {
