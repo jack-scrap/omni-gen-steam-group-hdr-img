@@ -873,14 +873,27 @@ void Console::exec() {
 				}
 
 				if (cmd == "copy") {
-					if (util::fs::exist(_home + "/" + _cwd + "/" + tok[1])) {
+					std::string fName;
+					switch (tok.size()) {
+						case 1 + 1:
+							fName = _buffName;
+
+							break;
+
+						case 1 + 2:
+							fName = tok[1];
+
+							break;
+					}
+
+					if (util::fs::exist(_home + "/" + _cwd + "/" + fName)) {
 						std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(_home + "/" +  _cwd + "/" + tok[1]);
 
-						util::fs::write(_home + "/" +  _cwd + "/" + tok[2], buff);
+						util::fs::write(_home + "/" +  _cwd + "/" + tok.back(), buff);
 					} else {
 						omni::err(omni::ERR_FS_NO_FILE, {
-								tok[1]
-								});
+							fName
+						});
 					}
 
 					_tree = util::fs::ls(_home + "/" + _cwd);

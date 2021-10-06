@@ -70,12 +70,13 @@ namespace omni {
 			}
 		}, {
 			"copy", {
+				1,
 				2
 			}
 		}, {
 			"run", {
 				0,
-					1
+				1
 			}
 		}, {
 			"set", {
