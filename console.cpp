@@ -842,7 +842,7 @@ void Console::exec() {
 							break;
 					}
 
-					util::fs::del(fName);
+					util::fs::del(_home + "/" + fName);
 
 					_tree = util::fs::ls(_home + "/" + _cwd);
 				}
