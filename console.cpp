@@ -309,11 +309,11 @@ void Console::fmtScr() {
 
 	std::string fInfo;
 
-	fInfo += util::fs::name(_buffName);
+	fInfo += util::fs::name(_home + "/" + _buffName);
 	fInfo += ' '; // pad
 
 	if (state::showFilePerm) {
-		std::string perm = util::fs::perm(_buffName);
+		std::string perm = util::fs::perm(_home + "/" + _buffName);
 
 		// wrap
 		perm.insert(0, "[");
@@ -545,9 +545,9 @@ void Console::render() {
 
 void Console::open(std::string fName) {
 	if (util::fs::exist(_home + "/" + fName)) {
-		_buffName = _home + "/" + fName;
+		_buffName = fName;
 
-		std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(_buffName);
+		std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(_home + "/" + _buffName);
 
 		if (buff.size()) {
 			_buff = buff;
@@ -562,7 +562,7 @@ void Console::open(std::string fName) {
 		});
 	}
 
-	if (util::fs::perm(_buffName)[1] == 'w') {
+	if (util::fs::perm(_home + "/" + _buffName)[1] == 'w') {
 		_cursEditor[MIN][X] = _buff.back().size() - 1 + 1;
 		_cursEditor[MIN][Y] = _buff.size() - 1;
 	} else {
@@ -784,7 +784,7 @@ void Console::exec() {
 
 				if (cmd == "new") {
 					if (!_diff) {
-						_buffName = _home + "/" + tok[1];
+						_buffName = tok[1];
 						_buff = {
 							""
 						};
