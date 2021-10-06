@@ -931,8 +931,14 @@ void Console::exec() {
 							break;
 					}
 
-					std::thread t(dispatch, fName, maxFs + maxNo);
-					t.detach();
+					if (util::fs::exist(_home + "/" + fName)) {
+						std::thread t(dispatch, fName, maxFs + maxNo);
+						t.detach();
+					} else {
+						omni::err(omni::ERR_FS_NO_FILE, {
+							fName
+						});
+					}
 				}
 
 				if (cmd == "set") {
