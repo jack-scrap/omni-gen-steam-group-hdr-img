@@ -70,6 +70,7 @@ namespace omni {
 			}
 		}, {
 			"rename", {
+				1,
 				2
 			}
 		}, {

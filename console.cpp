@@ -838,11 +838,24 @@ void Console::exec() {
 				}
 
 				if (cmd == "rename") {
-					if (util::fs::exist(_home + "/" + _cwd + "/" + tok[1])) {
-						rename((_home + "/" + _cwd + "/" + tok[1]).c_str(), (_home + "/" + _cwd + "/" + tok[2]).c_str());
+					std::string fName;
+					switch (tok.size()) {
+						case 1 + 1:
+							fName = _buffName;
+
+							break;
+
+						case 1 + 2:
+							fName = tok[1];
+
+							break;
+					}
+
+					if (util::fs::exist(_home + "/" + _cwd + "/" + fName)) {
+						rename((_home + "/" + _cwd + "/" + fName).c_str(), (_home + "/" + _cwd + "/" + tok.back()).c_str());
 					} else {
 						omni::err(omni::ERR_FS_NO_FILE, {
-							tok[1]
+							fName
 						});
 					}
 
