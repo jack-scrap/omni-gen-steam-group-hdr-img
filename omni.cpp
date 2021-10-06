@@ -45,10 +45,27 @@ void omni::err(unsigned int err, std::vector<std::string> arg) {
 
 			break;
 
-		case ERR_ARG_CNT:
-			msg = "Incorrect number of arguments to command `" + arg[0] + "`";
+		case ERR_ARG_CNT: {
+			std::string cmd = arg[0];
+
+			std::string cand;
+
+			cand += "[";
+
+			for (int i = 0; i < lib[cmd].size(); i++) {
+				cand += std::to_string(lib[cmd][i]);
+
+				if (i < lib[cmd].size() - 1) {
+					cand += ", ";
+				}
+			}
+
+			cand += "]";
+
+			msg = "Incorrect number of arguments to command `" + arg[0] + "`; expected one of " + cand;
 
 			break;
+		}
 
 		case ERR_TOK:
 			msg = "Inappropriate token `" + arg[0] + "`";
