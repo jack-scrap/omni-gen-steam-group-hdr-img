@@ -254,22 +254,20 @@ std::string util::fs::path::build(std::vector<std::string> entry) {
 }
 
 std::string util::fs::path::append(std::string lhs, std::string rhs) {
-	std::string _;
-
-	std::vector<std::string> entryTotal;
-
 	std::vector<std::string> entryLhs = entry(tok(lhs));
 	std::vector<std::string> entryRhs = entry(tok(rhs));
 
+	std::vector<std::string> entry;
+
 	for (int i = 0; i < entryLhs.size(); i++) {
-		entryTotal.push_back(entryLhs[i]);
+		entry.push_back(entryLhs[i]);
 	}
 
 	for (int i = 0; i < entryRhs.size(); i++) {
-		entryTotal.push_back(entryRhs[i]);
+		entry.push_back(entryRhs[i]);
 	}
 
-	return build(entryTotal);
+	return build(entry);
 }
 
 std::string util::fs::path::prune(std::string path, std::string name) {
