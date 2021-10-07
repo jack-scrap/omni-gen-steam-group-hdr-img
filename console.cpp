@@ -574,6 +574,8 @@ void Console::open(std::string fName) {
 	for (int i = 0; i < 2; i++) {
 		_cursEditor[MAX][i] = _cursEditor[MIN][i];
 	}
+
+	_hist.push_back(_buff);
 }
 
 void Console::changeDir(std::string dir) {
@@ -638,6 +640,8 @@ void Console::ins(char c) {
 
 			break;
 	}
+
+	_hist.push_back(_buff);
 }
 
 void Console::newLine() {
@@ -660,6 +664,8 @@ void Console::newLine() {
 	}
 
 	_diff = true;
+
+	_hist.push_back(_buff);
 }
 
 void Console::del() {
@@ -764,6 +770,8 @@ void Console::del() {
 
 			break;
 	}
+
+	_hist.push_back(_buff);
 }
 
 void Console::exec() {

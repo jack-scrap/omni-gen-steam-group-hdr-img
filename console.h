@@ -76,6 +76,8 @@ class Console {
 			""
 		};
 
+		std::vector<std::vector<std::string>> _hist;
+
 		std::vector<std::string> _clip;
 
 		time_t _raw;
