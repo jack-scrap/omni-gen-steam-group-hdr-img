@@ -470,9 +470,10 @@ void handle() {
 
 						// history
 						case SDLK_z:
-							if (console->_hist.size() > 1) {
-								console->_hist.pop_back();
-								console->_buff = console->_hist.back();
+							if (console->_h) {
+								console->_h--;
+
+								console->_buff = console->_hist[console->_h];
 							}
 
 							break;

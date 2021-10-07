@@ -77,6 +77,7 @@ class Console {
 		};
 
 		std::vector<std::vector<std::string>> _hist;
+		unsigned int _h = _hist.size();
 
 		std::vector<std::string> _clip;
 
@@ -105,6 +106,8 @@ class Console {
 		void newLine();
 
 		void del();
+
+		void addHist();
 
 		void exec();
 
