@@ -394,6 +394,7 @@ void handle() {
 
 				if (e.key.keysym.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 					switch (e.key.keysym.sym) {
+						// clipboard
 						case SDLK_c:
 							switch (console->_mode) {
 								case Console::EDITOR: {
@@ -463,6 +464,15 @@ void handle() {
 									console->del();
 
 									break;
+							}
+
+							break;
+
+						// history
+						case SDLK_z:
+							if (console->_hist.size() > 1) {
+								console->_hist.pop_back();
+								console->_buff = console->_hist.back();
 							}
 
 							break;
