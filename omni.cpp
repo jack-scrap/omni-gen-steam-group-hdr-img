@@ -10,8 +10,8 @@ void omni::err(unsigned int err, std::vector<std::string> arg) {
 
 			break;
 
-		case ERR_FS_NO_FILE:
-			msg = "File `" + arg[0] + "` not found";
+		case ERR_FS_NO_ENTRY:
+			msg = "Entry `" + arg[0] + "` not found";
 
 			break;
 

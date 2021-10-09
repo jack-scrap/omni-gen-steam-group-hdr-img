@@ -116,7 +116,7 @@ void util::fs::cp(std::string src, std::string dest) {
 			}
 		}
 	} else {
-		omni::err(omni::ERR_FS_NO_FILE, {
+		omni::err(omni::ERR_FS_NO_ENTRY, {
 			src
 		});
 	}

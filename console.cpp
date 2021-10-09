@@ -557,7 +557,7 @@ void Console::open(std::string fName) {
 			};
 		}
 	} else {
-		omni::err(omni::ERR_FS_NO_FILE, {
+		omni::err(omni::ERR_FS_NO_ENTRY, {
 			fName
 		});
 	}
@@ -878,7 +878,7 @@ void Console::exec() {
 					if (util::fs::exist(_home + "/" + _cwd + "/" + fName)) {
 						rename((_home + "/" + _cwd + "/" + fName).c_str(), (_home + "/" + _cwd + "/" + arg.back()).c_str());
 					} else {
-						omni::err(omni::ERR_FS_NO_FILE, {
+						omni::err(omni::ERR_FS_NO_ENTRY, {
 							fName
 						});
 					}
@@ -941,7 +941,7 @@ void Console::exec() {
 						std::thread t(dispatch, fName, maxFs + maxNo);
 						t.detach();
 					} else {
-						omni::err(omni::ERR_FS_NO_FILE, {
+						omni::err(omni::ERR_FS_NO_ENTRY, {
 							fName
 						});
 					}
