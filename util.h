@@ -32,7 +32,7 @@ namespace util {
 
 		void write(std::string fName, std::vector<std::string> buff);
 
-		void del(std::string fName);
+		void del(std::string name);
 
 		void cp(std::string src, std::string dest);
 

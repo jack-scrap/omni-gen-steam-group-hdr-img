@@ -80,14 +80,37 @@ void util::fs::write(std::string fName, std::vector<std::string> buff) {
 	f.close();
 }
 
-void util::fs::del(std::string fName) {
+void util::fs::del(std::string name) {
 	struct stat s;
-	stat(fName.c_str(), &s);
+	stat(name.c_str(), &s);
 
 	if (s.st_mode & S_IFREG) {
-		if (remove(fName.c_str()) != 0) {
+		if (remove(name.c_str()) != 0) {
 			omni::err(omni::ERR_FS_DEL_ENTRY, {
-				fName
+				name
+			});
+		}
+	}
+
+	if (s.st_mode & S_IFDIR) {
+		std::vector<std::map<std::string, std::string>> tree = util::fs::ls(name);
+		for (int i = 0; i < tree.size(); i++) {
+			if (tree[i]["name"] == "..") {
+				tree.erase(tree.begin() + i);
+			}
+		}
+
+		for (int i = 0; i < tree.size(); i++) {
+			if (remove(std::string(name + "/" + tree[i]["name"]).c_str()) != 0) {
+				omni::err(omni::ERR_FS_DEL_ENTRY, {
+					name + "/" + tree[i]["name"]
+				});
+			}
+		}
+
+		if (remove(name.c_str()) != 0) {
+			omni::err(omni::ERR_FS_DEL_ENTRY, {
+				name
 			});
 		}
 	}
