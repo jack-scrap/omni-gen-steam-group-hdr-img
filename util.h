@@ -40,10 +40,6 @@ namespace util {
 
 		std::string perm(std::string fName);
 
-		std::string name(std::string path);
-
-		std::string base(std::string path);
-
 		namespace path {
 			const std::string sep = "/";
 
@@ -62,6 +58,10 @@ namespace util {
 			std::string append(std::string lhs, std::string rhs);
 
 			std::string prune(std::string path, std::string name);
+
+			std::string name(std::string path);
+
+			std::string base(std::string path);
 		}
 	}
 

@@ -192,7 +192,7 @@ std::string util::fs::perm(std::string fName) {
 	return _;
 }
 
-std::string util::fs::name(std::string path) {
+std::string util::fs::path::name(std::string path) {
 	std::vector<std::string> tok = str::split(path, '/');
 
 	std::string f;
@@ -203,7 +203,7 @@ std::string util::fs::name(std::string path) {
 	return f;
 }
 
-std::string util::fs::base(std::string path) {
+std::string util::fs::path::base(std::string path) {
 	std::string f = name(path);
 
 	return str::split(f, '.')[0];

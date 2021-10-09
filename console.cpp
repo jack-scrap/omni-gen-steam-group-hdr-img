@@ -63,7 +63,7 @@ void dispatch(std::string fName, unsigned int ptrEditorX) {
 	}
 	
 	if (eq) {
-		std::string log = "log/" + util::fs::base(fName) + ".log";
+		std::string log = "log/" + util::fs::path::base(fName) + ".log";
 
 		console->_buff = util::log(console->_buff.size(), ptrEditorX);
 
@@ -309,7 +309,7 @@ void Console::fmtScr() {
 
 	std::string fInfo;
 
-	fInfo += util::fs::name(_home + "/" + _buffName);
+	fInfo += util::fs::path::name(_home + "/" + _buffName);
 	fInfo += ' '; // pad
 
 	if (state::showFilePerm) {
