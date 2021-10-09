@@ -34,6 +34,8 @@ namespace util {
 
 		void del(std::string fName);
 
+		void cp(std::string src, std::string dest);
+
 		std::vector<std::map<std::string, std::string>> ls(std::string path);
 
 		std::string perm(std::string fName);

@@ -900,39 +900,7 @@ void Console::exec() {
 							break;
 					}
 
-					struct stat s;
-					stat(std::string(_home + "/" + _cwd + "/" + name).c_str(), &s);
-
-					if (s.st_mode & S_IFREG) {
-						if (util::fs::exist(_home + "/" + _cwd + "/" + name)) {
-							std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(_home + "/" +  _cwd + "/" + arg[0]);
-
-							util::fs::write(_home + "/" +  _cwd + "/" + arg.back(), buff);
-						} else {
-							omni::err(omni::ERR_FS_NO_FILE, {
-								name
-							});
-						}
-					}
-
-					if (s.st_mode & S_IFDIR) {
-						mkdir(std::string(_home + "/" + arg[1]).c_str(), S_IRWXU);
-
-						std::vector<std::map<std::string, std::string>> tree = util::fs::ls(_home + "/" + _cwd + "/" + name);
-						for (int i = 0; i < tree.size(); i++) {
-							if (tree[i]["name"] == "..") {
-								if (_cwd == ".") {
-									tree.erase(tree.begin() + i);
-								}
-							}
-						}
-
-						for (int i = 0; i < tree.size(); i++) {
-							std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(_home + "/" + _cwd + "/" + name + "/" + tree[i]["name"]);
-
-							util::fs::write(_home + "/" + _cwd + "/" + arg[1] + "/" + tree[i]["name"], buff);
-						}
-					}
+					util::fs::cp(_home + "/" + _cwd + "/" + name, _home + "/" + _cwd + "/" + arg.back());
 
 					_tree = util::fs::ls(_home + "/" + _cwd);
 				}
