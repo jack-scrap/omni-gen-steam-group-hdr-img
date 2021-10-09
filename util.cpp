@@ -1356,16 +1356,16 @@ int util::math::norm(int lhs, int rhs) {
 	return _;
 }
 
-unsigned int util::math::clamp(unsigned int i, int dir, unsigned int roof) {
+unsigned int util::math::clamp(unsigned int i, int sign, unsigned int roof) {
 	unsigned int _ = i;
 
-	if (dir == 1) {
+	if (sign == 1) {
 		if (!(_ < roof)) {
 			_ = roof;
 		}
 	}
 
-	if (dir == -1) {
+	if (sign == -1) {
 		if (!(_ > roof)) {
 			_ = roof;
 		}
