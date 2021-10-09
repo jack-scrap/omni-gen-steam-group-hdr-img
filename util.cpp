@@ -82,7 +82,7 @@ void util::fs::write(std::string fName, std::vector<std::string> buff) {
 
 void util::fs::del(std::string fName) {
 	if (remove(fName.c_str()) != 0) {
-		omni::err(omni::ERR_FS_DEL_FILE, {
+		omni::err(omni::ERR_FS_DEL_ENTRY, {
 			fName
 		});
 	}

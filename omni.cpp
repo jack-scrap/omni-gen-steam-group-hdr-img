@@ -20,8 +20,8 @@ void omni::err(unsigned int err, std::vector<std::string> arg) {
 
 			break;
 
-		case ERR_FS_DEL_FILE:
-			msg = "Couldn't delete file `" + arg[0] + "`";
+		case ERR_FS_DEL_ENTRY:
+			msg = "Couldn't delete entry `" + arg[0] + "`";
 
 			break;
 

@@ -123,7 +123,7 @@ namespace omni {
 	enum {
 		ERR_FS_RO,
 		ERR_FS_NO_ENTRY,
-		ERR_FS_DEL_FILE,
+		ERR_FS_DEL_ENTRY,
 		ERR_FS_OPEN_DIR,
 		ERR_FS_DIR_EXIST,
 		ERR_FS_ROOT_DIR,
