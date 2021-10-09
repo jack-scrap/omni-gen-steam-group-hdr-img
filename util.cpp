@@ -92,33 +92,33 @@ void util::fs::cp(std::string src, std::string dest) {
 	struct stat s;
 	stat(std::string(src).c_str(), &s);
 
-	if (s.st_mode & S_IFREG) {
-		if (exist(src)) {
+	if (exist(src)) {
+		if (s.st_mode & S_IFREG) {
 			std::vector<std::string> buff = rd<std::vector<std::string>>(src);
 
 			write(dest, buff);
-		} else {
-			omni::err(omni::ERR_FS_NO_FILE, {
-				src
-			});
 		}
-	}
 
-	if (s.st_mode & S_IFDIR) {
-		mkdir(std::string(dest).c_str(), S_IRWXU);
+		if (s.st_mode & S_IFDIR) {
+			mkdir(std::string(dest).c_str(), S_IRWXU);
 
-		std::vector<std::map<std::string, std::string>> tree = util::fs::ls(src);
-		for (int i = 0; i < tree.size(); i++) {
-			if (tree[i]["name"] == "..") {
-				tree.erase(tree.begin() + i);
+			std::vector<std::map<std::string, std::string>> tree = util::fs::ls(src);
+			for (int i = 0; i < tree.size(); i++) {
+				if (tree[i]["name"] == "..") {
+					tree.erase(tree.begin() + i);
+				}
+			}
+
+			for (int i = 0; i < tree.size(); i++) {
+				std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(src + "/" + tree[i]["name"]);
+
+				util::fs::write(dest + "/" + tree[i]["name"], buff);
 			}
 		}
-
-		for (int i = 0; i < tree.size(); i++) {
-			std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(src + "/" + tree[i]["name"]);
-
-			util::fs::write(dest + "/" + tree[i]["name"], buff);
-		}
+	} else {
+		omni::err(omni::ERR_FS_NO_FILE, {
+			src
+		});
 	}
 }
 
