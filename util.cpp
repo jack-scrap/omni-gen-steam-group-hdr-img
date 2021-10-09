@@ -95,7 +95,7 @@ void util::fs::del(std::string fName) {
 
 void util::fs::cp(std::string src, std::string dest) {
 	struct stat s;
-	stat(std::string(src).c_str(), &s);
+	stat(src.c_str(), &s);
 
 	if (exist(src)) {
 		if (s.st_mode & S_IFREG) {
@@ -105,7 +105,7 @@ void util::fs::cp(std::string src, std::string dest) {
 		}
 
 		if (s.st_mode & S_IFDIR) {
-			mkdir(std::string(dest).c_str(), S_IRWXU);
+			mkdir(dest.c_str(), S_IRWXU);
 
 			std::vector<std::map<std::string, std::string>> tree = util::fs::ls(src);
 			for (int i = 0; i < tree.size(); i++) {
