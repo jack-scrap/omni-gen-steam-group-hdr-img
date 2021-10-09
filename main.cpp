@@ -569,7 +569,7 @@ int main(int argc, char** argv) {
 					if (it->first == "screen_width") {
 						int val = util::cfg::parse::whole(it->second);
 
-						omni::assertion(val >= 0, std::string("Value `") + std::to_string(val) + std::string("` invalid for option `") + it->first + std::string("`; number must be positive"));
+						omni::assert(val >= 0, std::string("Value `") + std::to_string(val) + std::string("` invalid for option `") + it->first + std::string("`; number must be positive"));
 
 						layout::view[X] = util::cfg::parse::whole(it->second);
 						layout::view[Y] = state::lineCnt * layout::glyph[Y];
@@ -578,7 +578,7 @@ int main(int argc, char** argv) {
 					if (it->first == "fps") {
 						int val = util::cfg::parse::whole(it->second);
 
-						omni::assertion(val >= 0, std::string("Value `") + std::to_string(val) + std::string("` invalid for option `") + it->first + std::string("`; number must be positive"));
+						omni::assert(val >= 0, std::string("Value `") + std::to_string(val) + std::string("` invalid for option `") + it->first + std::string("`; number must be positive"));
 
 						state::fps = val;
 					}
@@ -586,7 +586,7 @@ int main(int argc, char** argv) {
 					if (it->first == "speed") {
 						int val = util::cfg::parse::prec(it->second);
 
-						omni::assertion(val >= 0, std::string("Value `") + std::to_string(val) + std::string("` invalid for option `") + it->first + std::string("`; number must be positive"));
+						omni::assert(val >= 0, std::string("Value `") + std::to_string(val) + std::string("` invalid for option `") + it->first + std::string("`; number must be positive"));
 
 						state::speed = val;
 					}
@@ -603,7 +603,7 @@ int main(int argc, char** argv) {
 					if (it->first == "line_count") {
 						int val = util::cfg::parse::whole(it->second);
 
-						omni::assertion(val >= 0, std::string("Value `") + std::to_string(val) + std::string("` invalid for option `") + it->first + std::string("`; number must be positive"));
+						omni::assert(val >= 0, std::string("Value `") + std::to_string(val) + std::string("` invalid for option `") + it->first + std::string("`; number must be positive"));
 
 						state::lineCnt = val;
 					}
@@ -611,7 +611,7 @@ int main(int argc, char** argv) {
 					if (it->first == "line_width") {
 						int val = util::cfg::parse::whole(it->second);
 
-						omni::assertion(val >= 0, std::string("Value `") + std::to_string(val) + std::string("` invalid for option `") + it->first + std::string("`; number must be positive"));
+						omni::assert(val >= 0, std::string("Value `") + std::to_string(val) + std::string("` invalid for option `") + it->first + std::string("`; number must be positive"));
 
 						state::lineWd = val;
 					}
@@ -619,7 +619,7 @@ int main(int argc, char** argv) {
 					if (it->first == "tab_width") {
 						int val = util::cfg::parse::whole(it->second);
 
-						omni::assertion(val >= 0, std::string("Value `") + std::to_string(val) + std::string("` invalid for option `") + it->first + std::string("`; number must be positive"));
+						omni::assert(val >= 0, std::string("Value `") + std::to_string(val) + std::string("` invalid for option `") + it->first + std::string("`; number must be positive"));
 
 						state::tabWd = val;
 					}
@@ -678,7 +678,7 @@ int main(int argc, char** argv) {
 	}
 
 	if (argc > 1) {
-		omni::assertion(omni::stage.find(argv[1]) != omni::stage.end(), "Couldn't initialize; no corresponding section `" + std::string(argv[1]) + "`");
+		omni::assert(omni::stage.find(argv[1]) != omni::stage.end(), "Couldn't initialize; no corresponding section `" + std::string(argv[1]) + "`");
 
 		stage = argv[1];
 	} else {
@@ -689,7 +689,7 @@ int main(int argc, char** argv) {
 
 		std::string path = std::string("lvl/") + argv[1] + std::string("/") + name + std::string(".json");
 		std::ifstream in(path);
-		omni::assertion(in.good(), "Couldn't initialize; no level `" + std::to_string(std::stoi(argv[2])) + std::string("` in stage `") + argv[1] + std::string("`"));
+		omni::assert(in.good(), "Couldn't initialize; no level `" + std::to_string(std::stoi(argv[2])) + std::string("` in stage `") + argv[1] + std::string("`"));
 
 		lvl = atoi(argv[2]);
 	} else {

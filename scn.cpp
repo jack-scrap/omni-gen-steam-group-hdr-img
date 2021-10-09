@@ -193,7 +193,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 	goal = desired._ptr;
 
 	for (int i = 0; i < init._no; i++) {
-		omni::assertion(init._type[i] == desired._type[i], std::string("Data `") + data[i]->_id + std::string("` not comparable"));
+		omni::assert(init._type[i] == desired._type[i], std::string("Data `") + data[i]->_id + std::string("` not comparable"));
 	}
 
 	type = init._type;
@@ -244,7 +244,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 			Crane* _ = craneMk(init, loc, rot);
 
-			omni::assertion(!util::phys::collGround(_->_parent), "Crane clipping into ground plane");
+			omni::assert(!util::phys::collGround(_->_parent), "Crane clipping into ground plane");
 
 			crane._sz += sizeof (Crane*);
 			crane._ptr = (Crane**) realloc(crane._ptr, crane._sz);
@@ -283,7 +283,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 			Truck* _ = truckMk(array, loc, rot);
 
-			omni::assertion(!util::phys::collGround(_->_parent), "Truck clipping into ground plane");
+			omni::assert(!util::phys::collGround(_->_parent), "Truck clipping into ground plane");
 
 			truck._sz += sizeof (Truck*);
 			truck._ptr = (Truck**) realloc(truck._ptr, truck._sz);
