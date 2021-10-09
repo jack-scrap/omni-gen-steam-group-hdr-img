@@ -45,3 +45,5 @@ A full list of commands and hotkeys can be found in "omni.txt".
 
 # Configuration
 The `cfg` directory contains files that will be evaluated on startup.
+
+See `cfg.txt` for a list of available options.
