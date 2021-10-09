@@ -46,7 +46,7 @@ namespace util {
 			const std::string sep = "/";
 
 			const std::string home = "~";
-			const std::string homeExpand = "asdf";
+			const std::string homeExpand = "player";
 
 			const std::string curr = ".";
 			const std::string prev = "..";
