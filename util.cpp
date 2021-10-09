@@ -193,7 +193,7 @@ std::string util::fs::perm(std::string fName) {
 }
 
 std::string util::fs::path::name(std::string path) {
-	std::vector<std::string> tok = str::split(path, '/');
+	std::vector<std::string> tok = path::tok(path);
 
 	std::string f;
 	if (tok.size()) {
