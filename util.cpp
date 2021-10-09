@@ -52,14 +52,9 @@ std::vector<std::string> util::fs::rd<std::vector<std::string>>(std::string fNam
 }
 
 bool util::fs::exist(std::string fName) {
-	std::ifstream in;
-	in.open(std::string(".") + std::string("/") + fName);
+	struct stat info;
 
-	bool _ = in.good();
-
-	in.close();
-
-	return _;
+	return !stat(fName.c_str(), &info);
 }
 
 void util::fs::write(std::string fName, std::vector<std::string> buff) {
