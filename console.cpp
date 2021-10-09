@@ -900,14 +900,19 @@ void Console::exec() {
 							break;
 					}
 
-					if (util::fs::exist(_home + "/" + _cwd + "/" + fName)) {
-						std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(_home + "/" +  _cwd + "/" + arg[0]);
+					struct stat s;
+					stat(std::string(_home + "/" + _cwd + "/" + fName).c_str(), &s);
 
-						util::fs::write(_home + "/" +  _cwd + "/" + arg.back(), buff);
-					} else {
-						omni::err(omni::ERR_FS_NO_FILE, {
-							fName
-						});
+					if (s.st_mode & S_IFREG) {
+						if (util::fs::exist(_home + "/" + _cwd + "/" + fName)) {
+							std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(_home + "/" +  _cwd + "/" + arg[0]);
+
+							util::fs::write(_home + "/" +  _cwd + "/" + arg.back(), buff);
+						} else {
+							omni::err(omni::ERR_FS_NO_FILE, {
+								fName
+							});
+						}
 					}
 
 					_tree = util::fs::ls(_home + "/" + _cwd);
