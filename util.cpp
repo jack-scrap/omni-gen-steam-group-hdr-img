@@ -100,12 +100,18 @@ void util::fs::del(std::string name) {
 			}
 		}
 
-		// files
+		// entries
 		for (int i = 0; i < tree.size(); i++) {
-			if (remove(std::string(name + "/" + tree[i]["name"]).c_str()) != 0) {
-				omni::err(omni::ERR_FS_DEL_ENTRY, {
-					name + "/" + tree[i]["name"]
-				});
+			if (s.st_mode & S_IFREG) {
+				if (remove(std::string(name + "/" + tree[i]["name"]).c_str()) != 0) {
+					omni::err(omni::ERR_FS_DEL_ENTRY, {
+						name + "/" + tree[i]["name"]
+					});
+				}
+			}
+
+			if (s.st_mode & S_IFDIR) {
+				del(name + "/" + tree[i]["name"]);
 			}
 		}
 
