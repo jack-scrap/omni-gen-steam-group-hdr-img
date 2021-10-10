@@ -146,9 +146,15 @@ void util::fs::cp(std::string src, std::string dest) {
 			}
 
 			for (int i = 0; i < tree.size(); i++) {
-				std::vector<std::string> buff = rd<std::vector<std::string>>(src + "/" + tree[i]["name"]);
+				if (s.st_mode & S_IFREG) {
+					std::vector<std::string> buff = rd<std::vector<std::string>>(src + "/" + tree[i]["name"]);
 
-				write(dest + "/" + tree[i]["name"], buff);
+					write(dest + "/" + tree[i]["name"], buff);
+				}
+
+				if (s.st_mode & S_IFDIR) {
+					cp(src + "/" + tree[i]["name"], dest + "/" + tree[i]["name"]);
+				}
 			}
 		}
 	} else {
