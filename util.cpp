@@ -108,6 +108,7 @@ void util::fs::del(std::string name) {
 			}
 		}
 
+		// empty directory
 		if (remove(name.c_str()) != 0) {
 			omni::err(omni::ERR_FS_DEL_ENTRY, {
 				name
