@@ -93,7 +93,7 @@ void util::fs::del(std::string name) {
 	}
 
 	if (s.st_mode & S_IFDIR) {
-		std::vector<std::map<std::string, std::string>> tree = util::fs::ls(name);
+		std::vector<std::map<std::string, std::string>> tree = ls(name);
 		for (int i = 0; i < tree.size(); i++) {
 			if (tree[i]["name"] == "..") {
 				tree.erase(tree.begin() + i);
@@ -131,7 +131,7 @@ void util::fs::cp(std::string src, std::string dest) {
 		if (s.st_mode & S_IFDIR) {
 			mkdir(dest.c_str(), S_IRWXU);
 
-			std::vector<std::map<std::string, std::string>> tree = util::fs::ls(src);
+			std::vector<std::map<std::string, std::string>> tree = ls(src);
 			for (int i = 0; i < tree.size(); i++) {
 				if (tree[i]["name"] == "..") {
 					tree.erase(tree.begin() + i);
@@ -139,9 +139,9 @@ void util::fs::cp(std::string src, std::string dest) {
 			}
 
 			for (int i = 0; i < tree.size(); i++) {
-				std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(src + "/" + tree[i]["name"]);
+				std::vector<std::string> buff = rd<std::vector<std::string>>(src + "/" + tree[i]["name"]);
 
-				util::fs::write(dest + "/" + tree[i]["name"], buff);
+				write(dest + "/" + tree[i]["name"], buff);
 			}
 		}
 	} else {
