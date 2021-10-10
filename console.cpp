@@ -582,7 +582,6 @@ void Console::changeDir(std::string dir) {
 	_cwd = dir;
 
 	_tree = util::fs::ls(_home + "/" + _cwd);
-
 	for (int i = 0; i < _tree.size(); i++) {
 		if (_tree[i]["name"] == "..") {
 			if (_cwd == ".") {
@@ -815,7 +814,6 @@ void Console::exec() {
 					}
 
 					_tree = util::fs::ls(_home + "/" + _cwd);
-
 					for (int i = 0; i < _tree.size(); i++) {
 						if (_tree[i]["name"] == "..") {
 							if (_cwd == ".") {
@@ -845,7 +843,6 @@ void Console::exec() {
 
 					if (refresh) {
 						_tree = util::fs::ls(_home + "/" + _cwd);
-
 						for (int i = 0; i < _tree.size(); i++) {
 							if (_tree[i]["name"] == "..") {
 								if (_cwd == ".") {
@@ -875,7 +872,6 @@ void Console::exec() {
 					util::fs::del(_home + "/" + fName);
 
 					_tree = util::fs::ls(_home + "/" + _cwd);
-
 					for (int i = 0; i < _tree.size(); i++) {
 						if (_tree[i]["name"] == "..") {
 							if (_cwd == ".") {
@@ -908,7 +904,6 @@ void Console::exec() {
 					}
 
 					_tree = util::fs::ls(_home + "/" + _cwd);
-
 					for (int i = 0; i < _tree.size(); i++) {
 						if (_tree[i]["name"] == "..") {
 							if (_cwd == ".") {
@@ -935,7 +930,6 @@ void Console::exec() {
 					util::fs::cp(_home + "/" + _cwd + "/" + name, _home + "/" + _cwd + "/" + arg.back());
 
 					_tree = util::fs::ls(_home + "/" + _cwd);
-
 					for (int i = 0; i < _tree.size(); i++) {
 						if (_tree[i]["name"] == "..") {
 							if (_cwd == ".") {
