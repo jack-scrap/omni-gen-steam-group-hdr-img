@@ -51,10 +51,10 @@ std::vector<std::string> util::fs::rd<std::vector<std::string>>(std::string fNam
 	return cont;
 }
 
-bool util::fs::exist(std::string fName) {
+bool util::fs::exist(std::string name) {
 	struct stat info;
 
-	return !stat(fName.c_str(), &info);
+	return !stat(name.c_str(), &info);
 }
 
 void util::fs::write(std::string fName, std::vector<std::string> buff) {
