@@ -815,6 +815,14 @@ void Console::exec() {
 					}
 
 					_tree = util::fs::ls(_home + "/" + _cwd);
+
+					for (int i = 0; i < _tree.size(); i++) {
+						if (_tree[i]["name"] == "..") {
+							if (_cwd == ".") {
+								_tree.erase(_tree.begin() + i);
+							}
+						}
+					}
 				}
 
 				if (cmd == "save") {
@@ -837,6 +845,14 @@ void Console::exec() {
 
 					if (refresh) {
 						_tree = util::fs::ls(_home + "/" + _cwd);
+
+						for (int i = 0; i < _tree.size(); i++) {
+							if (_tree[i]["name"] == "..") {
+								if (_cwd == ".") {
+									_tree.erase(_tree.begin() + i);
+								}
+							}
+						}
 					}
 
 					_diff = false;
@@ -859,6 +875,14 @@ void Console::exec() {
 					util::fs::del(_home + "/" + fName);
 
 					_tree = util::fs::ls(_home + "/" + _cwd);
+
+					for (int i = 0; i < _tree.size(); i++) {
+						if (_tree[i]["name"] == "..") {
+							if (_cwd == ".") {
+								_tree.erase(_tree.begin() + i);
+							}
+						}
+					}
 				}
 
 				if (cmd == "rename") {
@@ -884,6 +908,14 @@ void Console::exec() {
 					}
 
 					_tree = util::fs::ls(_home + "/" + _cwd);
+
+					for (int i = 0; i < _tree.size(); i++) {
+						if (_tree[i]["name"] == "..") {
+							if (_cwd == ".") {
+								_tree.erase(_tree.begin() + i);
+							}
+						}
+					}
 				}
 
 				if (cmd == "copy") {
@@ -903,6 +935,14 @@ void Console::exec() {
 					util::fs::cp(_home + "/" + _cwd + "/" + name, _home + "/" + _cwd + "/" + arg.back());
 
 					_tree = util::fs::ls(_home + "/" + _cwd);
+
+					for (int i = 0; i < _tree.size(); i++) {
+						if (_tree[i]["name"] == "..") {
+							if (_cwd == ".") {
+								_tree.erase(_tree.begin() + i);
+							}
+						}
+					}
 				}
 
 				if (cmd == "run") {
