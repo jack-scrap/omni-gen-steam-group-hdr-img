@@ -13,6 +13,9 @@
 [Enter] -                  New line
 [Backspace] -              Delete
 
+[Ctrl] + [z] -             Undo
+[Ctrl] + [r] -             Redo
+
 ## Prompt
 `*command* *argument* ...`
 
