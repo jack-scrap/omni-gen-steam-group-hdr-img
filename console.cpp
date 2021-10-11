@@ -586,6 +586,8 @@ void Console::changeDir(std::string dir) {
 		if (_tree[i]["name"] == "..") {
 			if (_cwd == ".") {
 				_tree.erase(_tree.begin() + i);
+
+				break;
 			}
 		}
 	}
@@ -818,6 +820,8 @@ void Console::exec() {
 						if (_tree[i]["name"] == "..") {
 							if (_cwd == ".") {
 								_tree.erase(_tree.begin() + i);
+
+								break;
 							}
 						}
 					}
@@ -847,6 +851,8 @@ void Console::exec() {
 							if (_tree[i]["name"] == "..") {
 								if (_cwd == ".") {
 									_tree.erase(_tree.begin() + i);
+
+									break;
 								}
 							}
 						}
@@ -876,6 +882,8 @@ void Console::exec() {
 						if (_tree[i]["name"] == "..") {
 							if (_cwd == ".") {
 								_tree.erase(_tree.begin() + i);
+
+								break;
 							}
 						}
 					}
@@ -908,6 +916,8 @@ void Console::exec() {
 						if (_tree[i]["name"] == "..") {
 							if (_cwd == ".") {
 								_tree.erase(_tree.begin() + i);
+
+								break;
 							}
 						}
 					}
@@ -934,6 +944,8 @@ void Console::exec() {
 						if (_tree[i]["name"] == "..") {
 							if (_cwd == ".") {
 								_tree.erase(_tree.begin() + i);
+
+								break;
 							}
 						}
 					}
