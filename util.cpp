@@ -84,14 +84,6 @@ void util::fs::del(std::string name) {
 	struct stat s;
 	stat(name.c_str(), &s);
 
-	if (s.st_mode & S_IFREG) {
-		if (remove(name.c_str()) != 0) {
-			omni::err(omni::ERR_FS_DEL_ENTRY, {
-				name
-			});
-		}
-	}
-
 	if (s.st_mode & S_IFDIR) {
 		std::vector<std::map<std::string, std::string>> tree = ls(name);
 		for (int i = 0; i < tree.size(); i++) {
@@ -102,20 +94,24 @@ void util::fs::del(std::string name) {
 
 		// entries
 		for (int i = 0; i < tree.size(); i++) {
-			if (s.st_mode & S_IFREG) {
+			if (s.st_mode & S_IFDIR) {
+				del(name + "/" + tree[i]["name"]);
+			} else {
 				if (remove(std::string(name + "/" + tree[i]["name"]).c_str()) != 0) {
 					omni::err(omni::ERR_FS_DEL_ENTRY, {
 						name + "/" + tree[i]["name"]
 					});
 				}
 			}
-
-			if (s.st_mode & S_IFDIR) {
-				del(name + "/" + tree[i]["name"]);
-			}
 		}
 
 		// empty directory
+		if (remove(name.c_str()) != 0) {
+			omni::err(omni::ERR_FS_DEL_ENTRY, {
+				name
+			});
+		}
+	} else {
 		if (remove(name.c_str()) != 0) {
 			omni::err(omni::ERR_FS_DEL_ENTRY, {
 				name
