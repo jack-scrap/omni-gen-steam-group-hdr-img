@@ -97,7 +97,7 @@ void util::fs::del(std::string name) {
 			if (s.st_mode & S_IFDIR) {
 				del(name + "/" + tree[i]["name"]);
 			} else {
-				if (remove(std::string(name + "/" + tree[i]["name"]).c_str()) != 0) {
+				if (remove(std::string(name + "/" + tree[i]["name"]).c_str())) {
 					omni::err(omni::ERR_FS_DEL_ENTRY, {
 						name + "/" + tree[i]["name"]
 					});
@@ -106,13 +106,13 @@ void util::fs::del(std::string name) {
 		}
 
 		// empty directory
-		if (remove(name.c_str()) != 0) {
+		if (remove(name.c_str())) {
 			omni::err(omni::ERR_FS_DEL_ENTRY, {
 				name
 			});
 		}
 	} else {
-		if (remove(name.c_str()) != 0) {
+		if (remove(name.c_str())) {
 			omni::err(omni::ERR_FS_DEL_ENTRY, {
 				name
 			});
