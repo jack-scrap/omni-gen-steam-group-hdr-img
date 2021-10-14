@@ -1551,21 +1551,27 @@ std::vector<std::string> util::log(unsigned int loc, unsigned int ptrEditorX) {
 	}
 	buff.push_back(lb);
 
-	std::string keyLoc = "LOC: ";
-	std::string valLoc = std::to_string(loc);
+	std::map<std::string, std::string> attr = {
+		{
+			"LOC",
+			std::to_string(loc)
+		}, {
+			"CALLS",
+			std::to_string(c)
+		}
+	};
 
-	std::string pairLoc = str::pad(keyLoc, (state::lineWd - ptrEditorX - 1) - valLoc.size());
-	pairLoc += valLoc;
+	for (std::map<std::string, std::string>::iterator it = attr.begin(); it != attr.end(); ++it) {
+		std::string key = it->first;
+		key += ":";
 
-	buff.push_back(pairLoc);
+		std::string val = it->second;
 
-	std::string keyCalls = "CALLS: ";
-	std::string valCalls = std::to_string(c);
+		std::string pair = str::pad(key, (state::lineWd - ptrEditorX - 1) - val.size());
+		pair += val;
 
-	std::string pairCalls = str::pad(keyCalls, (state::lineWd - ptrEditorX - 1) - valCalls.size());
-	pairCalls += valCalls;
-
-	buff.push_back(pairCalls);
+		buff.push_back(pair);
+	}
 
 	for (int i = buff.size(); i < state::lineCnt - 2 - 1 - 2 - 1; i++) {
 		buff.push_back("");
