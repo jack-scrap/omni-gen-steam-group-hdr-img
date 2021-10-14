@@ -582,13 +582,19 @@ void Console::changeDir(std::string dir) {
 	_cwd = dir;
 
 	_tree = util::fs::ls(_home + util::fs::path::sep + _cwd);
-	if (_cwd == util::fs::path::curr) {
-		_tree.erase(std::remove_if(_tree.begin(), _tree.end(), [](std::map<std::string, std::string> entry) {
-			return entry["name"] == util::fs::path::prev;
-		}));
-
-		std::sort(_tree.begin(), _tree.end(), lexicoEntry);
+	if (_cwd != util::fs::path::curr) {
+		_tree.push_back({
+			{
+				"name",
+				util::fs::path::prev
+			}, {
+				"type",
+				"dir"
+			}
+		});
 	}
+
+	std::sort(_tree.begin(), _tree.end(), lexicoEntry);
 
 	_cursFs = 0;
 }
@@ -812,13 +818,19 @@ void Console::exec() {
 					}
 
 					_tree = util::fs::ls(_home + util::fs::path::sep + _cwd);
-					if (_cwd == util::fs::path::curr) {
-						_tree.erase(std::remove_if(_tree.begin(), _tree.end(), [](std::map<std::string, std::string> entry) {
-							return entry["name"] == util::fs::path::prev;
-						}));
-
-						std::sort(_tree.begin(), _tree.end(), lexicoEntry);
+					if (_cwd != util::fs::path::curr) {
+						_tree.push_back({
+							{
+								"name",
+								util::fs::path::prev
+							}, {
+								"type",
+								"dir"
+							}
+						});
 					}
+
+					std::sort(_tree.begin(), _tree.end(), lexicoEntry);
 				}
 
 				if (cmd == "save") {
@@ -841,13 +853,19 @@ void Console::exec() {
 
 					if (refresh) {
 						_tree = util::fs::ls(_home + util::fs::path::sep + _cwd);
-						if (_cwd == util::fs::path::curr) {
-							_tree.erase(std::remove_if(_tree.begin(), _tree.end(), [](std::map<std::string, std::string> entry) {
-								return entry["name"] == util::fs::path::prev;
-							}));
-
-							std::sort(_tree.begin(), _tree.end(), lexicoEntry);
+						if (_cwd != util::fs::path::curr) {
+							_tree.push_back({
+								{
+									"name",
+									util::fs::path::prev
+								}, {
+									"type",
+									"dir"
+								}
+							});
 						}
+
+						std::sort(_tree.begin(), _tree.end(), lexicoEntry);
 					}
 
 					_diff = false;
@@ -870,13 +888,19 @@ void Console::exec() {
 					util::fs::del(_home + util::fs::path::sep + fName);
 
 					_tree = util::fs::ls(_home + util::fs::path::sep + _cwd);
-					if (_cwd == util::fs::path::curr) {
-						_tree.erase(std::remove_if(_tree.begin(), _tree.end(), [](std::map<std::string, std::string> entry) {
-							return entry["name"] == util::fs::path::prev;
-						}));
-
-						std::sort(_tree.begin(), _tree.end(), lexicoEntry);
+					if (_cwd != util::fs::path::curr) {
+						_tree.push_back({
+							{
+								"name",
+								util::fs::path::prev
+							}, {
+								"type",
+								"dir"
+							}
+						});
 					}
+
+					std::sort(_tree.begin(), _tree.end(), lexicoEntry);
 				}
 
 				if (cmd == "rename") {
@@ -902,13 +926,19 @@ void Console::exec() {
 					}
 
 					_tree = util::fs::ls(_home + util::fs::path::sep + _cwd);
-					if (_cwd == util::fs::path::curr) {
-						_tree.erase(std::remove_if(_tree.begin(), _tree.end(), [](std::map<std::string, std::string> entry) {
-							return entry["name"] == util::fs::path::prev;
-						}));
-
-						std::sort(_tree.begin(), _tree.end(), lexicoEntry);
+					if (_cwd != util::fs::path::curr) {
+						_tree.push_back({
+							{
+								"name",
+								util::fs::path::prev
+							}, {
+								"type",
+								"dir"
+							}
+						});
 					}
+
+					std::sort(_tree.begin(), _tree.end(), lexicoEntry);
 				}
 
 				if (cmd == "copy") {
@@ -928,13 +958,19 @@ void Console::exec() {
 					util::fs::cp(_home + util::fs::path::sep + _cwd + util::fs::path::sep + name, _home + util::fs::path::sep + _cwd + util::fs::path::sep + arg.back());
 
 					_tree = util::fs::ls(_home + util::fs::path::sep + _cwd);
-					if (_cwd == util::fs::path::curr) {
-						_tree.erase(std::remove_if(_tree.begin(), _tree.end(), [](std::map<std::string, std::string> entry) {
-							return entry["name"] == util::fs::path::prev;
-						}));
-
-						std::sort(_tree.begin(), _tree.end(), lexicoEntry);
+					if (_cwd != util::fs::path::curr) {
+						_tree.push_back({
+							{
+								"name",
+								util::fs::path::prev
+							}, {
+								"type",
+								"dir"
+							}
+						});
 					}
+
+					std::sort(_tree.begin(), _tree.end(), lexicoEntry);
 				}
 
 				if (cmd == "run") {
