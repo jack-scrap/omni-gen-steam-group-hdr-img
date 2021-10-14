@@ -673,7 +673,7 @@ int main(int argc, char** argv) {
 	nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("stat.json"));
 	for (std::map<std::string, unsigned int>::iterator it = omni::stage.begin(); it != omni::stage.end(); ++it) {
 		if (serial["rank"] >= it->second) {
-			chmod(std::string("player/script/" + it->first).c_str(), S_IRWXU | S_IRWXG | S_IRWXO);
+			chmod(std::string("player/script/" + it->first).c_str(), S_IRUSR | S_IWUSR | S_IXUSR);
 		}
 	}
 
