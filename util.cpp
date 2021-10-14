@@ -75,7 +75,7 @@ void util::fs::write(std::string fName, std::vector<std::string> buff) {
 	}));
 	entry.insert(entry.begin(), ".");
 
-	std::string name = entry.back();
+	std::string f = entry.back();
 
 	entry.pop_back();
 
@@ -90,7 +90,7 @@ void util::fs::write(std::string fName, std::vector<std::string> buff) {
 		f.close();
 	} else {
 		omni::err(omni::ERR_FS_NO_PARENT_DIR, {
-			name,
+			f,
 			entry.back()
 		});
 	}
