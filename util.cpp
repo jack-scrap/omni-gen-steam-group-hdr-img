@@ -39,7 +39,7 @@ std::string util::fs::rd<std::string>(std::string fName) {
 template <>
 std::vector<std::string> util::fs::rd<std::vector<std::string>>(std::string fName) {
 	std::ifstream in;
-	in.open(std::string(path::curr) + std::string(path::sep) + fName);
+	in.open(path::curr + path::sep + fName);
 
 	std::vector<std::string> cont;
 	for (std::string l; std::getline(in, l);) {
@@ -179,7 +179,7 @@ void util::fs::cp(std::string src, std::string dest) {
 std::vector<std::map<std::string, std::string>> util::fs::ls(std::string path) {
 	std::vector<std::map<std::string, std::string>> tree;
 
-	std::string full = std::string(path::curr) + std::string(path::sep) + path;
+	std::string full = path::curr + path::sep + path;
 	auto dir = opendir(full.c_str());
 
 	if (!dir) {
