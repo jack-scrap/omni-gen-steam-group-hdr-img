@@ -36,11 +36,11 @@ class _Array(Structure):
 	]
 
 class _Dict(Structure):
-    _fields_ = [
-        ('_data', POINTER(c_void_p)),
-        ('_type', POINTER(c_uint)),
-        ('_no', c_uint)
-    ]
+	_fields_ = [
+		('_data', POINTER(c_void_p)),
+		('_type', POINTER(c_uint)),
+		('_no', c_uint)
+	]
 
 class _Var(Structure):
 	_fields_ = [
@@ -90,11 +90,11 @@ for i in range(_noData):
 		goal[id] = array
 
 	if _type[i] == 2:
-                ptr = cast(_data[i].contents._ptr, POINTER(_Dict))
-                dict = _Dict(ptr.contents._data, ptr.contents._type, ptr.contents._no)
+				ptr = cast(_data[i].contents._ptr, POINTER(_Dict))
+				dict = _Dict(ptr.contents._data, ptr.contents._type, ptr.contents._no)
 
-                data[id] = dict
-                goal[id] = dict
+				data[id] = dict
+				goal[id] = dict
 
 # bound
 class _Lim(Structure):
@@ -131,6 +131,10 @@ bound = {
 }
 
 # vehicle
+_cInc = _scn.cInc
+_cInc.restype = c_void_p
+_cInc.argtypes = None
+
 class _Crane(_Obj):
 	_fields_ = [
 		('_data', POINTER(_Cont)),
@@ -145,11 +149,15 @@ class _Crane(_Obj):
 		for i in range(3):
 			self._loc[i] = self._ptr.contents._loc[i]
 
+		_cInc()
+
 	def pan(self, delta):
 		_cranePan(self._ptr, delta)
 
 		for i in range(3):
 			self._loc[i] = self._ptr.contents._loc[i]
+
+		_cInc()
 
 	def ped(self, delta):
 		_cranePed(self._ptr, delta)
@@ -157,10 +165,14 @@ class _Crane(_Obj):
 		for i in range(3):
 			self._loc[i] = self._ptr.contents._loc[i]
 
+		_cInc()
+
 	def grab(self):
 		_craneGrab(self._ptr)
 
 		self._data = self._ptr.contents._data
+
+		_cInc()
 
 _craneZoom = _crane.craneZoom
 _craneZoom.restype = c_void_p
@@ -203,11 +215,15 @@ class _Truck(_Obj):
 		for i in range(3):
 			self._loc[i] = self._ptr.contents._loc[i]
 
+		_cInc()
+
 	def mv(self, delta):
 		for i in range(3):
 			self._loc[i] = self._ptr.contents._loc[i]
 
 		_truckMv(self._ptr, delta)
+
+		_cInc()
 
 _truckTurn = _truck.truckTurn
 _truckTurn.restype = c_void_p
@@ -234,6 +250,8 @@ class _CargoShip(_Obj):
 
 		for i in range(3):
 			self._loc[i] = self._ptr.contents._loc[i]
+
+		_cInc()
 
 _cargoShipMv = _cargo_ship.cargoShipMv
 _cargoShipMv.restype = c_void_p
@@ -310,6 +328,8 @@ class _(_Obj):
 
 	def toggle(self, i):
 		_streetSignToggle(self._ptr, i)
+
+		_cInc()
 
 # control-flow
 _streetSignGet = _scn.streetSignGet

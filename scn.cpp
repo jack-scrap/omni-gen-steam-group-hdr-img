@@ -123,6 +123,12 @@ CArr pathGet() {
 	return path;
 }
 
+unsigned int c = 0;
+
+void cInc() {
+	c++;
+}
+
 void scn::init(std::string stage, unsigned int lvl) {
 	nlohmann::json deser = nlohmann::json::parse(util::fs::rd<std::string>("lvl/" + stage + "/" + std::to_string(lvl) + ".json"));
 
@@ -414,4 +420,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 		obj.push_back(_->_parent);
 		prim.push_back(Mesh::OBJ);
 	}
+
+	c = 0;
 }
