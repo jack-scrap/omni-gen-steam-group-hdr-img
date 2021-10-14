@@ -188,22 +188,22 @@ std::vector<std::map<std::string, std::string>> util::fs::ls(std::string path) {
 		});
 	}
 
-	while (auto entity = readdir(dir)) {
-		if (strcmp(entity->d_name, path::curr.c_str())) {
+	while (auto entry = readdir(dir)) {
+		if (strcmp(entry->d_name, path::curr.c_str())) {
 			std::string type;
-			if (entity->d_type == DT_REG) {
+			if (entry->d_type == DT_REG) {
 				type = "file";
 			}
 
-			if (entity->d_type == DT_DIR) {
+			if (entry->d_type == DT_DIR) {
 				type = "dir";
 			}
 
-			if (strcmp(entity->d_name, path::prev.c_str())) {
+			if (strcmp(entry->d_name, path::prev.c_str())) {
 				tree.push_back({
 					{
 						"name",
-						std::string(entity->d_name)
+						std::string(entry->d_name)
 					}, {
 						"type",
 						type
@@ -214,7 +214,7 @@ std::vector<std::map<std::string, std::string>> util::fs::ls(std::string path) {
 					tree.push_back({
 						{
 							"name",
-							std::string(entity->d_name)
+							std::string(entry->d_name)
 						}, {
 							"type",
 							type
@@ -262,14 +262,14 @@ void util::fs::setW(std::string fName) {
 
 
 		auto dir = opendir(fName.c_str());
-		while (auto entity = readdir(dir)) {
-			if (entity->d_type == DT_REG) {
-				chmod(std::string(fName + path::sep + entity->d_name).c_str(), S_IRUSR | S_IWUSR | S_IXUSR);
+		while (auto entry = readdir(dir)) {
+			if (entry->d_type == DT_REG) {
+				chmod(std::string(fName + path::sep + entry->d_name).c_str(), S_IRUSR | S_IWUSR | S_IXUSR);
 			}
 
-			if (entity->d_type == DT_DIR) {
-				if (strcmp(entity->d_name, path::curr.c_str()) && strcmp(entity->d_name, path::prev.c_str())) {
-					setW(fName + path::sep + std::string(entity->d_name));
+			if (entry->d_type == DT_DIR) {
+				if (strcmp(entry->d_name, path::curr.c_str()) && strcmp(entry->d_name, path::prev.c_str())) {
+					setW(fName + path::sep + std::string(entry->d_name));
 				}
 			}
 		}
