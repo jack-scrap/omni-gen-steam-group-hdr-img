@@ -39,7 +39,7 @@ std::string util::fs::rd<std::string>(std::string fName) {
 template <>
 std::vector<std::string> util::fs::rd<std::vector<std::string>>(std::string fName) {
 	std::ifstream in;
-	in.open(std::string(".") + std::string("/") + fName);
+	in.open(std::string(path::curr) + std::string(path::sep) + fName);
 
 	std::vector<std::string> cont;
 	for (std::string l; std::getline(in, l);) {
@@ -73,7 +73,7 @@ void util::fs::write(std::string fName, std::vector<std::string> buff) {
 	std::vector<std::string> entry = path::entry(path::tok({
 		fName
 	}));
-	entry.insert(entry.begin(), ".");
+	entry.insert(entry.begin(), path::curr);
 
 	std::string f = entry.back();
 
@@ -103,7 +103,7 @@ void util::fs::del(std::string name) {
 	if (s.st_mode & S_IFDIR) {
 		std::vector<std::map<std::string, std::string>> tree = ls(name);
 		for (int i = 0; i < tree.size(); i++) {
-			if (tree[i]["name"] == "..") {
+			if (tree[i]["name"] == path::prev) {
 				tree.erase(tree.begin() + i);
 			}
 		}
@@ -111,11 +111,11 @@ void util::fs::del(std::string name) {
 		// entries
 		for (int i = 0; i < tree.size(); i++) {
 			if (s.st_mode & S_IFDIR) {
-				del(name + "/" + tree[i]["name"]);
+				del(name + path::sep + tree[i]["name"]);
 			} else {
-				if (remove(std::string(name + "/" + tree[i]["name"]).c_str())) {
+				if (remove(std::string(name + path::sep + tree[i]["name"]).c_str())) {
 					omni::err(omni::ERR_FS_DEL_ENTRY, {
-						name + "/" + tree[i]["name"]
+						name + path::sep + tree[i]["name"]
 					});
 				}
 			}
@@ -152,20 +152,20 @@ void util::fs::cp(std::string src, std::string dest) {
 
 			std::vector<std::map<std::string, std::string>> tree = ls(src);
 			for (int i = 0; i < tree.size(); i++) {
-				if (tree[i]["name"] == "..") {
+				if (tree[i]["name"] == path::prev) {
 					tree.erase(tree.begin() + i);
 				}
 			}
 
 			for (int i = 0; i < tree.size(); i++) {
 				if (s.st_mode & S_IFREG) {
-					std::vector<std::string> buff = rd<std::vector<std::string>>(src + "/" + tree[i]["name"]);
+					std::vector<std::string> buff = rd<std::vector<std::string>>(src + path::sep + tree[i]["name"]);
 
-					write(dest + "/" + tree[i]["name"], buff);
+					write(dest + path::sep + tree[i]["name"], buff);
 				}
 
 				if (s.st_mode & S_IFDIR) {
-					cp(src + "/" + tree[i]["name"], dest + "/" + tree[i]["name"]);
+					cp(src + path::sep + tree[i]["name"], dest + path::sep + tree[i]["name"]);
 				}
 			}
 		}
@@ -179,7 +179,7 @@ void util::fs::cp(std::string src, std::string dest) {
 std::vector<std::map<std::string, std::string>> util::fs::ls(std::string path) {
 	std::vector<std::map<std::string, std::string>> tree;
 
-	std::string full = std::string(".") + std::string("/") + path;
+	std::string full = std::string(path::curr) + std::string(path::sep) + path;
 	auto dir = opendir(full.c_str());
 
 	if (!dir) {
@@ -189,7 +189,7 @@ std::vector<std::map<std::string, std::string>> util::fs::ls(std::string path) {
 	}
 
 	while (auto entity = readdir(dir)) {
-		if (strcmp(entity->d_name, ".")) {
+		if (strcmp(entity->d_name, path::curr.c_str())) {
 			std::string type;
 			if (entity->d_type == DT_REG) {
 				type = "file";
@@ -199,7 +199,7 @@ std::vector<std::map<std::string, std::string>> util::fs::ls(std::string path) {
 				type = "dir";
 			}
 
-			if (strcmp(entity->d_name, "..")) {
+			if (strcmp(entity->d_name, path::prev.c_str())) {
 				tree.push_back({
 					{
 						"name",
@@ -210,7 +210,7 @@ std::vector<std::map<std::string, std::string>> util::fs::ls(std::string path) {
 					}
 				});
 			} else {
-				if (path != ".") {
+				if (path != path::curr) {
 					tree.push_back({
 						{
 							"name",
@@ -320,7 +320,7 @@ std::vector<std::string> util::fs::path::entry(std::vector<std::string> tok) {
 }
 
 std::string util::fs::path::build(std::vector<std::string> entry) {
-	entry.insert(entry.begin(), ".");
+	entry.insert(entry.begin(), path::curr);
 
 	std::string _;
 	for (int i = 0; i < entry.size(); i++) {
