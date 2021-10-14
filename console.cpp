@@ -309,11 +309,11 @@ void Console::fmtScr() {
 
 	std::string fInfo;
 
-	fInfo += util::fs::path::name(_home + "/" + _buffName);
+	fInfo += util::fs::path::name(_home + util::fs::path::sep + _buffName);
 	fInfo += ' '; // pad
 
 	if (state::showFilePerm) {
-		std::string perm = util::fs::perm(_home + "/" + _buffName);
+		std::string perm = util::fs::perm(_home + util::fs::path::sep + _buffName);
 
 		// wrap
 		perm.insert(0, "[");
@@ -394,7 +394,7 @@ void Console::fmtScr() {
 		std::string line = _tree[i]["name"];
 
 		if (_tree[i]["type"] == "dir") {
-			line += "/";
+			line += util::fs::path::sep;
 		}
 
 		if (line.size() > maxFs) {
@@ -408,7 +408,7 @@ void Console::fmtScr() {
 		std::string line = _tree[i]["name"];
 
 		if (_tree[i]["type"] == "dir") {
-			line += "/";
+			line += util::fs::path::sep;
 		}
 
 		int c = line.size();
@@ -544,10 +544,10 @@ void Console::render() {
 }
 
 void Console::open(std::string fName) {
-	if (util::fs::exist(_home + "/" + fName)) {
+	if (util::fs::exist(_home + util::fs::path::sep + fName)) {
 		_buffName = fName;
 
-		std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(_home + "/" + _buffName);
+		std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(_home + util::fs::path::sep + _buffName);
 
 		if (buff.size()) {
 			_buff = buff;
@@ -562,7 +562,7 @@ void Console::open(std::string fName) {
 		});
 	}
 
-	if (util::fs::perm(_home + "/" + _buffName)[1] == 'w') {
+	if (util::fs::perm(_home + util::fs::path::sep + _buffName)[1] == 'w') {
 		_cursEditor[MIN][X] = _buff.back().size() - 1 + 1;
 		_cursEditor[MIN][Y] = _buff.size() - 1;
 	} else {
@@ -581,7 +581,7 @@ void Console::open(std::string fName) {
 void Console::changeDir(std::string dir) {
 	_cwd = dir;
 
-	_tree = util::fs::ls(_home + "/" + _cwd);
+	_tree = util::fs::ls(_home + util::fs::path::sep + _cwd);
 	if (_cwd == util::fs::path::curr) {
 		_tree.erase(std::remove_if(_tree.begin(), _tree.end(), [](std::map<std::string, std::string> entry) {
 			return entry["name"] == util::fs::path::prev;
@@ -811,7 +811,7 @@ void Console::exec() {
 						omni::err(omni::ERR_FS_DIR_EXIST);
 					}
 
-					_tree = util::fs::ls(_home + "/" + _cwd);
+					_tree = util::fs::ls(_home + util::fs::path::sep + _cwd);
 					if (_cwd == util::fs::path::curr) {
 						_tree.erase(std::remove_if(_tree.begin(), _tree.end(), [](std::map<std::string, std::string> entry) {
 							return entry["name"] == util::fs::path::prev;
@@ -837,10 +837,10 @@ void Console::exec() {
 
 					bool refresh = !util::fs::exist(fName);
 
-					util::fs::write(_home + "/" + _cwd + "/" + fName, _buff);
+					util::fs::write(_home + util::fs::path::sep + _cwd + util::fs::path::sep + fName, _buff);
 
 					if (refresh) {
-						_tree = util::fs::ls(_home + "/" + _cwd);
+						_tree = util::fs::ls(_home + util::fs::path::sep + _cwd);
 						if (_cwd == util::fs::path::curr) {
 							_tree.erase(std::remove_if(_tree.begin(), _tree.end(), [](std::map<std::string, std::string> entry) {
 								return entry["name"] == util::fs::path::prev;
@@ -867,9 +867,9 @@ void Console::exec() {
 							break;
 					}
 
-					util::fs::del(_home + "/" + fName);
+					util::fs::del(_home + util::fs::path::sep + fName);
 
-					_tree = util::fs::ls(_home + "/" + _cwd);
+					_tree = util::fs::ls(_home + util::fs::path::sep + _cwd);
 					if (_cwd == util::fs::path::curr) {
 						_tree.erase(std::remove_if(_tree.begin(), _tree.end(), [](std::map<std::string, std::string> entry) {
 							return entry["name"] == util::fs::path::prev;
@@ -893,15 +893,15 @@ void Console::exec() {
 							break;
 					}
 
-					if (util::fs::exist(_home + "/" + _cwd + "/" + fName)) {
-						rename((_home + "/" + _cwd + "/" + fName).c_str(), (_home + "/" + _cwd + "/" + arg.back()).c_str());
+					if (util::fs::exist(_home + util::fs::path::sep + _cwd + util::fs::path::sep + fName)) {
+						rename((_home + util::fs::path::sep + _cwd + util::fs::path::sep + fName).c_str(), (_home + util::fs::path::sep + _cwd + util::fs::path::sep + arg.back()).c_str());
 					} else {
 						omni::err(omni::ERR_FS_NO_ENTRY, {
 							fName
 						});
 					}
 
-					_tree = util::fs::ls(_home + "/" + _cwd);
+					_tree = util::fs::ls(_home + util::fs::path::sep + _cwd);
 					if (_cwd == util::fs::path::curr) {
 						_tree.erase(std::remove_if(_tree.begin(), _tree.end(), [](std::map<std::string, std::string> entry) {
 							return entry["name"] == util::fs::path::prev;
@@ -925,9 +925,9 @@ void Console::exec() {
 							break;
 					}
 
-					util::fs::cp(_home + "/" + _cwd + "/" + name, _home + "/" + _cwd + "/" + arg.back());
+					util::fs::cp(_home + util::fs::path::sep + _cwd + util::fs::path::sep + name, _home + util::fs::path::sep + _cwd + util::fs::path::sep + arg.back());
 
-					_tree = util::fs::ls(_home + "/" + _cwd);
+					_tree = util::fs::ls(_home + util::fs::path::sep + _cwd);
 					if (_cwd == util::fs::path::curr) {
 						_tree.erase(std::remove_if(_tree.begin(), _tree.end(), [](std::map<std::string, std::string> entry) {
 							return entry["name"] == util::fs::path::prev;
@@ -943,7 +943,7 @@ void Console::exec() {
 						std::string line = _tree[i]["name"];
 
 						if (_tree[i]["type"] == "dir") {
-							line += "/";
+							line += util::fs::path::sep;
 						}
 
 						if (line.size() > maxFs) {
@@ -969,7 +969,7 @@ void Console::exec() {
 							break;
 					}
 
-					if (util::fs::exist(_home + "/" + fName)) {
+					if (util::fs::exist(_home + util::fs::path::sep + fName)) {
 						std::thread t(dispatch, fName, maxFs + maxNo);
 						t.detach();
 					} else {
@@ -980,7 +980,7 @@ void Console::exec() {
 				}
 
 				if (cmd == "set") {
-					std::string path = "script/" + arg[0] + "/" + arg[1] + "/main.py";
+					std::string path = "script/" + arg[0] + util::fs::path::sep + arg[1] + "/main.py";
 
 					scn::init(arg[0], std::stoi(arg[1]));
 
@@ -991,7 +991,7 @@ void Console::exec() {
 					if (eq) {
 						lvl++;
 
-						std::string fName = "script/" + stage + "/" + std::to_string(lvl) + "/main.py";
+						std::string fName = "script/" + stage + util::fs::path::sep + std::to_string(lvl) + "/main.py";
 
 						scn::init(stage, lvl);
 
@@ -1060,7 +1060,7 @@ void Console::hl() {
 	for (int i = 0; i < _tree.size(); i++) {
 		std::string fmt = _tree[i]["name"];
 		if (_tree[i]["type"] == "dir") {
-			fmt += "/";
+			fmt += util::fs::path::sep;
 		}
 
 		if (fmt.size() > maxFs) {
