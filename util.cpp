@@ -246,6 +246,36 @@ std::string util::fs::perm(std::string fName) {
 	return _;
 }
 
+void util::fs::setW(std::string fName) {
+	struct stat s;
+	stat(fName.c_str(), &s);
+
+	if (s.st_mode & S_IFREG) {
+		chmod(fName.c_str(), S_IRUSR | S_IWUSR | S_IXUSR);
+	}
+
+	if (s.st_mode & S_IFDIR) {
+		std::vector<std::map<std::string, std::string>> tree = ls(fName);
+		tree.erase(std::remove_if(tree.begin(), tree.end(), [](std::map<std::string, std::string> entry) {
+			return entry["name"] == path::curr || entry["name"] == path::prev;
+		}));
+
+
+		auto dir = opendir(fName.c_str());
+		while (auto entity = readdir(dir)) {
+			if (entity->d_type == DT_REG) {
+				chmod(std::string(fName + path::sep + entity->d_name).c_str(), S_IRUSR | S_IWUSR | S_IXUSR);
+			}
+
+			if (entity->d_type == DT_DIR) {
+				if (strcmp(entity->d_name, path::curr.c_str()) && strcmp(entity->d_name, path::prev.c_str())) {
+					setW(fName + path::sep + std::string(entity->d_name));
+				}
+			}
+		}
+	}
+}
+
 std::string util::fs::path::name(std::string path) {
 	std::vector<std::string> tok = path::tok(path);
 

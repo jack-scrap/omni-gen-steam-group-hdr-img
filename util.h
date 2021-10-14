@@ -40,6 +40,8 @@ namespace util {
 
 		std::string perm(std::string fName);
 
+		void setW(std::string fName);
+
 		namespace path {
 			const std::string sep = "/";
 
