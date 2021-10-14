@@ -245,7 +245,6 @@ void util::fs::setW(std::string fName) {
 			return entry["name"] == path::curr || entry["name"] == path::prev;
 		}));
 
-
 		auto dir = opendir(fName.c_str());
 		while (auto entry = readdir(dir)) {
 			if (entry->d_type == DT_REG) {
