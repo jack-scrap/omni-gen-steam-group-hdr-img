@@ -231,29 +231,29 @@ std::string util::fs::perm(std::string fName) {
 	return _;
 }
 
-void util::fs::setW(std::string fName) {
+void util::fs::setW(std::string path) {
 	struct stat s;
-	stat(fName.c_str(), &s);
+	stat(path.c_str(), &s);
 
 	if (s.st_mode & S_IFREG) {
-		chmod(fName.c_str(), S_IRUSR | S_IWUSR | S_IXUSR);
+		chmod(path.c_str(), S_IRUSR | S_IWUSR | S_IXUSR);
 	}
 
 	if (s.st_mode & S_IFDIR) {
-		std::vector<std::map<std::string, std::string>> tree = ls(fName);
+		std::vector<std::map<std::string, std::string>> tree = ls(path);
 		tree.erase(std::remove_if(tree.begin(), tree.end(), [](std::map<std::string, std::string> entry) {
 			return entry["name"] == path::curr || entry["name"] == path::prev;
 		}));
 
-		auto dir = opendir(fName.c_str());
+		auto dir = opendir(path.c_str());
 		while (auto entry = readdir(dir)) {
 			if (entry->d_type == DT_REG) {
-				chmod(std::string(fName + path::sep + entry->d_name).c_str(), S_IRUSR | S_IWUSR | S_IXUSR);
+				chmod(std::string(path + path::sep + entry->d_name).c_str(), S_IRUSR | S_IWUSR | S_IXUSR);
 			}
 
 			if (entry->d_type == DT_DIR) {
 				if (std::string(entry->d_name) == path::curr && entry->d_name == path::prev) {
-					setW(fName + path::sep + std::string(entry->d_name));
+					setW(path + path::sep + std::string(entry->d_name));
 				}
 			}
 		}
