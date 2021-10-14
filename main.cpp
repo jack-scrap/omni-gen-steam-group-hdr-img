@@ -555,7 +555,7 @@ int main(int argc, char** argv) {
 	std::vector<std::map<std::string, std::string>> dir = util::fs::ls("player/cfg");
 
 	for (int i = 0; i < dir.size(); i++) {
-		if (dir[i]["name"] != "..") {
+		if (dir[i]["name"] != util::fs::path::prev) {
 			std::map<std::string, std::string> setting = util::cfg::lex("player/cfg" + std::string("/") + dir[i]["name"]);
 
 			for (std::map<std::string, std::string>::iterator it = setting.begin(); it != setting.end(); ++it) {
