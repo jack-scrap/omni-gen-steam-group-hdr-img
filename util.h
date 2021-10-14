@@ -28,7 +28,7 @@ namespace util {
 		template <>
 		std::vector<std::string> rd(std::string fName);
 
-		bool exist(std::string fName);
+		bool exist(std::string name);
 
 		void write(std::string fName, std::vector<std::string> buff);
 
