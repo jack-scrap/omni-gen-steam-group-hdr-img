@@ -177,8 +177,6 @@ void util::fs::cp(std::string src, std::string dest) {
 }
 
 std::vector<std::map<std::string, std::string>> util::fs::ls(std::string path) {
-	std::vector<std::map<std::string, std::string>> tree;
-
 	std::string full = path::curr + path::sep + path;
 	auto dir = opendir(full.c_str());
 
@@ -188,6 +186,7 @@ std::vector<std::map<std::string, std::string>> util::fs::ls(std::string path) {
 		});
 	}
 
+	std::vector<std::map<std::string, std::string>> tree;
 	while (auto entry = readdir(dir)) {
 		if (std::string(entry->d_name) == path::curr) {
 			std::string type;
