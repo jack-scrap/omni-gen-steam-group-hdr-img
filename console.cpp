@@ -583,7 +583,7 @@ void Console::changeDir(std::string dir) {
 
 	_tree = util::fs::ls(_home + "/" + _cwd);
 	_tree.erase(std::remove_if(_tree.begin(), _tree.end(), [](std::map<std::string, std::string> entry) {
-		return entry["name"] == "..";
+		return entry["name"] == util::fs::path::prev;
 	}));
 
 	std::sort(_tree.begin(), _tree.end(), lexicoEntry);
