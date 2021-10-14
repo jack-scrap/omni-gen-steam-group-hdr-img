@@ -1006,11 +1006,11 @@ void Console::exec() {
 					}
 
 					if (util::fs::exist(_home + util::fs::path::sep + fName)) {
-						std::thread t(dispatch, fName, maxFs + maxNo);
+						std::thread t(dispatch, _home + util::fs::path::sep + fName, maxFs + maxNo);
 						t.detach();
 					} else {
 						omni::err(omni::ERR_FS_NO_ENTRY, {
-							fName
+							_home + util::fs::path::sep + fName
 						});
 					}
 				}
