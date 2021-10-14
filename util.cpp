@@ -240,19 +240,14 @@ void util::fs::setW(std::string path) {
 	}
 
 	if (s.st_mode & S_IFDIR) {
-		std::vector<std::map<std::string, std::string>> tree = ls(path);
-		tree.erase(std::remove_if(tree.begin(), tree.end(), [](std::map<std::string, std::string> entry) {
-			return entry["name"] == path::curr || entry["name"] == path::prev;
-		}));
-
-		auto dir = opendir(path.c_str());
+		auto dir = opendir(std::string(path).c_str());
 		while (auto entry = readdir(dir)) {
-			if (entry->d_type == DT_REG) {
-				chmod(std::string(path + path::sep + entry->d_name).c_str(), S_IRUSR | S_IWUSR | S_IXUSR);
-			}
+			if (std::string(entry->d_name) != util::fs::path::curr && std::string(entry->d_name) != util::fs::path::prev) {
+				if (entry->d_type == DT_REG) {
+					chmod(std::string(path + path::sep + entry->d_name).c_str(), S_IRUSR | S_IWUSR | S_IXUSR);
+				}
 
-			if (entry->d_type == DT_DIR) {
-				if (std::string(entry->d_name) == path::curr && entry->d_name == path::prev) {
+				if (entry->d_type == DT_DIR) {
 					setW(path + path::sep + std::string(entry->d_name));
 				}
 			}
