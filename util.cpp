@@ -27,8 +27,15 @@ std::string util::fs::rd<std::string>(std::string fName) {
 	in.open(fName);
 
 	std::string cont;
-	for (std::string l; std::getline(in, l);) {
-		cont += l + "\n";
+
+	if (exist(fName)) {
+		for (std::string l; std::getline(in, l);) {
+			cont += l + "\n";
+		}
+	} else {
+		omni::err(omni::ERR_FS_NO_ENTRY, {
+			path::build(path::entry(path::tok(fName)))
+		});
 	}
 
 	in.close();
@@ -42,8 +49,15 @@ std::vector<std::string> util::fs::rd<std::vector<std::string>>(std::string fNam
 	in.open(path::curr + path::sep + fName);
 
 	std::vector<std::string> cont;
-	for (std::string l; std::getline(in, l);) {
-		cont.push_back(l);
+
+	if (exist(fName)) {
+		for (std::string l; std::getline(in, l);) {
+			cont.push_back(l);
+		}
+	} else {
+		omni::err(omni::ERR_FS_NO_ENTRY, {
+			path::build(path::entry(path::tok(fName)))
+		});
 	}
 
 	in.close();
