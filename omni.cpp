@@ -35,6 +35,11 @@ void omni::err(unsigned int err, std::vector<std::string> arg) {
 
 			break;
 
+		case ERR_FS_NO_PARENT_DIR:
+			msg = "Couldn't write file `" + arg[0] + "`; parent directory `" + arg[1] + "` not present";
+
+			break;
+
 		case ERR_FS_ROOT_DIR:
 			msg = "Couldn't traverse parent directory -- at root";
 
