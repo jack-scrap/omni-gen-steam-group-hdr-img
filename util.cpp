@@ -189,7 +189,7 @@ std::vector<std::map<std::string, std::string>> util::fs::ls(std::string path) {
 	}
 
 	while (auto entry = readdir(dir)) {
-		if (strcmp(entry->d_name, path::curr.c_str())) {
+		if (std::string(entry->d_name) == path::curr) {
 			std::string type;
 			if (entry->d_type == DT_REG) {
 				type = "file";
@@ -199,7 +199,7 @@ std::vector<std::map<std::string, std::string>> util::fs::ls(std::string path) {
 				type = "dir";
 			}
 
-			if (strcmp(entry->d_name, path::prev.c_str())) {
+			if (std::string(entry->d_name) == path::prev) {
 				tree.push_back({
 					{
 						"name",
@@ -268,7 +268,7 @@ void util::fs::setW(std::string fName) {
 			}
 
 			if (entry->d_type == DT_DIR) {
-				if (strcmp(entry->d_name, path::curr.c_str()) && strcmp(entry->d_name, path::prev.c_str())) {
+				if (std::string(entry->d_name) == path::curr && entry->d_name == path::prev) {
 					setW(fName + path::sep + std::string(entry->d_name));
 				}
 			}
