@@ -70,14 +70,23 @@ void util::fs::write(std::string fName, std::vector<std::string> buff) {
 		}
 	}
 
-	std::ofstream f;
-	f.open(fName);
+	std::vector<std::string> entry = path::entry(path::tok({
+		fName
+	}));
+	entry.insert(entry.begin(), ".");
 
-	for (const std::string& line : buff) {
-		f << line + '\n';
+	entry.pop_back();
+
+	if (exist(path::build(entry))) {
+		std::ofstream f;
+		f.open(fName);
+
+		for (const std::string& line : buff) {
+			f << line + '\n';
+		}
+
+		f.close();
 	}
-
-	f.close();
 }
 
 void util::fs::del(std::string name) {
