@@ -778,6 +778,10 @@ void Console::del() {
 }
 
 void Console::addHist() {
+	if (_h < _hist.size() - 1) {
+		_hist.erase(_hist.begin() + _h, _hist.end());
+	}
+
 	_hist.push_back(_buff);
 	_h = _hist.size() - 1;
 }

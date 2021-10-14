@@ -477,6 +477,15 @@ void handle() {
 							}
 
 							break;
+
+						case SDLK_r:
+							if (console->_h < console->_hist.size() - 1) {
+								console->_h++;
+
+								console->_buff = console->_hist[console->_h];
+							}
+
+							break;
 					}
 				}
 			}
