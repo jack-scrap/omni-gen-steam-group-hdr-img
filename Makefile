@@ -24,8 +24,8 @@ all: omni ro mk_stage
 install:
 	su - && \
 	apt-get install sudo -y && \
-	apt-get update && \
-	apt-get install -y software-properties-common && \
+	sudo apt-get update && \
+	sudo apt-get install -y software-properties-common && \
 	sudo apt-get install -y libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev mesa-utils libglew-dev libglm-dev python3-dev
 
 main.o: main.cpp
