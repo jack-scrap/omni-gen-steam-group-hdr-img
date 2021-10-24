@@ -696,7 +696,7 @@ int main(int argc, char** argv) {
 	layout::res[Y] = layout::view[Y];
 
 	disp = new Disp("Omni", {
-		layout::view[X] + (state::lineWd * layout::glyph[X]), layout::view[Y]
+		layout::view[X] + layout::canv[X], layout::view[Y]
 	}, col[false]);
 
 	nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("stat.json"));
