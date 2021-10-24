@@ -525,9 +525,9 @@ void handle() {
 			SDL_GetMouseState(&cam._begin[0], &cam._begin[1]);
 
 			if (
-				cam._begin[X] > layout::res[X] &&
+				cam._begin[X] > layout::canv[X] &&
 				cam._begin[Y] > 0 &&
-				cam._begin[X] < layout::res[X] + layout::view[X] &&
+				cam._begin[X] < layout::canv[X] + layout::view[X] &&
 				cam._begin[Y] < layout::view[Y]
 			) {
 				cam._posPrev = cam._pos;
@@ -692,7 +692,7 @@ int main(int argc, char** argv) {
 	layout::canv[X] = state::lineWd * layout::glyph[X];
 	layout::canv[Y] = state::lineCnt * layout::glyph[Y];
 
-	layout::res[X] = state::lineWd * layout::glyph[X];
+	layout::res[X] = layout::canv[X] + layout::view[X];
 	layout::res[Y] = layout::view[Y];
 
 	disp = new Disp("Omni", {
@@ -851,7 +851,7 @@ int main(int argc, char** argv) {
 		console->render();
 		console->draw();
 
-		glViewport(layout::res[X], 0, layout::view[X], layout::view[Y]);
+		glViewport(layout::canv[X], 0, layout::view[X], layout::view[Y]);
 
 		glEnable(GL_DEPTH_TEST);
 
