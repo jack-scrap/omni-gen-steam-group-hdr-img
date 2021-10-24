@@ -44,7 +44,7 @@ Disp::Disp(const char* title, glm::vec2 res, glm::vec3 bg) :
 
 		SDL_RenderCopy(_rend, tex, NULL, NULL);
 
-		glClearColor(bg[R] / 255.0, bg[G] / 255.0, bg[B] / 255.0, 1);
+		glClearColor(bg[R] / 255.0, bg[G] / 255.0, bg[B] / 255.0, 1.0);
 
 		_open = true;
 	}
