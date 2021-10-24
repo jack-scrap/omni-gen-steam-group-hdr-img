@@ -474,6 +474,16 @@ void handle() {
 								console->_h--;
 
 								console->_buff = console->_hist[console->_h];
+
+								for (int r = 0; r < 2; r++) {
+									if (!(console->_cursEditor[r][Y] < console->_buff.size())) {
+										console->_cursEditor[r][Y]--;
+									}
+
+									if (console->_cursEditor[r][X] > console->_buff[console->_cursEditor[r][Y]].size()) {
+										console->_cursEditor[r][X] = console->_buff[console->_cursEditor[r][Y]].size();
+									}
+								}
 							}
 
 							break;
@@ -483,6 +493,16 @@ void handle() {
 								console->_h++;
 
 								console->_buff = console->_hist[console->_h];
+							}
+
+							for (int r = 0; r < 2; r++) {
+								if (!(console->_cursEditor[r][Y] < console->_buff.size())) {
+									console->_cursEditor[r][Y]--;
+								}
+
+								if (console->_cursEditor[r][X] > console->_buff[console->_cursEditor[r][Y]].size()) {
+									console->_cursEditor[r][X] = console->_buff[console->_cursEditor[r][Y]].size();
+								}
 							}
 
 							break;
