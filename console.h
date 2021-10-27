@@ -70,8 +70,8 @@ class Console {
 		unsigned int _cursPrompt[2];
 		unsigned int _cursFs;
 
-		bool _rngEditor;
-		bool _rngPrompt;
+		bool _rngEditor = false;
+		bool _rngPrompt = false;
 
 		std::vector<std::string> _buff = {
 			""
