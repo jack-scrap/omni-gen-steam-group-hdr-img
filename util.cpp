@@ -1451,11 +1451,11 @@ int util::math::delta(int min, int max) {
 int util::math::norm(int lhs, int rhs) {
 	int _ = 0;
 
-	int delta = rhs - lhs;
-	if (delta > 0) {
+	int diff = delta(lhs, rhs);
+	if (diff > 0) {
 		_ = 1;
 	}
-	if (delta < 0) {
+	if (diff < 0) {
 		_ = -1;
 	}
 
