@@ -449,7 +449,7 @@ void handle() {
 							switch (console->_mode) {
 								case Console::EDITOR:
 									console->_clip = {
-										std::string(console->_buff[console->_cursEditor[Y][console->_rngEditor]].begin() + console->_cursEditor[MIN][X], console->_buff[console->_cursEditor[Y][console->_rngEditor]].begin() + console->_cursEditor[MAX][X] + 1)
+										std::string(console->_buff[console->_cursEditor[console->_rngEditor][Y]].begin() + console->_cursEditor[MIN][X], console->_buff[console->_cursEditor[console->_rngEditor][Y]].begin() + console->_cursEditor[MAX][X] + 1)
 									};
 
 									console->del();
