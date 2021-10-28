@@ -447,14 +447,44 @@ void handle() {
 
 						case SDLK_x:
 							switch (console->_mode) {
-								case Console::EDITOR:
-									console->_clip = {
-										std::string(console->_buff[console->_cursEditor[console->_rngEditor][Y]].begin() + console->_cursEditor[MIN][X], console->_buff[console->_cursEditor[console->_rngEditor][Y]].begin() + console->_cursEditor[MAX][X] + 1)
+								case Console::EDITOR: {
+									std::vector<std::string> buff;
+
+									unsigned int idx[2] = {
+										0
 									};
+									for (int i = 0; i < 2; i++) {
+										idx[i] = console->_cursEditor[MIN][i];
+									}
+
+									std::string line;
+
+									unsigned int i = 0;
+									while (idx[X] < console->_cursEditor[MAX][X] + 1 || idx[Y] < console->_cursEditor[MAX][Y]) {
+										if (idx[X] < console->_buff[idx[Y]].size()) {
+											line.push_back(console->_buff[idx[Y]][idx[X]]);
+
+											idx[X]++;
+										} else {
+											buff.push_back(line);
+
+											line = "";
+
+											idx[Y]++;
+											idx[X] = 0;
+										}
+
+										i++;
+									}
+
+									buff.push_back(line);
+
+									console->_clip = buff;
 
 									console->del();
 
 									break;
+								}
 
 								case Console::PROMPT:
 									console->_clip = {
