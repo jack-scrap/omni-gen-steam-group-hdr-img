@@ -468,7 +468,6 @@ void handle() {
 										end[X] = console->_cursEditor[MAX][X];
 										end[Y] = console->_cursEditor[MAX][Y];
 									}
-
 									if (norm == -1) {
 										start[X] = console->_cursEditor[MAX][X];
 										start[Y] = console->_cursEditor[MAX][Y];
