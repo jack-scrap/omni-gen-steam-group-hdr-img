@@ -487,7 +487,10 @@ void handle() {
 									std::string line;
 
 									unsigned int i = 0;
-									while (idx[X] < console->_cursEditor[MAX][X] + 1 || idx[Y] < console->_cursEditor[MAX][Y]) {
+									while (i < util::math::idx::determ({
+										end[X],
+										end[Y]
+									}, console->_buff)) {
 										if (idx[X] < console->_buff[idx[Y]].size()) {
 											line.push_back(console->_buff[idx[Y]][idx[X]]);
 
