@@ -1444,8 +1444,8 @@ std::string util::cfg::key(std::string buff) {
 	return _;
 }
 
-int util::math::delta(int min, int max) {
-	return max - min;
+int util::math::delta(int lhs, int rhs) {
+	return rhs - lhs;
 }
 
 int util::math::norm(int lhs, int rhs) {

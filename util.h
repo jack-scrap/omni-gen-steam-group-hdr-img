@@ -174,7 +174,7 @@ namespace util {
 	}
 
 	namespace math {
-		int delta(int min, int max);
+		int delta(int lhs, int rhs);
 
 		int norm(int lhs, int rhs);
 

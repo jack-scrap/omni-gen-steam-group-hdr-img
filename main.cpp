@@ -510,11 +510,6 @@ void handle() {
 
 									console->del();
 
-									for (i = 0; i < console->_clip.size(); ++i) {
-										std::cout << console->_clip[i] << std::endl;
-									}
-									std::cout << std::endl;
-
 									break;
 								}
 
