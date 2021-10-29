@@ -486,7 +486,10 @@ void handle() {
 
 									std::string line;
 
-									unsigned int i = 0;
+									unsigned int i = util::math::idx::determ({
+										console->_cursEditor[MIN][X],
+										console->_cursEditor[MIN][Y]
+									}, console->_buff);
 									while (i < util::math::idx::determ({
 										end[X],
 										end[Y]
