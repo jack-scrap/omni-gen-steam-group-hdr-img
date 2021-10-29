@@ -450,11 +450,38 @@ void handle() {
 								case Console::EDITOR: {
 									std::vector<std::string> buff;
 
+									unsigned int start[2];
+									unsigned int end[2];
+
+									int norm = util::math::norm(util::math::idx::determ({
+										console->_cursEditor[MIN][X],
+										console->_cursEditor[MIN][Y]
+									}, console->_buff), util::math::idx::determ({
+										console->_cursEditor[MAX][X],
+										console->_cursEditor[MAX][Y]
+									}, console->_buff));
+
+									if (norm == 1) {
+										start[X] = console->_cursEditor[MIN][X];
+										start[Y] = console->_cursEditor[MIN][Y];
+
+										end[X] = console->_cursEditor[MAX][X];
+										end[Y] = console->_cursEditor[MAX][Y];
+									}
+
+									if (norm == -1) {
+										start[X] = console->_cursEditor[MAX][X];
+										start[Y] = console->_cursEditor[MAX][Y];
+
+										end[X] = console->_cursEditor[MIN][X];
+										end[Y] = console->_cursEditor[MIN][Y];
+									}
+
 									unsigned int idx[2] = {
 										0
 									};
 									for (int i = 0; i < 2; i++) {
-										idx[i] = console->_cursEditor[MIN][i];
+										idx[i] = start[i];
 									}
 
 									std::string line;
@@ -482,6 +509,11 @@ void handle() {
 									console->_clip = buff;
 
 									console->del();
+
+									for (i = 0; i < console->_clip.size(); ++i) {
+										std::cout << console->_clip[i] << std::endl;
+									}
+									std::cout << std::endl;
 
 									break;
 								}
