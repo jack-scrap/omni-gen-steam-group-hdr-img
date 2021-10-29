@@ -487,13 +487,22 @@ void handle() {
 									std::string line;
 
 									unsigned int i = util::math::idx::determ({
+										start[X],
+										start[Y]
+									}, console->_buff);
+
+									int delta = util::math::delta(util::math::idx::determ({
+										console->_cursEditor[MAX][X],
+										console->_cursEditor[MAX][Y]
+									}, console->_buff), util::math::idx::determ({
 										console->_cursEditor[MIN][X],
 										console->_cursEditor[MIN][Y]
-									}, console->_buff);
+									}, console->_buff));
+
 									while (i < util::math::idx::determ({
-										end[X],
-										end[Y]
-									}, console->_buff)) {
+										console->_cursEditor[MIN][X],
+										console->_cursEditor[MIN][Y]
+									}, console->_buff) + abs(delta)) {
 										if (idx[X] < console->_buff[idx[Y]].size()) {
 											line.push_back(console->_buff[idx[Y]][idx[X]]);
 
