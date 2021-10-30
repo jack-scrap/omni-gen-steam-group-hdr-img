@@ -291,19 +291,19 @@ std::vector<std::string> util::fs::path::tok(std::string buff) {
 
 	unsigned int i = 0;
 	while (i < buff.size()) {
-		if (buff[i] == sep[0]) {
+		if (std::string(1, buff[i]) == sep) {
 			_.push_back(std::string(1, buff[i]));
 
 			i++;
 		} else {
-			if (buff[i] == home[0]) {
+			if (std::string(1, buff[i]) == home) {
 				_.push_back(home);
 
 				i++;
 			} else {
 				std::string entry;
 				while (
-					buff[i] != sep[0] &&
+					std::string(1, buff[i]) != sep &&
 					i < buff.size()
 				) {
 					entry.push_back(buff[i]);
