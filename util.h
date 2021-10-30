@@ -53,7 +53,7 @@ namespace util {
 
 			std::vector<std::string> tok(std::string buff);
 
-			std::vector<std::string> entry(std::vector<std::string> tok);
+			std::vector<std::string> entry(std::string buff);
 
 			std::string build(std::vector<std::string> entry);
 

@@ -34,7 +34,7 @@ std::string util::fs::rd<std::string>(std::string fName) {
 		}
 	} else {
 		omni::err(omni::ERR_FS_NO_ENTRY, {
-			path::build(path::entry(path::tok(fName)))
+			path::build(path::entry(fName))
 		});
 	}
 
@@ -56,7 +56,7 @@ std::vector<std::string> util::fs::rd<std::vector<std::string>>(std::string fNam
 		}
 	} else {
 		omni::err(omni::ERR_FS_NO_ENTRY, {
-			path::build(path::entry(path::tok(fName)))
+			path::build(path::entry(fName))
 		});
 	}
 
@@ -84,9 +84,7 @@ void util::fs::write(std::string fName, std::vector<std::string> buff) {
 		}
 	}
 
-	std::vector<std::string> entry = path::entry(path::tok({
-		fName
-	}));
+	std::vector<std::string> entry = path::entry(fName);
 	entry.insert(entry.begin(), path::curr);
 
 	std::string f = entry.back();
@@ -319,8 +317,10 @@ std::vector<std::string> util::fs::path::tok(std::string buff) {
 	return _;
 }
 
-std::vector<std::string> util::fs::path::entry(std::vector<std::string> tok) {
+std::vector<std::string> util::fs::path::entry(std::string buff) {
 	std::vector<std::string> _;
+
+	std::vector<std::string> tok = util::fs::path::tok(buff);
 
 	for (int i = 0; i < tok.size(); i++) {
 		if (tok[i] != sep) {
@@ -360,8 +360,8 @@ std::string util::fs::path::build(std::vector<std::string> entry) {
 }
 
 std::string util::fs::path::append(std::string lhs, std::string rhs) {
-	std::vector<std::string> entryLhs = entry(tok(lhs));
-	std::vector<std::string> entryRhs = entry(tok(rhs));
+	std::vector<std::string> entryLhs = entry(lhs);
+	std::vector<std::string> entryRhs = entry(rhs);
 
 	std::vector<std::string> entry;
 
@@ -377,7 +377,7 @@ std::string util::fs::path::append(std::string lhs, std::string rhs) {
 }
 
 std::string util::fs::path::prune(std::string path, std::string name) {
-	std::vector<std::string> entryOld = entry(tok(path));
+	std::vector<std::string> entryOld = entry(path);
 
 	std::vector<std::string> entryNew;
 	for (int i = 0; i < entryOld.size(); i++) {

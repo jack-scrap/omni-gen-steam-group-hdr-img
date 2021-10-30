@@ -579,9 +579,7 @@ void Console::open(std::string fName) {
 }
 
 void Console::changeDir(std::string dir) {
-	_cwd = util::fs::path::build(util::fs::path::entry({
-		dir
-	}));
+	_cwd = util::fs::path::build(util::fs::path::entry(dir));
 
 	_tree = util::fs::ls(util::fs::path::build({
 		_home,
