@@ -838,7 +838,7 @@ int main(int argc, char** argv) {
 	while (disp->_open) {
 		disp->clear();
 
-		glViewport(0, 0, layout::canv[X], layout::view[Y]);
+		glViewport(0, 0, layout::canv[X], layout::canv[Y]);
 
 		glDisable(GL_DEPTH_TEST);
 
