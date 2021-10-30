@@ -350,7 +350,7 @@ std::string util::fs::path::build(std::vector<std::string> entry) {
 		std::string val = entry[i];
 
 		if (i < entry.size() - 1) {
-			val.push_back(sep[0]);
+			val += sep;
 		}
 
 		_ += val;
