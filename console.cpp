@@ -1357,3 +1357,69 @@ bool Console::lexicoEntry(std::map<std::string, std::string> lhs, std::map<std::
 
 	return std::lexicographical_compare(it[0], lhs["name"].end(), it[1], rhs["name"].end());
 }
+
+unsigned int idxDeterm(unsigned int coord[2], std::vector<std::string> buff) {
+	unsigned int _ = 0;
+
+	unsigned int idx[2] = {
+		0
+	};
+	while (idx[X] < coord[X] || idx[Y] < coord[Y]) {
+		if (idx[X] < buff[idx[Y]].size()) {
+			idx[X]++;
+		} else {
+			idx[Y]++;
+			idx[X] = 0;
+		}
+
+		_++;
+	}
+
+	return _;
+}
+
+std::vector<std::string> Console::slice(std::vector<std::string> buff, unsigned int rng[2][2]) {
+	std::vector<std::string> _;
+
+	std::string line;
+
+	int delta = util::math::delta(idxDeterm(rng[MIN], buff), idxDeterm(rng[MAX], buff));
+
+	unsigned int b = MIN;
+	if (delta > 0) {
+		b = MIN;
+	}
+	if (delta < 0) {
+		b = MAX;
+	}
+
+	unsigned int start[2];
+	for (int i = 0; i < 2; i++) {
+		start[i] = rng[b][i];
+	}
+
+	unsigned int i = 0;
+	unsigned int idx[2];
+	for (int i = 0; i < 2; i++) {
+		idx[i] = start[i];
+	}
+	while (i < 1 + abs(delta)) {
+		i++;
+
+		if (idx[X] < buff[idx[Y]].size()) {
+			line.push_back(buff[idx[Y]][idx[X]]);
+
+			idx[X]++;
+		} else {
+			_.push_back(line);
+			line = "";
+
+			idx[Y]++;
+			idx[X] = 0;
+		}
+	}
+
+	_.push_back(line);
+
+	return _;
+}

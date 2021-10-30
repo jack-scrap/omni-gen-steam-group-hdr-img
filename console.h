@@ -121,6 +121,8 @@ class Console {
 		void getTime();
 
 		static bool lexicoEntry(std::map<std::string, std::string> lhs, std::map<std::string, std::string> rhs);
+
+		static std::vector<std::string> slice(std::vector<std::string> buff, unsigned int rng[2][2]);
 		
 		enum {
 			EDITOR,
