@@ -157,37 +157,25 @@ void handle() {
 						}
 
 						if (e.key.keysym.sym == SDLK_DOWN) {
-							if (console->_cursEditor[console->_rngEditor][X] == console->_buff[console->_cursEditor[console->_rngEditor][Y]].size()) {
-								if (console->_cursEditor[console->_rngEditor][Y] < console->_buff.size() - 1) {
-									console->_cursEditor[console->_rngEditor][Y]++;
+							if (console->_cursEditor[console->_rngEditor][Y] < console->_buff.size() - 1) {
+								bool trail = console->_cursEditor[console->_rngEditor][X] == console->_buff[console->_cursEditor[console->_rngEditor][Y]].size();
 
+								console->_cursEditor[console->_rngEditor][Y]++;
+
+								if (trail) {
 									console->_cursEditor[console->_rngEditor][X] = console->_buff[console->_cursEditor[console->_rngEditor][Y]].size();
-								}
-							} else {
-								if (console->_cursEditor[console->_rngEditor][Y] < console->_buff.size() - 1) {
-									console->_cursEditor[console->_rngEditor][Y]++;
-
-									if (console->_cursEditor[console->_rngEditor][X] > console->_buff[console->_cursEditor[console->_rngEditor][Y]].size()) {
-										console->_cursEditor[console->_rngEditor][X] = console->_buff[console->_cursEditor[console->_rngEditor][Y]].size();
-									}
 								}
 							}
 						}
 
 						if (e.key.keysym.sym == SDLK_UP) {
-							if (console->_cursEditor[console->_rngEditor][X] == console->_buff[console->_cursEditor[console->_rngEditor][Y]].size()) {
-								if (console->_cursEditor[console->_rngEditor][Y] > 0) {
-									console->_cursEditor[console->_rngEditor][Y]--;
+							if (console->_cursEditor[console->_rngEditor][Y] > 0) {
+								bool trail = console->_cursEditor[console->_rngEditor][X] == console->_buff[console->_cursEditor[console->_rngEditor][Y]].size();
 
+								console->_cursEditor[console->_rngEditor][Y]--;
+
+								if (trail) {
 									console->_cursEditor[console->_rngEditor][X] = console->_buff[console->_cursEditor[console->_rngEditor][Y]].size();
-								}
-							} else {
-								if (console->_cursEditor[console->_rngEditor][Y] > 0) {
-									console->_cursEditor[console->_rngEditor][Y]--;
-
-									if (console->_cursEditor[console->_rngEditor][X] > console->_buff[console->_cursEditor[console->_rngEditor][Y]].size()) {
-										console->_cursEditor[console->_rngEditor][X] = console->_buff[console->_cursEditor[console->_rngEditor][Y]].size();
-									}
 								}
 							}
 						}
