@@ -317,7 +317,7 @@ void Console::fmtScr() {
 
 		// wrap
 		perm.insert(0, "[");
-		perm.push_back(']');
+		perm += "]";
 
 		fInfo += perm;
 		fInfo += ' '; // pad
