@@ -309,11 +309,17 @@ void Console::fmtScr() {
 
 	std::string fInfo;
 
-	fInfo += util::fs::path::name(_home + util::fs::path::sep + _buffName);
+	fInfo += util::fs::path::name(util::fs::path::build({
+		_home,
+		_buffName
+	}));
 	fInfo += ' '; // pad
 
 	if (state::showFilePerm) {
-		std::string perm = util::fs::perm(_home + util::fs::path::sep + _buffName);
+		std::string perm = util::fs::perm(util::fs::path::build({
+			_home,
+			_buffName
+		}));
 
 		// wrap
 		perm.insert(0, "[");
@@ -544,10 +550,16 @@ void Console::render() {
 }
 
 void Console::open(std::string fName) {
-	if (util::fs::exist(_home + util::fs::path::sep + fName)) {
+	if (util::fs::exist(util::fs::path::build({
+		_home,
+		fName
+	}))) {
 		_buffName = fName;
 
-		std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(_home + util::fs::path::sep + _buffName);
+		std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(util::fs::path::build({
+			_home,
+			_buffName
+		}));
 
 		if (buff.size()) {
 			_buff = buff;
@@ -562,7 +574,9 @@ void Console::open(std::string fName) {
 		});
 	}
 
-	if (util::fs::perm(_home + util::fs::path::sep + _buffName)[1] == 'w') {
+	if (util::fs::perm(util::fs::path::build({
+		_home, _buffName
+	}))[1] == 'w') {
 		_cursEditor[MIN][X] = _buff.back().size() - 1 + 1;
 		_cursEditor[MIN][Y] = _buff.size() - 1;
 	} else {
@@ -824,7 +838,10 @@ void Console::exec() {
 						omni::err(omni::ERR_FS_DIR_EXIST);
 					}
 
-					_tree = util::fs::ls(_home + util::fs::path::sep + _cwd);
+					_tree = util::fs::ls(util::fs::path::build({
+						_home,
+						_cwd
+					}));
 					if (_cwd != util::fs::path::curr) {
 						_tree.push_back({
 							{
@@ -856,10 +873,15 @@ void Console::exec() {
 
 					bool refresh = !util::fs::exist(fName);
 
-					util::fs::write(_home + util::fs::path::sep + _cwd + util::fs::path::sep + fName, _buff);
+					util::fs::write(util::fs::path::build({
+						_home + _cwd + fName
+					}), _buff);
 
 					if (refresh) {
-						_tree = util::fs::ls(_home + util::fs::path::sep + _cwd);
+						_tree = util::fs::ls(util::fs::path::build({
+							_home,
+							_cwd
+						}));
 						if (_cwd != util::fs::path::curr) {
 							_tree.push_back({
 								{
@@ -892,9 +914,15 @@ void Console::exec() {
 							break;
 					}
 
-					util::fs::del(_home + util::fs::path::sep + fName);
+					util::fs::del(util::fs::path::build({
+						_home,
+						fName
+					}));
 
-					_tree = util::fs::ls(_home + util::fs::path::sep + _cwd);
+					_tree = util::fs::ls(util::fs::path::build({
+						_home,
+						_cwd
+					}));
 					if (_cwd != util::fs::path::curr) {
 						_tree.push_back({
 							{
@@ -924,15 +952,30 @@ void Console::exec() {
 							break;
 					}
 
-					if (util::fs::exist(_home + util::fs::path::sep + _cwd + util::fs::path::sep + fName)) {
-						rename((_home + util::fs::path::sep + _cwd + util::fs::path::sep + fName).c_str(), (_home + util::fs::path::sep + _cwd + util::fs::path::sep + arg.back()).c_str());
+					if (util::fs::exist(util::fs::path::build({
+						_home,
+						_cwd,
+						fName
+					}))) {
+						rename((util::fs::path::build({
+							_home,
+							_cwd,
+							fName
+						})).c_str(), (util::fs::path::build({
+							_home,
+							_cwd,
+							arg.back()
+						})).c_str());
 					} else {
 						omni::err(omni::ERR_FS_NO_ENTRY, {
 							fName
 						});
 					}
 
-					_tree = util::fs::ls(_home + util::fs::path::sep + _cwd);
+					_tree = util::fs::ls(util::fs::path::build({
+						_home,
+						_cwd
+					}));
 					if (_cwd != util::fs::path::curr) {
 						_tree.push_back({
 							{
@@ -962,9 +1005,20 @@ void Console::exec() {
 							break;
 					}
 
-					util::fs::cp(_home + util::fs::path::sep + _cwd + util::fs::path::sep + name, _home + util::fs::path::sep + _cwd + util::fs::path::sep + arg.back());
+					util::fs::cp(util::fs::path::build({
+						_home,
+						_cwd,
+						name
+					}), util::fs::path::build({
+						_home,
+						_cwd,
+						arg.back()
+					}));
 
-					_tree = util::fs::ls(_home + util::fs::path::sep + _cwd);
+					_tree = util::fs::ls(util::fs::path::build({
+						_home,
+						_cwd
+					}));
 					if (_cwd != util::fs::path::curr) {
 						_tree.push_back({
 							{
@@ -1012,18 +1066,32 @@ void Console::exec() {
 							break;
 					}
 
-					if (util::fs::exist(_home + util::fs::path::sep + fName)) {
-						std::thread t(dispatch, _home + util::fs::path::sep + fName, maxFs + maxNo);
+					if (util::fs::exist(util::fs::path::build({
+						_home,
+						fName
+					}))) {
+						std::thread t(dispatch, util::fs::path::build({
+							_home,
+							fName
+						}), maxFs + maxNo);
 						t.detach();
 					} else {
 						omni::err(omni::ERR_FS_NO_ENTRY, {
-							_home + util::fs::path::sep + fName
+							util::fs::path::build({
+								_home,
+								fName
+							})
 						});
 					}
 				}
 
 				if (cmd == "set") {
-					std::string path = "script/" + arg[0] + util::fs::path::sep + arg[1] + "/main.py";
+					std::string path = util::fs::path::build({
+						"script",
+						arg[0],
+						arg[1],
+						"main.py"
+					});
 
 					scn::init(arg[0], std::stoi(arg[1]));
 
@@ -1034,7 +1102,12 @@ void Console::exec() {
 					if (eq) {
 						lvl++;
 
-						std::string fName = "script/" + stage + util::fs::path::sep + std::to_string(lvl) + "/main.py";
+						std::string fName = util::fs::path::build({
+							"script",
+							stage,
+							std::to_string(lvl),
+							"main.py"
+						});
 
 						scn::init(stage, lvl);
 
