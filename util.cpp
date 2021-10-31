@@ -46,7 +46,10 @@ std::string util::fs::rd<std::string>(std::string fName) {
 template <>
 std::vector<std::string> util::fs::rd<std::vector<std::string>>(std::string fName) {
 	std::ifstream in;
-	in.open(path::curr + path::sep + fName);
+	in.open(path::build({
+		path::curr,
+		fName
+	}));
 
 	std::vector<std::string> cont;
 
@@ -123,11 +126,20 @@ void util::fs::del(std::string name) {
 		// entries
 		for (int i = 0; i < tree.size(); i++) {
 			if (s.st_mode & S_IFDIR) {
-				del(name + path::sep + tree[i]["name"]);
+				del(path::build({
+					name,
+					tree[i]["name"]
+				}));
 			} else {
-				if (remove(std::string(name + path::sep + tree[i]["name"]).c_str())) {
+				if (remove(path::build({
+					name,
+					tree[i]["name"]
+				}).c_str())) {
 					omni::err(omni::ERR_FS_DEL_ENTRY, {
-						name + path::sep + tree[i]["name"]
+						path::build({
+							name,
+							tree[i]["name"]
+						})
 					});
 				}
 			}
@@ -171,13 +183,25 @@ void util::fs::cp(std::string src, std::string dest) {
 
 			for (int i = 0; i < tree.size(); i++) {
 				if (s.st_mode & S_IFREG) {
-					std::vector<std::string> buff = rd<std::vector<std::string>>(src + path::sep + tree[i]["name"]);
+					std::vector<std::string> buff = rd<std::vector<std::string>>(path::build({
+						src,
+						tree[i]["name"]
+					}));
 
-					write(dest + path::sep + tree[i]["name"], buff);
+					write(path::build({
+						dest,
+						tree[i]["name"]
+					}), buff);
 				}
 
 				if (s.st_mode & S_IFDIR) {
-					cp(src + path::sep + tree[i]["name"], dest + path::sep + tree[i]["name"]);
+					cp(path::build({
+						src,
+						tree[i]["name"]
+					}), path::build({
+						dest,
+						tree[i]["name"]
+					}));
 				}
 			}
 		}
@@ -189,7 +213,10 @@ void util::fs::cp(std::string src, std::string dest) {
 }
 
 std::vector<std::map<std::string, std::string>> util::fs::ls(std::string path) {
-	std::string full = path::curr + path::sep + path;
+	std::string full = path::build({
+		path::curr,
+		path
+	});
 	auto dir = opendir(full.c_str());
 
 	if (!dir) {
@@ -256,11 +283,17 @@ void util::fs::setW(std::string path) {
 		while (auto entry = readdir(dir)) {
 			if (std::string(entry->d_name) != util::fs::path::curr && std::string(entry->d_name) != util::fs::path::prev) {
 				if (entry->d_type == DT_REG) {
-					chmod(std::string(path + path::sep + entry->d_name).c_str(), S_IRUSR | S_IWUSR | S_IXUSR);
+					chmod(std::string(path::build({
+						path,
+						entry->d_name
+					})).c_str(), S_IRUSR | S_IWUSR | S_IXUSR);
 				}
 
 				if (entry->d_type == DT_DIR) {
-					setW(path + path::sep + std::string(entry->d_name));
+					setW(path::build({
+						path,
+						std::string(entry->d_name)
+					}));
 				}
 			}
 		}
