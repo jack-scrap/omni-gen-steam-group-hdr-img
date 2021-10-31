@@ -172,7 +172,6 @@ void handle() {
 									}
 								}
 							}
-
 						}
 
 						if (e.key.keysym.sym == SDLK_UP) {
