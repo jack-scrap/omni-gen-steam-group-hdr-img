@@ -316,16 +316,13 @@ void Console::fmtScr() {
 	fInfo += ' '; // pad
 
 	if (state::showFilePerm) {
-		std::string perm = util::fs::perm(util::fs::path::build({
-			_home,
-			_buffName
-		}));
+		std::string permFmt = _perm;
 
 		// wrap
-		perm.insert(0, "[");
-		perm += "]";
+		permFmt.insert(0, "[");
+		permFmt += "]";
 
-		fInfo += perm;
+		fInfo += permFmt;
 		fInfo += ' '; // pad
 	}
 
@@ -555,6 +552,10 @@ void Console::open(std::string fName) {
 		fName
 	}))) {
 		_buffName = fName;
+		_perm = util::fs::perm(util::fs::path::build({
+			_home,
+			_buffName
+		}));
 
 		std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(util::fs::path::build({
 			_home,

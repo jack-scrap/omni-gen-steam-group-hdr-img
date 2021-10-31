@@ -18,6 +18,7 @@ class Console {
 		unsigned char _block[100][100][3];
 
 		std::string _buffName;
+		std::string _perm;
 
 		const std::string _ps1 = "[] ";
 
