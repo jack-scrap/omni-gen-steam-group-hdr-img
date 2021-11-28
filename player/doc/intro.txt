@@ -8,7 +8,7 @@ If not, read "py.txt".
 
 If so, proceed.
 
-# Creating a file
+# Creating a buffer
 Hit [F3] to enter the command-line.
 
 Type `open` followed by the name of a buffer -- `open file.py`, and hit [Enter] to execute.
@@ -16,6 +16,8 @@ This will create a new buffer of the specified name.
 
 Type `print('Text')`.
 This placeholder Python code provides a basic way to test functionality via output.
+
+Excute the command `save` to write the buffer to a file.
 
 Execute the command `run` to execute the contents of the buffer.
 
@@ -30,7 +32,6 @@ Interfaces to data and vehicles are provided via the library `omni`.
 Type `import omni`.
 
 Initial and desired state are provided.
-
 To complete the level, refactor the initial state until it is equal to the desired state.
 
 To do so, vehicles are provided.
