@@ -42,8 +42,3 @@ Upon level completion, this rank will be increased.
 Given increased rank, further levels will be made writeable and open to editing.
 
 A full list of commands and hotkeys can be found in "omni.txt".
-
-# Configuration
-The `cfg` directory contains files that will be evaluated on startup.
-
-See `cfg.txt` for a list of available options.
