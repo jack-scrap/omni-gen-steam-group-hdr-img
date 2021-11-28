@@ -27,7 +27,7 @@ def fn():
 	print("Text")
 ```
 
-	The following is not valid, considering the function body to be empty and the following lines to be separate statements.
+The following is not valid, considering the function body to be empty and the following lines to be separate statements.
 
 ```
 def fn():

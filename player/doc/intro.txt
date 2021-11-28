@@ -19,7 +19,7 @@ This placeholder Python code provides a basic way to test functionality via outp
 
 Excute the command `save` to write the buffer to a file.
 
-Execute the command `run` to execute the contents of the buffer.
+Execute the command `run` to execute the contents of the file.
 
 This buffer will be ran, and the output will be displayed to the external console.
 
