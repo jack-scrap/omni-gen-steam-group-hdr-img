@@ -95,6 +95,10 @@ class Console {
 
 		void fmtScr();
 
+		unsigned int maxFs();
+
+		unsigned int maxNo();
+
 		void render();
 
 		void open(std::string fName);

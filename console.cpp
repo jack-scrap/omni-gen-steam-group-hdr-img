@@ -392,19 +392,7 @@ void Console::fmtScr() {
 	const unsigned int btm = state::lineCnt - 1;
 
 	/* file system */
-	unsigned int maxFs = 0;
-	for (int i = 0; i < _tree.size(); i++) {
-		std::string line = _tree[i]["name"];
-
-		if (_tree[i]["type"] == "dir") {
-			line += util::fs::path::sep;
-		}
-
-		if (line.size() > maxFs) {
-			maxFs = line.size();
-		}
-	}
-	maxFs += 1; // pad
+	unsigned int _maxFs = maxFs();
 
 	std::vector<std::string> entryName;
 	for (int i = 0; i < _tree.size(); i++) {
@@ -415,7 +403,7 @@ void Console::fmtScr() {
 		}
 
 		int c = line.size();
-		while (c < maxFs) {
+		while (c < _maxFs) {
 			line += ' ';
 
 			c++;
@@ -428,19 +416,18 @@ void Console::fmtScr() {
 		loc[X],
 		loc[Y]
 	}, {
-		maxFs,
+		_maxFs,
 		boundFrame[Y]
 	}, {
 		0,
 		_cursFs < boundFrame[Y] ? 0 : _cursFs - (boundFrame[Y] - 1)
 	});
 
-	loc[X] += maxFs;
+	loc[X] += _maxFs;
 
 	/* editor */
 	// line numbers
-	unsigned int maxNo = std::to_string(state::baseNo + _buff.size() - 1).size();
-	maxNo += 1; // pad
+	unsigned int _maxNo = maxNo();
 
 	std::vector<std::string> pre;
 	for (int i = _cursEditor[_rngEditor][Y] < boundFrame[Y] ? 0 : _cursEditor[_rngEditor][Y] - (boundFrame[Y] - 1); i < _buff.size(); i++) {
@@ -453,7 +440,7 @@ void Console::fmtScr() {
 
 		std::string no = std::to_string(base + i);
 
-		for (int i = no.size(); i < maxNo; i++) {
+		for (int i = no.size(); i < _maxNo; i++) {
 			no += ' ';
 		}
 
@@ -466,18 +453,18 @@ void Console::fmtScr() {
 		loc[X],
 		loc[Y]
 	}, {
-		maxNo,
+		_maxNo,
 		boundFrame[Y]
 	}, {
 		0,
 		0
 	});
 
-	loc[X] += maxNo;
+	loc[X] += _maxNo;
 
 	// buffer
 	const unsigned int boundEditor[2] = {
-		boundFrame[X] - (maxFs + maxNo),
+		boundFrame[X] - (_maxFs + _maxNo),
 		boundFrame[Y]
 	};
 
@@ -522,6 +509,31 @@ void Console::fmtScr() {
 		_cursPrompt[_rngPrompt] - util::math::clamp(_cursPrompt[_rngPrompt], 1, boundPrompt - 1),
 		0
 	});
+}
+
+unsigned int Console::maxFs() {
+	unsigned int _ = 0;
+	for (int i = 0; i < _tree.size(); i++) {
+		std::string line = _tree[i]["name"];
+
+		if (_tree[i]["type"] == "dir") {
+			line += util::fs::path::sep;
+		}
+
+		if (line.size() > _) {
+			_ = line.size();
+		}
+	}
+	_ += 1; // pad
+
+	return _;
+}
+
+unsigned int Console::maxNo() {
+	unsigned int _ = std::to_string(state::baseNo + _buff.size() - 1).size();
+	_ += 1; // pad
+
+	return _;
 }
 
 void Console::render() {
@@ -1036,23 +1048,9 @@ void Console::exec() {
 				}
 
 				if (cmd == "run") {
-					unsigned int maxFs = 0;
-					for (int i = 0; i < _tree.size(); i++) {
-						std::string line = _tree[i]["name"];
+					unsigned int _maxFs = maxFs();
 
-						if (_tree[i]["type"] == "dir") {
-							line += util::fs::path::sep;
-						}
-
-						if (line.size() > maxFs) {
-							maxFs = line.size();
-						}
-					}
-
-					maxFs += 1; // pad
-
-					unsigned int maxNo = std::to_string(state::baseNo + _buff.size() - 1).size();
-					maxNo += 1; // pad
+					unsigned int _maxNo = maxNo();
 
 					std::string fName;
 					switch (arg.size()) {
@@ -1074,7 +1072,7 @@ void Console::exec() {
 						std::thread t(dispatch, util::fs::path::build({
 							_home,
 							fName
-						}), maxFs + maxNo);
+						}), _maxFs + _maxNo);
 						t.detach();
 					} else {
 						omni::err(omni::ERR_FS_NO_ENTRY, {
@@ -1173,26 +1171,14 @@ void Console::hl() {
 	const unsigned int btm = state::lineCnt - 1;
 
 	/* file system */
-	unsigned int maxFs = 0;
-	for (int i = 0; i < _tree.size(); i++) {
-		std::string fmt = _tree[i]["name"];
-		if (_tree[i]["type"] == "dir") {
-			fmt += util::fs::path::sep;
-		}
+	unsigned int _maxFs = maxFs();
 
-		if (fmt.size() > maxFs) {
-			maxFs = fmt.size();
-		}
-	}
-	maxFs += 1;
-
-	loc[X] += maxFs;
+	loc[X] += _maxFs;
 	loc[Y] = 1;
 
 	/* editor */
 	// line numbers
-	unsigned int maxNo = std::to_string(state::baseNo + _buff.size() - 1).size();
-	maxNo += 1; // pad
+	unsigned int _maxNo = maxNo();
 
 	if (state::hlLineNo) {
 		int l = 0;
@@ -1201,7 +1187,7 @@ void Console::hl() {
 			if (l < _buff.size()) {
 				int c = 0;
 				int x = 0;
-				while (c < maxNo) {
+				while (c < _maxNo) {
 					unsigned int idx = util::math::idx::arr({
 						loc[X] + x,
 						loc[Y] + y
@@ -1226,7 +1212,7 @@ void Console::hl() {
 		int norm = util::math::norm(_cursEditor[MIN][Y], _cursEditor[MAX][Y]);
 
 		for (int l = 0; l < abs(delta) + 1; l++) {
-			for (int c = 0; c < maxNo; c++) {
+			for (int c = 0; c < _maxNo; c++) {
 				unsigned int idx = util::math::idx::arr({
 					loc[X] + c,
 					loc[Y] + _cursEditor[MIN][Y] + (l * norm)
@@ -1243,13 +1229,13 @@ void Console::hl() {
 	/* cursor */
 	// editor
 	const unsigned int boundEditor[2] = {
-		boundFrame[X] - (maxFs + maxNo),
+		boundFrame[X] - (_maxFs + _maxNo),
 		boundFrame[Y]
 	};
 
 	switch (_mode) {
 		case EDITOR: {
-			loc[X] = maxFs + maxNo;
+			loc[X] = _maxFs + _maxNo;
 			loc[Y] = 1;
 
 			int delta = util::math::idx::determ({
@@ -1348,7 +1334,7 @@ void Console::hl() {
 			loc[X] = 0;
 			loc[Y] = 1;
 
-			for (int c = 0; c < maxFs; c++) {
+			for (int c = 0; c < _maxFs; c++) {
 				unsigned int idx = util::math::idx::arr({
 					loc[X] + c,
 					loc[Y] + util::math::clamp(_cursFs, 1, boundFrame[Y] - 1)
