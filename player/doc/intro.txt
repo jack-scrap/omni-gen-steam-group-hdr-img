@@ -1,44 +1,57 @@
 Hello.
 
-This guide will run you through programming for Omni corporation.
-
 Are you familiar with the Python 3 programming language?
 
 If not, read "py.txt".
 
 If so, proceed.
 
-# Creating a buffer
+The following will walk you through programming for Omni corporation.
+
+# Set level
 Hit [F3] to enter the command-line.
 
-Type `open` followed by the name of a buffer -- `open file.py`, and hit [Enter] to execute.
-This will create a new buffer of the specified name.
+Type `set init 0`.
 
-Type `print('Text')`.
-This placeholder Python code provides a basic way to test functionality via output.
+Hit [Enter] to execute.
 
-Excute the command `save` to write the buffer to a file.
+This will open the first level and initialize the scene.
 
-Execute the command `run` to execute the contents of the file.
-
-This buffer will be ran, and the output will be displayed to the external console.
-
-# Saving
-To save this file, execute the command `save`.
+# Creating a buffer
+Type `open` followed by the name of the buffer -- `open script.py`.
 
 # Scripting
-Interfaces to data and vehicles are provided via the library `omni`.
+The "omni" header provides access to data and vehicles used to operate on this data.
 
-Type `import omni`.
+Hit [F1] to enter the editor.
 
-Initial and desired state are provided.
-To complete the level, refactor the initial state until it is equal to the desired state.
+Type `import omni`, this will open the library and provide access to data to required functionality.
 
-To do so, vehicles are provided.
+Initial state is visible under `._data`.
+Desired state is visible under `._goal`.
 
-The level is marked as complete upon making the desired data set equal to the one provided.
+Upon setting the data equal to the desired data, the level is completed.
 
-Player rank is tracked.
+To do so, vehicles with various functionalities are provided.
+
+The current level provides a crane.
+
+Type `crane.grab()` to grab the container.
+Type `crane.zoom(3.0)` to move the crane to a specific location.
+Type `crane.grab()` to release the container into the new location, updating the data.
+
+# Writing
+Execute `save` to write the file to the disk.
+
+# Running
+Execute `run` to run the file matching the buffer name.
+
+Given the provided code, the crane will be moved and the data will be updated.
+
+The initial level has been completed.
+
+# Leveling up
+Player "rank" is tracked given levels completed.
 Upon level completion, this rank will be increased.
 Given increased rank, further levels will be made writeable and open to editing.
 
