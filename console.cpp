@@ -524,6 +524,7 @@ unsigned int Console::maxFs() {
 			_ = line.size();
 		}
 	}
+
 	_ += 1; // pad
 
 	return _;
@@ -531,6 +532,7 @@ unsigned int Console::maxFs() {
 
 unsigned int Console::maxNo() {
 	unsigned int _ = std::to_string(state::baseNo + _buff.size() - 1).size();
+
 	_ += 1; // pad
 
 	return _;

@@ -35,17 +35,11 @@ void handle() {
 	while (SDL_WaitEvent(&e)) {
 		if (e.type == SDL_KEYDOWN) {
 			if (!SDL_GetModState()) {
-				if (
-					e.key.keysym.sym >= SDLK_a &&
-					e.key.keysym.sym <= SDLK_z
-				) {
+				if (e.key.keysym.sym >= SDLK_a && e.key.keysym.sym <= SDLK_z) {
 					console->ins(e.key.keysym.sym);
 				}
 
-				if ((
-					e.key.keysym.sym >= SDLK_0 &&
-					e.key.keysym.sym <= SDLK_9
-				)) {
+				if ((e.key.keysym.sym >= SDLK_0 && e.key.keysym.sym <= SDLK_9)) {
 					console->ins(e.key.keysym.sym);
 				}
 
@@ -215,10 +209,7 @@ void handle() {
 			} else {
 				if (e.key.keysym.mod & (KMOD_LSHIFT | KMOD_RSHIFT)) {
 					// text
-					if (
-						e.key.keysym.sym >= SDLK_a &&
-						e.key.keysym.sym <= SDLK_z
-					) {
+					if (e.key.keysym.sym >= SDLK_a && e.key.keysym.sym <= SDLK_z) {
 						char c = e.key.keysym.sym;
 
 						c -= 32;
@@ -226,10 +217,7 @@ void handle() {
 						console->ins(c);
 					}
 
-					if (
-						e.key.keysym.sym >= SDLK_0 &&
-						e.key.keysym.sym <= SDLK_9
-					) {
+					if (e.key.keysym.sym >= SDLK_0 && e.key.keysym.sym <= SDLK_9) {
 						char c;
 						switch (e.key.keysym.sym) {
 							case SDLK_0:
