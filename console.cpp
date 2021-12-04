@@ -392,8 +392,6 @@ void Console::fmtScr() {
 	const unsigned int btm = state::lineCnt - 1;
 
 	/* file system */
-	unsigned int _maxFs = maxFs();
-
 	std::vector<std::string> entryName;
 	for (int i = 0; i < _tree.size(); i++) {
 		std::string line = _tree[i]["name"];
@@ -403,7 +401,7 @@ void Console::fmtScr() {
 		}
 
 		int c = line.size();
-		while (c < _maxFs) {
+		while (c < maxFs()) {
 			line += ' ';
 
 			c++;
@@ -416,19 +414,17 @@ void Console::fmtScr() {
 		loc[X],
 		loc[Y]
 	}, {
-		_maxFs,
+		maxFs(),
 		boundFrame[Y]
 	}, {
 		0,
 		_cursFs < boundFrame[Y] ? 0 : _cursFs - (boundFrame[Y] - 1)
 	});
 
-	loc[X] += _maxFs;
+	loc[X] += maxFs();
 
 	/* editor */
 	// line numbers
-	unsigned int _maxNo = maxNo();
-
 	std::vector<std::string> pre;
 	for (int i = _cursEditor[_rngEditor][Y] < boundFrame[Y] ? 0 : _cursEditor[_rngEditor][Y] - (boundFrame[Y] - 1); i < _buff.size(); i++) {
 		std::string line;
@@ -440,7 +436,7 @@ void Console::fmtScr() {
 
 		std::string no = std::to_string(base + i);
 
-		for (int i = no.size(); i < _maxNo; i++) {
+		for (int i = no.size(); i < maxNo(); i++) {
 			no += ' ';
 		}
 
@@ -453,18 +449,18 @@ void Console::fmtScr() {
 		loc[X],
 		loc[Y]
 	}, {
-		_maxNo,
+		maxNo(),
 		boundFrame[Y]
 	}, {
 		0,
 		0
 	});
 
-	loc[X] += _maxNo;
+	loc[X] += maxNo();
 
 	// buffer
 	const unsigned int boundEditor[2] = {
-		boundFrame[X] - (_maxFs + _maxNo),
+		boundFrame[X] - (maxFs() + maxNo()),
 		boundFrame[Y]
 	};
 
@@ -1050,10 +1046,6 @@ void Console::exec() {
 				}
 
 				if (cmd == "run") {
-					unsigned int _maxFs = maxFs();
-
-					unsigned int _maxNo = maxNo();
-
 					std::string fName;
 					switch (arg.size()) {
 						case 0:
@@ -1074,7 +1066,7 @@ void Console::exec() {
 						std::thread t(dispatch, util::fs::path::build({
 							_home,
 							fName
-						}), _maxFs + _maxNo);
+						}), maxFs() + maxNo());
 						t.detach();
 					} else {
 						omni::err(omni::ERR_FS_NO_ENTRY, {
@@ -1173,15 +1165,11 @@ void Console::hl() {
 	const unsigned int btm = state::lineCnt - 1;
 
 	/* file system */
-	unsigned int _maxFs = maxFs();
-
-	loc[X] += _maxFs;
+	loc[X] += maxFs();
 	loc[Y] = 1;
 
 	/* editor */
 	// line numbers
-	unsigned int _maxNo = maxNo();
-
 	if (state::hlLineNo) {
 		int l = 0;
 		int y = 0;
@@ -1189,7 +1177,7 @@ void Console::hl() {
 			if (l < _buff.size()) {
 				int c = 0;
 				int x = 0;
-				while (c < _maxNo) {
+				while (c < maxNo()) {
 					unsigned int idx = util::math::idx::arr({
 						loc[X] + x,
 						loc[Y] + y
@@ -1214,7 +1202,7 @@ void Console::hl() {
 		int norm = util::math::norm(_cursEditor[MIN][Y], _cursEditor[MAX][Y]);
 
 		for (int l = 0; l < abs(delta) + 1; l++) {
-			for (int c = 0; c < _maxNo; c++) {
+			for (int c = 0; c < maxNo(); c++) {
 				unsigned int idx = util::math::idx::arr({
 					loc[X] + c,
 					loc[Y] + _cursEditor[MIN][Y] + (l * norm)
@@ -1231,13 +1219,13 @@ void Console::hl() {
 	/* cursor */
 	// editor
 	const unsigned int boundEditor[2] = {
-		boundFrame[X] - (_maxFs + _maxNo),
+		boundFrame[X] - (maxFs() + maxNo()),
 		boundFrame[Y]
 	};
 
 	switch (_mode) {
 		case EDITOR: {
-			loc[X] = _maxFs + _maxNo;
+			loc[X] = maxFs() + maxNo();
 			loc[Y] = 1;
 
 			int delta = util::math::idx::determ({
@@ -1336,7 +1324,7 @@ void Console::hl() {
 			loc[X] = 0;
 			loc[Y] = 1;
 
-			for (int c = 0; c < _maxFs; c++) {
+			for (int c = 0; c < maxFs(); c++) {
 				unsigned int idx = util::math::idx::arr({
 					loc[X] + c,
 					loc[Y] + util::math::clamp(_cursFs, 1, boundFrame[Y] - 1)
