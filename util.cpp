@@ -279,6 +279,8 @@ void util::fs::setW(std::string path) {
 	}
 
 	if (s.st_mode & S_IFDIR) {
+		chmod(path.c_str(), S_IRUSR | S_IWUSR | S_IXUSR);
+
 		auto dir = opendir(std::string(path).c_str());
 		while (auto entry = readdir(dir)) {
 			if (std::string(entry->d_name) != util::fs::path::curr && std::string(entry->d_name) != util::fs::path::prev) {
