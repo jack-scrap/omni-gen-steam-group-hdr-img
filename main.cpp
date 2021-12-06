@@ -705,9 +705,17 @@ int main(int argc, char** argv) {
 
 	std::string name;
 	if (argc > 1) {
-		name = "script/" + stage + "/" + std::to_string(lvl) + "/main.py";
+		name = util::fs::path::build({
+			"script",
+			stage,
+			std::to_string(lvl),
+			"main.py"
+		});
 	} else {
-		name = "doc/intro.txt";
+		name = util::fs::path::build({
+			"doc",
+			"intro.txt"
+		});
 	}
 
 	console = new Console(name, state::startDir);
