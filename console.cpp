@@ -282,10 +282,7 @@ void Console::fmtScr() {
 
 	int i = 0;
 	int x = 0;
-	while (
-		i < modeStr.size() &&
-		x < state::lineWd
-	) {
+	while (i < modeStr.size() && x < state::lineWd) {
 		_canv[util::math::idx::arr({
 			x,
 			0
@@ -334,10 +331,7 @@ void Console::fmtScr() {
 	}
 
 	i = 0;
-	while (
-		i < fInfo.size() &&
-		x < state::lineWd
-	) {
+	while (i < fInfo.size() && x < state::lineWd) {
 		_canv[util::math::idx::arr({
 			x,
 			0
@@ -365,10 +359,7 @@ void Console::fmtScr() {
 	}
 
 	i = 0;
-	while (
-		i < time.size() &&
-		x < state::lineWd
-	) {
+	while (i < time.size() && x < state::lineWd) {
 		_canv[util::math::idx::arr({
 			x,
 			0
@@ -680,10 +671,7 @@ void Console::newLine() {
 
 	_buff[_cursEditor[MIN][Y]].erase(_buff[_cursEditor[MIN][Y]].begin() + _cursEditor[MIN][X], _buff[_cursEditor[MIN][Y]].end());
 
-	if (
-		_cursEditor[MIN][Y] == _buff.size() - 1 &&
-		_cursEditor[MIN][X] == _buff[_cursEditor[MIN][Y]].size()
-	) {
+	if (_cursEditor[MIN][Y] == _buff.size() - 1 && _cursEditor[MIN][X] == _buff[_cursEditor[MIN][Y]].size()) {
 		_buff.push_back(tail);
 	} else {
 		_buff.insert(_buff.begin() + _cursEditor[MIN][Y] + 1, tail);
@@ -1256,10 +1244,7 @@ void Console::hl() {
 			while (i < 1 + abs(delta)) {
 				Coord st = util::math::coord::determ(startScal + (i * norm), _buff);
 
-				if (
-					i == 1 + abs(delta) - 1 &&
-					_cursEditor[MAX][X] == _buff[_cursEditor[MAX][Y]].size()
-				) {
+				if (i == 1 + abs(delta) - 1 && _cursEditor[MAX][X] == _buff[_cursEditor[MAX][Y]].size()) {
 					break;
 				}
 
@@ -1383,10 +1368,7 @@ bool Console::lexicoEntry(std::map<std::string, std::string> lhs, std::map<std::
 		rhs["name"].begin()
 	};
 
-	if (
-		std::isdigit(lhs["name"][0]) &&
-		std::isdigit(rhs["name"][0])
-	) {
+	if (std::isdigit(lhs["name"][0]) && std::isdigit(rhs["name"][0])) {
 		int n[2];
 
 		std::stringstream ss(lhs["name"]);

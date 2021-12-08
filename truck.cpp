@@ -140,10 +140,7 @@ void truckMv(Truck* truck, float delta) {
 }
 
 void truckTurn(Truck* truck, float delta) {
-	if (
-		truck->_ang + delta > truck->_rngWheel[MIN] &&
-		truck->_ang + delta < truck->_rngWheel[MAX]
-	) {
+	if (truck->_ang + delta > truck->_rngWheel[MIN] && truck->_ang + delta < truck->_rngWheel[MAX]) {
 		truck->_ang += delta;
 
 		for (int z = 0; z < 2; z++) {
