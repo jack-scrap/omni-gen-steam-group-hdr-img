@@ -7,6 +7,8 @@
 #include "prog.h"
 #include "layout.h"
 
+uint32_t epoch(uint32_t inter, void* param);
+
 class Console {
 	private:
 		char* _canv;

@@ -175,9 +175,6 @@ Console::Console(std::string fName, std::string dir) :
 		hl();
 
 		render();
-
-		// timer
-		SDL_AddTimer(0, epoch, NULL);
 	}
 
 void Console::fmt(std::vector<std::string> buff, Coord loc, Coord view, Coord ptr) {

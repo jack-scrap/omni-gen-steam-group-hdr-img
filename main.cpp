@@ -823,6 +823,8 @@ int main(int argc, char** argv) {
 	std::thread event(handle);
 	event.detach();
 
+	SDL_AddTimer(0, epoch, NULL);
+
 	while (disp->_open) {
 		disp->clear();
 
