@@ -61,7 +61,7 @@ void dispatch(std::string fName, unsigned int ptrEditorX) {
 				break;
 		}
 	}
-	
+
 	if (eq) {
 		std::string log = "log/" + util::fs::path::base(fName) + ".log";
 
