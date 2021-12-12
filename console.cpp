@@ -870,7 +870,9 @@ void Console::exec() {
 					bool refresh = !util::fs::exist(fName);
 
 					util::fs::write(util::fs::path::build({
-						_home + _cwd + fName
+						_home,
+						_cwd,
+						fName
 					}), _buff);
 
 					if (refresh) {
