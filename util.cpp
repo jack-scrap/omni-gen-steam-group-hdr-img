@@ -380,7 +380,7 @@ std::vector<std::string> util::fs::path::entry(std::string buff) {
 std::string util::fs::path::build(std::vector<std::string> entry) {
 	entry.insert(entry.begin(), path::curr);
 
-	std::string _;
+	std::string serial;
 	for (int i = 0; i < entry.size(); i++) {
 		std::string val = entry[i];
 
@@ -388,10 +388,10 @@ std::string util::fs::path::build(std::vector<std::string> entry) {
 			val += sep;
 		}
 
-		_ += val;
+		serial += val;
 	}
 
-	return _;
+	return serial;
 }
 
 std::string util::fs::path::append(std::string lhs, std::string rhs) {
