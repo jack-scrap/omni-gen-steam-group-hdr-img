@@ -13,14 +13,14 @@ typedef struct Truck {
 
 	float _ang;
 
-	float _rngWheel[2] = {
-		-(M_PI / 2),
-		M_PI / 2
-	};
-
 	GLuint _uni[2];
 
 	Obj* _parent;
+
+	static constexpr float _rngWheel[2] = {
+		-(M_PI / 2),
+		M_PI / 2
+	};
 
 	static GLfloat _bedVtx[3];
 	static GLushort _bedIdx[1];
