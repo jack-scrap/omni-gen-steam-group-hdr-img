@@ -791,7 +791,7 @@ CBuff util::json::str(nlohmann::json deser) {
 
 	_._x = buff.size();
 
-		_._ptr = (char*) malloc(_._x);
+	_._ptr = (char*) malloc(_._x);
 
 	for (int i = 0; i < buff.size(); i++) {
 		((char*) _._ptr)[i] = buff[i];
