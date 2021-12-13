@@ -9,16 +9,16 @@ typedef struct Crane {
 	Cont* _data;
 	float _loc[3];
 
-	const float _rngHead[2] = {
+	Obj* _parent;
+
+	static constexpr float _rngHead[2] = {
 		-3.0,
 		3.0
 	};
-	const float _rngClaw[2] = {
+	static constexpr float _rngClaw[2] = {
 		0.0,
 		13.8
 	};
-
-	Obj* _parent;
 
 	static GLfloat _speed;
 
