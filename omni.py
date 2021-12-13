@@ -1,4 +1,5 @@
 from ctypes import *
+import math
 
 _truck = CDLL('libtruck.so')
 _crane = CDLL('libcrane.so')
@@ -136,11 +137,13 @@ _cInc.restype = c_void_p
 _cInc.argtypes = None
 
 class _Crane(_Obj):
-	_fields_ = [
-		('_data', POINTER(_Cont)),
-		('_loc', c_float * 3),
-		('_rngHead', c_float * 2),
-		('_rngClaw', c_float * 2)
+	_rngHead = [
+	    -3.0,
+	    3.0
+	]
+	_rngClaw = [
+	    0.0,
+	    13.8
 	]
 
 	def zoom(self, delta):
@@ -200,11 +203,14 @@ _craneGrab.restype = c_void_p
 _craneGrab.argtypes = None
 
 class _Truck(_Obj):
+	_rngWheel = [
+	    -(math.pi / 2),
+	    math.pi / 2
+	]
+
 	_fields_ = [
 		('_data', POINTER(_Array)),
 		('_loc', c_float * 3),
-		('_ang', c_float),
-		('_rngWheel', c_float * 2)
 	]
 
 	def turn(self, delta):
