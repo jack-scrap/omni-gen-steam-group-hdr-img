@@ -316,7 +316,7 @@ if _cargoShipGet()._sz:
 			cargoShip.append(_CargoShip(_cargoShipPtr))
 
 			i += sizeof(c_void_p)
-	
+
 	else:
 		cargoShip = _CargoShip(_cargoShipPtr[0])
 
