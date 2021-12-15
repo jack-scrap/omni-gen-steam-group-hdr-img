@@ -427,16 +427,16 @@ std::string util::fs::path::prune(std::string path, std::string name) {
 }
 
 std::vector<GLfloat> util::mesh::plane(glm::vec2 bound) {
-	std::vector<GLfloat> _;
+	std::vector<GLfloat> vtc;
 
 	for (int y = 0; y < 2; y++) {
 		for (int x = 0; x < 2; x++) {
-			_.push_back(x * bound[X]);
-			_.push_back(y * bound[Y]);
+			vtc.push_back(x * bound[X]);
+			vtc.push_back(y * bound[Y]);
 		}
 	}
 
-	return _;
+	return vtc;
 }
 
 std::vector<GLfloat> util::mesh::rd::vtc(std::string fName) {
@@ -526,25 +526,25 @@ void util::mesh::aabb(GLfloat bound[3][2], GLfloat* vtc, GLushort* idc, unsigned
 }
 
 std::vector<GLfloat> util::mesh::rect::pos(glm::vec2 bound, unsigned int up, bool norm) {
-	std::vector<GLfloat> _;
+	std::vector<GLfloat> vtc;
 
 	for (int y = 0; y < 2; y++) {
 		for (int x = 0; x < 2; x++) {
-			_.push_back((x ? 1 : (norm ? -1 : 0)) * bound[X]);
+			vtc.push_back((x ? 1 : (norm ? -1 : 0)) * bound[X]);
 
 			if (up == Y) {
-				_.push_back((y ? 1 : (norm ? -1 : 0)) * bound[Y]);
-				_.push_back(0.0);
+				vtc.push_back((y ? 1 : (norm ? -1 : 0)) * bound[Y]);
+				vtc.push_back(0.0);
 			}
 
 			if (up == Z) {
-				_.push_back(0.0);
-				_.push_back((y ? 1 : (norm ? -1 : 0)) * bound[Y]);
+				vtc.push_back(0.0);
+				vtc.push_back((y ? 1 : (norm ? -1 : 0)) * bound[Y]);
 			}
 		}
 	}
 
-	return _;
+	return vtc;
 }
 
 std::vector<GLushort> util::mesh::rect::idc() {
