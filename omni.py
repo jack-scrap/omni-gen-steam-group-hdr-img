@@ -137,13 +137,18 @@ _cInc.restype = c_void_p
 _cInc.argtypes = None
 
 class _Crane(_Obj):
+	_fields_ = [
+		('_data', POINTER(_Cont)),
+		('_loc', c_float * 3)
+	]
+
 	_rngHead = [
-	    -3.0,
-	    3.0
+		-3.0,
+		3.0
 	]
 	_rngClaw = [
-	    0.0,
-	    13.8
+		0.0,
+		13.8
 	]
 
 	def zoom(self, delta):
@@ -204,8 +209,8 @@ _craneGrab.argtypes = None
 
 class _Truck(_Obj):
 	_rngWheel = [
-	    -(math.pi / 2),
-	    math.pi / 2
+		-(math.pi / 2),
+		math.pi / 2
 	]
 
 	_fields_ = [
