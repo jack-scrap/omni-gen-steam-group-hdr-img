@@ -617,28 +617,33 @@ bool util::phys::coll(Obj* p, Obj* q, glm::mat4 modelP, glm::mat4 modelQ) {
 	bool _ = true;
 
 	for (int a = 0; a < 3; a++) {
-		glm::vec3 vtxPMin = glm::vec3(0.0);
-		glm::vec3 vtxPMax = glm::vec3(0.0);
-		glm::vec3 vtxQMin = glm::vec3(0.0);
-		glm::vec3 vtxQMax = glm::vec3(0.0);
+		glm::vec3 vtxP[2];
+		for (int i = 0; i < 2; i++) {
+			vtxP[i] = glm::vec3(0.0);
+		}
 
-		vtxPMin[a] = p->_aabb[a][MIN];
-		vtxPMin = glm::vec3(modelP * glm::vec4(vtxPMin, 1.0));
+		glm::vec3 vtxQ[2];
+		for (int i = 0; i < 2; i++) {
+			vtxQ[i] = glm::vec3(0.0);
+		}
 
-		vtxPMax[a] = p->_aabb[a][MAX];
-		vtxPMax = glm::vec3(modelP * glm::vec4(vtxPMax, 1.0));
+		vtxP[MIN][a] = p->_aabb[a][MIN];
+		vtxP[MIN] = glm::vec3(modelP * glm::vec4(vtxP[MIN], 1.0));
 
-		vtxQMin[a] = p->_aabb[a][MIN];
-		vtxQMin = glm::vec3(modelQ * glm::vec4(vtxQMin, 1.0));
+		vtxP[MAX][a] = p->_aabb[a][MAX];
+		vtxP[MAX] = glm::vec3(modelP * glm::vec4(vtxP[MAX], 1.0));
 
-		vtxQMax[a] = p->_aabb[a][MAX];
-		vtxQMax = glm::vec3(modelQ * glm::vec4(vtxQMax, 1.0));
+		vtxQ[MIN][a] = p->_aabb[a][MIN];
+		vtxQ[MIN] = glm::vec3(modelQ * glm::vec4(vtxQ[MIN], 1.0));
+
+		vtxQ[MAX][a] = p->_aabb[a][MAX];
+		vtxQ[MAX] = glm::vec3(modelQ * glm::vec4(vtxQ[MAX], 1.0));
 
 		if (!(
-			vtxPMin[a] > vtxPMin[a] &&
-			vtxPMin[a] < vtxPMax[a] &&
-			vtxPMax[a] > vtxPMin[a] &&
-			vtxPMax[a] < vtxPMax[a]
+			vtxP[MIN][a] > vtxP[MIN][a] &&
+			vtxP[MIN][a] < vtxP[MAX][a] &&
+			vtxP[MAX][a] > vtxP[MIN][a] &&
+			vtxP[MAX][a] < vtxP[MAX][a]
 		)) {
 			_ = false;
 

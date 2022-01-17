@@ -162,6 +162,8 @@ void craneGrab(Crane* crane) {
 
 				if (idx->_data) {
 					if (util::phys::coll(crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW], idx->_data->_parent)) {
+						std::cout << "asdf" << std::endl;
+
 						craneInsert(crane, idxPop(idx));
 
 						return;
