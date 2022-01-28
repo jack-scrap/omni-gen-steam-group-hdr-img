@@ -633,17 +633,17 @@ bool util::phys::coll(Obj* p, Obj* q, glm::mat4 modelP, glm::mat4 modelQ) {
 		vtxP[MAX][a] = p->_aabb[a][MAX];
 		vtxP[MAX] = glm::vec3(modelP * glm::vec4(vtxP[MAX], 1.0));
 
-		vtxQ[MIN][a] = p->_aabb[a][MIN];
+		vtxQ[MIN][a] = q->_aabb[a][MIN];
 		vtxQ[MIN] = glm::vec3(modelQ * glm::vec4(vtxQ[MIN], 1.0));
 
-		vtxQ[MAX][a] = p->_aabb[a][MAX];
+		vtxQ[MAX][a] = q->_aabb[a][MAX];
 		vtxQ[MAX] = glm::vec3(modelQ * glm::vec4(vtxQ[MAX], 1.0));
 
 		if (!(
-			vtxP[MIN][a] > vtxP[MIN][a] &&
-			vtxP[MIN][a] < vtxP[MAX][a] &&
-			vtxP[MAX][a] > vtxP[MIN][a] &&
-			vtxP[MAX][a] < vtxP[MAX][a]
+			vtxP[MIN][a] > vtxQ[MIN][a] &&
+			vtxP[MIN][a] < vtxQ[MAX][a] &&
+			vtxQ[MAX][a] > vtxP[MIN][a] &&
+			vtxQ[MAX][a] < vtxP[MAX][a]
 		)) {
 			_ = false;
 
