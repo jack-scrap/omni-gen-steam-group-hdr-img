@@ -614,44 +614,10 @@ glm::vec3 util::matr::apply(glm::vec3 vtx, glm::mat4 model) {
 }
 
 bool util::phys::coll(Obj* p, Obj* q, glm::mat4 modelP, glm::mat4 modelQ) {
-	bool _ = true;
-
-	for (int a = 0; a < 3; a++) {
-		glm::vec3 vtxP[2];
-		for (int i = 0; i < 2; i++) {
-			vtxP[i] = glm::vec3(0.0);
-		}
-
-		glm::vec3 vtxQ[2];
-		for (int i = 0; i < 2; i++) {
-			vtxQ[i] = glm::vec3(0.0);
-		}
-
-		vtxP[MIN][a] = p->_aabb[a][MIN];
-		vtxP[MIN] = glm::vec3(modelP * glm::vec4(vtxP[MIN], 1.0));
-
-		vtxP[MAX][a] = p->_aabb[a][MAX];
-		vtxP[MAX] = glm::vec3(modelP * glm::vec4(vtxP[MAX], 1.0));
-
-		vtxQ[MIN][a] = q->_aabb[a][MIN];
-		vtxQ[MIN] = glm::vec3(modelQ * glm::vec4(vtxQ[MIN], 1.0));
-
-		vtxQ[MAX][a] = q->_aabb[a][MAX];
-		vtxQ[MAX] = glm::vec3(modelQ * glm::vec4(vtxQ[MAX], 1.0));
-
-		if (!(
-			vtxP[MIN][a] > vtxQ[MIN][a] &&
-			vtxP[MIN][a] < vtxQ[MAX][a] &&
-			vtxQ[MAX][a] > vtxP[MIN][a] &&
-			vtxQ[MAX][a] < vtxP[MAX][a]
-		)) {
-			_ = false;
-
-			break;
-		}
-	}
-
-	return _;
+	return
+		p->_aabb[MIN][X] < q->_aabb[MAX][X] && p->_aabb[MAX][X] > q->_aabb[MIN][X] &&
+    p->_aabb[MIN][Y] < q->_aabb[MAX][Y] && p->_aabb[MAX][Y] > q->_aabb[MIN][Y] &&
+    p->_aabb[MIN][Z] < q->_aabb[MAX][Z] && p->_aabb[MAX][Z] > q->_aabb[MIN][Z];
 }
 
 bool util::phys::coll(glm::vec3 vtx, Obj* bound, glm::mat4 modelVtx, glm::mat4 modelBound) {
