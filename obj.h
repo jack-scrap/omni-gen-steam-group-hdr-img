@@ -30,9 +30,7 @@ typedef struct Obj {
 
 	GLuint _tex;
 
-	GLfloat _aabb[3][2] = {
-		0.0
-	};
+	GLfloat _aabb[3][2];
 
 	Obj** _child;
 	unsigned int _noChild;
