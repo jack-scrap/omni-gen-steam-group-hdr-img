@@ -615,9 +615,9 @@ glm::vec3 util::matr::apply(glm::vec3 vtx, glm::mat4 model) {
 
 bool util::phys::coll(Obj* p, Obj* q, glm::mat4 modelP, glm::mat4 modelQ) {
 	return
-		p->_aabb[MIN][X] < q->_aabb[MAX][X] && p->_aabb[MAX][X] > q->_aabb[MIN][X] &&
-    p->_aabb[MIN][Y] < q->_aabb[MAX][Y] && p->_aabb[MAX][Y] > q->_aabb[MIN][Y] &&
-    p->_aabb[MIN][Z] < q->_aabb[MAX][Z] && p->_aabb[MAX][Z] > q->_aabb[MIN][Z];
+		p->_aabb[X][MIN] < q->_aabb[X][MAX] && p->_aabb[X][MAX] > q->_aabb[X][MIN] &&
+    p->_aabb[Y][MIN] < q->_aabb[Y][MAX] && p->_aabb[Y][MAX] > q->_aabb[Y][MIN] &&
+    p->_aabb[Z][MIN] < q->_aabb[Z][MAX] && p->_aabb[Z][MAX] > q->_aabb[Z][MIN];
 }
 
 bool util::phys::coll(glm::vec3 vtx, Obj* bound, glm::mat4 modelVtx, glm::mat4 modelBound) {
