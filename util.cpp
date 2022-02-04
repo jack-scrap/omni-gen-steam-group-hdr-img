@@ -620,23 +620,23 @@ bool util::phys::coll(Obj* p, Obj* q, glm::mat4 modelP, glm::mat4 modelQ) {
 		glm::vec3 pMin = glm::vec3(0.0);
 		pMin[a] = p->_aabb[a][MIN];
 
-		pMin = glm::vec3(p->_model * glm::vec4(pMin, 1.0));
+		pMin = glm::vec3(modelP * glm::vec4(pMin, 1.0));
 
 		glm::vec3 pMax = glm::vec3(0.0);
 		pMax[a] = p->_aabb[a][MAX];
 
-		pMax = glm::vec3(p->_model * glm::vec4(pMax, 1.0));
+		pMax = glm::vec3(modelP * glm::vec4(pMax, 1.0));
 
 		// Q
 		glm::vec3 qMin = glm::vec3(0.0);
 		qMin[a] = q->_aabb[a][MIN];
 
-		qMin = glm::vec3(q->_model * glm::vec4(qMin, 1.0));
+		qMin = glm::vec3(modelQ * glm::vec4(qMin, 1.0));
 
 		glm::vec3 qMax = glm::vec3(0.0);
 		qMin[a] = q->_aabb[a][MAX];
 
-		qMax = glm::vec3(q->_model * glm::vec4(qMax, 1.0));
+		qMax = glm::vec3(modelQ * glm::vec4(qMax, 1.0));
 
 		if (pMin[a] < qMax[a] && pMax[a] > qMin[a]) {
 			_ = false;
