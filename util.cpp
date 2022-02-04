@@ -616,6 +616,18 @@ glm::vec3 util::matr::apply(glm::vec3 vtx, glm::mat4 model) {
 bool util::phys::coll(Obj* p, Obj* q, glm::mat4 modelP, glm::mat4 modelQ) {
 	bool _ = true;
 	for (int a = 0; a < 3; a++) {
+		glm::vec3 pMin = glm::vec3(0.0);
+		pMin[a] = p->_aabb[a][MIN];
+
+		glm::vec3 pMax = glm::vec3(0.0);
+		pMax[a] = p->_aabb[a][MAX];
+
+		glm::vec3 qMin = glm::vec3(0.0);
+		qMin[a] = q->_aabb[a][MIN];
+
+		glm::vec3 qMax = glm::vec3(0.0);
+		qMin[a] = q->_aabb[a][MAX];
+
 		if (p->_aabb[a][MIN] < q->_aabb[a][MAX] && p->_aabb[a][MAX] > q->_aabb[a][MIN]) {
 			_ = false;
 
