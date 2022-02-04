@@ -638,7 +638,7 @@ bool util::phys::coll(Obj* p, Obj* q, glm::mat4 modelP, glm::mat4 modelQ) {
 
 		qMax = glm::vec3(modelQ * glm::vec4(qMax, 1.0));
 
-		if (pMin[a] < qMax[a] && pMax[a] > qMin[a]) {
+		if (!(pMin[a] < qMax[a] && pMax[a] > qMin[a])) {
 			_ = false;
 
 			break;
