@@ -634,7 +634,7 @@ bool util::phys::coll(Obj* p, Obj* q, glm::mat4 modelP, glm::mat4 modelQ) {
 		qMin = glm::vec3(modelQ * glm::vec4(qMin, 1.0));
 
 		glm::vec3 qMax = glm::vec3(0.0);
-		qMin[a] = q->_aabb[a][MAX];
+		qMax[a] = q->_aabb[a][MAX];
 
 		qMax = glm::vec3(modelQ * glm::vec4(qMax, 1.0));
 
