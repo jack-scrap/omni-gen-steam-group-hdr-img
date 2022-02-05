@@ -623,28 +623,30 @@ bool util::phys::coll(Obj* p, Obj* q, glm::mat4 modelP, glm::mat4 modelQ) {
 	bool _ = true;
 	for (int a = 0; a < 3; a++) {
 		// P
-		glm::vec3 pMin = glm::vec3(0.0);
-		pMin[a] = p->_aabb[a][MIN];
+		glm::vec3 rngP[2];
+		for (int b = 0; b < 2; b++) {
+			rngP[b] = glm::vec3(0.0);
+		}
 
-		pMin = glm::vec3(modelP * glm::vec4(pMin, 1.0));
+		for (int b = 0; b < 2; b++) {
+			rngP[b][a] = p->_aabb[a][b];
 
-		glm::vec3 pMax = glm::vec3(0.0);
-		pMax[a] = p->_aabb[a][MAX];
-
-		pMax = glm::vec3(modelP * glm::vec4(pMax, 1.0));
+			rngP[b] = glm::vec3(modelP * glm::vec4(rngP[b], 1.0));
+		}
 
 		// Q
-		glm::vec3 qMin = glm::vec3(0.0);
-		qMin[a] = q->_aabb[a][MIN];
+		glm::vec3 rngQ[2];
+		for (int b = 0; b < 2; b++) {
+			rngQ[b] = glm::vec3(0.0);
+		}
 
-		qMin = glm::vec3(modelQ * glm::vec4(qMin, 1.0));
+		for (int b = 0; b < 2; b++) {
+			rngQ[b][a] = q->_aabb[a][b];
 
-		glm::vec3 qMax = glm::vec3(0.0);
-		qMax[a] = q->_aabb[a][MAX];
+			rngQ[b] = glm::vec3(modelQ * glm::vec4(rngQ[b], 1.0));
+		}
 
-		qMax = glm::vec3(modelQ * glm::vec4(qMax, 1.0));
-
-		if (!(pMin[a] < qMax[a] && pMax[a] > qMin[a])) {
+		if (!(rngP[MIN][a] < rngQ[MAX][a] && rngP[MAX][a] > rngQ[MIN][a])) {
 			_ = false;
 
 			break;
