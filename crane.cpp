@@ -196,6 +196,10 @@ void craneInsert(Crane* crane, Cont* byte) {
 	crane->_data = byte;
 	crane->_parent->_child[Crane::SLOT] = crane->_data->_parent;
 
-	crane->_parent->_child[Crane::SLOT]->_model = glm::mat4(1.0);
+	glm::mat4 model = glm::mat4(1.0);
+	model = glm::translate(model, glm::vec3(1.0, 0.0, 0.0));
+
+	crane->_parent->_child[Crane::SLOT]->_model = model;
+
 	objAcc(crane->_parent->_child[Crane::SLOT], glm::mat4(1.0));
 }
