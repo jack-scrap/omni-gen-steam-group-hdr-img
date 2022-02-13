@@ -370,10 +370,7 @@ void objAnim(Obj* obj, glm::vec3 loc, glm::vec3 rot) {
 	glm::vec3 locFrame = glm::vec3(0.0);
 	glm::vec3 rotFrame = glm::vec3(0.0);
 	if (state::anim) {
-		while (
-			glm::any(glm::lessThan(locFrame, locMax)) ||
-			glm::any(glm::lessThan(rotFrame, rotMax))
-		) {
+		while (glm::any(glm::lessThan(locFrame, locMax)) || glm::any(glm::lessThan(rotFrame, rotMax))) {
 			glm::mat4 trans = glm::mat4(1.0);
 			trans = glm::translate(trans, locInc);
 			trans = util::matr::rot(trans, rotInc);
