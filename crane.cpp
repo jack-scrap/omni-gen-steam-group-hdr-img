@@ -205,5 +205,5 @@ void craneInsert(Crane* crane, Cont* byte) {
 
 	crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW]->_child[0]->_model = model;
 
-	objAcc(crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW], crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW]->_acc);
+	objAcc(crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW], crane->_parent->_child[Crane::HEAD]->_acc);
 }
