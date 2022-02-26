@@ -25,7 +25,7 @@ Crane* craneMk(Cont* init, glm::vec3 loc, glm::vec3 rot) {
 		_->_data = nullptr;
 	}
 
-	Obj* child[1 + 1 + (2 * 2 * 2 * 2) + (2 * 2)];
+	Obj* child[1 + 1 + (2 * 2 * 2 * 2) + (2 * 2) + (8 - 1) + 2];
 
 	// head
 	Obj* cont = nullptr;
@@ -77,7 +77,19 @@ Crane* craneMk(Cont* init, glm::vec3 loc, glm::vec3 rot) {
 		}
 	}
 
-	_->_parent = objMk("crane/body", "obj", "dir", true, child, sizeof child / sizeof *child, loc, rot);
+	child[1 + 1 + (2 * 2 * 2 * 2) + (2 * 2)] = objMk("crane/top_back", "obj", "dir", true);
+
+	child[1 + 1 + (2 * 2 * 2 * 2) + (2 * 2) + 3] = objMk("crane/body_front_r", "obj", "dir", true);
+	child[1 + 1 + (2 * 2 * 2 * 2) + (2 * 2) + 4] = objMk("crane/body_front_l", "obj", "dir", true);
+	child[1 + 1 + (2 * 2 * 2 * 2) + (2 * 2) + 1] = objMk("crane/body_back_r", "obj", "dir", true);
+	child[1 + 1 + (2 * 2 * 2 * 2) + (2 * 2) + 2] = objMk("crane/body_back_l", "obj", "dir", true);
+	child[1 + 1 + (2 * 2 * 2 * 2) + (2 * 2) + 5] = objMk("crane/top_front", "obj", "dir", true);
+	child[1 + 1 + (2 * 2 * 2 * 2) + (2 * 2) + 6] = objMk("crane/top_back", "obj", "dir", true);
+
+	child[1 + 1 + (2 * 2 * 2 * 2) + (2 * 2) + 7] = objMk("crane/body_btm_r", "obj", "dir", true);
+	child[1 + 1 + (2 * 2 * 2 * 2) + (2 * 2) + 8] = objMk("crane/body_btm_l", "obj", "dir", true);
+
+	_->_parent = objMk("crane/top_front", "obj", "dir", true, child, sizeof child / sizeof *child, loc, rot);
 
 	// offset
 	glm::vec3 offset = _->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
