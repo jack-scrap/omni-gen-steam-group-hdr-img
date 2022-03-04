@@ -54,7 +54,7 @@ Crane* craneMk(Cont* init, glm::vec3 loc, glm::vec3 rot) {
 						rim[b] = objMk("rim", "obj", "dir", true, glm::vec3(0.0), glm::vec3(0.0, b * M_PI, 0.0));
 					}
 
-					child[1 + 1 + w] = objMk("wheel", "obj", "dir", false, rim, 2, glm::vec3(-0.5 + ((x ? 1 : -1) * 3.0) + (j ? 1 : -1), 1.0, ((z ? 1 : -1) * 10.0) + ((k ? 1 : -1) * 0.6)));
+					child[1 + 1 + w] = objMk("wheel", "obj", "dir", false, rim, 2, glm::vec3(((x ? 1 : -1) * 3.0) + (j ? 1 : -1), 1.0, ((z ? 1 : -1) * 10.0) + ((k ? 1 : -1) * 0.6)));
 
 					w++;
 				}
