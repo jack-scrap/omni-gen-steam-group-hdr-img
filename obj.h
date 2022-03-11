@@ -76,9 +76,9 @@ void objDel(Obj* obj);
 
 void objAcc(Obj* obj, glm::mat4 prev);
 
-void objAnim(Obj* obj, glm::vec3 loc, glm::vec3 rot);
+void objAnim(Obj* obj, glm::vec3 loc, glm::vec3 rot, Obj* parent);
 
-void objMv(Obj* obj, glm::vec3 loc, glm::vec3 rot);
+void objMv(Obj* obj, glm::vec3 loc, glm::vec3 rot, Obj* parent);
 
 void objA(Obj* obj);
 
