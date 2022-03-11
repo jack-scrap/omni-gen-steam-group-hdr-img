@@ -28,10 +28,7 @@ void main() {
 
 	for	(int i = 0; i < 2; i++) {
 		for	(int b = 0; b < 2; b++) {
-			gl_Position = proj * view * model * vec4(
-				gl_in[i].gl_Position.xyz + (b * vec3(orth.x, 0.0, orth.y) * pad * 2),
-				1.0
-			);
+			gl_Position = proj * view * model * vec4(gl_in[i].gl_Position.xyz + (b * vec3(orth.x, 0.0, orth.y) * pad * 2), 1.0);
 			_obj = gl_in[i].gl_Position.xyz + (b * vec3(orth.x, 0.0, orth.y) * pad * 2);
 			_mag = vec3(hyp(gl_Position.xz));
 
