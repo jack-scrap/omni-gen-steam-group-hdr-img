@@ -121,7 +121,7 @@ void truckAnim(Truck* truck, glm::vec3 loc, glm::vec3 rot) {
 		truck->_parent->_child[4 + (truck->_data->_x * 2 * 2) + i]->_active = true;
 	}
 
-	objMv(truck->_parent, loc, rot, nullptr);
+	objMv(truck->_parent, nullptr, loc, rot);
 
 	for (int i = 0; i < 2; i++) {
 		truck->_parent->_child[4 + (truck->_data->_x * 2 * 2) + i]->_active = false;
@@ -144,7 +144,7 @@ void truckTurn(Truck* truck, float delta) {
 		truck->_ang += delta;
 
 		for (int z = 0; z < 2; z++) {
-			objAnim(truck->_parent->_child[z * 2], glm::vec3(0.0), glm::vec3(0.0, delta, 0.0), truck->_parent);
+			objAnim(truck->_parent->_child[z * 2], truck->_parent, glm::vec3(0.0), glm::vec3(0.0, delta, 0.0));
 		}
 	} else {
 		omni::err(omni::ERR_MV_RNG, {

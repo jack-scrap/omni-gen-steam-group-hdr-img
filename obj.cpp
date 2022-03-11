@@ -360,7 +360,7 @@ void objAcc(Obj* obj, glm::mat4 prev) {
 	}
 }
 
-void objAnim(Obj* obj, glm::vec3 loc, glm::vec3 rot, Obj* parent) {
+void objAnim(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot) {
 	glm::vec3 locMax = glm::abs(loc);
 	glm::vec3 rotMax = glm::abs(rot);
 
@@ -400,7 +400,7 @@ void objAnim(Obj* obj, glm::vec3 loc, glm::vec3 rot, Obj* parent) {
 	}
 }
 
-void objMv(Obj* obj, glm::vec3 loc, glm::vec3 rot, Obj* parent) {
+void objMv(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot) {
 	bool coll = false;
 	glm::mat4 dest = glm::mat4(1.0);
 	dest = glm::translate(dest, loc);
@@ -416,7 +416,7 @@ void objMv(Obj* obj, glm::vec3 loc, glm::vec3 rot, Obj* parent) {
 	}
 
 	if (!coll) {
-		objAnim(obj, loc, rot, parent);
+		objAnim(obj, parent, loc, rot);
 	} else {
 		omni::err(omni::ERR_OBJ_CLIP);
 	}
@@ -425,7 +425,7 @@ void objMv(Obj* obj, glm::vec3 loc, glm::vec3 rot, Obj* parent) {
 void objA(Obj* obj) {
 	int i = 0;
 	while (!util::phys::collGround(obj)) {
-		objMv(obj, glm::vec3(0.0, -(pow(i, 2) * phys::g), 0.0), glm::vec3(0.0), nullptr);
+		objMv(obj, nullptr, glm::vec3(0.0, -(pow(i, 2) * phys::g), 0.0), glm::vec3(0.0));
 
 		i++;
 	}

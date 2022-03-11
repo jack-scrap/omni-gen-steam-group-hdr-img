@@ -116,7 +116,7 @@ void craneAnim(Crane* crane, glm::vec3 loc) {
 		crane->_parent->_child[1 + 1 + (2 * 2 * 2 * 2) + i]->_active = true;
 	}
 
-	objMv(crane->_parent, loc, glm::vec3(0.0), nullptr);
+	objMv(crane->_parent, nullptr, loc, glm::vec3(0.0));
 
 	for (int i = 0; i < 2 * 2; i++) {
 		crane->_parent->_child[1 + 1 + (2 * 2 * 2 * 2) + i]->_active = false;
@@ -140,7 +140,7 @@ void cranePan(Crane* crane, float delta) {
 	if (dest[Z] > crane->_rngHead[MIN] && dest[Z] < crane->_rngHead[MAX]) {
 		glm::vec3 offset = glm::vec3(0.0, 0.0, delta);
 
-		objMv(crane->_parent->_child[Crane::HEAD], offset, glm::vec3(0.0), crane->_parent);
+		objMv(crane->_parent->_child[Crane::HEAD], crane->_parent, offset, glm::vec3(0.0));
 	} else {
 		omni::err(omni::ERR_MV_RNG, {
 			"crane head"
@@ -160,7 +160,7 @@ void cranePed(Crane* crane, float delta) {
 	if (dest[Y] > crane->_rngClaw[MIN] && dest[Y] < crane->_rngClaw[MAX]) {
 		glm::vec3 offset = glm::vec3(0.0, delta, 0.0);
 
-		objMv(crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW], offset, glm::vec3(0.0), crane->_parent->_child[Crane::HEAD]);
+		objMv(crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW], crane->_parent->_child[Crane::HEAD], offset, glm::vec3(0.0));
 	} else {
 		omni::err(omni::ERR_MV_RNG, {
 			"crane claw"
