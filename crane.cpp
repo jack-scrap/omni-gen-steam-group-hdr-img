@@ -216,7 +216,7 @@ void craneInsert(Crane* crane, Cont* byte) {
 	crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW]->_child[0] = crane->_data->_parent;
 
 	glm::mat4 model = glm::mat4(1.0);
-	model = glm::translate(model, glm::vec3(1.0, 0.0, 0.0));
+	model = glm::translate(model, glm::vec3(0.0, -(3.32 + 1.0), 0.0));
 
 	crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW]->_child[0]->_model = model;
 
