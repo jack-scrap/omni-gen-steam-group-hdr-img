@@ -870,19 +870,27 @@ CBuff util::json::array::tens(nlohmann::json deser) {
 	return _;
 }
 
-Var* util::json::var(nlohmann::json key, nlohmann::json val) {
+Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm::vec3 rot) {
 	Var* _;
 
 	char* name = id(key);
 
-	glm::vec3 loc = glm::vec3(0.0);
+	glm::vec3 _loc = glm::vec3(0.0);
 	if (val.contains("loc")) {
-		loc = vec(val["loc"]);
+		_loc = vec(val["loc"]);
 	}
 
-	glm::vec3 rot = glm::vec3(0.0);
+	if (loc != glm::vec3(0.0)) {
+		_loc = loc;
+	}
+
+	glm::vec3 _rot = glm::vec3(0.0);
 	if (val.contains("rot")) {
-		rot = vec(val["rot"]);
+		_rot = vec(val["rot"]);
+	}
+
+	if (rot != glm::vec3(0.0)) {
+		_rot = rot;
 	}
 
 	switch (val["block"].type()) {
@@ -890,7 +898,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val) {
 		case nlohmann::json::value_t::number_unsigned: {
 			char init = byte(val["block"]);
 
-			Idx* idx = idxMk(0, &init, 1, key, loc, rot);
+			Idx* idx = idxMk(0, &init, 1, key, _loc, _rot);
 
 			omni::assert(!(phys::collGround(idx->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
@@ -906,7 +914,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val) {
 				case nlohmann::json::value_t::number_unsigned: {
 					CBuff init = array::array(val["block"]);
 
-					Array* val = arrayMk((char*) init._ptr, init._x, key, X, loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
+					Array* val = arrayMk((char*) init._ptr, init._x, key, X, _loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), _rot);
 
 					omni::assert(!(phys::collGround(val->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
@@ -935,7 +943,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val) {
 						case nlohmann::json::value_t::array: {
 							CBuff init = array::tens(val["block"]);
 
-							Array* val = arrayMk((char*) init._ptr, init._x, init._y, key, loc, rot);
+							Array* val = arrayMk((char*) init._ptr, init._x, init._y, key, _loc, _rot);
 
 							omni::assert(!(phys::collGround(val->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
@@ -954,7 +962,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val) {
 		case nlohmann::json::value_t::string: {
 			CBuff init = str(val["block"]);
 
-			Array* val = arrayMk((char*) init._ptr, init._x, key, X, loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), rot);
+			Array* val = arrayMk((char*) init._ptr, init._x, key, X, _loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), _rot);
 
 			omni::assert(!(phys::collGround(val->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
@@ -990,10 +998,20 @@ Scope util::json::scope(nlohmann::json deser) {
 	for (const auto& pair : deser.items()) {
 		char* name = id(pair.key());
 
+		glm::vec3 loc = glm::vec3(0.0, 0.0, i * 10.0);
+		if (pair.value().contains("loc")) {
+			loc = vec(pair.value()["loc"]);
+		}
+
+		glm::vec3 rot = glm::vec3(0.0);
+		if (pair.value().contains("rot")) {
+			rot = vec(pair.value()["rot"]);
+		}
+
 		switch (pair.value()["block"].type()) {
 			// scalar
 			case nlohmann::json::value_t::number_unsigned: {
-				Var* item = var(pair.key(), pair.value());
+				Var* item = var(pair.key(), pair.value(), loc, rot);
 
 				((Var**) _._ptr)[i] = item;
 				((unsigned int*) _._type)[i] = omni::SCALAR;

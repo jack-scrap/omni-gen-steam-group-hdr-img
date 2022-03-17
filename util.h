@@ -118,7 +118,7 @@ namespace util {
 
 		bool ascii(nlohmann::json deser);
 
-		Var* var(nlohmann::json key, nlohmann::json val);
+		Var* var(nlohmann::json key, nlohmann::json val, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
 
 		Scope scope(nlohmann::json deser);
 
