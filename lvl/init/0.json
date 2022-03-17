@@ -1,11 +1,17 @@
 {
 	"data": {
-		"state": {
+		"left": {
+			"block": 1
+		},
+		"right": {
 			"block": 0
 		}
 	},
 	"goal": {
-		"state": {
+		"left": {
+			"block": 0
+		},
+		"right": {
 			"block": 1
 		}
 	},
