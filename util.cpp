@@ -1007,7 +1007,6 @@ Scope util::json::scope(nlohmann::json deser) {
 
 				((Var**) _._ptr)[i] = item;
 				((unsigned int*) _._type)[i] = omni::SCALAR;
-				i++;
 
 				break;
 			}
@@ -1018,7 +1017,6 @@ Scope util::json::scope(nlohmann::json deser) {
 
 				((Var**) _._ptr)[i] = item;
 				((unsigned int*) _._type)[i] = omni::ARRAY;
-				i++;
 
 				break;
 			}
@@ -1034,7 +1032,6 @@ Scope util::json::scope(nlohmann::json deser) {
 
 						((Var**) _._ptr)[i] = item;
 						((unsigned int*) _._type)[i] = omni::ARRAY;
-						i++;
 
 						break;
 					}
@@ -1048,7 +1045,6 @@ Scope util::json::scope(nlohmann::json deser) {
 
 								((Var**) _._ptr)[i] = item;
 								((unsigned int*) _._type)[i] = omni::ARRAY;
-								i++;
 
 								break;
 							}
@@ -1059,7 +1055,6 @@ Scope util::json::scope(nlohmann::json deser) {
 
 								((Var**) _._ptr)[i] = item;
 								((unsigned int*) _._type)[i] = omni::ARRAY;
-								i++;
 
 								break;
 							}
@@ -1078,7 +1073,6 @@ Scope util::json::scope(nlohmann::json deser) {
 
 				((Var**) _._ptr)[i] = item;
 				((unsigned int*) _._type)[i] = omni::DICT;
-				i++;
 
 				break;
 			}
