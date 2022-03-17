@@ -990,16 +990,6 @@ Scope util::json::scope(nlohmann::json deser) {
 	for (const auto& pair : deser.items()) {
 		char* name = id(pair.key());
 
-		glm::vec3 loc = glm::vec3(0.0);
-		if (pair.value().contains("loc")) {
-			loc = vec(pair.value()["loc"]);
-		}
-
-		glm::vec3 rot = glm::vec3(0.0);
-		if (pair.value().contains("rot")) {
-			rot = vec(pair.value()["rot"]);
-		}
-
 		switch (pair.value()["block"].type()) {
 			// scalar
 			case nlohmann::json::value_t::number_unsigned: {
