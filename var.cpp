@@ -2,11 +2,12 @@
 
 #include "var.h"
 
-Var* varMk(char* id, void* ptr) {
+Var* varMk(char* id, void* ptr, unsigned int type) {
 	Var* _ = (Var*) malloc(sizeof (Var));
 
 	_->_id = id;
 	_->_ptr = ptr;
+	_->_type = type;
 
 	return _;
 }
