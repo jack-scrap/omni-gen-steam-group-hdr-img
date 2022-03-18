@@ -995,10 +995,11 @@ Scope util::json::scope(nlohmann::json deser) {
 	_._type = (unsigned int*) malloc(_._no * sizeof (unsigned int));
 
 	unsigned int i = 0;
+	glm::vec3 offset = glm::vec3(0.0);
 	for (const auto& pair : deser.items()) {
 		char* name = id(pair.key());
 
-		glm::vec3 loc = glm::vec3(i * 10.0, 0.0, 0.0);
+		glm::vec3 loc = offset;
 		if (pair.value().contains("loc")) {
 			loc = vec(pair.value()["loc"]);
 		}
@@ -1087,6 +1088,8 @@ Scope util::json::scope(nlohmann::json deser) {
 		}
 
 		i++;
+
+		offset += glm::vec3(10.0, 0.0, 0.0);
 	}
 
 	return _;
