@@ -1005,7 +1005,7 @@ Scope util::json::scope(nlohmann::json deser) {
 			case nlohmann::json::value_t::number_unsigned: {
 				Var* item = var(pair.key(), pair.value(), loc, rot);
 
-				wd = ((Idx*) (item->_ptr))->_parent->_aabb[X][MAX] - ((Idx*) (item->_ptr))->_parent->_aabb[X][MIN];
+				wd = ((Idx*) item->_ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->_ptr)->_parent->_aabb[X][MIN];
 
 				((Var**) _._ptr)[i] = item;
 				((unsigned int*) _._type)[i] = omni::SCALAR;
@@ -1017,7 +1017,7 @@ Scope util::json::scope(nlohmann::json deser) {
 			case nlohmann::json::value_t::string: {
 				Var* item = var(pair.key(), pair.value());
 
-				wd = ((Array*) (item->_ptr))->_parent->_aabb[X][MAX] - ((Idx*) (item->_ptr))->_parent->_aabb[X][MIN];
+				wd = ((Array*) item->_ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->_ptr)->_parent->_aabb[X][MIN];
 
 				((Var**) _._ptr)[i] = item;
 				((unsigned int*) _._type)[i] = omni::ARRAY;
@@ -1034,7 +1034,7 @@ Scope util::json::scope(nlohmann::json deser) {
 					case nlohmann::json::value_t::number_unsigned: {
 						Var* item = var(pair.key(), pair.value());
 
-						wd = ((Array*) (item->_ptr))->_parent->_aabb[X][MAX] - ((Idx*) (item->_ptr))->_parent->_aabb[X][MIN];
+						wd = ((Array*) item->_ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->_ptr)->_parent->_aabb[X][MIN];
 
 						((Var**) _._ptr)[i] = item;
 						((unsigned int*) _._type)[i] = omni::ARRAY;
@@ -1049,7 +1049,7 @@ Scope util::json::scope(nlohmann::json deser) {
 							case nlohmann::json::value_t::number_unsigned: {
 								Var* item = var(pair.key(), pair.value());
 
-								wd = ((Array*) (item->_ptr))->_parent->_aabb[X][MAX] - ((Idx*) (item->_ptr))->_parent->_aabb[X][MIN];
+								wd = ((Array*) item->_ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->_ptr)->_parent->_aabb[X][MIN];
 
 								((Var**) _._ptr)[i] = item;
 								((unsigned int*) _._type)[i] = omni::ARRAY;
@@ -1061,7 +1061,7 @@ Scope util::json::scope(nlohmann::json deser) {
 							case nlohmann::json::value_t::array: {
 								Var* item = json::var(pair.key(), pair.value());
 
-								wd = ((Array*) (item->_ptr))->_parent->_aabb[X][MAX] - ((Idx*) (item->_ptr))->_parent->_aabb[X][MIN];
+								wd = ((Array*) item->_ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->_ptr)->_parent->_aabb[X][MIN];
 
 								((Var**) _._ptr)[i] = item;
 								((unsigned int*) _._type)[i] = omni::ARRAY;
@@ -1081,7 +1081,7 @@ Scope util::json::scope(nlohmann::json deser) {
 			case nlohmann::json::value_t::object: {
 				Var* item = var(pair.key(), pair.value());
 
-				wd = ((Dict*) (item->_ptr))->_parent->_aabb[X][MAX] - ((Idx*) (item->_ptr))->_parent->_aabb[X][MIN];
+				wd = ((Dict*) item->_ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->_ptr)->_parent->_aabb[X][MIN];
 
 				((Var**) _._ptr)[i] = item;
 				((unsigned int*) _._type)[i] = omni::DICT;
