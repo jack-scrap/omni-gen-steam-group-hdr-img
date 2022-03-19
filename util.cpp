@@ -999,10 +999,13 @@ Scope util::json::scope(nlohmann::json deser) {
 			rot = vec(pair.value()["rot"]);
 		}
 
+		GLfloat wd;
 		switch (pair.value()["block"].type()) {
 			// scalar
 			case nlohmann::json::value_t::number_unsigned: {
 				Var* item = var(pair.key(), pair.value(), loc, rot);
+
+				wd = ((Idx*) (item->_ptr))->_parent->_aabb[X][MAX] - ((Idx*) (item->_ptr))->_parent->_aabb[X][MIN];
 
 				((Var**) _._ptr)[i] = item;
 				((unsigned int*) _._type)[i] = omni::SCALAR;
@@ -1013,6 +1016,8 @@ Scope util::json::scope(nlohmann::json deser) {
 			// string
 			case nlohmann::json::value_t::string: {
 				Var* item = var(pair.key(), pair.value());
+
+				wd = ((Array*) (item->_ptr))->_parent->_aabb[X][MAX] - ((Idx*) (item->_ptr))->_parent->_aabb[X][MIN];
 
 				((Var**) _._ptr)[i] = item;
 				((unsigned int*) _._type)[i] = omni::ARRAY;
@@ -1029,6 +1034,8 @@ Scope util::json::scope(nlohmann::json deser) {
 					case nlohmann::json::value_t::number_unsigned: {
 						Var* item = var(pair.key(), pair.value());
 
+						wd = ((Array*) (item->_ptr))->_parent->_aabb[X][MAX] - ((Idx*) (item->_ptr))->_parent->_aabb[X][MIN];
+
 						((Var**) _._ptr)[i] = item;
 						((unsigned int*) _._type)[i] = omni::ARRAY;
 
@@ -1042,6 +1049,8 @@ Scope util::json::scope(nlohmann::json deser) {
 							case nlohmann::json::value_t::number_unsigned: {
 								Var* item = var(pair.key(), pair.value());
 
+								wd = ((Array*) (item->_ptr))->_parent->_aabb[X][MAX] - ((Idx*) (item->_ptr))->_parent->_aabb[X][MIN];
+
 								((Var**) _._ptr)[i] = item;
 								((unsigned int*) _._type)[i] = omni::ARRAY;
 
@@ -1051,6 +1060,8 @@ Scope util::json::scope(nlohmann::json deser) {
 							// 3D
 							case nlohmann::json::value_t::array: {
 								Var* item = json::var(pair.key(), pair.value());
+
+								wd = ((Array*) (item->_ptr))->_parent->_aabb[X][MAX] - ((Idx*) (item->_ptr))->_parent->_aabb[X][MIN];
 
 								((Var**) _._ptr)[i] = item;
 								((unsigned int*) _._type)[i] = omni::ARRAY;
@@ -1070,6 +1081,8 @@ Scope util::json::scope(nlohmann::json deser) {
 			case nlohmann::json::value_t::object: {
 				Var* item = var(pair.key(), pair.value());
 
+				wd = ((Dict*) (item->_ptr))->_parent->_aabb[X][MAX] - ((Idx*) (item->_ptr))->_parent->_aabb[X][MIN];
+
 				((Var**) _._ptr)[i] = item;
 				((unsigned int*) _._type)[i] = omni::DICT;
 
@@ -1077,9 +1090,9 @@ Scope util::json::scope(nlohmann::json deser) {
 			}
 		}
 
-		i++;
+		offset += glm::vec3(layout::padded(wd), 0.0, 0.0);
 
-		offset += glm::vec3(10.0, 0.0, 0.0);
+		i++;
 	}
 
 	return _;
