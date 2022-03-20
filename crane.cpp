@@ -174,27 +174,11 @@ void cranePed(Crane* crane, float delta) {
 }
 
 void craneGrab(Crane* crane) {
-	for (int i = 0; i < noData; i++) {
-		switch (type[i]) {
-			case omni::SCALAR: {
-				Idx* idx = (Idx*) data[i]->_ptr;
-
-				if (idx->_data) {
-					if (util::phys::coll(crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW], idx->_data->_parent)) {
-						craneInsert(crane, idxPop(idx));
-
-						return;
-					}
-				}
-
-				break;
-			}
-
-			case omni::ARRAY: {
-				Array* array = (Array*) data[i]->_ptr;
-
-				for (int i = 0; i < array->_x * array->_y; i++) {
-					Idx* idx = array->_data[i];
+	if (!crane->_data) {
+		for (int i = 0; i < noData; i++) {
+			switch (type[i]) {
+				case omni::SCALAR: {
+					Idx* idx = (Idx*) data[i]->_ptr;
 
 					if (idx->_data) {
 						if (util::phys::coll(crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW], idx->_data->_parent)) {
@@ -203,9 +187,27 @@ void craneGrab(Crane* crane) {
 							return;
 						}
 					}
+
+					break;
 				}
 
-				break;
+				case omni::ARRAY: {
+					Array* array = (Array*) data[i]->_ptr;
+
+					for (int i = 0; i < array->_x * array->_y; i++) {
+						Idx* idx = array->_data[i];
+
+						if (idx->_data) {
+							if (util::phys::coll(crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW], idx->_data->_parent)) {
+								craneInsert(crane, idxPop(idx));
+
+								return;
+							}
+						}
+					}
+
+					break;
+				}
 			}
 		}
 	}
