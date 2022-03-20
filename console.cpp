@@ -63,7 +63,10 @@ void dispatch(std::string fName, unsigned int ptrEditorX) {
 	}
 
 	if (eq) {
-		std::string log = "log/" + util::fs::path::base(fName) + ".log";
+		std::string log = util::fs::path::build({
+			"log",
+			util::fs::path::base(fName) + ".log"
+		});
 
 		console->_buff = util::log(console->_buff.size(), ptrEditorX);
 
