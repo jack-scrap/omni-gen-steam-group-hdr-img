@@ -885,6 +885,16 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 
 	switch (val["block"].type()) {
 		// scalar
+		case nlohmann::json::value_t::null: {
+			Idx* idx = idxMk(0, key, loc, rot);
+
+			omni::assert(!(phys::collGround(idx->_parent)), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
+
+			_ = varMk(name, idx, omni::SCALAR);
+
+			break;
+		}
+
 		case nlohmann::json::value_t::number_unsigned: {
 			char init = byte(val["block"]);
 
@@ -1002,6 +1012,17 @@ Scope util::json::scope(nlohmann::json deser) {
 		GLfloat wd;
 		switch (pair.value()["block"].type()) {
 			// scalar
+			case nlohmann::json::value_t::null: {
+				Var* item = var(pair.key(), pair.value(), loc, rot);
+
+				wd = ((Idx*) item->_ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->_ptr)->_parent->_aabb[X][MIN];
+
+				((Var**) _._ptr)[i] = item;
+				((unsigned int*) _._type)[i] = omni::SCALAR;
+
+				break;
+			}
+
 			case nlohmann::json::value_t::number_unsigned: {
 				Var* item = var(pair.key(), pair.value(), loc, rot);
 

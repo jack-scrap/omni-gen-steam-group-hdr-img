@@ -4,13 +4,13 @@
 			"block": 1
 		},
 		"right": {
-			"block": 0,
+			"block": null,
 			"loc": [10.0, 0, 0]
 		}
 	},
 	"goal": {
 		"left": {
-			"block": 0
+			"block": null
 		},
 		"right": {
 			"block": 1
