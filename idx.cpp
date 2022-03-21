@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include <string>
+#include <glm/gtc/matrix_transform.hpp>
 
 #include "idx.h"
 #include "layout.h"
@@ -99,7 +100,12 @@ void idxInsert(Idx* idx, Cont* byte) {
 	idx->_data = byte;
 	idx->_parent->_child[idx->_parent->_noChild - 1] = idx->_data->_parent;
 
-	objAcc(idx->_parent, glm::mat4(1.0));
+	glm::mat4 model = glm::mat4(1.0);
+	model = glm::translate(model, glm::vec3(2.0 / 2, 2.0 / 2, 4.0 / 2) + glm::vec3(layout::stroke, 0.0, layout::stroke) + glm::vec3(layout::pad * 2, 0.0, layout::pad * 2));
+
+	idx->_data->_parent->_model = model;
+
+	objAcc(idx->_parent, idx->_parent->_acc);
 }
 
 Cont* idxPop(Idx* idx) {
