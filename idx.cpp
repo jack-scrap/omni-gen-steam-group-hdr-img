@@ -101,7 +101,7 @@ void idxInsert(Idx* idx, Cont* byte) {
 	idx->_parent->_child[idx->_parent->_noChild - 1] = idx->_data->_parent;
 
 	glm::mat4 model = glm::mat4(1.0);
-	model = glm::translate(model, glm::vec3(2.0 / 2, 2.0 / 2, 4.0 / 2) + glm::vec3(layout::stroke, 0.0, layout::stroke) + glm::vec3(layout::pad * 2, 0.0, layout::pad * 2));
+	model = glm::translate(model, glm::vec3(layout::bordered(layout::idx[X]), layout::idx[Y], layout::bordered(layout::idx[Z])) / glm::vec3(2));
 
 	idx->_data->_parent->_model = model;
 
