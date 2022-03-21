@@ -16,7 +16,7 @@ typedef struct Crane {
 		3.0
 	};
 	static constexpr float _rngClaw[2] = {
-		0.0,
+		4.0,
 		13.8
 	};
 

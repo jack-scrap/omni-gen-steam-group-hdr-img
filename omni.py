@@ -147,7 +147,7 @@ class _Crane(_Obj):
 		3.0
 	]
 	_rngClaw = [
-		0.0,
+		4.0,
 		13.8
 	]
 
