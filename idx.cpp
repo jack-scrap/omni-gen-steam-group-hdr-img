@@ -105,7 +105,7 @@ void idxInsert(Idx* idx, Cont* byte) {
 
 	idx->_data->_parent->_model = model;
 
-	objAcc(idx->_parent, idx->_parent->_acc);
+	objAcc(idx->_parent, glm::mat4(1.0));
 }
 
 Cont* idxPop(Idx* idx) {
