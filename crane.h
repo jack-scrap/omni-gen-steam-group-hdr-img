@@ -45,3 +45,5 @@ extern "C" void cranePed(Crane* crane, float delta);
 extern "C" void craneGrab(Crane* crane);
 
 void craneInsert(Crane* crane, Cont* byte);
+
+Cont* cranePop(Crane* crane);

@@ -182,10 +182,7 @@ void craneGrab(Crane* crane) {
 
 					if (crane->_data && !idx->_data) {
 						if (util::phys::coll(crane->_data->_parent, idx->_parent)) {
-							idxInsert(idx, crane->_data);
-
-							crane->_data = nullptr;
-							crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW]->_child[0] = nullptr;
+							idxInsert(idx, cranePop(crane));
 
 							return;
 						}
@@ -202,7 +199,7 @@ void craneGrab(Crane* crane) {
 
 						if (crane->_data && !idx->_data) {
 							if (util::phys::coll(crane->_data->_parent, idx->_parent)) {
-								idxInsert(idx, crane->_data);
+								idxInsert(idx, cranePop(crane));
 
 								crane->_data = nullptr;
 								crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW]->_child[0] = nullptr;
@@ -265,4 +262,13 @@ void craneInsert(Crane* crane, Cont* byte) {
 	crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW]->_child[0]->_model = model;
 
 	objAcc(crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW], crane->_parent->_child[Crane::HEAD]->_acc);
+}
+
+Cont* cranePop(Crane* crane) {
+	Cont* _ = crane->_data;
+
+	crane->_data = nullptr;
+	crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW]->_child[0] = nullptr;
+
+	return _;
 }
