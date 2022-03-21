@@ -1617,7 +1617,7 @@ std::vector<std::string> util::log(unsigned int loc, unsigned int ptrEditorX) {
 	buff.push_back(head);
 
 	std::string lb;
-	for (int i = ptrEditorX; i < state::lineWd - 1; i++) {
+	for (int i = ptrEditorX; i < state::lineWd; i++) {
 		lb.push_back('=');
 	}
 	buff.push_back(lb);
@@ -1638,7 +1638,7 @@ std::vector<std::string> util::log(unsigned int loc, unsigned int ptrEditorX) {
 
 		std::string val = it->second;
 
-		std::string pair = str::pad(key, (state::lineWd - ptrEditorX - 1) - val.size());
+		std::string pair = str::pad(key, (state::lineWd - ptrEditorX) - val.size());
 		pair += val;
 
 		buff.push_back(pair);
