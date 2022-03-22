@@ -47,7 +47,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 	_->_model *= glm::translate(glm::mat4(1.0), loc);
 	_->_model *= util::matr::rot(glm::mat4(1.0), rot);
 	_->_view = glm::lookAt(cam._pos, cam._pos + glm::vec3(-1000.0, -1000.0, -1000.0), glm::vec3(0, 1, 0));
-	_->_proj = glm::ortho(-(layout::view[X] / 2.0), layout::view[X] / 2.0, -(layout::view[Y] / 2.0), layout::view[Y] / 2.0, 0.1, 10000.0);
+	_->_proj = glm::ortho(-(layout::view[X] / 2.0), layout::view[X] / 2.0, -(layout::view[Y] / 2.0), layout::view[Y] / 2.0, 0.1, 100000.0);
 	_->_acc = glm::mat4(1.0);
 
 	_->_prog = Prog(vtx, frag);
@@ -116,7 +116,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 	_->_model *= glm::translate(glm::mat4(1.0), loc);
 	_->_model *= util::matr::rot(glm::mat4(1.0), rot);
 	_->_view = glm::lookAt(cam._pos, cam._pos + glm::vec3(-1000.0, -1000.0, -1000.0), glm::vec3(0, 1, 0));
-	_->_proj = glm::ortho(-(layout::view[X] / 2.0), layout::view[X] / 2.0, -(layout::view[Y] / 2.0), layout::view[Y] / 2.0, 0.1, 10000.0);
+	_->_proj = glm::ortho(-(layout::view[X] / 2.0), layout::view[X] / 2.0, -(layout::view[Y] / 2.0), layout::view[Y] / 2.0, 0.1, 100000.0);
 	_->_acc = glm::mat4(1.0);
 
 	_->_prog = Prog(vtx, frag);
@@ -298,7 +298,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 	_->_model *= glm::translate(glm::mat4(1.0), loc);
 	_->_model *= util::matr::rot(glm::mat4(1.0), rot);
 	_->_view = glm::lookAt(cam._pos, cam._pos + glm::vec3(-1000.0, -1000.0, -1000.0), glm::vec3(0, 1, 0));
-	_->_proj = glm::ortho(-(layout::view[X] / 2.0), layout::view[X] / 2.0, -(layout::view[Y] / 2.0), layout::view[Y] / 2.0, 0.1, 10000.0);
+	_->_proj = glm::ortho(-(layout::view[X] / 2.0), layout::view[X] / 2.0, -(layout::view[Y] / 2.0), layout::view[Y] / 2.0, 0.1, 100000.0);
 	_->_acc = glm::mat4(1.0);
 
 	_->_prog = Prog(vtx, geom, frag);
