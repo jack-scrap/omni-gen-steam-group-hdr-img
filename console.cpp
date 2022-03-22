@@ -36,7 +36,7 @@ void dispatch(std::string fName, unsigned int ptrEditorX) {
 
 	PyRun_SimpleString(util::str::join(buff).c_str());
 
-	bool eq = true;
+	eq = true;
 	for (int i = 0; i < noData; i++) {
 		switch (type[i]) {
 			case omni::SCALAR:
