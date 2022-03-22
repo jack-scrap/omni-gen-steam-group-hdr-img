@@ -104,7 +104,9 @@ Crane* craneMk(Cont* init, glm::vec3 loc, glm::vec3 rot) {
 }
 
 void craneDel(Crane* crane) {
-	contDel(crane->_data);
+	if (crane->_data) {
+		contDel(crane->_data);
+	}
 
 	objDel(crane->_parent);
 
