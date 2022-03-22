@@ -1,18 +1,18 @@
 {
 	"data": {
-		"left": {
+		"src": {
 			"block": 1
 		},
-		"right": {
+		"dest": {
 			"block": null,
 			"loc": [10, 0, 0]
 		}
 	},
 	"goal": {
-		"left": {
+		"src": {
 			"block": null
 		},
-		"right": {
+		"dest": {
 			"block": 1
 		}
 	},
