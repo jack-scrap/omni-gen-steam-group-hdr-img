@@ -91,7 +91,9 @@ Idx* idxMk(unsigned int i, char* c, unsigned int sz, std::string name, glm::vec3
 }
 
 void idxDel(Idx* idx) {
-	contDel(idx->_data);
+	if (idx->_data) {
+		contDel(idx->_data);
+	}
 
 	free(idx);
 }
