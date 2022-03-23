@@ -1,17 +1,23 @@
 {
 	"data": {
-		"state": {
-			"block": 0,
+		"src": {
+			"block": null
+		},
+		"dest": {
+			"block": 1,
 			"loc": [
-				3,
+				10,
 				0,
 				0
 			]
 		}
 	},
 	"goal": {
-		"state": {
+		"src": {
 			"block": 1
+		},
+		"dest": {
+			"block": null
 		}
 	},
 	"vehicle": [
