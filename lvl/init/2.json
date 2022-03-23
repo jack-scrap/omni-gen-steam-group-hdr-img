@@ -1,15 +1,20 @@
 {
 	"data": {
 		"src": {
-			"block": 0
+			"block": 1
 		},
 		"dest": {
-			"block": 0
+			"block": null,
+			"loc": [
+				-10,
+				0,
+				0
+			]
 		}
 	},
 	"goal": {
 		"src": {
-			"block": 1
+			"block": null
 		},
 		"dest": {
 			"block": 1
