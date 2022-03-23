@@ -22,6 +22,6 @@ void idxDel(Idx* idx);
 
 void idxInsert(Idx* idx, Cont* byte);
 
-Cont* idxPop(Idx* idx);
+Cont* idxRm(Idx* idx);
 
 bool idxEq(Idx* lhs, Idx* rhs);
