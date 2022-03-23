@@ -1,23 +1,23 @@
 {
 	"data": {
-		"state": {
+		"src": {
 			"block": 3
 		},
-		"other_state": {
+		"dest": {
 			"block": 7
 		},
-		"other_other_state": {
+		"other_dest": {
 			"block": 12
 		}
 	},
 	"goal": {
-		"state": {
+		"src": {
 			"block": 12
 		},
-		"other_state": {
+		"dest": {
 			"block": 3
 		},
-		"other_other_state": {
+		"other_dest": {
 			"block": 7
 		}
 	},

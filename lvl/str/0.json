@@ -1,11 +1,11 @@
 {
 	"data": {
-		"state": {
+		"src": {
 			"block": "eTxt"
 		}
 	},
 	"goal": {
-		"state": {
+		"src": {
 			"block": "Text"
 		}
 	},

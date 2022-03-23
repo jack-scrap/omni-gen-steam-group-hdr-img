@@ -1,6 +1,6 @@
 {
 	"data": {
-		"state": {
+		"src": {
 			"key": {
 				"key": 3,
 				"other_key": [
@@ -11,7 +11,7 @@
 		}
 	},
 	"goal": {
-		"state": {
+		"src": {
 			"key": {
 				"key": 3,
 				"other_key": [

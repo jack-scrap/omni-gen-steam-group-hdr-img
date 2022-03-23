@@ -1,9 +1,9 @@
 {
 	"data": {
-		"state": {
+		"src": {
 			"block": 3
 		},
-		"other_state": {
+		"dest": {
 			"block": 3,
 			"loc": [
 				0.0,
@@ -13,10 +13,10 @@
 		}
 	},
 	"goal": {
-		"state": {
+		"src": {
 			"block": 3
 		},
-		"other_state": {
+		"dest": {
 			"block": 3
 		}
 	},

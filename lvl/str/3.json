@@ -1,9 +1,9 @@
 {
 	"data": {
-		"state": "TEXT"
+		"src": "TEXT"
 	},
 	"goal": {
-		"state": "ETTX"
+		"src": "ETTX"
 	},
 	"vehicle": [
 		{

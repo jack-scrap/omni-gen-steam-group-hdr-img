@@ -1,15 +1,15 @@
 {
 	"data": {
-		"state": {
-			"state": {
+		"src": {
+			"src": {
 				"key": 3,
 				"other_key": 7
 			}
 		}
 	},
 	"goal": {
-		"state": {
-			"state": {
+		"src": {
+			"src": {
 				"key": 7,
 				"other_key": 3
 			}

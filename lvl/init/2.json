@@ -1,17 +1,17 @@
 {
 	"data": {
-		"state": {
+		"src": {
 			"block": 0
 		},
-		"other_state": {
+		"dest": {
 			"block": 0
 		}
 	},
 	"goal": {
-		"state": {
+		"src": {
 			"block": 1
 		},
-		"other_state": {
+		"dest": {
 			"block": 1
 		}
 	},

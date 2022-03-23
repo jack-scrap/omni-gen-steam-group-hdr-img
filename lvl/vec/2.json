@@ -1,6 +1,6 @@
 {
 	"data": {
-		"state": {
+		"src": {
 			"block": [
 				[
 					[0]
@@ -18,7 +18,7 @@
 		}
 	},
 	"goal": {
-		"state": {
+		"src": {
 			"block": [
 				[
 					[7]

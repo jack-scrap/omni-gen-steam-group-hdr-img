@@ -1,12 +1,12 @@
 {
 	"data": {
-		"state": [
+		"src": [
 			0,
 			1
 		]
 	},
 	"goal": {
-		"state": [
+		"src": [
 			1,
 			0
 		]
