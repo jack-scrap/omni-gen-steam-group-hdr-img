@@ -1104,7 +1104,7 @@ void Console::exec() {
 
 				if (cmd == "quit") {
 					if (!_diff) {
-						exit(0);
+						disp->_open = false;
 					} else {
 						omni::err(omni::ERR_BUFF_DIFF);
 					}
