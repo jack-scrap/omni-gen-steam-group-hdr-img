@@ -1,7 +1,7 @@
 {
 	"data": {
 		"src": {
-			"block": 0
+			"block": null
 		},
 		"dest": {
 			"block": 1
@@ -12,7 +12,7 @@
 			"block": 1
 		},
 		"dest": {
-			"block": 0
+			"block": null
 		}
 	},
 	"vehicle": [

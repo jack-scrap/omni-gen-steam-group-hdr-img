@@ -4,12 +4,12 @@
 			"block": 1
 		},
 		"out": {
-			"block": 0
+			"block": null
 		}
 	},
 	"goal": {
 		"in": {
-			"block": 0
+			"block": null
 		},
 		"out": {
 			"block": 1
