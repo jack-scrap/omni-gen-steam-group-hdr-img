@@ -184,7 +184,7 @@ void craneGrab(Crane* crane) {
 
 					if (crane->_data && !idx->_data) {
 						if (util::phys::coll(crane->_data->_parent, idx->_parent, crane->_data->_parent->_acc, idx->_parent->_acc)) {
-							idxInsert(idx, craneRm(crane));
+							idxInsert(idx, craneMv(crane));
 
 							return;
 						}
@@ -201,7 +201,7 @@ void craneGrab(Crane* crane) {
 
 						if (crane->_data && !idx->_data) {
 							if (util::phys::coll(crane->_data->_parent, idx->_parent, crane->_data->_parent->_acc, idx->_parent->_acc)) {
-								idxInsert(idx, craneRm(crane));
+								idxInsert(idx, craneMv(crane));
 
 								crane->_data = nullptr;
 								crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW]->_child[0] = nullptr;
@@ -223,7 +223,7 @@ void craneGrab(Crane* crane) {
 
 					if (idx->_data) {
 						if (util::phys::coll(crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW], idx->_data->_parent, crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW]->_acc, idx->_data->_parent->_acc)) {
-							craneInsert(crane, idxRm(idx));
+							craneInsert(crane, idxMv(idx));
 
 							return;
 						}
@@ -240,7 +240,7 @@ void craneGrab(Crane* crane) {
 
 						if (idx->_data) {
 							if (util::phys::coll(crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW], idx->_data->_parent, crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW]->_acc, idx->_data->_parent->_acc)) {
-								craneInsert(crane, idxRm(idx));
+								craneInsert(crane, idxMv(idx));
 
 								return;
 							}
@@ -267,7 +267,7 @@ void craneInsert(Crane* crane, Cont* byte) {
 	objAcc(crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW], crane->_parent->_child[Crane::HEAD]->_acc);
 }
 
-Cont* craneRm(Crane* crane) {
+Cont* craneMv(Crane* crane) {
 	Cont* _ = crane->_data;
 
 	crane->_data = nullptr;

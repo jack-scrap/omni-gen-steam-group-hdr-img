@@ -46,4 +46,4 @@ extern "C" void craneGrab(Crane* crane);
 
 void craneInsert(Crane* crane, Cont* byte);
 
-Cont* craneRm(Crane* crane);
+Cont* craneMv(Crane* crane);

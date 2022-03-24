@@ -111,7 +111,7 @@ void idxInsert(Idx* idx, Cont* byte) {
 	objAcc(idx->_parent, glm::mat4(1.0));
 }
 
-Cont* idxRm(Idx* idx) {
+Cont* idxMv(Idx* idx) {
 	Cont* _ = idx->_data;
 
 	idx->_data = nullptr;
