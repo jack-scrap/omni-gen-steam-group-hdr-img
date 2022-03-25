@@ -35,7 +35,7 @@ Crane* craneMk(Cont* init, glm::vec3 loc, glm::vec3 rot) {
 		objMk("crane/head_back", "obj", "dir", true)
 	};
 
-	child[Crane::HEAD] = objMk("crane/head_front", "obj", "dir", true, headChild, 1 + 1, glm::vec3(0.0, Crane::_rngClaw[MAX], 0.0));
+	child[Crane::HEAD] = objMk("crane/head_front", "obj", "dir", true, headChild, 1 + 1, glm::vec3(0.0, Crane::_rngHead[MAX], 0.0));
 
 	// data
 	if (_->_data) {
@@ -140,7 +140,7 @@ void cranePan(Crane* crane, float delta) {
 	glm::mat4 trans = glm::translate(glm::mat4(1.0), glm::vec3(0.0, 0.0, delta));
 	glm::vec3 dest = glm::vec3(crane->_parent->_child[Crane::HEAD]->_model * trans * glm::vec4(glm::vec3(0.0), 1.0));
 
-	if (dest[Z] > crane->_rngHead[MIN] && dest[Z] < crane->_rngHead[MAX]) {
+	if (dest[Z] > crane->_rngClaw[MIN] && dest[Z] < crane->_rngClaw[MAX]) {
 		glm::vec3 offset = glm::vec3(0.0, 0.0, delta);
 
 		objMv(crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW], crane->_parent->_child[Crane::HEAD], offset, glm::vec3(0.0));
@@ -160,7 +160,7 @@ void cranePed(Crane* crane, float delta) {
 	glm::mat4 trans = glm::translate(glm::mat4(1.0), glm::vec3(0.0, delta, 0.0));
 	glm::vec3 dest = glm::vec3(crane->_parent->_child[Crane::HEAD]->_acc * trans * glm::vec4(glm::vec3(0.0), 1.0));
 
-	if (dest[Y] > crane->_rngClaw[MIN] && dest[Y] < crane->_rngClaw[MAX]) {
+	if (dest[Y] > crane->_rngHead[MIN] && dest[Y] < crane->_rngHead[MAX]) {
 		glm::vec3 offset = glm::vec3(0.0, delta, 0.0);
 
 		objMv(crane->_parent->_child[Crane::HEAD], crane->_parent, offset, glm::vec3(0.0));

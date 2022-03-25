@@ -143,13 +143,13 @@ class _Crane(_Obj):
 	]
 
 	_rngHead = [
-		-3.0,
-		3.0
-	]
-	_rngClaw = [
 		4.0,
 		13.8
 	]
+	_rngClaw = [
+		-3.0,
+		3.0
+        ]
 
 	def zoom(self, delta):
 		_craneZoom(self._ptr, delta)

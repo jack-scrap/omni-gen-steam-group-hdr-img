@@ -12,12 +12,12 @@ typedef struct Crane {
 	Obj* _parent;
 
 	static constexpr float _rngHead[2] = {
-		-3.0,
-		3.0
-	};
-	static constexpr float _rngClaw[2] = {
 		4.0,
 		13.8
+	};
+	static constexpr float _rngClaw[2] = {
+		-3.0,
+		3.0
 	};
 
 	static GLfloat _speed;
