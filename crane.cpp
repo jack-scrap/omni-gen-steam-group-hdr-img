@@ -31,8 +31,8 @@ Crane* craneMk(Cont* init, glm::vec3 loc, glm::vec3 rot) {
 	Obj* cont = nullptr;
 
 	Obj* headChild[] = {
-		objMk("crane/head_back", "obj", "dir", true),
-		objMk("crane/claw", "obj", "dir", true, &cont, 1)
+		objMk("crane/claw", "obj", "dir", true, &cont, 1),
+		objMk("crane/head_back", "obj", "dir", true)
 	};
 
 	child[Crane::HEAD] = objMk("crane/head_front", "obj", "dir", true, headChild, 1 + 1, glm::vec3(0.0, Crane::_rngClaw[MAX], 0.0));
