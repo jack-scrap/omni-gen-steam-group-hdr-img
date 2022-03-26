@@ -1,17 +1,23 @@
 {
 	"data": {
 		"src": {
+			"block": 1
+		},
+		"fst": {
 			"block": null
 		},
-		"dest": {
-			"block": 1
+		"snd": {
+			"block": null
 		}
 	},
 	"goal": {
 		"src": {
-			"block": 1
+			"block": null
 		},
-		"dest": {
+		"fst": {
+			"block": null
+		},
+		"snd": {
 			"block": null
 		}
 	},
