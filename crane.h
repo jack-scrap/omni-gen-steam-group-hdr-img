@@ -11,11 +11,11 @@ typedef struct Crane {
 
 	Obj* _parent;
 
-	static constexpr float _rngHead[2] = {
+	static constexpr float _rngTrack[2] = {
 		4.0,
 		13.8
 	};
-	static constexpr float _rngClaw[2] = {
+	static constexpr float _rngHead[2] = {
 		-3.0,
 		3.0
 	};
@@ -23,10 +23,10 @@ typedef struct Crane {
 	static GLfloat _speed;
 
 	enum {
-		HEAD,
+		TRACK,
 		SLOT,
 
-		CLAW = 0
+		HEAD = 0
 	};
 } Crane;
 

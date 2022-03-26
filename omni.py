@@ -142,11 +142,11 @@ class _Crane(_Obj):
 		('_loc', c_float * 3)
 	]
 
-	_rngHead = [
+	_rngTrack = [
 		4.0,
 		13.8
 	]
-	_rngClaw = [
+	_rngHead = [
 		-3.0,
 		3.0
         ]

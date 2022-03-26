@@ -27,15 +27,15 @@ Crane* craneMk(Cont* init, glm::vec3 loc, glm::vec3 rot) {
 
 	Obj* child[1 + 1 + (2 * 2 * 2 * 2) + (2 * 2) + (8 - 1) + 2 + 2];
 
-	// head
+	// track
 	Obj* cont = nullptr;
 
-	Obj* headChild[] = {
+	Obj* trackChild[] = {
 		objMk("crane/claw", "obj", "dir", true, &cont, 1),
-		objMk("crane/head_back", "obj", "dir", true)
+		objMk("crane/track_back", "obj", "dir", true)
 	};
 
-	child[Crane::HEAD] = objMk("crane/head_front", "obj", "dir", true, headChild, 1 + 1, glm::vec3(0.0, Crane::_rngHead[MAX], 0.0));
+	child[Crane::TRACK] = objMk("crane/track_front", "obj", "dir", true, trackChild, 1 + 1, glm::vec3(0.0, Crane::_rngTrack[MAX], 0.0));
 
 	// data
 	if (_->_data) {
@@ -138,12 +138,12 @@ void craneZoom(Crane* crane, float delta) {
 
 void cranePan(Crane* crane, float delta) {
 	glm::mat4 trans = glm::translate(glm::mat4(1.0), glm::vec3(0.0, 0.0, delta));
-	glm::vec3 dest = glm::vec3(crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW]->_model * trans * glm::vec4(glm::vec3(0.0), 1.0));
+	glm::vec3 dest = glm::vec3(crane->_parent->_child[Crane::TRACK]->_child[Crane::TRACK]->_model * trans * glm::vec4(glm::vec3(0.0), 1.0));
 
-	if (dest[Z] > Crane::_rngClaw[MIN] && dest[Z] < Crane::_rngClaw[MAX]) {
+	if (dest[Z] > Crane::_rngHead[MIN] && dest[Z] < Crane::_rngHead[MAX]) {
 		glm::vec3 offset = glm::vec3(0.0, 0.0, delta);
 
-		objMv(crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW], crane->_parent->_child[Crane::HEAD], offset, glm::vec3(0.0));
+		objMv(crane->_parent->_child[Crane::TRACK]->_child[Crane::TRACK], crane->_parent->_child[Crane::TRACK], offset, glm::vec3(0.0));
 	} else {
 		omni::err(omni::ERR_MV_RNG, {
 			"crane head"
@@ -158,12 +158,12 @@ void cranePan(Crane* crane, float delta) {
 
 void cranePed(Crane* crane, float delta) {
 	glm::mat4 trans = glm::translate(glm::mat4(1.0), glm::vec3(0.0, delta, 0.0));
-	glm::vec3 dest = glm::vec3(crane->_parent->_child[Crane::HEAD]->_acc * trans * glm::vec4(glm::vec3(0.0), 1.0));
+	glm::vec3 dest = glm::vec3(crane->_parent->_child[Crane::TRACK]->_acc * trans * glm::vec4(glm::vec3(0.0), 1.0));
 
-	if (dest[Y] > Crane::_rngHead[MIN] && dest[Y] < Crane::_rngHead[MAX]) {
+	if (dest[Y] > Crane::_rngTrack[MIN] && dest[Y] < Crane::_rngTrack[MAX]) {
 		glm::vec3 offset = glm::vec3(0.0, delta, 0.0);
 
-		objMv(crane->_parent->_child[Crane::HEAD], crane->_parent, offset, glm::vec3(0.0));
+		objMv(crane->_parent->_child[Crane::TRACK], crane->_parent, offset, glm::vec3(0.0));
 	} else {
 		omni::err(omni::ERR_MV_RNG, {
 			"crane claw"
@@ -205,7 +205,7 @@ void craneGrab(Crane* crane) {
 								idxInsert(idx, craneMv(crane));
 
 								crane->_data = nullptr;
-								crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW]->_child[0] = nullptr;
+								crane->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_child[0] = nullptr;
 
 								return;
 							}
@@ -223,7 +223,7 @@ void craneGrab(Crane* crane) {
 					Idx* idx = (Idx*) data[i]->_ptr;
 
 					if (idx->_data) {
-						if (util::phys::coll(crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW], idx->_data->_parent, crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW]->_acc, idx->_data->_parent->_acc)) {
+						if (util::phys::coll(crane->_parent->_child[Crane::TRACK]->_child[Crane::HEAD], idx->_data->_parent, crane->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_acc, idx->_data->_parent->_acc)) {
 							craneInsert(crane, idxMv(idx));
 
 							return;
@@ -240,7 +240,7 @@ void craneGrab(Crane* crane) {
 						Idx* idx = array->_data[i];
 
 						if (idx->_data) {
-							if (util::phys::coll(crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW], idx->_data->_parent, crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW]->_acc, idx->_data->_parent->_acc)) {
+							if (util::phys::coll(crane->_parent->_child[Crane::TRACK]->_child[Crane::HEAD], idx->_data->_parent, crane->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_acc, idx->_data->_parent->_acc)) {
 								craneInsert(crane, idxMv(idx));
 
 								return;
@@ -257,22 +257,22 @@ void craneGrab(Crane* crane) {
 
 void craneInsert(Crane* crane, Cont* byte) {
 	crane->_data = byte;
-	crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW]->_child[0] = crane->_data->_parent;
+	crane->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_child[0] = crane->_data->_parent;
 
 	// transform
 	glm::mat4 model = glm::mat4(1.0);
 	model = glm::translate(model, glm::vec3(0.0, -(3.32 + 1.0), 0.0));
 
-	crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW]->_child[0]->_model = model;
+	crane->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_child[0]->_model = model;
 
-	objAcc(crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW], crane->_parent->_child[Crane::HEAD]->_acc);
+	objAcc(crane->_parent->_child[Crane::TRACK]->_child[Crane::HEAD], crane->_parent->_child[Crane::TRACK]->_acc);
 }
 
 Cont* craneMv(Crane* crane) {
 	Cont* _ = crane->_data;
 
 	crane->_data = nullptr;
-	crane->_parent->_child[Crane::HEAD]->_child[Crane::CLAW]->_child[0] = nullptr;
+	crane->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_child[0] = nullptr;
 
 	return _;
 }
