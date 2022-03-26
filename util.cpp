@@ -426,17 +426,16 @@ std::string util::fs::path::prune(std::string path, std::string name) {
 	return build(entryNew);
 }
 
-std::vector<GLfloat> util::mesh::plane(glm::vec2 bound) {
-	std::vector<GLfloat> vtc;
-
+void util::mesh::plane(GLfloat vtc[2 * 2 * 2], glm::vec2 bound) {
+	int i = 0;
 	for (int y = 0; y < 2; y++) {
 		for (int x = 0; x < 2; x++) {
-			vtc.push_back(x * bound[X]);
-			vtc.push_back(y * bound[Y]);
+			vtc[i] = x * bound[X];
+			vtc[i + 1] = y * bound[Y];
+
+			i++;
 		}
 	}
-
-	return vtc;
 }
 
 std::vector<GLfloat> util::mesh::rd::vtc(std::string fName) {

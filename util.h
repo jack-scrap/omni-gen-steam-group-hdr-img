@@ -68,7 +68,7 @@ namespace util {
 	}
 
 	namespace mesh {
-		std::vector<GLfloat> plane(glm::vec2 bound);
+		void plane(GLfloat vtc[2 * 2 * 2], glm::vec2 bound);
 
 		void strip(GLushort idc[2][3]);
 
