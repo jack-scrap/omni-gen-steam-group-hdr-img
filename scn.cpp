@@ -25,7 +25,7 @@
 
 Var** data;
 Var** goal;
-unsigned int* type;
+unsigned int* type = (unsigned int*) malloc(0);
 unsigned int noData;
 bool eq = false;
 
@@ -188,7 +188,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 	// data
 	noData = deser["data"].size();
 
-	type = (unsigned int*) malloc(noData * sizeof (unsigned int));
+	realloc(type, noData * sizeof (unsigned int));
 
 	// initial
 	Scope init = util::json::scope(deser["data"]);
