@@ -1,16 +1,27 @@
 {
 	"data": {
 		"src": {
-			"block": 0,
+			"block": 1,
 			"loc": [
 				0,
 				0,
-				3
+				2
+			]
+		},
+		"dest": {
+			"block": null,
+			"loc": [
+				0,
+				0,
+				-6
 			]
 		}
 	},
 	"goal": {
 		"src": {
+			"block": null
+		},
+		"dest": {
 			"block": 1
 		}
 	},
