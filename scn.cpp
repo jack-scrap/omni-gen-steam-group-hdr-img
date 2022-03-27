@@ -195,7 +195,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 	goal = (Var**) realloc(goal, noData * sizeof (Var*));
 	type = (unsigned int*) realloc(type, noData * sizeof (unsigned int));
 
-	unsigned int i = 0;
+	int i = 0;
 	glm::vec3 offset = glm::vec3(0.0);
 	for (const auto& pair : scope.items()) {
     char* name = util::json::id(pair.key());
