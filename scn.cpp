@@ -192,6 +192,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 	noData = scope.size();
 
 	data = (Var**) malloc(noData * sizeof (Var*));
+	goal = (Var**) malloc(noData * sizeof (Var*));
 	type = (unsigned int*) realloc(type, noData * sizeof (unsigned int));
 
 	unsigned int i = 0;
@@ -305,12 +306,83 @@ void scn::init(std::string stage, unsigned int lvl) {
   }
 
 	// desired
-	Scope desired = util::json::scope(deser["goal"]);
-	goal = desired._ptr;
+	nlohmann::json scopeGoal = deser["goal"];
 
-	for (int i = 0; i < noData; i++) {
-		omni::assert(type[i] == desired._type[i], std::string("Data `") + data[i]->_id + std::string("` not comparable"));
-	}
+	i = 0;
+	for (const auto& pair : scopeGoal.items()) {
+    char* name = util::json::id(pair.key());
+
+    Var* item = util::json::var(pair.key(), pair.value());
+
+    GLfloat wd;
+    switch (pair.value()["block"].type()) {
+			// scalar
+			case nlohmann::json::value_t::null: {
+				goal[i] = item;
+
+				break;
+			}
+
+			case nlohmann::json::value_t::number_unsigned: {
+				goal[i] = item;
+
+				break;
+			}
+
+			// string
+			case nlohmann::json::value_t::string: {
+				goal[i] = item;
+
+				break;
+			}
+
+			// array
+			case nlohmann::json::value_t::array: {
+				omni::assert(util::json::array::euclid(pair.value()["block"], 0), std::string("Depth of `") + pair.key() + std::string("` exceeds 3 dimensions"));
+
+				switch (pair.value()["block"][0].type()) {
+					// 1D
+					case nlohmann::json::value_t::number_unsigned: {
+						goal[i] = item;
+
+						break;
+					}
+
+					// matrix
+					case nlohmann::json::value_t::array: {
+						switch (pair.value()["block"][0][0].type()) {
+							// 2D
+							case nlohmann::json::value_t::number_unsigned: {
+								goal[i] = item;
+
+								break;
+							}
+
+							// 3D
+							case nlohmann::json::value_t::array: {
+								goal[i] = item;
+
+								break;
+							}
+						}
+
+						break;
+					}
+				}
+
+				break;
+			}
+
+			// dictionary
+			case nlohmann::json::value_t::object: {
+				goal[i] = item;
+
+				break;
+			}
+    }
+
+    i++;
+  }
 
 	for (int i = 0; i < noData; i++) {
 		Obj* _;
