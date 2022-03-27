@@ -188,7 +188,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 	// data
 	noData = deser["data"].size();
 
-	realloc(type, noData * sizeof (unsigned int));
+	type = (unsigned int*) realloc(type, noData * sizeof (unsigned int));
 
 	// initial
 	Scope init = util::json::scope(deser["data"]);
