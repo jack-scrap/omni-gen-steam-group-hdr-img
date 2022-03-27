@@ -20,6 +20,9 @@ typedef struct Crane {
 		3.0
 	};
 
+	static GLfloat _lightVtc[2 * 2][3];
+	static GLushort _lightIdc[2][3];
+
 	static GLfloat _speed;
 
 	enum {
