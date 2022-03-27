@@ -5,20 +5,14 @@
 		},
 		"dest": {
 			"block": 7
-		},
-		"other_dest": {
-			"block": null
 		}
 	},
 	"goal": {
 		"src": {
-			"block": null
+			"block": 7
 		},
 		"dest": {
 			"block": 3
-		},
-		"other_dest": {
-			"block": 7
 		}
 	},
 	"vehicle": [
