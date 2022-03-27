@@ -186,23 +186,131 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 	/* allocate */
 	// data
-	noData = deser["data"].size();
+	// initial
+	nlohmann::json scope = deser["data"];
 
+	noData = scope.size();
+
+	data = (Var**) malloc(noData * sizeof (Var*));
 	type = (unsigned int*) realloc(type, noData * sizeof (unsigned int));
 
-	// initial
-	Scope init = util::json::scope(deser["data"]);
-	data = init._ptr;
+	unsigned int i = 0;
+	glm::vec3 offset = glm::vec3(0.0);
+	for (const auto& pair : scope.items()) {
+    char* name = util::json::id(pair.key());
+
+    glm::vec3 loc = offset;
+    if (pair.value().contains("loc")) {
+      loc = util::json::vec(pair.value()["loc"]);
+    }
+
+    glm::vec3 rot = glm::vec3(0.0);
+    if (pair.value().contains("rot")) {
+      rot = util::json::vec(pair.value()["rot"]);
+    }
+
+    Var* item = util::json::var(pair.key(), pair.value(), loc, rot);
+
+    GLfloat wd;
+    switch (pair.value()["block"].type()) {
+			// scalar
+			case nlohmann::json::value_t::null: {
+				wd = ((Idx*) item->_ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->_ptr)->_parent->_aabb[X][MIN];
+
+				data[i] = item;
+				type[i] = omni::SCALAR;
+
+				break;
+			}
+
+			case nlohmann::json::value_t::number_unsigned: {
+				wd = ((Idx*) item->_ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->_ptr)->_parent->_aabb[X][MIN];
+
+				data[i] = item;
+				type[i] = omni::SCALAR;
+
+				break;
+			}
+
+			// string
+			case nlohmann::json::value_t::string: {
+				wd = ((Array *)item->_ptr)->_parent->_aabb[X][MAX] - ((Idx *)item->_ptr)->_parent->_aabb[X][MIN];
+
+				data[i] = item;
+				type[i] = omni::ARRAY;
+
+				break;
+			}
+
+			// array
+			case nlohmann::json::value_t::array: {
+				omni::assert(util::json::array::euclid(pair.value()["block"], 0), std::string("Depth of `") + pair.key() + std::string("` exceeds 3 dimensions"));
+
+				switch (pair.value()["block"][0].type()) {
+					// 1D
+					case nlohmann::json::value_t::number_unsigned: {
+						wd = ((Array *)item->_ptr)->_parent->_aabb[X][MAX] - ((Idx *)item->_ptr)->_parent->_aabb[X][MIN];
+
+						data[i] = item;
+						type[i] = omni::ARRAY;
+
+						break;
+					}
+
+					// matrix
+					case nlohmann::json::value_t::array: {
+						switch (pair.value()["block"][0][0].type()) {
+							// 2D
+							case nlohmann::json::value_t::number_unsigned: {
+								wd = ((Array *)item->_ptr)->_parent->_aabb[X][MAX] - ((Idx *)item->_ptr)->_parent->_aabb[X][MIN];
+
+								data[i] = item;
+								type[i] = omni::ARRAY;
+
+								break;
+							}
+
+							// 3D
+							case nlohmann::json::value_t::array: {
+								wd = ((Array *)item->_ptr)->_parent->_aabb[X][MAX] - ((Idx *)item->_ptr)->_parent->_aabb[X][MIN];
+
+								data[i] = item;
+								type[i] = omni::ARRAY;
+
+								break;
+							}
+						}
+
+						break;
+					}
+				}
+
+				break;
+			}
+
+			// dictionary
+			case nlohmann::json::value_t::object: {
+				wd = ((Dict *)item->_ptr)->_parent->_aabb[X][MAX] - ((Idx *)item->_ptr)->_parent->_aabb[X][MIN];
+
+				data[i] = item;
+				type[i] = omni::DICT;
+
+				break;
+			}
+    }
+
+    offset += glm::vec3(layout::padded(wd), 0.0, 0.0);
+
+    i++;
+  }
 
 	// desired
 	Scope desired = util::json::scope(deser["goal"]);
 	goal = desired._ptr;
 
-	for (int i = 0; i < init._no; i++) {
-		omni::assert(init._type[i] == desired._type[i], std::string("Data `") + data[i]->_id + std::string("` not comparable"));
+	for (int i = 0; i < noData; i++) {
+		omni::assert(type[i] == desired._type[i], std::string("Data `") + data[i]->_id + std::string("` not comparable"));
 	}
-
-	type = init._type;
 
 	for (int i = 0; i < noData; i++) {
 		Obj* _;
@@ -410,7 +518,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 	streetSign._sz = deser["ctrl"].size();
 	streetSign._ptr = (StreetSign**) malloc(streetSign._sz * sizeof (StreetSign*));
 
-	int i = 0;
+	i = 0;
 	for (const auto& entry : deser["ctrl"].items()) {
 		StreetSign* _ = util::json::streetSign(entry.value());
 
