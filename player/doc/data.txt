@@ -39,7 +39,7 @@ Referred to as "FILO" (First-in, last-out), this structure is useful for scenari
 
 Adding data involves adding it to the end of the list, and removing data involves removing the beginning of the list.
 
-This is useful for operating on data that is dependant on the time at which it was added.
+This is useful for operating on data that is dependent on the time at which it was added.
 
 ```
 ls = [3, 7, 12]
@@ -179,7 +179,7 @@ node = Node(3, other_node)
 	```
 
 ## Tree
-Nodes in a "tree" may contain other independant nodes, but may not contain references to existing nodes.
+Nodes in a "tree" may contain other independent nodes, but may not contain references to existing nodes.
 
 The result is a "descending" data structure.
 

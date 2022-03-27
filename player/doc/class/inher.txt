@@ -5,7 +5,7 @@ Doing so can effectively describe complex sets of data without re-using code.
 General groups can be composed from which more specific ones can be created.
 
 # Creating
-The name of the parent class provided between parantheses will inherit all properties.
+The name of the parent class provided between parentheses will inherit all properties.
 
 ```
 class Parent:
@@ -19,7 +19,7 @@ class Child(Parent):
 ```
 
 Here, the properties have been automatically added to the class `Child`.
-Creation and usage of a child object like the parent will examplify this.
+Creation and usage of a child object like the parent will exemplify this.
 
 ```
 obj = Child()

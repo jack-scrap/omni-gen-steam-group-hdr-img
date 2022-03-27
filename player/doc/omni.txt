@@ -153,4 +153,4 @@ Bounds are provided.
 
 Area-based bounds from cones are provided in `.area`, and range-based bounds providing limits are provided in `rng`.
 
-These can be used to assert that colissions do not occur.
+These can be used to assert that collisions do not occur.

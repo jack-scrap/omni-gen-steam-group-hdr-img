@@ -9,7 +9,7 @@ The expression which would typically be the function body follows it.
 
 Call by providing the typical list tuple.
 
-The following examplifies creation and usage of a function in one line.
+The following exemplifies creation and usage of a function in one line.
 
 ````
 val = (lambda arg: arg + 3)(7)

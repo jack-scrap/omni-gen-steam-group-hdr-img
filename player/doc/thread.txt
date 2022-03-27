@@ -20,7 +20,7 @@ thread = threading.Thread(target = fn)
 thread.start()
 ```
 
-Immediately, an error case arrises.
+Immediately, an error case arises.
 
 Because the creation of the thread is the last statement, the program immediately terminates and eliminates any threads, likely before they have a chance to execute.
 
@@ -161,12 +161,12 @@ The existence of multiple threads means that errors can not be determined during
 Both fundamental issues with the Python language and undesired effects can be created as a result.
 
 The following section will run over some of the 
-commonly found errors arrising as a byproduct of multi-threading.
+commonly found errors arising as a byproduct of multi-threading.
 
 ## Race condition
 Where multiple processes are editing one piece of data, the general term "race condition" describes a problem where both processes attempt to access it at once.
 
-These processes cannot edit this data simultaneously, and doing so will terminate the proces.
+These processes cannot edit this data simultaneously, and doing so will terminate the process.
 
 ```
 import threading

@@ -6,4 +6,4 @@ G
 H
 
 # Dijkstra
-Dijkra's algorithm will find the shortest path betweennodes.
+Dijkra's algorithm will find the shortest path between nodes.

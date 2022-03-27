@@ -58,7 +58,7 @@ def fn(i):
 
 The function can then perform different tasks depending on the provided values, beyond simply statically executing the block of code.
 
-The following examplifies eliminating some redundancy where other complexity is still present.
+The following exemplifies eliminating some redundancy where other complexity is still present.
 
 ```
 i = 0
@@ -86,7 +86,7 @@ fn(other_var = 7, var = 3)
 ```
 
 However, any named arguments must follow any non-named ones.
-Preceeding the arguments with a named one means that the position of the following ones can no longer be inferred.
+Preceding the arguments with a named one means that the position of the following ones can no longer be inferred.
 
 ```
 def fn(var, other_var):
@@ -129,7 +129,7 @@ fn()
 ```
 
 Like named arguments, default arguments must follow non-default ones.
-No-longer being position dependant, the values can no longer be applied based on position.
+No-longer being position dependent, the values can no longer be applied based on position.
 
 ```
 def fn(arg, other_arg = 3):
@@ -174,7 +174,7 @@ def fn():
 	fn()
 ```
 
-In order to terminate this process, the calling of the function must be dependant on some kind of state being edited by the loop.
+In order to terminate this process, the calling of the function must be dependent on some kind of state being edited by the loop.
 
 Here, this recursive function has effectively emulated a loop.
 

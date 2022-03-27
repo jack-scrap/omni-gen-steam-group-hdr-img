@@ -1,6 +1,6 @@
 Like lists, tuples are sequences of data of arbitrary type.
 
-Tupes, however are immutable.
+Tuples, however are immutable.
 The elements will remain the same, and new elements may not be added or removed.
 
 # Creating

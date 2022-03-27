@@ -27,10 +27,10 @@ The following will run you through the process of efficiently sorting data.
 ## Big-O
 What is referred to as "Big-O" notation describes the effectiveness of an algorithm as it scales over large sets of data.
 
-O(1)          - constant
-O(n)          - linear
-O(n^2)        - quadratic
-O(n^c)        - polynomial
-O(c^n)        - exponential
-O(log(n))     - logarithmic
-O((loG(n))^c) - polylogarithmic
+O(1)          - Constant
+O(n)          - Linear
+O(n^2)        - Quadratic
+O(n^c)        - Polynomial
+O(c^n)        - Exponential
+O(log(n))     - Logarithmic
+O((log(n))^c) - Polylogarithmic

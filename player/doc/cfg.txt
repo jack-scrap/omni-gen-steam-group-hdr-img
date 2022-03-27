@@ -2,7 +2,7 @@ Config files assign values to various system settings upon startup.
 
 Files are scanned one assignment per-line.
 
-Separated by the assignment operator with the key preceeding and the value following, the form is `key = value`.
+Separated by the assignment operator with the key preceding and the value following, the form is `key = value`.
 
 # Keys
 | Name                 | Operation                                                         | Type    | Default | Valid      |

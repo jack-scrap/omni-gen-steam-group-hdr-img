@@ -1,6 +1,6 @@
 Algorithms are processes designed to run as efficiently as possible.
 
-By examining sets of data and re-structuring accordingly, operations can eliminate unecessary computations.
+By examining sets of data and re-structuring accordingly, operations can eliminate unnecessary computations.
 
 # Algorithms
 ## Bubble
@@ -90,4 +90,4 @@ O(n^2)        - Quadratic
 O(n^c)        - Polynomial
 O(c^n)        - Exponential
 O(log(n))     - Logarithmic
-O((loG(n))^c) - Polylogarithmic
+O((log(n))^c) - Polylogarithmic

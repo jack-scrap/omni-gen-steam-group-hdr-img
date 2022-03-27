@@ -70,7 +70,7 @@ Because this condition is true, and the program cannot proceed beyond the loop, 
 
 By manipulating this condition within the block of code itself, a running loop can alter its future behavior and terminate itself.
 
-An example of running this loop a determined number of times can be examplified as follows:
+An example of running this loop a determined number of times can be exemplified as follows:
 
 ```
 i = 0

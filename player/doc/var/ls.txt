@@ -2,7 +2,7 @@ The following will walk you through the process of creating, utilizing and modif
 
 Lists are sets of data, where each element is inherently tied to its position.
 
-Thse items may be of separate type, but are typically the same. Representing large groups of data whose usage is for the same purpose.
+These items may be of separate type, but are typically the same. Representing large groups of data whose usage is for the same purpose.
 
 # Creating
 `[]` Creates an array.

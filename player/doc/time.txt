@@ -1,5 +1,5 @@
 "Unix time" defines the number of elapsed seconds since Jan 1 1970.
-In order to convert this number into a readable format, special characters preceeded with "%" can be provided to calculate and format specific time constructs.
+In order to convert this number into a readable format, special characters preceded with "%" can be provided to calculate and format specific time constructs.
 
 Definitions are provided in a continuous string -- "%m %d, %y".
 
