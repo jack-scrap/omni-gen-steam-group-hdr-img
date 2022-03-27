@@ -1079,7 +1079,7 @@ Scope util::json::scope(nlohmann::json deser) {
 
 							// 3D
 							case nlohmann::json::value_t::array: {
-								Var* item = json::var(pair.key(), pair.value());
+								Var* item = var(pair.key(), pair.value());
 
 								wd = ((Array*) item->_ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->_ptr)->_parent->_aabb[X][MIN];
 
