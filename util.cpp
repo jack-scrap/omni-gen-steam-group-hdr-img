@@ -741,9 +741,7 @@ char util::json::byte(nlohmann::json deser) {
 }
 
 bool util::json::ascii(nlohmann::json deser) {
-	return
-		deser >= 0 &&
-		deser <= 127;
+	return deser >= 0 && deser <= 127;
 }
 
 CBuff util::json::array::dim(nlohmann::json deser, CBuff buff, int i) {
