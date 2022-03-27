@@ -23,8 +23,8 @@
 #include "i_beam.h"
 #include "util.h"
 
-Var** data;
-Var** goal;
+Var** data = (Var**) malloc(0);
+Var** goal = (Var**) malloc(0);
 unsigned int* type = (unsigned int*) malloc(0);
 unsigned int noData;
 bool eq = false;
@@ -191,8 +191,8 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 	noData = scope.size();
 
-	data = (Var**) malloc(noData * sizeof (Var*));
-	goal = (Var**) malloc(noData * sizeof (Var*));
+	data = (Var**) realloc(data, noData * sizeof (Var*));
+	goal = (Var**) realloc(goal, noData * sizeof (Var*));
 	type = (unsigned int*) realloc(type, noData * sizeof (unsigned int));
 
 	unsigned int i = 0;
