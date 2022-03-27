@@ -120,8 +120,6 @@ namespace util {
 
 		Var* var(nlohmann::json key, nlohmann::json val, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
 
-		Scope scope(nlohmann::json deser);
-
 		glm::vec3 vec(nlohmann::json deser);
 
 		StreetSign* streetSign(nlohmann::json deser);

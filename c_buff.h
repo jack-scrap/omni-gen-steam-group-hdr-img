@@ -15,9 +15,3 @@ typedef struct {
 	unsigned int _y;
 	unsigned int _z;
 } CBuff;
-
-typedef struct {
-	Var** _ptr;
-	unsigned int* _type;
-	unsigned int _no;
-} Scope;
