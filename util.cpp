@@ -322,7 +322,7 @@ std::string util::fs::path::base(std::string path) {
 std::vector<std::string> util::fs::path::tok(std::string buff) {
 	std::vector<std::string> _;
 
-	unsigned int i = 0;
+	int i = 0;
 	while (i < buff.size()) {
 		if (std::string(1, buff[i]) == sep) {
 			_.push_back(std::string(1, buff[i]));
