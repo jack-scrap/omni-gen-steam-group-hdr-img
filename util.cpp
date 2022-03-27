@@ -1008,12 +1008,12 @@ Scope util::json::scope(nlohmann::json deser) {
 			rot = vec(pair.value()["rot"]);
 		}
 
+		Var* item = var(pair.key(), pair.value(), loc, rot);
+
 		GLfloat wd;
 		switch (pair.value()["block"].type()) {
 			// scalar
 			case nlohmann::json::value_t::null: {
-				Var* item = var(pair.key(), pair.value(), loc, rot);
-
 				wd = ((Idx*) item->_ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->_ptr)->_parent->_aabb[X][MIN];
 
 				((Var**) _._ptr)[i] = item;
@@ -1023,8 +1023,6 @@ Scope util::json::scope(nlohmann::json deser) {
 			}
 
 			case nlohmann::json::value_t::number_unsigned: {
-				Var* item = var(pair.key(), pair.value(), loc, rot);
-
 				wd = ((Idx*) item->_ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->_ptr)->_parent->_aabb[X][MIN];
 
 				((Var**) _._ptr)[i] = item;
@@ -1035,8 +1033,6 @@ Scope util::json::scope(nlohmann::json deser) {
 
 			// string
 			case nlohmann::json::value_t::string: {
-				Var* item = var(pair.key(), pair.value());
-
 				wd = ((Array*) item->_ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->_ptr)->_parent->_aabb[X][MIN];
 
 				((Var**) _._ptr)[i] = item;
@@ -1052,8 +1048,6 @@ Scope util::json::scope(nlohmann::json deser) {
 				switch (pair.value()["block"][0].type()) {
 					// 1D
 					case nlohmann::json::value_t::number_unsigned: {
-						Var* item = var(pair.key(), pair.value());
-
 						wd = ((Array*) item->_ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->_ptr)->_parent->_aabb[X][MIN];
 
 						((Var**) _._ptr)[i] = item;
@@ -1067,8 +1061,6 @@ Scope util::json::scope(nlohmann::json deser) {
 						switch (pair.value()["block"][0][0].type()) {
 							// 2D
 							case nlohmann::json::value_t::number_unsigned: {
-								Var* item = var(pair.key(), pair.value());
-
 								wd = ((Array*) item->_ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->_ptr)->_parent->_aabb[X][MIN];
 
 								((Var**) _._ptr)[i] = item;
@@ -1079,8 +1071,6 @@ Scope util::json::scope(nlohmann::json deser) {
 
 							// 3D
 							case nlohmann::json::value_t::array: {
-								Var* item = var(pair.key(), pair.value());
-
 								wd = ((Array*) item->_ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->_ptr)->_parent->_aabb[X][MIN];
 
 								((Var**) _._ptr)[i] = item;
@@ -1099,8 +1089,6 @@ Scope util::json::scope(nlohmann::json deser) {
 
 			// dictionary
 			case nlohmann::json::value_t::object: {
-				Var* item = var(pair.key(), pair.value());
-
 				wd = ((Dict*) item->_ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->_ptr)->_parent->_aabb[X][MIN];
 
 				((Var**) _._ptr)[i] = item;
