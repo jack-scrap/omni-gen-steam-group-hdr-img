@@ -3,7 +3,7 @@
 #include <glm/glm.hpp>
 
 struct Cam {
-	glm::vec3 _pos = glm::vec3(1000.0, 1000.0, 1000.0);
+	glm::vec3 _pos = glm::vec3(10000.0, 10000.0, 10000.0);
 	glm::vec3 _scale = glm::vec3(50, 50, 50);
 
 	glm::vec3 _posPrev = _pos;
