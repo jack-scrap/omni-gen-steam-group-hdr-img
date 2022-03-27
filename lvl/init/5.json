@@ -7,12 +7,12 @@
 			"block": 7
 		},
 		"other_dest": {
-			"block": 12
+			"block": null
 		}
 	},
 	"goal": {
 		"src": {
-			"block": 12
+			"block": null
 		},
 		"dest": {
 			"block": 3
