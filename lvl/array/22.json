@@ -1,9 +1,9 @@
 {
 	"data": {
-		"src": {
+		"in": {
 			"block": 3
 		},
-		"dest": {
+		"out": {
 			"block": 3,
 			"loc": [
 				0.0,
@@ -11,7 +11,7 @@
 				-25.12
 			]
 		},
-		"other_dest": {
+		"other_out": {
 			"block": 3,
 			"loc": [
 				0.0,
@@ -19,7 +19,7 @@
 				-50.24
 			]
 		},
-		"other_other_dest": {
+		"other_other_out": {
 			"block": 3,
 			"loc": [
 				0.0,
@@ -29,16 +29,16 @@
 		}
 	},
 	"goal": {
-		"src": {
+		"in": {
 			"block": 3
 		},
-		"dest": {
+		"out": {
 			"block": 3
 		},
-		"other_dest": {
+		"other_out": {
 			"block": 3
 		},
-		"other_other_dest": {
+		"other_other_out": {
 			"block": 3
 		}
 	},

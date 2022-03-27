@@ -1,15 +1,15 @@
 {
 	"data": {
-		"src": {
-			"src": {
+		"in": {
+			"in": {
 				"key": 3,
 				"other_key": 7
 			}
 		}
 	},
 	"goal": {
-		"src": {
-			"src": {
+		"in": {
+			"in": {
 				"key": 7,
 				"other_key": 3
 			}

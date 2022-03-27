@@ -1,17 +1,17 @@
 {
 	"data": {
-		"src": {
+		"in": {
 			"block": 3
 		},
-		"dest": {
+		"out": {
 			"block": 7
 		}
 	},
 	"goal": {
-		"src": {
+		"in": {
 			"block": 7
 		},
-		"dest": {
+		"out": {
 			"block": 3
 		}
 	},

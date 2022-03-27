@@ -1,9 +1,9 @@
 {
 	"data": {
-		"src": {
+		"in": {
 			"block": 3
 		},
-		"dest": {
+		"out": {
 			"block": 3,
 			"loc": [
 				0.0,
@@ -13,10 +13,10 @@
 		}
 	},
 	"goal": {
-		"src": {
+		"in": {
 			"block": 3
 		},
-		"dest": {
+		"out": {
 			"block": 3
 		}
 	},

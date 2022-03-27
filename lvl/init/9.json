@@ -1,23 +1,23 @@
 {
 	"data": {
-		"src": {
+		"in": {
 			"block": 3
 		},
-		"dest": {
+		"out": {
 			"block": 7
 		},
-		"other_dest": {
+		"other_out": {
 			"block": null
 		}
 	},
 	"goal": {
-		"src": {
+		"in": {
 			"block": null
 		},
-		"dest": {
+		"out": {
 			"block": 7
 		},
-		"other_dest": {
+		"other_out": {
 			"block": 3
 		}
 	},

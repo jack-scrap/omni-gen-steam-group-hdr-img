@@ -1,12 +1,12 @@
 {
 	"data": {
-		"src": {
+		"in": {
 			"block": [
 				0,
 				1
 			]
 		},
-		"dest": {
+		"out": {
 			"block": [
 				0,
 				1
@@ -14,13 +14,13 @@
 		}
 	},
 	"goal": {
-		"src": {
+		"in": {
 			"block": [
 				1,
 				0
 			]
 		},
-		"dest": {
+		"out": {
 			"block": [
 				0,
 				1

@@ -3,7 +3,7 @@
 		{
 			"name": "cargo_ship",
 			"data": {
-				"name": "src",
+				"name": "in",
 				"block": [
 					1,
 					1
