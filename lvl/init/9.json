@@ -1,0 +1,45 @@
+{
+	"data": {
+		"src": {
+			"block": 3
+		},
+		"dest": {
+			"block": 7
+		},
+		"other_dest": {
+			"block": null
+		}
+	},
+	"goal": {
+		"src": {
+			"block": null
+		},
+		"dest": {
+			"block": 7
+		},
+		"other_dest": {
+			"block": 3
+		}
+	},
+	"vehicle": [
+		{
+			"name": "crane"
+		}
+	],
+	"bound": {
+		"rng": [
+			{
+				"min": {
+					"axis": "Z",
+					"val": -11.64,
+					"status": "halt"
+				},
+				"max": {
+					"axis": "Z",
+					"val": 11.64,
+					"status": "halt"
+				}
+			}
+		]
+	}
+}
