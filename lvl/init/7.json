@@ -1,23 +1,59 @@
 {
 	"data": {
 		"in": {
-			"block": 1
+			"block": [
+				1
+			]
 		},
 		"out": {
-			"block": null
+			"block": [
+				null
+			]
+		},
+		"other_in": {
+			"block": [
+				1
+			]
+		},
+		"other_out": {
+			"block": [
+				null
+			]
 		}
 	},
 	"goal": {
 		"in": {
-			"block": null
+			"block": [
+				null
+			]
 		},
 		"out": {
-			"block": 1
+			"block": [
+				1
+			]
+		},
+		"other_in": {
+			"block": [
+				null
+			]
+		},
+		"other_out": {
+			"block": [
+				1
+			]
 		}
 	},
 	"vehicle": [
 		{
 			"name": "crane"
+		},
+		{
+			"name": "crane",
+			"loc": [
+				0.0,
+				0.0,
+				-25.12
+			]
 		}
 	],
 	"bound": {
@@ -31,6 +67,18 @@
 				"max": {
 					"axis": "Z",
 					"val": 11.64,
+					"status": "halt"
+				}
+			},
+			{
+				"min": {
+					"axis": "Z",
+					"val": -36.76,
+					"status": "halt"
+				},
+				"max": {
+					"axis": "Z",
+					"val": -13.48,
 					"status": "halt"
 				}
 			}
