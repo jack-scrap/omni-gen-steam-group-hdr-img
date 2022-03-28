@@ -16,15 +16,9 @@ CargoShip* cargoShipMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	CargoShip* _ = (CargoShip*) malloc(sizeof (CargoShip));
 
 	// bed
-	glm::vec2 stride = glm::vec2(
-		layout::item(layout::bordered(layout::idx[X])),
-		layout::item(layout::bordered(layout::idx[Z]))
-	);
+	glm::vec2 stride = glm::vec2(layout::item(layout::bordered(layout::idx[X])), layout::item(layout::bordered(layout::idx[Z])));
 
-	glm::vec2 bound = glm::vec2(
-		layout::item(_->_x * stride[X]),
-		layout::item(_->_y * stride[Y])
-	);
+	glm::vec2 bound = glm::vec2(layout::item(_->_x * stride[X]), layout::item(_->_y * stride[Y]));
 
 	GLfloat vtc[2 * 2][3];
 	for (int y = 0; y < 2; y++) {
