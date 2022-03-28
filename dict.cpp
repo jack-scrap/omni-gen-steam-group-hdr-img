@@ -18,15 +18,9 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 
 	Obj* child[1 + deser.size()];
 
-	glm::vec2 strideLetter = glm::vec2(
-		layout::item(layout::item(0.0)),
-		layout::item(layout::item(layout::letter[Y]))
-	);
+	glm::vec2 strideLetter = glm::vec2(layout::item(layout::item(0.0)), layout::item(layout::item(layout::letter[Y])));
 
-	glm::vec2 strideIdx = glm::vec2(
-		layout::item(layout::bordered(layout::idx[X])),
-		layout::item(layout::bordered(layout::idx[Z]))
-	);
+	glm::vec2 strideIdx = glm::vec2(layout::item(layout::bordered(layout::idx[X])), layout::item(layout::bordered(layout::idx[Z])));
 
 	glm::vec2 overhead = glm::vec2(layout::overhead, layout::overhead + strideLetter[Y]);
 
