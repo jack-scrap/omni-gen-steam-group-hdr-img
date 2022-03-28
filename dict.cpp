@@ -32,7 +32,7 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 		switch (entry.value().type()) {
 			// scalar
 			case nlohmann::json::value_t::number_unsigned: {
-				char init = (int) entry.value();
+				char init = (char) ((int) entry.value());
 
 				Idx* idx = idxMk(0, &init, 1, entry.key(), glm::vec3(overhead[X], 0.0, overhead[Y]) + glm::vec3(0.0, 0.0, accY));
 
