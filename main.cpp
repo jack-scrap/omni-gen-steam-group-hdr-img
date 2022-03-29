@@ -39,7 +39,7 @@ void handle() {
 					console->ins(e.key.keysym.sym);
 				}
 
-				if ((e.key.keysym.sym >= SDLK_0 && e.key.keysym.sym <= SDLK_9)) {
+				if (e.key.keysym.sym >= SDLK_0 && e.key.keysym.sym <= SDLK_9) {
 					console->ins(e.key.keysym.sym);
 				}
 
