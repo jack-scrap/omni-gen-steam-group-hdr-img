@@ -281,10 +281,10 @@ void craneInsert(Crane* crane, Cont* byte) {
 }
 
 Cont* craneMv(Crane* crane) {
-	Cont* _ = crane->_data;
+	Cont* byte = crane->_data;
 
 	crane->_data = nullptr;
 	crane->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_child[0] = nullptr;
 
-	return _;
+	return byte;
 }
