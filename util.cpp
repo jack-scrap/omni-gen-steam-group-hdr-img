@@ -1398,8 +1398,8 @@ int util::math::norm(int lhs, int rhs) {
 	return _;
 }
 
-unsigned int util::math::clamp(unsigned int i, int sign, unsigned int roof) {
-	unsigned int _ = i;
+int util::math::clamp(int i, int sign, int roof) {
+	int _ = i;
 
 	if (sign == 1) {
 		if (!(_ < roof)) {

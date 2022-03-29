@@ -176,7 +176,7 @@ namespace util {
 
 		int norm(int lhs, int rhs);
 
-		unsigned int clamp(unsigned int i, int sign, unsigned int roof);
+		int clamp(int i, int sign, int roof);
 
 		namespace idx {
 			unsigned int arr(Coord st, Coord bound);
