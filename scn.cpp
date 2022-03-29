@@ -130,7 +130,7 @@ void cInc() {
 }
 
 void scn::init(std::string stage, unsigned int lvl) {
-	nlohmann::json deser = nlohmann::json::parse(util::fs::rd<std::string>("lvl/" + stage + "/" + std::to_string(lvl) + ".json"));
+	nlohmann::json deser = nlohmann::json::parse(util::fs::rd<std::string>("lvl" + util::fs::path::sep + stage + util::fs::path::sep + std::to_string(lvl) + ".json"));
 
 	/* de-allocate */
 	// data

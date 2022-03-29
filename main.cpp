@@ -97,11 +97,11 @@ void handle() {
 
 						case Console::FS:
 							if (console->_tree[console->_cursFs]["type"] == "file") {
-								console->open(console->_cwd + "/" + console->_tree[console->_cursFs]["name"]);
+								console->open(console->_cwd + util::fs::path::sep + console->_tree[console->_cursFs]["name"]);
 							}
 
 							if (console->_tree[console->_cursFs]["type"] == "dir") {
-								console->changeDir(console->_cwd + "/" + console->_tree[console->_cursFs]["name"]);
+								console->changeDir(console->_cwd + util::fs::path::sep + console->_tree[console->_cursFs]["name"]);
 							}
 
 							break;
@@ -559,7 +559,7 @@ int main(int argc, char** argv) {
 
 	for (int i = 0; i < dir.size(); i++) {
 		if (dir[i]["name"] != util::fs::path::prev) {
-			std::map<std::string, std::string> setting = util::cfg::lex("player/cfg" + std::string("/") + dir[i]["name"]);
+			std::map<std::string, std::string> setting = util::cfg::lex("player/cfg" + util::fs::path::sep + dir[i]["name"]);
 
 			for (std::map<std::string, std::string>::iterator it = setting.begin(); it != setting.end(); ++it) {
 				if (std::find(omni::var.begin(), omni::var.end(), it->first) != omni::var.end()) {
@@ -695,7 +695,7 @@ int main(int argc, char** argv) {
 	if (argc > 2) {
 		std::string name = argv[2];
 
-		std::string path = std::string("lvl/") + argv[1] + std::string("/") + name + std::string(".json");
+		std::string path = std::string("lvl") + util::fs::path::sep + argv[1] + util::fs::path::sep + name + std::string(".json");
 		std::ifstream in(path);
 		omni::assert(in.good(), "Couldn't initialize; no level `" + std::to_string(std::stoi(argv[2])) + std::string("` in stage `") + argv[1] + std::string("`"));
 
