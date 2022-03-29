@@ -525,9 +525,9 @@ void handle() {
 				}
 
 				cam._posDelta[X] = cam._delta[X];
-				cam._posDelta[Z] = -(cam._delta[X]);
+				cam._posDelta[Z] = -cam._delta[X];
 
-				cam._posDelta[Y] = -(cam._delta[Y]);
+				cam._posDelta[Y] = -cam._delta[Y];
 
 				cam._pos = cam._posPrev + cam._posDelta;
 			}
