@@ -5,8 +5,8 @@
 #include "obj.h"
 
 typedef struct IBeam {
-	static GLfloat _vtc[3][2][3];
-	static GLushort _idc[3][2];
+	static GLfloat _vtc[3 * 2 * 3];
+	static GLushort _idc[3 * 2];
 
 	GLint _uni[2];
 
