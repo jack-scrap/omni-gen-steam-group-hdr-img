@@ -27,8 +27,11 @@ GLfloat Crane::_lightVtc[2 * 2][3] = {
 };
 
 GLushort Crane::_lightIdc[2][3] = {
-	0, 1, 2,
-	2, 1, 3
+	{
+		0, 1, 2
+	}, {
+		2, 1, 3
+	}
 };
 
 GLfloat Crane::_speed = 0.2;
