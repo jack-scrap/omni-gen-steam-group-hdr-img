@@ -79,16 +79,16 @@ Truck* truckMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	// wheel
 	glm::vec3 overhead = glm::vec3(-((layout::margin * 2) + (layout::stroke / 2)), 0.0, 0.0);
 
-	int i = 0;
+	int w = 0;
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < init->_x + 1; x++) {
 			Obj* rim[] = {
 				objMk("rim", "obj", "dir", true)
 			};
 
-			child[4 + i] = objMk("wheel", "obj", "dir", false, rim, sizeof rim / sizeof *rim, overhead + glm::vec3(x * -(layout::bordered(layout::idx[Z])), -(1.0 + (0.2 * 2) + 0.2), (z ? 1 : -1) * (layout::bordered(layout::idx[X]) / 2)), glm::vec3(0.0, z * M_PI, 0.0));
+			child[4 + w] = objMk("wheel", "obj", "dir", false, rim, sizeof rim / sizeof *rim, overhead + glm::vec3(x * -(layout::bordered(layout::idx[Z])), -(1.0 + (0.2 * 2) + 0.2), (z ? 1 : -1) * (layout::bordered(layout::idx[X]) / 2)), glm::vec3(0.0, z * M_PI, 0.0));
 
-			i++;
+			w++;
 		}
 	}
 
