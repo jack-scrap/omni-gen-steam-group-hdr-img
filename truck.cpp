@@ -17,19 +17,14 @@ GLushort Truck::_bedIdx[1] = {
 	0
 };
 
-GLfloat Truck::_lightVtc[2 * 2][3] = {
-	{
-		0.0, -0.3, -0.5
-	}, {
-		0.0, -0.3, 0.5
-	}, {
-		0.0, 0.3, -0.5
-	}, {
-		0.0, 0.3, 0.5
-	}
+GLfloat Truck::_lightVtc[2 * 2 * 3] = {
+	0.0, -0.3, -0.5,
+	0.0, -0.3, 0.5,
+	0.0, 0.3, -0.5,
+	0.0, 0.3, 0.5
 };
 
-GLushort Truck::_lightIdc[2][3] = {
+GLushort Truck::_lightIdc[2 * 3] = {
 	0, 1, 2,
 	2, 1, 3
 };
@@ -94,7 +89,7 @@ Truck* truckMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 
 	// light
 	for (int z = 0; z < 2; z++) {
-		child[4 + ((init->_x + 1) * 2) + z] = objMk((GLfloat*) Truck::_lightVtc, (GLushort*) Truck::_lightIdc, 2 * 3, "obj", "alert", false, glm::vec3(-(init->_x * layout::idx[Z]) - (layout::stroke * 2) - layout::stroke - layout::stroke, 0.0, z ? 1 : -1));
+		child[4 + ((init->_x + 1) * 2) + z] = objMk(Truck::_lightVtc, Truck::_lightIdc, 2 * 3, "obj", "alert", false, glm::vec3(-(init->_x * layout::idx[Z]) - (layout::stroke * 2) - layout::stroke - layout::stroke, 0.0, z ? 1 : -1));
 	}
 
 	_->_parent = objMk("truck/front", "obj", "dir", true, child, sizeof child / sizeof *child, loc + glm::vec3(2.4, 1.3, 0.0), rot);
