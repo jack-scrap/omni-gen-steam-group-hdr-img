@@ -120,10 +120,7 @@ Array* arrayMk(char* init, unsigned int x, unsigned int y, std::string name, glm
 	// data
 	_->_data = (Idx**) malloc(_->_x * _->_y * sizeof (Idx*));
 
-	glm::vec2 stride = glm::vec2(
-		layout::item(layout::bordered(layout::idx[X])),
-		layout::item(layout::bordered(layout::idx[Z]))
-	);
+	glm::vec2 stride = glm::vec2(layout::item(layout::bordered(layout::idx[X])), layout::item(layout::bordered(layout::idx[Z])));
 
 	int c = 0;
 	for (int j = 0; j < _->_y; j++) {
