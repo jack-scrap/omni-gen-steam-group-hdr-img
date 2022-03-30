@@ -1,19 +1,21 @@
 CXX=g++
 
+BUILDDIR=build
+
 CXXFLAGS=-std=c++11 -Wno-narrowing
 
 SDLFLAGS=-lSDL2 -lSDL2_ttf -lSDL2_image
 GLFLAGS=-lGLEW -lGL
 PYFLAGS=-L/usr/lib/python3.6/config-3.6m-x86_64-linux-gnu -L/usr/lib -lpython3.6m -pthread -ldl -lutil -lm -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -I/usr/include/python3.6m -I/usr/include/python3.6m -g -fdebug-prefix-map=/build/python3.6-0aiVHW/python3.6-3.6.9=. -specs=/usr/share/dpkg/no-pie-compile.specs -fstack-protector -DNDEBUG -g -fwrapv -O3 -fPIC
-LIBFLAGS=-L./ -Wl,-rpath=./ $(LIBS:%.cpp=-l%)
+LIBFLAGS=-L$(BUILDDIR) -Wl,-rpath=$(BUILDDIR) $(LIBS:%.cpp=-l%)
 
 STATIC=main.cpp disp.cpp util.cpp mesh.cpp console.cpp var.cpp str.cpp border.cpp node.cpp cont.cpp idx.cpp array.cpp dict.cpp lim.cpp cone.cpp road.cpp state.cpp layout.cpp i_beam.cpp omni.cpp
 LIBS=scn.cpp prog.cpp obj.cpp line.cpp pt.cpp crane.cpp truck.cpp cargo_ship.cpp street_sign.cpp
 
 HDR=cam.h col.h math.h phys.h
 
-OBJ_STATIC=$(STATIC:%.cpp=%.o)
-OBJ_LIBS=$(LIBS:%.cpp=lib%.so)
+OBJ_STATIC=$(STATIC:build/%.cpp=%.o)
+OBJ_LIBS=$(LIBS:%.cpp=build/lib%.so)
 
 STAGE=init array str dict matrix vec ctrl_flow path thread
 
@@ -27,40 +29,40 @@ install:
 main.o: main.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@ $(PYFLAGS)
 
-%.o: %.cpp %.h
+$(BUILDDIR)/%.o: %.cpp %.h
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-console.o: console.cpp console.h
+$(BUILDDIR)/console.o: console.cpp console.h
 	$(CXX) $(CXXFLAGS) -c $< -o $@ $(PYFLAGS)
 
-scn.o: scn.cpp scn.h
+$(BUILDDIR)/scn.o: scn.cpp scn.h
 	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
 
-prog.o: prog.cpp prog.h
+$(BUILDDIR)/prog.o: prog.cpp prog.h
 	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
 
-obj.o: obj.cpp obj.h
+$(BUILDDIR)/obj.o: obj.cpp obj.h
 	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
 
-line.o: line.cpp line.h
+$(BUILDDIR)/line.o: line.cpp line.h
 	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
 
-pt.o: pt.cpp pt.h
+$(BUILDDIR)/pt.o: pt.cpp pt.h
 	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
 
-crane.o: crane.cpp crane.h
+$(BUILDDIR)/crane.o: crane.cpp crane.h
 	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
 
-truck.o: truck.cpp truck.h
+$(BUILDDIR)/truck.o: truck.cpp truck.h
 	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
 
-cargo_ship.o: cargo_ship.cpp cargo_ship.h
+$(BUILDDIR)/cargo_ship.o: cargo_ship.cpp cargo_ship.h
 	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
 
-street_sign.o: street_sign.cpp street_sign.h
+$(BUILDDIR)/street_sign.o: street_sign.cpp street_sign.h
 	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
 
-lib%.so: %.o
+$(BUILDDIR)/lib%.so: $(BUILDDIR)/%.o
 	$(CXX) $(CXXFLAGS) -shared $< -o $@
 
 omni: $(OBJ_STATIC) $(OBJ_LIBS) $(HDR)
@@ -76,4 +78,4 @@ mk_stage:
 	done
 
 clean:
-	rm *.o *.so omni
+	rm $(BUILDDIR)/*.o $(BUILDDIR)/*.so omni
