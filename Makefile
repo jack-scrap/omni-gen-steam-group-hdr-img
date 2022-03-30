@@ -19,9 +19,9 @@ OBJ_LIBS=$(LIBS:%.cpp=build/lib%.so)
 
 STAGE=init array str dict matrix vec ctrl_flow path thread
 
-.PHONY: all ro mk_stage clean
+.PHONY: all ro mk_build mk_stage clean
 
-all: omni ro mk_stage
+all: omni ro mk_build mk_stage
 
 install:
 	sudo apt-get install -y libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev mesa-utils libglew-dev libglm-dev python3-dev
@@ -70,6 +70,9 @@ omni: $(OBJ_STATIC) $(OBJ_LIBS) $(HDR)
 
 ro:
 	chmod -w -R player/doc
+
+mk_build:
+	mkdir -p $(BUILDDIR)
 
 mk_stage:
 	for DIR in $(STAGE) ; do \
