@@ -407,7 +407,7 @@ void objMv(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot) {
 	dest = util::matr::rot(dest, rot);
 	for (int i = 0; i < scn::obj.size(); i++) {
 		if (obj != scn::obj[i]) {
-			if (util::phys::coll(obj, scn::obj[i])) {
+			if (util::phys::aabb(obj, scn::obj[i])) {
 				coll = true;
 
 				break;

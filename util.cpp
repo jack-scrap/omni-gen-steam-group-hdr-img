@@ -618,7 +618,7 @@ glm::vec3 util::matr::apply(glm::vec3 vtx, glm::mat4 model) {
 	return glm::vec3(model * glm::vec4(glm::vec3(0.0), 1.0));
 }
 
-bool util::phys::coll(Obj* p, Obj* q, glm::mat4 modelP, glm::mat4 modelQ) {
+bool util::phys::aabb(Obj* p, Obj* q, glm::mat4 modelP, glm::mat4 modelQ) {
 	bool _ = true;
 	for (int a = 0; a < 3; a++) {
 		// P
