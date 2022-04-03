@@ -235,7 +235,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 			// string
 			case nlohmann::json::value_t::string: {
-				wd = ((Array*) item->_ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->_ptr)->_parent->_aabb[X][MIN];
+				wd = ((Array*) item->_ptr)->_parent->_aabb[X][MAX] - ((Array*) item->_ptr)->_parent->_aabb[X][MIN];
 
 				data[i] = item;
 				type[i] = omni::ARRAY;
@@ -250,7 +250,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 				switch (pair.value()["block"][0].type()) {
 					// 1D
 					case nlohmann::json::value_t::number_unsigned: {
-						wd = ((Array*) item->_ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->_ptr)->_parent->_aabb[X][MIN];
+						wd = ((Array*) item->_ptr)->_parent->_aabb[X][MAX] - ((Array*) item->_ptr)->_parent->_aabb[X][MIN];
 
 						data[i] = item;
 						type[i] = omni::ARRAY;
@@ -263,7 +263,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 						switch (pair.value()["block"][0][0].type()) {
 							// 2D
 							case nlohmann::json::value_t::number_unsigned: {
-								wd = ((Array*) item->_ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->_ptr)->_parent->_aabb[X][MIN];
+								wd = ((Array*) item->_ptr)->_parent->_aabb[X][MAX] - ((Array*) item->_ptr)->_parent->_aabb[X][MIN];
 
 								data[i] = item;
 								type[i] = omni::ARRAY;
@@ -273,7 +273,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 							// 3D
 							case nlohmann::json::value_t::array: {
-								wd = ((Array*) item->_ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->_ptr)->_parent->_aabb[X][MIN];
+								wd = ((Array*) item->_ptr)->_parent->_aabb[X][MAX] - ((Array*) item->_ptr)->_parent->_aabb[X][MIN];
 
 								data[i] = item;
 								type[i] = omni::ARRAY;
@@ -291,7 +291,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 			// dictionary
 			case nlohmann::json::value_t::object: {
-				wd = ((Dict*) item->_ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->_ptr)->_parent->_aabb[X][MIN];
+				wd = ((Dict*) item->_ptr)->_parent->_aabb[X][MAX] - ((Dict*) item->_ptr)->_parent->_aabb[X][MIN];
 
 				data[i] = item;
 				type[i] = omni::DICT;
