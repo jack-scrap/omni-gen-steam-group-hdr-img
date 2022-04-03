@@ -672,10 +672,7 @@ bool util::phys::aabb(glm::vec3 vtx, Obj* bound, glm::mat4 modelVtx, glm::mat4 m
 		rng[MAX][a] = bound->_aabb[a][MAX];
 		rng[MAX] = glm::vec3(modelVtx * glm::vec4(rng[MAX], 1.0));
 
-		if (!(
-			vtx[a] > rng[MIN][a] &&
-			vtx[a] < rng[MAX][a]
-		)) {
+		if (!(vtx[a] > rng[MIN][a] && vtx[a] < rng[MAX][a])) {
 			_ = false;
 
 			break;
