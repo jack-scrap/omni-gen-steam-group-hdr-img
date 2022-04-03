@@ -100,9 +100,9 @@ namespace util {
 	namespace phys {
 		bool aabb(Obj* p, Obj* q, glm::mat4 modelP = glm::mat4(1.0), glm::mat4 modelQ = glm::mat4(1.0));
 
-		bool coll(glm::vec3 vtx, Obj* bound, glm::mat4 modelBound = glm::mat4(1.0), glm::mat4 modelVtx = glm::mat4(1.0));
+		bool aabb(glm::vec3 vtx, Obj* bound, glm::mat4 modelBound = glm::mat4(1.0), glm::mat4 modelVtx = glm::mat4(1.0));
 
-		bool collGround(Obj* obj, glm::mat4 model = glm::mat4(1.0));
+		bool aabbGround(Obj* obj, glm::mat4 model = glm::mat4(1.0));
 	}
 
 	namespace str {
