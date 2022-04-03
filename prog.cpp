@@ -29,7 +29,11 @@ Shad::Shad(std::string name, unsigned int stage) {
 			break;
 	}
 
-	std::string buff = util::fs::rd<std::string>("res/shad/" + name + "." + ext);
+	std::string buff = util::fs::rd<std::string>(util::fs::path::build({
+		"res",
+		"shad",
+		name + "." + ext
+	}));
 	const char* src = buff.c_str();
 
 	_id = glCreateShader(type);

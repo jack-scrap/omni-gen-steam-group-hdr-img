@@ -441,7 +441,11 @@ void util::mesh::plane(GLfloat vtc[2 * 2 * 2], glm::vec2 bound) {
 std::vector<GLfloat> util::mesh::rd::vtc(std::string fName) {
 	std::vector<GLfloat> _;
 
-	std::vector<std::string> buff = fs::rd<std::vector<std::string>>("res/obj/" + fName + ".obj");
+	std::vector<std::string> buff = fs::rd<std::vector<std::string>>(fs::path::build({
+		"res",
+		"obj",
+		fName + ".obj"
+	}));
 
 	for (int l = 0; l < buff.size(); l++) {
 		std::vector<std::string> tok = str::split(buff[l], ' ');
@@ -461,7 +465,11 @@ std::vector<GLfloat> util::mesh::rd::vtc(std::string fName) {
 std::vector<GLfloat> util::mesh::rd::st(std::string fName) {
 	std::vector<GLfloat> _;
 
-	std::vector<std::string> buff = fs::rd<std::vector<std::string>>("res/obj/" + fName + ".obj");
+	std::vector<std::string> buff = fs::rd<std::vector<std::string>>(fs::path::build({
+		"res",
+		"obj",
+		fName + ".obj"
+	}));
 
 	for (int l = 0; l < buff.size(); l++) {
 		std::vector<std::string> tok = str::split(buff[l], ' ');
@@ -481,7 +489,11 @@ std::vector<GLfloat> util::mesh::rd::st(std::string fName) {
 std::vector<GLfloat> util::mesh::rd::norm(std::string fName) {
 	std::vector<GLfloat> _;
 
-	std::vector<std::string> buff = fs::rd<std::vector<std::string>>("res/obj/" + fName + ".obj");
+	std::vector<std::string> buff = fs::rd<std::vector<std::string>>(fs::path::build({
+		"res",
+		"obj",
+		fName + ".obj"
+	}));
 
 	for (int l = 0; l < buff.size(); l++) {
 		std::vector<std::string> tok = str::split(buff[l], ' ');
@@ -589,7 +601,11 @@ std::vector<GLfloat> util::mesh::gen::norm(std::vector<glm::vec3> vtc) {
 std::vector<GLushort> util::mesh::rd::idc(std::string fName, unsigned int attr) {
 	std::vector<GLushort> _;
 
-	std::vector<std::string> buff = fs::rd<std::vector<std::string>>("res/obj/" + fName + ".obj");
+	std::vector<std::string> buff = fs::rd<std::vector<std::string>>(fs::path::build({
+		"res",
+		"obj",
+		fName + ".obj"
+	}));
 
 	for (int l = 0; l < buff.size(); l++) {
 		std::vector<std::string> tok = str::split(buff[l], ' ');
