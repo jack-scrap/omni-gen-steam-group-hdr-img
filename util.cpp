@@ -1201,10 +1201,7 @@ float util::cfg::parse::prec(std::string buff) {
 			dot++;
 		}
 
-		if (
-			!isdigit(buff[i]) &&
-			buff[i] != '.'
-		) {
+		if (!isdigit(buff[i]) && buff[i] != '.') {
 			valid = false;
 
 			break;
