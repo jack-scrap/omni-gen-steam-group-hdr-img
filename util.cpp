@@ -1408,24 +1408,6 @@ int util::math::norm(int lhs, int rhs) {
 	return _;
 }
 
-int util::math::clamp(int i, int sign, int roof) {
-	int _ = i;
-
-	if (sign == 1) {
-		if (_ > roof) {
-			_ = roof;
-		}
-	}
-
-	if (sign == -1) {
-		if (_ < roof) {
-			_ = roof;
-		}
-	}
-
-	return _;
-}
-
 unsigned int util::math::idx::arr(Coord st, Coord bound) {
 	return (st._y * bound._x) + st._x;
 }

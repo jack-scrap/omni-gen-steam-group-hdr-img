@@ -462,8 +462,8 @@ void Console::fmtScr() {
 		boundEditor[X],
 		boundEditor[Y]
 	}, {
-		(loc[X] + _cursEditor[_rngEditor][X]) - (util::math::clamp(loc[X] + _cursEditor[_rngEditor][X], 1, boundFrame[X] - 1)),
-		(_cursEditor[_rngEditor][Y]) - (util::math::clamp(_cursEditor[_rngEditor][Y], 1, boundFrame[Y] - 1))
+		(loc[X] + _cursEditor[_rngEditor][X]) - (util::math::clamp<unsigned int>(loc[X] + _cursEditor[_rngEditor][X], 1, boundFrame[X] - 1)),
+		(_cursEditor[_rngEditor][Y]) - (util::math::clamp<unsigned int>(_cursEditor[_rngEditor][Y], 1, boundFrame[Y] - 1))
 	});
 
 	/* command-line */
@@ -493,7 +493,7 @@ void Console::fmtScr() {
 		boundPrompt,
 		1
 	}, {
-		_cursPrompt[_rngPrompt] - util::math::clamp(_cursPrompt[_rngPrompt], 1, boundPrompt - 1),
+		_cursPrompt[_rngPrompt] - util::math::clamp<unsigned int>(_cursPrompt[_rngPrompt], 1, boundPrompt - 1),
 		0
 	});
 }
@@ -1265,8 +1265,8 @@ void Console::hl() {
 			for (int r = 0; r < 2; r++) {
 				if (_cursEditor[r][X] == _buff[_cursEditor[r][Y]].size()) {
 					unsigned int clamped[2] = {
-						util::math::clamp(loc[X] + _cursEditor[r][X], 1, boundFrame[X] - 1),
-						util::math::clamp(loc[Y] + _cursEditor[r][Y], 1, boundFrame[Y])
+						util::math::clamp<unsigned int>(loc[X] + _cursEditor[r][X], 1, boundFrame[X] - 1),
+						util::math::clamp<unsigned int>(loc[Y] + _cursEditor[r][Y], 1, boundFrame[Y])
 					};
 
 					glTexSubImage2D(GL_TEXTURE_2D, 0, clamped[X] * layout::glyph[X], clamped[Y] * layout::glyph[Y], layout::glyph[X], layout::glyph[Y], GL_BGR, GL_UNSIGNED_BYTE, _block);
@@ -1297,7 +1297,7 @@ void Console::hl() {
 
 			// block
 			for (int r = 0; r < 2; r++) {
-				unsigned int clamped = util::math::clamp(loc[X] + _cursPrompt[r], 1, state::lineWd - 1);
+				unsigned int clamped = util::math::clamp<unsigned int>(loc[X] + _cursPrompt[r], 1, state::lineWd - 1);
 
 				if (_cursPrompt[r] == _prompt.size()) {
 					glTexSubImage2D(GL_TEXTURE_2D, 0, clamped * layout::glyph[X], (state::lineCnt - 1) * layout::glyph[Y], layout::glyph[X], layout::glyph[Y], GL_BGR, GL_UNSIGNED_BYTE, _block);
@@ -1314,7 +1314,7 @@ void Console::hl() {
 			for (int c = 0; c < maxFs(); c++) {
 				unsigned int idx = util::math::idx::arr({
 					loc[X] + c,
-					loc[Y] + util::math::clamp(_cursFs, 1, boundFrame[Y] - 1)
+					loc[Y] + util::math::clamp<unsigned int>(_cursFs, 1, boundFrame[Y] - 1)
 				}, {
 					state::lineWd,
 					state::lineCnt
