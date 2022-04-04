@@ -24,7 +24,7 @@ vec3 norm(vec3[3] tri) {
 	// calculate cross product
 	vec3 orth = cross(u, v),
 
-			 // normalize
+	// normalize
 	vec3 norm = normalize(orth);
 
 	return norm;
@@ -57,10 +57,7 @@ void main() {
 	// Y
 	for (int b = 0; b < 2; b++) {
 		for (int i = 0; i < 2 * 2; i++) {
-			gl_Position = proj * view * model * vec4(
-				vtc[(b * 2 * 2) + i],
-				1.0
-			);
+			gl_Position = proj * view * model * vec4(vtc[(b * 2 * 2) + i], 1.0);
 			_pos = gl_Position.xyz;
 
 			EmitVertex();
@@ -73,10 +70,7 @@ void main() {
 	for (int b = 0; b < 2; b++) {
 		for (int y = 0; y < 2; y++) {
 			for (int x = 0; x < 2; x++) {
-				gl_Position = proj * view * model * vec4(
-					vtc[b + (y * 2 * 2) + (x * 2)],
-					1.0
-				);
+				gl_Position = proj * view * model * vec4(vtc[b + (y * 2 * 2) + (x * 2)], 1.0);
 				_pos = gl_Position.xyz;
 
 				EmitVertex();
