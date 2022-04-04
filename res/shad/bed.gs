@@ -44,10 +44,7 @@ vec3[2] bevel(vec3[3] strip, float fac) {
 	vec3 u = strip[2] - strip[0];
 	vec3 v = strip[1] - strip[0];
 
-	return vec3[2](
-		strip[0] + (normalize(u) * fac),
-		strip[0] + (normalize(v) * fac)
-	);
+	return vec3[2](strip[0] + (normalize(u) * fac), strip[0] + (normalize(v) * fac));
 }
 
 void main() {
@@ -58,11 +55,7 @@ void main() {
 	int i = 0;
 	for (int y = 0; y < 2; y++) {
 		for (int x = 0; x < 2; x++) {
-			quad[i] = vec3(
-				(bool(x) ? 1 : -1) * ((strideIdx[0] / 2) + stroke),
-				0.0,
-				-(y * item(bordered(sz * strideIdx[1])))
-			);
+			quad[i] = vec3((bool(x) ? 1 : -1) * ((strideIdx[0] / 2) + stroke), 0.0, -(y * item(bordered(sz * strideIdx[1]))));
 
 			i++;
 		}
@@ -121,10 +114,7 @@ void main() {
 		for (int i = 0; i < (2 * 2) + 2; i++) {
 			unsigned int idx = faceIdc[i];
 
-			gl_Position = proj * view * model * vec4(
-				beveled[idx] + (y * vec3(0.0, ht, 0.0)),
-				1.0
-			);
+			gl_Position = proj * view * model * vec4(beveled[idx] + (y * vec3(0.0, ht, 0.0)), 1.0);
 			_pos = gl_Position.xyz;
 
 			EmitVertex();
@@ -139,10 +129,7 @@ void main() {
 			for (int y = 0; y < 2; y++) {
 				unsigned int idx = stripIdc[(i + p) % roof];
 
-				gl_Position = proj * view * model * vec4(
-					beveled[idx] + (y * vec3(0.0, ht, 0.0)),
-					1.0
-				);
+				gl_Position = proj * view * model * vec4(beveled[idx] + (y * vec3(0.0, ht, 0.0)), 1.0);
 				_pos = gl_Position.xyz;
 
 				EmitVertex();
