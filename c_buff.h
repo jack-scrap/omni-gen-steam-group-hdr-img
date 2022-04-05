@@ -2,8 +2,6 @@
 
 #include <stddef.h>
 
-#include "var.h"
-
 typedef struct {
 	void* _ptr;
 	size_t _sz;
