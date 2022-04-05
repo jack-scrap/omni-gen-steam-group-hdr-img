@@ -335,10 +335,7 @@ std::vector<std::string> util::fs::path::tok(std::string buff) {
 				i++;
 			} else {
 				std::string entry;
-				while (
-					std::string(1, buff[i]) != sep &&
-					i < buff.size()
-				) {
+				while (std::string(1, buff[i]) != sep && i < buff.size()) {
 					entry.push_back(buff[i]);
 
 					i++;
