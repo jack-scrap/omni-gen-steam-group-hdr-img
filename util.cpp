@@ -358,7 +358,6 @@ std::vector<std::string> util::fs::path::entry(std::string buff) {
 		if (tok[i] != sep) {
 			if (tok[i] == home) {
 				_.push_back(homeExpand);
-			} else if (tok[i] == curr) {
 			} else if (tok[i] == prev) {
 				if (_.size()) {
 					_.pop_back();
