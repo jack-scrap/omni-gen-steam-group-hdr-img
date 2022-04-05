@@ -4,7 +4,7 @@ uniform bool active;
 
 vec3[2] col = vec3[2](
 	vec3(38, 38, 38),
-	vec3(255, 155, 71)
+	vec3(255, 142, 65)
 );
 
 void main() {
