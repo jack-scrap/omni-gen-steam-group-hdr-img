@@ -735,7 +735,7 @@ void Console::del() {
 				}
 
 				for (int r = 0; r < 2; r++) {
-					if (!(_cursEditor[r][Y] < _buff.size())) {
+					if (_cursEditor[r][Y] > _buff.size()) {
 						_cursEditor[r][Y]--;
 					}
 
@@ -765,7 +765,7 @@ void Console::del() {
 
 				roof += 1;
 
-				if (!(roof < _prompt.size())) {
+				if (roof > _prompt.size()) {
 					roof = _prompt.size();
 				}
 
@@ -782,7 +782,7 @@ void Console::del() {
 				}
 			}
 
-			if (!(_cursPrompt[MIN] < _prompt.size())) {
+			if (_cursPrompt[MIN] > _prompt.size()) {
 				_cursPrompt[MIN] = _prompt.size();
 			}
 			_cursPrompt[MAX] = _cursPrompt[MIN];

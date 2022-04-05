@@ -450,7 +450,7 @@ void handle() {
 								console->_buff = console->_hist[console->_h];
 
 								for (int r = 0; r < 2; r++) {
-									if (!(console->_cursEditor[r][Y] < console->_buff.size())) {
+									if (console->_cursEditor[r][Y] > console->_buff.size()) {
 										console->_cursEditor[r][Y]--;
 									}
 
@@ -470,7 +470,7 @@ void handle() {
 							}
 
 							for (int r = 0; r < 2; r++) {
-								if (!(console->_cursEditor[r][Y] < console->_buff.size())) {
+								if (console->_cursEditor[r][Y] > console->_buff.size()) {
 									console->_cursEditor[r][Y]--;
 								}
 
