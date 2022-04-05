@@ -1297,10 +1297,7 @@ std::map<std::string, std::string> util::cfg::lex(std::string name) {
 				tok.push_back(line[i]);
 				i++;
 
-				while (
-					line[i] != '\'' &&
-					i < line.size()
-				) {
+				while (line[i] != '\'' && i < line.size()) {
 					tok.push_back(line[i]);
 
 					i++;
@@ -1319,10 +1316,7 @@ std::map<std::string, std::string> util::cfg::lex(std::string name) {
 			if (!isspace(line[i])) {
 				std::string tok;
 
-				while (
-					!isspace(line[i]) &&
-					i < line.size()
-				) {
+				while (!isspace(line[i]) && i < line.size()) {
 					tok.push_back(line[i]);
 
 					i++;
