@@ -735,7 +735,7 @@ char* util::json::id(nlohmann::json deser) {
 	std::string buff = deser.get<std::string>();
 
 	unsigned int no = buff.size();
-	char* _ = (char*) malloc((no + 1));
+	char* _ = (char*) malloc(no + 1);
 	for (int i = 0; i < no; i++) {
 		_[i] = buff[i];
 	}
