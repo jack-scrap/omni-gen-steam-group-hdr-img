@@ -9,7 +9,7 @@
 			]
 		},
 		"out": {
-			"block": null,
+			"block": 0,
 			"loc": [
 				0,
 				0,
@@ -19,7 +19,7 @@
 	},
 	"goal": {
 		"in": {
-			"block": null
+			"block": 0
 		},
 		"out": {
 			"block": 1

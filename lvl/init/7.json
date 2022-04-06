@@ -7,7 +7,7 @@
 		},
 		"out": {
 			"block": [
-				null
+				0
 			]
 		},
 		"other_in": {
@@ -17,14 +17,14 @@
 		},
 		"other_out": {
 			"block": [
-				null
+				0
 			]
 		}
 	},
 	"goal": {
 		"in": {
 			"block": [
-				null
+				0
 			]
 		},
 		"out": {
@@ -34,7 +34,7 @@
 		},
 		"other_in": {
 			"block": [
-				null
+				0
 			]
 		},
 		"other_out": {

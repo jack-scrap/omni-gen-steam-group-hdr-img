@@ -4,18 +4,18 @@
 			"block": 1
 		},
 		"fst": {
-			"block": null
+			"block": 0
 		},
 		"snd": {
-			"block": null
+			"block": 0
 		}
 	},
 	"goal": {
 		"in": {
-			"block": null
+			"block": 0
 		},
 		"fst": {
-			"block": null
+			"block": 0
 		},
 		"snd": {
 			"block": 1

@@ -891,20 +891,15 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 
 	switch (val["block"].type()) {
 		// scalar
-		case nlohmann::json::value_t::null: {
-			Idx* idx = idxMk(0, key, loc, rot);
-
-			omni::assert(!phys::aabbGround(idx->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
-
-			_ = varMk(name, idx, omni::SCALAR);
-
-			break;
-		}
-
 		case nlohmann::json::value_t::number_unsigned: {
 			char init = byte(val["block"]);
 
-			Idx* idx = idxMk(0, &init, 1, key, loc, rot);
+			Idx* idx;
+			if (init) {
+				idx = idxMk(0, &init, 1, key, loc, rot);
+			} else {
+				idx = idxMk(0, key, loc, rot);
+			}
 
 			omni::assert(!phys::aabbGround(idx->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
