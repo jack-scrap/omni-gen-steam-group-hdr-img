@@ -520,8 +520,9 @@ void scn::init(std::string stage, unsigned int lvl) {
 	for (const nlohmann::json::object_t& entry : deser["prop"]["static"]) {
 		Obj* _ = util::json::prop(entry);
 
+		prop[noProp] = _;
+
 		noProp++;
-		prop[noProp - 1] = _;
 
 		obj.push_back(_);
 		prim.push_back(Mesh::OBJ);
