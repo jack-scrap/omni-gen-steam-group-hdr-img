@@ -1238,7 +1238,7 @@ void Console::hl() {
 				_cursEditor[MIN][X],
 				_cursEditor[MIN][Y]
 			};
-			unsigned int i = 0;
+			int i = 0;
 			unsigned int startScal = util::math::idx::determ({
 				_cursEditor[MIN][X],
 				_cursEditor[MIN][Y]
@@ -1435,7 +1435,7 @@ std::vector<std::string> Console::slice(std::vector<std::string> buff, unsigned 
 		start[i] = rng[b][i];
 	}
 
-	unsigned int i = 0;
+	int i = 0;
 	unsigned int idx[2];
 	for (int i = 0; i < 2; i++) {
 		idx[i] = start[i];
