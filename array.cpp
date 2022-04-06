@@ -39,9 +39,9 @@ Array* arrayMk(char* init, unsigned int x, std::string name, unsigned int axis, 
 		}
 
 		if (init[c]) {
-			idx = idxMk(c, &init[c], 1, "", glm::vec3(layout::overhead, 0.0, layout::overhead) + glm::vec3(0.0, 0.0, c * stride[Y]));
+			idx = idxMk(c, &init[c], 1, "", glm::vec3(layout::overhead, 0.0, layout::overhead) + glm::vec3(c * stride[X], 0.0, 0.0));
 		} else {
-			idx = idxMk(c, "", glm::vec3(layout::overhead, 0.0, layout::overhead) + glm::vec3(0.0, 0.0, c * stride[Y]));
+			idx = idxMk(c, "", glm::vec3(layout::overhead, 0.0, layout::overhead) + glm::vec3(c * stride[X], 0.0, 0.0));
 		}
 
 		_->_data[c] = idx;
