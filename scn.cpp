@@ -516,11 +516,11 @@ void scn::init(std::string stage, unsigned int lvl) {
 	}
 
 	// prop
+	prop = (Obj**) realloc(prop, deser["prop"]["static"].size() * sizeof (Obj*));
 	for (const nlohmann::json::object_t& entry : deser["prop"]["static"]) {
 		Obj* _ = util::json::prop(entry);
 
 		noProp++;
-		prop = (Obj**) realloc(prop, noProp * sizeof (Obj*));
 		prop[noProp - 1] = _;
 
 		obj.push_back(_);
