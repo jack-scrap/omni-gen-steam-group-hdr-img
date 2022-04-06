@@ -12,7 +12,8 @@ Border* borderMk(glm::vec2 bound, glm::vec3 loc, glm::vec3 rot) {
 	GLfloat vtc[2 * 2 * 3 * 2];
 
 	std::vector<GLfloat> outer = util::mesh::rect::pos({
-		bound[X] + (layout::stroke * 2), bound[Y] + (layout::stroke * 2)
+		bound[X] + (layout::stroke * 2),
+		bound[Y] + (layout::stroke * 2)
 	}, Z, false);
 	int i = 0;
 	for (int y = 0; y < 2; y++) {
@@ -26,7 +27,8 @@ Border* borderMk(glm::vec2 bound, glm::vec3 loc, glm::vec3 rot) {
 	}
 
 	std::vector<GLfloat> inner = util::mesh::rect::pos({
-		bound[X], bound[Y]
+		bound[X],
+		bound[Y]
 	}, Z, false);
 	i = 0;
 	for (int y = 0; y < 2; y++) {
