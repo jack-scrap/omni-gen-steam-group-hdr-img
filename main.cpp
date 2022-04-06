@@ -530,7 +530,7 @@ void handle() {
 
 				cam._posDelta[Y] = -cam._delta[Y];
 
-				cam._pos = glm::vec3(cam._posPrev[X] + cam._posDelta[X] > 10000.0 + 500.0 ? 10000.0 + 500 : cam._posPrev[X] + cam._posDelta[X], cam._posPrev[Y] + cam._posDelta[Y] > 10000.0 + 500.0 ? 10000.0 + 500 : cam._posPrev[Y] + cam._posDelta[Y], cam._posPrev[Z] + cam._posDelta[Z] > 10000.0 + 500.0 ? 10000.0 + 500 : cam._posPrev[Z] + cam._posDelta[Z]);
+				cam._pos = glm::vec3(cam._posPrev[X] + cam._posDelta[X] > 10000.0 + 500.0 ? 10000.0 + 500.0 : cam._posPrev[X] + cam._posDelta[X], cam._posPrev[Y] + cam._posDelta[Y] > 10000.0 + 500.0 ? 10000.0 + 500.0 : cam._posPrev[Y] + cam._posDelta[Y], cam._posPrev[Z] + cam._posDelta[Z] > 10000.0 + 500.0 ? 10000.0 + 500 : cam._posPrev[Z] + cam._posDelta[Z]);
 				cam._pos = glm::vec3(cam._pos[X] < 10000.0 - 500.0 ? 10000.0 - 500 : cam._pos[X], cam._pos[Y] < 10000.0 - 500.0 ? 10000.0 - 500 : cam._pos[Y], cam._pos[Z] < 10000.0 - 500.0 ? 10000.0 - 500 : cam._pos[Z]);
 			}
 		}
