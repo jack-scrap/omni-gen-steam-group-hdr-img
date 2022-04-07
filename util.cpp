@@ -413,7 +413,7 @@ std::string util::fs::path::prune(std::string path, std::string name) {
 	std::vector<std::string> entryNew;
 	for (int i = 0; i < entryOld.size(); i++) {
 		if (entryOld[i] == name) {
-			break;
+			continue;
 		}
 
 		entryNew.push_back(entryOld[i]);
