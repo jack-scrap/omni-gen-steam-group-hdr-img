@@ -461,6 +461,8 @@ void scn::init(std::string stage, unsigned int lvl) {
 			} else {
 				init = {
 					nullptr,
+					0,
+					0,
 					0
 				};
 			}
