@@ -374,7 +374,7 @@ std::vector<std::string> util::fs::path::entry(std::string buff) {
 }
 
 std::string util::fs::path::build(std::vector<std::string> entry) {
-	entry.insert(entry.begin(), path::curr);
+	entry.insert(entry.begin(), curr);
 
 	std::string serial;
 	for (int i = 0; i < entry.size(); i++) {
