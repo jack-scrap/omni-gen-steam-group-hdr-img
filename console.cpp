@@ -8,6 +8,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <SDL2/SDL_image.h>
 
 #include "console.h"
 #include "omni.h"
@@ -91,6 +92,9 @@ Console::Console(std::string fName, std::string dir) :
 	_mode(EDITOR),
 	_cwd(dir),
 	_prog("console", "console") {
+		_map = IMG_Load("res/map.bmp");
+		SDL_Texture* tex = SDL_CreateTextureFromSurface(disp->_rend, _map);
+
 		_canv = (char*) calloc(state::lineWd * state::lineCnt, sizeof (char));
 		_hl = (char*) calloc(state::lineWd * state::lineCnt, sizeof (bool));
 
@@ -1342,7 +1346,7 @@ void Console::print(char c, bool b, Coord st) {
 		layout::map[X] * layout::glyph[X] * layout::glyph[Y]
 	};
 
-	glTexSubImage2D(GL_TEXTURE_2D, 0, st._x * layout::glyph[X], st._y * layout::glyph[Y], layout::glyph[X], layout::glyph[Y], GL_BGR, GL_UNSIGNED_BYTE, &(((char*) disp->_map->pixels)[((b * sz) + (idx._y * stride[Y]) + (idx._x * stride[X])) * 3]));
+	glTexSubImage2D(GL_TEXTURE_2D, 0, st._x * layout::glyph[X], st._y * layout::glyph[Y], layout::glyph[X], layout::glyph[Y], GL_BGR, GL_UNSIGNED_BYTE, &(((char*) _map->pixels)[((b * sz) + (idx._y * stride[Y]) + (idx._x * stride[X])) * 3]));
 }
 
 void Console::draw() {

@@ -1,5 +1,4 @@
 #include <thread>
-#include <SDL2/SDL_image.h>
 #include <glm/gtc/type_ptr.hpp>
 
 #include "disp.h"
@@ -38,11 +37,6 @@ Disp::Disp(const char* title, glm::vec2 res, glm::vec3 bg) :
 		glCullFace(GL_BACK);
 
 		_rend = SDL_CreateRenderer(_win, -1, 0);
-
-		_map = IMG_Load("res/map.bmp");
-		SDL_Texture* tex = SDL_CreateTextureFromSurface(_rend, _map);
-
-		SDL_RenderCopy(_rend, tex, NULL, NULL);
 
 		glClearColor(bg[R] / 255.0, bg[G] / 255.0, bg[B] / 255.0, 1.0);
 

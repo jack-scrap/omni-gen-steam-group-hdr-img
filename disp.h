@@ -15,12 +15,10 @@ class Disp {
 
 		SDL_Window* _win;
 
+	public:
 		SDL_Renderer* _rend;
 
-	public:
 		bool _open = false;
-
-		SDL_Surface* _map;
 
 		unsigned int _res[2];
 

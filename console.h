@@ -11,6 +11,8 @@ uint32_t epoch(uint32_t inter, void* param);
 
 class Console {
 	private:
+		SDL_Surface* _map;
+
 		char* _canv;
 		char* _hl;
 
