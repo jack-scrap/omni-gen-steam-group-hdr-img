@@ -460,11 +460,13 @@ void scn::init(std::string stage, unsigned int lvl) {
 				init = util::json::array::array(entry["data"]);
 			} else {
 				init = {
-					nullptr,
+					(char*) malloc(1),
 					1,
 					0,
 					0
 				};
+
+				((char*) init._ptr)[0] = 0;
 			}
 
 			Array* array = arrayMk((char*) init._ptr, init._x, "", Z, glm::vec3(0.0, layout::padded(0.0), -((layout::idx[X] / 2) + (layout::stroke * 2) + (layout::margin * 2 * 2))), glm::vec3(0.0, -M_PI / 2, 0.0));
