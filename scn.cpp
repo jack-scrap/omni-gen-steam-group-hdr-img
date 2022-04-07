@@ -591,12 +591,12 @@ void scn::init(std::string stage, unsigned int lvl) {
 	streetSign._sz = deser["ctrl"].size();
 	streetSign._ptr = (StreetSign**) malloc(streetSign._sz * sizeof (StreetSign*));
 
-	int s = 0;
+	i = 0;
 	for (const auto& entry : deser["ctrl"].items()) {
 		StreetSign* _ = util::json::streetSign(entry.value());
 
-		((StreetSign**) streetSign._ptr)[s] = _;
-		s++;
+		((StreetSign**) streetSign._ptr)[i] = _;
+		i++;
 
 		obj.push_back(_->_parent);
 		prim.push_back(Mesh::OBJ);
