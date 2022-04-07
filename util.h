@@ -59,7 +59,7 @@ namespace util {
 
 			std::string append(std::string lhs, std::string rhs);
 
-			std::string prune(std::string path, std::string name);
+			std::vector<std::string> prune(std::string path, std::string name);
 
 			std::string name(std::string path);
 

@@ -407,7 +407,7 @@ std::string util::fs::path::append(std::string lhs, std::string rhs) {
 	return build(entry);
 }
 
-std::string util::fs::path::prune(std::string path, std::string name) {
+std::vector<std::string> util::fs::path::prune(std::string path, std::string name) {
 	std::vector<std::string> entryOld = entry(path);
 
 	std::vector<std::string> entryNew;
@@ -419,7 +419,7 @@ std::string util::fs::path::prune(std::string path, std::string name) {
 		entryNew.push_back(entryOld[i]);
 	}
 
-	return build(entryNew);
+	return entryNew;
 }
 
 void util::mesh::plane(GLfloat vtc[2 * 2 * 2], glm::vec2 bound) {
