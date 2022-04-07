@@ -44,7 +44,10 @@ vec3[2] bevel(vec3[3] strip, float fac) {
 	vec3 u = strip[2] - strip[0];
 	vec3 v = strip[1] - strip[0];
 
-	return vec3[2](strip[0] + (normalize(u) * fac), strip[0] + (normalize(v) * fac));
+	return vec3[2](
+		strip[0] + (normalize(u) * fac),
+		strip[0] + (normalize(v) * fac)
+	);
 }
 
 void main() {
