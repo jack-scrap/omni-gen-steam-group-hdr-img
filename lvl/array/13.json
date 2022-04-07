@@ -1,6 +1,6 @@
 {
 	"data": {
-		"in": {
+		"array": {
 			"block": [
 				1,
 				0,
@@ -9,7 +9,7 @@
 		}
 	},
 	"goal": {
-		"in": {
+		"array": {
 			"block": [
 				2,
 				0,
