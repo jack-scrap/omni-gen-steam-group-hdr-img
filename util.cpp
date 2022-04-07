@@ -407,16 +407,14 @@ std::string util::fs::path::append(std::string lhs, std::string rhs) {
 	return build(entry);
 }
 
-std::vector<std::string> util::fs::path::prune(std::string path, std::string name) {
-	std::vector<std::string> entryOld = entry(path);
-
+std::vector<std::string> util::fs::path::prune(std::vector<std::string> path, std::string name) {
 	std::vector<std::string> _;
-	for (int i = 0; i < entryOld.size(); i++) {
-		if (entryOld[i] == name) {
+	for (int i = 0; i < path.size(); i++) {
+		if (path[i] == name) {
 			continue;
 		}
 
-		_.push_back(entryOld[i]);
+		_.push_back(path[i]);
 	}
 
 	return _;
