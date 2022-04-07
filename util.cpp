@@ -374,6 +374,8 @@ std::vector<std::string> util::fs::path::entry(std::string buff) {
 }
 
 std::string util::fs::path::build(std::vector<std::string> entry) {
+	entry = prune(entry, curr);
+
 	entry.insert(entry.begin(), curr);
 
 	std::string serial;
