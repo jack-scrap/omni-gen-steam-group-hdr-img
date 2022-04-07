@@ -521,7 +521,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 		Obj* _ = util::json::prop(entry);
 
 		prop[noProp] = _;
-
 		noProp++;
 
 		obj.push_back(_);
