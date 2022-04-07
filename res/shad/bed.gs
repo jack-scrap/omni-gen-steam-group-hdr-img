@@ -58,7 +58,7 @@ void main() {
 	int i = 0;
 	for (int y = 0; y < 2; y++) {
 		for (int x = 0; x < 2; x++) {
-			quad[i] = vec3((bool(x) ? 1 : -1) * ((strideIdx[0] / 2) + stroke), 0.0, -(y * item(bordered(sz * strideIdx[1]))));
+			quad[i] = vec3((bool(x) ? 1 : -1) * (bordered(strideIdx[0]) / 2), 0.0, -(y * item(bordered(sz * strideIdx[1]))));
 
 			i++;
 		}
