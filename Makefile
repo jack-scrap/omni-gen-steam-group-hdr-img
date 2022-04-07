@@ -14,8 +14,8 @@ LIBS=scn.cpp prog.cpp obj.cpp line.cpp pt.cpp crane.cpp truck.cpp cargo_ship.cpp
 
 HDR=cam.h col.h math.h phys.h
 
-OBJ_STATIC=$(STATIC:build/%.cpp=%.o)
-OBJ_LIBS=$(LIBS:%.cpp=build/lib%.so)
+OBJ_STATIC=$(STATIC:$(BUILDDIR)/%.cpp=%.o)
+OBJ_LIBS=$(LIBS:%.cpp=$(BUILDDIR)/lib%.so)
 
 STAGE=init array str dict matrix vec ctrl_flow path thread
 
