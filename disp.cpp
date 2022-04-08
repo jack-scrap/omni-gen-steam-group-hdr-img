@@ -50,7 +50,7 @@ void Disp::clear() {
 void Disp::update() {
 	SDL_GL_SwapWindow(_win);
 
-	_t++;
+	_t = SDL_GetTicks();
 }
 
 Disp::~Disp() {
