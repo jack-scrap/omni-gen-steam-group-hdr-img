@@ -398,13 +398,8 @@ std::string util::fs::path::append(std::string lhs, std::string rhs) {
 
 	std::vector<std::string> entry;
 
-	for (int i = 0; i < entryLhs.size(); i++) {
-		entry.push_back(entryLhs[i]);
-	}
-
-	for (int i = 0; i < entryRhs.size(); i++) {
-		entry.push_back(entryRhs[i]);
-	}
+	entry.insert(entry.end(), entryLhs.begin(), entryLhs.end());
+	entry.insert(entry.end(), entryRhs.begin(), entryRhs.end());
 
 	return build(entry);
 }
