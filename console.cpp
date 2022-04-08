@@ -728,13 +728,11 @@ void Console::del() {
 					}
 				} else {
 					if (_buff.size() > 1) {
-						if (_cursEditor[_rngEditor][Y] == _buff.size() - 1) {
-							_buff.pop_back();
+						_buff.erase(_buff.begin() + _cursEditor[_rngEditor][Y]);
 
-							_cursEditor[_rngEditor][Y]--;
+						_cursEditor[_rngEditor][Y]--;
 
-							console->_cursEditor[console->_rngEditor][X] = console->_buff[console->_cursEditor[console->_rngEditor][Y]].size();
-						}
+						console->_cursEditor[console->_rngEditor][X] = console->_buff[console->_cursEditor[console->_rngEditor][Y]].size();
 					}
 				}
 
