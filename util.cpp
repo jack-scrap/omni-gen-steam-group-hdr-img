@@ -393,15 +393,15 @@ std::string util::fs::path::build(std::vector<std::string> entry) {
 }
 
 std::string util::fs::path::append(std::string lhs, std::string rhs) {
+	std::vector<std::string> deser;
+
 	std::vector<std::string> entryLhs = entry(lhs);
 	std::vector<std::string> entryRhs = entry(rhs);
 
-	std::vector<std::string> entry;
+	deser.insert(deser.end(), entryLhs.begin(), entryLhs.end());
+	deser.insert(deser.end(), entryRhs.begin(), entryRhs.end());
 
-	entry.insert(entry.end(), entryLhs.begin(), entryLhs.end());
-	entry.insert(entry.end(), entryRhs.begin(), entryRhs.end());
-
-	return build(entry);
+	return build(deser);
 }
 
 std::vector<std::string> util::fs::path::prune(std::vector<std::string> path, std::string name) {
