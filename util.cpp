@@ -652,12 +652,14 @@ bool util::phys::aabb(Obj* p, Obj* q, glm::mat4 modelP, glm::mat4 modelQ) {
 			rngQ[b] = glm::vec3(modelQ * glm::vec4(rngQ[b], 1.0));
 		}
 
+		// flat plane
 		if (rngP[MIN][a] == rngP[MAX][a] || rngQ[MIN][a] == rngQ[MAX][a]) {
 			_ = false;
 
 			break;
 		}
 
+		// collision
 		if (!(rngP[MIN][a] < rngQ[MAX][a] && rngP[MAX][a] > rngQ[MIN][a])) {
 			_ = false;
 
