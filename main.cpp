@@ -575,7 +575,6 @@ int main(int argc, char** argv) {
 						omni::assert(val >= 0, std::string("Value `") + std::to_string(val) + std::string("` invalid for option `") + it->first + std::string("`; number must be positive"));
 
 						layout::view[X] = util::cfg::parse::whole(it->second);
-						layout::view[Y] = state::lineCnt * layout::glyph[Y];
 					}
 
 					if (it->first == "fps") {
@@ -609,6 +608,7 @@ int main(int argc, char** argv) {
 						omni::assert(val >= 0, std::string("Value `") + std::to_string(val) + std::string("` invalid for option `") + it->first + std::string("`; number must be positive"));
 
 						state::lineCnt = val;
+						layout::view[Y] = state::lineCnt * layout::glyph[Y];
 					}
 
 					if (it->first == "line_width") {
