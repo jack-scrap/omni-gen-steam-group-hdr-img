@@ -305,11 +305,14 @@ void scn::init(std::string stage, unsigned int lvl) {
 
     Var* item = util::json::var(pair.key(), pair.value());
 
+		unsigned int typeRhs;
+
     GLfloat wd;
     switch (pair.value()["block"].type()) {
 			// scalar
 			case nlohmann::json::value_t::number_unsigned: {
 				goal[i] = item;
+				typeRhs = omni::SCALAR;
 
 				break;
 			}
@@ -317,6 +320,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 			// string
 			case nlohmann::json::value_t::string: {
 				goal[i] = item;
+				typeRhs = omni::ARRAY;
 
 				break;
 			}
@@ -329,6 +333,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 					// 1D
 					case nlohmann::json::value_t::number_unsigned: {
 						goal[i] = item;
+						typeRhs = omni::ARRAY;
 
 						break;
 					}
@@ -339,6 +344,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 							// 2D
 							case nlohmann::json::value_t::number_unsigned: {
 								goal[i] = item;
+								typeRhs = omni::ARRAY;
 
 								break;
 							}
@@ -346,6 +352,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 							// 3D
 							case nlohmann::json::value_t::array: {
 								goal[i] = item;
+								typeRhs = omni::ARRAY;
 
 								break;
 							}
@@ -361,10 +368,13 @@ void scn::init(std::string stage, unsigned int lvl) {
 			// dictionary
 			case nlohmann::json::value_t::object: {
 				goal[i] = item;
+				typeRhs = omni::DICT;
 
 				break;
 			}
     }
+
+		omni::assert(typeRhs == type[i], "Can't compare data; types not comparable");
 
     i++;
   }
