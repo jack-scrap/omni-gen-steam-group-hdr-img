@@ -11,8 +11,8 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 proj;
 
-float pad = 0.16;
-float stroke = pad * 2;
+const float pad = 0.16;
+const float stroke = pad * 2;
 
 float wd = 16.0;
 

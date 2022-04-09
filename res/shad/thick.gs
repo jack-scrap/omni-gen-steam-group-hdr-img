@@ -11,7 +11,7 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 proj;
 
-float pad = 0.16;
+const float pad = 0.16;
 
 vec2 norm(vec2 vec) {
 	return normalize(vec2(-vec.y, vec.x));

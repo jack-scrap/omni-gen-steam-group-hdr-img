@@ -11,7 +11,7 @@ uniform mat4 view;
 uniform mat4 proj;
 
 float fac = 0.1;
-float pad = 0.16;
+const float pad = 0.16;
 
 float side = 1 - (2 * fac);
 
