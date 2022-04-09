@@ -305,7 +305,7 @@ void scn::init(std::string stage, unsigned int lvl) {
     i++;
   }
 
-	// desired
+	// RHS
 	nlohmann::json scopeGoal = deser["goal"];
 
 	i = 0;
