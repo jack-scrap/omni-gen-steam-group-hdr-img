@@ -365,15 +365,29 @@ void objAnim(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot) {
 	glm::vec3 rotMax = glm::abs(rot);
 
 	glm::vec3 locInc = glm::normalize((loc / glm::vec3(state::fps)) * glm::vec3(state::speed));
-	glm::vec3 rotInc = glm::normalize((rot / glm::vec3(state::fps)) * glm::vec3(state::speed));
+	glm::vec3 rotInc = glm::normalize(rot / glm::vec3(state::fps)) * glm::vec3(state::speed);
 
 	glm::vec3 locFrame = glm::vec3(0.0);
 	glm::vec3 rotFrame = glm::vec3(0.0);
 	if (state::anim) {
 		while (glm::any(glm::lessThan(locFrame, locMax)) || glm::any(glm::lessThan(rotFrame, rotMax))) {
+			glm::vec3 stepLoc;
+			if (glm::any(glm::lessThan(locFrame + locInc, locMax))) {
+				stepLoc = locInc;
+			} else  {
+				stepLoc = locMax - locFrame;
+			}
+
+			glm::vec3 stepRot;
+			if (glm::any(glm::lessThan(rotFrame + rotInc, rotMax))) {
+				stepRot = rotInc;
+			} else  {
+				stepRot = rotMax - rotFrame;
+			}
+
 			glm::mat4 trans = glm::mat4(1.0);
-			trans = glm::translate(trans, locInc);
-			trans = util::matr::rot(trans, rotInc);
+			trans = glm::translate(trans, stepLoc);
+			trans = util::matr::rot(trans, stepRot);
 
 			obj->_model *= trans;
 
@@ -386,8 +400,8 @@ void objAnim(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot) {
 
 			objAcc(obj, prev);
 
-			locFrame += glm::abs(locInc);
-			rotFrame += glm::abs(rotInc);
+			locFrame += glm::abs(stepLoc);
+			rotFrame += glm::abs(stepRot);
 
 			std::this_thread::sleep_for(std::chrono::milliseconds(1000 / state::fps));
 		}
