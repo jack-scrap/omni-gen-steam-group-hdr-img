@@ -185,7 +185,7 @@ void craneGrab(Crane* crane) {
 					Idx* idx = (Idx*) data[i]->_ptr;
 
 					if (crane->_data && !idx->_data) {
-						if (util::phys::aabb(crane->_data->_parent, idx->_parent, crane->_data->_parent->_acc, idx->_parent->_acc)) {
+						if (util::phys::aabb(glm::vec3(0.0), crane->_data->_parent, idx->_parent->_acc, crane->_data->_parent->_acc)) {
 							idxInsert(idx, craneMv(crane));
 
 							return;
@@ -202,7 +202,7 @@ void craneGrab(Crane* crane) {
 						Idx* idx = array->_data[i];
 
 						if (crane->_data && !idx->_data) {
-							if (util::phys::aabb(crane->_data->_parent, idx->_parent, crane->_data->_parent->_acc, idx->_parent->_acc)) {
+							if (util::phys::aabb(glm::vec3(0.0), crane->_data->_parent, idx->_parent->_acc, crane->_data->_parent->_acc)) {
 								idxInsert(idx, craneMv(crane));
 
 								crane->_data = nullptr;
