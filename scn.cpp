@@ -215,15 +215,6 @@ void scn::init(std::string stage, unsigned int lvl) {
     GLfloat wd;
     switch (pair.value()["block"].type()) {
 			// scalar
-			case nlohmann::json::value_t::null: {
-				wd = ((Idx*) item->_ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->_ptr)->_parent->_aabb[X][MIN];
-
-				data[i] = item;
-				type[i] = omni::SCALAR;
-
-				break;
-			}
-
 			case nlohmann::json::value_t::number_unsigned: {
 				wd = ((Idx*) item->_ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->_ptr)->_parent->_aabb[X][MIN];
 
@@ -317,12 +308,6 @@ void scn::init(std::string stage, unsigned int lvl) {
     GLfloat wd;
     switch (pair.value()["block"].type()) {
 			// scalar
-			case nlohmann::json::value_t::null: {
-				goal[i] = item;
-
-				break;
-			}
-
 			case nlohmann::json::value_t::number_unsigned: {
 				goal[i] = item;
 
