@@ -37,7 +37,7 @@ Crane* craneMk(Cont* init, glm::vec3 loc, glm::vec3 rot) {
 		_->_data = nullptr;
 	}
 
-	Obj* child[1 + 1 + (2 * 2 * 2 * 2) + (2 * 2) + (3 * 2)];
+	Obj* child[1 + 1 + (2 * 2 * 2 * 2) + (2 * 2) + (3 * 2) + 1];
 
 	// track
 	Obj* cont = nullptr;
@@ -93,6 +93,8 @@ Crane* craneMk(Cont* init, glm::vec3 loc, glm::vec3 rot) {
 
 	child[1 + 1 + (2 * 2 * 2 * 2) + (2 * 2) + 4] = objMk("crane/body_btm_l", "obj", "dir", true);
 	child[1 + 1 + (2 * 2 * 2 * 2) + (2 * 2) + 5] = objMk("crane/body_btm_r", "obj", "dir", true);
+
+	child[1 + 1 + (2 * 2 * 2 * 2) + (2 * 2) + 6] = objMk("crane/beam", "obj", "dir", true);
 
 	_->_parent = objMk("crane/body_r", "obj", "dir", true, child, sizeof child / sizeof *child, loc, rot);
 
