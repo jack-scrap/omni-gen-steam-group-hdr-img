@@ -414,8 +414,8 @@ void objAnim(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot) {
 		}
 	} else {
 		glm::mat4 trans = glm::mat4(1.0);
-		trans = glm::translate(trans, locMax);
-		trans = util::matr::rot(trans, rotMax);
+		trans = glm::translate(trans, loc);
+		trans = util::matr::rot(trans, rot);
 
 		objAcc(obj, obj->_acc * trans);
 	}
