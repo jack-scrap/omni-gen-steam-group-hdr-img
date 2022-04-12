@@ -707,6 +707,7 @@ void Console::del() {
 
 						l++;
 					} else {
+						// trailing line
 						_buff.erase(_buff.begin() + l);
 					}
 
