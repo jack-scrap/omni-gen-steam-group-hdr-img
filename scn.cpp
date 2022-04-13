@@ -601,5 +601,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 		prim.push_back(Mesh::OBJ);
 	}
 
+	/* general */
 	c = 0;
 }
