@@ -589,7 +589,8 @@ void Console::open(std::string fName) {
 	}
 
 	if (util::fs::perm(util::fs::path::build({
-		_home, _buffName
+		_home,
+		_buffName
 	}))[1] == 'w') {
 		_cursEditor[MIN][X] = _buff.back().size() - 1 + 1;
 		_cursEditor[MIN][Y] = _buff.size() - 1;
