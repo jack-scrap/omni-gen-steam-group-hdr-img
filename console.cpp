@@ -357,6 +357,7 @@ void Console::fmtScr() {
 
 	std::string time = std::string(_timeFmt);
 
+	// pad
 	while (x < state::lineWd - time.size()) {
 		_canv[util::math::idx::arr({
 			x,
