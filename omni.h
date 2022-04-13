@@ -133,6 +133,7 @@ namespace omni {
 
 		ERR_NO_CMD,
 		ERR_ARG_CNT,
+		ERR_SCRIPT_NOT_FIN,
 
 		ERR_TOK,
 		ERR_TOK_CNT,

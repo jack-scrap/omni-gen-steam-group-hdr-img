@@ -72,6 +72,12 @@ void omni::err(unsigned int err, std::vector<std::string> arg) {
 			break;
 		}
 
+		case ERR_SCRIPT_NOT_FIN: {
+			msg = "Cannot execute script; previous script still running";
+
+			break;
+		}
+
 		case ERR_TOK:
 			msg = "Inappropriate token `" + arg[0] + "`";
 

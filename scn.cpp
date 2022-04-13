@@ -28,6 +28,7 @@ Var** goal = (Var**) malloc(0);
 unsigned int* type = (unsigned int*) malloc(0);
 unsigned int noData;
 bool eq = false;
+bool run = false;
 
 Var** dataGet() {
 	return data;

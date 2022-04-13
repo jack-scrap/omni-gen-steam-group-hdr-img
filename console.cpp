@@ -33,6 +33,8 @@ uint32_t epoch(uint32_t inter, void* param) {
 }
 
 void dispatch(std::string fName, unsigned int ptrEditorX) {
+	run = true;
+
 	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(fName);
 
 	PyRun_SimpleString(util::str::join(buff).c_str());
@@ -88,6 +90,8 @@ void dispatch(std::string fName, unsigned int ptrEditorX) {
 			"stat.json"
 		}), util::str::split(deser, '\n'));
 	}
+
+	run = false;
 }
 
 Console::Console(std::string fName, std::string dir) :
@@ -1041,35 +1045,39 @@ void Console::exec() {
 				}
 
 				if (cmd == "run") {
-					std::string fName;
-					switch (arg.size()) {
-						case 0:
-							fName = _buffName;
+					if (!run) {
+						std::string fName;
+						switch (arg.size()) {
+							case 0:
+								fName = _buffName;
 
-							break;
+								break;
 
-						case 1:
-							fName = arg[0];
+							case 1:
+								fName = arg[0];
 
-							break;
-					}
+								break;
+						}
 
-					if (util::fs::exist(util::fs::path::build({
-						_home,
-						fName
-					}))) {
-						std::thread t(dispatch, util::fs::path::build({
+						if (util::fs::exist(util::fs::path::build({
 							_home,
 							fName
-						}), maxFs() + maxNo());
-						t.detach();
-					} else {
-						omni::err(omni::ERR_FS_NO_ENTRY, {
-							util::fs::path::build({
+						}))) {
+							std::thread t(dispatch, util::fs::path::build({
 								_home,
 								fName
-							})
-						});
+							}), maxFs() + maxNo());
+							t.detach();
+						} else {
+							omni::err(omni::ERR_FS_NO_ENTRY, {
+								util::fs::path::build({
+									_home,
+									fName
+								})
+							});
+						}
+					} else {
+						omni::err(omni::ERR_SCRIPT_NOT_FIN);
 					}
 				}
 

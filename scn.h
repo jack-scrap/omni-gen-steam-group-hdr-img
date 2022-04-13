@@ -26,6 +26,7 @@ extern "C" Var** goal;
 extern "C" unsigned int* type;
 extern "C" unsigned int noData;
 extern "C" bool eq;
+extern "C" bool run;
 
 extern "C" Var** dataGet();
 
