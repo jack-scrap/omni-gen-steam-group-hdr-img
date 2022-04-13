@@ -364,11 +364,12 @@ void objAnim(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot, GLfloat speed)
 	glm::vec3 locMax = glm::abs(loc);
 	glm::vec3 rotMax = glm::abs(rot);
 
-	glm::vec3 locInc = (loc / glm::vec3(state::fps)) * glm::vec3(state::speed);
+	glm::vec3 locInc = (loc / glm::vec3(state::fps));
 	if (loc != glm::vec3(0.0)) {
 		locInc = glm::normalize(locInc);
 	}
 
+	locInc *= glm::vec3(state::speed);
 	locInc *= glm::vec3(speed);
 
 	glm::vec3 rotInc = (rot / glm::vec3(state::fps)) * glm::vec3(state::speed);
@@ -376,6 +377,7 @@ void objAnim(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot, GLfloat speed)
 		rotInc = glm::normalize(rotInc);
 	}
 
+	rotInc *= glm::vec3(state::speed);
 	rotInc *= glm::vec3(speed);
 
 	glm::vec3 locFrame = glm::vec3(0.0);
