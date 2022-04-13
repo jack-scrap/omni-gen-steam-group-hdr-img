@@ -17,6 +17,7 @@ typedef struct CargoShip {
 
 	enum {
 		BED,
+
 		DATA
 	};
 } CargoShip;

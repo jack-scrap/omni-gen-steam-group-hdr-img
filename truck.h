@@ -34,6 +34,7 @@ typedef struct Truck {
 		BED,
 		OUTER,
 		TAIL,
+
 		DATA
 	};
 } Truck;
