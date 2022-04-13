@@ -51,9 +51,9 @@ Crane* craneMk(Cont* init, glm::vec3 loc, glm::vec3 rot) {
 
 	// data
 	if (_->_data) {
-		child[Crane::SLOT] = _->_data->_parent;
+		child[Crane::DATA] = _->_data->_parent;
 	} else {
-		child[Crane::SLOT] = nullptr;
+		child[Crane::DATA] = nullptr;
 	}
 
 	// wheel
