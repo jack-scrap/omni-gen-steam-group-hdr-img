@@ -614,6 +614,7 @@ void Console::changeDir(std::string dir) {
 		_home,
 		_cwd
 	}));
+
 	if (_cwd != util::fs::path::curr) {
 		_tree.push_back({
 			{
