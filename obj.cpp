@@ -388,14 +388,14 @@ void objAnim(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot, GLfloat speed)
 			if (glm::any(glm::lessThan(locFrame + locInc, locMax))) {
 				stepLoc = locInc;
 			} else  {
-				stepLoc = locMax - locFrame;
+				stepLoc = loc - locFrame;
 			}
 
 			glm::vec3 stepRot;
 			if (glm::any(glm::lessThan(rotFrame + rotInc, rotMax))) {
 				stepRot = rotInc;
 			} else  {
-				stepRot = rotMax - rotFrame;
+				stepRot = rot - rotFrame;
 			}
 
 			glm::mat4 trans = glm::mat4(1.0);
