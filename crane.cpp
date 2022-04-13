@@ -64,7 +64,7 @@ Crane* craneMk(Cont* init, glm::vec3 loc, glm::vec3 rot) {
 				for (int k = 0; k < 2; k++) {
 					Obj* rim[2];
 					for (int b = 0; b < 2; b++) {
-						rim[b] = objMk("rim", "obj", "dir", true, glm::vec3(0.0), glm::vec3(0.0, 180, 0.0));
+						rim[b] = objMk("rim", "obj", "dir", true, glm::vec3(0.0), glm::vec3(0.0, M_PI, 0.0));
 					}
 
 					child[1 + 1 + w] = objMk("wheel", "obj", "dir", false, rim, 2, glm::vec3(((x ? 1 : -1) * 3.0) + (j ? 1 : -1), 1.0, ((z ? 1 : -1) * 10.0) + ((k ? 1 : -1) * 0.6)));
@@ -79,7 +79,7 @@ Crane* craneMk(Cont* init, glm::vec3 loc, glm::vec3 rot) {
 	int l = 0;
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < 2; x++) {
-			child[1 + 1 + (2 * 2 * 2 * 2) + l] = objMk(Crane::_lightVtc, Crane::_lightIdc, 3 * 2, "obj", "alert", false, glm::vec3((x ? 1 : -1) * layout::padded(6.0), 1.74, (z ? 1 : -1) * 10.0), glm::vec3(0.0, 90, 0.0));
+			child[1 + 1 + (2 * 2 * 2 * 2) + l] = objMk(Crane::_lightVtc, Crane::_lightIdc, 3 * 2, "obj", "alert", false, glm::vec3((x ? 1 : -1) * layout::padded(6.0), 1.74, (z ? 1 : -1) * 10.0), glm::vec3(0.0, M_PI / 2, 0.0));
 
 			l++;
 		}
