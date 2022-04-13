@@ -27,9 +27,9 @@ typedef struct Crane {
 
 	enum {
 		TRACK,
-		DATA,
+		HEAD = 0,
 
-		HEAD = 0
+		DATA = 0
 	};
 } Crane;
 
