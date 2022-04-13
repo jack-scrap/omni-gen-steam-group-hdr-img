@@ -360,7 +360,7 @@ void objAcc(Obj* obj, glm::mat4 prev) {
 	}
 }
 
-void objAnim(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot) {
+void objAnim(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot, GLfloat speed) {
 	glm::vec3 locMax = glm::abs(loc);
 	glm::vec3 rotMax = glm::abs(rot);
 
@@ -369,10 +369,14 @@ void objAnim(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot) {
 		locInc = glm::normalize(locInc);
 	}
 
+	locInc *= glm::vec3(speed);
+
 	glm::vec3 rotInc = (rot / glm::vec3(state::fps)) * glm::vec3(state::speed);
 	if (rot != glm::vec3(0.0)) {
 		rotInc = glm::normalize(rotInc);
 	}
+
+	rotInc *= glm::vec3(speed);
 
 	glm::vec3 locFrame = glm::vec3(0.0);
 	glm::vec3 rotFrame = glm::vec3(0.0);
@@ -421,7 +425,7 @@ void objAnim(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot) {
 	}
 }
 
-void objMv(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot) {
+void objMv(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot, GLfloat speed) {
 	bool coll = false;
 	glm::mat4 dest = glm::mat4(1.0);
 	dest = glm::translate(dest, loc);
@@ -437,7 +441,7 @@ void objMv(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot) {
 	}
 
 	if (!coll) {
-		objAnim(obj, parent, loc, rot);
+		objAnim(obj, parent, loc, rot, speed);
 	} else {
 		omni::err(omni::ERR_OBJ_CLIP);
 	}

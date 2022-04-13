@@ -76,9 +76,9 @@ void objDel(Obj* obj);
 
 void objAcc(Obj* obj, glm::mat4 prev);
 
-void objAnim(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot);
+void objAnim(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot, GLfloat speed = 1.0);
 
-void objMv(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot);
+void objMv(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot, GLfloat speed = 1.0);
 
 void objA(Obj* obj);
 

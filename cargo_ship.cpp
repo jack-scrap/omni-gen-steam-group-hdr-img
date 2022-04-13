@@ -67,7 +67,7 @@ void cargoShipDel(CargoShip* cargoShip) {
 void cargoShipMv(CargoShip* cargoShip, float delta) {
 	glm::vec3 dest = glm::vec3(delta, 0.0, 0.0);
 
-	objAnim(cargoShip->_parent, nullptr, dest, glm::vec3(0.0));
+	objAnim(cargoShip->_parent, nullptr, dest, glm::vec3(0.0), CargoShip::_speed);
 
 	// offset
 	glm::vec3 offset = cargoShip->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
