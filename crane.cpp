@@ -26,7 +26,7 @@ GLushort Crane::_lightIdc[2 * 3] = {
 	2, 1, 3
 };
 
-GLfloat Crane::_speed = 0.2;
+float Crane::_speed = 0.2;
 
 Crane* craneMk(Cont* init, glm::vec3 loc, glm::vec3 rot) {
 	Crane* _ = (Crane*) malloc(sizeof (Crane));

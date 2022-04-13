@@ -10,7 +10,7 @@
 unsigned int CargoShip::_x = 10;
 unsigned int CargoShip::_y = 4;
 
-GLfloat CargoShip::_speed = 0.1;
+float CargoShip::_speed = 0.1;
 
 CargoShip* cargoShipMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	CargoShip* _ = (CargoShip*) malloc(sizeof (CargoShip));

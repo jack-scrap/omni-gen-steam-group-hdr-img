@@ -29,7 +29,7 @@ GLushort Truck::_lightIdc[2 * 3] = {
 	2, 1, 3
 };
 
-GLfloat Truck::_speed = 0.3;
+float Truck::_speed = 0.3;
 
 Truck* truckMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	Truck* _ = (Truck*) malloc(sizeof (Truck));

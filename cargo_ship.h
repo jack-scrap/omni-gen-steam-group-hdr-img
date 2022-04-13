@@ -13,7 +13,7 @@ typedef struct CargoShip {
 	static unsigned int _x;
 	static unsigned int _y;
 
-	static GLfloat _speed;
+	static float _speed;
 
 	enum {
 		BED,

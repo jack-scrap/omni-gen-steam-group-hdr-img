@@ -28,7 +28,7 @@ typedef struct Truck {
 	static GLfloat _lightVtc[2 * 2 * 3];
 	static GLushort _lightIdc[2 * 3];
 
-	static GLfloat _speed;
+	static float _speed;
 
 	enum {
 		BED,
