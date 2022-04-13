@@ -372,7 +372,7 @@ void objAnim(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot, GLfloat speed)
 	locInc *= glm::vec3(state::speed);
 	locInc *= glm::vec3(speed);
 
-	glm::vec3 rotInc = (rot / glm::vec3(state::fps)) * glm::vec3(state::speed);
+	glm::vec3 rotInc = (rot / glm::vec3(state::fps));
 	if (rot != glm::vec3(0.0)) {
 		rotInc = glm::normalize(rotInc);
 	}
