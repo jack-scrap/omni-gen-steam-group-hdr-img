@@ -84,7 +84,9 @@ void dispatch(std::string fName, unsigned int ptrEditorX) {
 
 		std::string deser = data.dump(1, '\t');
 
-		util::fs::write("stat.json", util::str::split(deser, '\n'));
+		util::fs::write(util::fs::path::build({
+			"stat.json"
+		}), util::str::split(deser, '\n'));
 	}
 }
 
