@@ -38,13 +38,12 @@ The current level provides a crane.
 
 To import the base library, type `from omni import *`.
 
-Type `crane.zoom(3.0)` to move the crane to a specified location.
-Type `crane.pan(1.0)` to position the crane head abov the container.
-Type `crane.ped(-9.0)` to move the crane head downwards.
+Type `crane.pan(1.5)` to position the crane head abov the container.
+Type `crane.ped(-9.5)` to move the crane head downwards.
 
 Type `crane.grab()` to grab the container.
 
-Type `crane.zoom(8.0)` to position the container above the second variable.
+Type `crane.zoom(10.0)` to position the container above the second variable.
 
 Type `crane.grab()` to relase the container into the variable.
 
