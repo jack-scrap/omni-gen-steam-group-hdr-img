@@ -21,7 +21,7 @@ STAGE=init array str dict matrix vec ctrl_flow path thread
 
 .PHONY: all ro mk_build mk_stage clean
 
-all: omni ro mk_build mk_stage
+all: mk_build mk_stage omni ro
 
 install:
 	sudo apt-get install -y libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev mesa-utils libglew-dev libglm-dev python3-dev
