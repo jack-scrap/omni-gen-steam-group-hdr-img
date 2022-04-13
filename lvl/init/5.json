@@ -1,18 +1,18 @@
 {
 	"data": {
 		"in": {
-			"block": 3
+			"block": 0
 		},
 		"out": {
-			"block": 7
+			"block": 1
 		}
 	},
 	"goal": {
 		"in": {
-			"block": 7
+			"block": 1
 		},
 		"out": {
-			"block": 3
+			"block": 0
 		}
 	},
 	"vehicle": [
