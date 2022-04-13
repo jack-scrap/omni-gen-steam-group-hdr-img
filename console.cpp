@@ -107,6 +107,7 @@ Console::Console(std::string fName, std::string dir) :
 		_data = (char*) calloc(layout::canv[X] * layout::canv[Y] * 3, sizeof (char));
 		_blank = (char*) calloc(layout::canv[X] * layout::canv[Y] * 3, sizeof (char));
 
+		// canvas
 		for (int y = 0; y < layout::canv[Y]; y++) {
 			for (int x = 0; x < layout::canv[X]; x++) {
 				unsigned idx = util::math::idx::arr({
