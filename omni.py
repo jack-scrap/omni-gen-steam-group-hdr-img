@@ -82,10 +82,17 @@ for i in range(_noData):
 
 		if idxData._data:
 		    data[id] = idxData._data.contents
-		    goal[id] = idxData._data.contents
 
 		else:
 		    data[id] = 0
+
+		ptrGoal = cast(_goal[i].contents._ptr, POINTER(_Idx))
+		idxGoal = _Idx(ptrGoal.contents._data)
+
+		if idxGoal._data:
+		    goal[id] = idxGoal._data.contents
+
+		else:
 		    goal[id] = 0
 
 	if _type[i] == 1:
