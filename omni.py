@@ -77,12 +77,12 @@ for i in range(_noData):
 
 	t = None
 	if _type[i] == 0:
-		ptr = cast(_data[i].contents._ptr, POINTER(_Idx))
-		idx = _Idx(ptr.contents._data)
+		ptrData = cast(_data[i].contents._ptr, POINTER(_Idx))
+		idxData = _Idx(ptrData.contents._data)
 
-		if idx._data:
-		    data[id] = idx._data.contents
-		    goal[id] = idx._data.contents
+		if idxData._data:
+		    data[id] = idxData._data.contents
+		    goal[id] = idxData._data.contents
 
 		else:
 		    data[id] = 0
