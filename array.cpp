@@ -28,20 +28,20 @@ Array* arrayMk(char* init, unsigned int x, std::string name, unsigned int axis, 
 		glm::vec3 offset;
 		switch (axis) {
 			case X:
-				offset = glm::vec3(stride[X], 0.0, 0.0);
+				offset = glm::vec3(c) * glm::vec3(stride[X], 0.0, 0.0);
 
 				break;
 
 			case Z:
-				offset = glm::vec3(0.0, 0.0, stride[Y]);
+				offset = glm::vec3(c) * glm::vec3(0.0, 0.0, stride[Y]);
 
 				break;
 		}
 
 		if (init[c]) {
-			idx = idxMk(c, &init[c], 1, "", glm::vec3(layout::overhead, 0.0, layout::overhead) + (glm::vec3(c) * offset));
+			idx = idxMk(c, &init[c], 1, "", glm::vec3(layout::overhead, 0.0, layout::overhead) + offset);
 		} else {
-			idx = idxMk(c, "", glm::vec3(layout::overhead, 0.0, layout::overhead) + (glm::vec3(c) * offset));
+			idx = idxMk(c, "", glm::vec3(layout::overhead, 0.0, layout::overhead) + offset);
 		}
 
 		_->_data[c] = idx;
