@@ -358,8 +358,13 @@ void Console::fmtScr() {
 
 	std::string time = std::string(_timeFmt);
 
+	unsigned roof = 0;
+	if (state::lineWd > time.size()) {
+		roof = state::lineWd - time.size();
+	}
+
 	// pad
-	while (x < state::lineWd - time.size()) {
+	while (x < roof) {
 		_canv[util::math::idx::arr({
 			x,
 			0
