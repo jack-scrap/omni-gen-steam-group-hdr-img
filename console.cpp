@@ -313,7 +313,7 @@ void Console::fmtScr() {
 	}, {
 		state::lineWd,
 		state::lineCnt
-	})] = ' ';
+	})] = ' '; // pad
 	x++;
 
 	std::string fInfo;
@@ -441,7 +441,7 @@ void Console::fmtScr() {
 		std::string no = std::to_string(base + i);
 
 		for (int i = no.size(); i < maxNo(); i++) {
-			no += ' ';
+			no += ' '; // pad
 		}
 
 		line += no;
