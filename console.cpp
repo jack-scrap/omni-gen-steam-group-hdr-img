@@ -33,7 +33,7 @@ uint32_t epoch(uint32_t inter, void* param) {
 }
 
 void dispatch(std::string fName, unsigned int ptrEditorX) {
-	run = true;
+	mtx = true;
 
 	std::vector<std::string> buff = util::fs::rd<std::vector<std::string>>(fName);
 
@@ -91,7 +91,7 @@ void dispatch(std::string fName, unsigned int ptrEditorX) {
 		}), util::str::split(deser, '\n'));
 	}
 
-	run = false;
+	mtx = false;
 }
 
 Console::Console(std::string fName, std::string dir) :
@@ -1055,7 +1055,7 @@ void Console::exec() {
 				}
 
 				if (cmd == "run") {
-					if (!run) {
+					if (!mtx) {
 						std::string fName;
 						switch (arg.size()) {
 							case 0:
