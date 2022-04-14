@@ -419,6 +419,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 			Cont* init;
 			if (entry.contains("data")) {
 				char c = util::json::byte(entry["data"]);
+
 				init = contMk(c);
 			} else {
 				init = nullptr;
