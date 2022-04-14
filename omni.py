@@ -80,8 +80,13 @@ for i in range(_noData):
 		ptr = cast(_data[i].contents._ptr, POINTER(_Idx))
 		idx = _Idx(ptr.contents._data)
 
-		data[id] = idx
-		goal[id] = idx
+		if idx._data:
+		    data[id] = idx._data.contents
+		    goal[id] = idx._data.contents
+
+		else:
+		    data[id] = 0
+		    goal[id] = 0
 
 	if _type[i] == 1:
 		ptr = cast(_data[i].contents._ptr, POINTER(_Array))
