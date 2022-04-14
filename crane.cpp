@@ -85,8 +85,8 @@ Crane* craneMk(Cont* init, glm::vec3 loc, glm::vec3 rot) {
 		}
 	}
 
-	child[1 + (2 * 2 * 2 * 2) + (2 * 2)] = objMk("crane/body_l", "obj", "dir", true);
-	child[1 + (2 * 2 * 2 * 2) + (2 * 2) + 1] = objMk("crane/body_r", "obj", "dir", true);
+	child[1 + (2 * 2 * 2 * 2) + (2 * 2)] = objMk("crane/front", "obj", "dir", true);
+	child[1 + (2 * 2 * 2 * 2) + (2 * 2) + 1] = objMk("crane/back", "obj", "dir", true);
 
 	child[1 + (2 * 2 * 2 * 2) + (2 * 2) + 2] = objMk("crane/support_l", "obj", "dir", true);
 	child[1 + (2 * 2 * 2 * 2) + (2 * 2) + 3] = objMk("crane/support_r", "obj", "dir", true);
