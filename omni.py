@@ -91,11 +91,11 @@ for i in range(_noData):
 		goal[id] = array
 
 	if _type[i] == 2:
-				ptr = cast(_data[i].contents._ptr, POINTER(_Dict))
-				dict = _Dict(ptr.contents._data, ptr.contents._type, ptr.contents._no)
+                ptr = cast(_data[i].contents._ptr, POINTER(_Dict))
+                dict = _Dict(ptr.contents._data, ptr.contents._type, ptr.contents._no)
 
-				data[id] = dict
-				goal[id] = dict
+                data[id] = dict
+                goal[id] = dict
 
 # bound
 class _Lim(Structure):
