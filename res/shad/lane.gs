@@ -5,7 +5,7 @@ layout (lines) in;
 layout (triangle_strip, max_vertices = 12) out;
 
 out vec3 _obj;
-out vec3 _mag;
+out float _mag;
 
 uniform mat4 model;
 uniform mat4 view;
@@ -34,7 +34,7 @@ void main() {
 			for	(int b = 0; b < 2; b++) {
 				gl_Position = proj * view * model * vec4(gl_in[i].gl_Position.xyz + ((b + ((bool(z) ? 1 : -1) * (wd / 2))) * vec3(orth.x, 0.0, orth.y) * stroke), 1.0);
 				_obj = gl_in[i].gl_Position.xyz + (b * vec3(orth.x, 0.0, orth.y) * stroke);
-				_mag = vec3(hyp(gl_Position.xz));
+				_mag = hyp(gl_Position.xz);
 
 				EmitVertex();
 			}
