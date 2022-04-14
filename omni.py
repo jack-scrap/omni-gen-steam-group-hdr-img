@@ -284,7 +284,7 @@ if _craneGet()._sz:
 
 		i = 0
 		while i < _craneGet()._sz:
-			crane.append(_cranePtr[i])
+			crane.append(_Crane(_cranePtr[i]))
 
 			i += sizeof(c_void_p)
 
