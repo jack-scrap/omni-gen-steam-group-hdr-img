@@ -206,6 +206,7 @@ void Console::fmt(std::vector<std::string> buff, Coord loc, Coord view, Coord pt
 			x < view._x &&
 			x < state::lineWd
 		) {
+			// tab expansion
 			if (buff[l][c] == '\t') {
 				int t = 0;
 				while (
