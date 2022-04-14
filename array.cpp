@@ -123,7 +123,9 @@ Array* arrayMk(char* init, unsigned int x, unsigned int y, std::string name, glm
 	for (int j = 0; j < _->_y; j++) {
 		for (int i = 0; i < _->_x; i++) {
 			Idx* idx;
+
 			glm::vec3 offset = glm::vec3(layout::overhead, 0.0, layout::overhead) + glm::vec3(i * stride[X], 0.0, j * stride[Y]);
+
 			if (init[c]) {
 				idx = idxMk(c, &init[c], 1, "", offset);
 			} else {
