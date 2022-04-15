@@ -136,9 +136,7 @@ void truckTurn(Truck* truck, float delta) {
 	if (truck->_ang + delta > truck->_rngWheel[MIN] && truck->_ang + delta < truck->_rngWheel[MAX]) {
 		truck->_ang += delta;
 
-		for (int z = 0; z < 2; z++) {
-			objAnim(truck->_parent->_child[z * 2], truck->_parent, glm::vec3(0.0), glm::vec3(0.0, glm::radians(delta), 0.0));
-		}
+		objAnim(truck->_parent, nullptr, glm::vec3(0.0), glm::vec3(0.0, glm::radians(delta), 0.0));
 	} else {
 		omni::err(omni::ERR_MV_RNG, {
 			"truck wheels"
