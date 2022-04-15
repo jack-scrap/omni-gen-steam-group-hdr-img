@@ -18,8 +18,8 @@ typedef struct Truck {
 	Obj* _parent;
 
 	static constexpr float _rngWheel[2] = {
-		-(M_PI / 2),
-		M_PI / 2
+		-90,
+		90
 	};
 
 	static GLfloat _bedVtx[3];

@@ -137,7 +137,7 @@ void truckTurn(Truck* truck, float delta) {
 		truck->_ang += delta;
 
 		for (int z = 0; z < 2; z++) {
-			objAnim(truck->_parent->_child[z * 2], truck->_parent, glm::vec3(0.0), glm::vec3(0.0, delta, 0.0));
+			objAnim(truck->_parent->_child[z * 2], truck->_parent, glm::vec3(0.0), glm::vec3(0.0, glm::radians(delta), 0.0));
 		}
 	} else {
 		omni::err(omni::ERR_MV_RNG, {
