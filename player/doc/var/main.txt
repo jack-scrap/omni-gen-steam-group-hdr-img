@@ -49,11 +49,11 @@ In the above snippet, the literal `3` is converted into a string.
 # Deleting
 The `del` operator will delete the variable provided to it by name.
 
-`
+```
 var = 3
 
 del var
-`
+```
 
 The variable has been freed, and is no longer accessible.
 
