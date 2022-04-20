@@ -228,6 +228,7 @@ class _Truck(_Obj):
 	_fields_ = [
 		('_data', POINTER(_Array)),
 		('_loc', c_float * 3),
+                ('_ang', c_float)
 	]
 
 	def turn(self, delta):
