@@ -233,7 +233,7 @@ class _Truck(_Obj):
 	def turn(self, delta):
 		_truckTurn(self._ptr, delta)
 
-		self._ang = self._data.contents._ang
+		self._ang = self._ptr.contents._ang
 
 		for i in range(3):
 			self._loc[i] = self._ptr.contents._loc[i]
