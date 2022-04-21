@@ -17,12 +17,6 @@ vec2 norm(vec2 vec) {
 	return normalize(vec2(-vec.y, vec.x));
 }
 
-float hyp(vec2 tri) {
-	float total = pow(tri.x, 2) + pow(tri.y, 2);
-
-	return sqrt(total);
-}
-
 void main() {
 	vec2 orth = norm(gl_in[1].gl_Position.xz - gl_in[0].gl_Position.xy);
 
@@ -34,6 +28,6 @@ void main() {
 			EmitVertex();
 		}
 
-		_mag = hyp(_obj.xz);
+		_mag = length(_obj.xz);
 	}
 }
