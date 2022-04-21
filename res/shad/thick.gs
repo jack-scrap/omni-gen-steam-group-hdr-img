@@ -30,9 +30,10 @@ void main() {
 		for	(int b = 0; b < 2; b++) {
 			gl_Position = proj * view * model * vec4(gl_in[i].gl_Position.xyz + ((bool(b) ? 1 : -1) * vec3(orth.x, 0.0, orth.y) * pad), 1.0);
 			_obj = gl_in[i].gl_Position.xyz + ((bool(b) ? 1 : -1) * vec3(orth.x, 0.0, orth.y) * pad);
-			_mag = hyp(gl_Position.xz);
 
 			EmitVertex();
 		}
+
+		_mag = hyp(gl_Position.xz);
 	}
 }
