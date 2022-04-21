@@ -23,6 +23,9 @@
 #include "omni.h"
 #include "layout.h"
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+
 Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
@@ -251,6 +254,31 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, std::string tex,
 
 	Obj* _ = objMk(&vtc[0], &stIdxed[0], &idcVtc[0], idcVtc.size(), vtx, frag, tex, active, loc, rot);
 
+	// texture
+	glGenTextures(1, &_->_tex);
+	glBindTexture(GL_TEXTURE_2D, _->_tex);
+
+	int dim[2];
+	int chan;
+	unsigned char* data = stbi_load(util::fs::path::build({
+		"res",
+		tex
+	}).c_str(), &dim[X], &dim[Y], &chan, 0);
+
+	if (data) {
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, dim[X], dim[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	_->_prog.unUse();
+	glBindVertexArray(0);
+
 	return _;
 }
 
@@ -272,6 +300,31 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, std::string tex,
 	}
 
 	Obj* _ = objMk(&vtc[0], &stIdxed[0], &idcVtc[0], idcVtc.size(), vtx, frag, tex, active, child, noChild, loc, rot);
+
+	// texture
+	glGenTextures(1, &_->_tex);
+	glBindTexture(GL_TEXTURE_2D, _->_tex);
+
+	int dim[2];
+	int chan;
+	unsigned char* data = stbi_load(util::fs::path::build({
+		"res",
+		tex
+	}).c_str(), &dim[X], &dim[Y], &chan, 0);
+
+	if (data) {
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, dim[X], dim[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	_->_prog.unUse();
+	glBindVertexArray(0);
 
 	return _;
 }
