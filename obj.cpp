@@ -240,7 +240,7 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, std::string tex,
 	std::vector<GLushort> idcSt = util::mesh::rd::idc(name, Obj::ST);
 
 	std::vector<GLfloat> stIdxed(st.size());
-	for (int i = 0; i < st.size(); i++) {
+	for (int i = 0; i < idcVtc.size(); i++) {
 		int idxPos = idcVtc[i] * 2;
 		int idxSt = idcSt[i] * 2;
 
@@ -262,7 +262,7 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, std::string tex,
 	std::vector<GLushort> idcSt = util::mesh::rd::idc(name, Obj::ST);
 
 	std::vector<GLfloat> stIdxed(st.size());
-	for (int i = 0; i < st.size(); i++) {
+	for (int i = 0; i < idcVtc.size(); i++) {
 		int idxPos = idcVtc[i] * 2;
 		int idxSt = idcSt[i] * 2;
 
