@@ -182,20 +182,20 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, std::string tex,
 	std::vector<GLfloat> vtc = util::mesh::rd::vtc(name);
 	std::vector<GLushort> idcVtc = util::mesh::rd::idc(name, Obj::POS);
 
-	std::vector<GLfloat> stRaw = util::mesh::rd::st(name);
+	std::vector<GLfloat> st = util::mesh::rd::st(name);
 	std::vector<GLushort> idcSt = util::mesh::rd::idc(name, Obj::ST);
 
-	std::vector<GLfloat> st(stRaw.size());
-	for (int i = 0; i < stRaw.size(); i++) {
+	std::vector<GLfloat> stIdxed(st.size());
+	for (int i = 0; i < st.size(); i++) {
 		int idxPos = idcVtc[i] * 2;
 		int idxSt = idcSt[i] * 2;
 
 		for (int a = 0; a < 2; a++) {
-			st[idxPos + a] = stRaw[idxSt + a];
+			stIdxed[idxPos + a] = st[idxSt + a];
 		}
 	}
 
-	Obj* _ = objMk(&vtc[0], &st[0], &idcVtc[0], idcVtc.size(), vtx, frag, tex, active, loc, rot);
+	Obj* _ = objMk(&vtc[0], &stIdxed[0], &idcVtc[0], idcVtc.size(), vtx, frag, tex, active, loc, rot);
 
 	return _;
 }
@@ -204,20 +204,20 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, std::string tex,
 	std::vector<GLfloat> vtc = util::mesh::rd::vtc(name);
 	std::vector<GLushort> idcVtc = util::mesh::rd::idc(name, Obj::POS);
 
-	std::vector<GLfloat> stRaw = util::mesh::rd::st(name);
+	std::vector<GLfloat> st = util::mesh::rd::st(name);
 	std::vector<GLushort> idcSt = util::mesh::rd::idc(name, Obj::ST);
 
-	std::vector<GLfloat> st(stRaw.size());
-	for (int i = 0; i < stRaw.size(); i++) {
+	std::vector<GLfloat> stIdxed(st.size());
+	for (int i = 0; i < st.size(); i++) {
 		int idxPos = idcVtc[i] * 2;
 		int idxSt = idcSt[i] * 2;
 
 		for (int a = 0; a < 2; a++) {
-			st[idxPos + a] = stRaw[idxSt + a];
+			stIdxed[idxPos + a] = st[idxSt + a];
 		}
 	}
 
-	Obj* _ = objMk(&vtc[0], &st[0], &idcVtc[0], idcVtc.size(), vtx, frag, tex, active, child, noChild, loc, rot);
+	Obj* _ = objMk(&vtc[0], &stIdxed[0], &idcVtc[0], idcVtc.size(), vtx, frag, tex, active, child, noChild, loc, rot);
 
 	return _;
 }
