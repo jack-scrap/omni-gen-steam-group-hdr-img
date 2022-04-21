@@ -187,8 +187,8 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, std::string tex,
 
 	std::vector<GLfloat> st(stRaw.size());
 	for (int i = 0; i < stRaw.size(); i++) {
-		GLuint idxPos = idcVtc[i] * 2;
-		GLuint idxSt = idcSt[i] * 2;
+		int idxPos = idcVtc[i] * 2;
+		int idxSt = idcSt[i] * 2;
 
 		for (int a = 0; a < 2; a++) {
 			st[idxPos + a] = stRaw[idxSt + a];
@@ -209,8 +209,8 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, std::string tex,
 
 	std::vector<GLfloat> st(stRaw.size());
 	for (int i = 0; i < stRaw.size(); i++) {
-		GLuint idxPos = idcVtc[i] * 2;
-		GLuint idxSt = idcSt[i] * 2;
+		int idxPos = idcVtc[i] * 2;
+		int idxSt = idcSt[i] * 2;
 
 		for (int a = 0; a < 2; a++) {
 			st[idxPos + a] = stRaw[idxSt + a];
