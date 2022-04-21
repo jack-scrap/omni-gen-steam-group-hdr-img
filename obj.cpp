@@ -184,9 +184,6 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj
 Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::string vtx, std::string frag, std::string tex, bool active, glm::vec3 loc, glm::vec3 rot) {
 	Obj* _ = objMk(vtc, idc, noPrim, vtx, frag, active, loc, rot);
 
-	// texture
-	_->_tex = util::tex::spray(tex);
-
 	glBindVertexArray(_->_mesh->_id[Mesh::VAO]);
 
 	glGenBuffers(1, &_->_mesh->_id[Mesh::STBO]);
@@ -201,7 +198,6 @@ Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::s
 	glVertexAttribPointer(_->_attr[Obj::ST], 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
 	glEnableVertexAttribArray(_->_attr[Obj::ST]);
 
-	glBindTexture(GL_TEXTURE_2D, 0);
 	_->_prog.unUse();
 	glBindVertexArray(0);
 
@@ -210,9 +206,6 @@ Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::s
 
 Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::string vtx, std::string frag, std::string tex, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
 	Obj* _ = objMk(vtc, idc, noPrim, vtx, frag, active, child, noChild, loc, rot);
-
-	// texture
-	_->_tex = util::tex::spray(tex);
 
 	glBindVertexArray(_->_mesh->_id[Mesh::VAO]);
 
