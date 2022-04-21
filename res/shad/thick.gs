@@ -34,6 +34,6 @@ void main() {
 			EmitVertex();
 		}
 
-		_mag = hyp(gl_Position.xz);
+		_mag = hyp(_obj.xz);
 	}
 }
