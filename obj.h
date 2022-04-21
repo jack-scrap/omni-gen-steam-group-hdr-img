@@ -26,7 +26,9 @@ typedef struct Obj {
 	Prog _prog;
 
 	GLint _attr[3];
+
 	GLint* _uni;
+	unsigned int _noUni = 5;
 
 	GLuint _tex;
 
