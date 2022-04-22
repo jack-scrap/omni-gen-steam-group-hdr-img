@@ -429,7 +429,7 @@ void util::mesh::plane(GLfloat vtc[2 * 2 * 2], glm::vec2 bound) {
 	}
 }
 
-std::vector<GLfloat> util::mesh::rd::vtc(std::string fName) {
+std::vector<GLfloat> util::mesh::rd::attr(std::string fName, unsigned int attr) {
 	std::vector<GLfloat> _;
 
 	std::vector<std::string> buff = fs::rd<std::vector<std::string>>(fs::path::build({
@@ -438,61 +438,24 @@ std::vector<GLfloat> util::mesh::rd::vtc(std::string fName) {
 		fName + ".obj"
 	}));
 
+	const std::string id[3] = {
+		"v",
+		"vt"
+		"vn"
+	};
+	const unsigned int sz[3] = {
+		3,
+		2,
+		3
+	};
+
 	for (int l = 0; l < buff.size(); l++) {
 		std::vector<std::string> tok = str::split(buff[l], ' ');
 
-		if (tok[0] == "v") {
+		if (tok[0] == id[attr]) {
 			omni::assert(tok.size() == 1 + 3, std::string("Couldn't load object `" ) + fName + std::string("`; inappropriate size of vertex position at [" ) + std::to_string(l) + std::string("]"));
 
-			for (int i = 1; i < 1 + 3; i++) {
-				_.push_back(std::stof(tok[i]));
-			}
-		}
-	}
-
-	return _;
-}
-
-std::vector<GLfloat> util::mesh::rd::st(std::string fName) {
-	std::vector<GLfloat> _;
-
-	std::vector<std::string> buff = fs::rd<std::vector<std::string>>(fs::path::build({
-		"res",
-		"obj",
-		fName + ".obj"
-	}));
-
-	for (int l = 0; l < buff.size(); l++) {
-		std::vector<std::string> tok = str::split(buff[l], ' ');
-
-		if (tok[0] == "vt") {
-			omni::assert(tok.size() == 1 + 2, std::string("Couldn't load object `" ) + fName + std::string("`; inappropriate size of texture coordinate at [" ) + std::to_string(l) + std::string("]"));
-
-			for (int i = 1; i < 1 + 2; i++) {
-				_.push_back(std::stof(tok[i]));
-			}
-		}
-	}
-
-	return _;
-}
-
-std::vector<GLfloat> util::mesh::rd::norm(std::string fName) {
-	std::vector<GLfloat> _;
-
-	std::vector<std::string> buff = fs::rd<std::vector<std::string>>(fs::path::build({
-		"res",
-		"obj",
-		fName + ".obj"
-	}));
-
-	for (int l = 0; l < buff.size(); l++) {
-		std::vector<std::string> tok = str::split(buff[l], ' ');
-
-		if (tok[0] == "vn") {
-			omni::assert(tok.size() == 1 + 3, std::string("Couldn't load object `" ) + fName + std::string("`; inappropriate size of normal at [" ) + std::to_string(l) + std::string("]"));
-
-			for (int i = 1; i < 1 + 3; i++) {
+			for (int i = 1; i < 1 + sz[attr]; i++) {
 				_.push_back(std::stof(tok[i]));
 			}
 		}
@@ -1563,7 +1526,7 @@ GLuint util::tex::spray(std::string tex) {
 	}
 
 	// create
-	std::vector<GLfloat> vtc = mesh::rd::vtc(tex);
+	std::vector<GLfloat> vtc = mesh::rd::attr(tex, Obj::POS);
 
 	std::vector<GLushort> idc = mesh::rd::idc(tex, Obj::POS);
 
