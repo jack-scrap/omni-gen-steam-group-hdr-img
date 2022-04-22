@@ -1,4 +1,5 @@
 #define GLM_ENABLE_EXPERIMENTAL
+#define STB_IMAGE_IMPLEMENTATION
 
 #include <stdio.h>
 #include <cmath>
@@ -22,8 +23,6 @@
 #include "phys.h"
 #include "omni.h"
 #include "layout.h"
-
-#define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
 Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
