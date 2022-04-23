@@ -229,9 +229,9 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, std::string tex,
 	int dim[2];
 	int chan;
 	unsigned char* data = stbi_load(util::fs::path::build({
-				"res",
-				tex
-				}).c_str(), &dim[X], &dim[Y], &chan, 0);
+		"res",
+		tex
+	}).c_str(), &dim[X], &dim[Y], &chan, 0);
 
 	if (data) {
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, dim[X], dim[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, data);
