@@ -440,7 +440,7 @@ std::vector<GLfloat> util::mesh::rd::attr(std::string fName, unsigned int attr) 
 
 	const std::string id[3] = {
 		"v",
-		"vt"
+		"vt",
 		"vn"
 	};
 	const unsigned int sz[3] = {
