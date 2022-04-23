@@ -233,11 +233,11 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, std::string tex,
 
 	std::vector<GLfloat> stIdxed(idcVtc.size() * 2);
 	for (int i = 0; i < idcVtc.size(); i++) {
-		int idxPos = idcVtc[i] * 2;
+		int idxVtx = idcVtc[i] * 2;
 		int idxSt = idcSt[i] * 2;
 
 		for (int a = 0; a < 2; a++) {
-			stIdxed[idxPos + a] = st[idxSt + a];
+			stIdxed[idxVtx + a] = st[idxSt + a];
 		}
 	}
 
@@ -275,11 +275,11 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, std::string tex,
 
 	std::vector<GLfloat> stIdxed(idcVtc.size() * 2);
 	for (int i = 0; i < idcVtc.size(); i++) {
-		int idxPos = idcVtc[i] * 2;
+		int idxVtx = idcVtc[i] * 2;
 		int idxSt = idcSt[i] * 2;
 
 		for (int a = 0; a < 2; a++) {
-			stIdxed[idxPos + a] = st[idxSt + a];
+			stIdxed[idxVtx + a] = st[idxSt + a];
 		}
 	}
 
