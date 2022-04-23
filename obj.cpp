@@ -236,8 +236,8 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, std::string tex,
 		int idxVtx = idcVtc[i] * 2;
 		int idxSt = idcSt[i] * 2;
 
-		for (int a = 0; a < 2; a++) {
-			stIdxed[idxVtx + a] = st[idxSt + a];
+		for (int c = 0; c < 2; c++) {
+			stIdxed[idxVtx + c] = st[idxSt + c];
 		}
 	}
 
@@ -278,8 +278,8 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, std::string tex,
 		int idxVtx = idcVtc[i] * 2;
 		int idxSt = idcSt[i] * 2;
 
-		for (int a = 0; a < 2; a++) {
-			stIdxed[idxVtx + a] = st[idxSt + a];
+		for (int c = 0; c < 2; c++) {
+			stIdxed[idxVtx + c] = st[idxSt + c];
 		}
 	}
 
