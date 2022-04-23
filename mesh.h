@@ -3,7 +3,7 @@
 #include <GL/glew.h>
 
 typedef struct Mesh {
-	GLuint _id[3];
+	GLuint _id[4];
 
 	unsigned int _noPrim;
 
