@@ -203,50 +203,6 @@ Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::s
 	return _;
 }
 
-Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::string vtx, std::string frag, std::string tex, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
-	Obj* _ = objMk(vtc, idc, noPrim, vtx, frag, active, child, noChild, loc, rot);
-
-	glBindVertexArray(_->_mesh->_id[Mesh::VAO]);
-
-	glGenBuffers(1, &_->_mesh->_id[Mesh::STBO]);
-	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh->_id[Mesh::STBO]);
-	glBufferData(GL_ARRAY_BUFFER, noPrim * 2 * sizeof (GLfloat), st, GL_STATIC_DRAW);
-
-	_->_prog.use();
-
-	// attribute
-	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh->_id[Mesh::STBO]);
-	_->_attr[Obj::ST] = glGetAttribLocation(_->_prog._id, "st");
-	glVertexAttribPointer(_->_attr[Obj::ST], 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
-	glEnableVertexAttribArray(_->_attr[Obj::ST]);
-
-	// texture
-	glGenTextures(1, &_->_tex);
-	glBindTexture(GL_TEXTURE_2D, _->_tex);
-
-	int dim[2];
-	int chan;
-	unsigned char* data = stbi_load(util::fs::path::build({
-		"res",
-		tex
-	}).c_str(), &dim[X], &dim[Y], &chan, 0);
-
-	if (data) {
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, dim[X], dim[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-		glGenerateMipmap(GL_TEXTURE_2D);
-	}
-
-	glBindTexture(GL_TEXTURE_2D, 0);
-	_->_prog.unUse();
-	glBindVertexArray(0);
-
-	return _;
-}
-
 Obj* objMk(std::string name, std::string vtx, std::string frag, std::string tex, bool active, glm::vec3 loc, glm::vec3 rot) {
 	std::vector<GLfloat> vtc = util::mesh::rd::attr(name, Obj::POS);
 	std::vector<GLushort> idcVtc = util::mesh::rd::idc(name, Obj::POS);
@@ -265,6 +221,50 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, std::string tex,
 	}
 
 	Obj* _ = objMk(&vtc[0], &stIdxed[0], &idcVtc[0], idcVtc.size(), vtx, frag, tex, active, loc, rot);
+
+	// texture
+	glGenTextures(1, &_->_tex);
+	glBindTexture(GL_TEXTURE_2D, _->_tex);
+
+	int dim[2];
+	int chan;
+	unsigned char* data = stbi_load(util::fs::path::build({
+				"res",
+				tex
+				}).c_str(), &dim[X], &dim[Y], &chan, 0);
+
+	if (data) {
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, dim[X], dim[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+	_->_prog.unUse();
+	glBindVertexArray(0);
+
+	return _;
+}
+
+Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::string vtx, std::string frag, std::string tex, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
+	Obj* _ = objMk(vtc, idc, noPrim, vtx, frag, active, child, noChild, loc, rot);
+
+	glBindVertexArray(_->_mesh->_id[Mesh::VAO]);
+
+	glGenBuffers(1, &_->_mesh->_id[Mesh::STBO]);
+	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh->_id[Mesh::STBO]);
+	glBufferData(GL_ARRAY_BUFFER, noPrim * 2 * sizeof (GLfloat), st, GL_STATIC_DRAW);
+
+	_->_prog.use();
+
+	// attribute
+	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh->_id[Mesh::STBO]);
+	_->_attr[Obj::ST] = glGetAttribLocation(_->_prog._id, "st");
+	glVertexAttribPointer(_->_attr[Obj::ST], 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+	glEnableVertexAttribArray(_->_attr[Obj::ST]);
 
 	// texture
 	glGenTextures(1, &_->_tex);
