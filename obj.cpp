@@ -201,27 +201,35 @@ Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::s
 	glGenTextures(1, &_->_tex);
 	glBindTexture(GL_TEXTURE_2D, _->_tex);
 
-	int dim[2];
-	int chan;
-	GLubyte* data = stbi_load(util::fs::path::build({
+	std::string fName = util::fs::path::build({
 		"res",
 		tex
-	}).c_str(), &dim[X], &dim[Y], &chan, 0);
+	});
 
-	if (data) {
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, dim[X], dim[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+	if (util::fs::exist(fName)) {
+		int dim[2];
+		int chan;
+		GLubyte* data = stbi_load(fName.c_str(), &dim[X], &dim[Y], &chan, 0);
 
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		if (data) {
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, dim[X], dim[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 
-		glGenerateMipmap(GL_TEXTURE_2D);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+			glGenerateMipmap(GL_TEXTURE_2D);
+		} else {
+			omni::err(omni::ERR_LD_TEX, {
+				tex
+			});
+		}
+
+		stbi_image_free(data);
 	} else {
-		omni::err(omni::ERR_LD_TEX, {
-			tex
+		omni::err(omni::ERR_FS_NO_ENTRY, {
+			fName
 		});
 	}
-
-	stbi_image_free(data);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 	_->_prog.unUse();
