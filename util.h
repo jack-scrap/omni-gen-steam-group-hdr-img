@@ -169,7 +169,7 @@ namespace util {
 	namespace tex {
 		GLuint rd(std::string fName);
 
-		GLuint spray(std::string tex);
+		GLuint spray(std::string fName);
 	}
 
 	namespace math {
