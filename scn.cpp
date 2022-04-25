@@ -604,10 +604,4 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 	/* general */
 	c = 0;
-
-	/* asdf */
-	Obj* plane = objMk("asdf", "obj", "tex", "dirt.jpg", true);
-
-	obj.push_back(plane);
-	prim.push_back(Mesh::OBJ);
 }
