@@ -237,7 +237,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 			// array
 			case nlohmann::json::value_t::array: {
-				omni::assert(util::json::array::euclid(pair.value()["block"], 0), std::string("Depth of `") + pair.key() + std::string("` exceeds 3 dimensions"));
+				omni::assertion(util::json::array::euclid(pair.value()["block"], 0), std::string("Depth of `") + pair.key() + std::string("` exceeds 3 dimensions"));
 
 				switch (pair.value()["block"][0].type()) {
 					// 1D
@@ -328,7 +328,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 			// array
 			case nlohmann::json::value_t::array: {
-				omni::assert(util::json::array::euclid(pair.value()["block"], 0), std::string("Depth of `") + pair.key() + std::string("` exceeds 3 dimensions"));
+				omni::assertion(util::json::array::euclid(pair.value()["block"], 0), std::string("Depth of `") + pair.key() + std::string("` exceeds 3 dimensions"));
 
 				switch (pair.value()["block"][0].type()) {
 					// 1D
@@ -375,7 +375,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 			}
     }
 
-		omni::assert(typeRhs == type[i], "Can't compare data; types not comparable");
+		omni::assertion(typeRhs == type[i], "Can't compare data; types not comparable");
 
     i++;
   }
@@ -427,7 +427,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 			Crane* _ = craneMk(init, loc, rot);
 
-			omni::assert(!util::phys::aabbGround(_->_parent), "Crane clipping into ground plane");
+			omni::assertion(!util::phys::aabbGround(_->_parent), "Crane clipping into ground plane");
 
 			crane._sz += sizeof (Crane*);
 			crane._ptr = (Crane**) realloc(crane._ptr, crane._sz);
@@ -470,7 +470,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 			Truck* _ = truckMk(array, loc, rot);
 
-			omni::assert(!util::phys::aabbGround(_->_parent), "Truck clipping into ground plane");
+			omni::assertion(!util::phys::aabbGround(_->_parent), "Truck clipping into ground plane");
 
 			truck._sz += sizeof (Truck*);
 			truck._ptr = (Truck**) realloc(truck._ptr, truck._sz);

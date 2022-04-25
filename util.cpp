@@ -453,7 +453,7 @@ std::vector<GLfloat> util::mesh::rd::attr(std::string fName, unsigned int attr) 
 		std::vector<std::string> tok = str::split(buff[l], ' ');
 
 		if (tok[0] == id[attr]) {
-			omni::assert(tok.size() == 1 + sz[attr], std::string("Couldn't load object `" ) + fName + std::string("`; inappropriate size of vertex position at [" ) + std::to_string(l) + std::string("]"));
+			omni::assertion(tok.size() == 1 + sz[attr], std::string("Couldn't load object `" ) + fName + std::string("`; inappropriate size of vertex position at [" ) + std::to_string(l) + std::string("]"));
 
 			for (int i = 1; i < 1 + sz[attr]; i++) {
 				_.push_back(std::stof(tok[i]));
@@ -565,7 +565,7 @@ std::vector<GLushort> util::mesh::rd::idc(std::string fName, unsigned int attr) 
 		std::vector<std::string> tok = str::split(buff[l], ' ');
 
 		if (tok[0] == "f") {
-			omni::assert(tok.size() == 1 + 3, std::string("Couldn't load object `" ) + fName + std::string("`; inappropriate number of indices for triangle primitive at [" ) + std::to_string(l) + std::string("]"));
+			omni::assertion(tok.size() == 1 + 3, std::string("Couldn't load object `" ) + fName + std::string("`; inappropriate number of indices for triangle primitive at [" ) + std::to_string(l) + std::string("]"));
 
 			for (int i = 1; i < 1 + 3; i++) {
 				std::vector<std::string> type = str::split(tok[i], '/');
@@ -710,7 +710,7 @@ char* util::json::id(nlohmann::json deser) {
 }
 
 char util::json::byte(nlohmann::json deser) {
-	omni::assert(ascii(deser), std::string("Data not ASCII applicable"));
+	omni::assertion(ascii(deser), std::string("Data not ASCII applicable"));
 
 	return (char) ((int) deser);
 }
@@ -788,7 +788,7 @@ CBuff util::json::array::array(nlohmann::json deser) {
 	_._ptr = (char*) malloc(_._x);
 	int c = 0;
 	for (int i = 0; i < _._x; i++) {
-		omni::assert(ascii(deser[i]), std::string("Data at index [") + std::to_string(i) + std::string("] not ASCII applicable"));
+		omni::assertion(ascii(deser[i]), std::string("Data at index [") + std::to_string(i) + std::string("] not ASCII applicable"));
 
 		((char*) _._ptr)[c] = (char) ((int) deser[i]);
 
@@ -808,7 +808,7 @@ CBuff util::json::array::matr(nlohmann::json deser) {
 	int c = 0;
 	for (int j = 0; j < _._y; j++) {
 		for (int i = 0; i < _._x; i++) {
-			omni::assert(ascii(deser[j][i]), std::string("Data at index [") + std::to_string(j) + "][" + std::to_string(i) + std::string("] not ASCII applicable"));
+			omni::assertion(ascii(deser[j][i]), std::string("Data at index [") + std::to_string(j) + "][" + std::to_string(i) + std::string("] not ASCII applicable"));
 
 			((char*) _._ptr)[c] = (char) ((int) deser[j][i]);
 
@@ -830,7 +830,7 @@ CBuff util::json::array::tens(nlohmann::json deser) {
 	for (int k = 0; k < _._y; k++) {
 		for (int j = 0; j < _._y; j++) {
 			for (int i = 0; i < _._x; i++) {
-				omni::assert(ascii(deser[k][j][i]), std::string("Data at index [") + std::to_string(j) + "][" + std::to_string(i) + std::string("] not ASCII applicable"));
+				omni::assertion(ascii(deser[k][j][i]), std::string("Data at index [") + std::to_string(j) + "][" + std::to_string(i) + std::string("] not ASCII applicable"));
 
 				((char*) _._ptr)[c] = (char) ((int) deser[k][j][i]);
 
@@ -867,7 +867,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 				idx = idxMk(0, key, loc, glm::radians(rot));
 			}
 
-			omni::assert(!phys::aabbGround(idx->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
+			omni::assertion(!phys::aabbGround(idx->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
 			_ = varMk(name, idx, omni::SCALAR);
 
@@ -883,7 +883,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 
 					Array* val = arrayMk((char*) init._ptr, init._x, key, X, loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), glm::radians(rot));
 
-					omni::assert(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
+					omni::assertion(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
 					_ = varMk(name, val, omni::ARRAY);
 
@@ -899,7 +899,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 
 							Array* val = arrayMk((char*) init._ptr, init._x, init._y, key, loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), glm::radians(rot));
 
-							omni::assert(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
+							omni::assertion(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
 							_ = varMk(name, val, omni::ARRAY);
 
@@ -912,7 +912,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 
 							Array* val = arrayMk((char*) init._ptr, init._x, init._y, key, loc, glm::radians(rot));
 
-							omni::assert(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
+							omni::assertion(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
 							_ = varMk(name, val, omni::ARRAY);
 
@@ -931,7 +931,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 
 			Array* val = arrayMk((char*) init._ptr, init._x, key, X, loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), glm::radians(rot));
 
-			omni::assert(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
+			omni::assertion(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
 			_ = varMk(name, val, omni::ARRAY);
 
@@ -943,7 +943,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 			nlohmann::json block = val["block"];
 			Dict* val = dictMk(block);
 
-			omni::assert(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
+			omni::assertion(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
 			_ = varMk(name, val, omni::DICT);
 
@@ -987,7 +987,7 @@ StreetSign* util::json::streetSign(nlohmann::json deser) {
 		no
 	}, loc, glm::radians(rot));
 
-	omni::assert(!phys::aabbGround(_->_parent), "Street sign clipping into ground plane");
+	omni::assertion(!phys::aabbGround(_->_parent), "Street sign clipping into ground plane");
 
 	return _;
 }
@@ -1085,7 +1085,7 @@ Obj* util::json::prop(nlohmann::json deser) {
 
 	Obj* _ = objMk(deser["name"], "obj", "dir", false, loc, glm::radians(rot));
 
-	omni::assert(!phys::aabbGround(_), std::string("Prop `") + std::string(deser["name"]) + std::string("` clipping into ground plane"));
+	omni::assertion(!phys::aabbGround(_), std::string("Prop `") + std::string(deser["name"]) + std::string("` clipping into ground plane"));
 
 	return _;
 }
@@ -1115,7 +1115,7 @@ Lim* util::json::bound::lim(nlohmann::json val) {
 
 	Lim* _ = limMk(axis, val["val"], status);
 
-	omni::assert(!phys::aabbGround(_->_parent), "Limit clipping into ground plane");
+	omni::assertion(!phys::aabbGround(_->_parent), "Limit clipping into ground plane");
 
 	return _;
 }
@@ -1135,7 +1135,7 @@ Cone* util::json::bound::area(nlohmann::json deser) {
 
 	Cone* _ = coneMk(init, loc);
 
-	omni::assert(!phys::aabbGround(_->_parent), "Cone clipping into ground plane");
+	omni::assertion(!phys::aabbGround(_->_parent), "Cone clipping into ground plane");
 
 	return _;
 }
@@ -1160,7 +1160,7 @@ bool util::cfg::parse::var(std::string buff) {
 
 int util::cfg::parse::whole(std::string buff) {
 	for (int i = 0; i < buff.size(); i++) {
-		omni::assert(isdigit(buff[i]) || buff[i] == '-', "Value `" + buff + "` invalid, whole number required");
+		omni::assertion(isdigit(buff[i]) || buff[i] == '-', "Value `" + buff + "` invalid, whole number required");
 	}
 
 	return std::stoi(buff);
@@ -1187,15 +1187,15 @@ float util::cfg::parse::prec(std::string buff) {
 		}
 	}
 
-	omni::assert(valid, "Value `" + buff + "` invalid, number with dot precision required");
+	omni::assertion(valid, "Value `" + buff + "` invalid, number with dot precision required");
 
 	return std::stof(buff);
 }
 
 bool util::cfg::parse::boolean(std::string buff) {
-	omni::assert(buff.size() == 1, "Value `" + buff + "` invalid, boolean required");
+	omni::assertion(buff.size() == 1, "Value `" + buff + "` invalid, boolean required");
 
-	omni::assert(buff[0] == 'n' || buff[0] == 'y', "Value `" + buff + "` invalid, boolean required");
+	omni::assertion(buff[0] == 'n' || buff[0] == 'y', "Value `" + buff + "` invalid, boolean required");
 
 	bool _;
 	switch (buff[0]) {
