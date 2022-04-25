@@ -203,7 +203,7 @@ Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::s
 
 	int dim[2];
 	int chan;
-	unsigned char* data = stbi_load(util::fs::path::build({
+	GLubyte* data = stbi_load(util::fs::path::build({
 		"res",
 		tex
 	}).c_str(), &dim[X], &dim[Y], &chan, 0);
