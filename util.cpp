@@ -1507,30 +1507,30 @@ GLuint util::tex::rd(std::string fName) {
 		fName
 	});
 
-	if (util::fs::exist(path)) {
-		int dim[2];
-		int chan;
-		GLubyte* data = stbi_load(path.c_str(), &dim[X], &dim[Y], &chan, 0);
-
-		if (data) {
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, dim[X], dim[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-			glGenerateMipmap(GL_TEXTURE_2D);
-
-			stbi_image_free(data);
-		} else {
-			omni::err(omni::ERR_RD_TEX, {
-				fName
-			});
-
-			return 0;
-		}
-	} else {
+	if (!util::fs::exist(path)) {
 		omni::err(omni::ERR_FS_NO_ENTRY, {
 			path
+		});
+
+		return 0;
+	}
+
+	int dim[2];
+	int chan;
+	GLubyte* data = stbi_load(path.c_str(), &dim[X], &dim[Y], &chan, 0);
+
+	if (data) {
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, dim[X], dim[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+		glGenerateMipmap(GL_TEXTURE_2D);
+
+		stbi_image_free(data);
+	} else {
+		omni::err(omni::ERR_RD_TEX, {
+			fName
 		});
 
 		return 0;
