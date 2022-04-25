@@ -74,7 +74,7 @@ Idx* idxMk(unsigned int i, char* c, unsigned int sz, std::string name, glm::vec3
 	glm::vec2 stride = glm::vec2(layout::item(layout::bordered(layout::idx[X])), layout::item(layout::bordered(layout::idx[Z])));
 
 	for (int i = 0; i < _->_sz; i++) {
-		Cont* byte = contMk(c[i], glm::vec3((layout::stroke * 2) + (layout::idx[X] / 2), 1.0, (layout::stroke * 2) + (layout::idx[Z] / 2)) + glm::vec3(0.0, i * stride[Y], 0.0));
+		Cont* byte = contMk(c[i], glm::vec3((layout::stroke * 2) + (layout::idx[X] / 2), 1.0, (layout::stroke * 2) + (layout::idx[Z] / 2)) + glm::vec3(0.0, i * layout::idx[Y], 0.0));
 
 		_->_data = byte;
 
