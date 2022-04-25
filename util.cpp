@@ -1525,11 +1525,15 @@ GLuint util::tex::rd(std::string fName) {
 			omni::err(omni::ERR_RD_TEX, {
 				fName
 			});
+
+			return 0;
 		}
 	} else {
 		omni::err(omni::ERR_FS_NO_ENTRY, {
 			path
 		});
+
+		return 0;
 	}
 
 	glBindTexture(GL_TEXTURE_2D, 0);
