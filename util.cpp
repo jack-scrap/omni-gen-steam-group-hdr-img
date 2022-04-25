@@ -1569,7 +1569,6 @@ GLuint util::tex::spray(std::string fName) {
 
 	// create
 	std::vector<GLfloat> vtc = mesh::rd::attr(fName, Obj::POS);
-
 	std::vector<GLushort> idc = mesh::rd::idc(fName, Obj::POS);
 
 	Mesh* mesh = meshMk(&vtc[0], &idc[0], idc.size());
