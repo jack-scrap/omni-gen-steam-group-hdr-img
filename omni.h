@@ -146,8 +146,8 @@ namespace omni {
 
 		ERR_SHADER,
 
-		ERR_FRAME_BUFF,
+		ERR_LD_TEX,
 
-		ERR_LD_TEX
+		ERR_FRAME_BUFF
 	};
 }
