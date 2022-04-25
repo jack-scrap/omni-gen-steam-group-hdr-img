@@ -221,6 +221,8 @@ Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::s
 		});
 	}
 
+	stbi_image_free(data);
+
 	glBindTexture(GL_TEXTURE_2D, 0);
 	_->_prog.unUse();
 	glBindVertexArray(0);
