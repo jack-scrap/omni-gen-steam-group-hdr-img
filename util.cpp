@@ -1519,13 +1519,13 @@ GLuint util::tex::rd(std::string fName) {
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
 			glGenerateMipmap(GL_TEXTURE_2D);
+
+			stbi_image_free(data);
 		} else {
 			omni::err(omni::ERR_RD_TEX, {
 				fName
 			});
 		}
-
-		stbi_image_free(data);
 	} else {
 		omni::err(omni::ERR_FS_NO_ENTRY, {
 			path
