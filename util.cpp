@@ -1497,20 +1497,20 @@ std::string util::now(std::string format) {
 	return std::string(out);
 }
 
-GLuint util::tex::rd(std::string tex) {
-	GLuint _;
-	glGenTextures(1, &_);
-	glBindTexture(GL_TEXTURE_2D, _);
+GLuint util::tex::rd(std::string fName) {
+	GLuint tex;
+	glGenTextures(1, &tex);
+	glBindTexture(GL_TEXTURE_2D, tex);
 
-	std::string fName = util::fs::path::build({
+	std::string path = util::fs::path::build({
 		"res",
-		tex
+		fName
 	});
 
-	if (util::fs::exist(fName)) {
+	if (util::fs::exist(path)) {
 		int dim[2];
 		int chan;
-		GLubyte* data = stbi_load(fName.c_str(), &dim[X], &dim[Y], &chan, 0);
+		GLubyte* data = stbi_load(path.c_str(), &dim[X], &dim[Y], &chan, 0);
 
 		if (data) {
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, dim[X], dim[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, data);
@@ -1521,20 +1521,20 @@ GLuint util::tex::rd(std::string tex) {
 			glGenerateMipmap(GL_TEXTURE_2D);
 		} else {
 			omni::err(omni::ERR_LD_TEX, {
-				tex
+				fName
 			});
 		}
 
 		stbi_image_free(data);
 	} else {
 		omni::err(omni::ERR_FS_NO_ENTRY, {
-			fName
+			path
 		});
 	}
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	return _;
+	return tex;
 }
 
 GLuint util::tex::spray(std::string tex) {
