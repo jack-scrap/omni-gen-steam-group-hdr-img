@@ -41,7 +41,7 @@ Crane* craneMk(Cont* init, glm::vec3 loc, glm::vec3 rot) {
 	Obj* cont = nullptr;
 
 	Obj* trackChild[] = {
-		objMk("crane/claw", "obj", "dir", true, &cont, 1),
+		objMk("crane/head", "obj", "dir", true, &cont, 1),
 		objMk("crane/track_back", "obj", "dir", true)
 	};
 
