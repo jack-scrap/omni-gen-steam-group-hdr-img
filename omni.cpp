@@ -122,6 +122,11 @@ void omni::err(unsigned int err, std::vector<std::string> arg) {
 			msg = "Framebuffer not complete";
 
 			break;
+
+		case ERR_LD_TEX:
+			msg = "Couldn't load texture " + arg[0];
+
+			break;
 	}
 
 	std::cout << "Error: " << msg << std::endl;

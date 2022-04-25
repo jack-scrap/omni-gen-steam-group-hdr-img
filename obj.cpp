@@ -215,6 +215,10 @@ Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::s
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
 		glGenerateMipmap(GL_TEXTURE_2D);
+	} else {
+		omni::err(omni::ERR_LD_TEX, {
+			tex
+		});
 	}
 
 	glBindTexture(GL_TEXTURE_2D, 0);
