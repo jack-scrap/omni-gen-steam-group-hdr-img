@@ -1,5 +1,4 @@
 #define GLM_ENABLE_EXPERIMENTAL
-#define STB_IMAGE_IMPLEMENTATION
 
 #include <stdio.h>
 #include <cmath>
@@ -23,7 +22,6 @@
 #include "phys.h"
 #include "omni.h"
 #include "layout.h"
-#include "stb_image.h"
 
 Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
 	// initialize
@@ -198,40 +196,8 @@ Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::s
 	glEnableVertexAttribArray(_->_attr[Obj::ST]);
 
 	// texture
-	glGenTextures(1, &_->_tex);
-	glBindTexture(GL_TEXTURE_2D, _->_tex);
+	_->_tex = util::tex::rd(tex);
 
-	std::string fName = util::fs::path::build({
-		"res",
-		tex
-	});
-
-	if (util::fs::exist(fName)) {
-		int dim[2];
-		int chan;
-		GLubyte* data = stbi_load(fName.c_str(), &dim[X], &dim[Y], &chan, 0);
-
-		if (data) {
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, dim[X], dim[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-			glGenerateMipmap(GL_TEXTURE_2D);
-		} else {
-			omni::err(omni::ERR_LD_TEX, {
-				tex
-			});
-		}
-
-		stbi_image_free(data);
-	} else {
-		omni::err(omni::ERR_FS_NO_ENTRY, {
-			fName
-		});
-	}
-
-	glBindTexture(GL_TEXTURE_2D, 0);
 	_->_prog.unUse();
 	glBindVertexArray(0);
 

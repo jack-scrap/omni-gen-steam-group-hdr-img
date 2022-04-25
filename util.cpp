@@ -1,4 +1,5 @@
 #define GLM_ENABLE_EXPERIMENTAL
+#define STB_IMAGE_IMPLEMENTATION
 
 #include <iostream>
 #include <sstream>
@@ -16,6 +17,7 @@
 #include "line.h"
 #include "omni.h"
 #include "layout.h"
+#include "stb_image.h"
 
 template <typename T>
 T util::fs::rd(std::string fName) {
@@ -1493,6 +1495,46 @@ std::string util::now(std::string format) {
 	strftime(out, sizeof out / sizeof *out, format.c_str(), info);
 
 	return std::string(out);
+}
+
+GLuint util::tex::rd(std::string tex) {
+	GLuint _;
+	glGenTextures(1, &_);
+	glBindTexture(GL_TEXTURE_2D, _);
+
+	std::string fName = util::fs::path::build({
+		"res",
+		tex
+	});
+
+	if (util::fs::exist(fName)) {
+		int dim[2];
+		int chan;
+		GLubyte* data = stbi_load(fName.c_str(), &dim[X], &dim[Y], &chan, 0);
+
+		if (data) {
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, dim[X], dim[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+			glGenerateMipmap(GL_TEXTURE_2D);
+		} else {
+			omni::err(omni::ERR_LD_TEX, {
+				tex
+			});
+		}
+
+		stbi_image_free(data);
+	} else {
+		omni::err(omni::ERR_FS_NO_ENTRY, {
+			fName
+		});
+	}
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	return _;
 }
 
 GLuint util::tex::spray(std::string tex) {
