@@ -118,7 +118,7 @@ void omni::err(unsigned int err, std::vector<std::string> arg) {
 
 			break;
 
-		case ERR_LD_TEX:
+		case ERR_RD_TEX:
 			msg = "Couldn't load texture " + arg[0];
 
 			break;

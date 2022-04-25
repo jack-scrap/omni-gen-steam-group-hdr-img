@@ -1520,7 +1520,7 @@ GLuint util::tex::rd(std::string fName) {
 
 			glGenerateMipmap(GL_TEXTURE_2D);
 		} else {
-			omni::err(omni::ERR_LD_TEX, {
+			omni::err(omni::ERR_RD_TEX, {
 				fName
 			});
 		}
