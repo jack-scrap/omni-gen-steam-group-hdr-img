@@ -1541,7 +1541,7 @@ GLuint util::tex::rd(std::string fName) {
 	return tex;
 }
 
-GLuint util::tex::spray(std::string fName) {
+GLuint util::tex::spray(std::string tex) {
 	/* framebuffer */
 	GLuint fbo;
 	glGenFramebuffers(1, &fbo);
@@ -1572,8 +1572,8 @@ GLuint util::tex::spray(std::string fName) {
 	}
 
 	// create
-	std::vector<GLfloat> vtc = mesh::rd::attr(fName, Obj::POS);
-	std::vector<GLushort> idc = mesh::rd::idc(fName, Obj::POS);
+	std::vector<GLfloat> vtc = mesh::rd::attr(tex, Obj::POS);
+	std::vector<GLushort> idc = mesh::rd::idc(tex, Obj::POS);
 
 	Mesh* mesh = meshMk(&vtc[0], &idc[0], idc.size());
 
