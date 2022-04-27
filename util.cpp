@@ -459,9 +459,7 @@ std::vector<GLfloat> util::mesh::rd::attr(std::string fName, unsigned int attr) 
 
 			for (int i = 1; i < 1 + sz[attr]; i++) {
 				std::string prec(1 + 1 + 4, ' ');
-				for (int c = 0; c < 1 + 1 + 4; c++) {
-					prec[c] = tok[i][c];
-				}
+				tok[i].copy(&prec[0], 1 + 1 + 4);
 
 				_.push_back(std::stof(prec));
 			}
