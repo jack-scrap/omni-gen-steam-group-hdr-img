@@ -458,7 +458,12 @@ std::vector<GLfloat> util::mesh::rd::attr(std::string fName, unsigned int attr) 
 			omni::assertion(tok.size() == 1 + sz[attr], std::string("Couldn't load object `" ) + fName + std::string("`; inappropriate size of vertex position at [" ) + std::to_string(l) + std::string("]"));
 
 			for (int i = 1; i < 1 + sz[attr]; i++) {
-				_.push_back(std::stof(tok[i]));
+				std::string prec(1 + 1 + 4, ' ');
+				for (int c = 0; c < 1 + 1 + 4; c++) {
+					prec[c] = tok[i][c];
+				}
+
+				_.push_back(std::stof(prec));
 			}
 		}
 	}
