@@ -133,30 +133,24 @@ Cont* idxPop(Idx* idx) {
 }
 
 bool idxEq(Idx* lhs, Idx* rhs) {
-	bool _;
-
 	// null
 	if (!lhs->_sz && !rhs->_sz) {
-		_ = true;
+		return true;
 	}
 
 	if (!lhs->_sz ^ !rhs->_sz) {
-		_ = false;
+		return false;
 	}
 
 	if (lhs->_sz != rhs->_sz) {
-		_ = false;
+		return false;
 	}
 
 	if (lhs->_sz && rhs->_sz) {
 		for (int i = 0; i < lhs->_sz; i++) {
 			if (lhs->_data[i]->_c != rhs->_data[i]->_c) {
-				_ = false;
-
-				break;
+				return false;
 			}
 		}
 	}
-
-	return _;
 }
