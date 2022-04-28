@@ -8,6 +8,7 @@
 #include <glm/gtx/string_cast.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <sys/stat.h>
+#include <iomanip>
 
 #include "util.h"
 #include "math.h"
@@ -458,12 +459,10 @@ std::vector<GLfloat> util::mesh::rd::attr(std::string fName, unsigned int attr) 
 			omni::assertion(tok.size() == 1 + sz[attr], std::string("Couldn't load object `" ) + fName + std::string("`; inappropriate size of vertex position at [" ) + std::to_string(l) + std::string("]"));
 
 			for (int i = 1; i < 1 + sz[attr]; i++) {
-				const unsigned int ln = tok[i].length() - 2;
+				std::stringstream out;
+				out << std::fixed << std::setprecision(4) << std::stof(tok[i]);
 
-				std::string trim(ln, 0);
-				tok[i].copy((char*) trim.c_str(), ln);
-
-				_.push_back(std::stof(trim));
+				_.push_back(std::stof(out.str()));
 			}
 		}
 	}
