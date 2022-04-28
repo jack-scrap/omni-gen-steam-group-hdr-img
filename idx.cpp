@@ -100,14 +100,17 @@ void idxDel(Idx* idx) {
 }
 
 void idxInsert(Idx* idx, Cont* byte) {
-	idx->_data[0] = byte;
-	idx->_parent->_child[idx->_parent->_noChild - 1] = idx->_data[0]->_parent;
+	idx->_sz++;
+	idx->_data = (Cont**) realloc(idx->_data, idx->_sz * sizeof (Cont*));
+
+	idx->_data[idx->_sz - 1] = byte;
+	idx->_parent->_child[idx->_parent->_noChild - 1] = idx->_data[idx->_sz - 1]->_parent;
 
 	// transform
 	glm::mat4 model = glm::mat4(1.0);
 	model = glm::translate(model, glm::vec3(layout::bordered(layout::idx[X]), layout::idx[Y], layout::bordered(layout::idx[Z])) / glm::vec3(2));
 
-	idx->_data[0]->_parent->_model = model;
+	idx->_data[idx->_sz - 1]->_parent->_model = model;
 
 	objAcc(idx->_parent, glm::mat4(1.0));
 }

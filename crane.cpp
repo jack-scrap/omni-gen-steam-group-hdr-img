@@ -188,7 +188,7 @@ void craneGrab(Crane* crane) {
 
 					modelIdx *= glm::translate(glm::mat4(1.0), glm::vec3(center[0], 0.0, center[1]));
 
-					if (crane->_data && !idx->_data[0]) {
+					if (crane->_data && !idx->_sz) {
 						if (util::phys::aabb(glm::vec3(0.0), crane->_data->_parent, modelIdx, crane->_data->_parent->_acc)) {
 							idxInsert(idx, craneMv(crane));
 
