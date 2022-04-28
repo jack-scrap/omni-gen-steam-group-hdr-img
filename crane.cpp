@@ -212,7 +212,7 @@ void craneGrab(Crane* crane) {
 
 						modelIdx *= glm::translate(glm::mat4(1.0), glm::vec3(center[0], 0.0, center[1]));
 
-						if (crane->_data && !idx->_data[0]) {
+						if (crane->_data && !idx->_sz) {
 							if (util::phys::aabb(glm::vec3(0.0), crane->_data->_parent, modelIdx, crane->_data->_parent->_acc)) {
 								idxPush(idx, craneMv(crane));
 
@@ -241,7 +241,7 @@ void craneGrab(Crane* crane) {
 
 					modelIdx *= glm::translate(glm::mat4(1.0), glm::vec3(center[0], 0.0, center[1]));
 
-					if (idx->_data[0]) {
+					if (idx->_sz) {
 						if (util::phys::aabb(crane->_parent->_child[Crane::TRACK]->_child[Crane::HEAD], idx->_data[0]->_parent, crane->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_acc, modelIdx)) {
 							craneInsert(crane, idxPop(idx));
 
@@ -265,7 +265,7 @@ void craneGrab(Crane* crane) {
 
 						modelIdx *= glm::translate(glm::mat4(1.0), glm::vec3(center[0], 0.0, center[1]));
 
-						if (idx->_data[0]) {
+						if (idx->_sz) {
 							if (util::phys::aabb(crane->_parent->_child[Crane::TRACK]->_child[Crane::HEAD], idx->_data[0]->_parent, crane->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_acc, modelIdx)) {
 								craneInsert(crane, idxPop(idx));
 
