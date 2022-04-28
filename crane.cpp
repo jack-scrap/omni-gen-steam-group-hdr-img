@@ -190,7 +190,7 @@ void craneGrab(Crane* crane) {
 
 					if (crane->_data && !idx->_sz) {
 						if (util::phys::aabb(glm::vec3(0.0), crane->_data->_parent, modelIdx, crane->_data->_parent->_acc)) {
-							idxInsert(idx, craneMv(crane));
+							idxPush(idx, craneMv(crane));
 
 							return;
 						}
@@ -214,7 +214,7 @@ void craneGrab(Crane* crane) {
 
 						if (crane->_data && !idx->_data[0]) {
 							if (util::phys::aabb(glm::vec3(0.0), crane->_data->_parent, modelIdx, crane->_data->_parent->_acc)) {
-								idxInsert(idx, craneMv(crane));
+								idxPush(idx, craneMv(crane));
 
 								crane->_data = nullptr;
 								crane->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_child[0] = nullptr;

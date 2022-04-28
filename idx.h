@@ -20,7 +20,7 @@ Idx* idxMk(unsigned int i, char* c, unsigned int sz, std::string name = "", glm:
 
 void idxDel(Idx* idx);
 
-void idxInsert(Idx* idx, Cont* byte);
+void idxPush(Idx* idx, Cont* byte);
 
 Cont* idxMv(Idx* idx);
 

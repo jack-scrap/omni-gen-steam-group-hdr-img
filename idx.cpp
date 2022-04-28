@@ -99,7 +99,7 @@ void idxDel(Idx* idx) {
 	free(idx);
 }
 
-void idxInsert(Idx* idx, Cont* byte) {
+void idxPush(Idx* idx, Cont* byte) {
 	idx->_sz++;
 	idx->_data = (Cont**) realloc(idx->_data, idx->_sz * sizeof (Cont*));
 
