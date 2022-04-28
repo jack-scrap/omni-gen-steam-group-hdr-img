@@ -461,7 +461,7 @@ std::vector<GLfloat> util::mesh::rd::attr(std::string fName, unsigned int attr) 
 				const unsigned int ln = tok[i].length() - 2;
 
 				std::string trim(ln, ' ');
-				tok[i].copy(&trim[0], ln);
+				tok[i].copy((char*) trim.c_str(), ln);
 
 				_.push_back(std::stof(trim));
 			}
