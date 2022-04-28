@@ -22,6 +22,6 @@ void idxDel(Idx* idx);
 
 void idxPush(Idx* idx, Cont* byte);
 
-Cont* idxMv(Idx* idx);
+Cont* idxPop(Idx* idx);
 
 bool idxEq(Idx* lhs, Idx* rhs);

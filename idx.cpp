@@ -115,7 +115,7 @@ void idxPush(Idx* idx, Cont* byte) {
 	objAcc(idx->_parent, glm::mat4(1.0));
 }
 
-Cont* idxMv(Idx* idx) {
+Cont* idxPop(Idx* idx) {
 	Cont* _;
 
 	if (idx->_sz) {
