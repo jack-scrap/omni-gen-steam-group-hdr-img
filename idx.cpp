@@ -103,12 +103,15 @@ void idxPush(Idx* idx, Cont* byte) {
 	idx->_sz++;
 	idx->_data = (Cont**) realloc(idx->_data, idx->_sz * sizeof (Cont*));
 
+	idx->_parent->_noChild++;
+	idx->_parent->_child = (Obj**) realloc(idx->_parent->_child, idx->_parent->_noChild * sizeof (Cont*));
+
 	idx->_data[idx->_sz - 1] = byte;
 	idx->_parent->_child[idx->_parent->_noChild - 1] = idx->_data[idx->_sz - 1]->_parent;
 
 	// transform
 	glm::mat4 model = glm::mat4(1.0);
-	model = glm::translate(model, glm::vec3(layout::bordered(layout::idx[X]), layout::idx[Y], layout::bordered(layout::idx[Z])) / glm::vec3(2));
+	model = glm::translate(model, glm::vec3(glm::vec3(layout::bordered(layout::idx[X]), layout::idx[Y], layout::bordered(layout::idx[Z])) / glm::vec3(2)) + glm::vec3(0.0, (idx->_sz - 1) * layout::idx[Y], 0.0));
 
 	idx->_data[idx->_sz - 1]->_parent->_model = model;
 
@@ -123,6 +126,9 @@ Cont* idxPop(Idx* idx) {
 
 		idx->_sz--;
 		idx->_data = (Cont**) realloc(idx->_data, idx->_sz * sizeof (Cont*));
+
+		idx->_parent->_noChild--;
+		idx->_parent->_child = (Obj**) realloc(idx->_parent->_child, idx->_parent->_noChild * sizeof (Cont*));
 
 		idx->_parent->_child[2 + idx->_sz - 1] = nullptr;
 	} else {
