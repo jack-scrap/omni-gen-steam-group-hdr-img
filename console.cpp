@@ -99,7 +99,7 @@ Console::Console(std::string fName, std::string dir) :
 	_cwd(dir),
 	_prog("console", "console") {
 		_map = IMG_Load("res/map.bmp");
-		SDL_Texture* tex = SDL_CreateTextureFromSurface(disp->_rend, _map);
+		SDL_CreateTextureFromSurface(disp->_rend, _map);
 
 		_canv = (char*) calloc(state::lineWd * state::lineCnt, sizeof (char));
 		_hl = (char*) calloc(state::lineWd * state::lineCnt, sizeof (bool));
