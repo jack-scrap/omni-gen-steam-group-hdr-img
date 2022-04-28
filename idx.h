@@ -8,7 +8,7 @@
 typedef struct {
 	unsigned int _i;
 
-	Cont* _data;
+	Cont** _data;
 	unsigned int _sz;
 
 	Obj* _parent;
