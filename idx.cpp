@@ -144,6 +144,10 @@ bool idxEq(Idx* lhs, Idx* rhs) {
 		_ = false;
 	}
 
+	if (lhs->_sz != rhs->_sz) {
+		_ = false;
+	}
+
 	if (lhs->_sz && rhs->_sz) {
 		for (int i = 0; i < lhs->_sz; i++) {
 			if (lhs->_data[i]->_c != rhs->_data[i]->_c) {
