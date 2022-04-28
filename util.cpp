@@ -32,7 +32,7 @@ std::string util::fs::rd<std::string>(std::string fName) {
 
 	if (exist(fName)) {
 		for (std::string l; std::getline(in, l);) {
-			cont += l + "\n";
+			cont += l + '\n';
 		}
 	} else {
 		omni::err(omni::ERR_FS_NO_ENTRY, {
