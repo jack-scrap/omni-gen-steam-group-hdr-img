@@ -116,10 +116,12 @@ void idxPush(Idx* idx, Cont* byte) {
 }
 
 Cont* idxMv(Idx* idx) {
-	Cont* _ = idx->_data[0];
+	Cont* _ = idx->_data[idx->_sz - 1];
 
-	idx->_data = nullptr;
-	idx->_parent->_child[idx->_parent->_noChild - 1] = nullptr;
+	idx->_sz--;
+	idx->_data = (Cont**) realloc(idx->_data, idx->_sz * sizeof (Cont*));
+
+	idx->_parent->_child[2 + idx->_sz - 1] = nullptr;
 
 	return _;
 }
