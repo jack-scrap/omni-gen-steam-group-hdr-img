@@ -136,16 +136,22 @@ bool idxEq(Idx* lhs, Idx* rhs) {
 	bool _;
 
 	// null
-	if (!lhs->_data && !rhs->_data) {
+	if (!lhs->_sz && !rhs->_sz) {
 		_ = true;
 	}
 
-	if (!lhs->_data ^ !rhs->_data) {
+	if (!lhs->_sz ^ !rhs->_sz) {
 		_ = false;
 	}
 
-	if (lhs->_data && rhs->_data) {
-		_ = lhs->_data[0]->_c == rhs->_data[0]->_c;
+	if (lhs->_sz && rhs->_sz) {
+		for (int i = 0; i < lhs->_sz; i++) {
+			if (lhs->_data[i]->_c != rhs->_data[i]->_c) {
+				_ = false;
+
+				break;
+			}
+		}
 	}
 
 	return _;
