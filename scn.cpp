@@ -545,6 +545,23 @@ void scn::init(std::string stage, unsigned int lvl) {
 		}
 	}
 
+	// mark
+	for (int i = 0; i < deser["mark"].size(); i++) {
+		GLfloat vtc[2 * 2 * 3] = {
+			deser["mark"][i][0][X], 0.0, deser["mark"][i][0][Y],
+			deser["mark"][i][1][X], 0.0, deser["mark"][i][1][Y]
+		};
+
+		GLushort idc[2] = {
+			0, 1
+		};
+
+		Obj* line = lineMk(vtc, idc, sizeof idc / sizeof *idc, "main", "thick", "solid", true);
+
+		obj.push_back(line);
+		prim.push_back(Mesh::LINE);
+	}
+
 	// bound
 	boundRng._sz = deser["bound"]["rng"].size();
 	boundRng._ptr = (Lim**) malloc(boundRng._sz * sizeof (Lim*));
