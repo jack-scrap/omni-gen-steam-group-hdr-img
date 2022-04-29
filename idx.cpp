@@ -27,11 +27,11 @@ Idx* idxMk(unsigned int i, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	}
 
 	// identifier
+	child[str.size()] = nullptr;
+
 	if (!name.empty()) {
 		Str* id = strMk(name, glm::vec3(0.0, 0.0, -(layout::margin * 2)));
 		child[str.size()] = id->_parent;
-	} else {
-		child[str.size()] = nullptr;
 	}
 
 	Border* scope = borderMk({
@@ -64,11 +64,11 @@ Idx* idxMk(unsigned int i, char* c, unsigned int sz, std::string name, glm::vec3
 	}
 
 	// identifier
+	child[1] = nullptr;
+
 	if (!name.empty()) {
 		Str* id = strMk(name, glm::vec3(0.0, 0.0, -(layout::margin * 2)));
 		child[1] = id->_parent;
-	} else {
-		child[1] = nullptr;
 	}
 
 	// data

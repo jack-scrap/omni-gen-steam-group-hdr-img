@@ -416,13 +416,11 @@ void scn::init(std::string stage, unsigned int lvl) {
 		}
 
 		if (entry["name"] == "crane") {
-			Cont* init;
+			Cont* init = nullptr;
 			if (entry.contains("data")) {
 				char c = util::json::byte(entry["data"]);
 
 				init = contMk(c);
-			} else {
-				init = nullptr;
 			}
 
 			Crane* _ = craneMk(init, loc, rot);

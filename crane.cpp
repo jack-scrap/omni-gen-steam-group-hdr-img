@@ -29,10 +29,10 @@ GLushort Crane::_lightIdc[2 * 3] = {
 Crane* craneMk(Cont* init, glm::vec3 loc, glm::vec3 rot) {
 	Crane* _ = (Crane*) malloc(sizeof (Crane));
 
+	_->_data = nullptr;
+
 	if (init) {
 		_->_data = init;
-	} else {
-		_->_data = nullptr;
 	}
 
 	Obj* child[1 + (2 * 2 * 2 * 2) + (2 * 2) + (2 * 2) + 1];

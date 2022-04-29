@@ -135,11 +135,11 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 	}
 
 	// identifier
+	child[0] = nullptr;
+
 	if (!name.empty()) {
 		Str* id = strMk(name, glm::vec3(0.0, 0.0, -(layout::margin * 2)));
 		child[0] = id->_parent;
-	} else {
-		child[0] = nullptr;
 	}
 
 	// scope
