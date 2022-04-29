@@ -199,7 +199,7 @@ void handle() {
 						}
 
 						if (e.key.keysym.sym == SDLK_UP) {
-							if (console->_cursFs > 0) {
+							if (console->_cursFs) {
 								console->_cursFs--;
 							}
 						}
