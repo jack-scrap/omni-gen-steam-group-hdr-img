@@ -674,9 +674,9 @@ int main(int argc, char** argv) {
 		layout::res[Y]
 	}, col[false]);
 
-	nlohmann::json serial = nlohmann::json::parse(util::fs::rd<std::string>("stat.json"));
+	nlohmann::json deser = nlohmann::json::parse(util::fs::rd<std::string>("stat.json"));
 	for (std::map<std::string, unsigned int>::iterator it = omni::stage.begin(); it != omni::stage.end(); ++it) {
-		if (serial["rank"] >= it->second) {
+		if (deser["rank"] >= it->second) {
 			util::fs::setW(util::fs::path::build({
 				"player",
 				"script",
