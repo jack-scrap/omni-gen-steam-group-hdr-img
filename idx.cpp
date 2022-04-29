@@ -47,6 +47,7 @@ Idx* idxMk(unsigned int i, char* c, unsigned int sz, std::string name, glm::vec3
 	Idx* _ = (Idx*) malloc(sizeof (Idx));
 
 	_->_sz = sz;
+	_->_data = (Cont**) malloc(_->_sz * sizeof (Cont*));
 	_->_i = i;
 
 	// index
@@ -76,7 +77,7 @@ Idx* idxMk(unsigned int i, char* c, unsigned int sz, std::string name, glm::vec3
 	for (int i = 0; i < _->_sz; i++) {
 		Cont* byte = contMk(c[i], glm::vec3((layout::stroke * 2) + (layout::idx[X] / 2), layout::idx[Y] / 2, (layout::stroke * 2) + (layout::idx[Z] / 2)) + glm::vec3(0.0, i * layout::idx[Y], 0.0));
 
-		_->_data = byte;
+		_->_data[i] = byte;
 
 		child[2 + i] = byte->_parent;
 	}
@@ -91,50 +92,69 @@ Idx* idxMk(unsigned int i, char* c, unsigned int sz, std::string name, glm::vec3
 }
 
 void idxDel(Idx* idx) {
-	if (idx->_data) {
-		contDel(idx->_data);
+	for (int i = 0; i < idx->_sz; i++) {
+		if (idx->_data[i]) {
+			contDel(idx->_data[i]);
+		}
 	}
 
 	free(idx);
 }
 
-void idxInsert(Idx* idx, Cont* byte) {
-	idx->_data = byte;
-	idx->_parent->_child[idx->_parent->_noChild - 1] = idx->_data->_parent;
+void idxPush(Idx* idx, Cont* byte) {
+	idx->_sz++;
+	idx->_data = (Cont**) realloc(idx->_data, idx->_sz * sizeof (Cont*));
+
+	idx->_parent->_noChild++;
+	idx->_parent->_child = (Obj**) realloc(idx->_parent->_child, idx->_parent->_noChild * sizeof (Cont*));
+
+	idx->_data[idx->_sz - 1] = byte;
+	idx->_parent->_child[idx->_parent->_noChild - 1] = idx->_data[idx->_sz - 1]->_parent;
 
 	// transform
 	glm::mat4 model = glm::mat4(1.0);
-	model = glm::translate(model, glm::vec3(layout::bordered(layout::idx[X]), layout::idx[Y], layout::bordered(layout::idx[Z])) / glm::vec3(2));
+	model = glm::translate(model, glm::vec3(glm::vec3(layout::bordered(layout::idx[X]), layout::idx[Y], layout::bordered(layout::idx[Z])) / glm::vec3(2)) + glm::vec3(0.0, (idx->_sz - 1) * layout::idx[Y], 0.0));
 
-	idx->_data->_parent->_model = model;
+	idx->_data[idx->_sz - 1]->_parent->_model = model;
 
 	objAcc(idx->_parent, glm::mat4(1.0));
 }
 
-Cont* idxMv(Idx* idx) {
-	Cont* _ = idx->_data;
+Cont* idxPop(Idx* idx) {
+	Cont* _ = nullptr;
 
-	idx->_data = nullptr;
-	idx->_parent->_child[idx->_parent->_noChild - 1] = nullptr;
+	if (idx->_sz) {
+		_ = idx->_data[idx->_sz - 1];
+
+		idx->_sz--;
+		idx->_data = (Cont**) realloc(idx->_data, idx->_sz * sizeof (Cont*));
+
+		idx->_parent->_noChild--;
+		idx->_parent->_child = (Obj**) realloc(idx->_parent->_child, idx->_parent->_noChild * sizeof (Cont*));
+	}
 
 	return _;
 }
 
 bool idxEq(Idx* lhs, Idx* rhs) {
-	bool _;
-
 	// null
-	if (!lhs->_data && !rhs->_data) {
-		_ = true;
+	if (!lhs->_sz && !rhs->_sz) {
+		return true;
 	}
 
-	if (!lhs->_data ^ !rhs->_data) {
-		_ = false;
+	if (!lhs->_sz ^ !rhs->_sz) {
+		return false;
 	}
 
-	if (lhs->_data && rhs->_data) {
-		_ = lhs->_data->_c == rhs->_data->_c;
+	if (lhs->_sz != rhs->_sz) {
+		return false;
 	}
 
-	return _;
+	if (lhs->_sz && rhs->_sz) {
+		for (int i = 0; i < lhs->_sz; i++) {
+			if (lhs->_data[i]->_c != rhs->_data[i]->_c) {
+				return false;
+			}
+		}
+	}
 }
