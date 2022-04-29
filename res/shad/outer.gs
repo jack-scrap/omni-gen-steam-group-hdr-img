@@ -13,13 +13,14 @@ uniform unsigned int sz;
 out vec3 _pos;
 
 void main() {
-	vec3[3] vtc = vec3[3](
+	vec3[2 * 2] vtc = vec3[2 * 2](
 		vec3(0.0, 0.0, 0.0),
 		vec3(10.0, 0.0, 0.0),
-		vec3(0.0, 10.0, 0.0)
+		vec3(0.0, 10.0, 0.0),
+		vec3(10.0, 10.0, 0.0)
 	);
 
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 2 * 2; i++) {
 		gl_Position = proj * view * model * vec4(vtc[i], 1.0);
 		_pos = gl_Position.xyz;
 
