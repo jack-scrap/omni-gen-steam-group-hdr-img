@@ -887,7 +887,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 				case nlohmann::json::value_t::number_unsigned: {
 					CBuff init = array::array(val["block"]);
 
-					Array* val = arrayMk((char*) init._ptr, init._x, key, X, loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), glm::radians(rot));
+					Array* val = arrayMk((char*) init._ptr, init._x, key, X, loc + glm::vec3(0.0, 0.0, -(layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2)), glm::radians(rot));
 
 					omni::assertion(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
@@ -903,7 +903,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 						case nlohmann::json::value_t::number_unsigned: {
 							CBuff init = array::matr(val["block"]);
 
-							Array* val = arrayMk((char*) init._ptr, init._x, init._y, key, loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), glm::radians(rot));
+							Array* val = arrayMk((char*) init._ptr, init._x, init._y, key, loc + glm::vec3(0.0, 0.0, -(layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2)), glm::radians(rot));
 
 							omni::assertion(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
@@ -935,7 +935,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 		case nlohmann::json::value_t::string: {
 			CBuff init = str(val["block"]);
 
-			Array* val = arrayMk((char*) init._ptr, init._x, key, X, loc + glm::vec3(0.0, 0.0, -((layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2))), glm::radians(rot));
+			Array* val = arrayMk((char*) init._ptr, init._x, key, X, loc + glm::vec3(0.0, 0.0, -(layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2)), glm::radians(rot));
 
 			omni::assertion(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
