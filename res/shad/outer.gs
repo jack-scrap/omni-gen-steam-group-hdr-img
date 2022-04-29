@@ -27,24 +27,23 @@ const float[3] outer = float[3](
 float thick = 0.2;
 
 void main() {
-	vec3[2 * 2] quad;
-	int i = 0;
-	for (int z = 0; z < 2; z++) {
-		for (int x = 0; x < 2; x++) {
-			quad[i] = vec3((bool(x) ? 1 : -1) * (outer[0] / 2), 0.0, z * -outer[2]);
+	vec3[4] strip = vec3[4](
+		vec3(-(outer[0] / 2), 0.0, 0.0),
+		vec3(-(outer[0] / 2), 0.0, -outer[2]),
+		vec3((outer[0] / 2), 0.0, -outer[2]),
+		vec3((outer[0] / 2), 0.0, 0.0)
+	);
 
-			i++;
-		}
-	}
+	for (int i = 0; i < 4 - 1; i++) {
+		for (int l = 0; l < 2; l++) {
+			for (int b = 0; b < 2; b++) {
+				vec3 vtx = strip[i + l] + vec3(0.0, b * -((thick * 2) + thick), 0.0);
 
-	for (int b = 0; b < 2; b++) {
-		for (int i = 0; i < 2 * 2; i++) {
-			vec3 vtx = quad[i] + (b * vec3(0.0, -((thick * 2) + thick), 0.0));
+				gl_Position = proj * view * model * vec4(vtx, 1.0);
+				_pos = gl_Position.xyz;
 
-			gl_Position = proj * view * model * vec4(vtx, 1.0);
-			_pos = gl_Position.xyz;
-
-			EmitVertex();
+				EmitVertex();
+			}
 		}
 
 		EndPrimitive();
