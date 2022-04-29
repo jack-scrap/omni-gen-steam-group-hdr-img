@@ -111,13 +111,13 @@ void truckDel(Truck* truck) {
 
 void truckAnim(Truck* truck, glm::vec3 loc, glm::vec3 rot) {
 	for (int i = 0; i < 2; i++) {
-		truck->_parent->_child[4 + (truck->_data->_x * 2 * 2) + i]->_active = true;
+		truck->_parent->_child[5 + ((truck->_data->_x + 1) * 2) + i]->_active = true;
 	}
 
 	objMv(truck->_parent, nullptr, loc, rot, Truck::_speed);
 
 	for (int i = 0; i < 2; i++) {
-		truck->_parent->_child[4 + (truck->_data->_x * 2 * 2) + i]->_active = false;
+		truck->_parent->_child[5 + ((truck->_data->_x + 1) * 2) + i]->_active = false;
 	}
 }
 
