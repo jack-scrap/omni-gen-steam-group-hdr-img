@@ -44,7 +44,7 @@ void main() {
 	float[3] outer = float[3](
 		bordered(bordered(idx[0])),
 		0.0,
-		bordered(bordered(idx[2]))
+		bordered(sz * bordered(idx[2]))
 	);
 
 	vec3[4] strip = vec3[4](

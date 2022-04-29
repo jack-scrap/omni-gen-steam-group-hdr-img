@@ -39,14 +39,18 @@ Truck* truckMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	// bed
 	Obj* bed = ptMk(Truck::_bedVtx, Truck::_bedIdx, 1, "main", "bed", "dir", false, glm::vec3(0.0), glm::vec3(0.0, M_PI / 2, 0.0));
 
-	bed->_uni = (GLint*) realloc(bed->_uni, (5 + 1) * sizeof (GLint));
-
 	bed->_prog.use();
+
+	bed->_uni = (GLint*) realloc(bed->_uni, (5 + 1) * sizeof (GLint));
 
 	bed->_uni[5] = glGetUniformLocation(bed->_prog._id, "sz");
 	glUniform1ui(bed->_uni[5], init->_x);
 
+	bed->_prog.unUse();
+
 	Obj* outer = ptMk(Truck::_bedVtx, Truck::_bedIdx, 1, "main", "outer", "dir", true, glm::vec3(0.0), glm::vec3(0.0, M_PI / 2, 0.0));
+
+	outer->_prog.use();
 
 	outer->_uni = (GLint*) realloc(outer->_uni, (5 + 1) * sizeof (GLint));
 
