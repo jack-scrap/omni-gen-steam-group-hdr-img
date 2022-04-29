@@ -24,8 +24,6 @@ const float[3] idx = float[3](
 	4
 );
 
-float thick = 0.2;
-
 float item(float bound) {
 	float _ = bound + (margin * 2);
 
@@ -59,7 +57,7 @@ void main() {
 	for (int i = 0; i < 4 - 1; i++) {
 		for (int l = 0; l < 2; l++) {
 			for (int b = 0; b < 2; b++) {
-				vec3 vtx = strip[i + l] + vec3(0.0, b * -((thick * 2) + thick), 0.0);
+				vec3 vtx = strip[i + l] + vec3(0.0, b * ht, 0.0);
 
 				gl_Position = proj * view * model * vec4(vtx, 1.0);
 				_pos = gl_Position.xyz;
