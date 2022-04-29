@@ -164,7 +164,7 @@ void cranePed(Crane* crane, float delta) {
 		objMv(crane->_parent->_child[Crane::TRACK], crane->_parent, offset, glm::vec3(0.0));
 	} else {
 		omni::err(omni::ERR_MV_RNG, {
-			"crane claw"
+			"crane head"
 		});
 	}
 
