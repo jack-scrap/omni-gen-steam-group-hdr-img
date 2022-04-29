@@ -18,6 +18,8 @@ const float[3] idx = float[3](
 	4
 );
 
+float thick = 0.2;
+
 void main() {
 	vec3[2 * 2] quad;
 	int i = 0;
@@ -31,7 +33,7 @@ void main() {
 
 	for (int b = 0; b < 2; b++) {
 		for (int i = 0; i < 2 * 2; i++) {
-			gl_Position = proj * view * model * vec4(quad[i] + (b * vec3(0.0, 0.2, 0.0)), 1.0);
+			gl_Position = proj * view * model * vec4(quad[i] + (b * vec3(0.0, thick, 0.0)), 1.0);
 			_pos = gl_Position.xyz;
 
 			EmitVertex();
