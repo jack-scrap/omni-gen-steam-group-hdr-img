@@ -58,9 +58,9 @@ Truck* truckMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	child[Truck::BED] = bed;
 	child[Truck::OUTER] = outer;
 
-	GLfloat thick = 0.2;
+	GLfloat ht = -0.2;
 
-	child[Truck::WELL] = objMk("truck/well", "obj", "dir", true, glm::vec3(-(layout::bordered(layout::idx[Z]) / 2), -thick, 0.0));
+	child[Truck::WELL] = objMk("truck/well", "obj", "dir", true, glm::vec3(-(layout::bordered(layout::idx[Z]) / 2), ht, 0.0));
 
 	child[Truck::TAIL] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-(init->_x * layout::idx[Z]) - (layout::stroke * 2), -layout::stroke, 0.0), rot);
 
@@ -77,7 +77,7 @@ Truck* truckMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 		for (int x = 0; x < init->_x + 1; x++) {
 			Obj* wheel = objMk("wheel", "obj", "dir", false);
 
-			child[5 + w] = objMk("rim", "obj", "dir", true, &wheel, 1, overhead + glm::vec3(x * -layout::bordered(layout::idx[Z]), -(1.0 + (thick * 2) + thick), (z ? 1 : -1) * (layout::bordered(layout::idx[X]) / 2)), glm::vec3(0.0, z * M_PI, 0.0));
+			child[5 + w] = objMk("rim", "obj", "dir", true, &wheel, 1, overhead + glm::vec3(x * -layout::bordered(layout::idx[Z]), -1.0 + (ht * 2) + ht, (z ? 1 : -1) * (layout::bordered(layout::idx[X]) / 2)), glm::vec3(0.0, z * M_PI, 0.0));
 
 			w++;
 		}
