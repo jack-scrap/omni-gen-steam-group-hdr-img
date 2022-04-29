@@ -29,12 +29,14 @@ void main() {
 		}
 	}
 
-	for (int i = 0; i < 2 * 2; i++) {
-		gl_Position = proj * view * model * vec4(quad[i], 1.0);
-		_pos = gl_Position.xyz;
+	for (int b = 0; b < 2; b++) {
+		for (int i = 0; i < 2 * 2; i++) {
+			gl_Position = proj * view * model * vec4(quad[i] + (b * vec3(0.0, 0.2, 0.0)), 1.0);
+			_pos = gl_Position.xyz;
 
-		EmitVertex();
+			EmitVertex();
+		}
+
+		EndPrimitive();
 	}
-
-	EndPrimitive();
 }
