@@ -19,18 +19,18 @@ const float[3] idx = float[3](
 );
 
 void main() {
-	vec3[2 * 2] vtc;
+	vec3[2 * 2] quad;
 	int i = 0;
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < 2; x++) {
-			vtc[i] = vec3((bool(x) ? 1 : -1) * (idx[0] / 2), 0.0, z * -idx[2]);
+			quad[i] = vec3((bool(x) ? 1 : -1) * (idx[0] / 2), 0.0, z * -idx[2]);
 
 			i++;
 		}
 	}
 
 	for (int i = 0; i < 2 * 2; i++) {
-		gl_Position = proj * view * model * vec4(vtc[i], 1.0);
+		gl_Position = proj * view * model * vec4(quad[i], 1.0);
 		_pos = gl_Position.xyz;
 
 		EmitVertex();
