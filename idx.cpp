@@ -121,7 +121,7 @@ void idxPush(Idx* idx, Cont* byte) {
 }
 
 Cont* idxPop(Idx* idx) {
-	Cont* _;
+	Cont* _ = nullptr;
 
 	if (idx->_sz) {
 		_ = idx->_data[idx->_sz - 1];
@@ -133,8 +133,6 @@ Cont* idxPop(Idx* idx) {
 		idx->_parent->_child = (Obj**) realloc(idx->_parent->_child, idx->_parent->_noChild * sizeof (Cont*));
 
 		idx->_parent->_child[idx->_parent->_noChild - 1] = nullptr;
-	} else {
-		_ = nullptr;
 	}
 
 	return _;
