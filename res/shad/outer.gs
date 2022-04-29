@@ -23,7 +23,7 @@ void main() {
 	int i = 0;
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < 2; x++) {
-			vtc[i] = vec3(x * -idx[0], 0.0, (bool(z) ? 1 : -1) * (idx[2] / 2));
+			vtc[i] = vec3(x * -idx[0], 0.0, (bool(z) ? 1 : -1) * (idx[2] / 2.0));
 
 			i++;
 		}
