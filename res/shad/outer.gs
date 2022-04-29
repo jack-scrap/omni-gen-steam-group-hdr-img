@@ -12,12 +12,18 @@ uniform unsigned int sz;
 
 out vec3 _pos;
 
+const float[3] idx = float[3](
+	2,
+	2,
+	4
+);
+
 void main() {
 	vec3[2 * 2] vtc;
 	int i = 0;
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < 2; x++) {
-			vtc[i] = vec3((bool(x) ? 1 : -1) * 10.0, 0.0, (bool(z) ? 1 : -1) * 10.0);
+			vtc[i] = vec3((bool(x) ? 1 : -1) * (idx[0] / 2), 0.0, (bool(z) ? 1 : -1) * (idx[2] / 2));
 
 			i++;
 		}
