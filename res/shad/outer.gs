@@ -18,6 +18,12 @@ const float[3] idx = float[3](
 	4
 );
 
+const float[3] outer = float[3](
+	6,
+	6,
+	8
+);
+
 float thick = 0.2;
 
 void main() {
@@ -25,7 +31,7 @@ void main() {
 	int i = 0;
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < 2; x++) {
-			quad[i] = vec3((bool(x) ? 1 : -1) * (idx[0] / 2), 0.0, z * -idx[2]);
+			quad[i] = vec3((bool(x) ? 1 : -1) * (outer[0] / 2), 0.0, z * -outer[2]);
 
 			i++;
 		}
