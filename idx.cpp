@@ -131,8 +131,6 @@ Cont* idxPop(Idx* idx) {
 
 		idx->_parent->_noChild--;
 		idx->_parent->_child = (Obj**) realloc(idx->_parent->_child, idx->_parent->_noChild * sizeof (Cont*));
-
-		idx->_parent->_child[idx->_parent->_noChild - 1] = nullptr;
 	}
 
 	return _;
