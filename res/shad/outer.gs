@@ -13,12 +13,15 @@ uniform unsigned int sz;
 out vec3 _pos;
 
 void main() {
-	vec3[2 * 2] vtc = vec3[2 * 2](
-		vec3(-10.0, 0.0, -10.0),
-		vec3(10.0, 0.0, -10.0),
-		vec3(-10.0, 0.0, 10.0),
-		vec3(10.0, 0.0, 10.0)
-	);
+	vec3[2 * 2] vtc;
+	int i = 0;
+	for (int z = 0; z < 2; z++) {
+		for (int x = 0; x < 2; x++) {
+			vtc[i] = vec3((bool(x) ? 1 : -1) * 10.0, 0.0, (bool(z) ? 1 : -1) * 10.0);
+
+			i++;
+		}
+	}
 
 	for (int i = 0; i < 2 * 2; i++) {
 		gl_Position = proj * view * model * vec4(vtc[i], 1.0);
