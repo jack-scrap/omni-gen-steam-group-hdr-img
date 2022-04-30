@@ -50,8 +50,8 @@ void main() {
 	vec3[4] strip = vec3[4](
 		vec3(-(outer[0] / 2), 0.0, 0.0),
 		vec3(-(outer[0] / 2), 0.0, -outer[2]),
-		vec3((outer[0] / 2), 0.0, -outer[2]),
-		vec3((outer[0] / 2), 0.0, 0.0)
+		vec3(outer[0] / 2, 0.0, -outer[2]),
+		vec3(outer[0] / 2, 0.0, 0.0)
 	);
 
 	// draw
