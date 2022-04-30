@@ -66,7 +66,7 @@ Truck* truckMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 
 	child[Truck::WELL] = objMk("truck/well", "obj", "dir", true, glm::vec3(-(layout::bordered(layout::idx[Z]) / 2), ht, 0.0));
 
-	child[Truck::TAIL] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-(init->_x * layout::idx[Z]) - (layout::stroke * 2), -layout::stroke, 0.0), rot);
+	child[Truck::TAIL] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-((init->_x * layout::idx[Z]) + (layout::stroke * 2)), -layout::stroke, 0.0), rot);
 
 	// data
 	_->_data = init;
