@@ -47,12 +47,15 @@ void main() {
 		bordered(sz * bordered(idx[2])) - (margin * 2)
 	);
 
-	vec3[2 * 2] vtc = vec3[2 * 2](
-		vec3(-(outer[0] / 2), 0.0, 0.0),
-		vec3(outer[0] / 2, 0.0, 0.0),
-		vec3(-(outer[0] / 2), 0.0, -outer[2]),
-		vec3(outer[0] / 2, 0.0, -outer[2])
-	);
+	vec3[2 * 2] vtc;
+	int i = 0;
+	for (int z = 0; z < 2; z++) {
+		for (int x = 0; x < 2; x++) {
+			vtc[i] = vec3((bool(x) ? 1 : -1) * (outer[0] / 2), 0.0, z * -outer[2]);
+
+			i++;
+		}
+	}
 
 	// draw
 	for (int b = 0; b < 2; b++) {
