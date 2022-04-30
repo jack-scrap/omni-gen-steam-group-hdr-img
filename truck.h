@@ -33,7 +33,6 @@ typedef struct Truck {
 	enum {
 		BED,
 		OUTER,
-		WELL,
 		TAIL,
 
 		DATA
