@@ -90,6 +90,7 @@ Truck* truckMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 		child[4 + ((init->_x + 1) * 2) + z] = objMk(Truck::_lightVtc, Truck::_lightIdc, 2 * 3, "obj", "alert", false, glm::vec3(-(layout::bordered(init->_x * layout::bordered(layout::idx[Z])) + (layout::margin * 2)), 0.0, (z ? 1 : -1) * layout::bordered(layout::idx[X] / 2)));
 	}
 
+	// wheel-well
 	for (int i = 0; i < init->_x; i++) {
 		child[4 + ((init->_x + 1) * 2) + 2 + i] = objMk("truck/well", "obj", "dir", true, glm::vec3(-((layout::bordered(layout::idx[Z]) / 2) + (i * layout::bordered(layout::idx[Z]))), ht, 0.0));
 	}
