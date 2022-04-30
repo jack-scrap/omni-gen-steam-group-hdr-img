@@ -42,9 +42,9 @@ float bordered(float bound) {
 
 void main() {
 	float[3] outer = float[3](
-		bordered(bordered(idx[0])),
+		bordered(bordered(idx[0])) - (margin * 2),
 		0.0,
-		bordered(sz * bordered(idx[2]))
+		bordered(sz * bordered(idx[2])) - (margin * 2)
 	);
 
 	vec3[2 * 2] vtc = vec3[2 * 2](
