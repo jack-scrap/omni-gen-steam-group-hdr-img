@@ -34,7 +34,7 @@ Truck* truckMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 
 	_->_ang = 0.0;
 
-	Obj* child[4 + ((init->_x + 1) * 2) + 2];
+	Obj* child[4 + ((init->_x + 1) * 2) + 2 + 1];
 
 	// bed
 	Obj* bed = ptMk(Truck::_bedVtx, Truck::_bedIdx, 1, "main", "bed", "dir", false, glm::vec3(0.0), glm::vec3(0.0, M_PI / 2, 0.0));
