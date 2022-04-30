@@ -92,7 +92,7 @@ Truck* truckMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 		child[5 + ((init->_x + 1) * 2) + z] = objMk(Truck::_lightVtc, Truck::_lightIdc, 2 * 3, "obj", "alert", false, glm::vec3(-layout::bordered(init->_x * layout::bordered(layout::idx[Z])), 0.0, z ? 1 : -1));
 	}
 
-	_->_parent = objMk("truck/front", "obj", "dir", true, child, sizeof child / sizeof *child, loc + glm::vec3(2.4, 1.3, 0.0), rot);
+	_->_parent = objMk("truck/front", "obj", "dir", true, child, sizeof child / sizeof *child, loc + glm::vec3(2.4, 1.0 + 1.3, 0.0), rot);
 
 	// offset
 	glm::vec3 offset = _->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
