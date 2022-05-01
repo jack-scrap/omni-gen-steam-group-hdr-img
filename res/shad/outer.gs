@@ -2,7 +2,7 @@
 
 layout (points) in;
 
-layout (triangle_strip, max_vertices = 44) out;
+layout (triangle_strip, max_vertices = 100) out;
 
 uniform mat4 model;
 uniform mat4 view;
@@ -23,6 +23,8 @@ const float[3] idx = float[3](
 	2,
 	4
 );
+
+float bevel = 0.2;
 
 float item(float bound) {
 	float _ = bound + (margin * 2);
@@ -113,6 +115,29 @@ void main() {
 			vec3 vtx = cap[i] + vec3((bool(b) ? 1 : -1) * (outer[0] / 2), 0.0, 0.0);
 
 			gl_Position = proj * view * model * vec4(vtx, 1.0);
+			_pos = gl_Position.xyz;
+
+			EmitVertex();
+		}
+
+		EndPrimitive();
+	}
+
+	// bevel
+	vec3[(2 * 2) + 2] beveledOuter = vec3[(2 * 2) + 2](
+		vec3(-(outer[0] / 2), 0.0, 0.0),
+		vec3(outer[0] / 2, 0.0, 0.0),
+		vec3(-(outer[0] / 2), 0.0, -(outer[2] - bevel)),
+		vec3(outer[0] / 2, 0.0, -(outer[2] - bevel)),
+		vec3(-((outer[0] / 2) - bevel), 0.0, -outer[2]),
+		vec3((outer[0] / 2) - bevel, 0.0, -outer[2])
+	);
+
+	for (int b = 0; b < 2; b++) {
+		for (int i = 0; i < beveledOuter.length - 1; i++) {
+			vec3 vtx = beveledOuter[i];
+
+			gl_Position = proj * view * model * vec4(vtx + vec3(0.0, b * ht, 0.0) + vec3(0.0, 5.0, 0.0), 1.0);
 			_pos = gl_Position.xyz;
 
 			EmitVertex();
