@@ -110,6 +110,21 @@ void main() {
 		EndPrimitive();
 	}
 
+	for (int i = 0; i < beveledOuter.length - 1; i++) {
+		for (int l = 0; l < 2; l++) {
+			for (int b = 0; b < 2; b++) {
+				vec3 vtx = beveledOuter[i + l];
+
+				gl_Position = proj * view * model * vec4(vtx + vec3(0.0, b * ht, 0.0), 1.0);
+				_pos = gl_Position.xyz;
+
+				EmitVertex();
+			}
+		}
+
+		EndPrimitive();
+	}
+
 	for (int b = 0; b < 2; b++) {
 		for (int i = 0; i < 2 * 2; i++) {
 			vec3 vtx = cap[i] + vec3((bool(b) ? 1 : -1) * (outer[0] / 2), 0.0, 0.0);
