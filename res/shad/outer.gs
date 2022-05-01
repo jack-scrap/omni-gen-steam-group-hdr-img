@@ -47,7 +47,7 @@ void main() {
 		bordered(sz * bordered(idx[2]))
 	);
 
-	vec3[4] strip = vec3[4](
+	vec3[4] stripOuter = vec3[4](
 		vec3(-(outer[0] / 2), 0.0, 0.0),
 		vec3(-(outer[0] / 2), 0.0, -outer[2]),
 		vec3(outer[0] / 2, 0.0, -outer[2]),
@@ -72,7 +72,7 @@ void main() {
 	for (int i = 0; i < outer.length - 1; i++) {
 		for (int l = 0; l < 2; l++) {
 			for (int b = 0; b < 2; b++) {
-				vec3 vtx = strip[i + l] + vec3(0.0, b * ht, 0.0);
+				vec3 vtx = stripOuter[i + l] + vec3(0.0, b * ht, 0.0);
 
 				gl_Position = proj * view * model * vec4(vtx, 1.0);
 				_pos = gl_Position.xyz;
@@ -85,10 +85,10 @@ void main() {
 	}
 
 	for (int y = 0; y < 2; y++) {
-		for (int i = 0; i < strip.length - 1; i++) {
+		for (int i = 0; i < stripOuter.length - 1; i++) {
 			for (int l = 0; l < 2; l++) {
 				for (int b = 0; b < 2; b++) {
-					vec3 vtx = strip[i + l];
+					vec3 vtx = stripOuter[i + l];
 					if (bool(b)) {
 						vtx = stripInner[i + l];
 					}
