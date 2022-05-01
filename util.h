@@ -177,7 +177,24 @@ namespace util {
 
 		int norm(int lhs, int rhs);
 
-		int clamp(int i, int sign, int roof);
+		template <typename T>
+		T clamp(T i, int sign, T roof) {
+			T _ = i;
+
+			if (sign == 1) {
+				if (_ > roof) {
+					_ = roof;
+				}
+			}
+
+			if (sign == -1) {
+				if (_ < roof) {
+					_ = roof;
+				}
+			}
+
+			return _;
+		}
 
 		namespace idx {
 			unsigned int arr(Coord st, Coord bound);
