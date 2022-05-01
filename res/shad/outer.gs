@@ -2,7 +2,7 @@
 
 layout (points) in;
 
-layout (triangle_strip, max_vertices = 12) out;
+layout (triangle_strip, max_vertices = 36) out;
 
 uniform mat4 model;
 uniform mat4 view;
@@ -54,6 +54,13 @@ void main() {
 		vec3(outer[0] / 2, 0.0, 0.0)
 	);
 
+	vec3[4] stripInner = vec3[4](
+		vec3(-((outer[0] / 2) - stroke), 0.0, 0.0),
+		vec3(-((outer[0] / 2) - stroke), 0.0, -(outer[2] - stroke)),
+		vec3((outer[0] / 2) - stroke, 0.0, -(outer[2] - stroke)),
+		vec3((outer[0] / 2) - stroke, 0.0, 0.0)
+	);
+
 	// draw
 	for (int i = 0; i < outer.length - 1; i++) {
 		for (int l = 0; l < 2; l++) {
@@ -68,5 +75,29 @@ void main() {
 		}
 
 		EndPrimitive();
+	}
+
+	for (int y = 0; y < 2; y++) {
+		for (int i = 0; i < strip.length - 1; i++) {
+			for (int l = 0; l < 2; l++) {
+				for (int b = 0; b < 2; b++) {
+					vec3 vtx = strip[i + l];
+					if (bool(b)) {
+						vtx = stripInner[i + l];
+					}
+
+					if (bool(y)) {
+						vtx += vec3(0.0, y * ht, 0.0);
+					}
+
+					gl_Position = proj * view * model * vec4(vtx, 1.0);
+					_pos = gl_Position.xyz;
+
+					EmitVertex();
+				}
+			}
+
+			EndPrimitive();
+		}
 	}
 }
