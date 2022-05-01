@@ -57,7 +57,7 @@ void main() {
 		}
 	}
 
-	// draw
+	/* draw */
 	for (int b = 0; b < 2; b++) {
 		for (int i = 0; i < 2 * 2; i++) {
 			vec3 vtx = vtc[i] + vec3(0.0, b * ht, 0.0);

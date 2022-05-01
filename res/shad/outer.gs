@@ -89,7 +89,7 @@ void main() {
 		vec3((outer[0] / 2) - stroke, 0.0, 0.0)
 	);
 
-	// draw
+	/* draw */
 	for (int y = 0; y < 2; y++) {
 		for (int i = 0; i < beveledOuter.length - 1; i++) {
 			for (int l = 0; l < 2; l++) {
