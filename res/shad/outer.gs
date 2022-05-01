@@ -70,44 +70,44 @@ void main() {
 		vec3(stroke, ht, 0.0)
 	);
 
+	// bevel
+	vec3[(2 * 2) + 2] beveledOuter = vec3[(2 * 2) + 2](
+		vec3(-(outer[0] / 2), 0.0, 0.0),
+		vec3(-(outer[0] / 2), 0.0, -(outer[2] - bevel)),
+		vec3(-((outer[0] / 2) - bevel), 0.0, -outer[2]),
+		vec3((outer[0] / 2) - bevel, 0.0, -outer[2]),
+		vec3(outer[0] / 2, 0.0, -(outer[2] - bevel)),
+		vec3(outer[0] / 2, 0.0, 0.0)
+	);
+
+	vec3[(2 * 2) + 2] beveledInner = vec3[(2 * 2) + 2](
+		vec3(-((outer[0] / 2) - stroke), 0.0, 0.0),
+		vec3(-((outer[0] / 2) - stroke), 0.0, -((outer[2] - bevel) - stroke)),
+		vec3(-(((outer[0] / 2) - bevel) - stroke), 0.0, -(outer[2] - stroke)),
+		vec3(((outer[0] / 2) - bevel) - stroke, 0.0, -(outer[2] - stroke)),
+		vec3((outer[0] / 2) - stroke, 0.0, -((outer[2] - bevel) - stroke)),
+		vec3((outer[0] / 2) - stroke, 0.0, 0.0)
+	);
+
 	// draw
-	for (int i = 0; i < outer.length - 1; i++) {
-		for (int l = 0; l < 2; l++) {
-			for (int b = 0; b < 2; b++) {
-				vec3 vtx = stripOuter[i + l] + vec3(0.0, b * ht, 0.0);
-
-				gl_Position = proj * view * model * vec4(vtx, 1.0);
-				_pos = gl_Position.xyz;
-
-				EmitVertex();
-			}
-		}
-
-		EndPrimitive();
-	}
-
 	for (int y = 0; y < 2; y++) {
-		for (int i = 0; i < stripOuter.length - 1; i++) {
+		for (int i = 0; i < beveledOuter.length - 1; i++) {
 			for (int l = 0; l < 2; l++) {
 				for (int b = 0; b < 2; b++) {
-					vec3 vtx = stripOuter[i + l];
+					vec3 vtx = beveledOuter[i + l];
 					if (bool(b)) {
-						vtx = stripInner[i + l];
+						vtx = beveledInner[i + l];
 					}
 
-					if (bool(y)) {
-						vtx += vec3(0.0, y * ht, 0.0);
-					}
-
-					gl_Position = proj * view * model * vec4(vtx, 1.0);
+					gl_Position = proj * view * model * vec4(vtx + vec3(0.0, y * ht, 0.0), 1.0);
 					_pos = gl_Position.xyz;
 
 					EmitVertex();
 				}
 			}
-
-			EndPrimitive();
 		}
+
+		EndPrimitive();
 	}
 
 	for (int b = 0; b < 2; b++) {
@@ -115,29 +115,6 @@ void main() {
 			vec3 vtx = cap[i] + vec3((bool(b) ? 1 : -1) * (outer[0] / 2), 0.0, 0.0);
 
 			gl_Position = proj * view * model * vec4(vtx, 1.0);
-			_pos = gl_Position.xyz;
-
-			EmitVertex();
-		}
-
-		EndPrimitive();
-	}
-
-	// bevel
-	vec3[(2 * 2) + 2] beveledOuter = vec3[(2 * 2) + 2](
-		vec3(-(outer[0] / 2), 0.0, 0.0),
-		vec3(outer[0] / 2, 0.0, 0.0),
-		vec3(-(outer[0] / 2), 0.0, -(outer[2] - bevel)),
-		vec3(outer[0] / 2, 0.0, -(outer[2] - bevel)),
-		vec3(-((outer[0] / 2) - bevel), 0.0, -outer[2]),
-		vec3((outer[0] / 2) - bevel, 0.0, -outer[2])
-	);
-
-	for (int b = 0; b < 2; b++) {
-		for (int i = 0; i < beveledOuter.length - 1; i++) {
-			vec3 vtx = beveledOuter[i];
-
-			gl_Position = proj * view * model * vec4(vtx + vec3(0.0, b * ht, 0.0) + vec3(0.0, 5.0, 0.0), 1.0);
 			_pos = gl_Position.xyz;
 
 			EmitVertex();
