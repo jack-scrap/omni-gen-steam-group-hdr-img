@@ -2,7 +2,7 @@
 
 layout (points) in;
 
-layout (triangle_strip, max_vertices = 44) out;
+layout (triangle_strip, max_vertices = 68) out;
 
 uniform mat4 model;
 uniform mat4 view;
