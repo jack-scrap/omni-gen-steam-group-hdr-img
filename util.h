@@ -121,8 +121,6 @@ namespace util {
 
 		glm::vec3 vec(nlohmann::json deser);
 
-		StreetSign* streetSign(nlohmann::json deser);
-
 		std::vector<Obj*> path(nlohmann::json path, nlohmann::json node, nlohmann::json status);
 
 		Obj* prop(nlohmann::json deser);
@@ -131,6 +129,8 @@ namespace util {
 		std::vector<T> ls(nlohmann::json deser);
 
 		CBuff str(nlohmann::json deser);
+
+		StreetSign* streetSign(nlohmann::json deser);
 
 		namespace array {
 			CBuff dim(nlohmann::json deser, CBuff buff, int i);

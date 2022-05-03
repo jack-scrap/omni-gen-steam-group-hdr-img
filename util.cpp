@@ -785,6 +785,35 @@ CBuff util::json::str(nlohmann::json deser) {
 	return _;
 }
 
+StreetSign* util::json::streetSign(nlohmann::json deser) {
+	std::vector<bool> pass = ls<bool>(deser["pass"]);
+
+	unsigned int no = pass.size();
+	bool* array = (bool*) malloc(no * sizeof (bool));
+	for (int i = 0; i < no; i++) {
+		array[i] = pass[i];
+	}
+
+	glm::vec3 loc = glm::vec3(0.0);
+	if (deser.contains("loc")) {
+		loc = vec(deser["loc"]);
+	}
+
+	glm::vec3 rot = glm::vec3(0.0);
+	if (deser.contains("rot")) {
+		rot = vec(deser["rot"]);
+	}
+
+	StreetSign* _ = streetSignMk({
+		array,
+		no
+	}, loc, glm::radians(rot));
+
+	omni::assertion(!phys::aabbGround(_->_parent), "Street sign clipping into ground plane");
+
+	return _;
+}
+
 CBuff util::json::array::array(nlohmann::json deser) {
 	CBuff _;
 
@@ -965,35 +994,6 @@ glm::vec3 util::json::vec(nlohmann::json deser) {
 	for (int a = 0; a < 3; a++) {
 		_[a] = deser[a];
 	}
-
-	return _;
-}
-
-StreetSign* util::json::streetSign(nlohmann::json deser) {
-	std::vector<bool> pass = ls<bool>(deser["pass"]);
-
-	unsigned int no = pass.size();
-	bool* array = (bool*) malloc(no * sizeof (bool));
-	for (int i = 0; i < no; i++) {
-		array[i] = pass[i];
-	}
-
-	glm::vec3 loc = glm::vec3(0.0);
-	if (deser.contains("loc")) {
-		loc = vec(deser["loc"]);
-	}
-
-	glm::vec3 rot = glm::vec3(0.0);
-	if (deser.contains("rot")) {
-		rot = vec(deser["rot"]);
-	}
-
-	StreetSign* _ = streetSignMk({
-		array,
-		no
-	}, loc, glm::radians(rot));
-
-	omni::assertion(!phys::aabbGround(_->_parent), "Street sign clipping into ground plane");
 
 	return _;
 }
