@@ -71,7 +71,7 @@ void main() {
 	);
 
 	// bevel
-	vec3[(2 * 2) + 2] beveledOuter = vec3[(2 * 2) + 2](
+	vec3[2 + (2 * 2)] beveledOuter = vec3[2 + (2 * 2)](
 		vec3(-(outer[0] / 2), 0.0, 0.0),
 		vec3(-(outer[0] / 2), 0.0, -(outer[2] - bevel)),
 		vec3(-((outer[0] / 2) - bevel), 0.0, -outer[2]),
