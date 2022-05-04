@@ -18,7 +18,7 @@ vec2 norm(vec2 vec) {
 }
 
 void main() {
-	vec2 orth = norm(gl_in[1].gl_Position.xz - gl_in[0].gl_Position.xy);
+	vec2 orth = norm(gl_in[1].gl_Position.xz - gl_in[0].gl_Position.xz);
 
 	for	(int i = 0; i < 2; i++) {
 		for	(int b = 0; b < 2; b++) {
