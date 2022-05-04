@@ -821,13 +821,10 @@ CBuff util::json::array::array(nlohmann::json deser) {
 	_._y = 1;
 	_._z = 1;
 	_._ptr = (char*) malloc(_._x);
-	int c = 0;
 	for (int i = 0; i < _._x; i++) {
 		omni::assertion(ascii(deser[i]), std::string("Data at index [") + std::to_string(i) + std::string("] not ASCII applicable"));
 
-		((char*) _._ptr)[c] = (char) ((int) deser[i]);
-
-		c++;
+		((char*) _._ptr)[i] = (char) ((int) deser[i]);
 	}
 
 	return _;
