@@ -12,6 +12,7 @@
 #include "obj.h"
 #include "c_buff.h"
 #include "var.h"
+#include "mark.h"
 #include "lim.h"
 #include "cone.h"
 #include "street_sign.h"
@@ -143,6 +144,7 @@ namespace util {
 		}
 
 		namespace bound {
+			Mark* mark(nlohmann::json deser);
 			Lim* lim(nlohmann::json deser);
 			Cone* area(nlohmann::json deser);
 		}

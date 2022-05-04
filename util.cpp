@@ -1091,6 +1091,30 @@ Obj* util::json::prop(nlohmann::json deser) {
 	return _;
 }
 
+Mark* util::json::bound::mark(nlohmann::json deser) {
+	unsigned int status;
+	if (deser["status"] == "pass") {
+		status = PASS;
+	}
+
+	if (deser["status"] == "halt") {
+		status = HALT;
+	}
+
+	if (deser["status"] == "alert") {
+		status = ALERT;
+	}
+
+	GLfloat val[2][2] = {
+		deser["val"][0][X], deser["val"][0][Y],
+		deser["val"][1][X], deser["val"][1][Y]
+	};
+
+	Mark* _ = markMk(&val[0], status);
+
+	return _;
+}
+
 Lim* util::json::bound::lim(nlohmann::json deser) {
 	unsigned int axis;
 	if (deser["axis"] == "X") {
