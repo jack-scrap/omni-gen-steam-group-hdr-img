@@ -1105,10 +1105,15 @@ Mark* util::json::bound::mark(nlohmann::json deser) {
 		status = ALERT;
 	}
 
-	GLfloat val[2][2] = {
-		deser["val"][0][X], deser["val"][0][Y],
-		deser["val"][1][X], deser["val"][1][Y]
-	};
+	GLfloat val[2][2];
+
+	for (int j = 0; j < 2; j++) {
+		std::vector<GLfloat> pt = util::json::ls<GLfloat>(deser["val"][j]);
+
+		for (int i = 0; i < 2; i++) {
+			val[j][i] = pt[i];
+		}
+	}
 
 	Mark* _ = markMk(&val[0], status);
 
