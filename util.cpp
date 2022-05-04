@@ -855,9 +855,9 @@ CBuff util::json::array::tens(nlohmann::json deser) {
 	_._x = deser[0][0].size();
 	_._y = deser[0].size();
 	_._z = deser.size();
-	_._ptr = (char*) malloc(_._x * _._y * _._x);
+	_._ptr = (char*) malloc(_._x * _._y * _._z);
 	int c = 0;
-	for (int k = 0; k < _._y; k++) {
+	for (int k = 0; k < _._z; k++) {
 		for (int j = 0; j < _._y; j++) {
 			for (int i = 0; i < _._x; i++) {
 				omni::assert(ascii(deser[k][j][i]), std::string("Data at index [") + std::to_string(j) + "][" + std::to_string(i) + std::string("] not ASCII applicable"));
