@@ -1503,11 +1503,14 @@ GLuint util::tex::rd(std::string fName) {
 
 	SDL_Texture* texSdl = SDL_CreateTextureFromSurface(disp->_rend, surf);
 
+	int dim[2];
+	SDL_QueryTexture(texSdl, NULL, NULL, &dim[0], &dim[1]);
+
 	SDL_Rect rect;
 	rect.x = 0;
 	rect.y = 0;
-	rect.w = 100;
-	rect.h = 100;
+	rect.w = dim[X];
+	rect.h = dim[Y];
 
 	SDL_RenderCopy(disp->_rend, texSdl, &rect, &rect);
 
