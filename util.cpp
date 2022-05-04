@@ -25,7 +25,9 @@ T util::fs::rd(std::string fName) {
 template <>
 std::string util::fs::rd<std::string>(std::string fName) {
 	std::ifstream in;
-	in.open(fName);
+	in.open(path::build({
+		fName
+	}));
 
 	std::string cont;
 
