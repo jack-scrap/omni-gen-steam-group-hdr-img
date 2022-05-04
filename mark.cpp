@@ -15,11 +15,10 @@ Mark* markMk(GLfloat val[2][2], unsigned int status) {
 		}
 	}
 
-	GLfloat vtc[2][3] = {
-		0.0
-	};
+	GLfloat vtc[2][3];
 	for (int b = 0; b < 2; b++) {
 		vtc[b][X] = _->_val[b][X];
+		vtc[b][Y] = 0.0;
 		vtc[b][Z] = _->_val[b][Y];
 	}
 

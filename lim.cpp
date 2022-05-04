@@ -15,10 +15,10 @@ Lim* limMk(unsigned int axis, GLfloat val, unsigned int status) {
 	_->_axis = axis;
 	_->_val = val;
 
-	GLfloat vtc[2][3] = {
-		0.0
-	};
+	GLfloat vtc[2][3];
 	for (int b = 0; b < 2; b++) {
+		vtc[b][Y] = 0.0;
+
 		switch (axis) {
 			case X:
 				vtc[b][X] = _->_val;
