@@ -558,29 +558,29 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 		unsigned int status;
 		if (deser["mark"][i]["status"] == "halt") {
-			status = Lim::HALT;
+			status = HALT;
 		}
 
 		if (deser["mark"][i]["status"] == "alert") {
-			status = Lim::ALERT;
+			status = ALERT;
 		}
 
 		std::string frag;
 		bool active;
 		switch (status) {
-			case Lim::PASS:
+			case PASS:
 				frag = "solid";
 				active = false;
 
 				break;
 
-			case Lim::HALT:
+			case HALT:
 				frag = "solid";
 				active = true;
 
 				break;
 
-			case Lim::ALERT:
+			case ALERT:
 				frag = "alertRoad";
 				active = true;
 

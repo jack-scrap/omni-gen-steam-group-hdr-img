@@ -9,17 +9,17 @@ Road* roadMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, unsigned int stat
 
 	std::string name;
 	switch (_->_status) {
-		case Lim::PASS:
+		case PASS:
 			name = "solid";
 
 			break;
 
-		case Lim::HALT:
+		case HALT:
 			name = "solid";
 
 			break;
 
-		case Lim::ALERT:
+		case ALERT:
 			name = "alert";
 
 			break;

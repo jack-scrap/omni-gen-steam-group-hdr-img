@@ -9,12 +9,6 @@ typedef struct Lim {
 	Obj* _parent;
 
 	static GLushort _idc[2];
-
-	enum {
-		PASS,
-		HALT,
-		ALERT
-	};
 } Lim;
 
 Lim* limMk(unsigned int axis, GLfloat val, unsigned int status);

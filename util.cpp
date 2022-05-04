@@ -1103,15 +1103,15 @@ Lim* util::json::bound::lim(nlohmann::json val) {
 
 	unsigned int status;
 	if (val["status"] == "pass") {
-		status = Lim::PASS;
+		status = PASS;
 	}
 
 	if (val["status"] == "halt") {
-		status = Lim::HALT;
+		status = HALT;
 	}
 
 	if (val["status"] == "alert") {
-		status = Lim::ALERT;
+		status = ALERT;
 	}
 
 	Lim* _ = limMk(axis, val["val"], status);

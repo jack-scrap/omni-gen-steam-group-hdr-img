@@ -37,19 +37,19 @@ Lim* limMk(unsigned int axis, GLfloat val, unsigned int status) {
 	std::string frag;
 	bool active;
 	switch (status) {
-		case Lim::PASS:
+		case PASS:
 			frag = "solid";
 			active = false;
 
 			break;
 
-		case Lim::HALT:
+		case HALT:
 			frag = "solid";
 			active = true;
 
 			break;
 
-		case Lim::ALERT:
+		case ALERT:
 			frag = "alertRoad";
 			active = true;
 
