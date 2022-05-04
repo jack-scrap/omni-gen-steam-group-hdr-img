@@ -48,7 +48,6 @@ template <>
 std::vector<std::string> util::fs::rd<std::vector<std::string>>(std::string fName) {
 	std::ifstream in;
 	in.open(path::build({
-		path::curr,
 		fName
 	}));
 
@@ -215,7 +214,6 @@ void util::fs::cp(std::string src, std::string dest) {
 
 std::vector<std::map<std::string, std::string>> util::fs::ls(std::string path) {
 	std::string full = path::build({
-		path::curr,
 		path
 	});
 	auto dir = opendir(full.c_str());
