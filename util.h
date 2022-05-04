@@ -143,7 +143,7 @@ namespace util {
 		}
 
 		namespace bound {
-			Lim* lim(nlohmann::json val);
+			Lim* lim(nlohmann::json deser);
 			Cone* area(nlohmann::json deser);
 		}
 	}

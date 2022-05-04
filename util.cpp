@@ -1091,30 +1091,30 @@ Obj* util::json::prop(nlohmann::json deser) {
 	return _;
 }
 
-Lim* util::json::bound::lim(nlohmann::json val) {
+Lim* util::json::bound::lim(nlohmann::json deser) {
 	unsigned int axis;
-	if (val["axis"] == "X") {
+	if (deser["axis"] == "X") {
 		axis = X;
 	}
 
-	if (val["axis"] == "Z") {
+	if (deser["axis"] == "Z") {
 		axis = Z;
 	}
 
 	unsigned int status;
-	if (val["status"] == "pass") {
+	if (deser["status"] == "pass") {
 		status = PASS;
 	}
 
-	if (val["status"] == "halt") {
+	if (deser["status"] == "halt") {
 		status = HALT;
 	}
 
-	if (val["status"] == "alert") {
+	if (deser["status"] == "alert") {
 		status = ALERT;
 	}
 
-	Lim* _ = limMk(axis, val["val"], status);
+	Lim* _ = limMk(axis, deser["val"], status);
 
 	omni::assert(!phys::aabbGround(_->_parent), "Limit clipping into ground plane");
 
