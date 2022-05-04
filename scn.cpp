@@ -548,15 +548,46 @@ void scn::init(std::string stage, unsigned int lvl) {
 	// mark
 	for (int i = 0; i < deser["mark"].size(); i++) {
 		GLfloat vtc[2 * 2 * 3] = {
-			deser["mark"][i][0][X], 0.0, deser["mark"][i][0][Y],
-			deser["mark"][i][1][X], 0.0, deser["mark"][i][1][Y]
+			deser["mark"][i]["val"][0][X], 0.0, deser["mark"][i]["val"][0][Y],
+			deser["mark"][i]["val"][1][X], 0.0, deser["mark"][i]["val"][1][Y]
 		};
 
 		GLushort idc[2] = {
 			0, 1
 		};
 
-		Obj* line = lineMk(vtc, idc, sizeof idc / sizeof *idc, "main", "thick", "solid", true);
+		unsigned int status;
+		if (deser["mark"][i]["status"] == "halt") {
+			status = Lim::HALT;
+		}
+
+		if (deser["mark"][i]["status"] == "alert") {
+			status = Lim::ALERT;
+		}
+
+		std::string frag;
+		bool active;
+		switch (status) {
+			case Lim::PASS:
+				frag = "solid";
+				active = false;
+
+				break;
+
+			case Lim::HALT:
+				frag = "solid";
+				active = true;
+
+				break;
+
+			case Lim::ALERT:
+				frag = "alertRoad";
+				active = true;
+
+				break;
+		}
+
+		Obj* line = lineMk(vtc, idc, sizeof idc / sizeof *idc, "main", "thick", frag, true);
 
 		obj.push_back(line);
 		prim.push_back(Mesh::LINE);
