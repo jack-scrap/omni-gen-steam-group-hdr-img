@@ -181,7 +181,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 		coneDel((Cone*) (((Cone**) boundArea._ptr) + i));
 	}
 
-	for (size_t i = 0; i < noData; i++) {
+	for (int i = 0; i < noData; i++) {
 		objDel(prop[i]);
 	}
 
