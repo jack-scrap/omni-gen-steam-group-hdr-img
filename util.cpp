@@ -1,5 +1,4 @@
 #define GLM_ENABLE_EXPERIMENTAL
-#define STB_IMAGE_IMPLEMENTATION
 
 #include <iostream>
 #include <sstream>
@@ -18,7 +17,6 @@
 #include "line.h"
 #include "omni.h"
 #include "layout.h"
-#include "stb_image.h"
 
 template <typename T>
 T util::fs::rd(std::string fName) {
@@ -1498,19 +1496,28 @@ GLuint util::tex::rd(std::string fName) {
 		return 0;
 	}
 
-	int dim[2];
-	int chan;
-	GLubyte* data = stbi_load(path.c_str(), &dim[X], &dim[Y], &chan, 0);
+	SDL_Surface* surf = SDL_LoadBMP(util::fs::path::build({
+		"res",
+		fName
+	}).c_str());
 
-	if (data) {
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, dim[X], dim[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+	SDL_Texture* texSdl = SDL_CreateTextureFromSurface(disp->_rend, surf);
+
+	SDL_Rect rect;
+	rect.x = 0;
+	rect.y = 0;
+	rect.w = 100;
+	rect.h = 100;
+
+	SDL_RenderCopy(disp->_rend, texSdl, &rect, &rect);
+
+	if (surf->pixels) {
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, rect.w, rect.h, 0, GL_RGB, GL_UNSIGNED_BYTE, surf->pixels);
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
 		glGenerateMipmap(GL_TEXTURE_2D);
-
-		stbi_image_free(data);
 	} else {
 		omni::err(omni::ERR_RD_TEX, {
 			fName
