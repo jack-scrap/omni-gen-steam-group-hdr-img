@@ -158,27 +158,27 @@ void scn::init(std::string stage, unsigned int lvl) {
 	}
 
 	// vehicle
-	for (size_t i = 0; i < crane._sz; i += sizeof (Crane*)) {
-		craneDel((Crane*) (((Crane**) crane._ptr) + i));
+	for (int i = 0; i < crane._sz / sizeof (Crane*); i++) {
+		craneDel(((Crane**) crane._ptr)[i]);
 	}
 
-	for (size_t i = 0; i < truck._sz; i += sizeof (Truck*)) {
-		truckDel((Truck*) (((Truck**) truck._ptr) + i));
+	for (int i = 0; i < truck._sz / sizeof (Truck*); i++) {
+		truckDel(((Truck**) truck._ptr)[i]);
 	}
 
-	for (size_t i = 0; i < cargoShip._sz; i += sizeof (CargoShip*)) {
-		cargoShipDel((CargoShip*) (((CargoShip**) cargoShip._ptr) + i));
+	for (int i = 0; i < cargoShip._sz / sizeof (CargoShip*); i++) {
+		cargoShipDel(((CargoShip**) cargoShip._ptr)[i]);
 	}
 
 	obj.clear();
 
 	// bound
-	for (size_t i = 0; i < boundRng._sz; i += sizeof (Lim*)) {
-		limDel((Lim*) (((Lim**) boundRng._ptr) + i));
+	for (int i = 0; i < boundRng._sz / sizeof (Lim*); i++) {
+		limDel(((Lim**) boundRng._ptr)[i]);
 	}
 
-	for (size_t i = 0; i < boundArea._sz; i += sizeof (Cone*)) {
-		coneDel((Cone*) (((Cone**) boundArea._ptr) + i));
+	for (int i = 0; i < boundArea._sz / sizeof (Cone*); i++) {
+		coneDel(((Cone**) boundArea._ptr)[i]);
 	}
 
 	for (int i = 0; i < noData; i++) {
@@ -554,11 +554,11 @@ void scn::init(std::string stage, unsigned int lvl) {
 	}
 
 	// bound
-	boundRng._sz = deser["bound"]["rng"].size();
-	boundRng._ptr = (Lim**) malloc(boundRng._sz * sizeof (Lim*));
+	boundRng._sz = deser["bound"]["rng"].size() * sizeof (Lim*);
+	boundRng._ptr = (Lim**) malloc(boundRng._sz);
 
-	boundArea._sz = deser["bound"]["area"].size();
-	boundArea._ptr = (Cone**) malloc(boundArea._sz * sizeof (Cone*));
+	boundArea._sz = deser["bound"]["area"].size() * sizeof (Cone*);
+	boundArea._ptr = (Cone**) malloc(boundArea._sz);
 
 	for (const auto& entry : deser["bound"].items()) {
 		int i = 0;
@@ -594,8 +594,8 @@ void scn::init(std::string stage, unsigned int lvl) {
 	}
 
 	// control-flow
-	streetSign._sz = deser["ctrl"].size();
-	streetSign._ptr = (StreetSign**) malloc(streetSign._sz * sizeof (StreetSign*));
+	streetSign._sz = deser["ctrl"].size() * sizeof (StreetSign*);
+	streetSign._ptr = (StreetSign**) malloc(streetSign._sz);
 
 	i = 0;
 	for (const auto& entry : deser["ctrl"].items()) {
