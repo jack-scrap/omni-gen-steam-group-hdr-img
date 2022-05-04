@@ -581,7 +581,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 				break;
 
 			case ALERT:
-				frag = "alertRoad";
+				frag = "alert";
 				active = true;
 
 				break;

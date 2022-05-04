@@ -50,7 +50,7 @@ Lim* limMk(unsigned int axis, GLfloat val, unsigned int status) {
 			break;
 
 		case ALERT:
-			frag = "alertRoad";
+			frag = "alert";
 			active = true;
 
 			break;
