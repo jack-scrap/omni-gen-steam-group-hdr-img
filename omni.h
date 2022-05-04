@@ -4,10 +4,12 @@
 #include <vector>
 #include <map>
 
+#undef assert
+
 namespace omni {
 	void err(unsigned int err, std::vector<std::string> arg = {});
 
-	void assertion(bool cond, std::string msg);
+	void assert(bool cond, std::string msg);
 
 	static std::map<std::string, unsigned int> stage = {
 		{

@@ -132,7 +132,7 @@ void omni::err(unsigned int err, std::vector<std::string> arg) {
 	std::cout << "Error: " << msg << std::endl;
 }
 
-void omni::assertion(bool cond, std::string msg) {
+void omni::assert(bool cond, std::string msg) {
 	if (!cond) {
 		std::cout << "Assertion failed: " << msg << std::endl;
 
