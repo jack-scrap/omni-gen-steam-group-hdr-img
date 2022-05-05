@@ -225,16 +225,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 				break;
 			}
 
-			// string
-			case nlohmann::json::value_t::string: {
-				wd = ((Array*) item->_ptr)->_parent->_aabb[X][MAX] - ((Array*) item->_ptr)->_parent->_aabb[X][MIN];
-
-				data[i] = item;
-				type[i] = omni::ARRAY;
-
-				break;
-			}
-
 			// array
 			case nlohmann::json::value_t::array: {
 				omni::assert(util::json::array::euclid(pair.value()["block"], 0), std::string("Depth of `") + pair.key() + std::string("` exceeds 3 dimensions"));
@@ -277,6 +267,16 @@ void scn::init(std::string stage, unsigned int lvl) {
 						break;
 					}
 				}
+
+				break;
+			}
+
+			// string
+			case nlohmann::json::value_t::string: {
+				wd = ((Array*) item->_ptr)->_parent->_aabb[X][MAX] - ((Array*) item->_ptr)->_parent->_aabb[X][MIN];
+
+				data[i] = item;
+				type[i] = omni::ARRAY;
 
 				break;
 			}
