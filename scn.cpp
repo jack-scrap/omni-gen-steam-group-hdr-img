@@ -446,6 +446,12 @@ void scn::init(std::string stage, unsigned int lvl) {
 					2,
 					0
 				};
+
+				for (int j = 0; j < 4; j++) {
+					for (int i = 0; i < 2; i++) {
+						((char*) init._ptr)[(j * 2) + i] = 0;
+					}
+				}
 			}
 
 			std::string name;
