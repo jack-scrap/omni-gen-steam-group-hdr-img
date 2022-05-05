@@ -14,7 +14,7 @@ LIBS=scn.cpp prog.cpp obj.cpp line.cpp pt.cpp crane.cpp truck.cpp cargo_ship.cpp
 
 HDR=cam.h col.h math.h phys.h
 
-OBJ_STATIC=$(STATIC:$(BUILDDIR)/%.cpp=%.o)
+OBJ_STATIC=$(STATIC:%.cpp=$(BUILDDIR)/%.o)
 OBJ_LIBS=$(LIBS:%.cpp=$(BUILDDIR)/lib%.so)
 
 STAGE=init array str dict matrix vec ctrl_flow path thread
@@ -23,7 +23,7 @@ STAGE=init array str dict matrix vec ctrl_flow path thread
 
 all: mk_build mk_stage omni ro
 
-main.o: main.cpp
+$(BUILDDIR)/main.o: main.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@ $(PYFLAGS)
 
 $(BUILDDIR)/%.o: %.cpp %.h
