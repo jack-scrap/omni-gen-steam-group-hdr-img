@@ -1114,6 +1114,8 @@ Mark* util::json::bound::mark(nlohmann::json deser) {
 
 	Mark* _ = markMk(&init[0], status);
 
+	omni::assert(!phys::aabbGround(_->_parent), "Marking clipping into ground plane");
+
 	return _;
 }
 
