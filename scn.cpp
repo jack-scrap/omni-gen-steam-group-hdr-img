@@ -448,7 +448,12 @@ void scn::init(std::string stage, unsigned int lvl) {
 				};
 			}
 
-			Array* array = arrayMk((char*) init._ptr, init._x, std::string(entry["data"]["name"]), X);
+			Array* array;
+			if (entry["data"].contains("name")) {
+				array = arrayMk((char*) init._ptr, init._x, std::string(entry["data"]["name"]), X);
+			} else {
+				array = arrayMk((char*) init._ptr, init._x, "", X);
+			}
 
 			CargoShip* _ = cargoShipMk(array, loc, rot);
 
