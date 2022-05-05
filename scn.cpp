@@ -436,10 +436,21 @@ void scn::init(std::string stage, unsigned int lvl) {
 		}
 
 		if (entry["name"] == "cargo_ship") {
-			CBuff array = util::json::array::array(entry["data"]["block"]);
-			Array* init = arrayMk((char*) array._ptr, array._x, std::string(entry["data"]["name"]), X);
+			CBuff init;
+			if (entry.contains("data")) {
+				init = util::json::array::array(entry["data"]["block"]);
+			} else {
+				init = {
+					(char*) malloc(4 * 2),
+					4,
+					2,
+					0
+				};
+			}
 
-			CargoShip* _ = cargoShipMk(init, loc, rot);
+			Array* array = arrayMk((char*) init._ptr, init._x, std::string(entry["data"]["name"]), X);
+
+			CargoShip* _ = cargoShipMk(array, loc, rot);
 
 			cargoShip._sz += sizeof (CargoShip*);
 			cargoShip._ptr = (CargoShip**) realloc(cargoShip._ptr, cargoShip._sz);
