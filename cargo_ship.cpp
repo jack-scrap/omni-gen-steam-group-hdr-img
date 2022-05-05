@@ -37,10 +37,10 @@ CargoShip* cargoShipMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	// data
 	_->_data = init;
 
+	child[CargoShip::DATA] = nullptr;
+
 	if (_->_data) {
 		child[CargoShip::DATA] = _->_data->_parent;
-	} else {
-		child[CargoShip::DATA] = nullptr;
 	}
 
 	_->_parent = objMk("cargo_ship", "obj", "dir", true, child, sizeof child / sizeof *child, loc, rot);
