@@ -187,7 +187,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 	/* allocate */
 	// data
-	// initial
+	// LHS
 	nlohmann::json scope = deser["data"];
 
 	noData = scope.size();
