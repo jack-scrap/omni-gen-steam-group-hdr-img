@@ -32,7 +32,8 @@ CargoShip* cargoShipMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 
 	Obj* child[2];
 
-	child[CargoShip::BED] = objMk((GLfloat*) vtc, (GLushort*) idc, 2 * 3, "obj", "dir", false, glm::vec3(-(bound[X] / 2), 0.0, -(bound[Y] / 2)));
+	glm::vec2 center = layout::center(bound);
+	child[CargoShip::BED] = objMk((GLfloat*) vtc, (GLushort*) idc, 2 * 3, "obj", "dir", false, glm::vec3(-center[X], 0.0, -center[Y]));
 
 	// data
 	_->_data = init;
