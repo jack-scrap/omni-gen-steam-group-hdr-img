@@ -29,35 +29,11 @@ $(BUILDDIR)/main.o: main.cpp
 $(BUILDDIR)/%.o: %.cpp %.h
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
+$(BUILDDIR)/%.o: %.cpp %.h
+	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
+
 $(BUILDDIR)/console.o: console.cpp console.h
 	$(CXX) $(CXXFLAGS) -c $< -o $@ $(PYFLAGS)
-
-$(BUILDDIR)/scn.o: scn.cpp scn.h
-	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
-
-$(BUILDDIR)/prog.o: prog.cpp prog.h
-	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
-
-$(BUILDDIR)/obj.o: obj.cpp obj.h
-	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
-
-$(BUILDDIR)/line.o: line.cpp line.h
-	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
-
-$(BUILDDIR)/pt.o: pt.cpp pt.h
-	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
-
-$(BUILDDIR)/crane.o: crane.cpp crane.h
-	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
-
-$(BUILDDIR)/truck.o: truck.cpp truck.h
-	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
-
-$(BUILDDIR)/cargo_ship.o: cargo_ship.cpp cargo_ship.h
-	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
-
-$(BUILDDIR)/street_sign.o: street_sign.cpp street_sign.h
-	$(CXX) $(CXXFLAGS) -fPIC -c $< -o $@
 
 $(BUILDDIR)/lib%.so: $(BUILDDIR)/%.o
 	$(CXX) $(CXXFLAGS) -shared $< -o $@
