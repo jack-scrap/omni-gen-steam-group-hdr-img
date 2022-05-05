@@ -27,7 +27,9 @@ Var** data = (Var**) malloc(0);
 Var** goal = (Var**) malloc(0);
 unsigned int* type = (unsigned int*) malloc(0);
 unsigned int noData = 0;
+
 bool eq = false;
+
 bool mtx = false;
 
 Var** dataGet() {
