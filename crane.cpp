@@ -254,7 +254,7 @@ void craneInsert(Crane* crane, Cont* byte) {
 
 	// transform
 	glm::mat4 model = glm::mat4(1.0);
-	model = glm::translate(model, glm::vec3(0.0, -(3.32 + 1.0), 0.0));
+	model = glm::translate(model, glm::vec3(0.0, -(3.32 + (layout::idx[Y] / 2)), 0.0));
 
 	crane->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_child[0]->_model = model;
 
