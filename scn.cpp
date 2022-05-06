@@ -461,7 +461,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 				name = std::string(entry["data"]["name"]);
 			}
 
-			Array* array = arrayMk((char*) init._ptr, init._x, name, X, glm::vec3(0.0, layout::padded(0.0), 0.0));
+			Array* array = arrayMk((char*) init._ptr, init._x, init._y, name, glm::vec3(0.0, layout::padded(0.0), 0.0));
 
 			CargoShip* _ = cargoShipMk(array, loc, rot);
 
