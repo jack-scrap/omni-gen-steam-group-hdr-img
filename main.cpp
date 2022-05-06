@@ -553,7 +553,7 @@ void handle() {
 	}
 }
 
-int main(int argc, char** argv) {
+int main(int argc, char* argv[]) {
 	// initialize
 	std::vector<std::map<std::string, std::string>> dir = util::fs::ls("player/cfg");
 
