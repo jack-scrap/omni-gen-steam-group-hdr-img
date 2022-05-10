@@ -109,12 +109,12 @@
 			{
 				"min": {
 					"axis": "Z",
-					"val": -11.64,
+					"val": -11.16,
 					"status": "halt"
 				},
 				"max": {
 					"axis": "Z",
-					"val": 11.64,
+					"val": 11.16,
 					"status": "halt"
 				}
 			}
