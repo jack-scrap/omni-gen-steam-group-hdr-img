@@ -1524,10 +1524,7 @@ GLuint util::tex::rd(std::string fName) {
 		return 0;
 	}
 
-	SDL_Surface* surf = SDL_LoadBMP(util::fs::path::build({
-		"res",
-		fName
-	}).c_str());
+	SDL_Surface* surf = SDL_LoadBMP(path.c_str());
 
 	SDL_Texture* texSdl = SDL_CreateTextureFromSurface(disp->_rend, surf);
 
