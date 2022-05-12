@@ -1542,14 +1542,7 @@ GLuint util::tex::rd(std::string fName) {
 
 	SDL_RenderCopy(disp->_rend, texSdl, &rect, &rect);
 
-	if (surf->pixels) {
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, rect.w, rect.h, 0, GL_RGB, GL_UNSIGNED_BYTE, surf->pixels);
-
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-		glGenerateMipmap(GL_TEXTURE_2D);
-	} else {
+	if (!surf->pixels) {
 		omni::err(omni::ERR_RD_TEX, {
 			fName
 		});
@@ -1557,6 +1550,12 @@ GLuint util::tex::rd(std::string fName) {
 		return 0;
 	}
 
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, rect.w, rect.h, 0, GL_RGB, GL_UNSIGNED_BYTE, surf->pixels);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+	glGenerateMipmap(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	return tex;
