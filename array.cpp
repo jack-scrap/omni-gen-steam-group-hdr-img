@@ -111,8 +111,12 @@ Array* arrayMk(char* init, unsigned int x, unsigned int y, std::string name, glm
 	Obj** child = (Obj**) malloc(noChild * sizeof (Obj*));
 
 	// identifier
-	Str* id = strMk(name, glm::vec3(0.0, 0.0, -(layout::margin * 2)));
-	child[0] = id->_parent;
+	if (!name.empty()) {
+		Str* id = strMk(name, glm::vec3(0.0, 0.0, -(layout::margin * 2)));
+		child[0] = id->_parent;
+	} else {
+		child[0] = nullptr;
+	}
 
 	// data
 	_->_data = (Idx**) malloc(_->_x * _->_y * sizeof (Idx*));
