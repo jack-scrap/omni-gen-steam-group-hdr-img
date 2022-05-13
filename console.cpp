@@ -118,18 +118,18 @@ Console::Console(std::string fName, std::string dir) :
 					layout::canv[Y]
 				}) * 3;
 
-				_blank[idx] = col[false].b;
+				_blank[idx] = col[false].r;
 				_blank[idx + 1] = col[false].g;
-				_blank[idx + 2] = col[false].r;
+				_blank[idx + 2] = col[false].b;
 			}
 		}
 
 		// cursor
 		for (int y = 0; y < sizeof _block / sizeof *_block; y++) {
 			for (int x = 0; x < sizeof *_block / sizeof **_block; x++) {
-				_block[y][x][0] = col[true].b;
+				_block[y][x][0] = col[true].r;
 				_block[y][x][1] = col[true].g;
-				_block[y][x][2] = col[true].r;
+				_block[y][x][2] = col[true].b;
 			}
 		}
 
@@ -174,7 +174,7 @@ Console::Console(std::string fName, std::string dir) :
 		glGenTextures(1, &_tex);
 		glBindTexture(GL_TEXTURE_2D, _tex);
 
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, state::lineWd * layout::glyph[X], state::lineCnt * layout::glyph[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, _blank);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, state::lineWd * layout::glyph[X], state::lineCnt * layout::glyph[Y], 0, GL_BGR, GL_UNSIGNED_BYTE, _blank);
 
 		glGenerateMipmap(GL_TEXTURE_2D);
 
@@ -263,7 +263,7 @@ void Console::clear() {
 
 	glBindTexture(GL_TEXTURE_2D, _tex);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, state::lineWd * layout::glyph[X], state::lineCnt * layout::glyph[Y], 0, GL_RGB, GL_UNSIGNED_BYTE, _blank);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, state::lineWd * layout::glyph[X], state::lineCnt * layout::glyph[Y], 0, GL_BGR, GL_UNSIGNED_BYTE, _blank);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
@@ -1292,7 +1292,7 @@ void Console::hl() {
 						util::math::clamp<unsigned int>(loc[Y] + _cursEditor[r][Y], 1, boundFrame[Y])
 					};
 
-					glTexSubImage2D(GL_TEXTURE_2D, 0, clamped[X] * layout::glyph[X], clamped[Y] * layout::glyph[Y], layout::glyph[X], layout::glyph[Y], GL_BGR, GL_UNSIGNED_BYTE, _block);
+					glTexSubImage2D(GL_TEXTURE_2D, 0, clamped[X] * layout::glyph[X], clamped[Y] * layout::glyph[Y], layout::glyph[X], layout::glyph[Y], GL_RGB, GL_UNSIGNED_BYTE, _block);
 				}
 			}
 
@@ -1323,7 +1323,7 @@ void Console::hl() {
 				unsigned int clamped = util::math::clamp<unsigned int>(loc[X] + _cursPrompt[r], 1, state::lineWd - 1);
 
 				if (_cursPrompt[r] == _prompt.size()) {
-					glTexSubImage2D(GL_TEXTURE_2D, 0, clamped * layout::glyph[X], (state::lineCnt - 1) * layout::glyph[Y], layout::glyph[X], layout::glyph[Y], GL_BGR, GL_UNSIGNED_BYTE, _block);
+					glTexSubImage2D(GL_TEXTURE_2D, 0, clamped * layout::glyph[X], (state::lineCnt - 1) * layout::glyph[Y], layout::glyph[X], layout::glyph[Y], GL_RGB, GL_UNSIGNED_BYTE, _block);
 				}
 			}
 
