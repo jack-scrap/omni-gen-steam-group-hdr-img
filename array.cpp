@@ -28,12 +28,12 @@ Array* arrayMk(char* init, unsigned int x, std::string name, unsigned int axis, 
 		glm::vec3 offset;
 		switch (axis) {
 			case X:
-				offset = glm::vec3(c) * glm::vec3(stride[X], 0.0, 0.0);
+				offset = glm::vec3(c * stride[X], 0.0, 0.0);
 
 				break;
 
 			case Z:
-				offset = glm::vec3(c) * glm::vec3(0.0, 0.0, stride[Y]);
+				offset = glm::vec3(0.0, 0.0, c * stride[Y]);
 
 				break;
 		}
