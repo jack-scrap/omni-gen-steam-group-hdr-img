@@ -13,7 +13,7 @@ uniform mat4 proj;
 void main() {
 	gl_Position = proj * view * model * vec4(pos, 1.0);
 
-	_pos = gl_Position.xyz;
+	_pos = vec3(model * vec4(pos, 1.0));
 	_obj = pos;
 	_st = vec2(st.x, 1.0 + (st.y * -1));
 }
