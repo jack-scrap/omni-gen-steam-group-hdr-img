@@ -13,6 +13,9 @@ typedef struct CargoShip {
 	static unsigned int _x;
 	static unsigned int _y;
 
+	static GLfloat _lightVtc[2 * 2 * 3];
+	static GLushort _lightIdc[2 * 3];
+
 	static constexpr float _speed = 0.1;
 
 	enum {
