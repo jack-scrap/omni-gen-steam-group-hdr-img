@@ -2,6 +2,7 @@
 
 in vec3 pos;
 in vec2 st;
+
 out vec3 _pos;
 out vec3 _obj;
 out vec2 _st;
