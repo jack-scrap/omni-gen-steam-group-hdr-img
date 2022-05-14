@@ -81,7 +81,7 @@ namespace util {
 		}
 
 		namespace gen {
-			std::vector<GLfloat> norm(std::vector<glm::vec3> vtc);
+			glm::vec3 norm(std::vector<glm::vec3> vtc);
 		}
 
 		namespace rd {

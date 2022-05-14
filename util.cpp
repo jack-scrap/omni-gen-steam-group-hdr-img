@@ -536,9 +536,7 @@ std::vector<GLushort> util::mesh::rect::idc() {
 	return _;
 }
 
-std::vector<GLfloat> util::mesh::gen::norm(std::vector<glm::vec3> vtc) {
-	std::vector<GLfloat> _;
-
+glm::vec3 util::mesh::gen::norm(std::vector<glm::vec3> vtc) {
 	// get edges
 	glm::vec3 u = vtc[1] - vtc[0];
 	glm::vec3 v = vtc[2] - vtc[0];
@@ -549,11 +547,7 @@ std::vector<GLfloat> util::mesh::gen::norm(std::vector<glm::vec3> vtc) {
 	// normalize
 	glm::vec3 norm = glm::normalize(orth);
 
-	for (int a = 0; a < 3; a++) {
-		_.push_back(norm[a]);
-	}
-
-	return _;
+	return norm;
 }
 
 std::vector<GLushort> util::mesh::rd::idc(std::string fName, unsigned int attr) {
