@@ -6,6 +6,7 @@
 #include "layout.h"
 #include "array.h"
 #include "util.h"
+#include "omni.h"
 
 unsigned int CargoShip::_x = 10;
 unsigned int CargoShip::_y = 4;
@@ -64,9 +65,15 @@ void cargoShipDel(CargoShip* cargoShip) {
 }
 
 void cargoShipMv(CargoShip* cargoShip, float delta) {
-	glm::vec3 dest = glm::vec3(delta, 0.0, 0.0);
+	if (delta >= 0.0) {
+		glm::vec3 dest = glm::vec3(delta, 0.0, 0.0);
 
-	objAnim(cargoShip->_parent, nullptr, dest, glm::vec3(0.0), CargoShip::_speed);
+		objAnim(cargoShip->_parent, nullptr, dest, glm::vec3(0.0), CargoShip::_speed);
+	} else {
+		omni::err(omni::ERR_MV_RNG, {
+			"cargo ship"
+		});
+	}
 
 	// offset
 	glm::vec3 offset = cargoShip->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
