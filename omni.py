@@ -269,7 +269,7 @@ class _CargoShip(_Obj):
 		('_loc', c_float * 3)
 	]
 
-	def zoom(self, delta):
+	def mv(self, delta):
 		_cargoShipMv(self._ptr, delta)
 
 		for i in range(3):
