@@ -330,19 +330,19 @@ _cargoShipGet.argtypes = None
 
 _cargoShipPtr = cast(_cargoShipGet()._ptr, POINTER(POINTER(_CargoShip)))
 
-cargoShip = None
+cargo_ship = None
 if _cargoShipGet()._sz:
 	if _cargoShipGet()._sz > 8:
-		cargoShip = []
+		cargo_ship = []
 
 		i = 0
 		while i < _cargoShipGet()._sz:
-			cargoShip.append(_CargoShip(_cargoShipPtr))
+			cargo_ship.append(_CargoShip(_cargoShipPtr))
 
 			i += sizeof(c_void_p)
 
 	else:
-		cargoShip = _CargoShip(_cargoShipPtr[0])
+		cargo_ship = _CargoShip(_cargoShipPtr[0])
 
 class _(_Obj):
 	_fields_ = [
