@@ -363,6 +363,8 @@ void objDel(Obj* obj) {
 
 	free(obj->_uni);
 
+	glDeleteTextures(1, &obj->_tex);
+
 	for (int i = 0; i < obj->_noChild; i++) {
 		if (obj->_child[i]) {
 			objDel(obj->_child[i]);
