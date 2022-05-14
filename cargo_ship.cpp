@@ -81,11 +81,25 @@ void cargoShipDel(CargoShip* cargoShip) {
 	free(cargoShip);
 }
 
+void cargoShipAnim(CargoShip* cargoShip, glm::vec3 loc) {
+	for (int i = 0; i < 2; i++) {
+		cargoShip->_parent->_child[2 + i]->_active = true;
+	}
+
+	objMv(cargoShip->_parent, nullptr, loc, glm::vec3(0.0), CargoShip::_speed);
+
+	for (int i = 0; i < 2; i++) {
+		cargoShip->_parent->_child[2 + i]->_active = false;
+	}
+}
+
 void cargoShipMv(CargoShip* cargoShip, float delta) {
 	if (delta >= 0.0) {
 		glm::vec3 dest = glm::vec3(delta, 0.0, 0.0);
 
-		objAnim(cargoShip->_parent, nullptr, dest, glm::vec3(0.0), CargoShip::_speed);
+		cargoShipAnim(cargoShip, dest);
+
+		/* objAnim(cargoShip->_parent, nullptr, dest, glm::vec3(0.0), CargoShip::_speed); */
 	} else {
 		omni::err(omni::ERR_MV_RNG, {
 			"cargo ship"

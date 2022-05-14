@@ -29,4 +29,6 @@ CargoShip* cargoShipMk(Array* init, glm::vec3 loc = glm::vec3(0.0), glm::vec3 ro
 
 void cargoShipDel(CargoShip* cargoShip);
 
+void cargoShipAnim(CargoShip* cargoShip, glm::vec3 loc);
+
 extern "C" void cargoShipMv(CargoShip* cargoShip, float delta);
