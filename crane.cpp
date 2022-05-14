@@ -123,6 +123,7 @@ void craneAnim(Crane* crane, glm::vec3 loc) {
 
 void craneZoom(Crane* crane, float delta) {
 	glm::vec3 dest = glm::vec3(delta, 0.0, 0.0);
+
 	craneAnim(crane, dest);
 
 	glm::vec3 offset = crane->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
@@ -133,6 +134,7 @@ void craneZoom(Crane* crane, float delta) {
 
 void cranePan(Crane* crane, float delta) {
 	glm::mat4 trans = glm::translate(glm::mat4(1.0), glm::vec3(0.0, 0.0, delta));
+
 	glm::vec3 dest = glm::vec3(crane->_parent->_child[Crane::TRACK]->_child[Crane::TRACK]->_model * trans * glm::vec4(glm::vec3(0.0), 1.0));
 
 	if (dest[Z] > Crane::_rngHead[MIN] && dest[Z] < Crane::_rngHead[MAX]) {

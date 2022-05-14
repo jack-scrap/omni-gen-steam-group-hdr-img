@@ -455,6 +455,7 @@ void objMv(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot, GLfloat speed) {
 	glm::mat4 dest = glm::mat4(1.0);
 	dest = glm::translate(dest, loc);
 	dest = util::matr::rot(dest, rot);
+
 	for (int i = 0; i < scn::obj.size(); i++) {
 		if (obj != scn::obj[i]) {
 			if (util::phys::aabb(obj, scn::obj[i])) {
