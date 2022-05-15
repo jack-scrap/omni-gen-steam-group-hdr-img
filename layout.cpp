@@ -14,12 +14,12 @@ GLfloat layout::item(GLfloat bound) {
 	return bound + (margin * 2);
 }
 
-GLfloat layout::bordered(GLfloat bound) {
+GLfloat layout::scoped(GLfloat bound) {
 	return item(bound) + item(stroke * 2);
 }
 
 glm::vec2 layout::var(glm::vec2 bound) {
-	return glm::vec2(bordered(bound[X]), bordered(bound[Y] + item(letter[Y])));
+	return glm::vec2(scoped(bound[X]), scoped(bound[Y] + item(letter[Y])));
 }
 
 glm::vec2 layout::center(glm::vec2 bound) {

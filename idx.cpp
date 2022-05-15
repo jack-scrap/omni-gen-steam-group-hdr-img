@@ -72,7 +72,7 @@ Idx* idxMk(unsigned int i, char* c, unsigned int sz, std::string name, glm::vec3
 	}
 
 	// data
-	glm::vec2 stride = glm::vec2(layout::item(layout::bordered(layout::idx[X])), layout::item(layout::bordered(layout::idx[Z])));
+	glm::vec2 stride = glm::vec2(layout::item(layout::scoped(layout::idx[X])), layout::item(layout::scoped(layout::idx[Z])));
 
 	for (int i = 0; i < _->_sz; i++) {
 		Cont* byte = contMk(c[i], glm::vec3((layout::stroke * 2) + (layout::idx[X] / 2), layout::idx[Y] / 2, (layout::stroke * 2) + (layout::idx[Z] / 2)) + glm::vec3(0.0, i * layout::idx[Y], 0.0));
@@ -113,7 +113,7 @@ void idxPush(Idx* idx, Cont* byte) {
 
 	// transform
 	glm::mat4 model = glm::mat4(1.0);
-	model = glm::translate(model, glm::vec3(glm::vec3(layout::bordered(layout::idx[X]), layout::idx[Y], layout::bordered(layout::idx[Z])) / glm::vec3(2)) + glm::vec3(0.0, (idx->_sz - 1) * layout::idx[Y], 0.0));
+	model = glm::translate(model, glm::vec3(glm::vec3(layout::scoped(layout::idx[X]), layout::idx[Y], layout::scoped(layout::idx[Z])) / glm::vec3(2)) + glm::vec3(0.0, (idx->_sz - 1) * layout::idx[Y], 0.0));
 
 	idx->_data[idx->_sz - 1]->_parent->_model = model;
 

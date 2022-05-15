@@ -20,7 +20,7 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 
 	glm::vec2 strideLetter = glm::vec2(layout::item(layout::item(0.0)), layout::item(layout::item(layout::letter[Y])));
 
-	glm::vec2 strideIdx = glm::vec2(layout::item(layout::bordered(layout::idx[X])), layout::item(layout::bordered(layout::idx[Z])));
+	glm::vec2 strideIdx = glm::vec2(layout::item(layout::scoped(layout::idx[X])), layout::item(layout::scoped(layout::idx[Z])));
 
 	glm::vec2 overhead = glm::vec2(layout::overhead, layout::overhead + strideLetter[Y]);
 
@@ -64,11 +64,11 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 						((Array**) _->_data)[i] = array;
 						_->_type[i] = omni::ARRAY;
 
-						if (layout::bordered(init._x * strideIdx[X]) > maxX) {
-							maxX = layout::bordered(init._x * strideIdx[X]);
+						if (layout::scoped(init._x * strideIdx[X]) > maxX) {
+							maxX = layout::scoped(init._x * strideIdx[X]);
 						}
 
-						GLfloat szY = layout::bordered(strideLetter[Y] + strideIdx[Y]);
+						GLfloat szY = layout::scoped(strideLetter[Y] + strideIdx[Y]);
 
 						accY += szY;
 
@@ -89,11 +89,11 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 								((Array**) _->_data)[i] = array;
 								_->_type[i] = omni::ARRAY;
 
-								if (layout::bordered(init._x * strideIdx[X]) > maxX) {
-									maxX = layout::bordered(init._x * strideIdx[X]);
+								if (layout::scoped(init._x * strideIdx[X]) > maxX) {
+									maxX = layout::scoped(init._x * strideIdx[X]);
 								}
 
-								GLfloat szY = layout::bordered(strideLetter[Y] + (init._y * strideIdx[Y]));
+								GLfloat szY = layout::scoped(strideLetter[Y] + (init._y * strideIdx[Y]));
 
 								accY += szY;
 
@@ -111,11 +111,11 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 								((Array**) _->_data)[i] = array;
 								_->_type[i] = omni::ARRAY;
 
-								if (layout::bordered(init._x * strideIdx[X]) > maxX) {
-									maxX = layout::bordered(init._x * strideIdx[X]);
+								if (layout::scoped(init._x * strideIdx[X]) > maxX) {
+									maxX = layout::scoped(init._x * strideIdx[X]);
 								}
 
-								glm::vec2 sz = glm::vec2(layout::bordered(0.0), layout::bordered(strideLetter[Y] + (init._y * strideIdx[Y])));
+								glm::vec2 sz = glm::vec2(layout::scoped(0.0), layout::scoped(strideLetter[Y] + (init._y * strideIdx[Y])));
 
 								accY += sz[Y];
 

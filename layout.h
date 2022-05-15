@@ -44,7 +44,7 @@ namespace layout {
 	GLfloat padded(GLfloat bound);
 	GLfloat item(GLfloat bound);
 
-	GLfloat bordered(GLfloat bound);
+	GLfloat scoped(GLfloat bound);
 
 	glm::vec2 var(glm::vec2 bound);
 
