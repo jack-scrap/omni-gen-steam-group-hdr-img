@@ -1,3 +1,5 @@
+SH=/bin/bash
+
 CXX=g++
 
 BUILDDIR=build
