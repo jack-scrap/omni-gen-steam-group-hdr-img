@@ -18,7 +18,7 @@ GLushort IBeam::_idc[3 * 2] = {
 };
 
 Obj* iBeamMk(GLfloat ln, unsigned int axis, glm::vec3 loc, glm::vec3 rot) {
-	Obj* _ = lineMk((GLfloat*) IBeam::_vtc, (GLushort*) IBeam::_idc, sizeof IBeam::_idc / sizeof (GLushort), "main", "beam", "dir", false, loc, rot);
+	Obj* _ = lineMk(IBeam::_vtc, IBeam::_idc, sizeof IBeam::_idc / sizeof (GLushort), "main", "beam", "dir", false, loc, rot);
 
 	_->_prog.use();
 
