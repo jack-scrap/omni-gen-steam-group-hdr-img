@@ -28,7 +28,7 @@ void main() {
 
 				gl_Position = proj * view * model * vec4(gl_in[0].gl_Position.xyz + pos, 1.0);
 
-				_obj = gl_in[0].gl_Position.xyz + pos;
+				_obj = vec3(model * vec4(pos, 1.0));
 
 				EmitVertex();
 			}
@@ -49,7 +49,7 @@ void main() {
 
 				gl_Position = proj * view * model * vec4(gl_in[0].gl_Position.xyz + pos, 1.0);
 
-				_obj = gl_in[0].gl_Position.xyz + pos;
+				_obj = vec3(model * vec4(pos, 1.0));
 
 				EmitVertex();
 			}
@@ -75,7 +75,7 @@ void main() {
 
 					gl_Position = proj * view * model * vec4(gl_in[0].gl_Position.xyz + pos, 1.0);
 
-					_obj = gl_in[0].gl_Position.xyz + pos;
+					_obj = vec3(model * vec4(pos, 1.0));
 
 					EmitVertex();
 				}
