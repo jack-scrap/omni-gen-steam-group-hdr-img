@@ -12,10 +12,10 @@ unsigned int CargoShip::_x = 10;
 unsigned int CargoShip::_y = 4;
 
 GLfloat CargoShip::_lightVtc[2 * 2 * 3] = {
-	0.0, -0.3, -0.5,
-	0.0, -0.3, 0.5,
-	0.0, 0.3, -0.5,
-	0.0, 0.3, 0.5
+	0.0, -0.5, -0.3,
+	0.0, -0.5, 0.3,
+	0.0, 0.5, -0.3,
+	0.0, 0.5, 0.3
 };
 
 GLushort CargoShip::_lightIdc[2 * 3] = {
