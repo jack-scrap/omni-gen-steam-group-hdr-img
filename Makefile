@@ -3,6 +3,7 @@ SH=/bin/bash
 CXX=g++
 
 BUILDDIR=build
+DESTDIR=/usr/local/bin
 
 CXXFLAGS=-std=c++11 -Wno-narrowing
 
@@ -21,7 +22,7 @@ OBJ_LIBS=$(LIBS:%.cpp=$(BUILDDIR)/lib%.so)
 
 STAGE=init array str dict matrix vec ctrl_flow path thread
 
-.PHONY: all ro mk_build mk_stage clean
+.PHONY: all ro mk_build mk_stage install clean
 
 all: mk_build mk_stage omni ro
 
@@ -54,6 +55,9 @@ mk_stage:
 		mkdir -p player/script/$$DIR ; \
 		chmod -w -R player/script/$$DIR ; \
 	done
+
+install:
+	sudo mv omni $(DESTDIR)
 
 clean:
 	rm $(BUILDDIR)/*.o $(BUILDDIR)/*.so omni
