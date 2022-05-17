@@ -24,7 +24,7 @@ const float[3] idx = float[3](
 	4
 );
 
-float bevel = 0.2;
+float bevel = 0.16;
 
 float item(float bound) {
 	float _ = bound + (margin * 2);
