@@ -43,7 +43,7 @@ CargoShip* cargoShipMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	GLushort idc[2][3];
 	util::mesh::strip(idc);
 
-	Obj* child[2 + 2];
+	Obj* child[2 + (2 * 2)];
 
 	glm::vec2 center = layout::center(bound);
 	child[CargoShip::BED] = objMk((GLfloat*) vtc, (GLushort*) idc, 2 * 3, "obj", "dir", false, glm::vec3(-center[X], 0.0, -center[Y]));
@@ -59,7 +59,9 @@ CargoShip* cargoShipMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 
 	// light
 	for (int z = 0; z < 2; z++) {
-		child[2 + z] = objMk(CargoShip::_lightVtc, CargoShip::_lightIdc, 2 * 3, "obj", "alert", true, glm::vec3(-(30.0 + (layout::margin * 2)), 0.0, (z ? 1 : -1) * 7.0));
+		for (int i = 0; i < 2; i++) {
+			child[2 + (z * 2) + i] = objMk(CargoShip::_lightVtc, CargoShip::_lightIdc, 2 * 3, "obj", "alert", true, glm::vec3(-(30.0 + (layout::margin * 2)), 0.0, ((z ? 1 : -1) * 7.0) + ((i ? 1 : -1) * 0.6)));
+		}
 	}
 
 	_->_parent = objMk("cargo_ship", "obj", "dir", true, child, sizeof child / sizeof *child, loc, rot);
