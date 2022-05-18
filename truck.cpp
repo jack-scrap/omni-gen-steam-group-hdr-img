@@ -87,7 +87,7 @@ Truck* truckMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 
 	// light
 	for (int z = 0; z < 2; z++) {
-		child[4 + ((init->_x + 1) * 2) + z] = objMk(Truck::_lightVtc, Truck::_lightIdc, 2 * 3, "obj", "alert", true, glm::vec3(-(layout::scoped(init->_x * layout::scoped(layout::idx[Z])) + (layout::margin * 2)), 0.0, (z ? 1 : -1) * layout::scoped(layout::idx[X] / 2)), glm::vec3(0.0, z * M_PI, 0.0));
+		child[4 + ((init->_x + 1) * 2) + z] = objMk(Truck::_lightVtc, Truck::_lightIdc, 2 * 3, "obj", "alert", false, glm::vec3(-(layout::scoped(init->_x * layout::scoped(layout::idx[Z])) + (layout::margin * 2)), 0.0, (z ? 1 : -1) * layout::scoped(layout::idx[X] / 2)), glm::vec3(0.0, z * M_PI, 0.0));
 	}
 
 	// wheel-well
