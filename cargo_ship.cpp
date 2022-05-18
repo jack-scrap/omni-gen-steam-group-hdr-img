@@ -60,7 +60,7 @@ CargoShip* cargoShipMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	// light
 	for (int z = 0; z < 2; z++) {
 		for (int i = 0; i < 2; i++) {
-			child[2 + (z * 2) + i] = objMk(CargoShip::_lightVtc, CargoShip::_lightIdc, 2 * 3, "obj", "alert", true, glm::vec3(-(30.0 + (layout::margin * 2)), 0.0, ((z ? 1 : -1) * 7.0) + ((i ? 1 : -1) * 0.6)));
+			child[2 + (z * 2) + i] = objMk(CargoShip::_lightVtc, CargoShip::_lightIdc, 2 * 3, "obj", "alert", false, glm::vec3(-(30.0 + (layout::margin * 2)), 0.0, ((z ? 1 : -1) * 7.0) + ((i ? 1 : -1) * 0.6)));
 		}
 	}
 
