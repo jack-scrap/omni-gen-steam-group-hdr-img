@@ -354,6 +354,73 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 	return _;
 }
 
+Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, std::string geom, std::string frag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
+	// initialize
+	Obj* _ = (Obj*) malloc(sizeof (Obj));
+
+	_->_noUni = 5;
+	_->_uni = (GLint*) malloc(_->_noUni * sizeof (GLint));
+	_->_active = active;
+	_->_v = 0.0;
+	_->_tex = 0;
+	_->_noChild = noChild;
+	_->_child = (Obj**) malloc(_->_noChild * sizeof (Obj*));
+	for (int i = 0; i < _->_noChild; i++) {
+		_->_child[i] = child[i];
+	}
+
+	for (int a = 0; a < 3; a++) {
+		for (int b = 0; b < 2; b++) {
+			_->_aabb[a][b] = 0.0;
+		}
+	}
+
+	_->_mesh = meshMk(vtc, idc, noPrim);
+
+	// matrix
+	_->_model = glm::mat4(1.0);
+	_->_model *= glm::translate(glm::mat4(1.0), loc);
+	_->_model *= util::matr::rot(glm::mat4(1.0), rot);
+	_->_view = glm::lookAt(cam._pos, cam._pos + glm::vec3(-10000.0, -10000.0, -10000.0), glm::vec3(0, 1, 0));
+	_->_proj = glm::ortho(-(layout::view[X] / 2.0), layout::view[X] / 2.0, -(layout::view[Y] / 2.0), layout::view[Y] / 2.0, 0.1, 100000.0);
+	_->_acc = glm::mat4(1.0);
+
+	_->_prog = Prog(vtx, geom, frag);
+
+	_->_prog.use();
+
+	// attribute
+	glBindBuffer(GL_ARRAY_BUFFER, _->_mesh->_id[Mesh::VBO]);
+	_->_attr[Obj::POS] = glGetAttribLocation(_->_prog._id, "pos");
+	glVertexAttribPointer(_->_attr[Obj::POS], 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
+	glEnableVertexAttribArray(_->_attr[Obj::POS]);
+
+	// uniform
+	_->_uni[Obj::MODEL] = glGetUniformLocation(_->_prog._id, "model");
+	_->_uni[Obj::VIEW] = glGetUniformLocation(_->_prog._id, "view");
+	_->_uni[Obj::PROJ] = glGetUniformLocation(_->_prog._id, "proj");
+
+	_->_uni[Obj::ACTIVE] = glGetUniformLocation(_->_prog._id, "active");
+
+	_->_uni[Obj::T] = glGetUniformLocation(_->_prog._id, "t");
+
+	glUniformMatrix4fv(_->_uni[Obj::MODEL], 1, GL_FALSE, glm::value_ptr(_->_model));
+	glUniformMatrix4fv(_->_uni[Obj::VIEW], 1, GL_FALSE, glm::value_ptr(_->_view));
+	glUniformMatrix4fv(_->_uni[Obj::PROJ], 1, GL_FALSE, glm::value_ptr(_->_proj));
+
+	glUniform1ui(_->_uni[Obj::ACTIVE], _->_active);
+
+	glUniform1ui(_->_uni[Obj::T], disp->_t);
+
+	_->_prog.unUse();
+	glBindVertexArray(0);
+
+	// rig
+	objAcc(_, glm::mat4(1.0));
+
+	return _;
+}
+
 void objDel(Obj* obj) {
 	meshDel(obj->_mesh);
 
