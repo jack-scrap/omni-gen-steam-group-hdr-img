@@ -1493,14 +1493,14 @@ std::string util::now(std::string format) {
 	return std::string(out);
 }
 
-GLuint util::tex::rd(std::string fName) {
+GLuint util::tex::rd(std::string name) {
 	GLuint tex;
 	glGenTextures(1, &tex);
 	glBindTexture(GL_TEXTURE_2D, tex);
 
 	std::string path = util::fs::path::build({
 		"res",
-		fName
+		name + ".bmp"
 	});
 
 	if (!util::fs::exist(path)) {
@@ -1528,7 +1528,7 @@ GLuint util::tex::rd(std::string fName) {
 
 	if (!surf->pixels) {
 		omni::err(omni::ERR_RD_TEX, {
-			fName
+			name + ".bmp"
 		});
 
 		return 0;
