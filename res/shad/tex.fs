@@ -7,7 +7,7 @@ uniform sampler2D tex;
 
 const float ambi = 0.6;
 
-vec3 sun = vec3(1.0, 1.0, 1.0);
+vec3 sun = vec3(1.0, 1.0, -1.0);
 
 void main() {
 	vec3 normFace = normalize(cross(dFdx(_pos), dFdy(_pos)));

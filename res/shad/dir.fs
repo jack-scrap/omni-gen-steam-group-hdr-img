@@ -6,7 +6,7 @@ uniform bool active;
 
 const float ambi = 0.6;
 
-vec3 sun = vec3(1.0, 1.0, 1.0);
+vec3 sun = vec3(1.0, 1.0, -1.0);
 
 vec3[2] col = vec3[2](
 	vec3(38, 38, 38),
