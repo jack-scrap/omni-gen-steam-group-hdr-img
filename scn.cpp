@@ -438,9 +438,15 @@ void scn::init(std::string stage, unsigned int lvl) {
 		}
 
 		if (entry["name"] == "cargo_ship") {
+			std::string name;
+
 			CBuff init;
 			if (entry.contains("data")) {
 				init = util::json::array::array(entry["data"]["block"]);
+
+				if (entry["data"].contains("name")) {
+					name = std::string(entry["data"]["name"]);
+				}
 			} else {
 				init = {
 					(char*) malloc(4 * 2),
@@ -454,11 +460,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 						((char*) init._ptr)[(j * 2) + i] = 0;
 					}
 				}
-			}
-
-			std::string name;
-			if (entry["data"].contains("name")) {
-				name = std::string(entry["data"]["name"]);
 			}
 
 			Array* array = arrayMk((char*) init._ptr, init._x, init._y, name, glm::vec3(0.0, layout::padded(0.0), 0.0));
