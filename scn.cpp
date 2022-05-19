@@ -449,13 +449,13 @@ void scn::init(std::string stage, unsigned int lvl) {
 				}
 			} else {
 				init = {
-					(char*) malloc(4 * 2),
-					4,
+					(char*) malloc(6 * 2),
+					6,
 					2,
 					0
 				};
 
-				for (int j = 0; j < 4; j++) {
+				for (int j = 0; j < 6; j++) {
 					for (int i = 0; i < 2; i++) {
 						((char*) init._ptr)[(j * 2) + i] = 0;
 					}
