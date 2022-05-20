@@ -36,7 +36,7 @@ glm::vec3 layout::center(Obj* obj) {
 	for (int a = 0; a < 3; a++) {
 		bound[a] = obj->_aabb[a][MAX] - obj->_aabb[a][MIN];
 
-		_[a] = -bound[a] / 2;
+		_[a] = -(bound[a] / 2);
 	}
 
 	return _;
