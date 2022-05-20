@@ -87,13 +87,13 @@ void cargoShipDel(CargoShip* cargoShip) {
 }
 
 void cargoShipAnim(CargoShip* cargoShip, glm::vec3 loc) {
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < 2 * 2; i++) {
 		cargoShip->_parent->_child[2 + i]->_active = true;
 	}
 
 	objMv(cargoShip->_parent, nullptr, loc, glm::vec3(0.0), CargoShip::_speed);
 
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < 2 * 2; i++) {
 		cargoShip->_parent->_child[2 + i]->_active = false;
 	}
 }
