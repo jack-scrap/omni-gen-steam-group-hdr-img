@@ -815,7 +815,7 @@ CBuff util::json::array::array(nlohmann::json deser) {
 	return _;
 }
 
-CBuff util::json::array::matr(nlohmann::json deser) {
+CBuff util::json::array::matrix(nlohmann::json deser) {
 	CBuff _;
 
 	_._x = deser[0].size();
@@ -912,7 +912,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 					switch (val["block"][0][0].type()) {
 						// 2D
 						case nlohmann::json::value_t::number_unsigned: {
-							CBuff init = array::matr(val["block"]);
+							CBuff init = array::matrix(val["block"]);
 
 							Array* val = arrayMk((char*) init._ptr, init._x, init._y, key, loc + glm::vec3(0.0, 0.0, -(layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2)), glm::radians(rot));
 
