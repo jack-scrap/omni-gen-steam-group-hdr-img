@@ -10,7 +10,7 @@ Cont* contMk(char c, glm::vec3 loc, glm::vec3 rot) {
 	_->_parent = objMk("container_2x4", "obj", "dir", true, loc, rot);
 
 	if (_->_c >= '!' && _->_c <= '~') {
-		_->_parent->_tex = util::tex::spray(std::string("glyph") + util::fs::path::sep + std::string(1, _->_c));
+		_->_parent->_tex = util::tex::spray("glyph" + util::fs::path::sep + std::string(1, _->_c));
 	}
 
 	return _;
