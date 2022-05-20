@@ -7,8 +7,6 @@
 typedef struct {
 	char _c;
 
-	GLuint _id[1];
-
 	Obj* _parent;
 
 	enum {
