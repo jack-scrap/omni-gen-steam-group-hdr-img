@@ -16,7 +16,7 @@ vec3[2] col = vec3[2](
 void main() {
 	vec3 normFace = normalize(cross(dFdx(_pos), dFdy(_pos)));
 
-	float ins = max(dot(normFace, normalize(sun)), 0.0);
+	float diff = max(dot(normFace, normalize(sun)), 0.0) * (1.0 - ambi);
 
-	gl_FragColor = vec4((ambi + (ins * (1.0 - ambi))) * (col[int(active)] / 255.0), 1.0);
+	gl_FragColor = vec4((ambi + diff) * (col[int(active)] / 255.0), 1.0);
 }
