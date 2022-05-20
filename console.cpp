@@ -1057,16 +1057,11 @@ void Console::exec() {
 				if (cmd == "run") {
 					if (!mtx) {
 						std::string fName;
-						switch (arg.size()) {
-							case 0:
-								fName = _buffName;
 
-								break;
-
-							case 1:
-								fName = arg[0];
-
-								break;
+						if (arg.size()) {
+							fName = arg[0];
+						} else {
+							fName = _buffName;
 						}
 
 						if (util::fs::exist(util::fs::path::build({
