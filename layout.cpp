@@ -23,13 +23,7 @@ glm::vec2 layout::var(glm::vec2 bound) {
 }
 
 glm::vec2 layout::center(glm::vec2 bound) {
-	glm::vec2 _;
-
-	for (int i = 0; i < 2; i++) {
-		_[i] = bound[i] / 2;
-	}
-
-	return _;
+	return bound / glm::vec2(2);
 }
 
 glm::vec3 layout::center(Obj* obj) {
