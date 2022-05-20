@@ -22,8 +22,7 @@ OBJ_LIBS=$(LIBS:%.cpp=$(BUILDDIR)/lib%.so)
 
 STAGE=init array str dict matrix vec ctrl_flow path thread
 
-.PHONY: all ro mk_build mk_stage install clean
-
+.PHONY: all
 all: mk_build mk_stage omni ro
 
 $(BUILDDIR)/main.o: main.cpp
@@ -44,20 +43,25 @@ $(BUILDDIR)/lib%.so: $(BUILDDIR)/%.o
 omni: $(OBJ_STATIC) $(OBJ_LIBS) $(HDR)
 	$(CXX) $(CXXFLAGS) $(OBJ_STATIC) -o $@ $(SDLFLAGS) $(GLFLAGS) $(PYFLAGS) $(LIBFLAGS)
 
+.PHONY: ro
 ro:
 	chmod -w -R player/doc
 
+.PHONY: mk_build
 mk_build:
 	mkdir -p $(BUILDDIR)
 
+.PHONY: mk_stage
 mk_stage:
 	for DIR in $(STAGE) ; do \
 		mkdir -p player/script/$$DIR ; \
 		chmod -w -R player/script/$$DIR ; \
 	done
 
+.PHONY: install
 install:
 	sudo mv omni $(DESTDIR)
 
+.PHONY: clean
 clean:
 	rm $(BUILDDIR)/*.o $(BUILDDIR)/*.so omni
