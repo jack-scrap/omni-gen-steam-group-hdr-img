@@ -31,12 +31,15 @@ CargoShip* cargoShipMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 
 	glm::vec2 bound = glm::vec2(layout::item(_->_x * stride[X]), layout::item(_->_y * stride[Y]));
 
-	GLfloat vtc[2 * 2][3];
+	GLfloat vtc[2 * 2 * 3];
+	int i = 0;
 	for (int y = 0; y < 2; y++) {
 		for (int x = 0; x < 2; x++) {
-			vtc[(y * 2) + x][0] = x * bound[X];
-			vtc[(y * 2) + x][1] = 0.0;
-			vtc[(y * 2) + x][2] = y * bound[Y];
+			vtc[i] = x * bound[X];
+			vtc[i + 1] = 0.0;
+			vtc[i + 2] = y * bound[Y];
+
+			i += 3;
 		}
 	}
 
