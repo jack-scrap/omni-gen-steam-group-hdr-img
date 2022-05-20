@@ -36,15 +36,15 @@ float padded(float bound) {
 	return _;
 }
 
-float bordered(float bound) {
+float scoped(float bound) {
 	return item(bound) + padded(stroke * 2);
 }
 
 void main() {
 	float[3] outer = float[3](
-		item(bordered(idx[0])),
+		item(scoped(idx[0])),
 		0.0,
-		bordered(sz * bordered(idx[2])) - (margin * 2)
+		scoped(sz * scoped(idx[2])) - (margin * 2)
 	);
 
 	vec3[2 * 2] vtc;
