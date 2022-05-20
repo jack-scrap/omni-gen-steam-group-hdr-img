@@ -103,8 +103,6 @@ void cargoShipMv(CargoShip* cargoShip, float delta) {
 		glm::vec3 dest = glm::vec3(delta, 0.0, 0.0);
 
 		cargoShipAnim(cargoShip, dest);
-
-		/* objAnim(cargoShip->_parent, nullptr, dest, glm::vec3(0.0), CargoShip::_speed); */
 	} else {
 		omni::err(omni::ERR_MV_RNG, {
 			"cargo ship"
