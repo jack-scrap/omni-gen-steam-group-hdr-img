@@ -14,5 +14,5 @@ void main() {
 
 	float diff = max(dot(normFace, normalize(sun)), 0.0) * (1.0 - ambi);
 
-	gl_FragColor = vec4((ambi + diff) * texture(tex, _st).rgb, 1.0);
+	gl_FragColor = vec4((1.0 - diff) * texture(tex, _st).rgb, 1.0);
 }
