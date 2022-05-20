@@ -173,26 +173,16 @@ void arrayDel(Array* array) {
 }
 
 bool arrayEq(Array* lhs, Array* rhs) {
-	bool _ = true;
-
 	int i = 0;
 	for (int y = 0; y < lhs->_y; y++) {
 		for (int x = 0; x < lhs->_x; x++) {
 			if (!idxEq(lhs->_data[i], rhs->_data[i])) {
-				_ = false;
-			}
-
-			if (!_) {
-				break;
+				return false;
 			}
 
 			i++;
 		}
-
-		if (!_) {
-			break;
-		}
 	}
 
-	return _;
+	return true;
 }

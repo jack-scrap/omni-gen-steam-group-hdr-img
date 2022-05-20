@@ -160,29 +160,19 @@ void dictDel(Dict* dict) {
 }
 
 bool dictEq(Dict* lhs, Dict* rhs) {
-	bool _ = true;
-
 	for (int i = 0; i < lhs->_no; i++) {
-		if (!_) {
-			break;
-		}
-
 		switch (lhs->_type[i]) {
 			case omni::SCALAR:
 				if (!idxEq((Idx*) lhs->_data[i], (Idx*) rhs->_data[i])) {
-					_ = false;
+					return false;
 				}
-
-				break;
 
 			case omni::ARRAY:
 				if (!arrayEq((Array*) lhs->_data[i], (Array*) rhs->_data[i])) {
-					_ = false;
+					return false;
 				}
-
-				break;
 		}
 	}
 
-	return _;
+	return true;
 }
