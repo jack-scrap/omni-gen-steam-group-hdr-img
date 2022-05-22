@@ -508,13 +508,13 @@ std::vector<GLfloat> util::mesh::rect::pos(glm::vec2 bound, unsigned int up, boo
 			vtc.push_back((x ? 1 : (norm ? -1 : 0)) * bound[X]);
 
 			if (up == Y) {
-				vtc.push_back((y ? 1 : (norm ? -1 : 0)) * bound[Y]);
 				vtc.push_back(0.0);
+				vtc.push_back((y ? 1 : (norm ? -1 : 0)) * bound[Y]);
 			}
 
 			if (up == Z) {
-				vtc.push_back(0.0);
 				vtc.push_back((y ? 1 : (norm ? -1 : 0)) * bound[Y]);
+				vtc.push_back(0.0);
 			}
 		}
 	}
