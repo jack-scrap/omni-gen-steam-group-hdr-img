@@ -1,26 +1,26 @@
-SH=/bin/bash
+SH:=/bin/bash
 
-CXX=g++
+CXX:=g++
 
-BUILDDIR=build
-DESTDIR=/usr/local/bin
+BUILDDIR:=build
+DESTDIR:=/usr/local/bin
 
-CXXFLAGS=-std=c++11 -Wno-narrowing
+CXXFLAGS:=-std=c++11 -Wno-narrowing
 
-SDLFLAGS=-lSDL2 -lSDL2_ttf -lSDL2_image
-GLFLAGS=-lGLEW -lGL
-PYFLAGS=-L/usr/lib/python3.6/config-3.6m-x86_64-linux-gnu -L/usr/lib -lpython3.6m -pthread -ldl -lutil -lm -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -I/usr/include/python3.6m -I/usr/include/python3.6m -g -fdebug-prefix-map=/build/python3.6-0aiVHW/python3.6-3.6.9=. -specs=/usr/share/dpkg/no-pie-compile.specs -fstack-protector -DNDEBUG -g -fwrapv -O3 -fPIC
+SDLFLAGS:=-lSDL2 -lSDL2_ttf -lSDL2_image
+GLFLAGS:=-lGLEW -lGL
+PYFLAGS:=-L/usr/lib/python3.6/config-3.6m-x86_64-linux-gnu -L/usr/lib -lpython3.6m -pthread -ldl -lutil -lm -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -I/usr/include/python3.6m -I/usr/include/python3.6m -g -fdebug-prefix-map=/build/python3.6-0aiVHW/python3.6-3.6.9=. -specs=/usr/share/dpkg/no-pie-compile.specs -fstack-protector -DNDEBUG -g -fwrapv -O3 -fPIC
 LIBFLAGS=-L$(BUILDDIR) -Wl,-rpath=$(BUILDDIR) $(LIBS:%.cpp=-l%)
 
-STATIC=main.cpp disp.cpp util.cpp mesh.cpp console.cpp var.cpp str.cpp border.cpp node.cpp cont.cpp idx.cpp array.cpp dict.cpp mark.cpp lim.cpp cone.cpp road.cpp state.cpp layout.cpp i_beam.cpp omni.cpp
-LIBS=scn.cpp prog.cpp obj.cpp line.cpp pt.cpp crane.cpp truck.cpp cargo_ship.cpp street_sign.cpp
+STATIC:=main.cpp disp.cpp util.cpp mesh.cpp console.cpp var.cpp str.cpp border.cpp node.cpp cont.cpp idx.cpp array.cpp dict.cpp mark.cpp lim.cpp cone.cpp road.cpp state.cpp layout.cpp i_beam.cpp omni.cpp
+LIBS:=scn.cpp prog.cpp obj.cpp line.cpp pt.cpp crane.cpp truck.cpp cargo_ship.cpp street_sign.cpp
 
-HDR=cam.h col.h math.h phys.h
+HDR:=cam.h col.h math.h phys.h
 
 OBJ_STATIC=$(STATIC:%.cpp=$(BUILDDIR)/%.o)
 OBJ_LIBS=$(LIBS:%.cpp=$(BUILDDIR)/lib%.so)
 
-STAGE=init array str dict matrix vec ctrl_flow path thread
+STAGE:=init array str dict matrix vec ctrl_flow path thread
 
 .PHONY: all
 all: mk_build mk_stage omni ro
