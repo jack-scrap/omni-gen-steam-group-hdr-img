@@ -425,7 +425,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 				init = contMk(c);
 			}
 
-			Crane* _ = craneMk(init, loc, rot);
+			Crane* _ = craneMk(init, loc, glm::radians(rot));
 
 			omni::assert(!util::phys::aabbGround(_->_parent), "Crane clipping into ground plane");
 
@@ -454,7 +454,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 			Array* array = arrayMk((char*) init._ptr, init._x, "", Z, glm::vec3(0.0, layout::padded(0.0), -((layout::idx[X] / 2) + (layout::stroke * 2) + (layout::margin * 2 * 2))), glm::vec3(0.0, -M_PI / 2, 0.0));
 
-			Truck* _ = truckMk(array, loc, rot);
+			Truck* _ = truckMk(array, loc, glm::radians(rot));
 
 			omni::assert(!util::phys::aabbGround(_->_parent), "Truck clipping into ground plane");
 
@@ -499,7 +499,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 			Array* array = arrayMk((char*) init._ptr, init._x, init._y, name, glm::vec3(0.0, layout::padded(0.0), 0.0));
 
-			CargoShip* _ = cargoShipMk(array, loc, rot);
+			CargoShip* _ = cargoShipMk(array, loc, glm::radians(rot));
 
 			cargoShip._sz += sizeof (CargoShip*);
 			cargoShip._ptr = (CargoShip**) realloc(cargoShip._ptr, cargoShip._sz);
@@ -563,7 +563,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 		}
 
 		if (entry["name"] == "i_beam") {
-			Obj* _ = iBeamMk(entry["sz"], entry["axis"], loc, rot);
+			Obj* _ = iBeamMk(entry["sz"], entry["axis"], loc, glm::radians(rot));
 
 			obj.push_back(_);
 			prim.push_back(Mesh::LINE);
