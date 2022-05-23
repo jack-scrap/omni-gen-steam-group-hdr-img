@@ -437,6 +437,41 @@ void scn::init(std::string stage, unsigned int lvl) {
 			prim.push_back(Mesh::OBJ);
 		}
 
+		if (entry["name"] == "truck") {
+			CBuff init;
+			if (entry.contains("data")) {
+				init = util::json::array::array(entry["data"]);
+			} else {
+				init = {
+					(char*) malloc(1),
+					1,
+					0,
+					0
+				};
+
+				((char*) init._ptr)[0] = 0;
+			}
+
+			Array* array = arrayMk((char*) init._ptr, init._x, "", Z, glm::vec3(0.0, layout::padded(0.0), -((layout::idx[X] / 2) + (layout::stroke * 2) + (layout::margin * 2 * 2))), glm::vec3(0.0, -M_PI / 2, 0.0));
+
+			Truck* _ = truckMk(array, loc, rot);
+
+			omni::assert(!util::phys::aabbGround(_->_parent), "Truck clipping into ground plane");
+
+			truck._sz += sizeof (Truck*);
+			truck._ptr = (Truck**) realloc(truck._ptr, truck._sz);
+			((Truck**) truck._ptr)[truck._sz - sizeof (Truck*)] = _;
+
+			obj.push_back(_->_parent);
+			prim.push_back(Mesh::OBJ);
+
+			obj.push_back(_->_parent->_child[Truck::BED]);
+			prim.push_back(Mesh::PT);
+
+			obj.push_back(_->_parent->_child[Truck::OUTER]);
+			prim.push_back(Mesh::PT);
+		}
+
 		if (entry["name"] == "cargo_ship") {
 			std::string name;
 
@@ -472,41 +507,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 			obj.push_back(_->_parent);
 			prim.push_back(Mesh::OBJ);
-		}
-
-		if (entry["name"] == "truck") {
-			CBuff init;
-			if (entry.contains("data")) {
-				init = util::json::array::array(entry["data"]);
-			} else {
-				init = {
-					(char*) malloc(1),
-					1,
-					0,
-					0
-				};
-
-				((char*) init._ptr)[0] = 0;
-			}
-
-			Array* array = arrayMk((char*) init._ptr, init._x, "", Z, glm::vec3(0.0, layout::padded(0.0), -((layout::idx[X] / 2) + (layout::stroke * 2) + (layout::margin * 2 * 2))), glm::vec3(0.0, -M_PI / 2, 0.0));
-
-			Truck* _ = truckMk(array, loc, rot);
-
-			omni::assert(!util::phys::aabbGround(_->_parent), "Truck clipping into ground plane");
-
-			truck._sz += sizeof (Truck*);
-			truck._ptr = (Truck**) realloc(truck._ptr, truck._sz);
-			((Truck**) truck._ptr)[truck._sz - sizeof (Truck*)] = _;
-
-			obj.push_back(_->_parent);
-			prim.push_back(Mesh::OBJ);
-
-			obj.push_back(_->_parent->_child[Truck::BED]);
-			prim.push_back(Mesh::PT);
-
-			obj.push_back(_->_parent->_child[Truck::OUTER]);
-			prim.push_back(Mesh::PT);
 		}
 	}
 
