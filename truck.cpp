@@ -64,7 +64,7 @@ Truck* truckMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 
 	GLfloat ht = -(0.2 * 2);
 
-	child[Truck::TAIL] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-layout::scoped(init->_x * layout::scoped(layout::idx[Z])), 0.0, 0.0) + glm::vec3(0.16, 0.0, 0.0));
+	child[Truck::TAIL] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-layout::scoped(init->_x * layout::scoped(layout::idx[Z])), -(0.2 * 2), 0.0));
 
 	// data
 	_->_data = init;
