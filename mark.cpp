@@ -1,6 +1,7 @@
 #include "mark.h"
 #include "line.h"
 #include "math.h"
+#include "layout.h"
 
 GLushort Mark::_idc[2] = {
 	0, 1
@@ -44,7 +45,7 @@ Mark* markMk(GLfloat val[2][2], unsigned int status) {
 			break;
 	}
 
-	_->_parent = lineMk((GLfloat*) vtc, Mark::_idc, 2, "main", "thick", frag, active);
+	_->_parent = lineMk((GLfloat*) vtc, Mark::_idc, 2, "main", "thick", frag, active, glm::vec3(0.0, layout::margin * 2, 0.0));
 
 	return _;
 }
