@@ -49,6 +49,3 @@ Mark* markMk(GLfloat val[2][2], unsigned int status) {
 
 	return _;
 }
-
-void markDel(Mark* mark) {
-}
