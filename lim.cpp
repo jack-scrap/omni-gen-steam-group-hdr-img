@@ -56,7 +56,7 @@ Lim* limMk(unsigned int axis, GLfloat val, unsigned int status) {
 			break;
 	}
 
-	_->_parent = lineMk((GLfloat*) vtc, Lim::_idc, 2, "main", "thick", frag, active, glm::vec3(0.0, layout::margin * 2, 0.0));
+	_->_parent = lineMk((GLfloat*) vtc, Lim::_idc, 2, "main", "thick", frag, active);
 
 	return _;
 }

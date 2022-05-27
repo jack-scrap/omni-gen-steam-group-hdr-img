@@ -45,7 +45,7 @@ Mark* markMk(GLfloat val[2][2], unsigned int status) {
 			break;
 	}
 
-	_->_parent = lineMk((GLfloat*) vtc, Mark::_idc, 2, "main", "thick", frag, active, glm::vec3(0.0, layout::margin * 2, 0.0));
+	_->_parent = lineMk((GLfloat*) vtc, Mark::_idc, 2, "main", "thick", frag, active);
 
 	return _;
 }
