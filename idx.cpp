@@ -113,8 +113,12 @@ void idxPush(Idx* idx, Cont* byte) {
 	idx->_parent->_child[idx->_parent->_noChild - 1] = idx->_data[idx->_sz - 1]->_parent;
 
 	// transform
+	glm::vec2 center = layout::center({
+		layout::idx[X],
+		layout::idx[Z]
+	});
 	glm::mat4 model = glm::mat4(1.0);
-	model = glm::translate(model, (glm::vec3(layout::scoped(layout::idx[X]), layout::idx[Y], layout::scoped(layout::idx[Z])) / glm::vec3(2)) + glm::vec3(0.0, (idx->_sz - 1) * layout::idx[Y], 0.0) + glm::vec3(0.0, -(layout::margin * 2), 0.0));
+	model = glm::translate(model, glm::vec3(layout::overhead, 0.0, layout::overhead) + glm::vec3(center[X], 0.0, center[Y]) + glm::vec3(0.0, layout::idx[Y] / 2, 0.0));
 
 	idx->_data[idx->_sz - 1]->_parent->_model = model;
 
