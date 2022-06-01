@@ -344,7 +344,7 @@ if _cargoShipGet()._sz:
 	else:
 		cargo_ship = _CargoShip(_cargoShipPtr[0])
 
-class _(_Obj):
+class _StreetSign(_Obj):
 	_fields_ = [
 		('_pass', POINTER(c_bool)),
 		('_no', c_int)
@@ -364,12 +364,12 @@ _streetSignToggle = _street_sign.streetSignToggle
 _streetSignToggle.restype = c_uint
 _streetSignToggle.argtypes = None
 
-_streetSignPtr = cast(_streetSignGet()._ptr, POINTER(_))
+_streetSignPtr = cast(_streetSignGet()._ptr, POINTER(_StreetSign))
 
 street_sign = []
 i = 0
 while i < _streetSignGet()._sz:
-	street_sign.append(_(_streetSignPtr[i]))
+	street_sign.append(_StreetSign(_streetSignPtr[i]))
 
 	i += sizeof(c_void_p)
 
