@@ -1,8 +1,8 @@
 from ctypes import *
 import math
 
-_truck = CDLL('libtruck.so')
 _crane = CDLL('libcrane.so')
+_truck = CDLL('libtruck.so')
 _cargo_ship = CDLL('libcargo_ship.so')
 _street_sign = CDLL('libstreet_sign.so')
 _scn = CDLL('libscn.so')
