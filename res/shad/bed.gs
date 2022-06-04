@@ -4,13 +4,13 @@ layout (points) in;
 
 layout (triangle_strip, max_vertices = 8) out;
 
+out vec3 _pos;
+
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 proj;
 
 uniform unsigned int sz;
-
-out vec3 _pos;
 
 const float pad = 0.16;
 const float margin = 0.16;
