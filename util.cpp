@@ -1620,3 +1620,175 @@ GLuint util::tex::spray(std::string tex) {
 
 	return cbo;
 }
+
+std::string util::glyphName(char c) {
+	std::string _;
+
+	// alpha-numeric
+	if (
+		(c >= '0' && c <= '9') ||
+		(c >= 'A' && c <= 'Z') ||
+		(c >= 'a' && c <= 'z')
+	) {
+		_ = std::string(1, c);
+	} else {
+		switch (c) {
+			case ' ':
+				_ = "spc";
+
+				break;
+
+			case '!':
+				_ = "bang";
+
+				break;
+
+			case '"':
+				_ = "dbl_quote";
+
+				break;
+
+			case '#':
+				_ = "pound";
+
+				break;
+
+			case '$':
+				_ = "dollar";
+
+				break;
+
+			case '%':
+				_ = "percent";
+
+				break;
+
+			case '&':
+				_ = "ampersand";
+
+				break;
+
+			case '\'':
+				_ = "single_quote";
+
+				break;
+
+			case '(':
+				_ = "round_bracket_l";
+
+				break;
+
+			case ')':
+				_ = "round_bracket_r";
+
+				break;
+
+			case '*':
+				_ = "asterisk";
+
+				break;
+
+			case '+':
+				_ = "plus";
+
+				break;
+
+			case ',':
+				_ = "comma";
+
+				break;
+
+			case '-':
+				_ = "minus";
+
+				break;
+
+			case '/':
+				_ = "fwd_slash";
+
+				break;
+
+			case ':':
+				_ = "colon";
+
+				break;
+
+			case ';':
+				_ = "semi_colon";
+
+				break;
+
+			case '<':
+				_ = "less_than";
+
+				break;
+
+			case '=':
+				_ = "equals";
+
+				break;
+
+			case '>':
+				_ = "greater_than";
+
+				break;
+
+			case '?':
+				_ = "question";
+
+				break;
+
+			case '@':
+				_ = "at";
+
+				break;
+
+			case '[':
+				_ = "sq_bracket_l";
+
+				break;
+
+			case ']':
+				_ = "sq_bracket_r";
+
+				break;
+
+			case '^':
+				_ = "carat";
+
+				break;
+
+			case '_':
+				_ = "underscore";
+
+				break;
+
+			case '`':
+				_ = "back_tick";
+
+				break;
+
+			case '{':
+				_ = "curly_bracket_l";
+
+				break;
+
+			case '|':
+				_ = "vert_bar";
+
+				break;
+
+			case '}':
+				_ = "curly_bracket_r";
+
+				break;
+
+			case '~':
+				_ = "tilde";
+
+				break;
+		}
+	}
+
+	return _;
+}
