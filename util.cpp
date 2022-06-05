@@ -1703,6 +1703,11 @@ std::string util::glyphName(char c) {
 
 				break;
 
+			case '.':
+				_ = "period";
+
+				break;
+
 			case '/':
 				_ = "fwd_slash";
 
