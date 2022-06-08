@@ -1779,7 +1779,7 @@ std::string util::glyphName(char c) {
 				break;
 
 			case '|':
-				_ = "vert_bar";
+				_ = "pipe";
 
 				break;
 
