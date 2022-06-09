@@ -30,6 +30,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, unsigned int type, 
 	_->_noUni = 5;
 	_->_uni = (GLint*) malloc(_->_noUni * sizeof (GLint));
 	_->_active = active;
+	_->_type = type;
 	_->_child = nullptr;
 	_->_noChild = 0;
 	_->_v = 0.0;
@@ -97,6 +98,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, unsigned int type, 
 	_->_noUni = 5;
 	_->_uni = (GLint*) malloc(_->_noUni * sizeof (GLint));
 	_->_active = active;
+	_->_type = type;
 	_->_noChild = noChild;
 	_->_child = (Obj**) malloc(_->_noChild * sizeof (Obj*));
 	for (int i = 0; i < _->_noChild; i++) {
@@ -297,6 +299,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, unsigned int type, 
 	_->_noUni = 5;
 	_->_uni = (GLint*) malloc(_->_noUni * sizeof (GLint));
 	_->_active = active;
+	_->_type = type;
 	_->_child = nullptr;
 	_->_noChild = 0;
 	_->_v = 0.0;
@@ -361,6 +364,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, unsigned int type, 
 	_->_noUni = 5;
 	_->_uni = (GLint*) malloc(_->_noUni * sizeof (GLint));
 	_->_active = active;
+	_->_type = type;
 	_->_v = 0.0;
 	_->_tex = 0;
 	_->_noChild = noChild;
