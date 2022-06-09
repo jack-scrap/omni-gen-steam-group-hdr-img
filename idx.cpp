@@ -41,6 +41,12 @@ Idx* idxMk(unsigned int i, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	}, child, sizeof child / sizeof *child, loc, rot);
 	_->_parent = scope->_parent;
 
+	for (int i = 0; i < str.size(); i++) {
+		glm::vec3 center = layout::center(child[i]);
+
+		objMv(child[i], _->_parent, glm::vec3(center[X], 0.0, -center[Z]), glm::vec3(0.0));
+	}
+
 	return _;
 }
 
@@ -88,6 +94,12 @@ Idx* idxMk(unsigned int i, char* c, unsigned int sz, std::string name, glm::vec3
 		layout::item(layout::idx[Z])
 	}, child, sizeof child / sizeof *child, loc, rot);
 	_->_parent = scope->_parent;
+
+	for (int i = 0; i < str.size(); i++) {
+		glm::vec3 center = layout::center(child[i]);
+
+		objMv(child[i], _->_parent, glm::vec3(center[X], 0.0, -center[Z]), glm::vec3(0.0));
+	}
 
 	return _;
 }
