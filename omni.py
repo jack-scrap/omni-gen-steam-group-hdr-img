@@ -60,11 +60,17 @@ class _Scope:
     def __getitem__(self, k):
         el = self._data[k]
 
-        ptr = cast(el.contents._ptr, POINTER(_Cont))
+        varPtr = cast(el.contents._ptr, POINTER(_Var))
 
-        cont = ptr.contents
+        contPtr = cast(varPtr.contents._ptr, POINTER(_Cont))
 
-        return cont._c
+        if contPtr:
+            cont = contPtr.contents
+
+            return cont._c
+
+        else:
+            return None
 
 _dataGet = _scn.dataGet
 _dataGet.restype = POINTER(POINTER(_Var))
