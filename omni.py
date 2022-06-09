@@ -62,7 +62,9 @@ class _Scope:
 
         ptr = cast(el.contents._ptr, POINTER(_Cont))
 
-        return ptr.contents._c
+        cont = ptr.contents
+
+        return cont._c
 
 _dataGet = _scn.dataGet
 _dataGet.restype = POINTER(POINTER(_Var))
