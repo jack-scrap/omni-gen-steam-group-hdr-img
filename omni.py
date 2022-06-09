@@ -85,7 +85,7 @@ _goal = _goalGet()
 _type = _typeGet()
 _noData = _noDataGet()
 
-scope = _Scope(_data, _noData)
+_scope = _Scope(_data, _noData)
 
 data = {}
 goal = {}
