@@ -7,7 +7,7 @@
 #include "scn.h"
 
 Obj* lineMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, std::string geom, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
-	return objMk(vtc, idc, noPrim, vtx, geom, frag, active, loc, rot);
+	return objMk(vtc, idc, noPrim, Mesh::LINE, vtx, geom, frag, active, loc, rot);
 }
 
 void limDel(Lim* lim) {

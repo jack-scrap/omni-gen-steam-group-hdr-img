@@ -23,7 +23,7 @@
 #include "omni.h"
 #include "layout.h"
 
-Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
+Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, unsigned int type, std::string vtx, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -90,7 +90,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 	return _;
 }
 
-Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, std::string frag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
+Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, unsigned int type, std::string vtx, std::string frag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -164,18 +164,18 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, glm
 	std::vector<GLfloat> vtc = util::mesh::rd::attr(name, Obj::POS);
 	std::vector<GLushort> idc = util::mesh::rd::idc(name, Obj::POS);
 
-	return objMk(&vtc[0], &idc[0], idc.size(), vtx, frag, active, loc, rot);
+	return objMk(&vtc[0], &idc[0], idc.size(), Mesh::OBJ, vtx, frag, active, loc, rot);
 }
 
 Obj* objMk(std::string name, std::string vtx, std::string frag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
 	std::vector<GLfloat> vtc = util::mesh::rd::attr(name, Obj::POS);
 	std::vector<GLushort> idc = util::mesh::rd::idc(name, Obj::POS);
 
-	return objMk(&vtc[0], &idc[0], idc.size(), vtx, frag, active, child, noChild, loc, rot);
+	return objMk(&vtc[0], &idc[0], idc.size(), Mesh::OBJ, vtx, frag, active, child, noChild, loc, rot);
 }
 
-Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::string vtx, std::string frag, std::string tex, bool active, glm::vec3 loc, glm::vec3 rot) {
-	Obj* _ = objMk(vtc, idc, noPrim, vtx, frag, active, loc, rot);
+Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, unsigned int type, std::string vtx, std::string frag, std::string tex, bool active, glm::vec3 loc, glm::vec3 rot) {
+	Obj* _ = objMk(vtc, idc, noPrim, type, vtx, frag, active, loc, rot);
 
 	glBindVertexArray(_->_mesh->_id[Mesh::VAO]);
 
@@ -230,13 +230,13 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, std::string tex,
 		idc.push_back(i);
 	}
 
-	Obj* _ = objMk(&vtc[0], &st[0], &idc[0], idc.size(), vtx, frag, tex, active, loc, rot);
+	Obj* _ = objMk(&vtc[0], &st[0], &idc[0], idc.size(), Mesh::OBJ, vtx, frag, tex, active, loc, rot);
 
 	return _;
 }
 
-Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, std::string vtx, std::string frag, std::string tex, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
-	Obj* _ = objMk(vtc, idc, noPrim, vtx, frag, active, child, noChild, loc, rot);
+Obj* objMk(GLfloat* vtc, GLfloat* st, GLushort* idc, unsigned int noPrim, unsigned int type, std::string vtx, std::string frag, std::string tex, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
+	Obj* _ = objMk(vtc, idc, noPrim, type, vtx, frag, active, child, noChild, loc, rot);
 
 	glBindVertexArray(_->_mesh->_id[Mesh::VAO]);
 
@@ -285,12 +285,12 @@ Obj* objMk(std::string name, std::string vtx, std::string frag, std::string tex,
 		idc.push_back(i);
 	}
 
-	Obj* _ = objMk(&vtc[0], &st[0], &idc[0], idc.size(), vtx, frag, tex, active, child, noChild, loc, rot);
+	Obj* _ = objMk(&vtc[0], &st[0], &idc[0], idc.size(), Mesh::OBJ, vtx, frag, tex, active, child, noChild, loc, rot);
 
 	return _;
 }
 
-Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, std::string geom, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
+Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, unsigned int type, std::string vtx, std::string geom, std::string frag, bool active, glm::vec3 loc, glm::vec3 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 
@@ -354,7 +354,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, st
 	return _;
 }
 
-Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, std::string vtx, std::string geom, std::string frag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
+Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, unsigned int type, std::string vtx, std::string geom, std::string frag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
 	// initialize
 	Obj* _ = (Obj*) malloc(sizeof (Obj));
 

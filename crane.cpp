@@ -74,7 +74,7 @@ Crane* craneMk(Cont* init, glm::vec3 loc, glm::vec3 rot) {
 	int l = 0;
 	for (int z = 0; z < 2; z++) {
 		for (int x = 0; x < 2; x++) {
-			child[1 + (2 * 2 * 2 * 2) + l] = objMk(Crane::_lightVtc, Crane::_lightIdc, 3 * 2, "obj", "alert", false, glm::vec3((x ? 1 : -1) * layout::padded(6.0), 1.74, (z ? 1 : -1) * 9.52), glm::vec3(0.0, M_PI / 2, 0.0));
+			child[1 + (2 * 2 * 2 * 2) + l] = objMk(Crane::_lightVtc, Crane::_lightIdc, 3 * 2, Mesh::OBJ, "obj", "alert", false, glm::vec3((x ? 1 : -1) * layout::padded(6.0), 1.74, (z ? 1 : -1) * 9.52), glm::vec3(0.0, M_PI / 2, 0.0));
 
 			l++;
 		}

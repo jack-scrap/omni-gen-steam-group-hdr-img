@@ -85,7 +85,7 @@ Border* borderMk(glm::vec2 bound, glm::vec3 loc, glm::vec3 rot) {
 		}
 	}
 
-	_->_parent = objMk(vtc, strip, 3 * 2 * 2 * 2, "obj", "solid", true, loc, rot);
+	_->_parent = objMk(vtc, strip, 3 * 2 * 2 * 2, Mesh::OBJ, "obj", "solid", true, loc, rot);
 
 	return _;
 }
@@ -171,7 +171,7 @@ Border* borderMk(glm::vec2 bound, Obj** child, unsigned int noChild, glm::vec3 l
 		}
 	}
 
-	_->_parent = objMk(vtc, strip, 3 * 2 * 2 * 2, "obj", "solid", true, child, noChild, loc, rot);
+	_->_parent = objMk(vtc, strip, 3 * 2 * 2 * 2, Mesh::OBJ, "obj", "solid", true, child, noChild, loc, rot);
 
 	return _;
 }
