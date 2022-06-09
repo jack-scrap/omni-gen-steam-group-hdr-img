@@ -13,6 +13,8 @@
 typedef struct Obj {
 	Mesh* _mesh;
 
+	unsigned int _type;
+
 	bool _active;
 
 	GLfloat _v;
