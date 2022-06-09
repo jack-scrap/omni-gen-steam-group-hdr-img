@@ -86,4 +86,4 @@ void objMv(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot, GLfloat speed = 
 
 void objA(Obj* obj);
 
-void objDraw(Obj* obj, unsigned int type);
+void objDraw(Obj* obj);

@@ -551,9 +551,9 @@ void objA(Obj* obj) {
 	}
 }
 
-void objDraw(Obj* obj, unsigned int type) {
+void objDraw(Obj* obj) {
 	GLenum prim;
-	switch (type) {
+	switch (obj->_type) {
 		case Mesh::PT:
 			prim = GL_POINTS;
 
@@ -592,7 +592,7 @@ void objDraw(Obj* obj, unsigned int type) {
 
 	for (int i = 0; i < obj->_noChild; i++) {
 		if (obj->_child[i]) {
-			objDraw(obj->_child[i], type);
+			objDraw(obj->_child[i]);
 		}
 	}
 }
