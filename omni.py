@@ -49,6 +49,17 @@ class _Var(Structure):
 		('_ptr', c_void_p)
 	]
 
+class _Scope:
+    _data = {}
+    _noData = 0
+
+    def __init__(self, data, noData):
+        self._data = data
+        self._noData = data
+
+    def __getitem__(self, k):
+        ptr = cast(self._data[k].contents._ptr, POINTER(_Cont))
+
 _dataGet = _scn.dataGet
 _dataGet.restype = POINTER(POINTER(_Var))
 _dataGet.argtypes = None
@@ -69,6 +80,8 @@ _data = _dataGet()
 _goal = _goalGet()
 _type = _typeGet()
 _noData = _noDataGet()
+
+scope = _Scope(_data, _noData)
 
 data = {}
 goal = {}
