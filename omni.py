@@ -58,19 +58,23 @@ class _Data:
 
             id = var._id.decode('utf-8')
 
-            contPtr = cast(var._ptr, POINTER(POINTER(_Cont)))
+            idxPtr = cast(var._ptr, POINTER(_Idx))
 
-            self._data[id] = contPtr
+            self._data[id] = idxPtr
 
     def __getitem__(self, k):
-        ptr = self._data[k]
+        idxPtr = self._data[k]
 
-        if ptr:
-            cont = ptr[0].contents
+        idx = idxPtr.contents
 
-            c = cont._c
+        contPtrPtr = cast(idx._data, POINTER(POINTER(_Cont)))
 
-            return int.from_bytes(c, byteorder = 'little')
+        if contPtrPtr:
+            contPtr = contPtrPtr[0]
+
+            cont = contPtr.contents
+
+            return cont
 
         else:
             return None
