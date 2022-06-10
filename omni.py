@@ -68,7 +68,9 @@ class _Scope:
         if ptr:
             cont = ptr.contents
 
-            return cont._c
+            c = cont._c
+
+            return int.from_bytes(c, byteorder = 'little')
 
         else:
             return None
