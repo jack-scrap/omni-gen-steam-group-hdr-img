@@ -63,14 +63,10 @@ class _Scope:
             self._data[id] = contPtr
 
     def __getitem__(self, k):
-        el = self._data[k]
+        ptr = self._data[k]
 
-        varPtr = cast(el.contents._ptr, POINTER(_Var))
-
-        contPtr = cast(varPtr.contents._ptr, POINTER(_Cont))
-
-        if contPtr:
-            cont = contPtr.contents
+        if ptr:
+            cont = ptr.contents
 
             return cont._c
 
