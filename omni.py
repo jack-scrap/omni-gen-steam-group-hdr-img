@@ -49,7 +49,7 @@ class _Var(Structure):
 		('_ptr', c_void_p)
 	]
 
-class _Scope:
+class _Data:
     _data = {}
 
     def __init__(self, data, noData):
@@ -96,7 +96,7 @@ _goal = _goalGet()
 _type = _typeGet()
 _noData = _noDataGet()
 
-scope = _Scope(_data, _noData)
+data = _Data(_data, _noData)
 
 # bound
 class _Lim(Structure):
