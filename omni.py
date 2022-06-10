@@ -58,7 +58,7 @@ class _Data:
 
             id = var._id.decode('utf-8')
 
-            contPtr = cast(var._ptr, POINTER(_Cont))
+            contPtr = cast(var._ptr, POINTER(POINTER(_Cont)))
 
             self._data[id] = contPtr
 
@@ -66,7 +66,7 @@ class _Data:
         ptr = self._data[k]
 
         if ptr:
-            cont = ptr.contents
+            cont = ptr[0].contents
 
             c = cont._c
 
