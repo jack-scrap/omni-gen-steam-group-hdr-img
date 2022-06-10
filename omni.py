@@ -95,45 +95,6 @@ _noData = _noDataGet()
 
 _scope = _Scope(_data, _noData)
 
-data = {}
-goal = {}
-for i in range(_noData):
-	id = _data[i].contents._id.decode('utf-8')
-
-	t = None
-	if _type[i] == 0:
-		ptrData = cast(_data[i].contents._ptr, POINTER(_Idx))
-		idxData = _Idx(ptrData.contents._data)
-
-		if idxData._data:
-		    data[id] = idxData._data.contents
-
-		else:
-		    data[id] = 0
-
-		ptrGoal = cast(_goal[i].contents._ptr, POINTER(_Idx))
-		idxGoal = _Idx(ptrGoal.contents._data)
-
-		if idxGoal._data:
-		    goal[id] = idxGoal._data.contents
-
-		else:
-		    goal[id] = 0
-
-	if _type[i] == 1:
-		ptr = cast(_data[i].contents._ptr, POINTER(_Array))
-		array = _Array(ptr.contents._data, ptr.contents._x, ptr.contents._y, ptr.contents._loc)
-
-		data[id] = array
-		goal[id] = array
-
-	if _type[i] == 2:
-                ptr = cast(_data[i].contents._ptr, POINTER(_Dict))
-                dict = _Dict(ptr.contents._data, ptr.contents._type, ptr.contents._no)
-
-                data[id] = dict
-                goal[id] = dict
-
 # bound
 class _Lim(Structure):
 	_fields_ = [
