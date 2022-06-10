@@ -54,11 +54,11 @@ class _Data:
 
     def __init__(self, data, noData):
         for i in range(noData):
-            el = data[i].contents
+            var = data[i].contents
 
-            id = el._id.decode('utf-8')
+            id = var._id.decode('utf-8')
 
-            contPtr = cast(el._ptr, POINTER(_Cont))
+            contPtr = cast(var._ptr, POINTER(_Cont))
 
             self._data[id] = contPtr
 
