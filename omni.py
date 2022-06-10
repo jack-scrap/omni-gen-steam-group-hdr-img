@@ -51,11 +51,16 @@ class _Var(Structure):
 
 class _Scope:
     _data = {}
-    _noData = 0
 
     def __init__(self, data, noData):
-        self._data = data
-        self._noData = data
+        for i in range(noData):
+            el = data[i].contents
+
+            id = el._id.decode('utf-8')
+
+            contPtr = cast(el._ptr, POINTER(_Cont))
+
+            self._data[id] = contPtr
 
     def __getitem__(self, k):
         el = self._data[k]
