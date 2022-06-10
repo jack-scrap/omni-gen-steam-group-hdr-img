@@ -93,7 +93,7 @@ _goal = _goalGet()
 _type = _typeGet()
 _noData = _noDataGet()
 
-_scope = _Scope(_data, _noData)
+scope = _Scope(_data, _noData)
 
 # bound
 class _Lim(Structure):
