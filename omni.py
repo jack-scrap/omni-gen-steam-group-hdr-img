@@ -75,7 +75,9 @@ class _Data:
 
             cont = contPtr.contents
 
-            return cont._c
+            c = cont._c
+
+            return int.from_bytes(c, byteorder = "little")
 
         else:
             return None
