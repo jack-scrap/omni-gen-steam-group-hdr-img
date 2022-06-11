@@ -320,6 +320,14 @@ std::string util::fs::path::base(std::string path) {
 	return str::split(f, '.')[0];
 }
 
+const std::string util::fs::path::sep = "/";
+
+const std::string util::fs::path::home = "~";
+const std::string util::fs::path::homeExpand = "player";
+
+const std::string util::fs::path::curr = ".";
+const std::string util::fs::path::prev = "..";
+
 std::vector<std::string> util::fs::path::tok(std::string buff) {
 	std::vector<std::string> _;
 

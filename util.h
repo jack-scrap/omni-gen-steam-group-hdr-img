@@ -44,13 +44,13 @@ namespace util {
 		void setW(std::string path);
 
 		namespace path {
-			const std::string sep = "/";
+			extern const std::string sep;
 
-			const std::string home = "~";
-			const std::string homeExpand = "player";
+			extern const std::string home;
+			extern const std::string homeExpand;
 
-			const std::string curr = ".";
-			const std::string prev = "..";
+			extern const std::string curr;
+			extern const std::string prev;
 
 			std::vector<std::string> tok(std::string buff);
 
