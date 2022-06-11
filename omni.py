@@ -46,7 +46,8 @@ class _Dict(Structure):
 class _Var(Structure):
 	_fields_ = [
 		('_id', c_char_p),
-		('_ptr', c_void_p)
+		('_ptr', c_void_p),
+                ('_type', c_uint)
 	]
 
 class _Data:
