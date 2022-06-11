@@ -25,7 +25,6 @@
 
 Var** data = (Var**) malloc(0);
 Var** goal = (Var**) malloc(0);
-unsigned int* type = (unsigned int*) malloc(0);
 unsigned int noData = 0;
 
 bool eq = false;
@@ -38,10 +37,6 @@ Var** dataGet() {
 
 Var** goalGet() {
 	return goal;
-}
-
-unsigned int* typeGet() {
-	return type;
 }
 
 unsigned int noDataGet() {
@@ -138,7 +133,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 	/* de-allocate */
 	// data
 	for (int i = 0; i < noData; i++) {
-		switch (type[i]) {
+		switch (data[i]->_type) {
 			case omni::SCALAR:
 				idxDel((Idx*) data[i]);
 				idxDel((Idx*) goal[i]);
@@ -196,7 +191,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 	data = (Var**) realloc(data, noData * sizeof (Var*));
 	goal = (Var**) realloc(goal, noData * sizeof (Var*));
-	type = (unsigned int*) realloc(type, noData * sizeof (unsigned int));
 
 	int i = 0;
 	glm::vec3 offset = glm::vec3(0.0);
@@ -222,7 +216,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 				wd = ((Idx*) item->_ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->_ptr)->_parent->_aabb[X][MIN];
 
 				data[i] = item;
-				type[i] = omni::SCALAR;
 
 				break;
 			}
@@ -237,7 +230,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 						wd = ((Array*) item->_ptr)->_parent->_aabb[X][MAX] - ((Array*) item->_ptr)->_parent->_aabb[X][MIN];
 
 						data[i] = item;
-						type[i] = omni::ARRAY;
 
 						break;
 					}
@@ -250,7 +242,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 								wd = ((Array*) item->_ptr)->_parent->_aabb[X][MAX] - ((Array*) item->_ptr)->_parent->_aabb[X][MIN];
 
 								data[i] = item;
-								type[i] = omni::ARRAY;
 
 								break;
 							}
@@ -260,7 +251,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 								wd = ((Array*) item->_ptr)->_parent->_aabb[X][MAX] - ((Array*) item->_ptr)->_parent->_aabb[X][MIN];
 
 								data[i] = item;
-								type[i] = omni::ARRAY;
 
 								break;
 							}
@@ -278,7 +268,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 				wd = ((Array*) item->_ptr)->_parent->_aabb[X][MAX] - ((Array*) item->_ptr)->_parent->_aabb[X][MIN];
 
 				data[i] = item;
-				type[i] = omni::ARRAY;
 
 				break;
 			}
@@ -288,7 +277,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 				wd = ((Dict*) item->_ptr)->_parent->_aabb[X][MAX] - ((Dict*) item->_ptr)->_parent->_aabb[X][MIN];
 
 				data[i] = item;
-				type[i] = omni::DICT;
 
 				break;
 			}
@@ -377,7 +365,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 			}
     }
 
-		omni::assert(typeRhs == type[i], "Can't compare data; types not comparable");
+		omni::assert(typeRhs == data[i]->_type, "Can't compare data; types not comparable");
 
     i++;
   }
@@ -385,7 +373,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 	for (int i = 0; i < noData; i++) {
 		Obj* _;
 
-		switch (type[i]) {
+		switch (data[i]->_type) {
 			case omni::SCALAR:
 				_ = ((Idx*) data[i]->_ptr)->_parent;
 

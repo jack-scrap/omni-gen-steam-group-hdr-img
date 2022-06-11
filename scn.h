@@ -23,7 +23,6 @@ extern Console* console;
 
 extern "C" Var** data;
 extern "C" Var** goal;
-extern "C" unsigned int* type;
 extern "C" unsigned int noData;
 
 extern "C" bool eq;
@@ -34,7 +33,6 @@ extern "C" Var** dataGet();
 
 extern "C" Var** goalGet();
 
-extern "C" unsigned int* typeGet();
 extern "C" unsigned int noDataGet();
 
 extern "C" CArr crane;

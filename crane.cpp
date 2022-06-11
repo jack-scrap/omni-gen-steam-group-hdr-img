@@ -176,7 +176,7 @@ void cranePed(Crane* crane, float delta) {
 void craneGrab(Crane* crane) {
 	if (crane->_data) {
 		for (int i = 0; i < noData; i++) {
-			switch (type[i]) {
+			switch (data[i]->_type) {
 				case omni::SCALAR: {
 					Idx* idx = (Idx*) data[i]->_ptr;
 
@@ -213,7 +213,7 @@ void craneGrab(Crane* crane) {
 		}
 	} else {
 		for (int i = 0; i < noData; i++) {
-			switch (type[i]) {
+			switch (data[i]->_type) {
 				case omni::SCALAR: {
 					Idx* idx = (Idx*) data[i]->_ptr;
 

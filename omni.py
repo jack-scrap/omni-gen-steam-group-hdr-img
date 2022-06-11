@@ -88,17 +88,12 @@ _goalGet = _scn.goalGet
 _goalGet.restype = POINTER(POINTER(_Var))
 _goalGet.argtypes = None
 
-_typeGet = _scn.typeGet
-_typeGet.restype = POINTER(c_uint)
-_typeGet.argtypes = None
-
 _noDataGet = _scn.noDataGet
 _noDataGet.restype = c_uint
 _noDataGet.argtypes = None
 
 _data = _dataGet()
 _goal = _goalGet()
-_type = _typeGet()
 _noData = _noDataGet()
 
 data = _Data(_data, _noData)
