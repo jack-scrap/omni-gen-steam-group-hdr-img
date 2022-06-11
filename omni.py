@@ -75,7 +75,7 @@ class _Data:
 
             cont = contPtr.contents
 
-            return cont
+            return cont._c
 
         else:
             return None
