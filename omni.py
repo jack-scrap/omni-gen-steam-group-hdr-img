@@ -20,12 +20,16 @@ class _Obj(Structure):
 # data
 class _Cont(Structure):
 	_fields_ = [
-		('_c', c_char)
+		('_c', c_char),
+                ('_parent', c_void_p)
 	]
 
 class _Idx(Structure):
 	_fields_ = [
-		('_data', POINTER(_Cont))
+		('_i', c_uint),
+		('_data', POINTER(_Cont)),
+                ('_sz', c_uint),
+                ('_parent', c_void_p)
 	]
 
 class _Array(Structure):
