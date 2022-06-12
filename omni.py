@@ -105,7 +105,6 @@ _goal = _goalGet()
 _noData = _noDataGet()
 
 data = _Data(_data, _noData)
-goal = _Data(_goal, _noData)
 
 # bound
 class _Lim(Structure):
