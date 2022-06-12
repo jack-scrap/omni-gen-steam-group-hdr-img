@@ -55,36 +55,38 @@ class _Var(Structure):
 	]
 
 class _Data:
-    _data = {}
+    _intern = {}
 
-    def __init__(self, data, noData):
-        for i in range(noData):
-            var = data[i].contents
+    def __init__(self, varPtrPtr, no):
+        for i in range(no):
+            varPtr = varPtrPtr[i]
+            var = varPtr.contents
 
-            id = var._id.decode('utf-8')
+            name = var._id.decode('utf-8')
 
             idxPtr = cast(var._ptr, POINTER(_Idx))
+            idx = idxPtr.contents
 
-            self._data[id] = idxPtr
+            contPtrPtr = cast(idx._data, POINTER(POINTER(_Cont)))
+
+            contPtr = None
+            if contPtrPtr:
+                contPtr = contPtrPtr[0]
+
+            self._intern[name] = contPtr
 
     def __getitem__(self, k):
-        idxPtr = self._data[k]
+        contPtr = self._intern[k]
 
-        idx = idxPtr.contents
-
-        contPtrPtr = cast(idx._data, POINTER(POINTER(_Cont)))
-
-        if contPtrPtr:
-            contPtr = contPtrPtr[0]
-
+        c = None
+        if contPtr:
             cont = contPtr.contents
 
             c = cont._c
 
-            return int.from_bytes(c, byteorder = "little")
+            c = int.from_bytes(c, byteorder = 'little')
 
-        else:
-            return None
+        return c
 
 _dataGet = _scn.dataGet
 _dataGet.restype = POINTER(POINTER(_Var))
