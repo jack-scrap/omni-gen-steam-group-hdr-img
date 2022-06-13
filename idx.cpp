@@ -10,7 +10,7 @@
 Idx* idxMk(unsigned int i, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	Idx* _ = (Idx*) malloc(sizeof (Idx));
 
-	_->_data = nullptr;
+	_->_data = (Cont**) malloc(0);
 	_->_sz = 0;
 	_->_i = i;
 
