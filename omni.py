@@ -54,7 +54,7 @@ class _Var(Structure):
                 ('_type', c_uint)
 	]
 
-class _Data:
+class _Scope:
     _intern = {}
 
     def __init__(self, raw, no):
@@ -106,7 +106,7 @@ _data = _dataGet()
 _goal = _goalGet()
 _noData = _noDataGet()
 
-data = _Data(_data, _noData)
+data = _Scope(_data, _noData)
 
 # bound
 class _Lim(Structure):
