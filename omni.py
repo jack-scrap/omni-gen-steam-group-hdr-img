@@ -70,7 +70,7 @@ class _Data:
             contPtrPtr = cast(idx._data, POINTER(POINTER(_Cont)))
 
             contPtr = None
-            if contPtrPtr:
+            if idx._sz:
                 contPtr = contPtrPtr[0]
 
             self._intern[name] = contPtr
