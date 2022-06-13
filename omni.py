@@ -67,21 +67,21 @@ class _Data:
             idxPtr = cast(var._ptr, POINTER(_Idx))
             idx = idxPtr.contents
 
-            contPtrPtr = cast(idx._data, POINTER(POINTER(_Cont)))
+            arr = cast(idx._data, POINTER(POINTER(_Cont)))
 
             contPtr = []
             if idx._sz:
                 for i in range(idx._sz):
-                    contPtr.append(contPtrPtr[i])
+                    contPtr.append(arr[i])
 
             self._intern[name] = contPtr
 
     def __getitem__(self, k):
-        contPtrPtr = self._intern[k]
+        arr = self._intern[k]
 
         rep = []
-        for i in range(len(contPtrPtr)):
-            contPtr = contPtrPtr[i]
+        for i in range(len(arr)):
+            contPtr = arr[i]
             cont = contPtr.contents
 
             rep.append(int.from_bytes(cont._c, byteorder = 'little'))
