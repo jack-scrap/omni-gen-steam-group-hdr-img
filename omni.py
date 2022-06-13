@@ -69,24 +69,24 @@ class _Data:
 
             contPtrPtr = cast(idx._data, POINTER(POINTER(_Cont)))
 
-            contPtr = None
+            contPtr = []
             if idx._sz:
-                contPtr = contPtrPtr[0]
+                for i in range(idx._sz):
+                    contPtr.append(contPtrPtr[i])
 
             self._intern[name] = contPtr
 
     def __getitem__(self, k):
-        contPtr = self._intern[k]
+        contPtrPtr = self._intern[k]
 
-        c = None
-        if contPtr:
+        rep = []
+        for i in range(len(contPtrPtr)):
+            contPtr = contPtrPtr[i]
             cont = contPtr.contents
 
-            c = cont._c
+            rep.append(int.from_bytes(cont._c, byteorder = 'little'))
 
-            c = int.from_bytes(c, byteorder = 'little')
-
-        return c
+        return rep
 
 _dataGet = _scn.dataGet
 _dataGet.restype = POINTER(POINTER(_Var))
