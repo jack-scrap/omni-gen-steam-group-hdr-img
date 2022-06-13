@@ -86,7 +86,9 @@ class _Data:
 
             rep.append(int.from_bytes(cont._c, byteorder = 'little'))
 
-        return rep
+        return {
+                'val': rep
+        }
 
 _dataGet = _scn.dataGet
 _dataGet.restype = POINTER(POINTER(_Var))
