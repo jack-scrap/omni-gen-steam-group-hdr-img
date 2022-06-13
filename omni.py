@@ -57,9 +57,9 @@ class _Var(Structure):
 class _Data:
     _intern = {}
 
-    def __init__(self, varPtrPtr, no):
+    def __init__(self, raw, no):
         for i in range(no):
-            varPtr = varPtrPtr[i]
+            varPtr = raw[i]
             var = varPtr.contents
 
             name = var._id.decode('utf-8')
