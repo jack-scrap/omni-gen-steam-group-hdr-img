@@ -124,21 +124,8 @@ This allows for complete freedom of movement without being restricted to an axis
 ## Data
 Data sets can be accessed by key.
 
-`state`
-`other_state`
-
-Data and offset is provided.
-
-`.data`
-	`._data`
-	`._loc`
-
-In the case of arrays, size is provided.
-
-	`._data`
-		`._x` - Size (X)
-		`._y` - Size (Y)
-		`._z` - Size (Z)
+`.data['state']`
+`.data['other_state']`
 
 Both initial and the desired state is provided.
 
