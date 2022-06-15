@@ -79,12 +79,23 @@ class _Scope:
     def __getitem__(self, k):
         arr = self._intern[k]
 
-        rep = []
-        for i in range(len(arr)):
-            contPtr = arr[i]
-            cont = contPtr.contents
+        rep = None
 
-            rep.append(int.from_bytes(cont._c, byteorder = 'little'))
+        if (len(arr)):
+            if len(arr) > 1:
+                rep = []
+
+                for i in range(len(arr)):
+                    contPtr = arr[i]
+                    cont = contPtr.contents
+
+                    rep.append(int.from_bytes(cont._c, byteorder = 'little'))
+
+            else:
+                    contPtr = arr[0]
+                    cont = contPtr.contents
+
+                    rep = int.from_bytes(cont._c, byteorder = 'little')
 
         return {
                 'val': rep
