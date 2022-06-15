@@ -153,11 +153,11 @@ class _Crane(_Obj):
 		('_loc', c_float * 3)
 	]
 
-	_rngTrack = [
+	rngTrack = [
 		4.0,
 		13.8
 	]
-	_rngHead = [
+	rngHead = [
 		-3.0,
 		3.0
         ]
@@ -225,7 +225,7 @@ class _Truck(_Obj):
 		('_ang', c_float)
 	]
 
-	_rngWheel = [
+	rngWheel = [
 		-(math.pi / 2),
 		math.pi / 2
 	]
