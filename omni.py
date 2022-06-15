@@ -57,6 +57,12 @@ class _Var(Structure):
 class _Scope:
     _intern = {}
 
+    def parseIdx(self, ptr):
+        contPtr = ptr
+        cont = contPtr.contents
+
+        return int.from_bytes(cont._c, byteorder = 'little')
+
     def __init__(self, raw, no):
         for i in range(no):
             varPtr = raw[i]
@@ -86,16 +92,10 @@ class _Scope:
                 rep = []
 
                 for i in range(len(arr)):
-                    contPtr = arr[i]
-                    cont = contPtr.contents
-
-                    rep.append(int.from_bytes(cont._c, byteorder = 'little'))
+                    rep.append(self.parseIdx(arr[i]))
 
             else:
-                    contPtr = arr[0]
-                    cont = contPtr.contents
-
-                    rep = int.from_bytes(cont._c, byteorder = 'little')
+                    rep = self.parseIdx(arr[0])
 
         return {
                 'val': rep
