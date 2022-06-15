@@ -75,27 +75,27 @@ class _Scope:
 
             arr = cast(idx._data, POINTER(POINTER(_Cont)))
 
-            contPtr = []
+            el = []
             if idx._sz:
                 for i in range(idx._sz):
-                    contPtr.append(arr[i])
+                    el.append(arr[i])
 
-            self._intern[name] = contPtr
+            self._intern[name] = el
 
     def __getitem__(self, k):
-        arr = self._intern[k]
+        el = self._intern[k]
 
         rep = None
 
-        if (len(arr)):
-            if len(arr) > 1:
+        if (len(el)):
+            if len(el) > 1:
                 rep = []
 
-                for i in range(len(arr)):
-                    rep.append(self.parseIdx(arr[i]))
+                for i in range(len(el)):
+                    rep.append(self.parseIdx(el[i]))
 
             else:
-                    rep = self.parseIdx(arr[0])
+                    rep = self.parseIdx(el[0])
 
         return {
                 'val': rep
