@@ -219,15 +219,15 @@ _craneGrab.restype = c_void_p
 _craneGrab.argtypes = None
 
 class _Truck(_Obj):
-	_rngWheel = [
-		-(math.pi / 2),
-		math.pi / 2
-	]
-
 	_fields_ = [
 		('_data', POINTER(_Array)),
 		('_loc', c_float * 3),
-                ('_ang', c_float)
+		('_ang', c_float)
+	]
+
+	_rngWheel = [
+		-(math.pi / 2),
+		math.pi / 2
 	]
 
 	def turn(self, delta):
