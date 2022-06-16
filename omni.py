@@ -38,14 +38,16 @@ class _Array(Structure):
 		('_data', POINTER(POINTER(_Idx))),
 		('_x', c_uint),
 		('_y', c_uint),
-		('_loc', c_float * 3)
+		('_loc', c_float * 3),
+                ('_parent', c_void_p)
 	]
 
 class _Dict(Structure):
 	_fields_ = [
 		('_data', POINTER(c_void_p)),
 		('_type', POINTER(c_uint)),
-		('_no', c_uint)
+		('_no', c_uint),
+                ('_parent', c_void_p)
 	]
 
 class _Var(Structure):
