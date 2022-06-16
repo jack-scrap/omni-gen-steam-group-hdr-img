@@ -81,7 +81,8 @@ class _Scope:
                     el.append(ls[i])
 
             self._intern[name] = {
-                    'ptr': el
+                    'ptr': el,
+                    'type': var._type
             }
 
     def __getitem__(self, k):
