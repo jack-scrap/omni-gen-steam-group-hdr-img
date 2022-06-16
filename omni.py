@@ -63,6 +63,28 @@ class _Scope:
 
         return int.from_bytes(cont._c, byteorder = 'little')
 
+    def parseIdx(self, ptr):
+        rep = None
+
+        ptrIdx = cast(ptr, POINTER(_Idx))
+        idx = ptrIdx.contents
+
+        ls = cast(idx._data, POINTER(POINTER(_Cont)))
+
+        if (idx._sz):
+            # list
+            if idx._sz > 1:
+                rep = []
+
+                for i in range(idx._sz):
+                    rep.append(self.parseByte(ls[i]))
+
+            # scalar
+            else:
+                rep = self.parseByte(ls[0])
+
+        return rep
+
     def __init__(self, raw, no):
         for i in range(no):
             varPtr = raw[i]
@@ -82,22 +104,7 @@ class _Scope:
 
         # index
         if (self._intern[k]['type'] == 0):
-            ptr = cast(el, POINTER(_Idx))
-            idx = ptr.contents
-
-            ls = cast(idx._data, POINTER(POINTER(_Cont)))
-
-            if (idx._sz):
-                # list
-                if idx._sz > 1:
-                    rep = []
-
-                    for i in range(idx._sz):
-                        rep.append(self.parseByte(ls[i]))
-
-                # scalar
-                else:
-                        rep = self.parseByte(ls[0])
+            rep = self.parseIdx(el)
 
         return {
                 'val': rep
