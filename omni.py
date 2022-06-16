@@ -60,7 +60,7 @@ class _Var(Structure):
 class _Scope:
     _intern = {}
 
-    def __parseByte(self, ptr):
+    def __parseStack(self, ptr):
         contPtr = ptr
         cont = contPtr.contents
 
@@ -80,11 +80,11 @@ class _Scope:
                 rep = []
 
                 for i in range(idx._sz):
-                    rep.append(self.__parseByte(ls[i]))
+                    rep.append(self.__parseStack(ls[i]))
 
             # scalar
             else:
-                rep = self.__parseByte(ls[0])
+                rep = self.__parseStack(ls[0])
 
         return rep
 
