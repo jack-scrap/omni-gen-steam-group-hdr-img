@@ -86,12 +86,14 @@ class _Scope:
             ls = cast(idx._data, POINTER(POINTER(_Cont)))
 
             if (idx._sz):
+                # list
                 if idx._sz > 1:
                     rep = []
 
                     for i in range(idx._sz):
                         rep.append(self.parseIdx(ls[i]))
 
+                # scalar
                 else:
                         rep = self.parseIdx(ls[0])
 
