@@ -204,7 +204,8 @@ _cInc.argtypes = None
 class _Crane(_Obj):
 	_fields_ = [
 		('_data', POINTER(_Cont)),
-		('_loc', c_float * 3)
+		('_loc', c_float * 3),
+                ('_parent', c_void_p)
 	]
 
 	rngTrack = [
@@ -276,7 +277,9 @@ class _Truck(_Obj):
 	_fields_ = [
 		('_data', POINTER(_Array)),
 		('_loc', c_float * 3),
-		('_ang', c_float)
+		('_ang', c_float),
+                ('_uni', c_uint * 2),
+                ('_parent', c_void_p)
 	]
 
 	rngWheel = [
@@ -319,7 +322,8 @@ _truckMv.argtypes = [
 class _CargoShip(_Obj):
 	_fields_ = [
 		('_data', POINTER(_Array)),
-		('_loc', c_float * 3)
+		('_loc', c_float * 3),
+                ('_parent', c_void_p)
 	]
 
 	def mv(self, delta):
