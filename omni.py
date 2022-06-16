@@ -79,6 +79,8 @@ class _Scope:
         el = self._intern[k]['ptr']
 
         rep = None
+
+        # index
         if (self._intern[k]['type'] == 0):
             idxPtr = cast(el, POINTER(_Idx))
             idx = idxPtr.contents
