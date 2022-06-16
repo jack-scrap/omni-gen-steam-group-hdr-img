@@ -73,12 +73,12 @@ class _Scope:
             idxPtr = cast(var._ptr, POINTER(_Idx))
             idx = idxPtr.contents
 
-            arr = cast(idx._data, POINTER(POINTER(_Cont)))
+            ls = cast(idx._data, POINTER(POINTER(_Cont)))
 
             el = []
             if idx._sz:
                 for i in range(idx._sz):
-                    el.append(arr[i])
+                    el.append(ls[i])
 
             self._intern[name] = el
 
