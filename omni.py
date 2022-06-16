@@ -128,16 +128,16 @@ class _Scope:
             }
 
     def __getitem__(self, k):
-        el = self._intern[k]['ptr']
+        ptr = self._intern[k]['ptr']
 
         rep = None
 
         # index
         if (self._intern[k]['type'] == 0):
-            rep = self.__parseIdx(el)
+            rep = self.__parseIdx(ptr)
 
         if (self._intern[k]['type'] == 1):
-            rep = self.__parseArray(el)
+            rep = self.__parseArray(ptr)
 
         return {
                 'val': rep
