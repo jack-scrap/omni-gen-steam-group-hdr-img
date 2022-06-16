@@ -288,10 +288,10 @@ void scn::init(std::string stage, unsigned int lvl) {
   }
 
 	// RHS
-	nlohmann::json scopeGoal = deser["goal"];
+	nlohmann::json scopeRhs = deser["goal"];
 
 	i = 0;
-	for (const auto& pair : scopeGoal.items()) {
+	for (const auto& pair : scopeRhs.items()) {
     char* name = util::json::id(pair.key());
 
     Var* item = util::json::var(pair.key(), pair.value());
