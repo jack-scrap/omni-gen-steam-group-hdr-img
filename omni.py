@@ -29,6 +29,7 @@ class _Idx(Structure):
 		('_i', c_uint),
 		('_data', POINTER(_Cont)),
                 ('_sz', c_uint),
+                ('_loc', c_float * 3),
                 ('_parent', c_void_p)
 	]
 
