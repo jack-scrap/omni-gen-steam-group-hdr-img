@@ -74,7 +74,6 @@ Obj** prop = (Obj**) malloc(0);
 unsigned int noProp = 0;
 
 std::vector<Obj*> scn::obj;
-std::vector<unsigned int> scn::prim;
 
 CArr streetSign = {
 	(StreetSign**) malloc(0),
@@ -391,7 +390,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 		}
 
 		obj.push_back(_);
-		prim.push_back(Mesh::OBJ);
 	}
 
 	for (const auto& entry : deser["vehicle"]) {
@@ -422,7 +420,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 			((Crane**) crane._ptr)[crane._sz - sizeof (Crane*)] = _;
 
 			obj.push_back(_->_parent);
-			prim.push_back(Mesh::OBJ);
 		}
 
 		if (entry["name"] == "truck") {
@@ -451,13 +448,10 @@ void scn::init(std::string stage, unsigned int lvl) {
 			((Truck**) truck._ptr)[truck._sz - sizeof (Truck*)] = _;
 
 			obj.push_back(_->_parent);
-			prim.push_back(Mesh::OBJ);
 
 			obj.push_back(_->_parent->_child[Truck::BED]);
-			prim.push_back(Mesh::PT);
 
 			obj.push_back(_->_parent->_child[Truck::OUTER]);
-			prim.push_back(Mesh::PT);
 		}
 
 		if (entry["name"] == "cargo_ship") {
@@ -494,7 +488,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 			((CargoShip**) cargoShip._ptr)[cargoShip._sz - sizeof (CargoShip*)] = _;
 
 			obj.push_back(_->_parent);
-			prim.push_back(Mesh::OBJ);
 		}
 	}
 
@@ -523,7 +516,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 		for (Obj* seg : _) {
 			obj.push_back(seg);
-			prim.push_back(Mesh::LINE);
 		}
 	}
 
@@ -536,7 +528,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 		noProp++;
 
 		obj.push_back(_);
-		prim.push_back(Mesh::OBJ);
 	}
 
 	for (nlohmann::json entry : deser["prop"]["dyna"]) {
@@ -554,7 +545,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 			Obj* _ = iBeamMk(entry["sz"], entry["axis"], loc, glm::radians(rot));
 
 			obj.push_back(_);
-			prim.push_back(Mesh::LINE);
 		}
 	}
 
@@ -563,7 +553,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 		Mark* _ = util::json::bound::mark(deser["mark"][i]);
 
 		obj.push_back(_->_parent);
-		prim.push_back(Mesh::LINE);
 	}
 
 	// bound
@@ -584,7 +573,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 					i++;
 
 					obj.push_back(_->_parent);
-					prim.push_back(Mesh::LINE);
 				}	
 			}	
 		}
@@ -598,10 +586,8 @@ void scn::init(std::string stage, unsigned int lvl) {
 				i++;
 
 				obj.push_back(_->_parent);
-				prim.push_back(Mesh::OBJ);
 
 				obj.push_back(_->_parent->_child[0]);
-				prim.push_back(Mesh::PT);
 			}
 		}
 	}
@@ -618,7 +604,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 		i++;
 
 		obj.push_back(_->_parent);
-		prim.push_back(Mesh::OBJ);
 	}
 
 	/* general */
