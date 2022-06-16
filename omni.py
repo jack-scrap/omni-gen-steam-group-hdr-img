@@ -93,15 +93,22 @@ class _Scope:
 
         lsIdx = cast(array._data, POINTER(POINTER(_Idx)))
 
-        for y in range(array._y):
-            sub = []
+        # 2D
+        if (array._y > 1):
+            for y in range(array._y):
+                sub = []
 
+                for x in range(array._x):
+                    i = (y * array._y) + x
+
+                    sub.append(self.parseIdx(lsIdx[i]))
+
+                rep.append(sub)
+
+        # 1D
+        else:
             for x in range(array._x):
-                i = (y * array._y) + x
-
-                sub.append(self.parseIdx(lsIdx[i]))
-
-            rep.append(sub)
+                rep.append(self.parseIdx(lsIdx[x]))
 
         return rep
 
