@@ -160,6 +160,7 @@ _goal = _goalGet()
 _noData = _noDataGet()
 
 data = _Scope(_data, _noData)
+goal = _Scope(_goal, _noData)
 
 # bound
 class _Lim(Structure):
