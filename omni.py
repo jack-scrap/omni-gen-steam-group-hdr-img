@@ -115,9 +115,9 @@ class _Scope:
 
         return rep
 
-    def __init__(self, raw, no):
+    def __init__(self, ptr, no):
         for i in range(no):
-            varPtr = raw[i]
+            varPtr = ptr[i]
             var = varPtr.contents
 
             name = var._id.decode('utf-8')
