@@ -85,6 +85,26 @@ class _Scope:
 
         return rep
 
+    def parseArray(self, ptr):
+        rep = []
+
+        ptrArray = cast(ptr, POINTER(_Array))
+        array = ptrArray.contents
+
+        lsIdx = cast(array._data, POINTER(POINTER(_Idx)))
+
+        for y in range(array._y):
+            sub = []
+
+            for x in range(array._x):
+                i = (y * array._y) + x
+
+                sub.append(self.parseIdx(lsIdx[i]))
+
+            rep.append(sub)
+
+        return rep
+
     def __init__(self, raw, no):
         for i in range(no):
             varPtr = raw[i]
@@ -105,6 +125,9 @@ class _Scope:
         # index
         if (self._intern[k]['type'] == 0):
             rep = self.parseIdx(el)
+
+        if (self._intern[k]['type'] == 1):
+            rep = self.parseArray(el)
 
         return {
                 'val': rep
