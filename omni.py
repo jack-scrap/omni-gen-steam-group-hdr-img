@@ -70,18 +70,8 @@ class _Scope:
 
             name = var._id.decode('utf-8')
 
-            idxPtr = cast(var._ptr, POINTER(_Idx))
-            idx = idxPtr.contents
-
-            ls = cast(idx._data, POINTER(POINTER(_Cont)))
-
-            el = []
-            if idx._sz:
-                for i in range(idx._sz):
-                    el.append(ls[i])
-
             self._intern[name] = {
-                    'ptr': el,
+                    'ptr': var._ptr,
                     'type': var._type
             }
 
@@ -89,16 +79,21 @@ class _Scope:
         el = self._intern[k]['ptr']
 
         rep = None
+        if (self._intern[k]['type'] == 0):
+            idxPtr = cast(el, POINTER(_Idx))
+            idx = idxPtr.contents
 
-        if (len(el)):
-            if len(el) > 1:
-                rep = []
+            ls = cast(idx._data, POINTER(POINTER(_Cont)))
 
-                for i in range(len(el)):
-                    rep.append(self.parseIdx(el[i]))
+            if (idx._sz):
+                if idx._sz > 1:
+                    rep = []
 
-            else:
-                    rep = self.parseIdx(el[0])
+                    for i in range(idx._sz):
+                        rep.append(self.parseIdx(ls[i]))
+
+                else:
+                        rep = self.parseIdx(ls[0])
 
         return {
                 'val': rep
