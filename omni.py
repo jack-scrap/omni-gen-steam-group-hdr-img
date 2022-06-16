@@ -58,7 +58,7 @@ class _Var(Structure):
 	]
 
 class _Scope:
-    _intern = {}
+    __intern = {}
 
     def __parseByte(self, ptr):
         contPtr = ptr
@@ -122,21 +122,21 @@ class _Scope:
 
             name = var._id.decode('utf-8')
 
-            self._intern[name] = {
+            self.__intern[name] = {
                     'ptr': var._ptr,
                     'type': var._type
             }
 
     def __getitem__(self, k):
-        ptr = self._intern[k]['ptr']
+        ptr = self.__intern[k]['ptr']
 
         rep = None
 
         # index
-        if (self._intern[k]['type'] == 0):
+        if (self.__intern[k]['type'] == 0):
             rep = self.__parseIdx(ptr)
 
-        if (self._intern[k]['type'] == 1):
+        if (self.__intern[k]['type'] == 1):
             rep = self.__parseArray(ptr)
 
         return {
