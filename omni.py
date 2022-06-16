@@ -80,10 +80,12 @@ class _Scope:
                 for i in range(idx._sz):
                     el.append(ls[i])
 
-            self._intern[name] = el
+            self._intern[name] = {
+                    'ptr': el
+            }
 
     def __getitem__(self, k):
-        el = self._intern[k]
+        el = self._intern[k]['ptr']
 
         rep = None
 
