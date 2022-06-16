@@ -82,8 +82,8 @@ class _Scope:
 
         # index
         if (self._intern[k]['type'] == 0):
-            idxPtr = cast(el, POINTER(_Idx))
-            idx = idxPtr.contents
+            ptr = cast(el, POINTER(_Idx))
+            idx = ptr.contents
 
             ls = cast(idx._data, POINTER(POINTER(_Cont)))
 
