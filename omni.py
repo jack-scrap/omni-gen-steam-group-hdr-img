@@ -60,13 +60,13 @@ class _Var(Structure):
 class _Scope:
     _intern = {}
 
-    def parseByte(self, ptr):
+    def __parseByte(self, ptr):
         contPtr = ptr
         cont = contPtr.contents
 
         return int.from_bytes(cont._c, byteorder = 'little')
 
-    def parseIdx(self, ptr):
+    def __parseIdx(self, ptr):
         rep = None
 
         ptrIdx = cast(ptr, POINTER(_Idx))
@@ -80,15 +80,15 @@ class _Scope:
                 rep = []
 
                 for i in range(idx._sz):
-                    rep.append(self.parseByte(ls[i]))
+                    rep.append(self.__parseByte(ls[i]))
 
             # scalar
             else:
-                rep = self.parseByte(ls[0])
+                rep = self.__parseByte(ls[0])
 
         return rep
 
-    def parseArray(self, ptr):
+    def __parseArray(self, ptr):
         rep = []
 
         ptrArray = cast(ptr, POINTER(_Array))
@@ -104,14 +104,14 @@ class _Scope:
                 for x in range(array._x):
                     i = (y * array._y) + x
 
-                    sub.append(self.parseIdx(lsIdx[i]))
+                    sub.append(self.__parseIdx(lsIdx[i]))
 
                 rep.append(sub)
 
         # 1D
         else:
             for x in range(array._x):
-                rep.append(self.parseIdx(lsIdx[x]))
+                rep.append(self.__parseIdx(lsIdx[x]))
 
         return rep
 
@@ -134,10 +134,10 @@ class _Scope:
 
         # index
         if (self._intern[k]['type'] == 0):
-            rep = self.parseIdx(el)
+            rep = self.__parseIdx(el)
 
         if (self._intern[k]['type'] == 1):
-            rep = self.parseArray(el)
+            rep = self.__parseArray(el)
 
         return {
                 'val': rep
