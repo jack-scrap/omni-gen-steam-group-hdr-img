@@ -154,6 +154,7 @@ class _Scope:
         el = self.__intern[k]
         ptr = el['ptr']
         t = el['type']
+        offset = el['offset']
 
         rep = None
 
@@ -167,7 +168,7 @@ class _Scope:
 
         return {
                 'val': rep,
-                'offset': el['offset']
+                'offset': offset
         }
 
 _dataGet = _scn.dataGet
