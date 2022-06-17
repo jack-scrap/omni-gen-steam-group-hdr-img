@@ -123,18 +123,30 @@ class _Scope:
             name = var._id.decode('utf-8')
 
             rep = None
+            offset = None
 
             # index
             if (var._type == 0):
                 rep = self.__parseIdx(var._ptr)
 
+                idxPtr = cast(var._ptr, POINTER(_Idx))
+                idx = idxPtr.contents
+
+                offset = list(idx._loc)
+
             # array
             if (var._type == 1):
                 rep = self.__parseArray(var._ptr)
 
+                arrayPtr = cast(var._ptr, POINTER(_Array))
+                array = arrayPtr.contents
+
+                offset = list(array._loc)
+
             self.__intern[name] = {
                     'ptr': var._ptr,
-                    'type': var._type
+                    'type': var._type,
+                    'offset': offset
             }
 
     def __getitem__(self, k):
@@ -153,7 +165,8 @@ class _Scope:
             rep = self.__parseArray(ptr)
 
         return {
-                'val': rep
+                'val': rep,
+                'offset': el['offset']
         }
 
 _dataGet = _scn.dataGet
