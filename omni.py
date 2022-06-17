@@ -138,8 +138,9 @@ class _Scope:
             }
 
     def __getitem__(self, k):
-        ptr = self.__intern[k]['ptr']
-        t = self.__intern[k]['type']
+        el = self.__intern[k]
+        ptr = el['ptr']
+        t = el['type']
 
         rep = None
 
