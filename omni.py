@@ -434,8 +434,7 @@ if _cargoShipGet()._sz:
 
 class _StreetSign(_Obj):
 	_fields_ = [
-		('_pass', POINTER(c_bool)),
-		('_no', c_int),
+		('_pass', _CArr),
                 ('_parent', c_void_p)
 	]
 
