@@ -129,15 +129,16 @@ class _Scope:
 
     def __getitem__(self, k):
         ptr = self.__intern[k]['ptr']
+        t = self.__intern[k]['type']
 
         rep = None
 
         # index
-        if (self.__intern[k]['type'] == 0):
+        if (t == 0):
             rep = self.__parseIdx(ptr)
 
         # array
-        if (self.__intern[k]['type'] == 1):
+        if (t == 1):
             rep = self.__parseArray(ptr)
 
         return {
