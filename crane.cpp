@@ -93,7 +93,7 @@ Crane* craneMk(Cont* init, glm::vec3 loc, glm::vec3 rot) {
 	// offset
 	glm::vec3 offset = _->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int a = 0; a < 3; a++) {
-		_->_loc[a] = offset[a];
+		_->_offset[a] = offset[a];
 	}
 
 	return _;
@@ -128,7 +128,7 @@ void craneZoom(Crane* crane, float delta) {
 
 	glm::vec3 offset = crane->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int a = 0; a < 3; a++) {
-		crane->_loc[a] = offset[a];
+		crane->_offset[a] = offset[a];
 	}
 }
 
@@ -149,7 +149,7 @@ void cranePan(Crane* crane, float delta) {
 
 	glm::vec3 offset = crane->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int a = 0; a < 3; a++) {
-		crane->_loc[a] = offset[a];
+		crane->_offset[a] = offset[a];
 	}
 }
 
@@ -169,7 +169,7 @@ void cranePed(Crane* crane, float delta) {
 
 	glm::vec3 offset = crane->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int a = 0; a < 3; a++) {
-		crane->_loc[a] = offset[a];
+		crane->_offset[a] = offset[a];
 	}
 }
 

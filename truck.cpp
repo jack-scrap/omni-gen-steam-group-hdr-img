@@ -100,7 +100,7 @@ Truck* truckMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	// offset
 	glm::vec3 offset = _->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int a = 0; a < 3; a++) {
-		_->_loc[a] = offset[a];
+		_->_offset[a] = offset[a];
 	}
 
 	return _;
@@ -133,7 +133,7 @@ void truckMv(Truck* truck, float delta) {
 
 	glm::vec3 offset = truck->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int a = 0; a < 3; a++) {
-		truck->_loc[a] = offset[a];
+		truck->_offset[a] = offset[a];
 	}
 }
 
@@ -155,6 +155,6 @@ void truckTurn(Truck* truck, float delta) {
 	// offset
 	glm::vec3 offset = truck->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int a = 0; a < 3; a++) {
-		truck->_loc[a] = offset[a];
+		truck->_offset[a] = offset[a];
 	}
 }

@@ -7,7 +7,7 @@
 
 typedef struct Crane {
 	Cont* _data;
-	float _loc[3];
+	float _offset[3];
 
 	Obj* _parent;
 
