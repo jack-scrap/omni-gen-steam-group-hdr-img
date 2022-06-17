@@ -152,6 +152,7 @@ class _Scope:
 
     def __getitem__(self, k):
         el = self.__intern[k]
+
         ptr = el['ptr']
         t = el['type']
         offset = el['offset']
