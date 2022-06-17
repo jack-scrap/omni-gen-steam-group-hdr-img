@@ -150,6 +150,12 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 
 	_->_parent = scope->_parent;
 
+	// offset
+	glm::vec3 offset = _->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	for (int a = 0; a < 3; a++) {
+		_->_offset[a] = offset[a];
+	}
+
 	return _;
 }
 

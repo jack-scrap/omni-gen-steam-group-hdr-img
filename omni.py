@@ -47,6 +47,7 @@ class _Dict(Structure):
 		('_data', POINTER(c_void_p)),
 		('_type', POINTER(c_uint)),
 		('_no', c_uint),
+                ('_offset', c_float * 3),
                 ('_parent', c_void_p)
 	]
 

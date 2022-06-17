@@ -11,6 +11,8 @@ typedef struct {
 	unsigned int* _type;
 	unsigned int _no;
 
+	float _offset[3];
+
 	Obj* _parent;
 } Dict;
 
