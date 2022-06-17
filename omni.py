@@ -29,7 +29,7 @@ class _Idx(Structure):
 		('_i', c_uint),
 		('_data', POINTER(_Cont)),
                 ('_sz', c_uint),
-                ('_loc', c_float * 3),
+                ('_offset', c_float * 3),
                 ('_parent', c_void_p)
 	]
 
@@ -38,7 +38,7 @@ class _Array(Structure):
 		('_data', POINTER(POINTER(_Idx))),
 		('_x', c_uint),
 		('_y', c_uint),
-		('_loc', c_float * 3),
+		('_offset', c_float * 3),
                 ('_parent', c_void_p)
 	]
 
@@ -132,7 +132,7 @@ class _Scope:
                 idxPtr = cast(var._ptr, POINTER(_Idx))
                 idx = idxPtr.contents
 
-                offset = list(idx._loc)
+                offset = list(idx._offset)
 
             # array
             if (var._type == 1):
@@ -141,7 +141,7 @@ class _Scope:
                 arrayPtr = cast(var._ptr, POINTER(_Array))
                 array = arrayPtr.contents
 
-                offset = list(array._loc)
+                offset = list(array._offset)
 
             self.__intern[name] = {
                     'ptr': var._ptr,

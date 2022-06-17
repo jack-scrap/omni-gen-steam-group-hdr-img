@@ -11,7 +11,7 @@ typedef struct {
 	Cont** _data;
 	unsigned int _sz;
 
-	float _loc[3];
+	float _offset[3];
 
 	Obj* _parent;
 } Idx;

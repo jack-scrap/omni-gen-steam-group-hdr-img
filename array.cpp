@@ -95,7 +95,7 @@ Array* arrayMk(char* init, unsigned int x, std::string name, unsigned int axis, 
 	// offset
 	glm::vec3 offset = _->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int a = 0; a < 3; a++) {
-		_->_loc[a] = offset[a];
+		_->_offset[a] = offset[a];
 	}
 
 	return _;
@@ -153,7 +153,7 @@ Array* arrayMk(char* init, unsigned int x, unsigned int y, std::string name, glm
 	// offset
 	glm::vec3 offset = _->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int a = 0; a < 3; a++) {
-		_->_loc[a] = offset[a];
+		_->_offset[a] = offset[a];
 	}
 
 	return _;
