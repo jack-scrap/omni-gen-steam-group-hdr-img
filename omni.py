@@ -136,6 +136,7 @@ class _Scope:
         if (self.__intern[k]['type'] == 0):
             rep = self.__parseIdx(ptr)
 
+        # array
         if (self.__intern[k]['type'] == 1):
             rep = self.__parseArray(ptr)
 
