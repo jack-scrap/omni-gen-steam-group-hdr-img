@@ -58,8 +58,6 @@ class _Var(Structure):
 	]
 
 class _Scope:
-    __intern = {}
-
     def __parseByte(self, ptr):
         contPtr = ptr
         cont = contPtr.contents
@@ -116,11 +114,23 @@ class _Scope:
         return rep
 
     def __init__(self, ptr, no):
+        self.__intern = {}
+
         for i in range(no):
             varPtr = ptr[i]
             var = varPtr.contents
 
             name = var._id.decode('utf-8')
+
+            rep = None
+
+            # index
+            if (var._type == 0):
+                rep = self.__parseIdx(var._ptr)
+
+            # array
+            if (var._type == 1):
+                rep = self.__parseArray(var._ptr)
 
             self.__intern[name] = {
                     'ptr': var._ptr,
