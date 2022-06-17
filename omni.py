@@ -195,7 +195,8 @@ goal = _Scope(_goal, _noData)
 class _Lim(Structure):
 	_fields_ = [
 		('_axis', c_uint),
-		('_val', c_float)
+		('_val', c_float),
+                ('_parent', c_void_p)
 	]
 
 _boundRngGet = _scn.boundRngGet
@@ -205,7 +206,8 @@ _boundRngGet.argtypes = None
 class _Cone(Structure):
 	_fields_ = [
 		('_bound', c_float * 2 * 2),
-		('_offset', c_float * 3)
+		('_offset', c_float * 3),
+                ('_parent', c_void_p)
 	]
 
 _boundAreaGet = _scn.boundAreaGet
@@ -433,7 +435,8 @@ if _cargoShipGet()._sz:
 class _StreetSign(_Obj):
 	_fields_ = [
 		('_pass', POINTER(c_bool)),
-		('_no', c_int)
+		('_no', c_int),
+                ('_parent', c_void_p)
 	]
 
 	def toggle(self, i):
