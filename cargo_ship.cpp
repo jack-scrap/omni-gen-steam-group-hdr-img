@@ -78,31 +78,31 @@ CargoShip* cargoShipMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	return _;
 }
 
-void cargoShipDel(CargoShip* cargoShip) {
-	arrayDel(cargoShip->_data);
+void cargoShipDel(CargoShip* inst) {
+	arrayDel(inst->_data);
 
-	objDel(cargoShip->_parent);
+	objDel(inst->_parent);
 
-	free(cargoShip);
+	free(inst);
 }
 
-void cargoShipAnim(CargoShip* cargoShip, glm::vec3 loc) {
+void cargoShipAnim(CargoShip* inst, glm::vec3 loc) {
 	for (int i = 0; i < 2 * 2; i++) {
-		cargoShip->_parent->_child[2 + i]->_active = true;
+		inst->_parent->_child[2 + i]->_active = true;
 	}
 
-	objMv(cargoShip->_parent, nullptr, loc, glm::vec3(0.0), CargoShip::_speed);
+	objMv(inst->_parent, nullptr, loc, glm::vec3(0.0), CargoShip::_speed);
 
 	for (int i = 0; i < 2 * 2; i++) {
-		cargoShip->_parent->_child[2 + i]->_active = false;
+		inst->_parent->_child[2 + i]->_active = false;
 	}
 }
 
-void cargoShipMv(CargoShip* cargoShip, float delta) {
+void cargoShipMv(CargoShip* inst, float delta) {
 	if (delta >= 0.0) {
 		glm::vec3 dest = glm::vec3(delta, 0.0, 0.0);
 
-		cargoShipAnim(cargoShip, dest);
+		cargoShipAnim(inst, dest);
 	} else {
 		omni::err(omni::ERR_MV_RNG, {
 			"cargo ship"
@@ -110,8 +110,8 @@ void cargoShipMv(CargoShip* cargoShip, float delta) {
 	}
 
 	// offset
-	glm::vec3 offset = cargoShip->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int a = 0; a < 3; a++) {
-		cargoShip->_offset[a] = offset[a];
+		inst->_offset[a] = offset[a];
 	}
 }
