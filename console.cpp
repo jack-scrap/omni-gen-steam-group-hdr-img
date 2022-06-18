@@ -1266,8 +1266,8 @@ void Console::hl() {
 			}, _buff);
 			while (i < 1 + abs(delta)) {
 				Coord st = {
-					loc[X] + _cursEditor[_rngEditor][X],
-					loc[Y] + _cursEditor[_rngEditor][Y]
+					loc[X] + start._x,
+					loc[Y] + start._y
 				};
 
 				if (i == 1 + abs(delta) - 1 && _cursEditor[MAX][X] == _buff[_cursEditor[MAX][Y]].size()) {
