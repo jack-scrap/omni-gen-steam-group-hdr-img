@@ -212,6 +212,7 @@ void craneGrab(Crane* inst) {
 			}
 		}
 	} else {
+		/* data */
 		for (int i = 0; i < noData; i++) {
 			switch (data[i]->_type) {
 				case omni::SCALAR: {
@@ -244,6 +245,26 @@ void craneGrab(Crane* inst) {
 					}
 
 					break;
+				}
+			}
+
+			/* vehicle */
+			// truck
+			for (int i = 0; i < truck._sz / sizeof (Truck*); i++) {
+				Truck* truckInst = ((Truck**) truck._ptr)[i];
+
+				Array* array = truckInst->_data;
+
+				for (int i = 0; i < array->_x; i++) {
+					Idx* idx = array->_data[i];
+
+					Cont* head = idx->_data[idx->_sz - 1];
+
+					if (util::phys::aabb(inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD], head->_parent, inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_acc, head->_parent->_acc)) {
+						craneInsert(inst, idxPop(idx));
+
+						return;
+					}
 				}
 			}
 		}
