@@ -160,6 +160,10 @@ void handle() {
 									console->_cursEditor[console->_rngEditor][X] = console->_buff[console->_cursEditor[console->_rngEditor][Y]].size();
 								}
 							}
+
+							if (console->_cursEditor[console->_rngEditor][X] > console->_buff[console->_cursEditor[console->_rngEditor][Y]].size()) {
+								console->_cursEditor[console->_rngEditor][X] = console->_buff[console->_cursEditor[console->_rngEditor][Y]].size();
+							}
 						}
 
 						if (e.key.keysym.sym == SDLK_UP) {
@@ -171,6 +175,10 @@ void handle() {
 								if (trail) {
 									console->_cursEditor[console->_rngEditor][X] = console->_buff[console->_cursEditor[console->_rngEditor][Y]].size();
 								}
+							}
+
+							if (console->_cursEditor[console->_rngEditor][X] > console->_buff[console->_cursEditor[console->_rngEditor][Y]].size()) {
+								console->_cursEditor[console->_rngEditor][X] = console->_buff[console->_cursEditor[console->_rngEditor][Y]].size();
 							}
 						}
 
