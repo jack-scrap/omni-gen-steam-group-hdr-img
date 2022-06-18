@@ -35,18 +35,18 @@ typedef struct Crane {
 
 Crane* craneMk(Cont* init, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
 
-void craneDel(Crane* crane);
+void craneDel(Crane* inst);
 
 extern "C" void craneAnim(Crane* inst, glm::vec3 loc);
 
-extern "C" void craneZoom(Crane* crane, float delta);
+extern "C" void craneZoom(Crane* inst, float delta);
 
-extern "C" void cranePan(Crane* crane, float delta);
+extern "C" void cranePan(Crane* inst, float delta);
 
-extern "C" void cranePed(Crane* crane, float delta);
+extern "C" void cranePed(Crane* inst, float delta);
 
-extern "C" void craneGrab(Crane* crane);
+extern "C" void craneGrab(Crane* inst);
 
-void craneInsert(Crane* crane, Cont* byte);
+void craneInsert(Crane* inst, Cont* byte);
 
-Cont* craneRm(Crane* crane);
+Cont* craneRm(Crane* inst);

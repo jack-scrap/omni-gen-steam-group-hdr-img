@@ -99,14 +99,14 @@ Crane* craneMk(Cont* init, glm::vec3 loc, glm::vec3 rot) {
 	return _;
 }
 
-void craneDel(Crane* crane) {
-	if (crane->_data) {
-		contDel(crane->_data);
+void craneDel(Crane* inst) {
+	if (inst->_data) {
+		contDel(inst->_data);
 	}
 
-	objDel(crane->_parent);
+	objDel(inst->_parent);
 
-	free(crane);
+	free(inst);
 }
 
 void craneAnim(Crane* inst, glm::vec3 loc) {
@@ -121,67 +121,67 @@ void craneAnim(Crane* inst, glm::vec3 loc) {
 	}
 }
 
-void craneZoom(Crane* crane, float delta) {
+void craneZoom(Crane* inst, float delta) {
 	glm::vec3 dest = glm::vec3(delta, 0.0, 0.0);
 
-	craneAnim(crane, dest);
+	craneAnim(inst, dest);
 
-	glm::vec3 offset = crane->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int a = 0; a < 3; a++) {
-		crane->_offset[a] = offset[a];
+		inst->_offset[a] = offset[a];
 	}
 }
 
-void cranePan(Crane* crane, float delta) {
+void cranePan(Crane* inst, float delta) {
 	glm::mat4 trans = glm::translate(glm::mat4(1.0), glm::vec3(0.0, 0.0, delta));
 
-	glm::vec3 dest = glm::vec3(crane->_parent->_child[Crane::TRACK]->_child[Crane::TRACK]->_model * trans * glm::vec4(glm::vec3(0.0), 1.0));
+	glm::vec3 dest = glm::vec3(inst->_parent->_child[Crane::TRACK]->_child[Crane::TRACK]->_model * trans * glm::vec4(glm::vec3(0.0), 1.0));
 
 	if (dest[Z] > Crane::_rngHead[MIN] && dest[Z] < Crane::_rngHead[MAX]) {
 		glm::vec3 offset = glm::vec3(0.0, 0.0, delta);
 
-		objMv(crane->_parent->_child[Crane::TRACK]->_child[Crane::TRACK], crane->_parent->_child[Crane::TRACK], offset, glm::vec3(0.0));
+		objMv(inst->_parent->_child[Crane::TRACK]->_child[Crane::TRACK], inst->_parent->_child[Crane::TRACK], offset, glm::vec3(0.0));
 	} else {
 		omni::err(omni::ERR_MV_RNG, {
 			"crane head"
 		});
 	}
 
-	glm::vec3 offset = crane->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int a = 0; a < 3; a++) {
-		crane->_offset[a] = offset[a];
+		inst->_offset[a] = offset[a];
 	}
 }
 
-void cranePed(Crane* crane, float delta) {
+void cranePed(Crane* inst, float delta) {
 	glm::mat4 trans = glm::translate(glm::mat4(1.0), glm::vec3(0.0, delta, 0.0));
-	glm::vec3 dest = glm::vec3(crane->_parent->_child[Crane::TRACK]->_acc * trans * glm::vec4(glm::vec3(0.0), 1.0));
+	glm::vec3 dest = glm::vec3(inst->_parent->_child[Crane::TRACK]->_acc * trans * glm::vec4(glm::vec3(0.0), 1.0));
 
 	if (dest[Y] > Crane::_rngTrack[MIN] && dest[Y] < Crane::_rngTrack[MAX]) {
 		glm::vec3 offset = glm::vec3(0.0, delta, 0.0);
 
-		objMv(crane->_parent->_child[Crane::TRACK], crane->_parent, offset, glm::vec3(0.0));
+		objMv(inst->_parent->_child[Crane::TRACK], inst->_parent, offset, glm::vec3(0.0));
 	} else {
 		omni::err(omni::ERR_MV_RNG, {
 			"crane head"
 		});
 	}
 
-	glm::vec3 offset = crane->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int a = 0; a < 3; a++) {
-		crane->_offset[a] = offset[a];
+		inst->_offset[a] = offset[a];
 	}
 }
 
-void craneGrab(Crane* crane) {
-	if (crane->_data) {
+void craneGrab(Crane* inst) {
+	if (inst->_data) {
 		for (int i = 0; i < noData; i++) {
 			switch (data[i]->_type) {
 				case omni::SCALAR: {
 					Idx* idx = (Idx*) data[i]->_ptr;
 
-					if (util::phys::aabb(glm::vec3(0.0), crane->_data->_parent, idx->_parent->_acc, crane->_data->_parent->_acc)) {
-						idxPush(idx, craneRm(crane));
+					if (util::phys::aabb(glm::vec3(0.0), inst->_data->_parent, idx->_parent->_acc, inst->_data->_parent->_acc)) {
+						idxPush(idx, craneRm(inst));
 
 						return;
 					}
@@ -195,12 +195,12 @@ void craneGrab(Crane* crane) {
 					for (int i = 0; i < array->_x * array->_y; i++) {
 						Idx* idx = array->_data[i];
 
-						if (crane->_data && !idx->_sz) {
-							if (util::phys::aabb(glm::vec3(0.0), crane->_data->_parent, idx->_parent->_acc, crane->_data->_parent->_acc)) {
-								idxPush(idx, craneRm(crane));
+						if (inst->_data && !idx->_sz) {
+							if (util::phys::aabb(glm::vec3(0.0), inst->_data->_parent, idx->_parent->_acc, inst->_data->_parent->_acc)) {
+								idxPush(idx, craneRm(inst));
 
-								crane->_data = nullptr;
-								crane->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_child[0] = nullptr;
+								inst->_data = nullptr;
+								inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_child[0] = nullptr;
 
 								return;
 							}
@@ -218,8 +218,8 @@ void craneGrab(Crane* crane) {
 					Idx* idx = (Idx*) data[i]->_ptr;
 
 					if (idx->_sz) {
-						if (util::phys::aabb(crane->_parent->_child[Crane::TRACK]->_child[Crane::HEAD], idx->_data[idx->_sz - 1]->_parent, crane->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_acc, idx->_parent->_acc)) {
-							craneInsert(crane, idxPop(idx));
+						if (util::phys::aabb(inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD], idx->_data[idx->_sz - 1]->_parent, inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_acc, idx->_parent->_acc)) {
+							craneInsert(inst, idxPop(idx));
 
 							return;
 						}
@@ -235,8 +235,8 @@ void craneGrab(Crane* crane) {
 						Idx* idx = array->_data[i];
 
 						if (idx->_sz) {
-							if (util::phys::aabb(crane->_parent->_child[Crane::TRACK]->_child[Crane::HEAD], idx->_data[idx->_sz - 1]->_parent, crane->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_acc, idx->_parent->_acc)) {
-								craneInsert(crane, idxPop(idx));
+							if (util::phys::aabb(inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD], idx->_data[idx->_sz - 1]->_parent, inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_acc, idx->_parent->_acc)) {
+								craneInsert(inst, idxPop(idx));
 
 								return;
 							}
@@ -250,24 +250,24 @@ void craneGrab(Crane* crane) {
 	}
 }
 
-void craneInsert(Crane* crane, Cont* byte) {
-	crane->_data = byte;
-	crane->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_child[0] = crane->_data->_parent;
+void craneInsert(Crane* inst, Cont* byte) {
+	inst->_data = byte;
+	inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_child[0] = inst->_data->_parent;
 
 	// transform
 	glm::mat4 model = glm::mat4(1.0);
 	model = glm::translate(model, glm::vec3(0.0, -(3.32 + (layout::idx[Y] / 2)), 0.0));
 
-	crane->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_child[0]->_model = model;
+	inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_child[0]->_model = model;
 
-	objAcc(crane->_parent->_child[Crane::TRACK]->_child[Crane::HEAD], crane->_parent->_child[Crane::TRACK]->_acc);
+	objAcc(inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD], inst->_parent->_child[Crane::TRACK]->_acc);
 }
 
-Cont* craneRm(Crane* crane) {
-	Cont* byte = crane->_data;
+Cont* craneRm(Crane* inst) {
+	Cont* byte = inst->_data;
 
-	crane->_data = nullptr;
-	crane->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_child[0] = nullptr;
+	inst->_data = nullptr;
+	inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_child[0] = nullptr;
 
 	return byte;
 }
