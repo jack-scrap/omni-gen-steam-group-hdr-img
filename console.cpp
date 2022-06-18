@@ -1259,10 +1259,7 @@ void Console::hl() {
 				_cursEditor[MIN][X],
 				_cursEditor[MIN][Y]
 			};
-			unsigned int startScal = util::math::idx::determ({
-				_cursEditor[MIN][X],
-				_cursEditor[MIN][Y]
-			}, _buff);
+			unsigned int startScal = util::math::idx::determ(start, _buff);
 
 			int i = 0;
 			while (i < 1 + abs(delta)) {
