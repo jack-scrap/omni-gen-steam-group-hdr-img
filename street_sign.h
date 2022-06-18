@@ -13,6 +13,6 @@ typedef struct {
 
 StreetSign* streetSignMk(CArr pass, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
 
-void streetSignDel(StreetSign* streetSign);
+void streetSignDel(StreetSign* inst);
 
-extern "C" void streetSignToggle(StreetSign* streetSign, unsigned int i);
+extern "C" void streetSignToggle(StreetSign* inst, unsigned int i);
