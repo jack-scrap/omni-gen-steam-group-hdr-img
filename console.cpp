@@ -1269,17 +1269,17 @@ void Console::hl() {
 					break;
 				}
 
-				Coord st = {
-					loc[X] + start._x,
-					loc[Y] + start._y
-				};
+				i++;
+			}
 
-				_hl[util::math::idx::arr(st, {
+			for (int r = 0; r < 2; r++) {
+				_hl[util::math::idx::arr({
+					loc[X] + _cursEditor[r][X],
+					loc[Y] + _cursEditor[r][Y]
+				}, {
 					state::lineWd,
 					state::lineCnt
 				})] = true;
-
-				i++;
 			}
 
 			// block
