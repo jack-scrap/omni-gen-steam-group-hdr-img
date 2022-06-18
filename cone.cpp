@@ -35,8 +35,8 @@ Cone* coneMk(GLfloat init[2][2], glm::vec3 loc, glm::vec3 rot) {
 	return _;
 }
 
-void coneDel(Cone* cone) {
-	objDel(cone->_parent);
+void coneDel(Cone* inst) {
+	objDel(inst->_parent);
 
-	free(cone);
+	free(inst);
 }
