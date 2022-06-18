@@ -255,15 +255,19 @@ void craneGrab(Crane* inst) {
 
 				Array* array = truckInst->_data;
 
-				for (int i = 0; i < array->_x; i++) {
-					Idx* idx = array->_data[i];
+				for (int y = 0; y < array->_y; y++) {
+					for (int x = 0; x < array->_x; x++) {
+						int i = (y * array->_x) + x;
 
-					Cont* head = idx->_data[idx->_sz - 1];
+						Idx* idx = array->_data[i];
 
-					if (util::phys::aabb(inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD], head->_parent, inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_acc, head->_parent->_acc)) {
-						craneInsert(inst, idxPop(idx));
+						Cont* head = idx->_data[idx->_sz - 1];
 
-						return;
+						if (util::phys::aabb(inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD], head->_parent, inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_acc, head->_parent->_acc)) {
+							craneInsert(inst, idxPop(idx));
+
+							return;
+						}
 					}
 				}
 			}
