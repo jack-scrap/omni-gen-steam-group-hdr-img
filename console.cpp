@@ -1265,14 +1265,14 @@ void Console::hl() {
 				_cursEditor[MIN][Y]
 			}, _buff);
 			while (i < 1 + abs(delta)) {
+				if (i == 1 + abs(delta) - 1 && _cursEditor[MAX][X] == _buff[_cursEditor[MAX][Y]].size()) {
+					break;
+				}
+
 				Coord st = {
 					loc[X] + start._x,
 					loc[Y] + start._y
 				};
-
-				if (i == 1 + abs(delta) - 1 && _cursEditor[MAX][X] == _buff[_cursEditor[MAX][Y]].size()) {
-					break;
-				}
 
 				_hl[util::math::idx::arr(st, {
 					state::lineWd,
