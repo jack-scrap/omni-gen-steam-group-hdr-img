@@ -106,46 +106,46 @@ Truck* truckMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	return _;
 }
 
-void truckDel(Truck* truck) {
-	arrayDel(truck->_data);
+void truckDel(Truck* inst) {
+	arrayDel(inst->_data);
 
-	objDel(truck->_parent);
+	objDel(inst->_parent);
 
-	free(truck);
+	free(inst);
 }
 
-void truckAnim(Truck* truck, glm::vec3 loc, glm::vec3 rot) {
+void truckAnim(Truck* inst, glm::vec3 loc, glm::vec3 rot) {
 	for (int i = 0; i < 2; i++) {
-		truck->_parent->_child[4 + ((truck->_data->_x + 1) * 2) + i]->_active = true;
+		inst->_parent->_child[4 + ((inst->_data->_x + 1) * 2) + i]->_active = true;
 	}
 
-	objMv(truck->_parent, nullptr, loc, rot, Truck::_speed);
+	objMv(inst->_parent, nullptr, loc, rot, Truck::_speed);
 
 	for (int i = 0; i < 2; i++) {
-		truck->_parent->_child[4 + ((truck->_data->_x + 1) * 2) + i]->_active = false;
+		inst->_parent->_child[4 + ((inst->_data->_x + 1) * 2) + i]->_active = false;
 	}
 }
 
-void truckMv(Truck* truck, float delta) {
+void truckMv(Truck* inst, float delta) {
 	glm::vec3 dest = glm::vec3(delta, 0.0, 0.0);
 
-	truckAnim(truck, dest, glm::vec3(0.0));
+	truckAnim(inst, dest, glm::vec3(0.0));
 
-	glm::vec3 offset = truck->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int a = 0; a < 3; a++) {
-		truck->_offset[a] = offset[a];
+		inst->_offset[a] = offset[a];
 	}
 }
 
-void truckTurn(Truck* truck, float delta) {
-	if (truck->_ang + delta > truck->_rngWheel[MIN] && truck->_ang + delta < truck->_rngWheel[MAX]) {
-		truck->_ang += delta;
+void truckTurn(Truck* inst, float delta) {
+	if (inst->_ang + delta > inst->_rngWheel[MIN] && inst->_ang + delta < inst->_rngWheel[MAX]) {
+		inst->_ang += delta;
 
 		for (int z = 0; z < 2; z++) {
-			objAnim(truck->_parent->_child[4 + z], truck->_parent, glm::vec3(0.0), glm::vec3(0.0, glm::radians(delta), 0.0));
+			objAnim(inst->_parent->_child[4 + z], inst->_parent, glm::vec3(0.0), glm::vec3(0.0, glm::radians(delta), 0.0));
 		}
 
-		objAnim(truck->_parent, nullptr, glm::vec3(0.0), glm::vec3(0.0, glm::radians(delta), 0.0));
+		objAnim(inst->_parent, nullptr, glm::vec3(0.0), glm::vec3(0.0, glm::radians(delta), 0.0));
 	} else {
 		omni::err(omni::ERR_MV_RNG, {
 			"truck wheels"
@@ -153,8 +153,8 @@ void truckTurn(Truck* truck, float delta) {
 	}
 
 	// offset
-	glm::vec3 offset = truck->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int a = 0; a < 3; a++) {
-		truck->_offset[a] = offset[a];
+		inst->_offset[a] = offset[a];
 	}
 }

@@ -41,10 +41,10 @@ typedef struct Truck {
 
 Truck* truckMk(Array* init, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
 
-void truckDel(Truck* truck);
+void truckDel(Truck* inst);
 
-void truckAnim(Truck* truck, glm::vec3 loc, glm::vec3 rot);
+void truckAnim(Truck* inst, glm::vec3 loc, glm::vec3 rot);
 
-extern "C" void truckTurn(Truck* truck, float delta);
+extern "C" void truckTurn(Truck* inst, float delta);
 
-extern "C" void truckMv(Truck* truck, float delta);
+extern "C" void truckMv(Truck* inst, float delta);
