@@ -1265,10 +1265,6 @@ void Console::hl() {
 				_cursEditor[MIN][Y]
 			}, _buff);
 			while (i < 1 + abs(delta)) {
-				if (i == 1 + abs(delta) - 1 && _cursEditor[MAX][X] == _buff[_cursEditor[MAX][Y]].size()) {
-					break;
-				}
-
 				i++;
 			}
 
