@@ -37,7 +37,7 @@ Crane* craneMk(Cont* init, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::
 
 void craneDel(Crane* crane);
 
-extern "C" void craneAnim(Crane* crane, glm::vec3 loc);
+extern "C" void craneAnim(Crane* inst, glm::vec3 loc);
 
 extern "C" void craneZoom(Crane* crane, float delta);
 

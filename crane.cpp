@@ -109,15 +109,15 @@ void craneDel(Crane* crane) {
 	free(crane);
 }
 
-void craneAnim(Crane* crane, glm::vec3 loc) {
+void craneAnim(Crane* inst, glm::vec3 loc) {
 	for (int i = 0; i < 2 * 2; i++) {
-		crane->_parent->_child[1 + (2 * 2 * 2 * 2) + i]->_active = true;
+		inst->_parent->_child[1 + (2 * 2 * 2 * 2) + i]->_active = true;
 	}
 
-	objMv(crane->_parent, nullptr, loc, glm::vec3(0.0), Crane::_speed);
+	objMv(inst->_parent, nullptr, loc, glm::vec3(0.0), Crane::_speed);
 
 	for (int i = 0; i < 2 * 2; i++) {
-		crane->_parent->_child[1 + (2 * 2 * 2 * 2) + i]->_active = false;
+		inst->_parent->_child[1 + (2 * 2 * 2 * 2) + i]->_active = false;
 	}
 }
 
