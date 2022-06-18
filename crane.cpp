@@ -271,6 +271,28 @@ void craneGrab(Crane* inst) {
 					}
 				}
 			}
+
+			for (int i = 0; i < cargoShip._sz / sizeof (CargoShip*); i++) {
+				CargoShip* cargoShipInst = ((CargoShip**) cargoShip._ptr)[i];
+
+				Array* array = cargoShipInst->_data;
+
+				for (int y = 0; y < array->_y; y++) {
+					for (int x = 0; x < array->_x; x++) {
+						int i = (y * array->_x) + x;
+
+						Idx* idx = array->_data[i];
+
+						Cont* head = idx->_data[idx->_sz - 1];
+
+						if (util::phys::aabb(inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD], head->_parent, inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_acc, head->_parent->_acc)) {
+							craneInsert(inst, idxPop(idx));
+
+							return;
+						}
+					}
+				}
+			}	
 		}
 	}
 }
