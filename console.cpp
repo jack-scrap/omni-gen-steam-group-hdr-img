@@ -1239,27 +1239,21 @@ void Console::hl() {
 			loc[X] = maxFs() + maxNo();
 			loc[Y] = 1;
 
-			int delta = util::math::delta(util::math::idx::determ({
-				_cursEditor[MIN][X],
-				_cursEditor[MIN][Y]
-			}, _buff), util::math::idx::determ({
-				_cursEditor[MAX][X],
-				_cursEditor[MAX][Y]
-			}, _buff));
-
-			int norm = util::math::norm(util::math::idx::determ({
-				_cursEditor[MIN][X],
-				_cursEditor[MIN][Y]
-			}, _buff), util::math::idx::determ({
-				_cursEditor[MAX][X],
-				_cursEditor[MAX][Y]
-			}, _buff));
-
 			Coord start = {
 				_cursEditor[MIN][X],
 				_cursEditor[MIN][Y]
 			};
 			unsigned int startScal = util::math::idx::determ(start, _buff);
+
+			Coord end = {
+				_cursEditor[MAX][X],
+				_cursEditor[MAX][Y]
+			};
+			unsigned int endScal = util::math::idx::determ(end, _buff);
+
+			int delta = util::math::delta(startScal, endScal);
+
+			int norm = util::math::norm(startScal, endScal);
 
 			int i = 0;
 			while (i < 1 + abs(delta)) {
