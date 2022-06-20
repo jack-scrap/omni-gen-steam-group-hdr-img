@@ -116,25 +116,25 @@ Idx* idxMk(unsigned int i, char* c, unsigned int sz, std::string name, glm::vec3
 	return _;
 }
 
-void idxDel(Idx* idx) {
-	for (int i = 0; i < idx->_sz; i++) {
-		if (idx->_data[i]) {
-			contDel(idx->_data[i]);
+void idxDel(Idx* inst) {
+	for (int i = 0; i < inst->_sz; i++) {
+		if (inst->_data[i]) {
+			contDel(inst->_data[i]);
 		}
 	}
 
-	free(idx);
+	free(inst);
 }
 
-void idxPush(Idx* idx, Cont* byte) {
-	idx->_sz++;
-	idx->_data = (Cont**) realloc(idx->_data, idx->_sz * sizeof (Cont*));
+void idxPush(Idx* inst, Cont* byte) {
+	inst->_sz++;
+	inst->_data = (Cont**) realloc(inst->_data, inst->_sz * sizeof (Cont*));
 
-	idx->_parent->_noChild++;
-	idx->_parent->_child = (Obj**) realloc(idx->_parent->_child, idx->_parent->_noChild * sizeof (Cont*));
+	inst->_parent->_noChild++;
+	inst->_parent->_child = (Obj**) realloc(inst->_parent->_child, inst->_parent->_noChild * sizeof (Cont*));
 
-	idx->_data[idx->_sz - 1] = byte;
-	idx->_parent->_child[idx->_parent->_noChild - 1] = idx->_data[idx->_sz - 1]->_parent;
+	inst->_data[inst->_sz - 1] = byte;
+	inst->_parent->_child[inst->_parent->_noChild - 1] = inst->_data[inst->_sz - 1]->_parent;
 
 	// transform
 	glm::vec2 center = layout::center({
@@ -144,22 +144,22 @@ void idxPush(Idx* idx, Cont* byte) {
 	glm::mat4 model = glm::mat4(1.0);
 	model = glm::translate(model, glm::vec3(layout::overhead, 0.0, layout::overhead) + glm::vec3(center[X], 0.0, center[Y]) + glm::vec3(0.0, layout::idx[Y] / 2, 0.0));
 
-	idx->_data[idx->_sz - 1]->_parent->_model = model;
+	inst->_data[inst->_sz - 1]->_parent->_model = model;
 
-	objAcc(idx->_parent, glm::mat4(1.0));
+	objAcc(inst->_parent, glm::mat4(1.0));
 }
 
-Cont* idxPop(Idx* idx) {
+Cont* idxPop(Idx* inst) {
 	Cont* byte = nullptr;
 
-	if (idx->_sz) {
-		byte = idx->_data[idx->_sz - 1];
+	if (inst->_sz) {
+		byte = inst->_data[inst->_sz - 1];
 
-		idx->_sz--;
-		idx->_data = (Cont**) realloc(idx->_data, idx->_sz * sizeof (Cont*));
+		inst->_sz--;
+		inst->_data = (Cont**) realloc(inst->_data, inst->_sz * sizeof (Cont*));
 
-		idx->_parent->_noChild--;
-		idx->_parent->_child = (Obj**) realloc(idx->_parent->_child, idx->_parent->_noChild * sizeof (Cont*));
+		inst->_parent->_noChild--;
+		inst->_parent->_child = (Obj**) realloc(inst->_parent->_child, inst->_parent->_noChild * sizeof (Cont*));
 	}
 
 	return byte;
