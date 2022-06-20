@@ -22,6 +22,6 @@ Array* arrayMk(char* init, unsigned int x, std::string name = "", unsigned int a
 
 Array* arrayMk(char* init, unsigned int x, unsigned int y, std::string name = "", glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
 
-void arrayDel(Array* array);
+void arrayDel(Array* inst);
 
 bool arrayEq(Array* lhs, Array* rhs);

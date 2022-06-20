@@ -159,17 +159,17 @@ Array* arrayMk(char* init, unsigned int x, unsigned int y, std::string name, glm
 	return _;
 }
 
-void arrayDel(Array* array) {
-	for (int y = 0; y < array->_y; y++) {
-		for (int x = 0; x < array->_x; x++) {
-			idxDel(array->_data[(y * array->_x) + x]);
+void arrayDel(Array* inst) {
+	for (int y = 0; y < inst->_y; y++) {
+		for (int x = 0; x < inst->_x; x++) {
+			idxDel(inst->_data[(y * inst->_x) + x]);
 		}
 	}
-	free(array->_data);
+	free(inst->_data);
 
-	objDel(array->_parent);
+	objDel(inst->_parent);
 
-	free(array);
+	free(inst);
 }
 
 bool arrayEq(Array* lhs, Array* rhs) {
