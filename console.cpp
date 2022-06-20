@@ -740,8 +740,8 @@ void Console::del() {
 					_cursEditor[MAX][i] = _cursEditor[MIN][i];
 				}
 			} else {
-				if (_buff[_cursEditor[_rngEditor][Y]].size()) {
-					if (_cursEditor[_rngEditor][X] == _buff[_cursEditor[_rngEditor][Y]].size()) {
+				if (_buff[_cursEditor[_rngEditor][Y]].size()) { // non-blank line
+					if (_cursEditor[_rngEditor][X] == _buff[_cursEditor[_rngEditor][Y]].size()) { // trailing
 						_buff[_cursEditor[_rngEditor][Y]].pop_back();
 					} else {
 						_buff[_cursEditor[_rngEditor][Y]].erase(_buff[_cursEditor[_rngEditor][Y]].begin() + _cursEditor[MIN][X], _buff[_cursEditor[_rngEditor][Y]].begin() + _cursEditor[MAX][X] + 1);
