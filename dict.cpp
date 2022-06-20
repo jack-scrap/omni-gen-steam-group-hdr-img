@@ -159,10 +159,10 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 	return _;
 }
 
-void dictDel(Dict* dict) {
-	objDel(dict->_parent);
+void dictDel(Dict* inst) {
+	objDel(inst->_parent);
 
-	free(dict);
+	free(inst);
 }
 
 bool dictEq(Dict* lhs, Dict* rhs) {
