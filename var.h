@@ -8,4 +8,4 @@ typedef struct {
 
 Var* varMk(char* id, void* ptr, unsigned int type);
 
-void varDel(Var* var);
+void varDel(Var* inst);

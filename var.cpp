@@ -12,9 +12,9 @@ Var* varMk(char* id, void* ptr, unsigned int type) {
 	return _;
 }
 
-void varDel(Var* var) {
-	free(var->_id);
-	free(var->_ptr);
+void varDel(Var* inst) {
+	free(inst->_id);
+	free(inst->_ptr);
 
-	free(var);
+	free(inst);
 }
