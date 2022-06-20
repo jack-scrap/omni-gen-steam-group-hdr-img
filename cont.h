@@ -12,4 +12,4 @@ typedef struct {
 
 Cont* contMk(char c, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
 
-void contDel(Cont* cont);
+void contDel(Cont* inst);

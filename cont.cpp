@@ -16,8 +16,8 @@ Cont* contMk(char c, glm::vec3 loc, glm::vec3 rot) {
 	return _;
 }
 
-void contDel(Cont* cont) {
-	objDel(cont->_parent);
+void contDel(Cont* inst) {
+	objDel(inst->_parent);
 
-	free(cont);
+	free(inst);
 }
