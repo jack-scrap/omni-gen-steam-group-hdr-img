@@ -25,35 +25,35 @@ Node* nodeMk(char* data, int no, Node** child, unsigned int noChild) {
 	return _;
 }
 
-void nodeDel(Node* node) {
-	free(node->_data);
+void nodeDel(Node* inst) {
+	free(inst->_data);
 
-	for (int i = 0; i < node->_noChild; i++) {
-		nodeDel(node->_child[i]);
+	for (int i = 0; i < inst->_noChild; i++) {
+		nodeDel(inst->_child[i]);
 	}
-	free(node->_child);
+	free(inst->_child);
 
-	free(node);
+	free(inst);
 }
 
-void nodeDepth(Node* node, unsigned int* depth) {
+void nodeDepth(Node* inst, unsigned int* depth) {
 	(*depth)++;
 
-	if (node->_noChild) {
-		if (node->_child[0]) {
-			nodeDepth(node->_child[0], depth);
+	if (inst->_noChild) {
+		if (inst->_child[0]) {
+			nodeDepth(inst->_child[0], depth);
 		}
 	}
 }
 
-void nodeMax(Node* node, unsigned int* no) {
-	if (node->_no > *no) {
-		*no = node->_no;
+void nodeMax(Node* inst, unsigned int* no) {
+	if (inst->_no > *no) {
+		*no = inst->_no;
 	}
 
-	for (int i = 0; i < node->_noChild; i++) {
-		if (node->_child[i]->_no > *no) {
-			*no = node->_child[i]->_no;
+	for (int i = 0; i < inst->_noChild; i++) {
+		if (inst->_child[i]->_no > *no) {
+			*no = inst->_child[i]->_no;
 		}
 	}
 }
