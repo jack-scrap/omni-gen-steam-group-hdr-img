@@ -176,8 +176,8 @@ Border* borderMk(glm::vec2 bound, Obj** child, unsigned int noChild, glm::vec3 l
 	return _;
 }
 
-void borderDel(Border* border) {
-	objDel(border->_parent);
+void borderDel(Border* inst) {
+	objDel(inst->_parent);
 
-	free(border);
+	free(inst);
 }

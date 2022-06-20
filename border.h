@@ -15,4 +15,4 @@ Border* borderMk(glm::vec2 bound, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot 
 
 Border* borderMk(glm::vec2 bound, Obj** child, unsigned int noChild, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
 
-void borderDel(Border* border);
+void borderDel(Border* inst);
