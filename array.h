@@ -24,4 +24,8 @@ Array* arrayMk(char* init, unsigned int x, unsigned int y, std::string name = ""
 
 void arrayDel(Array* inst);
 
+void arrayPush(Array* inst, unsigned int x, unsigned int y, Cont* byte);
+
+Cont* arrayPop(Array* inst, unsigned int x, unsigned int y);
+
 bool arrayEq(Array* lhs, Array* rhs);

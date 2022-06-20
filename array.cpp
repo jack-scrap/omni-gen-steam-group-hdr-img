@@ -172,6 +172,18 @@ void arrayDel(Array* inst) {
 	free(inst);
 }
 
+void arrayPush(Array* inst, unsigned int x, unsigned int y, Cont* byte) {
+	Idx* idx = inst->_data[(y * inst->_x) + x];
+
+	idxPush(idx, byte);
+}
+
+Cont* arrayPop(Array* inst, unsigned int x, unsigned int y) {
+	Idx* idx = inst->_data[(y * inst->_x) + x];
+
+	return idxPop(idx);
+}
+
 bool arrayEq(Array* lhs, Array* rhs) {
 	int i = 0;
 	for (int y = 0; y < lhs->_y; y++) {
