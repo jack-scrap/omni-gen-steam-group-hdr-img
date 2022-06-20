@@ -750,7 +750,9 @@ void Console::del() {
 					if (_buff.size() > 1) {
 						_buff.erase(_buff.begin() + _cursEditor[_rngEditor][Y]);
 
-						_cursEditor[_rngEditor][Y]--;
+						if (_cursEditor[_rngEditor][Y]) {
+							_cursEditor[_rngEditor][Y]--;
+						}
 
 						console->_cursEditor[console->_rngEditor][X] = console->_buff[console->_cursEditor[console->_rngEditor][Y]].size();
 					}
