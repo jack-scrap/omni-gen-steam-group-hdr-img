@@ -11,3 +11,5 @@ typedef struct Mark {
 } Mark;
 
 Mark* markMk(GLfloat val[2][2], unsigned int status);
+
+void markDel(Mark* inst);
