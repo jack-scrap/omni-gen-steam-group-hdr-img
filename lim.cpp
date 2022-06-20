@@ -61,8 +61,8 @@ Lim* limMk(unsigned int axis, GLfloat val, unsigned int status) {
 	return _;
 }
 
-void limDel(Lim* lim) {
-	objDel(lim->_parent);
+void limDel(Lim* inst) {
+	objDel(inst->_parent);
 
-	free(lim);
+	free(inst);
 }
