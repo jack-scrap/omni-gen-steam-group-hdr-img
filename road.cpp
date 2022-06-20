@@ -30,8 +30,8 @@ Road* roadMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, unsigned int stat
 	return _;
 }
 
-void roadDel(Road* road) {
-	objDel(road->_parent);
+void roadDel(Road* inst) {
+	objDel(inst->_parent);
 
-	free(road);
+	free(inst);
 }
