@@ -111,3 +111,12 @@ for i in range(n):
 ```
 
 The number of operations scales strictly relative to the input.
+
+## Quadratic
+```
+for j in range(n):
+	for i in range(n):
+		print(3)
+```
+
+The number operations scales relative to the input squared.
