@@ -103,3 +103,11 @@ Despite the second algorithm having an additional operation, both it and the ini
 `print(3)`
 
 Input is nonexistent and does not vary.
+
+## Linear
+```
+for i in range(n):
+	print(3)
+```
+
+The number of operations scales strictly relative to the input.
