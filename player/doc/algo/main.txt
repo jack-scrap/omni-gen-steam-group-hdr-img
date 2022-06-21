@@ -91,3 +91,8 @@ O(n^c)        - Polynomial
 O(c^n)        - Exponential
 O(log(n))     - Logarithmic
 O((log(n))^c) - Polylogarithmic
+
+### Constant
+`print(3)`
+
+Input is nonexistent and does not vary.
