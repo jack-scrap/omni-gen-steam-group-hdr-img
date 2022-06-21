@@ -91,6 +91,7 @@ O(n^c)        - Polynomial
 O(c^n)        - Exponential
 O(log(n))     - Logarithmic
 O((log(n))^c) - Polylogarithmic
+O(n!) -       - Factorial
 
 "Constants" are ignored.
 

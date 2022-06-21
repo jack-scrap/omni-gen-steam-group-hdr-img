@@ -156,6 +156,7 @@ void handle() {
 
 								console->_cursEditor[console->_rngEditor][Y]++;
 
+								// pin to end
 								if (trail) {
 									console->_cursEditor[console->_rngEditor][X] = console->_buff[console->_cursEditor[console->_rngEditor][Y]].size();
 								}
@@ -172,6 +173,7 @@ void handle() {
 
 								console->_cursEditor[console->_rngEditor][Y]--;
 
+								// pin to end
 								if (trail) {
 									console->_cursEditor[console->_rngEditor][X] = console->_buff[console->_cursEditor[console->_rngEditor][Y]].size();
 								}
