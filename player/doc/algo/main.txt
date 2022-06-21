@@ -100,14 +100,14 @@ O((log(n))^c) - Polylogarithmic
 Despite the second algorithm having an additional operation, both it and the initial one have "constant" complexity where the input is unchanging.
 
 ### Constant
-`print(3)`
+`print("Text")`
 
 Input is nonexistent and does not vary.
 
 ## Linear
 ```
 for i in range(n):
-	print(3)
+	print("Text")
 ```
 
 The number of operations scales strictly relative to the input.
@@ -116,7 +116,7 @@ The number of operations scales strictly relative to the input.
 ```
 for j in range(n):
 	for i in range(n):
-		print(3)
+		print("Text")
 ```
 
 The number operations scales relative to the input squared.
