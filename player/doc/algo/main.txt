@@ -92,6 +92,13 @@ O(c^n)        - Exponential
 O(log(n))     - Logarithmic
 O((log(n))^c) - Polylogarithmic
 
+"Constants" are ignored.
+
+`print(3)`
+`print(3 * 3)`
+
+Despite the second algorithm having an additional operation, both it and the initial one have "constant" complexity where the input is unchanging.
+
 ### Constant
 `print(3)`
 
