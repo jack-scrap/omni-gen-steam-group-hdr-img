@@ -99,6 +99,8 @@ O((log(n))^c) - Polylogarithmic
 
 Despite the second algorithm having an additional operation, both it and the initial one have "constant" complexity where the input is unchanging.
 
+Calculating the "best case" and "worst case" with the most and least efficient outputs, algorithms are judged by the worst case.
+
 ### Constant
 `print("Text")`
 
