@@ -29,6 +29,7 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 	GLfloat maxX = 0.0;
 	GLfloat accY = 0.0;
 	for (const auto& entry : deser.items()) {
+		Obj* id;
 		switch (entry.value().type()) {
 			// scalar
 			case nlohmann::json::value_t::number_unsigned: {
@@ -43,6 +44,21 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 
 				if (strideIdx[X] > maxX) {
 					maxX = strideIdx[X];
+				}
+
+				// name
+				float idWd = 0.0;
+
+				id = (((Idx**) _->_data)[i])->_parent->_child[1];
+
+				idWd += layout::item(id->_aabb[X][MAX] - id->_aabb[X][MIN]);
+
+				for (int i = 0; i < id->_noChild; i++) {
+					idWd += layout::item(id->_child[i]->_aabb[X][MAX] - id->_child[i]->_aabb[X][MIN]);
+				}
+
+				if (idWd > maxX) {
+					maxX = idWd;
 				}
 
 				accY += strideLetter[Y] + strideIdx[Y];
@@ -66,6 +82,21 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 
 						if (layout::scoped(init._x * strideIdx[X]) > maxX) {
 							maxX = layout::scoped(init._x * strideIdx[X]);
+						}
+
+						// name
+						float idWd = 0.0;
+
+						id = (((Array**) _->_data)[i])->_parent->_child[1];
+
+						idWd += layout::item(id->_aabb[X][MAX] - id->_aabb[X][MIN]);
+
+						for (int i = 0; i < id->_noChild; i++) {
+							idWd += layout::item(id->_child[i]->_aabb[X][MAX] - id->_child[i]->_aabb[X][MIN]);
+						}
+
+						if (idWd > maxX) {
+							maxX = idWd;
 						}
 
 						GLfloat szY = layout::scoped(strideLetter[Y] + strideIdx[Y]);
@@ -93,6 +124,21 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 									maxX = layout::scoped(init._x * strideIdx[X]);
 								}
 
+								// name
+								float idWd = 0.0;
+
+								id = (((Array**) _->_data)[i])->_parent->_child[1];
+
+								idWd += layout::item(id->_aabb[X][MAX] - id->_aabb[X][MIN]);
+
+								for (int i = 0; i < id->_noChild; i++) {
+									idWd += layout::item(id->_child[i]->_aabb[X][MAX] - id->_child[i]->_aabb[X][MIN]);
+								}
+
+								if (idWd > maxX) {
+									maxX = idWd;
+								}
+
 								GLfloat szY = layout::scoped(strideLetter[Y] + (init._y * strideIdx[Y]));
 
 								accY += szY;
@@ -117,6 +163,21 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 
 								glm::vec2 sz = glm::vec2(layout::scoped(0.0), layout::scoped(strideLetter[Y] + (init._y * strideIdx[Y])));
 
+								// name
+								float idWd = 0.0;
+
+								id = (((Array**) _->_data)[i])->_parent->_child[1];
+
+								idWd += layout::item(id->_aabb[X][MAX] - id->_aabb[X][MIN]);
+
+								for (int i = 0; i < id->_noChild; i++) {
+									idWd += layout::item(id->_child[i]->_aabb[X][MAX] - id->_child[i]->_aabb[X][MIN]);
+								}
+
+								if (idWd > maxX) {
+									maxX = idWd;
+								}
+
 								accY += sz[Y];
 
 								break;
@@ -139,6 +200,7 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 
 	if (!name.empty()) {
 		Str* id = strMk(name, glm::vec3(0.0, 0.0, -(layout::margin * 2)));
+
 		child[0] = id->_parent;
 	}
 
