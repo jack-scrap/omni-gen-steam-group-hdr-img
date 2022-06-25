@@ -11,9 +11,11 @@ Str* strMk(std::string buff, glm::vec3 loc, glm::vec3 rot) {
 
 	Obj* head = objMk("glyph/" + util::glyphName(buff[0]), "obj", "solid", true);
 
+	float offset = 0.0;
+
 	float wd = head->_aabb[X][MAX] - head->_aabb[X][MIN];
 
-	float offset = layout::item(wd);
+	offset += layout::item(wd);
 
 	objDel(head);
 
