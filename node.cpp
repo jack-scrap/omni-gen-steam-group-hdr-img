@@ -4,14 +4,14 @@
 #include "node.h"
 
 Node* nodeMk(char* data, int no) {
-	Node* _ = (Node*) malloc(sizeof (Node));
+	Node* inst = (Node*) malloc(sizeof (Node));
 
-	_->_data = data;
-	_->_no = no;
-	_->_child = nullptr;
-	_->_noChild = 0;
+	inst->_data = data;
+	inst->_no = no;
+	inst->_child = nullptr;
+	inst->_noChild = 0;
 
-	return _;
+	return inst;
 }
 
 Node* nodeMk(char* data, int no, Node** child, unsigned int noChild) {
