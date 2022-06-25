@@ -18,17 +18,17 @@ GLushort IBeam::_idc[3 * 2] = {
 };
 
 Obj* iBeamMk(GLfloat ln, unsigned int axis, glm::vec3 loc, glm::vec3 rot) {
-	Obj* _ = lineMk(IBeam::_vtc, IBeam::_idc, sizeof IBeam::_idc / sizeof (GLushort), "main", "beam", "dir", false, loc, rot);
+	Obj* inst = lineMk(IBeam::_vtc, IBeam::_idc, sizeof IBeam::_idc / sizeof (GLushort), "main", "beam", "dir", false, loc, rot);
 
-	_->_prog.use();
+	inst->_prog.use();
 
-	_->_uni[IBeam::AXIS] = glGetUniformLocation(_->_prog._id, "axis");
-	_->_uni[IBeam::LN] = glGetUniformLocation(_->_prog._id, "ln");
+	inst->_uni[IBeam::AXIS] = glGetUniformLocation(inst->_prog._id, "axis");
+	inst->_uni[IBeam::LN] = glGetUniformLocation(inst->_prog._id, "ln");
 
-	glUniform1ui(_->_uni[IBeam::AXIS], axis);
-	glUniform1f(_->_uni[IBeam::LN], ln);
+	glUniform1ui(inst->_uni[IBeam::AXIS], axis);
+	glUniform1f(inst->_uni[IBeam::LN], ln);
 
-	_->_prog.unUse();
+	inst->_prog.unUse();
 
-	return _;
+	return inst;
 }
