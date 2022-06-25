@@ -8,11 +8,11 @@
 #include "util.h"
 
 Idx* idxMk(unsigned int i, std::string name, glm::vec3 loc, glm::vec3 rot) {
-	Idx* _ = (Idx*) malloc(sizeof (Idx));
+	Idx* inst = (Idx*) malloc(sizeof (Idx));
 
-	_->_data = (Cont**) malloc(0);
-	_->_sz = 0;
-	_->_i = i;
+	inst->_data = (Cont**) malloc(0);
+	inst->_sz = 0;
+	inst->_i = i;
 
 	// index
 	std::string str = std::to_string(i);
@@ -39,7 +39,7 @@ Idx* idxMk(unsigned int i, std::string name, glm::vec3 loc, glm::vec3 rot) {
 		layout::item(layout::idx[X]),
 		layout::item(layout::idx[Z])
 	}, child, sizeof child / sizeof *child, loc, rot);
-	_->_parent = border->_parent;
+	inst->_parent = border->_parent;
 
 	for (int i = 0; i < str.size(); i++) {
 		glm::vec3 center = layout::center(child[i]);
@@ -47,28 +47,28 @@ Idx* idxMk(unsigned int i, std::string name, glm::vec3 loc, glm::vec3 rot) {
 		child[i]->_model = glm::translate(child[i]->_model, glm::vec3(center[X], 0.0, -center[Z]));
 	}
 
-	objAcc(_->_parent, glm::mat4(1.0));
+	objAcc(inst->_parent, glm::mat4(1.0));
 
 	// offset
-	glm::vec3 offset = _->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int a = 0; a < 3; a++) {
-		_->_offset[a] = offset[a];
+		inst->_offset[a] = offset[a];
 	}
 
-	return _;
+	return inst;
 }
 
 Idx* idxMk(unsigned int i, char* c, unsigned int sz, std::string name, glm::vec3 loc, glm::vec3 rot) {
-	Idx* _ = (Idx*) malloc(sizeof (Idx));
+	Idx* inst = (Idx*) malloc(sizeof (Idx));
 
-	_->_sz = sz;
-	_->_data = (Cont**) malloc(_->_sz * sizeof (Cont*));
-	_->_i = i;
+	inst->_sz = sz;
+	inst->_data = (Cont**) malloc(inst->_sz * sizeof (Cont*));
+	inst->_i = i;
 
 	// index
 	std::string str = std::to_string(i);
 
-	Obj* child[str.size() + _->_sz + 1];
+	Obj* child[str.size() + inst->_sz + 1];
 
 	glm::vec2 center = layout::center({
 		layout::idx[X],
@@ -89,10 +89,10 @@ Idx* idxMk(unsigned int i, char* c, unsigned int sz, std::string name, glm::vec3
 	// data
 	glm::vec2 stride = glm::vec2(layout::item(layout::scoped(layout::idx[X])), layout::item(layout::scoped(layout::idx[Z])));
 
-	for (int i = 0; i < _->_sz; i++) {
+	for (int i = 0; i < inst->_sz; i++) {
 		Cont* byte = contMk(c[i], glm::vec3((layout::stroke * 2) + (layout::idx[X] / 2), layout::idx[Y] / 2, (layout::stroke * 2) + (layout::idx[Z] / 2)) + glm::vec3(0.0, i * layout::idx[Y], 0.0));
 
-		_->_data[i] = byte;
+		inst->_data[i] = byte;
 
 		child[2 + i] = byte->_parent;
 	}
@@ -101,21 +101,21 @@ Idx* idxMk(unsigned int i, char* c, unsigned int sz, std::string name, glm::vec3
 		layout::item(layout::idx[X]),
 		layout::item(layout::idx[Z])
 	}, child, sizeof child / sizeof *child, loc, rot);
-	_->_parent = border->_parent;
+	inst->_parent = border->_parent;
 
 	for (int i = 0; i < str.size(); i++) {
 		glm::vec3 center = layout::center(child[i]);
 
-		objMv(child[i], _->_parent, glm::vec3(center[X], 0.0, -center[Z]), glm::vec3(0.0));
+		objMv(child[i], inst->_parent, glm::vec3(center[X], 0.0, -center[Z]), glm::vec3(0.0));
 	}
 
 	// offset
-	glm::vec3 offset = _->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int a = 0; a < 3; a++) {
-		_->_offset[a] = offset[a];
+		inst->_offset[a] = offset[a];
 	}
 
-	return _;
+	return inst;
 }
 
 void idxDel(Idx* inst) {
