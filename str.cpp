@@ -13,7 +13,7 @@ Str* strMk(std::string buff, glm::vec3 loc, glm::vec3 rot) {
 
 	float wd = head->_aabb[X][MAX] - head->_aabb[X][MIN];
 
-	float offset = layout::padded(wd);
+	float offset = layout::item(wd);
 
 	objDel(head);
 
@@ -23,7 +23,7 @@ Str* strMk(std::string buff, glm::vec3 loc, glm::vec3 rot) {
 
 		float wd = child[i]->_aabb[X][MAX] - child[i]->_aabb[X][MIN];
 
-		offset += layout::padded(wd);
+		offset += layout::item(wd);
 	}
 
 	_->_parent = objMk("glyph/" + util::glyphName(buff[0]), "obj", "solid", true, child, sizeof child / sizeof *child, loc);
