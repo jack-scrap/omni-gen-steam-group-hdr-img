@@ -530,7 +530,6 @@ std::vector<GLfloat> util::mesh::rect::pos(glm::vec2 bound, unsigned int up, boo
 
 std::vector<GLushort> util::mesh::rect::idc() {
 	std::vector<GLushort> _;
-
 	for (int t = 0; t < 2; t++) {
 		for (int a = 0; a < 3; a++) {
 			GLushort offset = (t * 3);
