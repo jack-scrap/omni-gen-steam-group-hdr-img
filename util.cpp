@@ -438,8 +438,6 @@ void util::mesh::plane(GLfloat vtc[2 * 2 * 2], glm::vec2 bound) {
 }
 
 std::vector<GLfloat> util::mesh::rd::attr(std::string fName, unsigned int attr) {
-	std::vector<GLfloat> _;
-
 	std::vector<std::string> buff = fs::rd<std::vector<std::string>>(fs::path::build({
 		"res",
 		"obj",
@@ -457,6 +455,7 @@ std::vector<GLfloat> util::mesh::rd::attr(std::string fName, unsigned int attr) 
 		3
 	};
 
+	std::vector<GLfloat> _;
 	for (int l = 0; l < buff.size(); l++) {
 		std::vector<std::string> tok = str::split(buff[l], ' ');
 
@@ -558,14 +557,13 @@ glm::vec3 util::mesh::gen::norm(std::vector<glm::vec3> vtc) {
 }
 
 std::vector<GLushort> util::mesh::rd::idc(std::string fName, unsigned int attr) {
-	std::vector<GLushort> _;
-
 	std::vector<std::string> buff = fs::rd<std::vector<std::string>>(fs::path::build({
 		"res",
 		"obj",
 		fName + ".obj"
 	}));
 
+	std::vector<GLushort> _;
 	for (int l = 0; l < buff.size(); l++) {
 		std::vector<std::string> tok = str::split(buff[l], ' ');
 
