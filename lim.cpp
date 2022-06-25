@@ -10,10 +10,10 @@ GLushort Lim::_idc[2] = {
 };
 
 Lim* limMk(unsigned int axis, GLfloat val, unsigned int status) {
-	Lim* _ = (Lim*) malloc(sizeof (Lim));
+	Lim* inst = (Lim*) malloc(sizeof (Lim));
 
-	_->_axis = axis;
-	_->_val = val;
+	inst->_axis = axis;
+	inst->_val = val;
 
 	GLfloat vtc[2][3];
 	for (int b = 0; b < 2; b++) {
@@ -21,13 +21,13 @@ Lim* limMk(unsigned int axis, GLfloat val, unsigned int status) {
 
 		switch (axis) {
 			case X:
-				vtc[b][X] = _->_val;
+				vtc[b][X] = inst->_val;
 				vtc[b][Z] = (b ? 1 : -1) * 100.0;
 				
 				break;
 
 			case Z:
-				vtc[b][Z] = _->_val;
+				vtc[b][Z] = inst->_val;
 				vtc[b][X] = (b ? 1 : -1) * 100.0;
 
 				break;
@@ -56,9 +56,9 @@ Lim* limMk(unsigned int axis, GLfloat val, unsigned int status) {
 			break;
 	}
 
-	_->_parent = lineMk((GLfloat*) vtc, Lim::_idc, 2, "main", "thick", frag, active);
+	inst->_parent = lineMk((GLfloat*) vtc, Lim::_idc, 2, "main", "thick", frag, active);
 
-	return _;
+	return inst;
 }
 
 void limDel(Lim* inst) {
