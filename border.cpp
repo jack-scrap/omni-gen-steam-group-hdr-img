@@ -5,9 +5,9 @@
 #include "util.h"
 
 Border* borderMk(glm::vec2 bound, glm::vec3 loc, glm::vec3 rot) {
-	Border* _ = (Border*) malloc(sizeof (Border));
+	Border* inst = (Border*) malloc(sizeof (Border));
 
-	_->_bound = bound;
+	inst->_bound = bound;
 
 	GLfloat vtc[2 * 2 * 3 * 2];
 
@@ -85,15 +85,15 @@ Border* borderMk(glm::vec2 bound, glm::vec3 loc, glm::vec3 rot) {
 		}
 	}
 
-	_->_parent = objMk(vtc, strip, 3 * 2 * 2 * 2, Mesh::OBJ, "obj", "solid", true, loc, rot);
+	inst->_parent = objMk(vtc, strip, 3 * 2 * 2 * 2, Mesh::OBJ, "obj", "solid", true, loc, rot);
 
-	return _;
+	return inst;
 }
 
 Border* borderMk(glm::vec2 bound, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
-	Border* _ = (Border*) malloc(sizeof (Border));
+	Border* inst = (Border*) malloc(sizeof (Border));
 
-	_->_bound = bound;
+	inst->_bound = bound;
 
 	GLfloat vtc[2 * 2 * 3 * 2];
 
@@ -171,9 +171,9 @@ Border* borderMk(glm::vec2 bound, Obj** child, unsigned int noChild, glm::vec3 l
 		}
 	}
 
-	_->_parent = objMk(vtc, strip, 3 * 2 * 2 * 2, Mesh::OBJ, "obj", "solid", true, child, noChild, loc, rot);
+	inst->_parent = objMk(vtc, strip, 3 * 2 * 2 * 2, Mesh::OBJ, "obj", "solid", true, child, noChild, loc, rot);
 
-	return _;
+	return inst;
 }
 
 void borderDel(Border* inst) {
