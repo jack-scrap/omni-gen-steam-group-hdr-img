@@ -30,9 +30,9 @@ GLushort Truck::_lightIdc[2 * 3] = {
 };
 
 Truck* truckMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
-	Truck* _ = (Truck*) malloc(sizeof (Truck));
+	Truck* inst = (Truck*) malloc(sizeof (Truck));
 
-	_->_ang = 0.0;
+	inst->_ang = 0.0;
 
 	Obj* child[4 + ((init->_x + 1) * 2) + 2 + init->_x];
 
@@ -67,9 +67,9 @@ Truck* truckMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	child[Truck::TAIL] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-layout::scoped(init->_x * layout::scoped(layout::idx[Z]) - (0.32 / 2)), -(0.2 * 2), 0.0));
 
 	// data
-	_->_data = init;
+	inst->_data = init;
 
-	child[Truck::DATA] = _->_data->_parent;
+	child[Truck::DATA] = inst->_data->_parent;
 
 	// wheel
 	glm::vec3 overhead = glm::vec3(-((layout::margin * 2) + (layout::stroke / 2)), 0.0, 0.0);
@@ -95,15 +95,15 @@ Truck* truckMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 		child[4 + ((init->_x + 1) * 2) + 2 + i] = objMk("truck/well", "obj", "dir", true, glm::vec3(-((layout::scoped(layout::idx[Z]) / 2) + (i * layout::scoped(layout::idx[Z]))), ht, 0.0));
 	}
 
-	_->_parent = objMk("truck/front", "obj", "dir", true, child, sizeof child / sizeof *child, loc + glm::vec3(2.4, 1.0 + 1.3, 0.0), rot);
+	inst->_parent = objMk("truck/front", "obj", "dir", true, child, sizeof child / sizeof *child, loc + glm::vec3(2.4, 1.0 + 1.3, 0.0), rot);
 
 	// offset
-	glm::vec3 offset = _->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int a = 0; a < 3; a++) {
-		_->_offset[a] = offset[a];
+		inst->_offset[a] = offset[a];
 	}
 
-	return _;
+	return inst;
 }
 
 void truckDel(Truck* inst) {

@@ -8,21 +8,21 @@
 #include "str.h"
 
 Array* arrayMk(char* init, unsigned int x, std::string name, unsigned int axis, glm::vec3 loc, glm::vec3 rot) {
-	Array* _ = (Array*) malloc(sizeof (Array));
+	Array* inst = (Array*) malloc(sizeof (Array));
 
-	_->_x = x;
-	_->_y = 1;
+	inst->_x = x;
+	inst->_y = 1;
 
 	// data
-	_->_data = (Idx**) malloc(_->_x * _->_y * sizeof (Idx*));
+	inst->_data = (Idx**) malloc(inst->_x * inst->_y * sizeof (Idx*));
 
-	unsigned int noChild = 1 + (_->_x * _->_y);
+	unsigned int noChild = 1 + (inst->_x * inst->_y);
 	Obj** child = (Obj**) malloc(noChild * sizeof (Obj*));
 
 	glm::vec2 stride = glm::vec2(layout::item(layout::scoped(layout::idx[X])), layout::item(layout::scoped(layout::idx[Z])));
 
 	int c = 0;
-	for (int i = 0; i < _->_x; i++) {
+	for (int i = 0; i < inst->_x; i++) {
 		Idx* idx;
 
 		glm::vec3 offset;
@@ -44,8 +44,8 @@ Array* arrayMk(char* init, unsigned int x, std::string name, unsigned int axis, 
 			idx = idxMk(c, "", glm::vec3(layout::overhead, 0.0, layout::overhead) + offset);
 		}
 
-		_->_data[c] = idx;
-		child[1 + c] = _->_data[c]->_parent;
+		inst->_data[c] = idx;
+		child[1 + c] = inst->_data[c]->_parent;
 
 		c++;
 	}
@@ -61,12 +61,12 @@ Array* arrayMk(char* init, unsigned int x, std::string name, unsigned int axis, 
 	glm::vec2 bound;
 	switch (axis) {
 		case X:
-			bound = glm::vec2(_->_x, _->_y);
+			bound = glm::vec2(inst->_x, inst->_y);
 
 			break;
 
 		case Z:
-			bound = glm::vec2(_->_y, _->_x);
+			bound = glm::vec2(inst->_y, inst->_x);
 
 			break;
 	}
@@ -75,30 +75,30 @@ Array* arrayMk(char* init, unsigned int x, std::string name, unsigned int axis, 
 	switch (axis) {
 		case X:
 			scope = borderMk({
-				_->_x * stride[X],
-				_->_y * stride[Y]
+				inst->_x * stride[X],
+				inst->_y * stride[Y]
 			}, child, noChild, loc, rot);
 
 			break;
 
 		case Z:
 			scope = borderMk({
-				_->_y * stride[X],
-				_->_x * stride[Y]
+				inst->_y * stride[X],
+				inst->_x * stride[Y]
 			}, child, noChild, loc, rot);
 
 			break;
 	}
 
-	_->_parent = scope->_parent;
+	inst->_parent = scope->_parent;
 
 	// offset
-	glm::vec3 offset = _->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int a = 0; a < 3; a++) {
-		_->_offset[a] = offset[a];
+		inst->_offset[a] = offset[a];
 	}
 
-	return _;
+	return inst;
 }
 
 Array* arrayMk(char* init, unsigned int x, unsigned int y, std::string name, glm::vec3 loc, glm::vec3 rot) {

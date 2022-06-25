@@ -3,13 +3,13 @@
 #include "var.h"
 
 Var* varMk(char* id, void* ptr, unsigned int type) {
-	Var* _ = (Var*) malloc(sizeof (Var));
+	Var* inst = (Var*) malloc(sizeof (Var));
 
-	_->_id = id;
-	_->_ptr = ptr;
-	_->_type = type;
+	inst->_id = id;
+	inst->_ptr = ptr;
+	inst->_type = type;
 
-	return _;
+	return inst;
 }
 
 void varDel(Var* inst) {

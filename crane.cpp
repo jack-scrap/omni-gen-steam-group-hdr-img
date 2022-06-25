@@ -27,12 +27,12 @@ GLushort Crane::_lightIdc[2 * 3] = {
 };
 
 Crane* craneMk(Cont* init, glm::vec3 loc, glm::vec3 rot) {
-	Crane* _ = (Crane*) malloc(sizeof (Crane));
+	Crane* inst = (Crane*) malloc(sizeof (Crane));
 
-	_->_data = nullptr;
+	inst->_data = nullptr;
 
 	if (init) {
-		_->_data = init;
+		inst->_data = init;
 	}
 
 	Obj* child[1 + (2 * 2 * 2 * 2) + (2 * 2) + (2 * 2) + 1];
@@ -48,8 +48,8 @@ Crane* craneMk(Cont* init, glm::vec3 loc, glm::vec3 rot) {
 	child[Crane::TRACK] = objMk("crane/track_front", "obj", "dir", true, trackChild, 1 + 1, glm::vec3(0.0, Crane::_rngTrack[MAX], 0.0));
 
 	// data
-	if (_->_data) {
-		child[Crane::TRACK]->_child[Crane::HEAD]->_child[0] = _->_data->_parent;
+	if (inst->_data) {
+		child[Crane::TRACK]->_child[Crane::HEAD]->_child[0] = inst->_data->_parent;
 	} else {
 		child[Crane::TRACK]->_child[Crane::HEAD]->_child[0] = nullptr;
 	}
@@ -88,15 +88,15 @@ Crane* craneMk(Cont* init, glm::vec3 loc, glm::vec3 rot) {
 	child[1 + (2 * 2 * 2 * 2) + (2 * 2) + 3] = objMk("crane/body_btm_l", "obj", "dir", true);
 	child[1 + (2 * 2 * 2 * 2) + (2 * 2) + 4] = objMk("crane/body_btm_r", "obj", "dir", true);
 
-	_->_parent = objMk("crane/front", "obj", "dir", true, child, sizeof child / sizeof* child, loc, rot);
+	inst->_parent = objMk("crane/front", "obj", "dir", true, child, sizeof child / sizeof* child, loc, rot);
 
 	// offset
-	glm::vec3 offset = _->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int a = 0; a < 3; a++) {
-		_->_offset[a] = offset[a];
+		inst->_offset[a] = offset[a];
 	}
 
-	return _;
+	return inst;
 }
 
 void craneDel(Crane* inst) {

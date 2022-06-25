@@ -7,7 +7,7 @@
 #include "util.h"
 
 Str* strMk(std::string buff, glm::vec3 loc, glm::vec3 rot) {
-	Str* _ = (Str*) malloc(sizeof (Str));
+	Str* inst = (Str*) malloc(sizeof (Str));
 
 	Obj* head = objMk("glyph/" + util::glyphName(buff[0]), "obj", "solid", true);
 
@@ -28,9 +28,9 @@ Str* strMk(std::string buff, glm::vec3 loc, glm::vec3 rot) {
 		offset += layout::item(wd);
 	}
 
-	_->_parent = objMk("glyph/" + util::glyphName(buff[0]), "obj", "solid", true, child, sizeof child / sizeof *child, loc);
+	inst->_parent = objMk("glyph/" + util::glyphName(buff[0]), "obj", "solid", true, child, sizeof child / sizeof *child, loc);
 
-	return _;
+	return inst;
 }
 
 void strDel(Str* inst) {

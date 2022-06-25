@@ -3,12 +3,12 @@
 #include "lim.h"
 
 Road* roadMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, unsigned int status, glm::vec3 loc, glm::vec3 rot) {
-	Road* _ = (Road*) malloc(sizeof (Road));
+	Road* inst = (Road*) malloc(sizeof (Road));
 
-	_->_status = status;
+	inst->_status = status;
 
 	std::string name;
-	switch (_->_status) {
+	switch (inst->_status) {
 		case PASS:
 			name = "solid";
 
@@ -25,9 +25,9 @@ Road* roadMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, unsigned int stat
 			break;
 	};
 
-	_->_parent = lineMk(vtc, idc, noPrim, "main", "thick", name, true, loc, rot);
+	inst->_parent = lineMk(vtc, idc, noPrim, "main", "thick", name, true, loc, rot);
 	
-	return _;
+	return inst;
 }
 
 void roadDel(Road* inst) {

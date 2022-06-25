@@ -8,19 +8,19 @@ GLushort Mark::_idc[2] = {
 };
 
 Mark* markMk(GLfloat val[2][2], unsigned int status) {
-	Mark* _ = (Mark*) malloc(sizeof (Mark));
+	Mark* inst = (Mark*) malloc(sizeof (Mark));
 
 	for (int j = 0; j < 2; j++) {
 		for (int i = 0; i < 2; i++) {
-			_->_val[j][i] = val[j][i];
+			inst->_val[j][i] = val[j][i];
 		}
 	}
 
 	GLfloat vtc[2][3];
 	for (int b = 0; b < 2; b++) {
-		vtc[b][X] = _->_val[b][X];
+		vtc[b][X] = inst->_val[b][X];
 		vtc[b][Y] = 0.0;
-		vtc[b][Z] = _->_val[b][Y];
+		vtc[b][Z] = inst->_val[b][Y];
 	}
 
 	std::string frag;
@@ -45,9 +45,9 @@ Mark* markMk(GLfloat val[2][2], unsigned int status) {
 			break;
 	}
 
-	_->_parent = lineMk((GLfloat*) vtc, Mark::_idc, 2, "main", "thick", frag, active);
+	inst->_parent = lineMk((GLfloat*) vtc, Mark::_idc, 2, "main", "thick", frag, active);
 
-	return _;
+	return inst;
 }
 
 void markDel(Mark* inst) {
