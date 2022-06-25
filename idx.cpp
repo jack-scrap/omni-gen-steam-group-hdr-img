@@ -44,8 +44,10 @@ Idx* idxMk(unsigned int i, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	for (int i = 0; i < str.size(); i++) {
 		glm::vec3 center = layout::center(child[i]);
 
-		objMv(child[i], _->_parent, glm::vec3(center[X], 0.0, -center[Z]), glm::vec3(0.0));
+		child[i]->_model = glm::translate(child[i]->_model, glm::vec3(center[X], 0.0, -center[Z]));
 	}
+
+	objAcc(_->_parent, glm::mat4(1.0));
 
 	// offset
 	glm::vec3 offset = _->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
