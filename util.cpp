@@ -438,12 +438,6 @@ void util::mesh::plane(GLfloat vtc[2 * 2 * 2], glm::vec2 bound) {
 }
 
 std::vector<GLfloat> util::mesh::rd::attr(std::string fName, unsigned int attr) {
-	std::vector<std::string> buff = fs::rd<std::vector<std::string>>(fs::path::build({
-		"res",
-		"obj",
-		fName + ".obj"
-	}));
-
 	const std::string id[3] = {
 		"v",
 		"vt",
@@ -454,6 +448,12 @@ std::vector<GLfloat> util::mesh::rd::attr(std::string fName, unsigned int attr) 
 		2,
 		3
 	};
+
+	std::vector<std::string> buff = fs::rd<std::vector<std::string>>(fs::path::build({
+		"res",
+		"obj",
+		fName + ".obj"
+	}));
 
 	std::vector<GLfloat> _;
 	for (int l = 0; l < buff.size(); l++) {
