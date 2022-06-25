@@ -55,7 +55,7 @@ void main() {
 		for (int x = 0; x < 2; x++) {
 			for (int h = 0; h < 2; h++) {
 				for (int v = 0; v < 2; v++) {
-					vec3 pos = vec3 ((bool(x) ? 1 : -1) * (1 - fac), 0.0, (bool(z) ? 1 : -1) * (1 - fac)) + vec3((bool(h) ? 1 : -1) * ((bool(x) ? 1 : -1) * fac), (bool(v) ? 1 : -1) * (2 * pad), (bool(h) ? 1 : -1) * ((bool(z) ? -1 : 1) * fac));
+					vec3 pos = vec3((bool(x) ? 1 : -1) * (1 - fac), 0.0, (bool(z) ? 1 : -1) * (1 - fac)) + vec3((bool(h) ? 1 : -1) * ((bool(x) ? 1 : -1) * fac), (bool(v) ? 1 : -1) * (2 * pad), (bool(h) ? 1 : -1) * ((bool(z) ? -1 : 1) * fac));
 
 					gl_Position = proj * view * model * vec4(gl_in[0].gl_Position.xyz + pos, 1.0);
 
