@@ -24,12 +24,12 @@ GLushort CargoShip::_lightIdc[2 * 3] = {
 };
 
 CargoShip* cargoShipMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
-	CargoShip* _ = (CargoShip*) malloc(sizeof (CargoShip));
+	CargoShip* inst = (CargoShip*) malloc(sizeof (CargoShip));
 
 	// bed
 	glm::vec2 stride = glm::vec2(layout::item(layout::scoped(layout::idx[X])), layout::item(layout::scoped(layout::idx[Z])));
 
-	glm::vec2 bound = glm::vec2(layout::item(_->_x * stride[X]), layout::item(_->_y * stride[Y]));
+	glm::vec2 bound = glm::vec2(layout::item(inst->_x * stride[X]), layout::item(inst->_y * stride[Y]));
 
 	GLfloat vtc[2 * 2 * 3];
 	int i = 0;
@@ -52,12 +52,12 @@ CargoShip* cargoShipMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	child[CargoShip::BED] = objMk(vtc, (GLushort*) idc, 2 * 3, Mesh::OBJ, "obj", "dir", false, glm::vec3(-center[X], 0.0, -center[Y]));
 
 	// data
-	_->_data = init;
+	inst->_data = init;
 
 	child[CargoShip::DATA] = nullptr;
 
-	if (_->_data) {
-		child[CargoShip::DATA] = _->_data->_parent;
+	if (inst->_data) {
+		child[CargoShip::DATA] = inst->_data->_parent;
 	}
 
 	// light
@@ -67,15 +67,15 @@ CargoShip* cargoShipMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 		}
 	}
 
-	_->_parent = objMk("cargo_ship", "obj", "dir", true, child, sizeof child / sizeof *child, loc, rot);
+	inst->_parent = objMk("cargo_ship", "obj", "dir", true, child, sizeof child / sizeof *child, loc, rot);
 
 	// offset
-	glm::vec3 offset = _->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int a = 0; a < 3; a++) {
-		_->_offset[a] = offset[a];
+		inst->_offset[a] = offset[a];
 	}
 
-	return _;
+	return inst;
 }
 
 void cargoShipDel(CargoShip* inst) {
