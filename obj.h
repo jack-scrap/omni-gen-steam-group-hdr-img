@@ -76,14 +76,14 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, unsigned int type, 
 
 Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, unsigned int type, std::string vtx, std::string geom, std::string frag, bool active, Obj** child, unsigned int noChild, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
 
-void objDel(Obj* obj);
+void objDel(Obj* inst);
 
-void objAcc(Obj* obj, glm::mat4 prev);
+void objAcc(Obj* inst, glm::mat4 prev);
 
-void objAnim(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot, GLfloat speed = 1.0);
+void objAnim(Obj* inst, Obj* parent, glm::vec3 loc, glm::vec3 rot, GLfloat speed = 1.0);
 
 void objMv(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot, GLfloat speed = 1.0);
 
-void objA(Obj* obj);
+void objA(Obj* inst);
 
-void objDraw(Obj* obj);
+void objDraw(Obj* inst);

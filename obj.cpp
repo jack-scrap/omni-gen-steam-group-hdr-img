@@ -425,34 +425,34 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, unsigned int type, 
 	return _;
 }
 
-void objDel(Obj* obj) {
-	meshDel(obj->_mesh);
+void objDel(Obj* inst) {
+	meshDel(inst->_mesh);
 
-	free(obj->_uni);
+	free(inst->_uni);
 
-	glDeleteTextures(1, &obj->_tex);
+	glDeleteTextures(1, &inst->_tex);
 
-	for (int i = 0; i < obj->_noChild; i++) {
-		if (obj->_child[i]) {
-			objDel(obj->_child[i]);
+	for (int i = 0; i < inst->_noChild; i++) {
+		if (inst->_child[i]) {
+			objDel(inst->_child[i]);
 		}
 	}
-	free(obj->_child);
+	free(inst->_child);
 
-	free(obj);
+	free(inst);
 }
 
-void objAcc(Obj* obj, glm::mat4 prev) {
-	obj->_acc = prev * obj->_model;
+void objAcc(Obj* inst, glm::mat4 prev) {
+	inst->_acc = prev * inst->_model;
 
-	for (int i = 0; i < obj->_noChild; i++) {
-		if (obj->_child[i]) {
-			objAcc(obj->_child[i], obj->_acc);
+	for (int i = 0; i < inst->_noChild; i++) {
+		if (inst->_child[i]) {
+			objAcc(inst->_child[i], inst->_acc);
 		}
 	}
 }
 
-void objAnim(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot, GLfloat speed) {
+void objAnim(Obj* inst, Obj* parent, glm::vec3 loc, glm::vec3 rot, GLfloat speed) {
 	glm::vec3 locMax = glm::abs(loc);
 	glm::vec3 rotMax = glm::abs(rot);
 
@@ -494,7 +494,7 @@ void objAnim(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot, GLfloat speed)
 			trans = glm::translate(trans, stepLoc);
 			trans = util::matr::rot(trans, stepRot);
 
-			obj->_model *= trans;
+			inst->_model *= trans;
 
 			glm::mat4 prev;
 			if (parent) {
@@ -503,7 +503,7 @@ void objAnim(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot, GLfloat speed)
 				prev = glm::mat4(1.0);
 			}
 
-			objAcc(obj, prev);
+			objAcc(inst, prev);
 
 			locFrame += glm::abs(stepLoc);
 			rotFrame += glm::abs(stepRot);
@@ -515,19 +515,19 @@ void objAnim(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot, GLfloat speed)
 		trans = glm::translate(trans, loc);
 		trans = util::matr::rot(trans, rot);
 
-		objAcc(obj, obj->_acc * trans);
+		objAcc(inst, inst->_acc * trans);
 	}
 }
 
-void objMv(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot, GLfloat speed) {
+void objMv(Obj* inst, Obj* parent, glm::vec3 loc, glm::vec3 rot, GLfloat speed) {
 	bool coll = false;
 	glm::mat4 dest = glm::mat4(1.0);
 	dest = glm::translate(dest, loc);
 	dest = util::matr::rot(dest, rot);
 
 	for (int i = 0; i < scn::obj.size(); i++) {
-		if (obj != scn::obj[i]) {
-			if (util::phys::aabb(obj, scn::obj[i])) {
+		if (inst != scn::obj[i]) {
+			if (util::phys::aabb(inst, scn::obj[i])) {
 				coll = true;
 
 				break;
@@ -536,24 +536,24 @@ void objMv(Obj* obj, Obj* parent, glm::vec3 loc, glm::vec3 rot, GLfloat speed) {
 	}
 
 	if (!coll) {
-		objAnim(obj, parent, loc, rot, speed);
+		objAnim(inst, parent, loc, rot, speed);
 	} else {
 		omni::err(omni::ERR_OBJ_CLIP);
 	}
 }
 
-void objA(Obj* obj) {
+void objA(Obj* inst) {
 	int i = 0;
-	while (!util::phys::aabbGround(obj)) {
-		objMv(obj, nullptr, glm::vec3(0.0, -(pow(i, 2) * phys::g), 0.0), glm::vec3(0.0));
+	while (!util::phys::aabbGround(inst)) {
+		objMv(inst, nullptr, glm::vec3(0.0, -(pow(i, 2) * phys::g), 0.0), glm::vec3(0.0));
 
 		i++;
 	}
 }
 
-void objDraw(Obj* obj) {
+void objDraw(Obj* inst) {
 	GLenum prim;
-	switch (obj->_type) {
+	switch (inst->_type) {
 		case Mesh::PT:
 			prim = GL_POINTS;
 
@@ -570,29 +570,29 @@ void objDraw(Obj* obj) {
 			break;
 	};
 
-	obj->_view = glm::lookAt(cam._pos, cam._pos + glm::vec3(-10000.0, -10000.0, -10000.0), glm::vec3(0, 1, 0));
-	obj->_view = glm::scale(obj->_view, cam._scale);
+	inst->_view = glm::lookAt(cam._pos, cam._pos + glm::vec3(-10000.0, -10000.0, -10000.0), glm::vec3(0, 1, 0));
+	inst->_view = glm::scale(inst->_view, cam._scale);
 
-	glBindVertexArray(obj->_mesh->_id[Mesh::VAO]);
-	obj->_prog.use();
-	glBindTexture(GL_TEXTURE_2D, obj->_tex);
+	glBindVertexArray(inst->_mesh->_id[Mesh::VAO]);
+	inst->_prog.use();
+	glBindTexture(GL_TEXTURE_2D, inst->_tex);
 
-	glUniformMatrix4fv(obj->_uni[Obj::MODEL], 1, GL_FALSE, glm::value_ptr(obj->_acc));
-	glUniformMatrix4fv(obj->_uni[Obj::VIEW], 1, GL_FALSE, glm::value_ptr(obj->_view));
+	glUniformMatrix4fv(inst->_uni[Obj::MODEL], 1, GL_FALSE, glm::value_ptr(inst->_acc));
+	glUniformMatrix4fv(inst->_uni[Obj::VIEW], 1, GL_FALSE, glm::value_ptr(inst->_view));
 
-	glUniform1ui(obj->_uni[Obj::T], disp->_t);
+	glUniform1ui(inst->_uni[Obj::T], disp->_t);
 
-	glUniform1ui(obj->_uni[Obj::ACTIVE], obj->_active);
+	glUniform1ui(inst->_uni[Obj::ACTIVE], inst->_active);
 
-	glDrawElements(prim, obj->_mesh->_noPrim, GL_UNSIGNED_SHORT, (GLvoid*) 0);
+	glDrawElements(prim, inst->_mesh->_noPrim, GL_UNSIGNED_SHORT, (GLvoid*) 0);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
-	obj->_prog.unUse();
+	inst->_prog.unUse();
 	glBindVertexArray(0);
 
-	for (int i = 0; i < obj->_noChild; i++) {
-		if (obj->_child[i]) {
-			objDraw(obj->_child[i]);
+	for (int i = 0; i < inst->_noChild; i++) {
+		if (inst->_child[i]) {
+			objDraw(inst->_child[i]);
 		}
 	}
 }
