@@ -362,7 +362,6 @@ std::vector<std::string> util::fs::path::entry(std::string buff) {
 	std::vector<std::string> _;
 
 	std::vector<std::string> tok = util::fs::path::tok(buff);
-
 	for (int i = 0; i < tok.size(); i++) {
 		if (tok[i] != sep) {
 			if (tok[i] == home) {
