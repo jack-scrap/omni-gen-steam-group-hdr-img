@@ -41,10 +41,12 @@ Idx* idxMk(unsigned int i, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	}, child, sizeof child / sizeof *child, loc, rot);
 	inst->_parent = border->_parent;
 
-	for (int i = 0; i < str.size(); i++) {
-		glm::vec3 center = layout::center(child[i]);
+	GLfloat wdId = str.size() * (layout::stroke + layout::letter[X]);
 
-		child[i]->_model = glm::translate(child[i]->_model, glm::vec3(center[X], 0.0, -center[Z]));
+	glm::vec2 centerId = layout::center(glm::vec2(wdId, 0.0));
+
+	for (int i = 0; i < str.size(); i++) {
+		child[i]->_model = glm::translate(child[i]->_model, glm::vec3(-centerId[X], 0.0, (layout::letter[Y] / 2)));
 	}
 
 	objAcc(inst->_parent, glm::mat4(1.0));
