@@ -298,6 +298,7 @@ void craneGrab(Crane* inst) {
 				}
 			}
 
+			// cargo ship
 			for (int i = 0; i < cargoShip._sz / sizeof (CargoShip*); i++) {
 				CargoShip* cargoShipInst = ((CargoShip**) cargoShip._ptr)[i];
 
