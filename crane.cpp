@@ -285,12 +285,14 @@ void craneGrab(Crane* inst) {
 
 						Idx* idx = array->_data[i];
 
-						Cont* head = idx->_data[idx->_sz - 1];
+						if (idx->_sz) {
+							Cont* head = idx->_data[idx->_sz - 1];
 
-						if (util::phys::aabb(inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD], head->_parent, inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_acc, head->_parent->_acc)) {
-							craneInsert(inst, idxPop(idx));
+							if (util::phys::aabb(inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD], head->_parent, inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_acc, head->_parent->_acc)) {
+								craneInsert(inst, idxPop(idx));
 
-							return;
+								return;
+							}
 						}
 					}
 				}
@@ -313,12 +315,14 @@ void craneGrab(Crane* inst) {
 
 						Idx* idx = array->_data[i];
 
-						Cont* head = idx->_data[idx->_sz - 1];
+						if (idx->_sz) {
+							Cont* head = idx->_data[idx->_sz - 1];
 
-						if (util::phys::aabb(inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD], head->_parent, inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_acc, head->_parent->_acc)) {
-							craneInsert(inst, idxPop(idx));
+							if (util::phys::aabb(inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD], head->_parent, inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_acc, head->_parent->_acc)) {
+								craneInsert(inst, idxPop(idx));
 
-							return;
+								return;
+							}
 						}
 					}
 				}
