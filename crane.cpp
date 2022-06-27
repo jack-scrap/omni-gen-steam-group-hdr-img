@@ -234,14 +234,18 @@ void craneGrab(Crane* inst) {
 				case omni::ARRAY: {
 					Array* array = (Array*) data[i]->_ptr;
 
-					for (int i = 0; i < array->_x * array->_y; i++) {
-						Idx* idx = array->_data[i];
+					for (int y = 0; y < array->_y; y++) {
+						for (int x = 0; x < array->_x; x++) {
+							int i = (y * array->_x) + x;
 
-						if (idx->_sz) {
-							if (util::phys::aabb(inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD], idx->_data[idx->_sz - 1]->_parent, inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_acc, idx->_data[idx->_sz - 1]->_parent->_acc)) {
-								craneInsert(inst, idxPop(idx));
+							Idx* idx = array->_data[i];
 
-								return;
+							if (idx->_sz) {
+								if (util::phys::aabb(inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD], idx->_data[idx->_sz - 1]->_parent, inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_acc, idx->_data[idx->_sz - 1]->_parent->_acc)) {
+									craneInsert(inst, arrayPop(array, x, y));
+
+									return;
+								}
 							}
 						}
 					}
