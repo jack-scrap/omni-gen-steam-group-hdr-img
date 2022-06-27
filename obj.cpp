@@ -535,11 +535,13 @@ void objMv(Obj* inst, Obj* parent, glm::vec3 loc, glm::vec3 rot, GLfloat speed) 
 		}
 	}
 
-	if (!coll) {
-		objAnim(inst, parent, loc, rot, speed);
-	} else {
-		omni::err(omni::ERR_OBJ_CLIP);
-	}
+	objAnim(inst, parent, loc, rot, speed);
+
+/* 	if (!coll) { */
+/* 		objAnim(inst, parent, loc, rot, speed); */
+/* 	} else { */
+/* 		omni::err(omni::ERR_OBJ_CLIP); */
+/* 	} */
 }
 
 void objA(Obj* inst) {
