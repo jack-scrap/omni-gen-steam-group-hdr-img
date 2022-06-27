@@ -199,14 +199,14 @@ namespace util {
 		}
 
 		namespace idx {
-			unsigned int arr(Coord st, Coord bound);
+			unsigned int array(Coord st, Coord bound);
 			unsigned int determ(Coord st, std::vector<std::string> buff);
 
 			unsigned int expand(std::string line, unsigned int idx);
 		}
 
 		namespace coord {
-			Coord arr(unsigned int idx, Coord bound);
+			Coord array(unsigned int idx, Coord bound);
 			Coord determ(unsigned int idx, std::vector<std::string> buff);
 		}
 	}

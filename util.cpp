@@ -1379,7 +1379,7 @@ int util::math::norm(int lhs, int rhs) {
 	return _;
 }
 
-unsigned int util::math::idx::arr(Coord st, Coord bound) {
+unsigned int util::math::idx::array(Coord st, Coord bound) {
 	return (st._y * bound._x) + st._x;
 }
 
@@ -1410,7 +1410,7 @@ unsigned int util::math::idx::expand(std::string line, unsigned int idx) {
 	return _;
 }
 
-Coord util::math::coord::arr(unsigned int idx, Coord bound) {
+Coord util::math::coord::array(unsigned int idx, Coord bound) {
 	return {
 		idx % bound._x,
 		idx / bound._x

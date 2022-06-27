@@ -110,7 +110,7 @@ Console::Console(std::string fName, std::string dir) :
 		// canvas
 		for (int y = 0; y < layout::canv[Y]; y++) {
 			for (int x = 0; x < layout::canv[X]; x++) {
-				unsigned idx = util::math::idx::arr({
+				unsigned idx = util::math::idx::array({
 					x,
 					y
 				}, {
@@ -217,7 +217,7 @@ void Console::fmt(std::vector<std::string> buff, Coord loc, Coord view, Coord pt
 					x < view._x &&
 					x < state::lineWd
 				) {
-					_canv[util::math::idx::arr({
+					_canv[util::math::idx::array({
 						loc._x + x,
 						loc._y + y
 					}, {
@@ -229,7 +229,7 @@ void Console::fmt(std::vector<std::string> buff, Coord loc, Coord view, Coord pt
 					x++;
 				}
 			} else {
-				_canv[util::math::idx::arr({
+				_canv[util::math::idx::array({
 					loc._x + x,
 					loc._y + y
 				}, {
@@ -251,7 +251,7 @@ void Console::fmt(std::vector<std::string> buff, Coord loc, Coord view, Coord pt
 void Console::clear() {
 	for (int y = 0; y < state::lineCnt; y++) {
 		for (int x = 0; x < state::lineWd; x++) {
-			unsigned int idx = util::math::idx::arr({
+			unsigned int idx = util::math::idx::array({
 				x,
 				y
 			}, {
@@ -298,7 +298,7 @@ void Console::fmtScr() {
 	int i = 0;
 	int x = 0;
 	while (i < modeStr.size() && x < state::lineWd) {
-		_canv[util::math::idx::arr({
+		_canv[util::math::idx::array({
 			x,
 			0
 		}, {
@@ -310,7 +310,7 @@ void Console::fmtScr() {
 		x++;
 	}
 
-	_canv[util::math::idx::arr({
+	_canv[util::math::idx::array({
 		x,
 		0
 	}, {
@@ -347,7 +347,7 @@ void Console::fmtScr() {
 
 	i = 0;
 	while (i < fInfo.size() && x < state::lineWd) {
-		_canv[util::math::idx::arr({
+		_canv[util::math::idx::array({
 			x,
 			0
 		}, {
@@ -368,7 +368,7 @@ void Console::fmtScr() {
 
 	// pad
 	while (x < roof) {
-		_canv[util::math::idx::arr({
+		_canv[util::math::idx::array({
 			x,
 			0
 		}, {
@@ -381,7 +381,7 @@ void Console::fmtScr() {
 
 	i = 0;
 	while (i < time.size() && x < state::lineWd) {
-		_canv[util::math::idx::arr({
+		_canv[util::math::idx::array({
 			x,
 			0
 		}, {
@@ -555,7 +555,7 @@ void Console::render() {
 				c,
 				l
 			};
-			unsigned int idx = util::math::idx::arr(st, {
+			unsigned int idx = util::math::idx::array(st, {
 				state::lineWd,
 				state::lineCnt
 			});
@@ -1161,7 +1161,7 @@ void Console::hl() {
 
 	/* status bar */
 	for (int i = 0; i < state::lineWd; i++) {
-		unsigned int idx = util::math::idx::arr({
+		unsigned int idx = util::math::idx::array({
 			i,
 			0
 		}, {
@@ -1191,7 +1191,7 @@ void Console::hl() {
 				int c = 0;
 				int x = 0;
 				while (c < maxNo()) {
-					unsigned int idx = util::math::idx::arr({
+					unsigned int idx = util::math::idx::array({
 						loc[X] + x,
 						loc[Y] + y
 					}, {
@@ -1216,7 +1216,7 @@ void Console::hl() {
 
 		for (int l = 0; l < abs(delta) + 1; l++) {
 			for (int c = 0; c < maxNo(); c++) {
-				unsigned int idx = util::math::idx::arr({
+				unsigned int idx = util::math::idx::array({
 					loc[X] + c,
 					loc[Y] + _cursEditor[MIN][Y] + (l * norm)
 				}, {
@@ -1263,7 +1263,7 @@ void Console::hl() {
 			}
 
 			for (int r = 0; r < 2; r++) {
-				_hl[util::math::idx::arr({
+				_hl[util::math::idx::array({
 					loc[X] + _cursEditor[r][X],
 					loc[Y] + _cursEditor[r][Y]
 				}, {
@@ -1295,7 +1295,7 @@ void Console::hl() {
 			int norm = util::math::norm(_cursPrompt[MIN], _cursPrompt[MAX]);
 
 			for (int i = 0; i < 1 + abs(delta); i++) {
-				unsigned int idx = util::math::idx::arr({
+				unsigned int idx = util::math::idx::array({
 					loc[X] + _cursPrompt[MIN] + (i * norm),
 					loc[Y]
 				}, {
@@ -1323,7 +1323,7 @@ void Console::hl() {
 			loc[Y] = 1;
 
 			for (int c = 0; c < maxFs(); c++) {
-				unsigned int idx = util::math::idx::arr({
+				unsigned int idx = util::math::idx::array({
 					loc[X] + c,
 					loc[Y] + util::math::clamp<unsigned int>(_cursFs, 1, boundFrame[Y] - 1)
 				}, {
@@ -1342,7 +1342,7 @@ void Console::hl() {
 }
 
 void Console::print(char c, bool b, Coord st) {
-	Coord idx = util::math::coord::arr(c, {
+	Coord idx = util::math::coord::array(c, {
 		16,
 		16
 	});

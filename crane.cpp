@@ -194,7 +194,7 @@ void craneGrab(Crane* inst) {
 
 					for (int y = 0; y < array->_y; y++) {
 						for (int x = 0; x < array->_x; x++) {
-							unsigned int i = util::math::idx::arr({
+							unsigned int i = util::math::idx::array({
 								x,
 								y
 							}, {
@@ -242,7 +242,7 @@ void craneGrab(Crane* inst) {
 
 					for (int y = 0; y < array->_y; y++) {
 						for (int x = 0; x < array->_x; x++) {
-							unsigned int i = util::math::idx::arr({
+							unsigned int i = util::math::idx::array({
 								x,
 								y
 							}, {
@@ -275,7 +275,7 @@ void craneGrab(Crane* inst) {
 
 				for (int y = 0; y < array->_y; y++) {
 					for (int x = 0; x < array->_x; x++) {
-						unsigned int i = util::math::idx::arr({
+						unsigned int i = util::math::idx::array({
 							x,
 							y
 						}, {
@@ -303,7 +303,7 @@ void craneGrab(Crane* inst) {
 
 				for (int y = 0; y < array->_y; y++) {
 					for (int x = 0; x < array->_x; x++) {
-						unsigned int i = util::math::idx::arr({
+						unsigned int i = util::math::idx::array({
 							x,
 							y
 						}, {
