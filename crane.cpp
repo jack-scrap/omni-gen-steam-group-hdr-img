@@ -208,9 +208,6 @@ void craneGrab(Crane* inst) {
 							if (inst->_data && !idx->_sz) {
 								idxPush(idx, craneRm(inst));
 
-								inst->_data = nullptr;
-								inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_child[0] = nullptr;
-
 								return;
 							}
 						}
@@ -242,9 +239,6 @@ void craneGrab(Crane* inst) {
 
 					if (inst->_data && !idx->_sz) {
 						arrayPush(array, x, y, craneRm(inst));
-
-						inst->_data = nullptr;
-						inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_child[0] = nullptr;
 					}
 				}
 			}
@@ -270,9 +264,6 @@ void craneGrab(Crane* inst) {
 
 					if (inst->_data && !idx->_sz) {
 						arrayPush(array, x, y, craneRm(inst));
-
-						inst->_data = nullptr;
-						inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_child[0] = nullptr;
 					}
 				}
 			}
