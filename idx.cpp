@@ -139,18 +139,6 @@ void idxPush(Idx* inst, Cont* byte) {
 
 	inst->_data[inst->_sz - 1] = byte;
 	inst->_parent->_child[inst->_parent->_noChild - 1] = inst->_data[inst->_sz - 1]->_parent;
-
-	// transform
-	glm::vec2 center = layout::center({
-		layout::idx[X],
-		layout::idx[Z]
-	});
-	glm::mat4 model = glm::mat4(1.0);
-	model = glm::translate(model, glm::vec3(layout::overhead, 0.0, layout::overhead) + glm::vec3(center[X], 0.0, center[Y]) + glm::vec3(0.0, layout::idx[Y] / 2, 0.0));
-
-	inst->_data[inst->_sz - 1]->_parent->_model = model;
-
-	objAcc(inst->_parent, glm::mat4(1.0));
 }
 
 Cont* idxPop(Idx* inst) {

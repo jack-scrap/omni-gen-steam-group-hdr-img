@@ -185,6 +185,18 @@ void arrayPush(Array* inst, unsigned int x, unsigned int y, Cont* byte) {
 	Idx* idx = inst->_data[i];
 
 	idxPush(idx, byte);
+
+	// transform
+	glm::vec2 center = layout::center({
+		layout::idx[X],
+		layout::idx[Z]
+	});
+	glm::mat4 model = glm::mat4(1.0);
+	model = glm::translate(model, glm::vec3(layout::overhead, 0.0, layout::overhead) + glm::vec3(center[X], 0.0, center[Y]) + glm::vec3(0.0, layout::idx[Y] / 2, 0.0));
+
+	idx->_data[idx->_sz - 1]->_parent->_model = model;
+
+	objAcc(idx->_parent, inst->_parent->_acc);
 }
 
 Cont* arrayPop(Array* inst, unsigned int x, unsigned int y) {
