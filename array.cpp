@@ -6,6 +6,7 @@
 #include "layout.h"
 #include "idx.h"
 #include "str.h"
+#include "util.h"
 
 Array* arrayMk(char* init, unsigned int x, std::string name, unsigned int axis, glm::vec3 loc, glm::vec3 rot) {
 	Array* inst = (Array*) malloc(sizeof (Array));
@@ -173,7 +174,15 @@ void arrayDel(Array* inst) {
 }
 
 void arrayPush(Array* inst, unsigned int x, unsigned int y, Cont* byte) {
-	Idx* idx = inst->_data[(y * inst->_x) + x];
+	int i = util::math::idx::array({
+		x,
+		y
+	}, {
+		inst->_x,
+		inst->_y
+	});
+
+	Idx* idx = inst->_data[i];
 
 	idxPush(idx, byte);
 }
