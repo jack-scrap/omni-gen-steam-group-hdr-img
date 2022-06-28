@@ -24,11 +24,11 @@ Mesh* meshMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim) {
 void meshDel(Mesh* mesh) {
 	for (int i = 1; i < 4; i++) {
 		if (mesh->_id[i]) {
-			glDeleteBuffers(1, &mesh->_id[i]);
+			/* glDeleteBuffers(1, &mesh->_id[i]); */
 		}
 	}
 
-	glDeleteBuffers(1, &mesh->_id[0]);
+	/* glDeleteBuffers(1, &mesh->_id[0]); */
 
 	free(mesh);
 }

@@ -430,7 +430,7 @@ void objDel(Obj* inst) {
 
 	free(inst->_uni);
 
-	glDeleteTextures(1, &inst->_tex);
+	/* glDeleteTextures(1, &inst->_tex); */
 
 	for (int i = 0; i < inst->_noChild; i++) {
 		if (inst->_child[i]) {
