@@ -206,7 +206,7 @@ void craneGrab(Crane* inst) {
 							Idx* idx = array->_data[i];
 
 							if (inst->_data && !idx->_sz) {
-								idxPush(idx, craneRm(inst));
+								arrayPush(array, x, y, craneRm(inst));
 
 								return;
 							}
