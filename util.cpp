@@ -793,14 +793,14 @@ StreetSign* util::json::streetSign(nlohmann::json deser) {
 		rot = vec(deser["rot"]);
 	}
 
-	StreetSign* _ = streetSignMk({
+	StreetSign* inst = streetSignMk({
 		array,
 		no
 	}, loc, glm::radians(rot));
 
-	omni::assert(!phys::aabbGround(_->_parent), "Street sign clipping into ground plane");
+	omni::assert(!phys::aabbGround(inst->_parent), "Street sign clipping into ground plane");
 
-	return _;
+	return inst;
 }
 
 CBuff util::json::array::array(nlohmann::json deser) {
@@ -864,7 +864,7 @@ CBuff util::json::array::tens(nlohmann::json deser) {
 }
 
 Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm::vec3 rot) {
-	Var* _;
+	Var* inst;
 
 	char* name = id(key);
 
@@ -890,7 +890,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 
 			omni::assert(!phys::aabbGround(idx->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
-			_ = varMk(name, idx, omni::SCALAR);
+			inst = varMk(name, idx, omni::SCALAR);
 
 			break;
 		}
@@ -906,7 +906,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 
 					omni::assert(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
-					_ = varMk(name, val, omni::ARRAY);
+					inst = varMk(name, val, omni::ARRAY);
 
 					break;
 				}
@@ -922,7 +922,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 
 							omni::assert(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
-							_ = varMk(name, val, omni::ARRAY);
+							inst = varMk(name, val, omni::ARRAY);
 
 							break;
 						}
@@ -935,7 +935,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 
 							omni::assert(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
-							_ = varMk(name, val, omni::ARRAY);
+							inst = varMk(name, val, omni::ARRAY);
 
 							break;
 						}
@@ -954,7 +954,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 
 			omni::assert(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
-			_ = varMk(name, val, omni::ARRAY);
+			inst = varMk(name, val, omni::ARRAY);
 
 			break;
 		}
@@ -966,13 +966,13 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 
 			omni::assert(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
-			_ = varMk(name, val, omni::DICT);
+			inst = varMk(name, val, omni::DICT);
 
 			break;
 		}
 	}
 
-	return _;
+	return inst;
 }
 
 glm::vec3 util::json::vec(nlohmann::json deser) {
@@ -1075,11 +1075,11 @@ Obj* util::json::prop(nlohmann::json deser) {
 		rot = vec(deser["rot"]);
 	}
 
-	Obj* _ = objMk(deser["name"], "obj", "dir", false, loc, glm::radians(rot));
+	Obj* inst = objMk(deser["name"], "obj", "dir", false, loc, glm::radians(rot));
 
-	omni::assert(!phys::aabbGround(_), std::string("Prop `") + std::string(deser["name"]) + std::string("` clipping into ground plane"));
+	omni::assert(!phys::aabbGround(inst), std::string("Prop `") + std::string(deser["name"]) + std::string("` clipping into ground plane"));
 
-	return _;
+	return inst;
 }
 
 Mark* util::json::bound::mark(nlohmann::json deser) {
@@ -1103,11 +1103,11 @@ Mark* util::json::bound::mark(nlohmann::json deser) {
 		status = ALERT;
 	}
 
-	Mark* _ = markMk(&init[0], status);
+	Mark* inst = markMk(&init[0], status);
 
-	omni::assert(!phys::aabbGround(_->_parent), "Marking clipping into ground plane");
+	omni::assert(!phys::aabbGround(inst->_parent), "Marking clipping into ground plane");
 
-	return _;
+	return inst;
 }
 
 Lim* util::json::bound::lim(nlohmann::json deser) {
@@ -1133,11 +1133,11 @@ Lim* util::json::bound::lim(nlohmann::json deser) {
 		status = ALERT;
 	}
 
-	Lim* _ = limMk(axis, deser["val"], status);
+	Lim* inst = limMk(axis, deser["val"], status);
 
-	omni::assert(!phys::aabbGround(_->_parent), "Limit clipping into ground plane");
+	omni::assert(!phys::aabbGround(inst->_parent), "Limit clipping into ground plane");
 
-	return _;
+	return inst;
 }
 
 Cone* util::json::bound::area(nlohmann::json deser) {
@@ -1153,11 +1153,11 @@ Cone* util::json::bound::area(nlohmann::json deser) {
 		loc = vec(deser["loc"]);
 	}
 
-	Cone* _ = coneMk(init, loc);
+	Cone* inst = coneMk(init, loc);
 
-	omni::assert(!phys::aabbGround(_->_parent), "Cone clipping into ground plane");
+	omni::assert(!phys::aabbGround(inst->_parent), "Cone clipping into ground plane");
 
-	return _;
+	return inst;
 }
 
 bool util::cfg::parse::var(std::string buff) {
