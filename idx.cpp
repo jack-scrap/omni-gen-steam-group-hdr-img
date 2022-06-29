@@ -23,6 +23,7 @@ Idx* idxMk(unsigned int i, std::string name, glm::vec3 loc, glm::vec3 rot) {
 		layout::idx[X],
 		layout::idx[Z]
 	});
+
 	for (int i = 0; i < str.size(); i++) {
 		child[i] = objMk("glyph/" + std::string(1, str[i]), "obj", "solid", true, glm::vec3(layout::overhead, 0.0, layout::overhead) + glm::vec3(center[X], 0.0, center[Y]) + glm::vec3(i * (layout::stroke + layout::letter[X]), 0.0, 0.0), rot);
 	}
@@ -70,7 +71,7 @@ Idx* idxMk(unsigned int i, char* c, unsigned int sz, std::string name, glm::vec3
 	// index
 	std::string str = std::to_string(i);
 
-	Obj* child[str.size() + inst->_sz + 1];
+	Obj* child[str.size() + 1 + inst->_sz];
 
 	glm::vec2 center = layout::center({
 		layout::idx[X],
@@ -81,11 +82,11 @@ Idx* idxMk(unsigned int i, char* c, unsigned int sz, std::string name, glm::vec3
 	}
 
 	// identifier
-	child[1] = nullptr;
+	child[str.size()] = nullptr;
 
 	if (!name.empty()) {
 		Str* id = strMk(name, glm::vec3(0.0, 0.0, -(layout::margin * 2)));
-		child[1] = id->_parent;
+		child[str.size()] = id->_parent;
 	}
 
 	// data
@@ -96,7 +97,7 @@ Idx* idxMk(unsigned int i, char* c, unsigned int sz, std::string name, glm::vec3
 
 		inst->_data[i] = byte;
 
-		child[2 + i] = byte->_parent;
+		child[str.size() + 1 + i] = byte->_parent;
 	}
 
 	Border* border = borderMk({

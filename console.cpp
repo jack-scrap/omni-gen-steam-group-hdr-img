@@ -1106,20 +1106,7 @@ void Console::exec() {
 
 				if (cmd == "next") {
 					if (eq) {
-						lvl++;
-
-						std::string fName = util::fs::path::build({
-							"script",
-							stage,
-							std::to_string(lvl),
-							"main.py"
-						});
-
-						scn::init(stage, lvl);
-
-						console->open(fName);
-
-						eq = false;
+						next = true;
 					} else {
 						omni::err(omni::ERR_LVL_NOT_FIN);
 					}

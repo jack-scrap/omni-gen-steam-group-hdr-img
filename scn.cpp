@@ -31,6 +31,8 @@ bool eq = false;
 
 bool mtx = false;
 
+bool next = false;
+
 Var** dataGet() {
 	return data;
 }
