@@ -70,7 +70,7 @@ Idx* idxMk(unsigned int i, char* c, unsigned int sz, std::string name, glm::vec3
 	// index
 	std::string str = std::to_string(i);
 
-	Obj* child[str.size() + inst->_sz + 1];
+	Obj* child[str.size() + 1 + inst->_sz];
 
 	glm::vec2 center = layout::center({
 		layout::idx[X],
@@ -81,11 +81,11 @@ Idx* idxMk(unsigned int i, char* c, unsigned int sz, std::string name, glm::vec3
 	}
 
 	// identifier
-	child[1] = nullptr;
+	child[str.size()] = nullptr;
 
 	if (!name.empty()) {
 		Str* id = strMk(name, glm::vec3(0.0, 0.0, -(layout::margin * 2)));
-		child[1] = id->_parent;
+		child[str.size()] = id->_parent;
 	}
 
 	// data
@@ -96,7 +96,7 @@ Idx* idxMk(unsigned int i, char* c, unsigned int sz, std::string name, glm::vec3
 
 		inst->_data[i] = byte;
 
-		child[2 + i] = byte->_parent;
+		child[str.size() + 1 + i] = byte->_parent;
 	}
 
 	Border* border = borderMk({
