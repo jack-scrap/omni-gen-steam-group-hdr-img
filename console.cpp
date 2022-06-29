@@ -1264,8 +1264,8 @@ void Console::hl() {
 
 			for (int r = 0; r < 2; r++) {
 				_hl[util::math::idx::array({
-					loc[X] + _cursEditor[r][X],
-					loc[Y] + _cursEditor[r][Y]
+					(loc[X] + _cursEditor[r][X]) < (boundFrame[X] - 1) ? (loc[X] + _cursEditor[r][X]) : (boundFrame[X] - 1),
+					(loc[Y] + _cursEditor[r][Y]) < (boundFrame[Y] - 1) ? (loc[Y] + _cursEditor[r][Y]) : (boundFrame[Y] - 1)
 				}, {
 					state::lineWd,
 					state::lineCnt
