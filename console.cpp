@@ -65,32 +65,6 @@ void dispatch(std::string fName, unsigned int ptrEditorX) {
 		}
 	}
 
-	if (eq) {
-		std::string log = util::fs::path::build({
-			"log",
-			util::fs::path::base(fName) + ".log"
-		});
-
-		console->_buff = util::log(console->_buff.size(), ptrEditorX);
-
-		nlohmann::json deser = nlohmann::json::parse(util::fs::rd<std::string>("stat.json"));
-
-		unsigned int rank = deser["rank"];
-		rank++;
-
-		nlohmann::json data = {
-			{
-				"rank", rank
-			}
-		};
-
-		std::string serial = data.dump(1, '\t');
-
-		util::fs::write(util::fs::path::build({
-			"stat.json"
-		}), util::str::split(serial, '\n'));
-	}
-
 	mtx = false;
 }
 

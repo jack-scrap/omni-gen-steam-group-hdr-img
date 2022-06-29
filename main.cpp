@@ -836,6 +836,23 @@ int main(int argc, char* argv[]) {
 	SDL_AddTimer(0, epoch, NULL);
 
 	while (disp->_open) {
+		if (eq) {
+			lvl++;
+
+			std::string fName = util::fs::path::build({
+				"script",
+				stage,
+				std::to_string(lvl),
+				"main.py"
+			});
+
+			scn::init(stage, lvl);
+
+			console->open(fName);
+
+			eq = false;
+		}
+
 		disp->clear();
 
 		glViewport(0, 0, layout::canv[X], layout::canv[Y]);
