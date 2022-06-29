@@ -6,12 +6,12 @@ void omni::err(unsigned int err, std::vector<std::string> arg) {
 	std::string msg;
 	switch (err) {
 		case ERR_FS_RO:
-			msg = "Couldn't write `" + arg[0] + "`; file read-only";
+			msg = "Couldn't write '" + arg[0] + "'; file read-only";
 
 			break;
 
 		case ERR_FS_NO_ENTRY:
-			msg = "Entry `" + arg[0] + "` not found";
+			msg = "Entry '" + arg[0] + "' not found";
 
 			break;
 
@@ -21,22 +21,22 @@ void omni::err(unsigned int err, std::vector<std::string> arg) {
 			break;
 
 		case ERR_FS_DEL_ENTRY:
-			msg = "Couldn't delete entry `" + arg[0] + "`";
+			msg = "Couldn't delete entry '" + arg[0] + "'";
 
 			break;
 
 		case ERR_FS_OPEN_DIR:
-			msg = "Couldn't open directory `" + arg[0] + "`";
+			msg = "Couldn't open directory '" + arg[0] + "'";
 
 			break;
 
 		case ERR_FS_DIR_EXIST:
-			msg = "Couldn't create directory `" + arg[0] + "`; already present";
+			msg = "Couldn't create directory '" + arg[0] + "'; already present";
 
 			break;
 
 		case ERR_FS_NO_PARENT_DIR:
-			msg = "Couldn't write file `" + arg[0] + "`; parent directory `" + arg[1] + "` not present";
+			msg = "Couldn't write file '" + arg[0] + "'; parent directory `" + arg[1] + "` not present";
 
 			break;
 
@@ -79,7 +79,7 @@ void omni::err(unsigned int err, std::vector<std::string> arg) {
 		}
 
 		case ERR_TOK:
-			msg = "Inappropriate token `" + arg[0] + "`";
+			msg = "Inappropriate token '" + arg[0] + "'";
 
 			break;
 
@@ -89,12 +89,12 @@ void omni::err(unsigned int err, std::vector<std::string> arg) {
 			break;
 
 		case ERR_CFG_NO_KEY:
-			msg = "Config key `" + arg[0] + "` not found";
+			msg = "Config key '" + arg[0] + "' not found";
 
 			break;
 
 		case ERR_CFG_KEY:
-			msg = "Inappropriate key `" + arg[0] + "`, can only be alpha-numeric with `_` separator";
+			msg = "Inappropriate key '" + arg[0] + "', can only be alpha-numeric with `_` separator";
 
 			break;
 
