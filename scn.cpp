@@ -31,7 +31,7 @@ bool eq = false;
 
 bool mtx = false;
 
-bool next = false;
+bool inc = false;
 
 Var** dataGet() {
 	return data;

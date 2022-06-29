@@ -832,7 +832,7 @@ int main(int argc, char* argv[]) {
 	SDL_AddTimer(0, epoch, NULL);
 
 	while (disp->_open) {
-		if (next) {
+		if (inc) {
 			lvl++;
 
 			std::string fName = util::fs::path::build({
@@ -846,7 +846,7 @@ int main(int argc, char* argv[]) {
 
 			console->open(fName);
 
-			next = false;
+			inc = false;
 		}
 
 		disp->clear();

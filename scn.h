@@ -29,7 +29,7 @@ extern "C" bool eq;
 
 extern "C" bool mtx;
 
-extern "C" bool next;
+extern "C" bool inc;
 
 extern "C" Var** dataGet();
 
