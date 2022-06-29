@@ -162,9 +162,7 @@ void handle() {
 								}
 							}
 
-							if (console->_cursEditor[console->_rngEditor][X] > console->_buff[console->_cursEditor[console->_rngEditor][Y]].size()) {
-								console->_cursEditor[console->_rngEditor][X] = console->_buff[console->_cursEditor[console->_rngEditor][Y]].size();
-							}
+							console->_cursEditor[console->_rngEditor][X] = util::math::clamp<unsigned int>(console->_cursEditor[console->_rngEditor][X], 1, console->_buff[console->_cursEditor[console->_rngEditor][Y]].size());
 						}
 
 						if (e.key.keysym.sym == SDLK_UP) {
@@ -179,9 +177,7 @@ void handle() {
 								}
 							}
 
-							if (console->_cursEditor[console->_rngEditor][X] > console->_buff[console->_cursEditor[console->_rngEditor][Y]].size()) {
-								console->_cursEditor[console->_rngEditor][X] = console->_buff[console->_cursEditor[console->_rngEditor][Y]].size();
-							}
+							console->_cursEditor[console->_rngEditor][X] = util::math::clamp<unsigned int>(console->_cursEditor[console->_rngEditor][X], 1, console->_buff[console->_cursEditor[console->_rngEditor][Y]].size());
 						}
 
 						break;
