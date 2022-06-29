@@ -242,6 +242,8 @@ void craneGrab(Crane* inst) {
 					if (inst->_data && !idx->_sz) {
 						if (util::phys::aabb(glm::vec3(0.0), inst->_data->_parent, idx->_parent->_acc, inst->_data->_parent->_acc)) {
 							arrayPush(array, x, y, craneRm(inst));
+
+							return;
 						}
 					}
 				}
@@ -269,6 +271,8 @@ void craneGrab(Crane* inst) {
 					if (inst->_data && !idx->_sz) {
 						if (util::phys::aabb(glm::vec3(0.0), inst->_data->_parent, idx->_parent->_acc, inst->_data->_parent->_acc)) {
 							arrayPush(array, x, y, craneRm(inst));
+
+							return;
 						}
 					}
 				}
