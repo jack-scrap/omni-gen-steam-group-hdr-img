@@ -835,7 +835,7 @@ int main(int argc, char* argv[]) {
 		if (inc) {
 			lvl++;
 
-			std::string fName = util::fs::path::build({
+			std::string name = util::fs::path::build({
 				"script",
 				stage,
 				std::to_string(lvl),
@@ -844,7 +844,7 @@ int main(int argc, char* argv[]) {
 
 			scn::init(stage, lvl);
 
-			console->open(fName);
+			console->open(name);
 
 			inc = false;
 		}
