@@ -151,7 +151,7 @@ void idxPush(Idx* inst, Cont* byte) {
 
 	inst->_data[inst->_sz - 1]->_parent->_model = model;
 
-	objAcc(inst->_parent, inst->_parent->_acc);
+	objAcc(inst->_parent, glm::mat4(1.0));
 }
 
 Cont* idxPop(Idx* inst) {
