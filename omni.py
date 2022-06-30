@@ -133,7 +133,7 @@ class _Scope:
                 idxPtr = cast(var._ptr, POINTER(_Idx))
                 idx = idxPtr.contents
 
-                offset = list(idx._offset)
+                offset = [round(val, 4) for val in list(idx._offset)]
 
             # array
             if (var._type == 1):
@@ -142,7 +142,7 @@ class _Scope:
                 arrayPtr = cast(var._ptr, POINTER(_Array))
                 array = arrayPtr.contents
 
-                offset = list(array._offset)
+                offset = [round(val, 4) for val in list(array._offset)]
 
             self.__intern[name] = {
                     'ptr': var._ptr,
