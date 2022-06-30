@@ -53,10 +53,7 @@ mk_build:
 
 .PHONY: mk_stage
 mk_stage:
-	for DIR in $(STAGE) ; do \
-		mkdir -p player/script/$$DIR ; \
-		chmod -w -R player/script/$$DIR ; \
-	done
+	mkdir -p player/script
 
 .PHONY: install
 install:
