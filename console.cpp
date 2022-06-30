@@ -1244,11 +1244,6 @@ void Console::hl() {
 
 			int norm = util::math::norm(startScal, endScal);
 
-			int i = 0;
-			while (i < 1 + abs(delta)) {
-				i++;
-			}
-
 			for (int r = 0; r < 2; r++) {
 				_hl[util::math::idx::array({
 					util::math::clamp<unsigned int>(loc[X] + _cursEditor[r][X], 1, boundFrame[X] - 1),
