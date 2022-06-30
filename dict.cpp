@@ -188,6 +188,12 @@ void dictDel(Dict* inst) {
 	free(inst);
 }
 
+void dictPush(Dict* inst, std::string key, Cont* byte) {
+}
+
+Cont* dictPop(Dict* inst, std::string key) {
+}
+
 bool dictEq(Dict* lhs, Dict* rhs) {
 	for (int i = 0; i < lhs->_no; i++) {
 		switch (lhs->_type[i]) {
