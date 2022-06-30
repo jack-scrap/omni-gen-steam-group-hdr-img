@@ -133,7 +133,9 @@ Console::Console(std::string fName, std::string dir) :
 			}
 		}
 
-		open(fName);
+		if (!_buffName.empty()) {
+			open(fName);
+		}
 
 		changeDir(_cwd);
 
@@ -321,11 +323,13 @@ void Console::fmtScr() {
 
 	std::string fInfo;
 
-	fInfo += util::fs::path::name(util::fs::path::build({
-		_home,
-		_buffName
-	}));
-	fInfo += ' '; // pad
+	if (!_buffName.empty()) {
+		fInfo += util::fs::path::name(util::fs::path::build({
+			_home,
+			_buffName
+		}));
+		fInfo += ' '; // pad
+	}
 
 	if (state::showFilePerm) {
 		std::string permFmt = _perm;

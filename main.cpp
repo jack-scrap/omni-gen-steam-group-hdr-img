@@ -711,14 +711,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	std::string name;
-	if (argc > 1) {
-		name = util::fs::path::build({
-			"script",
-			stage,
-			std::to_string(lvl),
-			"main.py"
-		});
-	} else {
+	if (!(argc > 1)) {
 		name = util::fs::path::build({
 			"doc",
 			"intro.txt"
@@ -835,16 +828,7 @@ int main(int argc, char* argv[]) {
 		if (inc) {
 			lvl++;
 
-			std::string name = util::fs::path::build({
-				"script",
-				stage,
-				std::to_string(lvl),
-				"main.py"
-			});
-
 			scn::init(stage, lvl);
-
-			console->open(name);
 
 			inc = false;
 		}
