@@ -825,12 +825,12 @@ int main(int argc, char* argv[]) {
 	SDL_AddTimer(0, epoch, NULL);
 
 	while (disp->_open) {
-		if (inc) {
+		if (adv) {
 			lvl++;
 
 			scn::init(stage, lvl);
 
-			inc = false;
+			adv = false;
 		}
 
 		disp->clear();

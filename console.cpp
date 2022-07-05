@@ -1110,7 +1110,7 @@ void Console::exec() {
 
 				if (cmd == "next") {
 					if (eq) {
-						inc = true;
+						adv = true;
 					} else {
 						omni::err(omni::ERR_LVL_NOT_FIN);
 					}
