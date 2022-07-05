@@ -62,7 +62,7 @@ extern "C" CArr path;
 extern "C" CArr pathGet();
 
 extern "C" unsigned int c;
-extern "C" void cInc();
+extern "C" void cIncr();
 
 namespace scn {
 	extern std::vector<Obj*> obj;

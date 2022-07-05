@@ -124,7 +124,7 @@ CArr pathGet() {
 
 unsigned int c = 0;
 
-void cInc() {
+void cIncr() {
 	c++;
 }
 
