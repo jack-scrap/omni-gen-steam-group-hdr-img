@@ -962,7 +962,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 		// dictionary
 		case nlohmann::json::value_t::object: {
 			nlohmann::json block = val["block"];
-			Dict* val = dictMk(block);
+			Dict* val = dictMk(block, key);
 
 			omni::assert(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
