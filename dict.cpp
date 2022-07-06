@@ -16,7 +16,7 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 	inst->_data = (void**) malloc(inst->_no * sizeof (void*));
 	inst->_type = (unsigned int*) malloc(inst->_no * sizeof (unsigned int));
 
-	Obj* child[1 + deser.size()];
+	Obj* child[deser.size() + 1];
 
 	glm::vec2 strideLetter = glm::vec2(layout::item(layout::item(0.0)), layout::item(layout::item(layout::letter[Y])));
 
@@ -37,7 +37,7 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 
 				Idx* idx = idxMk(0, &init, 1, entry.key(), glm::vec3(overhead[X], 0.0, overhead[Y]) + glm::vec3(0.0, 0.0, accY));
 
-				child[1 + i] = idx->_parent;
+				child[i] = idx->_parent;
 
 				((Idx**) inst->_data)[i] = idx;
 				inst->_type[i] = omni::SCALAR;
@@ -157,11 +157,11 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 	}
 
 	// identifier
-	child[0] = nullptr;
+	child[deser.size()] = nullptr;
 
 	if (!name.empty()) {
 		Str* id = strMk(name, glm::vec3(0.0, 0.0, -(layout::margin * 2)));
-		child[0] = id->_parent;
+		child[deser.size()] = id->_parent;
 	}
 
 	// scope
