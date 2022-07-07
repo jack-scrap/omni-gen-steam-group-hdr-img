@@ -1273,8 +1273,10 @@ void Console::hl() {
 					if (idx._x) {
 						idx._x--;
 					} else {
-						idx._y--;
-						idx._x = _buff[idx._y].size() - 1;
+						if (idx._y) {
+							idx._y--;
+							idx._x = _buff[idx._y].size() - 1;
+						}
 					}
 				}
 
