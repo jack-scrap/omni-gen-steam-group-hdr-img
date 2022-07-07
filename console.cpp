@@ -1260,8 +1260,22 @@ void Console::hl() {
 					state::lineCnt
 				})] = true;
 
-				if (idx._x < _buff[idx._y].size()) {
-					idx._x += norm;
+				if (norm == 1) {
+					if (idx._x < _buff[idx._y].size() - 1) {
+						idx._x++;
+					} else {
+						idx._y++;
+						idx._x = 0;
+					}
+				}
+
+				if (norm == -1) {
+					if (idx._x) {
+						idx._x--;
+					} else {
+						idx._y--;
+						idx._x = _buff[idx._y].size() - 1;
+					}
 				}
 
 				i++;
