@@ -1248,14 +1248,23 @@ void Console::hl() {
 
 			int norm = util::math::norm(startScal, endScal);
 
-			for (int r = 0; r < 2; r++) {
+			Coord idx = start;
+
+			int i = 0;
+			while (i <= abs(delta)) {
 				_hl[util::math::idx::array({
-					util::math::clamp<unsigned int>(loc[X] + _cursEditor[r][X], 1, boundFrame[X] - 1),
-					util::math::clamp<unsigned int>(loc[Y] + _cursEditor[r][Y], 1, boundFrame[Y] - 1)
+					util::math::clamp<unsigned int>(loc[X] + idx._x, 1, boundFrame[X] - 1),
+					util::math::clamp<unsigned int>(loc[Y] + idx._y, 1, boundFrame[Y] - 1)
 				}, {
 					state::lineWd,
 					state::lineCnt
 				})] = true;
+
+				if (idx._x < _buff[idx._y].size()) {
+					idx._x += norm;
+				}
+
+				i++;
 			}
 
 			// block
