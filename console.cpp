@@ -1264,8 +1264,10 @@ void Console::hl() {
 					if (idx._x < _buff[idx._y].size() - 1) {
 						idx._x++;
 					} else {
-						idx._y++;
-						idx._x = 0;
+						if (idx._y != end._y) {
+							idx._y++;
+							idx._x = 0;
+						}
 					}
 				}
 
