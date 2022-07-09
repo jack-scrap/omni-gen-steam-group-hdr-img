@@ -1,9 +1,9 @@
 #pragma once
 
 typedef struct {
-	char* _id;
-	void* _ptr;
-	unsigned int _type;
+	char* id;
+	void* ptr;
+	unsigned int type;
 } Var;
 
 Var* varMk(char* id, void* ptr, unsigned int type);

@@ -177,9 +177,9 @@ void craneGrab(Crane* inst) {
 	if (inst->_data) {
 		/* data */
 		for (int i = 0; i < noData; i++) {
-			switch (data[i]->_type) {
+			switch (data[i]->type) {
 				case omni::SCALAR: {
-					Idx* idx = (Idx*) data[i]->_ptr;
+					Idx* idx = (Idx*) data[i]->ptr;
 
 					if (util::phys::aabb(glm::vec3(0.0), inst->_data->_parent, idx->_parent->_acc, inst->_data->_parent->_acc)) {
 						idxPush(idx, craneRm(inst));
@@ -191,7 +191,7 @@ void craneGrab(Crane* inst) {
 				}
 
 				case omni::ARRAY: {
-					Array* array = (Array*) data[i]->_ptr;
+					Array* array = (Array*) data[i]->ptr;
 
 					for (int y = 0; y < array->_y; y++) {
 						for (int x = 0; x < array->_x; x++) {
@@ -281,9 +281,9 @@ void craneGrab(Crane* inst) {
 	} else {
 		/* data */
 		for (int i = 0; i < noData; i++) {
-			switch (data[i]->_type) {
+			switch (data[i]->type) {
 				case omni::SCALAR: {
-					Idx* idx = (Idx*) data[i]->_ptr;
+					Idx* idx = (Idx*) data[i]->ptr;
 
 					if (idx->_sz) {
 						if (util::phys::aabb(inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD], idx->_data[idx->_sz - 1]->_parent, inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_acc, idx->_data[idx->_sz - 1]->_parent->_acc)) {
@@ -297,7 +297,7 @@ void craneGrab(Crane* inst) {
 				}
 
 				case omni::ARRAY: {
-					Array* array = (Array*) data[i]->_ptr;
+					Array* array = (Array*) data[i]->ptr;
 
 					for (int y = 0; y < array->_y; y++) {
 						for (int x = 0; x < array->_x; x++) {

@@ -134,7 +134,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 	/* de-allocate */
 	// data
 	for (int i = 0; i < noData; i++) {
-		switch (data[i]->_type) {
+		switch (data[i]->type) {
 			case omni::SCALAR:
 				idxDel((Idx*) data[i]);
 				idxDel((Idx*) goal[i]);
@@ -214,7 +214,7 @@ void scn::init(std::string stage, unsigned int lvl) {
     switch (pair.value()["block"].type()) {
 			// scalar
 			case nlohmann::json::value_t::number_unsigned: {
-				wd = ((Idx*) item->_ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->_ptr)->_parent->_aabb[X][MIN];
+				wd = ((Idx*) item->ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->ptr)->_parent->_aabb[X][MIN];
 
 				data[i] = item;
 
@@ -228,7 +228,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 				switch (pair.value()["block"][0].type()) {
 					// 1D
 					case nlohmann::json::value_t::number_unsigned: {
-						wd = ((Array*) item->_ptr)->_parent->_aabb[X][MAX] - ((Array*) item->_ptr)->_parent->_aabb[X][MIN];
+						wd = ((Array*) item->ptr)->_parent->_aabb[X][MAX] - ((Array*) item->ptr)->_parent->_aabb[X][MIN];
 
 						data[i] = item;
 
@@ -240,7 +240,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 						switch (pair.value()["block"][0][0].type()) {
 							// 2D
 							case nlohmann::json::value_t::number_unsigned: {
-								wd = ((Array*) item->_ptr)->_parent->_aabb[X][MAX] - ((Array*) item->_ptr)->_parent->_aabb[X][MIN];
+								wd = ((Array*) item->ptr)->_parent->_aabb[X][MAX] - ((Array*) item->ptr)->_parent->_aabb[X][MIN];
 
 								data[i] = item;
 
@@ -249,7 +249,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 							// 3D
 							case nlohmann::json::value_t::array: {
-								wd = ((Array*) item->_ptr)->_parent->_aabb[X][MAX] - ((Array*) item->_ptr)->_parent->_aabb[X][MIN];
+								wd = ((Array*) item->ptr)->_parent->_aabb[X][MAX] - ((Array*) item->ptr)->_parent->_aabb[X][MIN];
 
 								data[i] = item;
 
@@ -266,7 +266,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 			// string
 			case nlohmann::json::value_t::string: {
-				wd = ((Array*) item->_ptr)->_parent->_aabb[X][MAX] - ((Array*) item->_ptr)->_parent->_aabb[X][MIN];
+				wd = ((Array*) item->ptr)->_parent->_aabb[X][MAX] - ((Array*) item->ptr)->_parent->_aabb[X][MIN];
 
 				data[i] = item;
 
@@ -275,7 +275,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 			// dictionary
 			case nlohmann::json::value_t::object: {
-				wd = ((Dict*) item->_ptr)->_parent->_aabb[X][MAX] - ((Dict*) item->_ptr)->_parent->_aabb[X][MIN];
+				wd = ((Dict*) item->ptr)->_parent->_aabb[X][MAX] - ((Dict*) item->ptr)->_parent->_aabb[X][MIN];
 
 				data[i] = item;
 
@@ -366,7 +366,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 			}
     }
 
-		omni::assert(typeRhs == data[i]->_type, "Can't compare data; types not comparable");
+		omni::assert(typeRhs == data[i]->type, "Can't compare data; types not comparable");
 
     i++;
   }
@@ -374,19 +374,19 @@ void scn::init(std::string stage, unsigned int lvl) {
 	for (int i = 0; i < noData; i++) {
 		Obj* _;
 
-		switch (data[i]->_type) {
+		switch (data[i]->type) {
 			case omni::SCALAR:
-				_ = ((Idx*) data[i]->_ptr)->_parent;
+				_ = ((Idx*) data[i]->ptr)->_parent;
 
 				break;
 
 			case omni::ARRAY:
-				_ = ((Array*) data[i]->_ptr)->_parent;
+				_ = ((Array*) data[i]->ptr)->_parent;
 
 				break;
 
 			case omni::DICT:
-				_ = ((Dict*) data[i]->_ptr)->_parent;
+				_ = ((Dict*) data[i]->ptr)->_parent;
 
 				break;
 		}

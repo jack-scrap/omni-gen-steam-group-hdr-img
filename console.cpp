@@ -41,23 +41,23 @@ void dispatch(std::string fName, unsigned int ptrEditorX) {
 
 	eq = true;
 	for (int i = 0; i < noData; i++) {
-		switch (data[i]->_type) {
+		switch (data[i]->type) {
 			case omni::SCALAR:
-				if (!idxEq((Idx*) data[i]->_ptr, (Idx*) goal[i]->_ptr)) {
+				if (!idxEq((Idx*) data[i]->ptr, (Idx*) goal[i]->ptr)) {
 					eq = false;
 				}
 
 				break;
 
 			case omni::ARRAY:
-				if (!arrayEq((Array*) data[i]->_ptr, (Array*) goal[i]->_ptr)) {
+				if (!arrayEq((Array*) data[i]->ptr, (Array*) goal[i]->ptr)) {
 					eq = false;
 				}
 
 				break;
 
 			case omni::DICT:
-				if (!dictEq((Dict*) data[i]->_ptr, (Dict*) goal[i]->_ptr)) {
+				if (!dictEq((Dict*) data[i]->ptr, (Dict*) goal[i]->ptr)) {
 					eq = false;
 				}
 
