@@ -6,8 +6,6 @@
 #include "obj.h"
 
 typedef struct {
-	glm::vec2 _bound;
-
 	Obj* _parent;
 } Border;
 

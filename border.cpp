@@ -7,8 +7,6 @@
 Border* borderMk(glm::vec2 bound, glm::vec3 loc, glm::vec3 rot) {
 	Border* inst = (Border*) malloc(sizeof (Border));
 
-	inst->_bound = bound;
-
 	GLfloat vtc[2 * 2 * 3 * 2];
 
 	std::vector<GLfloat> outer = util::mesh::rect::pos({
@@ -92,8 +90,6 @@ Border* borderMk(glm::vec2 bound, glm::vec3 loc, glm::vec3 rot) {
 
 Border* borderMk(glm::vec2 bound, Obj** child, unsigned int noChild, glm::vec3 loc, glm::vec3 rot) {
 	Border* inst = (Border*) malloc(sizeof (Border));
-
-	inst->_bound = bound;
 
 	GLfloat vtc[2 * 2 * 3 * 2];
 
