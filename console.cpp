@@ -1261,10 +1261,10 @@ void Console::hl() {
 				})] = true;
 
 				if (norm == 1) {
-					if (idx._x < _buff[idx._y].size() - 1) {
+					if (idx._x < _buff[idx._y].size() - 1) { // line bounds
 						idx._x++;
 					} else {
-						if (idx._y != end._y) {
+						if (idx._y != end._y) { // wrap
 							idx._y++;
 							idx._x = 0;
 						}
@@ -1272,10 +1272,10 @@ void Console::hl() {
 				}
 
 				if (norm == -1) {
-					if (idx._x) {
+					if (idx._x) { // initial character
 						idx._x--;
 					} else {
-						if (idx._y) {
+						if (idx._y) { // wrap
 							idx._y--;
 							idx._x = _buff[idx._y].size() - 1;
 						}
