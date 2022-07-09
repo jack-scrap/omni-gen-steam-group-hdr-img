@@ -26,7 +26,6 @@ class _Cont(Structure):
 
 class _Idx(Structure):
 	_fields_ = [
-		('_i', c_uint),
 		('_data', POINTER(_Cont)),
                 ('_sz', c_uint),
                 ('_offset', c_float * 3),

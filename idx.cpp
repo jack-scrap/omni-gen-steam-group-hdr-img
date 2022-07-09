@@ -12,7 +12,6 @@ Idx* idxMk(unsigned int i, std::string name, glm::vec3 loc, glm::vec3 rot) {
 
 	inst->_data = (Cont**) malloc(0);
 	inst->_sz = 0;
-	inst->_i = i;
 
 	// index
 	std::string str = std::to_string(i);
@@ -66,7 +65,6 @@ Idx* idxMk(unsigned int i, char* c, unsigned int sz, std::string name, glm::vec3
 
 	inst->_sz = sz;
 	inst->_data = (Cont**) malloc(inst->_sz * sizeof (Cont*));
-	inst->_i = i;
 
 	// index
 	std::string str = std::to_string(i);

@@ -6,8 +6,6 @@
 #include "cont.h"
 
 typedef struct {
-	unsigned int _i;
-
 	Cont** _data;
 	unsigned int _sz;
 
