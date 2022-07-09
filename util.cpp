@@ -717,17 +717,17 @@ bool util::json::ascii(nlohmann::json deser) {
 CBuff util::json::array::dim(nlohmann::json deser, CBuff buff, int i) {
 	switch (i) {
 		case 0:
-			buff._z = deser.size();
+			buff.z = deser.size();
 
 			break;
 
 		case 1:
-			buff._y = deser.size();
+			buff.y = deser.size();
 
 			break;
 
 		case 2:
-			buff._x = deser.size();
+			buff.x = deser.size();
 
 			break;
 	}
@@ -758,17 +758,17 @@ bool util::json::array::euclid(nlohmann::json deser, unsigned int sz) {
 CBuff util::json::str(nlohmann::json deser) {
 	CBuff _;
 
-	_._y = 1;
-	_._z = 1;
+	_.y = 1;
+	_.z = 1;
 
 	std::string buff = deser;
 
-	_._x = buff.size();
+	_.x = buff.size();
 
-	_._ptr = (char*) malloc(_._x);
+	_.ptr = (char*) malloc(_.x);
 
 	for (int i = 0; i < buff.size(); i++) {
-		((char*) _._ptr)[i] = buff[i];
+		((char*) _.ptr)[i] = buff[i];
 	}
 
 	return _;
@@ -806,14 +806,14 @@ StreetSign* util::json::streetSign(nlohmann::json deser) {
 CBuff util::json::array::array(nlohmann::json deser) {
 	CBuff _;
 
-	_._x = deser.size();
-	_._y = 1;
-	_._z = 1;
-	_._ptr = (char*) malloc(_._x);
-	for (int i = 0; i < _._x; i++) {
+	_.x = deser.size();
+	_.y = 1;
+	_.z = 1;
+	_.ptr = (char*) malloc(_.x);
+	for (int i = 0; i < _.x; i++) {
 		omni::assert(ascii(deser[i]), std::string("Data at index [") + std::to_string(i) + std::string("] not ASCII applicable"));
 
-		((char*) _._ptr)[i] = (char) ((int) deser[i]);
+		((char*) _.ptr)[i] = (char) ((int) deser[i]);
 	}
 
 	return _;
@@ -822,16 +822,16 @@ CBuff util::json::array::array(nlohmann::json deser) {
 CBuff util::json::array::matrix(nlohmann::json deser) {
 	CBuff _;
 
-	_._x = deser[0].size();
-	_._y = deser.size();
-	_._z = 1;
-	_._ptr = (char*) malloc(_._x * _._y);
+	_.x = deser[0].size();
+	_.y = deser.size();
+	_.z = 1;
+	_.ptr = (char*) malloc(_.x * _.y);
 	int c = 0;
-	for (int j = 0; j < _._y; j++) {
-		for (int i = 0; i < _._x; i++) {
+	for (int j = 0; j < _.y; j++) {
+		for (int i = 0; i < _.x; i++) {
 			omni::assert(ascii(deser[j][i]), std::string("Data at index [") + std::to_string(j) + "][" + std::to_string(i) + std::string("] not ASCII applicable"));
 
-			((char*) _._ptr)[c] = (char) ((int) deser[j][i]);
+			((char*) _.ptr)[c] = (char) ((int) deser[j][i]);
 
 			c++;
 		}
@@ -843,17 +843,17 @@ CBuff util::json::array::matrix(nlohmann::json deser) {
 CBuff util::json::array::tens(nlohmann::json deser) {
 	CBuff _;
 
-	_._x = deser[0][0].size();
-	_._y = deser[0].size();
-	_._z = deser.size();
-	_._ptr = (char*) malloc(_._x * _._y * _._z);
+	_.x = deser[0][0].size();
+	_.y = deser[0].size();
+	_.z = deser.size();
+	_.ptr = (char*) malloc(_.x * _.y * _.z);
 	int c = 0;
-	for (int k = 0; k < _._z; k++) {
-		for (int j = 0; j < _._y; j++) {
-			for (int i = 0; i < _._x; i++) {
+	for (int k = 0; k < _.z; k++) {
+		for (int j = 0; j < _.y; j++) {
+			for (int i = 0; i < _.x; i++) {
 				omni::assert(ascii(deser[k][j][i]), std::string("Data at index [") + std::to_string(j) + "][" + std::to_string(i) + std::string("] not ASCII applicable"));
 
-				((char*) _._ptr)[c] = (char) ((int) deser[k][j][i]);
+				((char*) _.ptr)[c] = (char) ((int) deser[k][j][i]);
 
 				c++;
 			}
@@ -902,7 +902,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 				case nlohmann::json::value_t::number_unsigned: {
 					CBuff init = array::array(val["block"]);
 
-					Array* val = arrayMk((char*) init._ptr, init._x, key, X, loc + glm::vec3(0.0, 0.0, -(layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2)), glm::radians(rot));
+					Array* val = arrayMk((char*) init.ptr, init.x, key, X, loc + glm::vec3(0.0, 0.0, -(layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2)), glm::radians(rot));
 
 					omni::assert(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
@@ -918,7 +918,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 						case nlohmann::json::value_t::number_unsigned: {
 							CBuff init = array::matrix(val["block"]);
 
-							Array* val = arrayMk((char*) init._ptr, init._x, init._y, key, loc + glm::vec3(0.0, 0.0, -(layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2)), glm::radians(rot));
+							Array* val = arrayMk((char*) init.ptr, init.x, init.y, key, loc + glm::vec3(0.0, 0.0, -(layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2)), glm::radians(rot));
 
 							omni::assert(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
@@ -931,7 +931,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 						case nlohmann::json::value_t::array: {
 							CBuff init = array::tens(val["block"]);
 
-							Array* val = arrayMk((char*) init._ptr, init._x, init._y, key, loc, glm::radians(rot));
+							Array* val = arrayMk((char*) init.ptr, init.x, init.y, key, loc, glm::radians(rot));
 
 							omni::assert(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
@@ -950,7 +950,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 		case nlohmann::json::value_t::string: {
 			CBuff init = str(val["block"]);
 
-			Array* val = arrayMk((char*) init._ptr, init._x, key, X, loc + glm::vec3(0.0, 0.0, -(layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2)), glm::radians(rot));
+			Array* val = arrayMk((char*) init.ptr, init.x, key, X, loc + glm::vec3(0.0, 0.0, -(layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2)), glm::radians(rot));
 
 			omni::assert(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 

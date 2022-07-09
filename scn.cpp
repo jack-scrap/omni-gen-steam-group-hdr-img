@@ -156,27 +156,27 @@ void scn::init(std::string stage, unsigned int lvl) {
 	}
 
 	// vehicle
-	for (int i = 0; i < crane._sz / sizeof (Crane*); i++) {
-		craneDel(((Crane**) crane._ptr)[i]);
+	for (int i = 0; i < crane.sz / sizeof (Crane*); i++) {
+		craneDel(((Crane**) crane.ptr)[i]);
 	}
 
-	for (int i = 0; i < truck._sz / sizeof (Truck*); i++) {
-		truckDel(((Truck**) truck._ptr)[i]);
+	for (int i = 0; i < truck.sz / sizeof (Truck*); i++) {
+		truckDel(((Truck**) truck.ptr)[i]);
 	}
 
-	for (int i = 0; i < cargoShip._sz / sizeof (CargoShip*); i++) {
-		cargoShipDel(((CargoShip**) cargoShip._ptr)[i]);
+	for (int i = 0; i < cargoShip.sz / sizeof (CargoShip*); i++) {
+		cargoShipDel(((CargoShip**) cargoShip.ptr)[i]);
 	}
 
 	obj.clear();
 
 	// bound
-	for (int i = 0; i < boundRng._sz / sizeof (Lim*); i++) {
-		limDel(((Lim**) boundRng._ptr)[i]);
+	for (int i = 0; i < boundRng.sz / sizeof (Lim*); i++) {
+		limDel(((Lim**) boundRng.ptr)[i]);
 	}
 
-	for (int i = 0; i < boundArea._sz / sizeof (Cone*); i++) {
-		coneDel(((Cone**) boundArea._ptr)[i]);
+	for (int i = 0; i < boundArea.sz / sizeof (Cone*); i++) {
+		coneDel(((Cone**) boundArea.ptr)[i]);
 	}
 
 	for (int i = 0; i < noProp; i++) {
@@ -417,9 +417,9 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 			omni::assert(!util::phys::aabbGround(_->_parent), "Crane clipping into ground plane");
 
-			crane._sz += sizeof (Crane*);
-			crane._ptr = (Crane**) realloc(crane._ptr, crane._sz);
-			((Crane**) crane._ptr)[crane._sz - sizeof (Crane*)] = _;
+			crane.sz += sizeof (Crane*);
+			crane.ptr = (Crane**) realloc(crane.ptr, crane.sz);
+			((Crane**) crane.ptr)[crane.sz - sizeof (Crane*)] = _;
 
 			obj.push_back(_->_parent);
 		}
@@ -436,18 +436,18 @@ void scn::init(std::string stage, unsigned int lvl) {
 					0
 				};
 
-				((char*) init._ptr)[0] = 0;
+				((char*) init.ptr)[0] = 0;
 			}
 
-			Array* array = arrayMk((char*) init._ptr, init._x, "", Z, glm::vec3(0.0, layout::padded(0.0), -((layout::idx[X] / 2) + (layout::stroke * 2) + (layout::margin * 2 * 2))), glm::vec3(0.0, -M_PI / 2, 0.0));
+			Array* array = arrayMk((char*) init.ptr, init.x, "", Z, glm::vec3(0.0, layout::padded(0.0), -((layout::idx[X] / 2) + (layout::stroke * 2) + (layout::margin * 2 * 2))), glm::vec3(0.0, -M_PI / 2, 0.0));
 
 			Truck* _ = truckMk(array, loc, glm::radians(rot));
 
 			omni::assert(!util::phys::aabbGround(_->_parent), "Truck clipping into ground plane");
 
-			truck._sz += sizeof (Truck*);
-			truck._ptr = (Truck**) realloc(truck._ptr, truck._sz);
-			((Truck**) truck._ptr)[truck._sz - sizeof (Truck*)] = _;
+			truck.sz += sizeof (Truck*);
+			truck.ptr = (Truck**) realloc(truck.ptr, truck.sz);
+			((Truck**) truck.ptr)[truck.sz - sizeof (Truck*)] = _;
 
 			obj.push_back(_->_parent);
 
@@ -474,20 +474,20 @@ void scn::init(std::string stage, unsigned int lvl) {
 					0
 				};
 
-				for (int j = 0; j < init._x; j++) {
-					for (int i = 0; i < init._y; i++) {
-						((char*) init._ptr)[(j * init._y) + i] = 0;
+				for (int j = 0; j < init.x; j++) {
+					for (int i = 0; i < init.y; i++) {
+						((char*) init.ptr)[(j * init.y) + i] = 0;
 					}
 				}
 			}
 
-			Array* array = arrayMk((char*) init._ptr, init._x, init._y, name, glm::vec3(0.0, layout::padded(0.0), 0.0));
+			Array* array = arrayMk((char*) init.ptr, init.x, init.y, name, glm::vec3(0.0, layout::padded(0.0), 0.0));
 
 			CargoShip* _ = cargoShipMk(array, loc, glm::radians(rot));
 
-			cargoShip._sz += sizeof (CargoShip*);
-			cargoShip._ptr = (CargoShip**) realloc(cargoShip._ptr, cargoShip._sz);
-			((CargoShip**) cargoShip._ptr)[cargoShip._sz - sizeof (CargoShip*)] = _;
+			cargoShip.sz += sizeof (CargoShip*);
+			cargoShip.ptr = (CargoShip**) realloc(cargoShip.ptr, cargoShip.sz);
+			((CargoShip**) cargoShip.ptr)[cargoShip.sz - sizeof (CargoShip*)] = _;
 
 			obj.push_back(_->_parent);
 		}
@@ -496,22 +496,22 @@ void scn::init(std::string stage, unsigned int lvl) {
 	// path
 	for (const auto& strip : deser["road"]["path"]["idc"]) {
 		for (const auto& node : strip) {
-			path._sz++;
-			path._ptr = (unsigned int*) realloc(path._ptr, path._sz * sizeof (unsigned int));
-			((unsigned int*) path._ptr)[path._sz - 1] = node;
+			path.sz++;
+			path.ptr = (unsigned int*) realloc(path.ptr, path.sz * sizeof (unsigned int));
+			((unsigned int*) path.ptr)[path.sz - 1] = node;
 		}
 	}
 
-	node._sz = 0;
-	node._ptr = (unsigned int*) malloc(node._sz * sizeof (unsigned int));
+	node.sz = 0;
+	node.ptr = (unsigned int*) malloc(node.sz * sizeof (unsigned int));
 	for (const nlohmann::json::array_t& strip : deser["road"]["path"]["idc"]) {
 		std::vector<Obj*> _ = util::json::path(strip, deser["road"]["node"], deser["road"]["path"]["status"]);
 
-		node._sz += 3;
-		node._ptr = (unsigned int*) realloc(node._ptr, node._sz * sizeof (unsigned int));
+		node.sz += 3;
+		node.ptr = (unsigned int*) realloc(node.ptr, node.sz * sizeof (unsigned int));
 		int a = 0;
 		for (const nlohmann::json::number_unsigned_t& axis : strip) {
-			((unsigned int*) node._ptr)[node._sz - 3 + a] = axis;
+			((unsigned int*) node.ptr)[node.sz - 3 + a] = axis;
 			
 			a++;
 		}
@@ -558,11 +558,11 @@ void scn::init(std::string stage, unsigned int lvl) {
 	}
 
 	// bound
-	boundRng._sz = deser["bound"]["rng"].size() * sizeof (Lim*);
-	boundRng._ptr = (Lim**) malloc(boundRng._sz);
+	boundRng.sz = deser["bound"]["rng"].size() * sizeof (Lim*);
+	boundRng.ptr = (Lim**) malloc(boundRng.sz);
 
-	boundArea._sz = deser["bound"]["area"].size() * sizeof (Cone*);
-	boundArea._ptr = (Cone**) malloc(boundArea._sz);
+	boundArea.sz = deser["bound"]["area"].size() * sizeof (Cone*);
+	boundArea.ptr = (Cone**) malloc(boundArea.sz);
 
 	for (const auto& entry : deser["bound"].items()) {
 		int i = 0;
@@ -571,7 +571,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 				for (const auto& rng : entry) {
 					Lim* _ = util::json::bound::lim(rng);
 
-					((Lim**) boundRng._ptr)[i] = _;
+					((Lim**) boundRng.ptr)[i] = _;
 					i++;
 
 					obj.push_back(_->_parent);
@@ -584,7 +584,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 			for (const auto& entry : entry.value()) {
 				Cone* _ = util::json::bound::area(entry);
 
-				((Cone**) boundArea._ptr)[i] = _;
+				((Cone**) boundArea.ptr)[i] = _;
 				i++;
 
 				obj.push_back(_->_parent);
@@ -595,14 +595,14 @@ void scn::init(std::string stage, unsigned int lvl) {
 	}
 
 	// control-flow
-	streetSign._sz = deser["ctrl"].size() * sizeof (StreetSign*);
-	streetSign._ptr = (StreetSign**) malloc(streetSign._sz);
+	streetSign.sz = deser["ctrl"].size() * sizeof (StreetSign*);
+	streetSign.ptr = (StreetSign**) malloc(streetSign.sz);
 
 	i = 0;
 	for (const auto& entry : deser["ctrl"].items()) {
 		StreetSign* _ = util::json::streetSign(entry.value());
 
-		((StreetSign**) streetSign._ptr)[i] = _;
+		((StreetSign**) streetSign.ptr)[i] = _;
 		i++;
 
 		obj.push_back(_->_parent);

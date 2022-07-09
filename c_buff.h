@@ -3,13 +3,13 @@
 #include <stddef.h>
 
 typedef struct {
-	void* _ptr;
-	size_t _sz;
+	void* ptr;
+	size_t sz;
 } CArr;
 
 typedef struct {
-	void* _ptr;
-	unsigned int _x;
-	unsigned int _y;
-	unsigned int _z;
+	void* ptr;
+	unsigned int x;
+	unsigned int y;
+	unsigned int z;
 } CBuff;

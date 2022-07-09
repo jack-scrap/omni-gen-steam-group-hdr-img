@@ -222,8 +222,8 @@ void craneGrab(Crane* inst) {
 
 		/* vehicle */
 		// truck
-		for (int i = 0; i < truck._sz / sizeof (Truck*); i++) {
-			Truck* truckInst = ((Truck**) truck._ptr)[i];
+		for (int i = 0; i < truck.sz / sizeof (Truck*); i++) {
+			Truck* truckInst = ((Truck**) truck.ptr)[i];
 
 			Array* array = truckInst->_data;
 
@@ -251,8 +251,8 @@ void craneGrab(Crane* inst) {
 		}
 
 		// cargo ship
-		for (int i = 0; i < cargoShip._sz / sizeof (CargoShip*); i++) {
-			CargoShip* cargoShipInst = ((CargoShip**) cargoShip._ptr)[i];
+		for (int i = 0; i < cargoShip.sz / sizeof (CargoShip*); i++) {
+			CargoShip* cargoShipInst = ((CargoShip**) cargoShip.ptr)[i];
 
 			Array* array = cargoShipInst->_data;
 
@@ -327,8 +327,8 @@ void craneGrab(Crane* inst) {
 
 			/* vehicle */
 			// truck
-			for (int i = 0; i < truck._sz / sizeof (Truck*); i++) {
-				Truck* truckInst = ((Truck**) truck._ptr)[i];
+			for (int i = 0; i < truck.sz / sizeof (Truck*); i++) {
+				Truck* truckInst = ((Truck**) truck.ptr)[i];
 
 				Array* array = truckInst->_data;
 
@@ -358,8 +358,8 @@ void craneGrab(Crane* inst) {
 			}
 
 			// cargo ship
-			for (int i = 0; i < cargoShip._sz / sizeof (CargoShip*); i++) {
-				CargoShip* cargoShipInst = ((CargoShip**) cargoShip._ptr)[i];
+			for (int i = 0; i < cargoShip.sz / sizeof (CargoShip*); i++) {
+				CargoShip* cargoShipInst = ((CargoShip**) cargoShip.ptr)[i];
 
 				Array* array = cargoShipInst->_data;
 
