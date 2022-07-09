@@ -1,8 +1,8 @@
 #pragma once
 
 typedef struct {
-	unsigned int _x;
-	unsigned int _y;
+	unsigned int x;
+	unsigned int y;
 } Coord;
 
 enum {

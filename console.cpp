@@ -197,18 +197,18 @@ Console::Console(std::string fName, std::string dir) :
 	}
 
 void Console::fmt(std::vector<std::string> buff, Coord loc, Coord view, Coord ptr) {
-	int l = ptr._y;
+	int l = ptr.y;
 	int y = 0;
 	while (
 		l < buff.size() &&
-		y < view._y &&
+		y < view.y &&
 		y < state::lineCnt
 	) {
-		int c = ptr._x;
+		int c = ptr.x;
 		int x = 0;
 		while (
 			c < buff[l].size() &&
-			x < view._x &&
+			x < view.x &&
 			x < state::lineWd
 		) {
 			// tab expansion
@@ -216,12 +216,12 @@ void Console::fmt(std::vector<std::string> buff, Coord loc, Coord view, Coord pt
 				int t = 0;
 				while (
 					t < state::tabWd &&
-					x < view._x &&
+					x < view.x &&
 					x < state::lineWd
 				) {
 					_canv[util::math::idx::array({
-						loc._x + x,
-						loc._y + y
+						loc.x + x,
+						loc.y + y
 					}, {
 						state::lineWd,
 						state::lineCnt
@@ -232,8 +232,8 @@ void Console::fmt(std::vector<std::string> buff, Coord loc, Coord view, Coord pt
 				}
 			} else {
 				_canv[util::math::idx::array({
-					loc._x + x,
-					loc._y + y
+					loc.x + x,
+					loc.y + y
 				}, {
 					state::lineWd,
 					state::lineCnt
@@ -1253,31 +1253,31 @@ void Console::hl() {
 			int i = 0;
 			while (i <= abs(delta)) {
 				_hl[util::math::idx::array({
-					util::math::clamp<unsigned int>(loc[X] + idx._x, 1, boundFrame[X] - 1),
-					util::math::clamp<unsigned int>(loc[Y] + idx._y, 1, boundFrame[Y] - 1)
+					util::math::clamp<unsigned int>(loc[X] + idx.x, 1, boundFrame[X] - 1),
+					util::math::clamp<unsigned int>(loc[Y] + idx.y, 1, boundFrame[Y] - 1)
 				}, {
 					state::lineWd,
 					state::lineCnt
 				})] = true;
 
 				if (norm == 1) {
-					if (idx._x < _buff[idx._y].size() - 1) { // line bounds
-						idx._x++;
+					if (idx.x < _buff[idx.y].size() - 1) { // line bounds
+						idx.x++;
 					} else {
-						if (idx._y != end._y) { // wrap
-							idx._y++;
-							idx._x = 0;
+						if (idx.y != end.y) { // wrap
+							idx.y++;
+							idx.x = 0;
 						}
 					}
 				}
 
 				if (norm == -1) {
-					if (idx._x) { // initial character
-						idx._x--;
-					} else {
-						if (idx._y) { // wrap
-							idx._y--;
-							idx._x = _buff[idx._y].size() - 1;
+					if (idx.x) { // initial character
+						idx.x--;
+					} else{
+						if (idx.y) { // wrap
+							idx.y--;
+							idx.x = _buff[idx.y].size() - 1;
 						}
 					}
 				}
@@ -1366,7 +1366,7 @@ void Console::print(char c, bool b, Coord st) {
 		layout::map[X] * layout::glyph[X] * layout::glyph[Y]
 	};
 
-	glTexSubImage2D(GL_TEXTURE_2D, 0, st._x * layout::glyph[X], st._y * layout::glyph[Y], layout::glyph[X], layout::glyph[Y], GL_BGR, GL_UNSIGNED_BYTE, &(((char*) _map->pixels)[((b * sz) + (idx._y * stride[Y]) + (idx._x * stride[X])) * 3]));
+	glTexSubImage2D(GL_TEXTURE_2D, 0, st.x * layout::glyph[X], st.y * layout::glyph[Y], layout::glyph[X], layout::glyph[Y], GL_BGR, GL_UNSIGNED_BYTE, &(((char*) _map->pixels)[((b * sz) + (idx.y * stride[Y]) + (idx.x * stride[X])) * 3]));
 }
 
 void Console::draw() {

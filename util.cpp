@@ -1380,15 +1380,15 @@ int util::math::norm(int lhs, int rhs) {
 }
 
 unsigned int util::math::idx::array(Coord st, Coord bound) {
-	return (st._y * bound._x) + st._x;
+	return (st.y * bound.x) + st.x;
 }
 
 unsigned int util::math::idx::determ(Coord st, std::vector<std::string> buff) {
 	unsigned int _ = 0;
-	for (int i = 0; i < st._y; i++) {
+	for (int i = 0; i < st.y; i++) {
 		_ += buff[i].size();
 	}
-	_ += st._x;
+	_ += st.x;
 
 	return _;
 }
@@ -1412,8 +1412,8 @@ unsigned int util::math::idx::expand(std::string line, unsigned int idx) {
 
 Coord util::math::coord::array(unsigned int idx, Coord bound) {
 	return {
-		idx % bound._x,
-		idx / bound._x
+		idx % bound.x,
+		idx / bound.x
 	};
 }
 
@@ -1425,11 +1425,11 @@ Coord util::math::coord::determ(unsigned int idx, std::vector<std::string> buff)
 
 	int i = 0;
 	while (i < idx) {
-		if (_._x < buff[_._y].size() - 1) {
-			_._x++;
+		if (_.x < buff[_.y].size() - 1) {
+			_.x++;
 		} else {
-			_._y++;
-			_._x = 0;
+			_.y++;
+			_.x = 0;
 		}
 
 		i++;
