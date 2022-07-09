@@ -4,4 +4,4 @@
 
 namespace phys {
 	GLfloat g = 9.81;
-};
+}
