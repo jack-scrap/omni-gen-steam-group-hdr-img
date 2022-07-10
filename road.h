@@ -3,7 +3,7 @@
 #include "obj.h"
 
 typedef struct {
-	unsigned int _status;
+	unsigned int status;
 
 	Obj* _parent;
 } Road;

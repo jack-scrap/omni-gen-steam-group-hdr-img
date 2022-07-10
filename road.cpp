@@ -5,10 +5,10 @@
 Road* roadMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, unsigned int status, glm::vec3 loc, glm::vec3 rot) {
 	Road* inst = (Road*) malloc(sizeof (Road));
 
-	inst->_status = status;
+	inst->status = status;
 
 	std::string name;
-	switch (inst->_status) {
+	switch (inst->status) {
 		case PASS:
 			name = "solid";
 
