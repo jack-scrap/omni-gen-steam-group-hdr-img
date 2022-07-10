@@ -6,8 +6,8 @@
 #include "obj.h"
 
 typedef struct Node {
-	char* _data;
-	int _no;
+	char* data;
+	int no;
 
 	Node** _child;
 	unsigned int _noChild;

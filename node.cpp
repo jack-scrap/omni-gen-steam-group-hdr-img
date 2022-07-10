@@ -6,8 +6,8 @@
 Node* nodeMk(char* data, int no) {
 	Node* inst = (Node*) malloc(sizeof (Node));
 
-	inst->_data = data;
-	inst->_no = no;
+	inst->data = data;
+	inst->no = no;
 	inst->_child = nullptr;
 	inst->_noChild = 0;
 
@@ -17,8 +17,8 @@ Node* nodeMk(char* data, int no) {
 Node* nodeMk(char* data, int no, Node** child, unsigned int noChild) {
 	Node* _ = (Node*) malloc(sizeof (Node));
 
-	_->_data = data;
-	_->_no = no;
+	_->data = data;
+	_->no = no;
 	_->_child = child;
 	_->_noChild = noChild;
 
@@ -26,7 +26,7 @@ Node* nodeMk(char* data, int no, Node** child, unsigned int noChild) {
 }
 
 void nodeDel(Node* inst) {
-	free(inst->_data);
+	free(inst->data);
 
 	for (int i = 0; i < inst->_noChild; i++) {
 		nodeDel(inst->_child[i]);
@@ -47,13 +47,13 @@ void nodeDepth(Node* inst, unsigned int* depth) {
 }
 
 void nodeMax(Node* inst, unsigned int* no) {
-	if (inst->_no > *no) {
-		*no = inst->_no;
+	if (inst->no > *no) {
+		*no = inst->no;
 	}
 
 	for (int i = 0; i < inst->_noChild; i++) {
-		if (inst->_child[i]->_no > *no) {
-			*no = inst->_child[i]->_no;
+		if (inst->_child[i]->no > *no) {
+			*no = inst->_child[i]->no;
 		}
 	}
 }
