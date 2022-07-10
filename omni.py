@@ -234,7 +234,7 @@ _cIncr.argtypes = None
 class _Crane(_Obj):
 	_fields_ = [
 		('_data', POINTER(_Cont)),
-		('_offset', c_float * 3),
+		('offset', c_float * 3),
                 ('_parent', c_void_p)
 	]
 
@@ -251,7 +251,7 @@ class _Crane(_Obj):
 		_craneZoom(self._ptr, delta)
 
 		for i in range(3):
-			self._offset[i] = self._ptr.contents._offset[i]
+			self.offset[i] = self._ptr.contents.offset[i]
 
 		_cIncr()
 
@@ -259,7 +259,7 @@ class _Crane(_Obj):
 		_cranePan(self._ptr, delta)
 
 		for i in range(3):
-			self._offset[i] = self._ptr.contents._offset[i]
+			self.offset[i] = self._ptr.contents.offset[i]
 
 		_cIncr()
 
@@ -267,7 +267,7 @@ class _Crane(_Obj):
 		_cranePed(self._ptr, delta)
 
 		for i in range(3):
-			self._offset[i] = self._ptr.contents._offset[i]
+			self.offset[i] = self._ptr.contents.offset[i]
 
 		_cIncr()
 
@@ -306,7 +306,7 @@ _craneGrab.argtypes = None
 class _Truck(_Obj):
 	_fields_ = [
 		('_data', POINTER(_Array)),
-		('_offset', c_float * 3),
+		('offset', c_float * 3),
 		('_ang', c_float),
                 ('_uni', c_uint * 2),
                 ('_parent', c_void_p)
@@ -323,13 +323,13 @@ class _Truck(_Obj):
 		self._ang = self._ptr.contents._ang
 
 		for i in range(3):
-			self._offset[i] = self._ptr.contents._offset[i]
+			self.offset[i] = self._ptr.contents.offset[i]
 
 		_cIncr()
 
 	def mv(self, delta):
 		for i in range(3):
-			self._offset[i] = self._ptr.contents._offset[i]
+			self.offset[i] = self._ptr.contents.offset[i]
 
 		_truckMv(self._ptr, delta)
 
@@ -352,7 +352,7 @@ _truckMv.argtypes = [
 class _CargoShip(_Obj):
 	_fields_ = [
 		('_data', POINTER(_Array)),
-		('_offset', c_float * 3),
+		('offset', c_float * 3),
                 ('_parent', c_void_p)
 	]
 
@@ -360,7 +360,7 @@ class _CargoShip(_Obj):
 		_cargoShipMv(self._ptr, delta)
 
 		for i in range(3):
-			self._offset[i] = self._ptr.contents._offset[i]
+			self.offset[i] = self._ptr.contents.offset[i]
 
 		_cIncr()
 
