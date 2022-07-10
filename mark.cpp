@@ -12,15 +12,15 @@ Mark* markMk(GLfloat val[2][2], unsigned int status) {
 
 	for (int j = 0; j < 2; j++) {
 		for (int i = 0; i < 2; i++) {
-			inst->_val[j][i] = val[j][i];
+			inst->val[j][i] = val[j][i];
 		}
 	}
 
 	GLfloat vtc[2][3];
 	for (int b = 0; b < 2; b++) {
-		vtc[b][X] = inst->_val[b][X];
+		vtc[b][X] = inst->val[b][X];
 		vtc[b][Y] = 0.0;
-		vtc[b][Z] = inst->_val[b][Y];
+		vtc[b][Z] = inst->val[b][Y];
 	}
 
 	std::string frag;

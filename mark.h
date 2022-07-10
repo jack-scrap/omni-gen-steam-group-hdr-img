@@ -3,7 +3,7 @@
 #include "obj.h"
 
 typedef struct Mark {
-	GLfloat _val[2][2];
+	GLfloat val[2][2];
 
 	Obj* _parent;
 
