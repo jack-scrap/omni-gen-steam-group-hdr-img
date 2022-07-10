@@ -28,7 +28,7 @@ class _Idx(Structure):
 	_fields_ = [
 		('data', POINTER(_Cont)),
                 ('sz', c_uint),
-                ('_offset', c_float * 3),
+                ('offset', c_float * 3),
                 ('_parent', c_void_p)
 	]
 
@@ -37,7 +37,7 @@ class _Array(Structure):
 		('data', POINTER(POINTER(_Idx))),
 		('x', c_uint),
 		('_y', c_uint),
-		('_offset', c_float * 3),
+		('offset', c_float * 3),
                 ('_parent', c_void_p)
 	]
 
@@ -46,7 +46,7 @@ class _Dict(Structure):
 		('data', POINTER(c_void_p)),
 		('type', POINTER(c_uint)),
 		('no', c_uint),
-                ('_offset', c_float * 3),
+                ('offset', c_float * 3),
                 ('_parent', c_void_p)
 	]
 
@@ -132,7 +132,7 @@ class _Scope:
                 idxPtr = cast(var._ptr, POINTER(_Idx))
                 idx = idxPtr.contents
 
-                offset = [round(val, 4) for val in list(idx._offset)]
+                offset = [round(val, 4) for val in list(idx.offset)]
 
             # array
             if (var._type == 1):
@@ -141,7 +141,7 @@ class _Scope:
                 arrayPtr = cast(var._ptr, POINTER(_Array))
                 array = arrayPtr.contents
 
-                offset = [round(val, 4) for val in list(array._offset)]
+                offset = [round(val, 4) for val in list(array.offset)]
 
             self.__intern[name] = {
                     'ptr': var._ptr,
