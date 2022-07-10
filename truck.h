@@ -8,8 +8,8 @@
 #include "c_buff.h"
 
 typedef struct Truck {
-	Array* _data;
-	float _offset[3];
+	Array* data;
+	float offset[3];
 
 	float _ang;
 

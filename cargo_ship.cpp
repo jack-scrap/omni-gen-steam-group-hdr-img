@@ -52,12 +52,12 @@ CargoShip* cargoShipMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	child[CargoShip::BED] = objMk(vtc, (GLushort*) idc, 2 * 3, Mesh::OBJ, "obj", "dir", false, glm::vec3(-center[X], 0.0, -center[Y]));
 
 	// data
-	inst->_data = init;
+	inst->data = init;
 
 	child[CargoShip::DATA] = nullptr;
 
-	if (inst->_data) {
-		child[CargoShip::DATA] = inst->_data->_parent;
+	if (inst->data) {
+		child[CargoShip::DATA] = inst->data->_parent;
 	}
 
 	// light
@@ -72,14 +72,14 @@ CargoShip* cargoShipMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	// offset
 	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int a = 0; a < 3; a++) {
-		inst->_offset[a] = offset[a];
+		inst->offset[a] = offset[a];
 	}
 
 	return inst;
 }
 
 void cargoShipDel(CargoShip* inst) {
-	arrayDel(inst->_data);
+	arrayDel(inst->data);
 
 	objDel(inst->_parent);
 
@@ -112,6 +112,6 @@ void cargoShipMv(CargoShip* inst, float delta) {
 	// offset
 	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int a = 0; a < 3; a++) {
-		inst->_offset[a] = offset[a];
+		inst->offset[a] = offset[a];
 	}
 }

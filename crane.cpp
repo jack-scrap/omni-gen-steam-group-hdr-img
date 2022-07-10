@@ -29,10 +29,10 @@ GLushort Crane::_lightIdc[2 * 3] = {
 Crane* craneMk(Cont* init, glm::vec3 loc, glm::vec3 rot) {
 	Crane* inst = (Crane*) malloc(sizeof (Crane));
 
-	inst->_data = nullptr;
+	inst->data = nullptr;
 
 	if (init) {
-		inst->_data = init;
+		inst->data = init;
 	}
 
 	Obj* child[1 + (2 * 2 * 2 * 2) + (2 * 2) + (2 * 2) + 1];
@@ -48,8 +48,8 @@ Crane* craneMk(Cont* init, glm::vec3 loc, glm::vec3 rot) {
 	child[Crane::TRACK] = objMk("crane/track_front", "obj", "dir", true, trackChild, 1 + 1, glm::vec3(0.0, Crane::_rngTrack[MAX], 0.0));
 
 	// data
-	if (inst->_data) {
-		child[Crane::TRACK]->_child[Crane::HEAD]->_child[0] = inst->_data->_parent;
+	if (inst->data) {
+		child[Crane::TRACK]->_child[Crane::HEAD]->_child[0] = inst->data->_parent;
 	} else {
 		child[Crane::TRACK]->_child[Crane::HEAD]->_child[0] = nullptr;
 	}
@@ -93,15 +93,15 @@ Crane* craneMk(Cont* init, glm::vec3 loc, glm::vec3 rot) {
 	// offset
 	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int a = 0; a < 3; a++) {
-		inst->_offset[a] = offset[a];
+		inst->offset[a] = offset[a];
 	}
 
 	return inst;
 }
 
 void craneDel(Crane* inst) {
-	if (inst->_data) {
-		contDel(inst->_data);
+	if (inst->data) {
+		contDel(inst->data);
 	}
 
 	objDel(inst->_parent);
@@ -128,7 +128,7 @@ void craneZoom(Crane* inst, float delta) {
 
 	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int a = 0; a < 3; a++) {
-		inst->_offset[a] = offset[a];
+		inst->offset[a] = offset[a];
 	}
 }
 
@@ -149,7 +149,7 @@ void cranePan(Crane* inst, float delta) {
 
 	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int a = 0; a < 3; a++) {
-		inst->_offset[a] = offset[a];
+		inst->offset[a] = offset[a];
 	}
 }
 
@@ -169,19 +169,19 @@ void cranePed(Crane* inst, float delta) {
 
 	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int a = 0; a < 3; a++) {
-		inst->_offset[a] = offset[a];
+		inst->offset[a] = offset[a];
 	}
 }
 
 void craneGrab(Crane* inst) {
-	if (inst->_data) {
+	if (inst->data) {
 		/* data */
 		for (int i = 0; i < noData; i++) {
 			switch (data[i]->type) {
 				case omni::SCALAR: {
 					Idx* idx = (Idx*) data[i]->ptr;
 
-					if (util::phys::aabb(glm::vec3(0.0), inst->_data->_parent, idx->_parent->_acc, inst->_data->_parent->_acc)) {
+					if (util::phys::aabb(glm::vec3(0.0), inst->data->_parent, idx->_parent->_acc, inst->data->_parent->_acc)) {
 						idxPush(idx, craneRm(inst));
 
 						return;
@@ -205,8 +205,8 @@ void craneGrab(Crane* inst) {
 
 							Idx* idx = array->data[i];
 
-							if (inst->_data && !idx->sz) {
-								if (util::phys::aabb(glm::vec3(0.0), inst->_data->_parent, idx->_parent->_acc, inst->_data->_parent->_acc)) {
+							if (inst->data && !idx->sz) {
+								if (util::phys::aabb(glm::vec3(0.0), inst->data->_parent, idx->_parent->_acc, inst->data->_parent->_acc)) {
 									arrayPush(array, x, y, craneRm(inst));
 
 									return;
@@ -225,7 +225,7 @@ void craneGrab(Crane* inst) {
 		for (int i = 0; i < truck.sz / sizeof (Truck*); i++) {
 			Truck* truckInst = ((Truck**) truck.ptr)[i];
 
-			Array* array = truckInst->_data;
+			Array* array = truckInst->data;
 
 			for (int y = 0; y < array->_y; y++) {
 				for (int x = 0; x < array->_x; x++) {
@@ -239,8 +239,8 @@ void craneGrab(Crane* inst) {
 
 					Idx* idx = array->data[i];
 
-					if (inst->_data && !idx->sz) {
-						if (util::phys::aabb(glm::vec3(0.0), inst->_data->_parent, idx->_parent->_acc, inst->_data->_parent->_acc)) {
+					if (inst->data && !idx->sz) {
+						if (util::phys::aabb(glm::vec3(0.0), inst->data->_parent, idx->_parent->_acc, inst->data->_parent->_acc)) {
 							arrayPush(array, x, y, craneRm(inst));
 
 							return;
@@ -254,7 +254,7 @@ void craneGrab(Crane* inst) {
 		for (int i = 0; i < cargoShip.sz / sizeof (CargoShip*); i++) {
 			CargoShip* cargoShipInst = ((CargoShip**) cargoShip.ptr)[i];
 
-			Array* array = cargoShipInst->_data;
+			Array* array = cargoShipInst->data;
 
 			for (int y = 0; y < array->_y; y++) {
 				for (int x = 0; x < array->_x; x++) {
@@ -268,8 +268,8 @@ void craneGrab(Crane* inst) {
 
 					Idx* idx = array->data[i];
 
-					if (inst->_data && !idx->sz) {
-						if (util::phys::aabb(glm::vec3(0.0), inst->_data->_parent, idx->_parent->_acc, inst->_data->_parent->_acc)) {
+					if (inst->data && !idx->sz) {
+						if (util::phys::aabb(glm::vec3(0.0), inst->data->_parent, idx->_parent->_acc, inst->data->_parent->_acc)) {
 							arrayPush(array, x, y, craneRm(inst));
 
 							return;
@@ -330,7 +330,7 @@ void craneGrab(Crane* inst) {
 			for (int i = 0; i < truck.sz / sizeof (Truck*); i++) {
 				Truck* truckInst = ((Truck**) truck.ptr)[i];
 
-				Array* array = truckInst->_data;
+				Array* array = truckInst->data;
 
 				for (int y = 0; y < array->_y; y++) {
 					for (int x = 0; x < array->_x; x++) {
@@ -361,7 +361,7 @@ void craneGrab(Crane* inst) {
 			for (int i = 0; i < cargoShip.sz / sizeof (CargoShip*); i++) {
 				CargoShip* cargoShipInst = ((CargoShip**) cargoShip.ptr)[i];
 
-				Array* array = cargoShipInst->_data;
+				Array* array = cargoShipInst->data;
 
 				for (int y = 0; y < array->_y; y++) {
 					for (int x = 0; x < array->_x; x++) {
@@ -392,8 +392,8 @@ void craneGrab(Crane* inst) {
 }
 
 void craneInsert(Crane* inst, Cont* byte) {
-	inst->_data = byte;
-	inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_child[0] = inst->_data->_parent;
+	inst->data = byte;
+	inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_child[0] = inst->data->_parent;
 
 	// transform
 	glm::mat4 model = glm::mat4(1.0);
@@ -405,9 +405,9 @@ void craneInsert(Crane* inst, Cont* byte) {
 }
 
 Cont* craneRm(Crane* inst) {
-	Cont* byte = inst->_data;
+	Cont* byte = inst->data;
 
-	inst->_data = nullptr;
+	inst->data = nullptr;
 	inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_child[0] = nullptr;
 
 	return byte;

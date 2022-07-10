@@ -67,9 +67,9 @@ Truck* truckMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	child[Truck::TAIL] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-layout::scoped(init->_x * layout::scoped(layout::idx[Z]) - (0.32 / 2)), -(0.2 * 2), 0.0));
 
 	// data
-	inst->_data = init;
+	inst->data = init;
 
-	child[Truck::DATA] = inst->_data->_parent;
+	child[Truck::DATA] = inst->data->_parent;
 
 	// wheel
 	glm::vec3 overhead = glm::vec3(-((layout::margin * 2) + (layout::stroke / 2)), 0.0, 0.0);
@@ -100,14 +100,14 @@ Truck* truckMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	// offset
 	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int a = 0; a < 3; a++) {
-		inst->_offset[a] = offset[a];
+		inst->offset[a] = offset[a];
 	}
 
 	return inst;
 }
 
 void truckDel(Truck* inst) {
-	arrayDel(inst->_data);
+	arrayDel(inst->data);
 
 	objDel(inst->_parent);
 
@@ -116,13 +116,13 @@ void truckDel(Truck* inst) {
 
 void truckAnim(Truck* inst, glm::vec3 loc, glm::vec3 rot) {
 	for (int i = 0; i < 2; i++) {
-		inst->_parent->_child[4 + ((inst->_data->_x + 1) * 2) + i]->_active = true;
+		inst->_parent->_child[4 + ((inst->data->_x + 1) * 2) + i]->_active = true;
 	}
 
 	objMv(inst->_parent, nullptr, loc, rot, Truck::_speed);
 
 	for (int i = 0; i < 2; i++) {
-		inst->_parent->_child[4 + ((inst->_data->_x + 1) * 2) + i]->_active = false;
+		inst->_parent->_child[4 + ((inst->data->_x + 1) * 2) + i]->_active = false;
 	}
 }
 
@@ -133,7 +133,7 @@ void truckMv(Truck* inst, float delta) {
 
 	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int a = 0; a < 3; a++) {
-		inst->_offset[a] = offset[a];
+		inst->offset[a] = offset[a];
 	}
 }
 
@@ -155,6 +155,6 @@ void truckTurn(Truck* inst, float delta) {
 	// offset
 	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
 	for (int a = 0; a < 3; a++) {
-		inst->_offset[a] = offset[a];
+		inst->offset[a] = offset[a];
 	}
 }

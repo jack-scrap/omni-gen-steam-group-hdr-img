@@ -6,8 +6,8 @@
 #include "cont.h"
 
 typedef struct Crane {
-	Cont* _data;
-	float _offset[3];
+	Cont* data;
+	float offset[3];
 
 	Obj* _parent;
 
