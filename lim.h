@@ -4,7 +4,7 @@
 
 typedef struct Lim {
 	unsigned int _axis;
-	GLfloat _val;
+	float _val;
 
 	Obj* _parent;
 
