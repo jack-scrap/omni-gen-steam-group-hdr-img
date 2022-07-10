@@ -586,7 +586,7 @@ void objDraw(Obj* inst) {
 
 	glUniform1ui(inst->_uni[Obj::ACTIVE], inst->_active);
 
-	glDrawElements(prim, inst->_mesh->_noPrim, GL_UNSIGNED_SHORT, (GLvoid*) 0);
+	glDrawElements(prim, inst->_mesh->noPrim, GL_UNSIGNED_SHORT, (GLvoid*) 0);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 	inst->_prog.unUse();

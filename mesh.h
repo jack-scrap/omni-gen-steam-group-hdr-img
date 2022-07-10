@@ -5,7 +5,7 @@
 typedef struct Mesh {
 	GLuint _id[4];
 
-	unsigned int _noPrim;
+	unsigned int noPrim;
 
 	enum {
 		VAO,
