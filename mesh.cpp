@@ -13,7 +13,7 @@ Mesh* meshMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim) {
 
 	glGenBuffers(1, &inst->_id[Mesh::VBO]);
 	glBindBuffer(GL_ARRAY_BUFFER, inst->_id[Mesh::VBO]);
-	glBufferData(GL_ARRAY_BUFFER, noPrim * 3 * sizeof (GLfloat), vtc, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, inst->_noPrim * 3 * sizeof (GLfloat), vtc, GL_STATIC_DRAW);
 
 	glGenBuffers(1, &inst->_id[Mesh::IBO]);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, inst->_id[Mesh::IBO]);
