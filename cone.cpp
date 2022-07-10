@@ -17,7 +17,7 @@ Cone* coneMk(GLfloat init[2][2], glm::vec3 loc, glm::vec3 rot) {
 
 	for (int y = 0; y < 2; y++) {
 		for (int x = 0; x < 2; x++) {
-			inst->_bound[x][y] = init[x][y];
+			inst->bound[x][y] = init[x][y];
 		}
 	}
 
@@ -29,7 +29,7 @@ Cone* coneMk(GLfloat init[2][2], glm::vec3 loc, glm::vec3 rot) {
 
 	// offset
 	for (int a = 0; a < 3; a++) {
-		inst->_offset[a] = loc[a];
+		inst->offset[a] = loc[a];
 	}
 
 	return inst;

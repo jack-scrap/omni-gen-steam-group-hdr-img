@@ -6,9 +6,9 @@
 #include "obj.h"
 
 typedef struct Cone {
-	GLfloat _bound[2][2];
+	GLfloat bound[2][2];
 
-	float _offset[3];
+	float offset[3];
 
 	Obj* _parent;
 

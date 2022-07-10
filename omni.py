@@ -204,8 +204,8 @@ _boundRngGet.argtypes = None
 
 class _Cone(Structure):
 	_fields_ = [
-		('_bound', c_float * 2 * 2),
-		('_offset', c_float * 3),
+		('bound', c_float * 2 * 2),
+		('offset', c_float * 3),
                 ('_parent', c_void_p)
 	]
 
