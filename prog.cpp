@@ -36,16 +36,16 @@ Shad::Shad(std::string name, unsigned int stage) {
 	}));
 	const char* src = buff.c_str();
 
-	_id = glCreateShader(type);
-	glShaderSource(_id, 1, &src, NULL);
-	glCompileShader(_id);
+	id = glCreateShader(type);
+	glShaderSource(id, 1, &src, NULL);
+	glCompileShader(id);
 
 	GLint succ;
 	char err[] = "";
 
-	glGetShaderiv(_id, GL_COMPILE_STATUS, &succ);
+	glGetShaderiv(id, GL_COMPILE_STATUS, &succ);
 	if (!succ) {
-		glGetShaderInfoLog(_id, 512, NULL, err);
+		glGetShaderInfoLog(id, 512, NULL, err);
 		omni::err(omni::ERR_SHADER);
 		std::cerr << err << std::endl;
 	}
@@ -58,8 +58,8 @@ Prog::Prog(std::string nameVtx, std::string nameFrag) {
 
 	// program
 	_id = glCreateProgram();
-	glAttachShader(_id, vtx._id);
-	glAttachShader(_id, frag._id);
+	glAttachShader(_id, vtx.id);
+	glAttachShader(_id, frag.id);
 	glLinkProgram(_id);
 }
 
@@ -71,9 +71,9 @@ Prog::Prog(std::string nameVtx, std::string nameGeom, std::string nameFrag) {
 
 	// program
 	_id = glCreateProgram();
-	glAttachShader(_id, vtx._id);
-	glAttachShader(_id, geom._id);
-	glAttachShader(_id, frag._id);
+	glAttachShader(_id, vtx.id);
+	glAttachShader(_id, geom.id);
+	glAttachShader(_id, frag.id);
 	glLinkProgram(_id);
 }
 
