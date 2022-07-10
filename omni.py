@@ -36,7 +36,7 @@ class _Array(Structure):
 	_fields_ = [
 		('data', POINTER(POINTER(_Idx))),
 		('x', c_uint),
-		('_y', c_uint),
+		('y', c_uint),
 		('offset', c_float * 3),
                 ('_parent', c_void_p)
 	]
@@ -95,12 +95,12 @@ class _Scope:
         lsIdx = cast(array.data, POINTER(POINTER(_Idx)))
 
         # 2D
-        if (array._y > 1):
-            for y in range(array._y):
+        if (array.y > 1):
+            for y in range(array.y):
                 sub = []
 
-                for x in range(array._x):
-                    i = (y * array._y) + x
+                for x in range(array.x):
+                    i = (y * array.y) + x
 
                     sub.append(self.__parseIdx(lsIdx[i]))
 
@@ -108,7 +108,7 @@ class _Scope:
 
         # 1D
         else:
-            for x in range(array._x):
+            for x in range(array.x):
                 rep.append(self.__parseIdx(lsIdx[x]))
 
         return rep
