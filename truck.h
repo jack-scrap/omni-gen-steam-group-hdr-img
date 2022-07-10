@@ -11,7 +11,7 @@ typedef struct Truck {
 	Array* data;
 	float offset[3];
 
-	float _ang;
+	float ang;
 
 	GLuint _uni[2];
 

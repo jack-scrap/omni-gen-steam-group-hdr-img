@@ -307,7 +307,7 @@ class _Truck(_Obj):
 	_fields_ = [
 		('_data', POINTER(_Array)),
 		('offset', c_float * 3),
-		('_ang', c_float),
+		('ang', c_float),
                 ('_uni', c_uint * 2),
                 ('_parent', c_void_p)
 	]
@@ -320,7 +320,7 @@ class _Truck(_Obj):
 	def turn(self, delta):
 		_truckTurn(self._ptr, delta)
 
-		self._ang = self._ptr.contents._ang
+		self.ang = self._ptr.contents.ang
 
 		for i in range(3):
 			self.offset[i] = self._ptr.contents.offset[i]

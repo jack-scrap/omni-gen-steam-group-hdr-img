@@ -32,7 +32,7 @@ GLushort Truck::_lightIdc[2 * 3] = {
 Truck* truckMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	Truck* inst = (Truck*) malloc(sizeof (Truck));
 
-	inst->_ang = 0.0;
+	inst->ang = 0.0;
 
 	Obj* child[4 + ((init->_x + 1) * 2) + 2 + init->_x];
 
@@ -138,8 +138,8 @@ void truckMv(Truck* inst, float delta) {
 }
 
 void truckTurn(Truck* inst, float delta) {
-	if (inst->_ang + delta > inst->_rngWheel[MIN] && inst->_ang + delta < inst->_rngWheel[MAX]) {
-		inst->_ang += delta;
+	if (inst->ang + delta > inst->_rngWheel[MIN] && inst->ang + delta < inst->_rngWheel[MAX]) {
+		inst->ang += delta;
 
 		for (int z = 0; z < 2; z++) {
 			objAnim(inst->_parent->_child[4 + z], inst->_parent, glm::vec3(0.0), glm::vec3(0.0, glm::radians(delta), 0.0));
