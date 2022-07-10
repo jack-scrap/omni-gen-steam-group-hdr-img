@@ -193,8 +193,8 @@ goal = _Scope(_goal, _noData)
 # bound
 class _Lim(Structure):
 	_fields_ = [
-		('_axis', c_uint),
-		('_val', c_float),
+		('axis', c_uint),
+		('val', c_float),
                 ('_parent', c_void_p)
 	]
 

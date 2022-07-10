@@ -3,8 +3,8 @@
 #include "obj.h"
 
 typedef struct Lim {
-	unsigned int _axis;
-	float _val;
+	unsigned int axis;
+	float val;
 
 	Obj* _parent;
 
