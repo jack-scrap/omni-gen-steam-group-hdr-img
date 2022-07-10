@@ -15,7 +15,7 @@ Array* arrayMk(char* init, unsigned int x, std::string name, unsigned int axis, 
 	inst->_y = 1;
 
 	// data
-	inst->_data = (Idx**) malloc(inst->_x * inst->_y * sizeof (Idx*));
+	inst->data = (Idx**) malloc(inst->_x * inst->_y * sizeof (Idx*));
 
 	unsigned int noChild = 1 + (inst->_x * inst->_y);
 	Obj** child = (Obj**) malloc(noChild * sizeof (Obj*));
@@ -45,8 +45,8 @@ Array* arrayMk(char* init, unsigned int x, std::string name, unsigned int axis, 
 			idx = idxMk(c, "", glm::vec3(layout::overhead, 0.0, layout::overhead) + offset);
 		}
 
-		inst->_data[c] = idx;
-		child[1 + c] = inst->_data[c]->_parent;
+		inst->data[c] = idx;
+		child[1 + c] = inst->data[c]->_parent;
 
 		c++;
 	}
@@ -120,7 +120,7 @@ Array* arrayMk(char* init, unsigned int x, unsigned int y, std::string name, glm
 	}
 
 	// data
-	_->_data = (Idx**) malloc(_->_x * _->_y * sizeof (Idx*));
+	_->data = (Idx**) malloc(_->_x * _->_y * sizeof (Idx*));
 
 	glm::vec2 stride = glm::vec2(layout::item(layout::scoped(layout::idx[X])), layout::item(layout::scoped(layout::idx[Z])));
 
@@ -137,8 +137,8 @@ Array* arrayMk(char* init, unsigned int x, unsigned int y, std::string name, glm
 				idx = idxMk(c, "", offset);
 			}
 
-			_->_data[c] = idx;
-			child[1 + c] = _->_data[c]->_parent;
+			_->data[c] = idx;
+			child[1 + c] = _->data[c]->_parent;
 
 			c++;
 		}
@@ -163,10 +163,10 @@ Array* arrayMk(char* init, unsigned int x, unsigned int y, std::string name, glm
 void arrayDel(Array* inst) {
 	for (int y = 0; y < inst->_y; y++) {
 		for (int x = 0; x < inst->_x; x++) {
-			idxDel(inst->_data[(y * inst->_x) + x]);
+			idxDel(inst->data[(y * inst->_x) + x]);
 		}
 	}
-	free(inst->_data);
+	free(inst->data);
 
 	objDel(inst->_parent);
 
@@ -182,7 +182,7 @@ void arrayPush(Array* inst, unsigned int x, unsigned int y, Cont* byte) {
 		inst->_y
 	});
 
-	Idx* idx = inst->_data[i];
+	Idx* idx = inst->data[i];
 
 	idxPush(idx, byte);
 
@@ -194,13 +194,13 @@ void arrayPush(Array* inst, unsigned int x, unsigned int y, Cont* byte) {
 	glm::mat4 model = glm::mat4(1.0);
 	model = glm::translate(model, glm::vec3(layout::overhead, 0.0, layout::overhead) + glm::vec3(center[X], 0.0, center[Y]) + glm::vec3(0.0, layout::idx[Y] / 2, 0.0));
 
-	idx->_data[idx->_sz - 1]->_parent->_model = model;
+	idx->data[idx->sz - 1]->_parent->_model = model;
 
 	objAcc(idx->_parent, inst->_parent->_acc);
 }
 
 Cont* arrayPop(Array* inst, unsigned int x, unsigned int y) {
-	Idx* idx = inst->_data[(y * inst->_x) + x];
+	Idx* idx = inst->data[(y * inst->_x) + x];
 
 	return idxPop(idx);
 }
@@ -209,7 +209,7 @@ bool arrayEq(Array* lhs, Array* rhs) {
 	int i = 0;
 	for (int y = 0; y < lhs->_y; y++) {
 		for (int x = 0; x < lhs->_x; x++) {
-			if (!idxEq(lhs->_data[i], rhs->_data[i])) {
+			if (!idxEq(lhs->data[i], rhs->data[i])) {
 				return false;
 			}
 

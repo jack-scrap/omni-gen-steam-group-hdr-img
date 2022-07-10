@@ -8,7 +8,7 @@
 #include "math.h"
 
 typedef struct {
-	Idx** _data;
+	Idx** data;
 
 	unsigned int _x;
 	unsigned int _y;

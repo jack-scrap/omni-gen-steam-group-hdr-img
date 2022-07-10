@@ -26,16 +26,16 @@ class _Cont(Structure):
 
 class _Idx(Structure):
 	_fields_ = [
-		('_data', POINTER(_Cont)),
-                ('_sz', c_uint),
+		('data', POINTER(_Cont)),
+                ('sz', c_uint),
                 ('_offset', c_float * 3),
                 ('_parent', c_void_p)
 	]
 
 class _Array(Structure):
 	_fields_ = [
-		('_data', POINTER(POINTER(_Idx))),
-		('_x', c_uint),
+		('data', POINTER(POINTER(_Idx))),
+		('x', c_uint),
 		('_y', c_uint),
 		('_offset', c_float * 3),
                 ('_parent', c_void_p)
@@ -43,9 +43,9 @@ class _Array(Structure):
 
 class _Dict(Structure):
 	_fields_ = [
-		('_data', POINTER(c_void_p)),
-		('_type', POINTER(c_uint)),
-		('_no', c_uint),
+		('data', POINTER(c_void_p)),
+		('type', POINTER(c_uint)),
+		('no', c_uint),
                 ('_offset', c_float * 3),
                 ('_parent', c_void_p)
 	]
@@ -70,7 +70,7 @@ class _Scope:
         ptrIdx = cast(ptr, POINTER(_Idx))
         idx = ptrIdx.contents
 
-        ls = cast(idx._data, POINTER(POINTER(_Cont)))
+        ls = cast(idx.data, POINTER(POINTER(_Cont)))
 
         if (idx._sz):
             # list
@@ -92,7 +92,7 @@ class _Scope:
         ptrArray = cast(ptr, POINTER(_Array))
         array = ptrArray.contents
 
-        lsIdx = cast(array._data, POINTER(POINTER(_Idx)))
+        lsIdx = cast(array.data, POINTER(POINTER(_Idx)))
 
         # 2D
         if (array._y > 1):

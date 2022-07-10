@@ -8,10 +8,9 @@
 #include "cont.h"
 
 typedef struct {
-	void** _data;
-	unsigned int* _type;
-	unsigned int _no;
-
+	void** data;
+	unsigned int* type;
+	unsigned int no;
 	float _offset[3];
 
 	Obj* _parent;

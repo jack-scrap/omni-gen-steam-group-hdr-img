@@ -6,8 +6,8 @@
 #include "cont.h"
 
 typedef struct {
-	Cont** _data;
-	unsigned int _sz;
+	Cont** data;
+	unsigned int sz;
 
 	float _offset[3];
 

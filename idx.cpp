@@ -10,8 +10,8 @@
 Idx* idxMk(unsigned int i, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	Idx* inst = (Idx*) malloc(sizeof (Idx));
 
-	inst->_data = (Cont**) malloc(0);
-	inst->_sz = 0;
+	inst->data = (Cont**) malloc(0);
+	inst->sz = 0;
 
 	// index
 	std::string str = std::to_string(i);
@@ -63,13 +63,13 @@ Idx* idxMk(unsigned int i, std::string name, glm::vec3 loc, glm::vec3 rot) {
 Idx* idxMk(unsigned int i, char* c, unsigned int sz, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	Idx* inst = (Idx*) malloc(sizeof (Idx));
 
-	inst->_sz = sz;
-	inst->_data = (Cont**) malloc(inst->_sz * sizeof (Cont*));
+	inst->sz = sz;
+	inst->data = (Cont**) malloc(inst->sz * sizeof (Cont*));
 
 	// index
 	std::string str = std::to_string(i);
 
-	Obj* child[str.size() + 1 + inst->_sz];
+	Obj* child[str.size() + 1 + inst->sz];
 
 	glm::vec2 center = layout::center({
 		layout::idx[X],
@@ -90,10 +90,10 @@ Idx* idxMk(unsigned int i, char* c, unsigned int sz, std::string name, glm::vec3
 	// data
 	glm::vec2 stride = glm::vec2(layout::item(layout::scoped(layout::idx[X])), layout::item(layout::scoped(layout::idx[Z])));
 
-	for (int i = 0; i < inst->_sz; i++) {
+	for (int i = 0; i < inst->sz; i++) {
 		Cont* byte = contMk(c[i], glm::vec3((layout::stroke * 2) + (layout::idx[X] / 2), layout::idx[Y] / 2, (layout::stroke * 2) + (layout::idx[Z] / 2)) + glm::vec3(0.0, i * layout::idx[Y], 0.0));
 
-		inst->_data[i] = byte;
+		inst->data[i] = byte;
 
 		child[str.size() + 1 + i] = byte->_parent;
 	}
@@ -120,9 +120,9 @@ Idx* idxMk(unsigned int i, char* c, unsigned int sz, std::string name, glm::vec3
 }
 
 void idxDel(Idx* inst) {
-	for (int i = 0; i < inst->_sz; i++) {
-		if (inst->_data[i]) {
-			contDel(inst->_data[i]);
+	for (int i = 0; i < inst->sz; i++) {
+		if (inst->data[i]) {
+			contDel(inst->data[i]);
 		}
 	}
 
@@ -130,14 +130,14 @@ void idxDel(Idx* inst) {
 }
 
 void idxPush(Idx* inst, Cont* byte) {
-	inst->_sz++;
-	inst->_data = (Cont**) realloc(inst->_data, inst->_sz * sizeof (Cont*));
+	inst->sz++;
+	inst->data = (Cont**) realloc(inst->data, inst->sz * sizeof (Cont*));
 
 	inst->_parent->_noChild++;
 	inst->_parent->_child = (Obj**) realloc(inst->_parent->_child, inst->_parent->_noChild * sizeof (Cont*));
 
-	inst->_data[inst->_sz - 1] = byte;
-	inst->_parent->_child[inst->_parent->_noChild - 1] = inst->_data[inst->_sz - 1]->_parent;
+	inst->data[inst->sz - 1] = byte;
+	inst->_parent->_child[inst->_parent->_noChild - 1] = inst->data[inst->sz - 1]->_parent;
 
 	// transform
 	glm::vec2 center = layout::center({
@@ -147,7 +147,7 @@ void idxPush(Idx* inst, Cont* byte) {
 	glm::mat4 model = glm::mat4(1.0);
 	model = glm::translate(model, glm::vec3(layout::overhead, 0.0, layout::overhead) + glm::vec3(center[X], 0.0, center[Y]) + glm::vec3(0.0, layout::idx[Y] / 2, 0.0));
 
-	inst->_data[inst->_sz - 1]->_parent->_model = model;
+	inst->data[inst->sz - 1]->_parent->_model = model;
 
 	objAcc(inst->_parent, glm::mat4(1.0));
 }
@@ -155,11 +155,11 @@ void idxPush(Idx* inst, Cont* byte) {
 Cont* idxPop(Idx* inst) {
 	Cont* byte = nullptr;
 
-	if (inst->_sz) {
-		byte = inst->_data[inst->_sz - 1];
+	if (inst->sz) {
+		byte = inst->data[inst->sz - 1];
 
-		inst->_sz--;
-		inst->_data = (Cont**) realloc(inst->_data, inst->_sz * sizeof (Cont*));
+		inst->sz--;
+		inst->data = (Cont**) realloc(inst->data, inst->sz * sizeof (Cont*));
 
 		inst->_parent->_noChild--;
 		inst->_parent->_child = (Obj**) realloc(inst->_parent->_child, inst->_parent->_noChild * sizeof (Cont*));
@@ -170,21 +170,21 @@ Cont* idxPop(Idx* inst) {
 
 bool idxEq(Idx* lhs, Idx* rhs) {
 	// null
-	if (!lhs->_sz && !rhs->_sz) {
+	if (!lhs->sz && !rhs->sz) {
 		return true;
 	}
 
-	if (!lhs->_sz ^ !rhs->_sz) {
+	if (!lhs->sz ^ !rhs->sz) {
 		return false;
 	}
 
-	if (lhs->_sz != rhs->_sz) {
+	if (lhs->sz != rhs->sz) {
 		return false;
 	}
 
-	if (lhs->_sz && rhs->_sz) {
-		for (int i = 0; i < lhs->_sz; i++) {
-			if (lhs->_data[i]->_c != rhs->_data[i]->_c) {
+	if (lhs->sz && rhs->sz) {
+		for (int i = 0; i < lhs->sz; i++) {
+			if (lhs->data[i]->_c != rhs->data[i]->_c) {
 				return false;
 			}
 		}
