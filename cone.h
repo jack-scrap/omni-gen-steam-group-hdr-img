@@ -7,7 +7,6 @@
 
 typedef struct Cone {
 	GLfloat bound[2][2];
-
 	float offset[3];
 
 	Obj* _parent;
