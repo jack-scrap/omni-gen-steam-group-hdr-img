@@ -72,12 +72,12 @@ class _Scope:
 
         ls = cast(idx.data, POINTER(POINTER(_Cont)))
 
-        if (idx._sz):
+        if (idx.sz):
             # list
-            if idx._sz > 1:
+            if idx.sz > 1:
                 rep = []
 
-                for i in range(idx._sz):
+                for i in range(idx.sz):
                     rep.append(self.__parseByte(ls[i]))
 
             # scalar
