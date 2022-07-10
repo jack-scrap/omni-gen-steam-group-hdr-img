@@ -233,7 +233,7 @@ _cIncr.argtypes = None
 
 class _Crane(_Obj):
 	_fields_ = [
-		('_data', POINTER(_Cont)),
+		('data', POINTER(_Cont)),
 		('offset', c_float * 3),
                 ('_parent', c_void_p)
 	]
@@ -274,7 +274,7 @@ class _Crane(_Obj):
 	def grab(self):
 		_craneGrab(self._ptr)
 
-		self._data = self._ptr.contents._data
+		self.data = self._ptr.contents.data
 
 		_cIncr()
 
@@ -305,7 +305,7 @@ _craneGrab.argtypes = None
 
 class _Truck(_Obj):
 	_fields_ = [
-		('_data', POINTER(_Array)),
+		('data', POINTER(_Array)),
 		('offset', c_float * 3),
 		('ang', c_float),
                 ('_uni', c_uint * 2),
@@ -351,7 +351,7 @@ _truckMv.argtypes = [
 
 class _CargoShip(_Obj):
 	_fields_ = [
-		('_data', POINTER(_Array)),
+		('data', POINTER(_Array)),
 		('offset', c_float * 3),
                 ('_parent', c_void_p)
 	]
