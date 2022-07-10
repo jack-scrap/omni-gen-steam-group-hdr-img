@@ -247,6 +247,24 @@ class _Crane(_Obj):
 		3.0
         ]
 
+	def __getattribute__(self, attr):
+            ptr = super(_Crane, self).__getattribute__(attr)
+
+            if attr == 'data':
+                val = None
+
+                if ptr:
+                    val = ptr.contents._c
+
+                return val
+
+            if attr == 'offset':
+                ls = []
+                for i in range(3):
+                    ls.append(ptr[i])
+
+                return ls
+
 	def zoom(self, delta):
 		_craneZoom(self._ptr, delta)
 
