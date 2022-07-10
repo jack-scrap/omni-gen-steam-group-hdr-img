@@ -554,7 +554,7 @@ void handle() {
 		}
 
 		if (e.type == SDL_QUIT) {
-			disp->_open = false;
+			disp->open = false;
 		}
 	}
 }
@@ -824,7 +824,7 @@ int main(int argc, char* argv[]) {
 
 	SDL_AddTimer(0, epoch, NULL);
 
-	while (disp->_open) {
+	while (disp->open) {
 		if (adv) {
 			lvl++;
 

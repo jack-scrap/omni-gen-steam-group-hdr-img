@@ -10,7 +10,7 @@
 #include "layout.h"
 
 Disp::Disp(const char* title, glm::vec2 res, glm::vec3 bg) :
-	_t(0) {
+	t(0) {
 		for (int i = 0; i < 2; i++) {
 			_res[i] = res[i];
 		}
@@ -36,11 +36,11 @@ Disp::Disp(const char* title, glm::vec2 res, glm::vec3 bg) :
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_BACK);
 
-		_rend = SDL_CreateRenderer(_win, -1, 0);
+		rend = SDL_CreateRenderer(_win, -1, 0);
 
 		glClearColor(bg[R] / 255.0, bg[G] / 255.0, bg[B] / 255.0, 1.0);
 
-		_open = true;
+		open = true;
 	}
 
 void Disp::clear() {
@@ -50,7 +50,7 @@ void Disp::clear() {
 void Disp::update() {
 	SDL_GL_SwapWindow(_win);
 
-	_t = SDL_GetTicks();
+	t = SDL_GetTicks();
 }
 
 Disp::~Disp() {

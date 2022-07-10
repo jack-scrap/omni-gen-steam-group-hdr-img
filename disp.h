@@ -16,13 +16,13 @@ class Disp {
 		SDL_Window* _win;
 
 	public:
-		SDL_Renderer* _rend;
+		SDL_Renderer* rend;
 
-		bool _open = false;
+		bool open = false;
 
 		unsigned int _res[2];
 
-		uint32_t _t;
+		uint32_t t;
 
 		Disp(const char* title, glm::vec2 res, glm::vec3 bg);
 

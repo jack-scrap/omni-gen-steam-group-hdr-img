@@ -1517,7 +1517,7 @@ GLuint util::tex::rd(std::string name) {
 
 	SDL_Surface* surf = SDL_LoadBMP(path.c_str());
 
-	SDL_Texture* texSdl = SDL_CreateTextureFromSurface(disp->_rend, surf);
+	SDL_Texture* texSdl = SDL_CreateTextureFromSurface(disp->rend, surf);
 
 	int dim[2];
 	SDL_QueryTexture(texSdl, nullptr, nullptr, &dim[0], &dim[1]);
@@ -1528,7 +1528,7 @@ GLuint util::tex::rd(std::string name) {
 	rect.w = dim[X];
 	rect.h = dim[Y];
 
-	SDL_RenderCopy(disp->_rend, texSdl, &rect, &rect);
+	SDL_RenderCopy(disp->rend, texSdl, &rect, &rect);
 
 	if (!surf->pixels) {
 		omni::err(omni::ERR_RD_TEX, {

@@ -99,7 +99,7 @@ Console::Console(std::string fName, std::string dir) :
 	_cwd(dir),
 	_prog("console", "console") {
 		_map = IMG_Load("res/map.bmp");
-		SDL_CreateTextureFromSurface(disp->_rend, _map);
+		SDL_CreateTextureFromSurface(disp->rend, _map);
 
 		_canv = (char*) calloc(state::lineWd * state::lineCnt, sizeof (char));
 		_hl = (char*) calloc(state::lineWd * state::lineCnt, sizeof (bool));
@@ -1118,7 +1118,7 @@ void Console::exec() {
 
 				if (cmd == "quit") {
 					if (!_diff) {
-						disp->_open = false;
+						disp->open = false;
 					} else {
 						omni::err(omni::ERR_BUFF_DIFF);
 					}
