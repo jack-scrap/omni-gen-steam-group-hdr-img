@@ -380,16 +380,31 @@ _truckMv.argtypes = [
 
 class _CargoShip(_Obj):
     _fields_ = [
-            ('data', POINTER(_Array)),
-            ('offset', c_float * 3),
+            ('_data', POINTER(_Array)),
+            ('_offset', c_float * 3),
             ('_parent', c_void_p)
     ]
 
+    @property
+    def data(self):
+        ptr = self._ptr
+        arrayPtr = ptr.contents._data
+
+        return _parseArray(arrayPtr)
+
+    @property
+    def offset(self):
+        ptr = self._ptr
+        offset = ptr.contents._offset
+
+        ls = []
+        for i in range(3):
+            ls.append(offset[i])
+
+        return ls
+
     def mv(self, delta):
         _cargoShipMv(self._ptr, delta)
-
-        for i in range(3):
-            self.offset[i] = self._ptr.contents.offset[i]
 
         _cIncr()
 
