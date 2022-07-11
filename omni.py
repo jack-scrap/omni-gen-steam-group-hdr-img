@@ -62,6 +62,13 @@ def _parseArray(ptr):
 
         return rep
 
+def _parseOffset(ptr):
+    offset = ptr.contents._offset
+
+    ls = [round(val, 4) for val in list(offset)]
+
+    return ls
+
 class _CArr(Structure):
     _fields_ = [
             ('_ptr', c_void_p),
@@ -262,11 +269,8 @@ class _Crane(_Obj):
     @property
     def offset(self):
         ptr = self._ptr
-        offset = ptr.contents._offset
 
-        ls = [round(val, 4) for val in list(offset)]
-
-        return ls
+        return _parseOffset(self._ptr)
 
     def zoom(self, delta):
         _craneZoom(self._ptr, delta)
@@ -337,11 +341,8 @@ class _Truck(_Obj):
     @property
     def offset(self):
         ptr = self._ptr
-        offset = ptr.contents._offset
 
-        ls = [round(val, 4) for val in list(offset)]
-
-        return ls
+        return _parseOffset(self._ptr)
 
     @property
     def ang(self):
@@ -391,11 +392,8 @@ class _CargoShip(_Obj):
     @property
     def offset(self):
         ptr = self._ptr
-        offset = ptr.contents._offset
 
-        ls = [round(val, 4) for val in list(offset)]
-
-        return ls
+        return _parseOffset(self._ptr)
 
     def mv(self, delta):
         _cargoShipMv(self._ptr, delta)
