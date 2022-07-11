@@ -7,6 +7,9 @@ _cargo_ship = CDLL('libcargo_ship.so')
 _street_sign = CDLL('libstreet_sign.so')
 _scn = CDLL('libscn.so')
 
+def _parseFloat(val):
+    return round(val, 4)
+
 def _parseByte(ptr):
     contPtr = ptr
     cont = contPtr.contents
@@ -65,7 +68,7 @@ def _parseArray(ptr):
 def _parseOffset(ptr):
     offset = ptr.contents._offset
 
-    ls = [round(val, 4) for val in list(offset)]
+    ls = [_parseFloat(val) for val in list(offset)]
 
     return ls
 
@@ -139,7 +142,7 @@ class _Scope:
                 idxPtr = cast(var._ptr, POINTER(_Idx))
                 idx = idxPtr.contents
 
-                offset = [round(val, 4) for val in list(idx.offset)]
+                offset = [_parseFloat(val) for val in list(idx.offset)]
 
             # array
             if (var._type == 1):
@@ -148,7 +151,7 @@ class _Scope:
                 arrayPtr = cast(var._ptr, POINTER(_Array))
                 array = arrayPtr.contents
 
-                offset = [round(val, 4) for val in list(array.offset)]
+                offset = [_parseFloat(val) for val in list(array.offset)]
 
             self.__intern[name] = {
                     'ptr': var._ptr,
