@@ -8,54 +8,54 @@ _street_sign = CDLL('libstreet_sign.so')
 _scn = CDLL('libscn.so')
 
 class _CArr(Structure):
-	_fields_ = [
-		('_ptr', c_void_p),
-		('_sz', c_size_t)
-	]
+    _fields_ = [
+            ('_ptr', c_void_p),
+            ('_sz', c_size_t)
+    ]
 
 class _Obj(Structure):
-	def __init__(self, ptr):
-		self._ptr = ptr
+    def __init__(self, ptr):
+        self._ptr = ptr
 
 # data
 class _Cont(Structure):
-	_fields_ = [
-		('_c', c_char),
-                ('_parent', c_void_p)
-	]
+    _fields_ = [
+            ('_c', c_char),
+            ('_parent', c_void_p)
+    ]
 
 class _Idx(Structure):
-	_fields_ = [
-		('data', POINTER(_Cont)),
-                ('sz', c_uint),
-                ('offset', c_float * 3),
-                ('_parent', c_void_p)
-	]
+    _fields_ = [
+            ('data', POINTER(_Cont)),
+            ('sz', c_uint),
+            ('offset', c_float * 3),
+            ('_parent', c_void_p)
+    ]
 
 class _Array(Structure):
-	_fields_ = [
-		('data', POINTER(POINTER(_Idx))),
-		('x', c_uint),
-		('y', c_uint),
-		('offset', c_float * 3),
-                ('_parent', c_void_p)
-	]
+    _fields_ = [
+            ('data', POINTER(POINTER(_Idx))),
+            ('x', c_uint),
+            ('y', c_uint),
+            ('offset', c_float * 3),
+            ('_parent', c_void_p)
+    ]
 
 class _Dict(Structure):
-	_fields_ = [
-		('data', POINTER(c_void_p)),
-		('type', POINTER(c_uint)),
-		('no', c_uint),
-                ('offset', c_float * 3),
-                ('_parent', c_void_p)
-	]
+    _fields_ = [
+            ('data', POINTER(c_void_p)),
+            ('type', POINTER(c_uint)),
+            ('no', c_uint),
+            ('offset', c_float * 3),
+            ('_parent', c_void_p)
+    ]
 
 class _Var(Structure):
-	_fields_ = [
-		('_id', c_char_p),
-		('_ptr', c_void_p),
-                ('_type', c_uint)
-	]
+    _fields_ = [
+            ('_id', c_char_p),
+            ('_ptr', c_void_p),
+            ('_type', c_uint)
+    ]
 
 class _Scope:
     def __parseByte(self, ptr):
@@ -192,22 +192,22 @@ goal = _Scope(_goal, _noData)
 
 # bound
 class _Lim(Structure):
-	_fields_ = [
-		('axis', c_uint),
-		('val', c_float),
-                ('_parent', c_void_p)
-	]
+    _fields_ = [
+            ('axis', c_uint),
+            ('val', c_float),
+            ('_parent', c_void_p)
+    ]
 
 _boundRngGet = _scn.boundRngGet
 _boundRngGet.restype = _CArr
 _boundRngGet.argtypes = None
 
 class _Cone(Structure):
-	_fields_ = [
-		('bound', c_float * 2 * 2),
-		('offset', c_float * 3),
-                ('_parent', c_void_p)
-	]
+    _fields_ = [
+            ('bound', c_float * 2 * 2),
+            ('offset', c_float * 3),
+            ('_parent', c_void_p)
+    ]
 
 _boundAreaGet = _scn.boundAreaGet
 _boundAreaGet.restype = _CArr
@@ -222,8 +222,8 @@ _boundRngGet.argtypes = None
 _ptrBoundArea = cast(_boundRngGet()._ptr, POINTER(POINTER(_Lim)))
 
 bound = {
-	'rng': _boundRngGet(),
-	'area': _boundAreaGet()
+        'rng': _boundRngGet(),
+        'area': _boundAreaGet()
 }
 
 # vehicle
@@ -232,89 +232,83 @@ _cIncr.restype = c_void_p
 _cIncr.argtypes = None
 
 class _Crane(_Obj):
-	_fields_ = [
-		('data', POINTER(_Cont)),
-		('offset', c_float * 3),
-                ('_parent', c_void_p)
-	]
+    _fields_ = [
+            ('_data', POINTER(_Cont)),
+            ('_offset', c_float * 3),
+            ('_parent', c_void_p)
+    ]
 
-	rngTrack = [
-		4.0,
-		13.8
-	]
-	rngHead = [
-		-3.0,
-		3.0
-        ]
+    rngTrack = [
+            4.0,
+            13.8
+    ]
+    rngHead = [
+            -3.0,
+            3.0
+    ]
 
-	def __getattribute__(self, attr):
-            ptr = super(_Crane, self).__getattribute__(attr)
+    @property
+    def data(self):
+        ptr = self._ptr
+        data = ptr.contents._data
 
-            if attr == 'data':
-                val = None
+        val = None
 
-                if ptr:
-                    val = ptr.contents._c
+        if data:
+            val = data.contents._c
 
-                return val
+        return val
 
-            if attr == 'offset':
-                ls = []
-                for i in range(3):
-                    ls.append(ptr[i])
+    @property
+    def offset(self):
+        ptr = self._ptr
+        offset = ptr.contents._offset
 
-                return ls
+        ls = []
+        for i in range(3):
+            ls.append(offset[i])
 
-	def zoom(self, delta):
-		_craneZoom(self._ptr, delta)
+        return ls
 
-		for i in range(3):
-			self.offset[i] = self._ptr.contents.offset[i]
+    def zoom(self, delta):
+        _craneZoom(self._ptr, delta)
 
-		_cIncr()
+        _cIncr()
 
-	def pan(self, delta):
-		_cranePan(self._ptr, delta)
+    def pan(self, delta):
+        _cranePan(self._ptr, delta)
 
-		for i in range(3):
-			self.offset[i] = self._ptr.contents.offset[i]
+        _cIncr()
 
-		_cIncr()
+    def ped(self, delta):
+        _cranePed(self._ptr, delta)
 
-	def ped(self, delta):
-		_cranePed(self._ptr, delta)
+        _cIncr()
 
-		for i in range(3):
-			self.offset[i] = self._ptr.contents.offset[i]
+    def grab(self):
+        _craneGrab(self._ptr)
 
-		_cIncr()
-
-	def grab(self):
-		_craneGrab(self._ptr)
-
-		self.data = self._ptr.contents.data
-
-		_cIncr()
+        _cIncr()
 
 _craneZoom = _crane.craneZoom
 _craneZoom.restype = c_void_p
 _craneZoom.argtypes = [
-	POINTER(_Crane),
-	c_float
+        POINTER(_Crane),
+        c_float
 ]
 
 _cranePan = _crane.cranePan
 _cranePan.restype = c_void_p
 _cranePan.argtypes = [
-	POINTER(_Crane),
-	c_float
+        POINTER(_Crane),
+        c_float
 ]
 
 _cranePed = _crane.cranePed
 _cranePed.restype = c_void_p
 _cranePed.argtypes = [
-	POINTER(_Crane),
-	c_float
+        POINTER(_Crane),
+        c_float
 ]
 
 _craneGrab = _crane.craneGrab
@@ -322,71 +316,71 @@ _craneGrab.restype = c_void_p
 _craneGrab.argtypes = None
 
 class _Truck(_Obj):
-	_fields_ = [
-		('data', POINTER(_Array)),
-		('offset', c_float * 3),
-		('ang', c_float),
-                ('_uni', c_uint * 2),
-                ('_parent', c_void_p)
-	]
+    _fields_ = [
+            ('data', POINTER(_Array)),
+            ('offset', c_float * 3),
+            ('ang', c_float),
+            ('_uni', c_uint * 2),
+            ('_parent', c_void_p)
+    ]
 
-	rngWheel = [
-		-(math.pi / 2),
-		math.pi / 2
-	]
+    rngWheel = [
+            -(math.pi / 2),
+            math.pi / 2
+    ]
 
-	def turn(self, delta):
-		_truckTurn(self._ptr, delta)
+    def turn(self, delta):
+        _truckTurn(self._ptr, delta)
 
-		self.ang = self._ptr.contents.ang
+        self.ang = self._ptr.contents.ang
 
-		for i in range(3):
-			self.offset[i] = self._ptr.contents.offset[i]
+        for i in range(3):
+            self.offset[i] = self._ptr.contents.offset[i]
 
-		_cIncr()
+        _cIncr()
 
-	def mv(self, delta):
-		for i in range(3):
-			self.offset[i] = self._ptr.contents.offset[i]
+    def mv(self, delta):
+        for i in range(3):
+            self.offset[i] = self._ptr.contents.offset[i]
 
-		_truckMv(self._ptr, delta)
+        _truckMv(self._ptr, delta)
 
-		_cIncr()
+        _cIncr()
 
 _truckTurn = _truck.truckTurn
 _truckTurn.restype = c_void_p
 _truckTurn.argtypes = [
-		POINTER(_Truck),
-		c_float
+                POINTER(_Truck),
+                c_float
 ]
 
 _truckMv = _truck.truckMv
 _truckMv.restype = c_void_p
 _truckMv.argtypes = [
-		POINTER(_Truck),
-		c_float
+                POINTER(_Truck),
+                c_float
 ]
 
 class _CargoShip(_Obj):
-	_fields_ = [
-		('data', POINTER(_Array)),
-		('offset', c_float * 3),
-                ('_parent', c_void_p)
-	]
+    _fields_ = [
+            ('data', POINTER(_Array)),
+            ('offset', c_float * 3),
+            ('_parent', c_void_p)
+    ]
 
-	def mv(self, delta):
-		_cargoShipMv(self._ptr, delta)
+    def mv(self, delta):
+        _cargoShipMv(self._ptr, delta)
 
-		for i in range(3):
-			self.offset[i] = self._ptr.contents.offset[i]
+        for i in range(3):
+            self.offset[i] = self._ptr.contents.offset[i]
 
-		_cIncr()
+        _cIncr()
 
 _cargoShipMv = _cargo_ship.cargoShipMv
 _cargoShipMv.restype = c_void_p
 _cargoShipMv.argtypes = [
-		POINTER(_CargoShip),
-		c_float
+                POINTER(_CargoShip),
+                c_float
 ]
 
 _craneGet = _scn.craneGet
@@ -397,17 +391,17 @@ _cranePtr = cast(_craneGet()._ptr, POINTER(POINTER(_Crane)))
 
 crane = None
 if _craneGet()._sz:
-	if _craneGet()._sz > 8:
-		crane = []
+    if _craneGet()._sz > 8:
+        crane = []
 
-		i = 0
-		while i < _craneGet()._sz:
-			crane.append(_Crane(_cranePtr[i]))
+        i = 0
+        while i < _craneGet()._sz:
+            crane.append(_Crane(_cranePtr[i]))
 
-			i += sizeof(c_void_p)
+            i += sizeof(c_void_p)
 
-	else:
-		crane = _Crane(_cranePtr[0])
+    else:
+        crane = _Crane(_cranePtr[0])
 
 _truckGet = _scn.truckGet
 _truckGet.restype = _CArr
@@ -417,17 +411,17 @@ _truckPtr = cast(_truckGet()._ptr, POINTER(POINTER(_Truck)))
 
 truck = None
 if _truckGet()._sz:
-	if _truckGet()._sz > 8:
-		truck = []
+    if _truckGet()._sz > 8:
+        truck = []
 
-		i = 0
-		while i < _truckGet()._sz:
-			truck.append(_Truck(_truckPtr[i]))
+        i = 0
+        while i < _truckGet()._sz:
+            truck.append(_Truck(_truckPtr[i]))
 
-			i += sizeof(c_void_p)
+            i += sizeof(c_void_p)
 
-	else:
-		truck = _Truck(_truckPtr[0])
+    else:
+        truck = _Truck(_truckPtr[0])
 
 _cargoShipGet = _scn.cargoShipGet
 _cargoShipGet.restype = _CArr
@@ -437,28 +431,28 @@ _cargoShipPtr = cast(_cargoShipGet()._ptr, POINTER(POINTER(_CargoShip)))
 
 cargo_ship = None
 if _cargoShipGet()._sz:
-	if _cargoShipGet()._sz > 8:
-		cargo_ship = []
+    if _cargoShipGet()._sz > 8:
+        cargo_ship = []
 
-		i = 0
-		while i < _cargoShipGet()._sz:
-			cargo_ship.append(_CargoShip(_cargoShipPtr))
+        i = 0
+        while i < _cargoShipGet()._sz:
+            cargo_ship.append(_CargoShip(_cargoShipPtr))
 
-			i += sizeof(c_void_p)
+            i += sizeof(c_void_p)
 
-	else:
-		cargo_ship = _CargoShip(_cargoShipPtr[0])
+    else:
+        cargo_ship = _CargoShip(_cargoShipPtr[0])
 
 class _StreetSign(_Obj):
-	_fields_ = [
-		('_pass', _CArr),
-                ('_parent', c_void_p)
-	]
+    _fields_ = [
+            ('_pass', _CArr),
+            ('_parent', c_void_p)
+    ]
 
-	def toggle(self, i):
-		_streetSignToggle(self._ptr, i)
+    def toggle(self, i):
+        _streetSignToggle(self._ptr, i)
 
-		_cIncr()
+        _cIncr()
 
 # control-flow
 _streetSignGet = _scn.streetSignGet
@@ -474,9 +468,9 @@ _streetSignPtr = cast(_streetSignGet()._ptr, POINTER(_StreetSign))
 street_sign = []
 i = 0
 while i < _streetSignGet()._sz:
-	street_sign.append(_StreetSign(_streetSignPtr[i]))
+    street_sign.append(_StreetSign(_streetSignPtr[i]))
 
-	i += sizeof(c_void_p)
+    i += sizeof(c_void_p)
 
 # path
 ## node
