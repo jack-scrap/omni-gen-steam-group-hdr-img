@@ -19,7 +19,7 @@ def _parseIdx(ptr):
     ptrIdx = cast(ptr, POINTER(_Idx))
     idx = ptrIdx.contents
 
-    ls = cast(idx.data, POINTER(POINTER(_Cont)))
+    contPtrPtr = cast(idx.data, POINTER(POINTER(_Cont)))
 
     if (idx.sz):
         # list
@@ -27,11 +27,11 @@ def _parseIdx(ptr):
             rep = []
 
             for i in range(idx.sz):
-                rep.append(_parseByte(ls[i]))
+                rep.append(_parseByte(contPtrPtr[i]))
 
         # scalar
         else:
-            rep = _parseByte(ls[0])
+            rep = _parseByte(contPtrPtr[0])
 
     return rep
 
@@ -41,7 +41,7 @@ def _parseArray(ptr):
     ptrArray = cast(ptr, POINTER(_Array))
     array = ptrArray.contents
 
-    lsIdx = cast(array.data, POINTER(POINTER(_Idx)))
+    idxPtrPtr = cast(array.data, POINTER(POINTER(_Idx)))
 
     # 2D
     if (array.y > 1):
@@ -51,14 +51,14 @@ def _parseArray(ptr):
             for x in range(array.x):
                 i = (y * array.y) + x
 
-                sub.append(_parseIdx(lsIdx[i]))
+                sub.append(_parseIdx(idxPtrPtr[i]))
 
             rep.append(sub)
 
     # 1D
     else:
         for x in range(array.x):
-            rep.append(_parseIdx(lsIdx[x]))
+            rep.append(_parseIdx(idxPtrPtr[x]))
 
         return rep
 
