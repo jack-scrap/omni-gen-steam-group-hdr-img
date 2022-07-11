@@ -31,7 +31,7 @@ def _parseIdx(ptr):
 
         # scalar
         else:
-            rep = _parseByte(contPtrPtr[0])
+            rep = _parseByte(contPtrPtr.contents)
 
     return rep
 
@@ -425,7 +425,7 @@ if _craneGet()._sz:
             i += sizeof(c_void_p)
 
     else:
-        crane = _Crane(_cranePtr[0])
+        crane = _Crane(_cranePtr.contents)
 
 _truckGet = _scn.truckGet
 _truckGet.restype = _CArr
@@ -445,7 +445,7 @@ if _truckGet()._sz:
             i += sizeof(c_void_p)
 
     else:
-        truck = _Truck(_truckPtr[0])
+        truck = _Truck(_truckPtr.contents)
 
 _cargoShipGet = _scn.cargoShipGet
 _cargoShipGet.restype = _CArr
@@ -465,7 +465,7 @@ if _cargoShipGet()._sz:
             i += sizeof(c_void_p)
 
     else:
-        cargo_ship = _CargoShip(_cargoShipPtr[0])
+        cargo_ship = _CargoShip(_cargoShipPtr.contents)
 
 class _StreetSign(_Obj):
     _fields_ = [
