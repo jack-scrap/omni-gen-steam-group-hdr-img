@@ -317,9 +317,9 @@ _craneGrab.argtypes = None
 
 class _Truck(_Obj):
     _fields_ = [
-            ('data', POINTER(_Array)),
-            ('offset', c_float * 3),
-            ('ang', c_float),
+            ('_data', POINTER(_Array)),
+            ('_offset', c_float * 3),
+            ('_ang', c_float),
             ('_uni', c_uint * 2),
             ('_parent', c_void_p)
     ]
@@ -329,20 +329,37 @@ class _Truck(_Obj):
             math.pi / 2
     ]
 
+    @property
+    def data(self):
+        ptr = self._ptr
+        arrayPtr = ptr.contents._data
+
+        return _parseArray(arrayPtr)
+
+    @property
+    def offset(self):
+        ptr = self._ptr
+        offset = ptr.contents._offset
+
+        ls = []
+        for i in range(3):
+            ls.append(offset[i])
+
+        return ls
+
+    @property
+    def ang(self):
+        ptr = self._ptr
+        ang = ptr.contents._ang
+
+        return ang
+
     def turn(self, delta):
         _truckTurn(self._ptr, delta)
-
-        self.ang = self._ptr.contents.ang
-
-        for i in range(3):
-            self.offset[i] = self._ptr.contents.offset[i]
 
         _cIncr()
 
     def mv(self, delta):
-        for i in range(3):
-            self.offset[i] = self._ptr.contents.offset[i]
-
         _truckMv(self._ptr, delta)
 
         _cIncr()
