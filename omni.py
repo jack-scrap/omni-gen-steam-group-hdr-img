@@ -264,9 +264,7 @@ class _Crane(_Obj):
         ptr = self._ptr
         offset = ptr.contents._offset
 
-        ls = []
-        for i in range(3):
-            ls.append(offset[i])
+        ls = [round(val, 4) for val in list(offset)]
 
         return ls
 
@@ -341,9 +339,7 @@ class _Truck(_Obj):
         ptr = self._ptr
         offset = ptr.contents._offset
 
-        ls = []
-        for i in range(3):
-            ls.append(offset[i])
+        ls = [round(val, 4) for val in list(offset)]
 
         return ls
 
@@ -397,9 +393,7 @@ class _CargoShip(_Obj):
         ptr = self._ptr
         offset = ptr.contents._offset
 
-        ls = []
-        for i in range(3):
-            ls.append(offset[i])
+        ls = [round(val, 4) for val in list(offset)]
 
         return ls
 
