@@ -7,6 +7,61 @@ _cargo_ship = CDLL('libcargo_ship.so')
 _street_sign = CDLL('libstreet_sign.so')
 _scn = CDLL('libscn.so')
 
+def _parseByte(ptr):
+    contPtr = ptr
+    cont = contPtr.contents
+
+    return int.from_bytes(cont._c, byteorder = 'little')
+
+def _parseIdx(ptr):
+    rep = None
+
+    ptrIdx = cast(ptr, POINTER(_Idx))
+    idx = ptrIdx.contents
+
+    ls = cast(idx.data, POINTER(POINTER(_Cont)))
+
+    if (idx.sz):
+        # list
+        if idx.sz > 1:
+            rep = []
+
+            for i in range(idx.sz):
+                rep.append(_parseByte(ls[i]))
+
+        # scalar
+        else:
+            rep = _parseByte(ls[0])
+
+    return rep
+
+def _parseArray(ptr):
+    rep = []
+
+    ptrArray = cast(ptr, POINTER(_Array))
+    array = ptrArray.contents
+
+    lsIdx = cast(array.data, POINTER(POINTER(_Idx)))
+
+    # 2D
+    if (array.y > 1):
+        for y in range(array.y):
+            sub = []
+
+            for x in range(array.x):
+                i = (y * array.y) + x
+
+                sub.append(_parseIdx(lsIdx[i]))
+
+            rep.append(sub)
+
+    # 1D
+    else:
+        for x in range(array.x):
+            rep.append(_parseIdx(lsIdx[x]))
+
+        return rep
+
 class _CArr(Structure):
     _fields_ = [
             ('_ptr', c_void_p),
@@ -58,61 +113,6 @@ class _Var(Structure):
     ]
 
 class _Scope:
-    def __parseByte(self, ptr):
-        contPtr = ptr
-        cont = contPtr.contents
-
-        return int.from_bytes(cont._c, byteorder = 'little')
-
-    def __parseIdx(self, ptr):
-        rep = None
-
-        ptrIdx = cast(ptr, POINTER(_Idx))
-        idx = ptrIdx.contents
-
-        ls = cast(idx.data, POINTER(POINTER(_Cont)))
-
-        if (idx.sz):
-            # list
-            if idx.sz > 1:
-                rep = []
-
-                for i in range(idx.sz):
-                    rep.append(self.__parseByte(ls[i]))
-
-            # scalar
-            else:
-                rep = self.__parseByte(ls[0])
-
-        return rep
-
-    def __parseArray(self, ptr):
-        rep = []
-
-        ptrArray = cast(ptr, POINTER(_Array))
-        array = ptrArray.contents
-
-        lsIdx = cast(array.data, POINTER(POINTER(_Idx)))
-
-        # 2D
-        if (array.y > 1):
-            for y in range(array.y):
-                sub = []
-
-                for x in range(array.x):
-                    i = (y * array.y) + x
-
-                    sub.append(self.__parseIdx(lsIdx[i]))
-
-                rep.append(sub)
-
-        # 1D
-        else:
-            for x in range(array.x):
-                rep.append(self.__parseIdx(lsIdx[x]))
-
-        return rep
-
     def __init__(self, ptr, no):
         self.__intern = {}
 
@@ -127,7 +127,7 @@ class _Scope:
 
             # index
             if (var._type == 0):
-                rep = self.__parseIdx(var._ptr)
+                rep = _parseIdx(var._ptr)
 
                 idxPtr = cast(var._ptr, POINTER(_Idx))
                 idx = idxPtr.contents
@@ -136,7 +136,7 @@ class _Scope:
 
             # array
             if (var._type == 1):
-                rep = self.__parseArray(var._ptr)
+                rep = _parseArray(var._ptr)
 
                 arrayPtr = cast(var._ptr, POINTER(_Array))
                 array = arrayPtr.contents
@@ -160,11 +160,11 @@ class _Scope:
 
         # index
         if (t == 0):
-            rep = self.__parseIdx(ptr)
+            rep = _parseIdx(ptr)
 
         # array
         if (t == 1):
-            rep = self.__parseArray(ptr)
+            rep = _parseArray(ptr)
 
         return {
                 'val': rep,
