@@ -122,10 +122,10 @@ CArr pathGet() {
 	return path;
 }
 
-unsigned int c = 0;
+unsigned int call = 0;
 
-void cIncr() {
-	c++;
+void callIncr() {
+	call++;
 }
 
 void scn::init(std::string stage, unsigned int lvl) {
@@ -609,5 +609,5 @@ void scn::init(std::string stage, unsigned int lvl) {
 	}
 
 	/* general */
-	c = 0;
+	call = 0;
 }

@@ -237,9 +237,9 @@ bound = {
 }
 
 # vehicle
-_cIncr = _scn.cIncr
-_cIncr.restype = c_void_p
-_cIncr.argtypes = None
+_callIncr = _scn.callIncr
+_callIncr.restype = c_void_p
+_callIncr.argtypes = None
 
 class _Crane(_Obj):
     _fields_ = [
@@ -278,22 +278,22 @@ class _Crane(_Obj):
     def zoom(self, delta):
         _craneZoom(self._ptr, delta)
 
-        _cIncr()
+        _callIncr()
 
     def pan(self, delta):
         _cranePan(self._ptr, delta)
 
-        _cIncr()
+        _callIncr()
 
     def ped(self, delta):
         _cranePed(self._ptr, delta)
 
-        _cIncr()
+        _callIncr()
 
     def grab(self):
         _craneGrab(self._ptr)
 
-        _cIncr()
+        _callIncr()
 
 _craneZoom = _crane.craneZoom
 _craneZoom.restype = c_void_p
@@ -357,12 +357,12 @@ class _Truck(_Obj):
     def turn(self, delta):
         _truckTurn(self._ptr, delta)
 
-        _cIncr()
+        _callIncr()
 
     def mv(self, delta):
         _truckMv(self._ptr, delta)
 
-        _cIncr()
+        _callIncr()
 
 _truckTurn = _truck.truckTurn
 _truckTurn.restype = c_void_p
@@ -401,7 +401,7 @@ class _CargoShip(_Obj):
     def mv(self, delta):
         _cargoShipMv(self._ptr, delta)
 
-        _cIncr()
+        _callIncr()
 
 _cargoShipMv = _cargo_ship.cargoShipMv
 _cargoShipMv.restype = c_void_p
@@ -479,7 +479,7 @@ class _StreetSign(_Obj):
     def toggle(self, i):
         _streetSignToggle(self._ptr, i)
 
-        _cIncr()
+        _callIncr()
 
 # control-flow
 _streetSignGet = _scn.streetSignGet

@@ -61,8 +61,8 @@ extern "C" CArr nodeGet();
 extern "C" CArr path;
 extern "C" CArr pathGet();
 
-extern "C" unsigned int c;
-extern "C" void cIncr();
+extern "C" unsigned int call;
+extern "C" void callIncr();
 
 namespace scn {
 	extern std::vector<Obj*> obj;

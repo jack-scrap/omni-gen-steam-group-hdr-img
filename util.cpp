@@ -1456,7 +1456,7 @@ std::vector<std::string> util::log(unsigned int loc, unsigned int ptrEditorX) {
 			std::to_string(loc)
 		}, {
 			"CALLS",
-			std::to_string(c)
+			std::to_string(call)
 		}
 	};
 
