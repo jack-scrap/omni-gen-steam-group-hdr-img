@@ -217,7 +217,7 @@ class _Bound:
             conePtrPtr = cast(cArr.ptr, POINTER(POINTER(_Cone)))
 
             i = 0
-            while i < int(cArr.sz / 4):
+            while i < int(cArr.sz / 8):
                 conePtr = conePtrPtr[i]
                 cone = conePtr.contents
 
