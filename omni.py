@@ -117,9 +117,9 @@ class _Dict(Structure):
 
 class _Var(Structure):
     _fields_ = [
-            ('_id', c_char_p),
-            ('_ptr', c_void_p),
-            ('_type', c_uint)
+            ('id', c_char_p),
+            ('ptr', c_void_p),
+            ('type', c_uint)
     ]
 
 class _Scope:
@@ -130,32 +130,32 @@ class _Scope:
             varPtr = ptr[i]
             var = varPtr.contents
 
-            name = var._id.decode('utf-8')
+            name = var.id.decode('utf-8')
 
             rep = None
             offset = None
 
             # index
-            if (var._type == 0):
-                rep = _parseIdx(var._ptr)
+            if (var.type == 0):
+                rep = _parseIdx(var.ptr)
 
-                idxPtr = cast(var._ptr, POINTER(_Idx))
+                idxPtr = cast(var.ptr, POINTER(_Idx))
                 idx = idxPtr.contents
 
                 offset = [_parseFloat(val) for val in list(idx.offset)]
 
             # array
-            if (var._type == 1):
-                rep = _parseArray(var._ptr)
+            if (var.type == 1):
+                rep = _parseArray(var.ptr)
 
-                arrayPtr = cast(var._ptr, POINTER(_Array))
+                arrayPtr = cast(var.ptr, POINTER(_Array))
                 array = arrayPtr.contents
 
                 offset = [_parseFloat(val) for val in list(array.offset)]
 
             self.__intern[name] = {
-                    'ptr': var._ptr,
-                    'type': var._type,
+                    'ptr': var.ptr,
+                    'type': var.type,
                     'offset': offset
             }
 
