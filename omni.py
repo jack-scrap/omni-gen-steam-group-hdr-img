@@ -202,12 +202,18 @@ class _Bound:
                 limMinPtr = limPtrPtr[i]
                 limMin = limMinPtr.contents
 
-                rng['max'] = _parseFloat(limMin.val)
+                rng['max'] = {
+                        'axis': limMin.axis,
+                        'val': _parseFloat(limMin.val)
+                }
 
                 limMaxPtr = limPtrPtr[i + 1]
                 limMax = limMaxPtr.contents
 
-                rng['min'] = _parseFloat(limMax.val)
+                rng['min'] = {
+                        'axis': limMax.axis,
+                        'val': _parseFloat(limMax.val)
+                }
 
                 rep.append(rng)
 
@@ -221,12 +227,20 @@ class _Bound:
                 conePtr = conePtrPtr[i]
                 cone = conePtr.contents
 
+                area = []
                 for y in range(2):
                     rng = []
                     for x in range(2):
                         rng.append(_parseFloat(cone.bound[y][x]))
 
-                    rep.append(rng)
+                    area.append(rng)
+
+                offset = _parseOffset(conePtr)
+
+                rep.append({
+                    'bound': rng,
+                    'offset': offset
+                })
 
                 i += 1
 
