@@ -188,6 +188,20 @@ class _Bound:
                 'area': ptrArea
         }
 
+    def _axisStr(self, i):
+        val = None
+
+        if i == 0:
+            val = 'X'
+
+        if i == 1:
+            val = 'Y'
+
+        if i == 2:
+            val = 'Z'
+
+        return val
+
     def __getitem__(self, k):
         cArr = self._intern[k]
 
@@ -201,7 +215,7 @@ class _Bound:
                 lim = limPtr.contents
 
                 rep.append({
-                        'axis': lim.axis,
+                        'axis': self._axisStr(lim.axis),
                         'val': _parseFloat(lim.val)
                 })
 
