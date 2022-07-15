@@ -66,7 +66,7 @@ def _parseArray(ptr):
         return rep
 
 def _parseOffset(ptr):
-    offset = ptr.contents._offset
+    offset = ptr.contents.offset
 
     ls = [_parseFloat(val) for val in list(offset)]
 
@@ -243,8 +243,8 @@ _callIncr.argtypes = None
 
 class _Crane(_Obj):
     _fields_ = [
-            ('_data', POINTER(_Cont)),
-            ('_offset', c_float * 3),
+            ('data', POINTER(_Cont)),
+            ('offset', c_float * 3),
             ('_parent', c_void_p)
     ]
 
@@ -322,9 +322,9 @@ _craneGrab.argtypes = None
 
 class _Truck(_Obj):
     _fields_ = [
-            ('_data', POINTER(_Array)),
-            ('_offset', c_float * 3),
-            ('_ang', c_float),
+            ('data', POINTER(_Array)),
+            ('offset', c_float * 3),
+            ('ang', c_float),
             ('_uni', c_uint * 2),
             ('_parent', c_void_p)
     ]
@@ -337,7 +337,7 @@ class _Truck(_Obj):
     @property
     def data(self):
         ptr = self._ptr
-        arrayPtr = ptr.contents._data
+        arrayPtr = ptr.contents.data
 
         return _parseArray(arrayPtr)
 
@@ -350,7 +350,7 @@ class _Truck(_Obj):
     @property
     def ang(self):
         ptr = self._ptr
-        ang = ptr.contents._ang
+        ang = ptr.contents.ang
 
         return ang
 
@@ -380,15 +380,15 @@ _truckMv.argtypes = [
 
 class _CargoShip(_Obj):
     _fields_ = [
-            ('_data', POINTER(_Array)),
-            ('_offset', c_float * 3),
+            ('data', POINTER(_Array)),
+            ('offset', c_float * 3),
             ('_parent', c_void_p)
     ]
 
     @property
     def data(self):
         ptr = self._ptr
-        arrayPtr = ptr.contents._data
+        arrayPtr = ptr.contents.data
 
         return _parseArray(arrayPtr)
 
