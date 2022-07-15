@@ -191,7 +191,17 @@ class _Bound:
     def __getitem__(self, k):
         cArr = self._intern[k]
 
-        ptr = cast(cArr.ptr, POINTER(_Var))
+        rep = []
+        if k == 'rng':
+            limPtrPtr = cast(cArr.ptr, POINTER(POINTER(_Lim)))
+
+            for i in range(int(cArr.sz / 4)):
+                limPtr = limPtrPtr[i]
+                lim = limPtr.contents
+
+                rep.append(_parseFloat(lim.val))
+
+        return rep
 
 _dataGet = _scn.dataGet
 _dataGet.restype = POINTER(POINTER(_Var))
