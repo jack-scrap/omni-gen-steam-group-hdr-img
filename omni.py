@@ -221,14 +221,13 @@ class _Bound:
                 conePtr = conePtrPtr[i]
                 cone = conePtr.contents
 
-                area = []
                 for y in range(2):
                     rng = []
 
                     for x in range(2):
                         rng.append(_parseFloat(cone.bound[y][x]))
 
-                    area.append(rng)
+                    rep.append(rng)
 
                 i += 1
 
