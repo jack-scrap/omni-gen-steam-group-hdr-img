@@ -226,9 +226,7 @@ class _Bound:
                     innerLs = []
 
                     for x in range(2):
-                        idx = (y * 2) + x
-
-                        innerLs.append(cone.bound[idx])
+                        innerLs.append(_parseFloat(cone.bound[y][x]))
 
                     data.append(innerLs)
 
