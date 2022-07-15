@@ -74,8 +74,8 @@ def _parseOffset(ptr):
 
 class _CArr(Structure):
     _fields_ = [
-            ('_ptr', c_void_p),
-            ('_sz', c_size_t)
+            ('ptr', c_void_p),
+            ('sz', c_size_t)
     ]
 
 class _Obj(Structure):
@@ -223,13 +223,13 @@ _boundAreaGet = _scn.boundAreaGet
 _boundAreaGet.restype = _CArr
 _boundAreaGet.argtypes = None
 
-_ptrBoundArea = cast(_boundAreaGet()._ptr, POINTER(POINTER(_Cone)))
+_ptrBoundArea = cast(_boundAreaGet().ptr, POINTER(POINTER(_Cone)))
 
 _boundRngGet = _scn.boundRngGet
 _boundRngGet.restype = _CArr
 _boundRngGet.argtypes = None
 
-_ptrBoundArea = cast(_boundRngGet()._ptr, POINTER(POINTER(_Lim)))
+_ptrBoundArea = cast(_boundRngGet().ptr, POINTER(POINTER(_Lim)))
 
 bound = {
         'rng': _boundRngGet(),
@@ -414,15 +414,15 @@ _craneGet = _scn.craneGet
 _craneGet.restype = _CArr
 _craneGet.argtypes = None
 
-_cranePtr = cast(_craneGet()._ptr, POINTER(POINTER(_Crane)))
+_cranePtr = cast(_craneGet().ptr, POINTER(POINTER(_Crane)))
 
 crane = None
-if _craneGet()._sz:
-    if _craneGet()._sz > 8:
+if _craneGet().sz:
+    if _craneGet().sz > 8:
         crane = []
 
         i = 0
-        while i < _craneGet()._sz:
+        while i < _craneGet().sz:
             crane.append(_Crane(_cranePtr[i]))
 
             i += sizeof(c_void_p)
@@ -434,15 +434,15 @@ _truckGet = _scn.truckGet
 _truckGet.restype = _CArr
 _truckGet.argtypes = None
 
-_truckPtr = cast(_truckGet()._ptr, POINTER(POINTER(_Truck)))
+_truckPtr = cast(_truckGet().ptr, POINTER(POINTER(_Truck)))
 
 truck = None
-if _truckGet()._sz:
-    if _truckGet()._sz > 8:
+if _truckGet().sz:
+    if _truckGet().sz > 8:
         truck = []
 
         i = 0
-        while i < _truckGet()._sz:
+        while i < _truckGet().sz:
             truck.append(_Truck(_truckPtr[i]))
 
             i += sizeof(c_void_p)
@@ -454,15 +454,15 @@ _cargoShipGet = _scn.cargoShipGet
 _cargoShipGet.restype = _CArr
 _cargoShipGet.argtypes = None
 
-_cargoShipPtr = cast(_cargoShipGet()._ptr, POINTER(POINTER(_CargoShip)))
+_cargoShipPtr = cast(_cargoShipGet().ptr, POINTER(POINTER(_CargoShip)))
 
 cargo_ship = None
-if _cargoShipGet()._sz:
-    if _cargoShipGet()._sz > 8:
+if _cargoShipGet().sz:
+    if _cargoShipGet().sz > 8:
         cargo_ship = []
 
         i = 0
-        while i < _cargoShipGet()._sz:
+        while i < _cargoShipGet().sz:
             cargo_ship.append(_CargoShip(_cargoShipPtr))
 
             i += sizeof(c_void_p)
@@ -490,11 +490,11 @@ _streetSignToggle = _street_sign.streetSignToggle
 _streetSignToggle.restype = c_uint
 _streetSignToggle.argtypes = None
 
-_streetSignPtr = cast(_streetSignGet()._ptr, POINTER(_StreetSign))
+_streetSignPtr = cast(_streetSignGet().ptr, POINTER(_StreetSign))
 
 street_sign = []
 i = 0
-while i < _streetSignGet()._sz:
+while i < _streetSignGet().sz:
     street_sign.append(_StreetSign(_streetSignPtr[i]))
 
     i += sizeof(c_void_p)
