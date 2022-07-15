@@ -188,6 +188,11 @@ class _Bound:
                 'area': ptrArea
         }
 
+    def __getitem__(self, k):
+        cArr = self._intern[k]
+
+        ptr = cast(cArr.ptr, POINTER(_Var))
+
 _dataGet = _scn.dataGet
 _dataGet.restype = POINTER(POINTER(_Var))
 _dataGet.argtypes = None
