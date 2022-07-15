@@ -195,11 +195,25 @@ class _Bound:
         if k == 'rng':
             limPtrPtr = cast(cArr.ptr, POINTER(POINTER(_Lim)))
 
-            for i in range(int(cArr.sz / 4)):
-                limPtr = limPtrPtr[i]
-                lim = limPtr.contents
+            i = 0
+            while i < int(cArr.sz / 4):
+                rng = {}
 
-                rep.append(_parseFloat(lim.val))
+                limMinPtr = limPtrPtr[i]
+                limMin = limMinPtr.contents
+
+                rng['max'] = _parseFloat(limMin.val)
+
+                limMaxPtr = limPtrPtr[i + 1]
+                limMax = limMaxPtr.contents
+
+                rng['min'] = _parseFloat(limMax.val)
+
+                rep.append(rng)
+
+                i += 2
+
+                rep.append(rng)
 
         return rep
 
