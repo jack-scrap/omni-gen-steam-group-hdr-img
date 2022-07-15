@@ -223,7 +223,6 @@ class _Bound:
 
                 for y in range(2):
                     rng = []
-
                     for x in range(2):
                         rng.append(_parseFloat(cone.bound[y][x]))
 
