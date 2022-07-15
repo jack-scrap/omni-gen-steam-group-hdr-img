@@ -197,27 +197,15 @@ class _Bound:
 
             i = 0
             while i < int(cArr.sz / 4):
-                rng = {}
+                limPtr = limPtrPtr[i]
+                lim = limPtr.contents
 
-                limMinPtr = limPtrPtr[i]
-                limMin = limMinPtr.contents
+                rep.append({
+                        'axis': lim.axis,
+                        'val': _parseFloat(lim.val)
+                })
 
-                rng['max'] = {
-                        'axis': limMin.axis,
-                        'val': _parseFloat(limMin.val)
-                }
-
-                limMaxPtr = limPtrPtr[i + 1]
-                limMax = limMaxPtr.contents
-
-                rng['min'] = {
-                        'axis': limMax.axis,
-                        'val': _parseFloat(limMax.val)
-                }
-
-                rep.append(rng)
-
-                i += 2
+                i += 1
 
         if k == 'area':
             conePtrPtr = cast(cArr.ptr, POINTER(POINTER(_Cone)))
