@@ -181,6 +181,13 @@ class _Scope:
                 'offset': offset
         }
 
+class _Bound:
+    def __init__(self, ptrRng, ptrArea):
+        self._intern = {
+                'rng': ptrRng,
+                'area': ptrArea
+        }
+
 _dataGet = _scn.dataGet
 _dataGet.restype = POINTER(POINTER(_Var))
 _dataGet.argtypes = None
@@ -231,10 +238,7 @@ _boundRngGet.argtypes = None
 
 _ptrBoundArea = cast(_boundRngGet().ptr, POINTER(POINTER(_Lim)))
 
-bound = {
-        'rng': _boundRngGet(),
-        'area': _boundAreaGet()
-}
+bound = _Bound(_boundRngGet(), _boundAreaGet())
 
 # vehicle
 _callIncr = _scn.callIncr
