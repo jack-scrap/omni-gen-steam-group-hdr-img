@@ -213,7 +213,26 @@ class _Bound:
 
                 i += 2
 
-                rep.append(rng)
+        if k == 'area':
+            conePtrPtr = cast(cArr.ptr, POINTER(POINTER(_Cone)))
+
+            i = 0
+            while i < int(cArr.sz / 4):
+                conePtr = conePtrPtr[i]
+                cone = conePtr.contents
+
+                data = []
+                for y in range(2):
+                    innerLs = []
+
+                    for x in range(2):
+                        idx = (y * 2) + x
+
+                        innerLs.append(cone.bound[idx])
+
+                    data.append(innerLs)
+
+                i += 1
 
         return rep
 
