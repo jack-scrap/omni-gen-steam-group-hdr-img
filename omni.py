@@ -236,7 +236,7 @@ class _Bound:
                 offset = _parseOffset(conePtr)
 
                 rep.append({
-                    'bound': rng,
+                    'bound': area,
                     'offset': offset
                 })
 
