@@ -209,8 +209,7 @@ class _Bound:
         if k == 'rng':
             limPtrPtr = cast(cArr.ptr, POINTER(POINTER(_Lim)))
 
-            i = 0
-            while i < int(cArr.sz / 4):
+            for i in range(int(cArr.sz / 4)):
                 limPtr = limPtrPtr[i]
                 lim = limPtr.contents
 
@@ -219,13 +218,10 @@ class _Bound:
                         'val': _parseFloat(lim.val)
                 })
 
-                i += 1
-
         if k == 'area':
             conePtrPtr = cast(cArr.ptr, POINTER(POINTER(_Cone)))
 
-            i = 0
-            while i < int(cArr.sz / 8):
+            for i in range(int(cArr.sz / 8)):
                 conePtr = conePtrPtr[i]
                 cone = conePtr.contents
 
@@ -243,8 +239,6 @@ class _Bound:
                     'bound': rng,
                     'offset': offset
                 })
-
-                i += 1
 
         return rep
 
