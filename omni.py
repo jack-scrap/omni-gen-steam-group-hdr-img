@@ -140,7 +140,7 @@ class _Scope:
                 idxPtr = cast(var.ptr, POINTER(_Idx))
                 idx = idxPtr.contents
 
-                offset = [_parseFloat(val) for val in list(idx.offset)]
+                offset = _parseOffset(idx.offset)
 
             # array
             if (var.type == 1):
@@ -149,7 +149,7 @@ class _Scope:
                 arrayPtr = cast(var.ptr, POINTER(_Array))
                 array = arrayPtr.contents
 
-                offset = [_parseFloat(val) for val in list(array.offset)]
+                offset = _parseOffset(array.offset)
 
             self.__intern[name] = {
                     'ptr': var.ptr,
