@@ -6,12 +6,12 @@
 #include "obj.h"
 
 typedef struct {
-	CArr _pass;
+	CArr _status;
 
 	Obj* _parent;
 } StreetSign;
 
-StreetSign* streetSignMk(CArr pass, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
+StreetSign* streetSignMk(CArr status, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
 
 void streetSignDel(StreetSign* inst);
 

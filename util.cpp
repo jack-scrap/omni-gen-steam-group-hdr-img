@@ -775,12 +775,12 @@ CBuff util::json::str(nlohmann::json deser) {
 }
 
 StreetSign* util::json::streetSign(nlohmann::json deser) {
-	std::vector<bool> pass = ls<bool>(deser["pass"]);
+	std::vector<bool> status = ls<bool>(deser["status"]);
 
-	unsigned int no = pass.size();
+	unsigned int no = status.size();
 	bool* array = (bool*) malloc(no * sizeof (bool));
 	for (int i = 0; i < no; i++) {
-		array[i] = pass[i];
+		array[i] = status[i];
 	}
 
 	glm::vec3 loc = glm::vec3(0.0);
