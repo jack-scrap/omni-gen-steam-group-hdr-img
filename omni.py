@@ -225,19 +225,9 @@ class _Bound:
                 conePtr = coneCont[i]
                 cone = conePtr.contents
 
-                area = []
-                for y in range(2):
-                    rng = []
-                    for x in range(2):
-                        rng.append(_parseFloat(cone.bound[y][x]))
-
-                    area.append(rng)
-
-                offset = _parseOffset(conePtr)
-
                 rep.append({
-                    'bound': area,
-                    'offset': offset
+                    'bound': cone.bound,
+                    'offset': cone.offset
                 })
 
         return rep
@@ -275,10 +265,26 @@ _boundRngGet.argtypes = None
 
 class _Cone(Structure):
     _fields_ = [
-            ('bound', c_float * 2 * 2),
-            ('offset', c_float * 3),
+            ('_bound', c_float * 2 * 2),
+            ('_offset', c_float * 3),
             ('_parent', c_void_p)
     ]
+
+    @property
+    def bound(self):
+            area = []
+            for y in range(2):
+                rng = []
+                for x in range(2):
+                    rng.append(_parseFloat(self._bound[y][x]))
+
+                area.append(rng)
+
+            return area
+
+    @property
+    def offset(self):
+            return [_parseFloat(val) for val in list(self._offset)]
 
 _boundAreaGet = _scn.boundAreaGet
 _boundAreaGet.restype = _CArr
