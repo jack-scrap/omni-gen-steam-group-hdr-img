@@ -716,6 +716,7 @@ int main(int argc, char* argv[]) {
 
 	PyObject* path = PySys_GetObject("path");
 	PyList_Append(path, PyUnicode_FromString("."));
+	PyList_Append(path, PyUnicode_FromString("player/script"));
 
 	if (boot) {
 		GLfloat vtc[] = {
