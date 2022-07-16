@@ -418,7 +418,7 @@ class _Truck(_Obj):
         ptr = self._ptr
         ang = ptr.contents._ang
 
-        return ang
+        return _parseFloat(ang)
 
     def turn(self, delta):
         _truckTurn(self._ptr, delta)
