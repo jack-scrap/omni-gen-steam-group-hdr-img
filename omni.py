@@ -22,7 +22,7 @@ def _parseIdx(ptr):
     ptrIdx = cast(ptr, POINTER(_Idx))
     idx = ptrIdx.contents
 
-    byteCont = cast(idx.data, POINTER(POINTER(_Cont)))
+    byteCont = cast(idx._data, POINTER(POINTER(_Cont)))
 
     if (idx.sz):
         # list
@@ -44,7 +44,7 @@ def _parseArray(ptr):
     ptrArray = cast(ptr, POINTER(_Array))
     array = ptrArray.contents
 
-    idxCont = cast(array.data, POINTER(POINTER(_Idx)))
+    idxCont = cast(array._data, POINTER(POINTER(_Idx)))
 
     # 2D
     if (array.y > 1):
@@ -89,27 +89,27 @@ class _Cont(Structure):
 
 class _Idx(Structure):
     _fields_ = [
-            ('data', POINTER(_Cont)),
+            ('_data', POINTER(_Cont)),
             ('sz', c_uint),
-            ('offset', c_float * 3),
+            ('_offset', c_float * 3),
             ('_parent', c_void_p)
     ]
 
 class _Array(Structure):
     _fields_ = [
-            ('data', POINTER(POINTER(_Idx))),
+            ('_data', POINTER(POINTER(_Idx))),
             ('x', c_uint),
             ('y', c_uint),
-            ('offset', c_float * 3),
+            ('_offset', c_float * 3),
             ('_parent', c_void_p)
     ]
 
 class _Dict(Structure):
     _fields_ = [
-            ('data', POINTER(c_void_p)),
-            ('type', POINTER(c_uint)),
-            ('no', c_uint),
-            ('offset', c_float * 3),
+            ('_data', POINTER(c_void_p)),
+            ('_type', POINTER(c_uint)),
+            ('_no', c_uint),
+            ('_offset', c_float * 3),
             ('_parent', c_void_p)
     ]
 
@@ -140,7 +140,7 @@ class _Scope:
                 idxPtr = cast(var.ptr, POINTER(_Idx))
                 idx = idxPtr.contents
 
-                offset = _parseOffset(idx.offset)
+                offset = _parseOffset(idx._offset)
 
             # array
             if (var.type == 1):
@@ -149,7 +149,7 @@ class _Scope:
                 arrayPtr = cast(var.ptr, POINTER(_Array))
                 array = arrayPtr.contents
 
-                offset = _parseOffset(array.offset)
+                offset = _parseOffset(array._offset)
 
             self.__intern[name] = {
                     'ptr': var.ptr,
