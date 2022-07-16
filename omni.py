@@ -22,7 +22,7 @@ def _parseIdx(ptr):
     ptrIdx = cast(ptr, POINTER(_Idx))
     idx = ptrIdx.contents
 
-    contPtrPtr = cast(idx.data, POINTER(POINTER(_Cont)))
+    contCont = cast(idx.data, POINTER(POINTER(_Cont)))
 
     if (idx.sz):
         # list
@@ -30,11 +30,11 @@ def _parseIdx(ptr):
             rep = []
 
             for i in range(idx.sz):
-                rep.append(_parseByte(contPtrPtr[i]))
+                rep.append(_parseByte(contCont[i]))
 
         # scalar
         else:
-            rep = _parseByte(contPtrPtr.contents)
+            rep = _parseByte(contCont.contents)
 
     return rep
 
@@ -44,7 +44,7 @@ def _parseArray(ptr):
     ptrArray = cast(ptr, POINTER(_Array))
     array = ptrArray.contents
 
-    idxPtrPtr = cast(array.data, POINTER(POINTER(_Idx)))
+    idxCont = cast(array.data, POINTER(POINTER(_Idx)))
 
     # 2D
     if (array.y > 1):
@@ -54,14 +54,14 @@ def _parseArray(ptr):
             for x in range(array.x):
                 i = (y * array.y) + x
 
-                sub.append(_parseIdx(idxPtrPtr[i]))
+                sub.append(_parseIdx(idxCont[i]))
 
             rep.append(sub)
 
     # 1D
     else:
         for x in range(array.x):
-            rep.append(_parseIdx(idxPtrPtr[x]))
+            rep.append(_parseIdx(idxCont[x]))
 
         return rep
 
@@ -207,10 +207,10 @@ class _Bound:
 
         rep = []
         if k == 'rng':
-            limPtrPtr = cast(cArr.ptr, POINTER(POINTER(_Lim)))
+            limCont = cast(cArr.ptr, POINTER(POINTER(_Lim)))
 
             for i in range(int(cArr.sz / 4)):
-                limPtr = limPtrPtr[i]
+                limPtr = limCont[i]
                 lim = limPtr.contents
 
                 rep.append({
@@ -219,10 +219,10 @@ class _Bound:
                 })
 
         if k == 'area':
-            conePtrPtr = cast(cArr.ptr, POINTER(POINTER(_Cone)))
+            coneCont = cast(cArr.ptr, POINTER(POINTER(_Cone)))
 
             for i in range(int(cArr.sz / 8)):
-                conePtr = conePtrPtr[i]
+                conePtr = coneCont[i]
                 cone = conePtr.contents
 
                 area = []
