@@ -313,8 +313,8 @@ _callIncr.argtypes = None
 
 class _Crane(_Obj):
     _fields_ = [
-            ('data', POINTER(_Cont)),
-            ('offset', c_float * 3),
+            ('_data', POINTER(_Cont)),
+            ('_offset', c_float * 3),
             ('_parent', c_void_p)
     ]
 
@@ -341,7 +341,7 @@ class _Crane(_Obj):
 
     @property
     def offset(self):
-        return _parseOffset(self._ptr.contents.offset)
+        return _parseOffset(self._ptr.contents._offset)
 
     def zoom(self, delta):
         _craneZoom(self._ptr, delta)
@@ -390,9 +390,9 @@ _craneGrab.argtypes = None
 
 class _Truck(_Obj):
     _fields_ = [
-            ('data', POINTER(_Array)),
-            ('offset', c_float * 3),
-            ('ang', c_float),
+            ('_data', POINTER(_Array)),
+            ('_offset', c_float * 3),
+            ('_ang', c_float),
             ('_uni', c_uint * 2),
             ('_parent', c_void_p)
     ]
@@ -405,18 +405,18 @@ class _Truck(_Obj):
     @property
     def data(self):
         ptr = self._ptr
-        arrayPtr = ptr.contents.data
+        arrayPtr = ptr.contents._data
 
         return _parseArray(arrayPtr)
 
     @property
     def offset(self):
-        return _parseOffset(self._ptr.contents.offset)
+        return _parseOffset(self._ptr.contents._offset)
 
     @property
     def ang(self):
         ptr = self._ptr
-        ang = ptr.contents.ang
+        ang = ptr.contents._ang
 
         return ang
 
@@ -446,21 +446,21 @@ _truckMv.argtypes = [
 
 class _CargoShip(_Obj):
     _fields_ = [
-            ('data', POINTER(_Array)),
-            ('offset', c_float * 3),
+            ('_data', POINTER(_Array)),
+            ('_offset', c_float * 3),
             ('_parent', c_void_p)
     ]
 
     @property
     def data(self):
         ptr = self._ptr
-        arrayPtr = ptr.contents.data
+        arrayPtr = ptr.contents._data
 
         return _parseArray(arrayPtr)
 
     @property
     def offset(self):
-        return _parseOffset(self._ptr.contents.offset)
+        return _parseOffset(self._ptr.contents._offset)
 
     def mv(self, delta):
         _cargoShipMv(self._ptr, delta)
