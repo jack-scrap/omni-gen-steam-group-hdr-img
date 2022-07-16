@@ -548,6 +548,14 @@ class _StreetSign(_Obj):
             ('_parent', c_void_p)
     ]
 
+    @property
+    def status(self):
+        ls = []
+        for i in range(int(_status._sz / 8)):
+            ls.append(_status.ptr[i])
+
+        return ls
+
     def toggle(self, i):
         _streetSignToggle(self._ptr, i)
 
