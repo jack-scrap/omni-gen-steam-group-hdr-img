@@ -681,15 +681,6 @@ int main(int argc, char* argv[]) {
 	}, col[false]);
 
 	nlohmann::json deser = nlohmann::json::parse(util::fs::rd<std::string>("stat.json"));
-	for (std::map<std::string, unsigned int>::iterator it = omni::stage.begin(); it != omni::stage.end(); ++it) {
-		if (deser["rank"] >= it->second) {
-			util::fs::setW(util::fs::path::build({
-				"player",
-				"script",
-				it->first
-			}));
-		}
-	}
 
 	if (argc > 1) {
 		omni::assert(omni::stage.find(argv[1]) != omni::stage.end(), "Couldn't initialize; no corresponding section `" + std::string(argv[1]) + "`");
