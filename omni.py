@@ -254,10 +254,18 @@ goal = _Scope(_goal, _noData)
 # bound
 class _Lim(Structure):
     _fields_ = [
-            ('axis', c_uint),
-            ('val', c_float),
+            ('_axis', c_uint),
+            ('_val', c_float),
             ('_parent', c_void_p)
     ]
+
+    @property
+    def axis(self):
+        return int(self._axis)
+
+    @property
+    def val(self):
+        return _parseFloat(self._val)
 
 _boundRngGet = _scn.boundRngGet
 _boundRngGet.restype = _CArr
