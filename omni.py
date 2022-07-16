@@ -11,10 +11,10 @@ def _parseFloat(val):
     return round(val, 4)
 
 def _parseByte(ptr):
-    contPtr = ptr
-    cont = contPtr.contents
+    bytePtr = ptr
+    byte = bytePtr.contents
 
-    return int.from_bytes(cont._c, byteorder = 'little')
+    return int.from_bytes(byte._c, byteorder = 'little')
 
 def _parseIdx(ptr):
     rep = None
@@ -22,7 +22,7 @@ def _parseIdx(ptr):
     ptrIdx = cast(ptr, POINTER(_Idx))
     idx = ptrIdx.contents
 
-    contCont = cast(idx.data, POINTER(POINTER(_Cont)))
+    byteCont = cast(idx.data, POINTER(POINTER(_Cont)))
 
     if (idx.sz):
         # list
@@ -30,11 +30,11 @@ def _parseIdx(ptr):
             rep = []
 
             for i in range(idx.sz):
-                rep.append(_parseByte(contCont[i]))
+                rep.append(_parseByte(byteCont[i]))
 
         # scalar
         else:
-            rep = _parseByte(contCont.contents)
+            rep = _parseByte(byteCont.contents)
 
     return rep
 
