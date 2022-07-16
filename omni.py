@@ -65,9 +65,7 @@ def _parseArray(ptr):
 
         return rep
 
-def _parseOffset(ptr):
-    offset = ptr.contents.offset
-
+def _parseOffset(offset):
     ls = [_parseFloat(val) for val in list(offset)]
 
     return ls
@@ -292,7 +290,7 @@ class _Cone(Structure):
 
     @property
     def offset(self):
-            return [_parseFloat(val) for val in list(self._offset)]
+        return _parseOffset(self._ptr.contents.offset)
 
 _boundAreaGet = _scn.boundAreaGet
 _boundAreaGet.restype = _CArr
@@ -343,9 +341,7 @@ class _Crane(_Obj):
 
     @property
     def offset(self):
-        ptr = self._ptr
-
-        return _parseOffset(self._ptr)
+        return _parseOffset(self._ptr.contents.offset)
 
     def zoom(self, delta):
         _craneZoom(self._ptr, delta)
@@ -415,9 +411,7 @@ class _Truck(_Obj):
 
     @property
     def offset(self):
-        ptr = self._ptr
-
-        return _parseOffset(self._ptr)
+        return _parseOffset(self._ptr.contents.offset)
 
     @property
     def ang(self):
@@ -466,9 +460,7 @@ class _CargoShip(_Obj):
 
     @property
     def offset(self):
-        ptr = self._ptr
-
-        return _parseOffset(self._ptr)
+        return _parseOffset(self._ptr.contents.offset)
 
     def mv(self, delta):
         _cargoShipMv(self._ptr, delta)
