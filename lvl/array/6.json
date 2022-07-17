@@ -82,6 +82,39 @@
 					"val": 11.16,
 					"status": "halt"
 				}
+			}, {
+				"min": {
+					"axis": "Z",
+					"val": -36.28,
+					"status": "halt"
+				},
+				"max": {
+					"axis": "Z",
+					"val": -13.96,
+					"status": "halt"
+				}
+			}, {
+				"min": {
+					"axis": "Z",
+					"val": -61.4,
+					"status": "halt"
+				},
+				"max": {
+					"axis": "Z",
+					"val": -39.08,
+					"status": "halt"
+				}
+			}, {
+				"min": {
+					"axis": "Z",
+					"val": -86.52,
+					"status": "halt"
+				},
+				"max": {
+					"axis": "Z",
+					"val": -64.2,
+					"status": "halt"
+				}
 			}
 		]
 	}
