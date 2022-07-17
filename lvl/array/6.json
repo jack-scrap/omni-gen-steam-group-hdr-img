@@ -1,88 +1,27 @@
 {
 	"data": {
-		"in": {
+		"array": {
 			"block": [
-				3
-			]
-		},
-		"out": {
-			"block": [
-				3
-			],
-			"loc": [
-				0.0,
-				0.0,
-				-25.12
-			]
-		},
-		"other_out": {
-			"block": [
-				3
-			],
-			"loc": [
-				0.0,
-				0.0,
-				-50.24
-			]
-		},
-		"other_other_out": {
-			"block": [
-				3
-			],
-			"loc": [
-				0.0,
-				0.0,
-				-75.36
+				0,
+				1,
+				0,
+				1
 			]
 		}
 	},
 	"goal": {
-		"in": {
+		"array": {
 			"block": [
-				3
-			]
-		},
-		"out": {
-			"block": [
-				3
-			]
-		},
-		"other_out": {
-			"block": [
-				3
-			]
-		},
-		"other_other_out": {
-			"block": [
-				3
+				0,
+				0,
+				1,
+				1
 			]
 		}
 	},
 	"vehicle": [
 		{
 			"name": "crane"
-		}, {
-			"name": "crane",
-			"loc": [
-				0.0,
-				0.0,
-				-25.12
-			]
-		}, {
-			"name": "crane",
-			"loc": [
-				0.0,
-				0.0,
-				-50.24
-			]
-		},
-		{
-			"name": "crane",
-			"loc": [
-				0.0,
-				0.0,
-				-75.36
-			]
 		}
 	],
 	"bound": {
@@ -96,39 +35,6 @@
 				"max": {
 					"axis": "Z",
 					"val": 11.16,
-					"status": "halt"
-				}
-			}, {
-				"min": {
-					"axis": "Z",
-					"val": -36.28,
-					"status": "halt"
-				},
-				"max": {
-					"axis": "Z",
-					"val": -13.96,
-					"status": "halt"
-				}
-			}, {
-				"min": {
-					"axis": "Z",
-					"val": -61.4,
-					"status": "halt"
-				},
-				"max": {
-					"axis": "Z",
-					"val": -39.08,
-					"status": "halt"
-				}
-			}, {
-				"min": {
-					"axis": "Z",
-					"val": -86.52,
-					"status": "halt"
-				},
-				"max": {
-					"axis": "Z",
-					"val": -64.2,
 					"status": "halt"
 				}
 			}
