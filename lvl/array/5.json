@@ -31,8 +31,7 @@
 	"vehicle": [
 		{
 			"name": "crane"
-		},
-		{
+		}, {
 			"name": "crane",
 			"loc": [
 				0.0,
