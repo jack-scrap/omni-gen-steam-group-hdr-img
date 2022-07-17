@@ -46,6 +46,17 @@
 					"val": 11.16,
 					"status": "halt"
 				}
+			}, {
+				"min": {
+					"axis": "Z",
+					"val": -36.28,
+					"status": "halt"
+				},
+				"max": {
+					"axis": "Z",
+					"val": -13.96,
+					"status": "halt"
+				}
 			}
 		]
 	}
