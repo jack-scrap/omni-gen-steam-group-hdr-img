@@ -20,7 +20,7 @@ void main() {
 	for	(int t = 0; t < 2; t++) {
 		for	(int y = 0; y < 2; y++) {
 			for	(int x = 0; x < 2; x++) {
-				vec3 pos = vec3((bool(x) ? 1 : -1) * side, (bool(y) ? 1 : -1) * (2 * pad), bool(t) ? 1 : -1);
+				vec3 pos = vec3(bool(x) ? 1 : -1, (bool(y) ? 1 : -1) * (2 * pad), bool(t) ? 1 : -1);
 
 				gl_Position = proj * view * model * vec4(gl_in[0].gl_Position.xyz + pos, 1.0);
 
