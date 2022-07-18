@@ -55,5 +55,26 @@
 				]
 			]
 		}
+	},
+	"vehicle": [
+		{
+			"name": "crane"
+		}
+	],
+	"bound": {
+		"rng": [
+			{
+				"min": {
+					"axis": "Z",
+					"val": -11.16,
+					"status": "halt"
+				},
+				"max": {
+					"axis": "Z",
+					"val": 11.16,
+					"status": "halt"
+				}
+			}
+		]
 	}
 }
