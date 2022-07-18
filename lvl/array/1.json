@@ -1,43 +1,43 @@
 {
-	"data": {
-		"array": {
-			"block": [
-				0,
-				0,
-				1,
-				1
-			]
-		}
-	},
-	"goal": {
-		"array": {
-			"block": [
-				1,
-				1,
-				0,
-				0
-			]
-		}
-	},
-	"vehicle": [
-		{
-			"name": "crane"
-		}
-	],
-	"bound": {
-		"rng": [
-			{
-				"min": {
-					"axis": "Z",
-					"val": -11.16,
-					"status": "halt"
-				},
-				"max": {
-					"axis": "Z",
-					"val": 11.16,
-					"status": "halt"
-				}
-			}
-		]
-	}
+  "data": {
+    "array": {
+      "block": [
+        0,
+        0,
+        1,
+        1
+      ]
+    }
+  },
+  "goal": {
+    "array": {
+      "block": [
+        1,
+        1,
+        0,
+        0
+      ]
+    }
+  },
+  "vehicle": [
+    {
+      "name": "crane"
+    }
+  ],
+  "bound": {
+    "rng": [
+      {
+        "min": {
+          "axis": "Z",
+          "val": -11.16,
+          "status": "halt"
+        },
+        "max": {
+          "axis": "Z",
+          "val": 11.16,
+          "status": "halt"
+        }
+      }
+    ]
+  }
 }
