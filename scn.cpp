@@ -522,14 +522,17 @@ void scn::init(std::string stage, unsigned int lvl) {
 	}
 
 	// prop
-	prop = (Obj**) realloc(prop, deser["prop"]["static"].size() * sizeof (Obj*));
+	noProp = deser["prop"]["static"].size();
+	prop = (Obj**) realloc(prop, noProp * sizeof (Obj*));
+	i = 0;
 	for (const nlohmann::json::object_t& entry : deser["prop"]["static"]) {
 		Obj* instObj = util::json::prop(entry);
 
-		prop[noProp] = instObj;
-		noProp++;
+		prop[i] = instObj;
 
 		obj.push_back(instObj);
+
+		i++;
 	}
 
 	for (const nlohmann::json entry : deser["prop"]["dyna"]) {
