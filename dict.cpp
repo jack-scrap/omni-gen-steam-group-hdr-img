@@ -138,6 +138,18 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 
 				break;
 			}
+
+			// dictionary
+			case nlohmann::json::value_t::object: {
+				Dict* dict = dictMk(entry.value(), name, loc, rot);
+
+				child[1 + i] = dict->_parent;
+
+				((Dict**) inst->data)[i] = dict;
+				inst->type[i] = omni::DICT;
+
+				break;
+			}																			 
 		}
 
 		// name
