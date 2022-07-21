@@ -72,8 +72,10 @@ CArr cargoShipGet() {
 	return cargoShip;
 }
 
-Obj** prop = (Obj**) malloc(0);
-unsigned int noProp = 0;
+CArr prop = {
+	(CargoShip**) malloc(0),
+	0
+};
 
 std::vector<Obj*> scn::obj;
 
@@ -179,8 +181,8 @@ void scn::init(std::string stage, unsigned int lvl) {
 		coneDel(((Cone**) boundArea.ptr)[i]);
 	}
 
-	for (int i = 0; i < noProp; i++) {
-		objDel(prop[i]);
+	for (int i = 0; i < prop.sz / sizeof (Obj*); i++) {
+		objDel(((Obj**) prop.ptr)[i]);
 	}
 
 	/* allocate */
@@ -518,13 +520,13 @@ void scn::init(std::string stage, unsigned int lvl) {
 	}
 
 	// prop
-	noProp = deser["prop"]["static"].size();
-	prop = (Obj**) realloc(prop, noProp * sizeof (Obj*));
+	prop.sz = deser["prop"]["static"].size() * sizeof (Obj*);
+	prop.ptr = (Obj**) realloc(prop.ptr, prop.sz);
 	i = 0;
 	for (const nlohmann::json::object_t& entry : deser["prop"]["static"]) {
 		Obj* instObj = util::json::prop(entry);
 
-		prop[i] = instObj;
+		((Obj**) prop.ptr)[i] = instObj;
 
 		obj.push_back(instObj);
 
