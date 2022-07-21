@@ -388,6 +388,10 @@ _craneGrab = _crane.craneGrab
 _craneGrab.restype = c_void_p
 _craneGrab.argtypes = None
 
+class Crane:
+    rngTrack = _Crane.rngTrack
+    rngTrack = _Crane.rngHead
+
 class _Truck(_Obj):
     _fields_ = [
             ('_data', POINTER(_Array)),
@@ -444,6 +448,9 @@ _truckMv.argtypes = [
                 c_float
 ]
 
+class Truck:
+    rngWheel = _Truck.rngWheel
+
 class _CargoShip(_Obj):
     _fields_ = [
             ('_data', POINTER(_Array)),
@@ -473,6 +480,9 @@ _cargoShipMv.argtypes = [
                 POINTER(_CargoShip),
                 c_float
 ]
+
+class CargoShip:
+    pass
 
 _craneGet = _scn.craneGet
 _craneGet.restype = _CArr
