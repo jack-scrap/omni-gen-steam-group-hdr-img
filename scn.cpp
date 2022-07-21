@@ -516,8 +516,8 @@ void scn::init(std::string stage, unsigned int lvl) {
 			a++;
 		}
 
-		for (Obj* seg : _) {
-			obj.push_back(seg);
+		for (const Obj* seg : _) {
+			obj.push_back((Obj*) seg);
 		}
 	}
 
@@ -532,7 +532,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 		obj.push_back(_);
 	}
 
-	for (nlohmann::json entry : deser["prop"]["dyna"]) {
+	for (const nlohmann::json entry : deser["prop"]["dyna"]) {
 		glm::vec3 loc = glm::vec3(0.0);
 		if (entry.contains("loc")) {
 			loc = util::json::vec(entry["loc"]);
