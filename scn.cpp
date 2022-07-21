@@ -450,10 +450,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 			((Truck**) truck.ptr)[truck.sz - sizeof (Truck*)] = instTruck;
 
 			obj.push_back(instTruck->_parent);
-
-			obj.push_back(instTruck->_parent->_child[Truck::BED]);
-
-			obj.push_back(instTruck->_parent->_child[Truck::OUTER]);
 		}
 
 		if (entry["name"] == "cargo_ship") {
@@ -591,8 +587,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 				i++;
 
 				obj.push_back(instCone->_parent);
-
-				obj.push_back(instCone->_parent->_child[0]);
 			}
 		}
 	}
