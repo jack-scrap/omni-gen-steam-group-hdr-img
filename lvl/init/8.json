@@ -3,10 +3,10 @@
 		"in": {
 			"block": 1
 		},
-		"out": {
+		"fst": {
 			"block": 1
 		},
-		"other_out": {
+		"snd": {
 			"block": 0
 		}
 	},
@@ -14,10 +14,10 @@
 		"in": {
 			"block": 0
 		},
-		"out": {
+		"fst": {
 			"block": 1
 		},
-		"other_out": {
+		"snd": {
 			"block": 1
 		}
 	},
