@@ -372,26 +372,26 @@ void scn::init(std::string stage, unsigned int lvl) {
   }
 
 	for (int i = 0; i < noData; i++) {
-		Obj* _;
+		Obj* instObj;
 
 		switch (data[i]->type) {
 			case omni::SCALAR:
-				_ = ((Idx*) data[i]->ptr)->_parent;
+				instObj = ((Idx*) data[i]->ptr)->_parent;
 
 				break;
 
 			case omni::ARRAY:
-				_ = ((Array*) data[i]->ptr)->_parent;
+				instObj = ((Array*) data[i]->ptr)->_parent;
 
 				break;
 
 			case omni::DICT:
-				_ = ((Dict*) data[i]->ptr)->_parent;
+				instObj = ((Dict*) data[i]->ptr)->_parent;
 
 				break;
 		}
 
-		obj.push_back(_);
+		obj.push_back(instObj);
 	}
 
 	for (const auto& entry : deser["vehicle"]) {
@@ -413,15 +413,15 @@ void scn::init(std::string stage, unsigned int lvl) {
 				init = contMk(c);
 			}
 
-			Crane* _ = craneMk(init, loc, glm::radians(rot));
+			Crane* instCrane = craneMk(init, loc, glm::radians(rot));
 
-			omni::assert(!util::phys::aabbGround(_->_parent), "Crane clipping into ground plane");
+			omni::assert(!util::phys::aabbGround(instCrane->_parent), "Crane clipping into ground plane");
 
 			crane.sz += sizeof (Crane*);
 			crane.ptr = (Crane**) realloc(crane.ptr, crane.sz);
-			((Crane**) crane.ptr)[crane.sz - sizeof (Crane*)] = _;
+			((Crane**) crane.ptr)[crane.sz - sizeof (Crane*)] = instCrane;
 
-			obj.push_back(_->_parent);
+			obj.push_back(instCrane->_parent);
 		}
 
 		if (entry["name"] == "truck") {
@@ -439,21 +439,21 @@ void scn::init(std::string stage, unsigned int lvl) {
 				((char*) init.ptr)[0] = 0;
 			}
 
-			Array* array = arrayMk((char*) init.ptr, init.x, "", Z, glm::vec3(0.0, layout::padded(0.0), -((layout::idx[X] / 2) + (layout::stroke * 2) + (layout::margin * 2 * 2))), glm::vec3(0.0, -M_PI / 2, 0.0));
+			Array* instArray = arrayMk((char*) init.ptr, init.x, "", Z, glm::vec3(0.0, layout::padded(0.0), -((layout::idx[X] / 2) + (layout::stroke * 2) + (layout::margin * 2 * 2))), glm::vec3(0.0, -M_PI / 2, 0.0));
 
-			Truck* _ = truckMk(array, loc, glm::radians(rot));
+			Truck* instTruck = truckMk(instArray, loc, glm::radians(rot));
 
-			omni::assert(!util::phys::aabbGround(_->_parent), "Truck clipping into ground plane");
+			omni::assert(!util::phys::aabbGround(instTruck->_parent), "Truck clipping into ground plane");
 
 			truck.sz += sizeof (Truck*);
 			truck.ptr = (Truck**) realloc(truck.ptr, truck.sz);
-			((Truck**) truck.ptr)[truck.sz - sizeof (Truck*)] = _;
+			((Truck**) truck.ptr)[truck.sz - sizeof (Truck*)] = instTruck;
 
-			obj.push_back(_->_parent);
+			obj.push_back(instTruck->_parent);
 
-			obj.push_back(_->_parent->_child[Truck::BED]);
+			obj.push_back(instTruck->_parent->_child[Truck::BED]);
 
-			obj.push_back(_->_parent->_child[Truck::OUTER]);
+			obj.push_back(instTruck->_parent->_child[Truck::OUTER]);
 		}
 
 		if (entry["name"] == "cargo_ship") {
@@ -481,15 +481,15 @@ void scn::init(std::string stage, unsigned int lvl) {
 				}
 			}
 
-			Array* array = arrayMk((char*) init.ptr, init.x, init.y, name, glm::vec3(0.0, layout::padded(0.0), 0.0));
+			Array* instArray = arrayMk((char*) init.ptr, init.x, init.y, name, glm::vec3(0.0, layout::padded(0.0), 0.0));
 
-			CargoShip* _ = cargoShipMk(array, loc, glm::radians(rot));
+			CargoShip* instCargoShip = cargoShipMk(instArray, loc, glm::radians(rot));
 
 			cargoShip.sz += sizeof (CargoShip*);
 			cargoShip.ptr = (CargoShip**) realloc(cargoShip.ptr, cargoShip.sz);
-			((CargoShip**) cargoShip.ptr)[cargoShip.sz - sizeof (CargoShip*)] = _;
+			((CargoShip**) cargoShip.ptr)[cargoShip.sz - sizeof (CargoShip*)] = instCargoShip;
 
-			obj.push_back(_->_parent);
+			obj.push_back(instCargoShip->_parent);
 		}
 	}
 
@@ -524,12 +524,12 @@ void scn::init(std::string stage, unsigned int lvl) {
 	// prop
 	prop = (Obj**) realloc(prop, deser["prop"]["static"].size() * sizeof (Obj*));
 	for (const nlohmann::json::object_t& entry : deser["prop"]["static"]) {
-		Obj* _ = util::json::prop(entry);
+		Obj* instObj = util::json::prop(entry);
 
-		prop[noProp] = _;
+		prop[noProp] = instObj;
 		noProp++;
 
-		obj.push_back(_);
+		obj.push_back(instObj);
 	}
 
 	for (const nlohmann::json entry : deser["prop"]["dyna"]) {
@@ -544,17 +544,17 @@ void scn::init(std::string stage, unsigned int lvl) {
 		}
 
 		if (entry["name"] == "i_beam") {
-			Obj* _ = iBeamMk(entry["sz"], entry["axis"], loc, glm::radians(rot));
+			Obj* instObj = iBeamMk(entry["sz"], entry["axis"], loc, glm::radians(rot));
 
-			obj.push_back(_);
+			obj.push_back(instObj);
 		}
 	}
 
 	// mark
 	for (int i = 0; i < deser["mark"].size(); i++) {
-		Mark* _ = util::json::bound::mark(deser["mark"][i]);
+		Mark* instMark = util::json::bound::mark(deser["mark"][i]);
 
-		obj.push_back(_->_parent);
+		obj.push_back(instMark->_parent);
 	}
 
 	// bound
@@ -569,12 +569,12 @@ void scn::init(std::string stage, unsigned int lvl) {
 		if (entry.key() == "rng") {
 			for (const auto& entry : entry.value()) {
 				for (const auto& rng : entry) {
-					Lim* _ = util::json::bound::lim(rng);
+					Lim* instLim = util::json::bound::lim(rng);
 
-					((Lim**) boundRng.ptr)[i] = _;
+					((Lim**) boundRng.ptr)[i] = instLim;
 					i++;
 
-					obj.push_back(_->_parent);
+					obj.push_back(instLim->_parent);
 				}	
 			}	
 		}
@@ -582,14 +582,14 @@ void scn::init(std::string stage, unsigned int lvl) {
 		if (entry.key() == "area") {
 			int i = 0;
 			for (const auto& entry : entry.value()) {
-				Cone* _ = util::json::bound::area(entry);
+				Cone* instCone = util::json::bound::area(entry);
 
-				((Cone**) boundArea.ptr)[i] = _;
+				((Cone**) boundArea.ptr)[i] = instCone;
 				i++;
 
-				obj.push_back(_->_parent);
+				obj.push_back(instCone->_parent);
 
-				obj.push_back(_->_parent->_child[0]);
+				obj.push_back(instCone->_parent->_child[0]);
 			}
 		}
 	}
@@ -600,12 +600,12 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 	i = 0;
 	for (const auto& entry : deser["ctrl"].items()) {
-		StreetSign* _ = util::json::streetSign(entry.value());
+		StreetSign* instStreetSign = util::json::streetSign(entry.value());
 
-		((StreetSign**) streetSign.ptr)[i] = _;
+		((StreetSign**) streetSign.ptr)[i] = instStreetSign;
 		i++;
 
-		obj.push_back(_->_parent);
+		obj.push_back(instStreetSign->_parent);
 	}
 
 	/* general */
