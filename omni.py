@@ -318,11 +318,11 @@ class _Crane(_Obj):
             ('_parent', c_void_p)
     ]
 
-    rngTrack = [
+    rng_track = [
             4.0,
             13.8
     ]
-    rngHead = [
+    rng_head = [
             -3.0,
             3.0
     ]
@@ -389,8 +389,8 @@ _craneGrab.restype = c_void_p
 _craneGrab.argtypes = None
 
 class Crane:
-    rngTrack = _Crane.rngTrack
-    rngTrack = _Crane.rngHead
+    rng_track = _Crane.rng_track
+    rng_track = _Crane.rng_head
 
 class _Truck(_Obj):
     _fields_ = [
@@ -401,7 +401,7 @@ class _Truck(_Obj):
             ('_parent', c_void_p)
     ]
 
-    rngWheel = [
+    rng_wheel = [
             -(math.pi / 2),
             math.pi / 2
     ]
@@ -449,7 +449,7 @@ _truckMv.argtypes = [
 ]
 
 class Truck:
-    rngWheel = _Truck.rngWheel
+    rng_wheel = _Truck.rng_wheel
 
 class _CargoShip(_Obj):
     _fields_ = [
