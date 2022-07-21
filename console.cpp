@@ -1103,7 +1103,13 @@ void Console::exec() {
 						"main.py"
 					});
 
-					scn::init(arg[0], std::stoi(arg[1]));
+					nlohmann::json deser = nlohmann::json::parse(util::fs::rd<std::string>("stat.json"));
+
+					unsigned int rank = deser["rank"];
+
+					if (rank) {
+						scn::init(arg[0], std::stoi(arg[1]));
+					}
 
 					console->open(path);
 				}

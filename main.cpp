@@ -710,7 +710,12 @@ int main(int argc, char* argv[]) {
 	}
 
 	console = new Console(name, state::startDir);
-	scn::init(stage, lvl);
+
+	unsigned int rank = deser["rank"];
+
+	if (rank) {
+		scn::init(stage, lvl);
+	}
 
 	Py_Initialize();
 
