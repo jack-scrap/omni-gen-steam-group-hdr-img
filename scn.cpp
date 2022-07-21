@@ -505,7 +505,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 	node.sz = 0;
 	node.ptr = (unsigned int*) malloc(node.sz * sizeof (unsigned int));
 	for (const nlohmann::json::array_t& strip : deser["road"]["path"]["idc"]) {
-		std::vector<Obj*> _ = util::json::path(strip, deser["road"]["node"], deser["road"]["path"]["status"]);
+		std::vector<Obj*> path = util::json::path(strip, deser["road"]["node"], deser["road"]["path"]["status"]);
 
 		node.sz += 3;
 		node.ptr = (unsigned int*) realloc(node.ptr, node.sz * sizeof (unsigned int));
@@ -516,7 +516,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 			a++;
 		}
 
-		for (const Obj* seg : _) {
+		for (const Obj* seg : path) {
 			obj.push_back((Obj*) seg);
 		}
 	}
