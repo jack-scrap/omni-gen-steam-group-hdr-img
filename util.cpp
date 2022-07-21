@@ -911,7 +911,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 					break;
 				}
 
-				// matrix
+				// 2D
 				case nlohmann::json::value_t::array: {
 					switch (val["block"][0][0].type()) {
 						// 2D

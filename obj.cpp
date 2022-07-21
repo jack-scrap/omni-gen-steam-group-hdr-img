@@ -44,7 +44,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, unsigned int type, 
 
 	inst->_mesh = meshMk(vtc, idc, noPrim);
 
-	// matrix
+	// 2D
 	inst->_model = glm::mat4(1.0);
 	inst->_model *= glm::translate(glm::mat4(1.0), loc);
 	inst->_model *= util::matr::rot(glm::mat4(1.0), rot);
@@ -115,7 +115,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, unsigned int type, 
 
 	inst->_mesh = meshMk(vtc, idc, noPrim);
 
-	// matrix
+	// 2D
 	inst->_model = glm::mat4(1.0);
 	inst->_model *= glm::translate(glm::mat4(1.0), loc);
 	inst->_model *= util::matr::rot(glm::mat4(1.0), rot);
@@ -313,7 +313,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, unsigned int type, 
 
 	inst->_mesh = meshMk(vtc, idc, noPrim);
 
-	// matrix
+	// 2D
 	inst->_model = glm::mat4(1.0);
 	inst->_model *= glm::translate(glm::mat4(1.0), loc);
 	inst->_model *= util::matr::rot(glm::mat4(1.0), rot);
@@ -381,7 +381,7 @@ Obj* objMk(GLfloat* vtc, GLushort* idc, unsigned int noPrim, unsigned int type, 
 
 	inst->_mesh = meshMk(vtc, idc, noPrim);
 
-	// matrix
+	// 2D
 	inst->_model = glm::mat4(1.0);
 	inst->_model *= glm::translate(glm::mat4(1.0), loc);
 	inst->_model *= util::matr::rot(glm::mat4(1.0), rot);

@@ -80,7 +80,7 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 						break;
 					}
 
-					// matrix
+					// 2D
 					case nlohmann::json::value_t::array: {
 						switch (entry.value()[0][0].type()) {
 							// 2D

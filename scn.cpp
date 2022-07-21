@@ -235,7 +235,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 						break;
 					}
 
-					// matrix
+					// 2D
 					case nlohmann::json::value_t::array: {
 						switch (pair.value()["block"][0][0].type()) {
 							// 2D
@@ -330,7 +330,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 						break;
 					}
 
-					// matrix
+					// 2D
 					case nlohmann::json::value_t::array: {
 						switch (pair.value()["block"][0][0].type()) {
 							// 2D
