@@ -23,6 +23,8 @@ Mark* markMk(GLfloat val[2][2], unsigned int status) {
 		vtc[b][Z] = inst->val[b][Y];
 	}
 
+	std::cout << status << std::endl;
+
 	std::string frag;
 	bool active;
 	switch (status) {
@@ -41,6 +43,11 @@ Mark* markMk(GLfloat val[2][2], unsigned int status) {
 		case ALERT:
 			frag = "alert";
 			active = true;
+
+			break;
+
+		default:
+			std::cout << "asdf" << std::endl;
 
 			break;
 	}

@@ -1090,13 +1090,9 @@ Mark* util::json::bound::mark(nlohmann::json deser) {
 		}
 	}
 
-	unsigned int status;
+	unsigned int status = HALT;
 	if (deser["status"] == "pass") {
 		status = PASS;
-	}
-
-	if (deser["status"] == "halt") {
-		status = HALT;
 	}
 
 	if (deser["status"] == "alert") {
@@ -1120,13 +1116,9 @@ Lim* util::json::bound::lim(nlohmann::json deser) {
 		axis = Z;
 	}
 
-	unsigned int status;
+	unsigned int status = HALT;
 	if (deser["status"] == "pass") {
 		status = PASS;
-	}
-
-	if (deser["status"] == "halt") {
-		status = HALT;
 	}
 
 	if (deser["status"] == "alert") {
