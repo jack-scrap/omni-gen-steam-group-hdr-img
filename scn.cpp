@@ -398,7 +398,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 		if (entry["name"] == "truck") {
 			CBuff init;
 			if (entry.contains("data")) {
-				init = util::json::array::array(entry["data"]);
+				init = util::json::array::lin(entry["data"]);
 			} else {
 				init = {
 					(char*) malloc(1),
@@ -428,7 +428,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 			CBuff init;
 			if (entry.contains("data")) {
-				init = util::json::array::array(entry["data"]["block"]);
+				init = util::json::array::lin(entry["data"]["block"]);
 
 				if (entry["data"].contains("name")) {
 					name = std::string(entry["data"]["name"]);

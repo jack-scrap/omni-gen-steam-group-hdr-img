@@ -58,7 +58,7 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 				switch (entry.value()[0].type()) {
 					// 1D
 					case nlohmann::json::value_t::number_unsigned: {
-						CBuff init = util::json::array::array(entry.value());
+						CBuff init = util::json::array::lin(entry.value());
 
 						Array* array = arrayMk((char*) init.ptr, init.x, entry.key(), X, glm::vec3(overhead[X], 0.0, overhead[Y]) + glm::vec3(0.0, 0.0, accY));
 

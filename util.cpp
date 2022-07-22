@@ -803,7 +803,7 @@ StreetSign* util::json::streetSign(nlohmann::json deser) {
 	return inst;
 }
 
-CBuff util::json::array::array(nlohmann::json deser) {
+CBuff util::json::array::lin(nlohmann::json deser) {
 	CBuff _;
 
 	_.x = deser.size();
@@ -876,7 +876,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 			switch (val["block"][0].type()) {
 				// 1D
 				case nlohmann::json::value_t::number_unsigned: {
-					CBuff init = array::array(val["block"]);
+					CBuff init = array::lin(val["block"]);
 
 					Array* val = arrayMk((char*) init.ptr, init.x, key, X, loc + glm::vec3(0.0, 0.0, -(layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2)), glm::radians(rot));
 

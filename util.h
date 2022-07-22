@@ -138,7 +138,7 @@ namespace util {
 
 			bool euclid(nlohmann::json deser, unsigned int sz);
 
-			CBuff array(nlohmann::json deser);
+			CBuff lin(nlohmann::json deser);
 			CBuff matrix(nlohmann::json deser);
 		}
 
