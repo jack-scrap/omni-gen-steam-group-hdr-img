@@ -257,13 +257,12 @@ std::vector<std::map<std::string, std::string>> util::fs::ls(std::string path) {
 
 
 std::string util::fs::perm(std::string fName) {
-	std::string _;
-
 	struct stat f;
 	if (stat(fName.c_str(), &f) < 0) {
-		return _;
+		return "";
 	}
 
+	std::string _;
 	_.push_back(f.st_mode & S_IRUSR ? 'r' : '-');
 	_.push_back(f.st_mode & S_IWUSR ? 'w' : '-');
 	_.push_back(f.st_mode & S_IXUSR ? 'x' : '-');
