@@ -713,7 +713,7 @@ int main(int argc, char* argv[]) {
 
 	unsigned int rank = deser["rank"];
 
-	if (rank) {
+	if (rank >= omni::stage[stage]) {
 		scn::init(stage, lvl);
 	}
 

@@ -1107,7 +1107,7 @@ void Console::exec() {
 
 					unsigned int rank = deser["rank"];
 
-					if (rank) {
+					if (rank >= omni::stage[stage]) {
 						scn::init(arg[0], std::stoi(arg[1]));
 					}
 
