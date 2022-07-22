@@ -1,0 +1,76 @@
+{
+	"init": [
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false
+	],
+	"array": [
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false
+	],
+	"str": [
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false
+	],
+	"dict": [
+		false,
+		false,
+		false,
+		false
+	],
+	"matrix": [
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false,
+		false
+	],
+	"vec": [
+		false,
+		false,
+		false
+	],
+	"ctrl_flow": [
+		false,
+		false,
+		false,
+		false
+	],
+	"path": [
+		false,
+		false,
+		false
+	],
+	"thread": [
+		false,
+		false
+	]
+}
