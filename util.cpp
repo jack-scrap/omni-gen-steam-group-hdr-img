@@ -841,8 +841,6 @@ CBuff util::json::array::matrix(nlohmann::json deser) {
 }
 
 Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm::vec3 rot) {
-	Var* inst;
-
 	char* name = id(key);
 
 	if (val.contains("loc")) {
@@ -853,6 +851,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 		rot = vec(val["rot"]);
 	}
 
+	Var* inst;
 	switch (val["block"].type()) {
 		// stack
 		case nlohmann::json::value_t::number_unsigned: {
