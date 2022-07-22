@@ -5,6 +5,7 @@
 
 typedef struct CargoShip {
 	Array* data;
+
 	float offset[3];
 
 	Obj* _parent;

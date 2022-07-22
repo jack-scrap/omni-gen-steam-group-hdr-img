@@ -11,6 +11,7 @@ typedef struct {
 	void** data;
 	unsigned int* type;
 	unsigned int no;
+
 	float offset[3];
 
 	Obj* _parent;

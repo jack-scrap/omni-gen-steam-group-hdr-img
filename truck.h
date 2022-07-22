@@ -9,6 +9,7 @@
 
 typedef struct Truck {
 	Array* data;
+
 	float offset[3];
 
 	float ang;
