@@ -2,6 +2,7 @@ player/script
 player/cfg
 
 stat.json
+fin.json
 
 *.o
 *.so
