@@ -23,7 +23,7 @@ OBJ_LIBS=$(LIBS:%.cpp=$(BUILDDIR)/lib%.so)
 STAGE:=init array str dict matrix vec ctrl_flow path thread
 
 .PHONY: all
-all: mk_build mk_stage omni ro
+all: mk_build mk_script omni ro
 
 $(BUILDDIR)/main.o: main.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@ $(PYFLAGS)
@@ -51,8 +51,8 @@ ro:
 mk_build:
 	mkdir -p $(BUILDDIR)
 
-.PHONY: mk_stage
-mk_stage:
+.PHONY: mk_script
+mk_script:
 	mkdir -p player/script
 
 .PHONY: install
