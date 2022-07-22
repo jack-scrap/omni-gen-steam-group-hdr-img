@@ -854,7 +854,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 	}
 
 	switch (val["block"].type()) {
-		// scalar
+		// stack
 		case nlohmann::json::value_t::number_unsigned: {
 			char init = byte(val["block"]);
 

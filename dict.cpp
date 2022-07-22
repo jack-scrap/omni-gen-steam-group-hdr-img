@@ -31,7 +31,7 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 	for (const auto& entry : deser.items()) {
 		Obj* id;
 		switch (entry.value().type()) {
-			// scalar
+			// stack
 			case nlohmann::json::value_t::number_unsigned: {
 				char init = (char) ((int) entry.value());
 

@@ -214,7 +214,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 
     GLfloat wd;
     switch (pair.value()["block"].type()) {
-			// scalar
+			// stack
 			case nlohmann::json::value_t::number_unsigned: {
 				wd = ((Idx*) item->ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->ptr)->_parent->_aabb[X][MIN];
 
@@ -287,7 +287,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 
     GLfloat wd;
     switch (pair.value()["block"].type()) {
-			// scalar
+			// stack
 			case nlohmann::json::value_t::number_unsigned: {
 				goal[i] = item;
 				typeRhs = omni::SCALAR;
