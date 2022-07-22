@@ -715,6 +715,10 @@ int main(int argc, char* argv[]) {
 
 	if (rank >= omni::stage[stage]) {
 		scn::init(stage, lvl);
+	} else {
+		omni::err(omni::ERR_RANK_LT, {
+			stage
+		});
 	}
 
 	Py_Initialize();

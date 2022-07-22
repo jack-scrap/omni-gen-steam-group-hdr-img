@@ -1,6 +1,10 @@
 #include <iostream>
 
 #include "omni.h"
+#include "json.hpp"
+#include "util.h"
+
+#undef assert
 
 void omni::err(unsigned int err, std::vector<std::string> arg) {
 	std::string msg;
@@ -76,6 +80,16 @@ void omni::err(unsigned int err, std::vector<std::string> arg) {
 			msg = "Cannot execute script; previous script still running";
 
 			break;
+		}
+
+		case ERR_RANK_LT: {
+			nlohmann::json deser = nlohmann::json::parse(util::fs::rd<std::string>("stat.json"));
+
+			unsigned int rank = deser["rank"];
+
+			msg = "Cannot load level; player rank (" + std::to_string(rank) + ") less than required for section '" + arg[0] + "' (" + std::to_string(omni::stage[arg[0]]) + ")";
+
+	 		break;
 		}
 
 		case ERR_TOK:

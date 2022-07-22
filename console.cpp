@@ -1109,6 +1109,10 @@ void Console::exec() {
 
 					if (rank >= omni::stage[stage]) {
 						scn::init(arg[0], std::stoi(arg[1]));
+					} else {
+						omni::err(omni::ERR_RANK_LT, {
+							arg[0]
+						});
 					}
 
 					console->open(path);

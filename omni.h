@@ -141,6 +141,7 @@ namespace omni {
 		ERR_CFG_KEY,
 
 		ERR_LVL_NOT_FIN,
+		ERR_RANK_LT,
 
 		ERR_OBJ_CLIP,
 
