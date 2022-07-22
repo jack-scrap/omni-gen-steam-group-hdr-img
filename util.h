@@ -140,7 +140,6 @@ namespace util {
 
 			CBuff array(nlohmann::json deser);
 			CBuff matrix(nlohmann::json deser);
-			CBuff tens(nlohmann::json deser);
 		}
 
 		namespace bound {

@@ -239,25 +239,9 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 					// 2D
 					case nlohmann::json::value_t::array: {
-						switch (pair.value()["block"][0][0].type()) {
-							// 2D
-							case nlohmann::json::value_t::number_unsigned: {
-								wd = ((Array*) item->ptr)->_parent->_aabb[X][MAX] - ((Array*) item->ptr)->_parent->_aabb[X][MIN];
+						wd = ((Array*) item->ptr)->_parent->_aabb[X][MAX] - ((Array*) item->ptr)->_parent->_aabb[X][MIN];
 
-								data[i] = item;
-
-								break;
-							}
-
-							// 3D
-							case nlohmann::json::value_t::array: {
-								wd = ((Array*) item->ptr)->_parent->_aabb[X][MAX] - ((Array*) item->ptr)->_parent->_aabb[X][MIN];
-
-								data[i] = item;
-
-								break;
-							}
-						}
+						data[i] = item;
 
 						break;
 					}
@@ -334,23 +318,8 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 					// 2D
 					case nlohmann::json::value_t::array: {
-						switch (pair.value()["block"][0][0].type()) {
-							// 2D
-							case nlohmann::json::value_t::number_unsigned: {
-								goal[i] = item;
-								typeRhs = omni::ARRAY;
-
-								break;
-							}
-
-							// 3D
-							case nlohmann::json::value_t::array: {
-								goal[i] = item;
-								typeRhs = omni::ARRAY;
-
-								break;
-							}
-						}
+						goal[i] = item;
+						typeRhs = omni::ARRAY;
 
 						break;
 					}

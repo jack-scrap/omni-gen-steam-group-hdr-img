@@ -840,29 +840,6 @@ CBuff util::json::array::matrix(nlohmann::json deser) {
 	return _;
 }
 
-CBuff util::json::array::tens(nlohmann::json deser) {
-	CBuff _;
-
-	_.x = deser[0][0].size();
-	_.y = deser[0].size();
-	_.z = deser.size();
-	_.ptr = (char*) malloc(_.x * _.y * _.z);
-	int c = 0;
-	for (int k = 0; k < _.z; k++) {
-		for (int j = 0; j < _.y; j++) {
-			for (int i = 0; i < _.x; i++) {
-				omni::assert(ascii(deser[k][j][i]), std::string("Data at index [") + std::to_string(j) + "][" + std::to_string(i) + std::string("] not ASCII applicable"));
-
-				((char*) _.ptr)[c] = (char) ((int) deser[k][j][i]);
-
-				c++;
-			}
-		}
-	}
-
-	return _;
-}
-
 Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm::vec3 rot) {
 	Var* inst;
 
@@ -913,33 +890,15 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 
 				// 2D
 				case nlohmann::json::value_t::array: {
-					switch (val["block"][0][0].type()) {
-						// 2D
-						case nlohmann::json::value_t::number_unsigned: {
-							CBuff init = array::matrix(val["block"]);
+					CBuff init = array::matrix(val["block"]);
 
-							Array* val = arrayMk((char*) init.ptr, init.x, init.y, key, loc + glm::vec3(0.0, 0.0, -(layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2)), glm::radians(rot));
+					Array* val = arrayMk((char*) init.ptr, init.x, init.y, key, loc + glm::vec3(0.0, 0.0, -(layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2)), glm::radians(rot));
 
-							omni::assert(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
+					omni::assert(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
-							inst = varMk(name, val, omni::ARRAY);
+					inst = varMk(name, val, omni::ARRAY);
 
-							break;
-						}
-
-						// 3D
-						case nlohmann::json::value_t::array: {
-							CBuff init = array::tens(val["block"]);
-
-							Array* val = arrayMk((char*) init.ptr, init.x, init.y, key, loc, glm::radians(rot));
-
-							omni::assert(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
-
-							inst = varMk(name, val, omni::ARRAY);
-
-							break;
-						}
-					}
+					break;
 				}
 			}
 
