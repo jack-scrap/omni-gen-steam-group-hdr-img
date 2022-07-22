@@ -866,7 +866,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 
 			omni::assert(!phys::aabbGround(idx->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
-			inst = varMk(name, idx, omni::SCALAR);
+			inst = varMk(name, idx, omni::IDX);
 
 			break;
 		}

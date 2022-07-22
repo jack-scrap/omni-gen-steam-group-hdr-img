@@ -137,7 +137,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 	// data
 	for (int i = 0; i < noData; i++) {
 		switch (data[i]->type) {
-			case omni::SCALAR:
+			case omni::IDX:
 				idxDel((Idx*) data[i]);
 				idxDel((Idx*) goal[i]);
 
@@ -290,7 +290,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 			// stack
 			case nlohmann::json::value_t::number_unsigned: {
 				goal[i] = item;
-				typeRhs = omni::SCALAR;
+				typeRhs = omni::IDX;
 
 				break;
 			}
@@ -346,7 +346,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 		Obj* instObj;
 
 		switch (data[i]->type) {
-			case omni::SCALAR:
+			case omni::IDX:
 				instObj = ((Idx*) data[i]->ptr)->_parent;
 
 				break;

@@ -40,7 +40,7 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 				child[i] = idx->_parent;
 
 				((Idx**) inst->data)[i] = idx;
-				inst->type[i] = omni::SCALAR;
+				inst->type[i] = omni::IDX;
 
 				if (strideIdx[X] > maxX) {
 					maxX = strideIdx[X];
@@ -177,7 +177,7 @@ Cont* dictPop(Dict* inst, std::string key) {
 bool dictEq(Dict* lhs, Dict* rhs) {
 	for (int i = 0; i < lhs->no; i++) {
 		switch (lhs->type[i]) {
-			case omni::SCALAR:
+			case omni::IDX:
 				if (!idxEq((Idx*) lhs->data[i], (Idx*) rhs->data[i])) {
 					return false;
 				}

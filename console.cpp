@@ -42,7 +42,7 @@ void dispatch(std::string fName, unsigned int ptrEditorX) {
 	eq = true;
 	for (int i = 0; i < noData; i++) {
 		switch (data[i]->type) {
-			case omni::SCALAR:
+			case omni::IDX:
 				if (!idxEq((Idx*) data[i]->ptr, (Idx*) goal[i]->ptr)) {
 					eq = false;
 				}

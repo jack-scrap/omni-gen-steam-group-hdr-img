@@ -178,7 +178,7 @@ void craneGrab(Crane* inst) {
 		/* data */
 		for (int i = 0; i < noData; i++) {
 			switch (data[i]->type) {
-				case omni::SCALAR: {
+				case omni::IDX: {
 					Idx* idx = (Idx*) data[i]->ptr;
 
 					if (util::phys::aabb(glm::vec3(0.0), inst->data->_parent, idx->_parent->_acc, inst->data->_parent->_acc)) {
@@ -282,7 +282,7 @@ void craneGrab(Crane* inst) {
 		/* data */
 		for (int i = 0; i < noData; i++) {
 			switch (data[i]->type) {
-				case omni::SCALAR: {
+				case omni::IDX: {
 					Idx* idx = (Idx*) data[i]->ptr;
 
 					if (idx->sz) {

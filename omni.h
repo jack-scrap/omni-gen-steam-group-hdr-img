@@ -115,7 +115,7 @@ namespace omni {
 	};
 
 	enum {
-		SCALAR,
+		IDX,
 		ARRAY,
 		DICT
 	};
