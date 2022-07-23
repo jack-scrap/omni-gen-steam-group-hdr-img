@@ -133,7 +133,7 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 		}
 
 		// name
-		float idWd = 0.0;
+		GLfloat idWd = 0.0;
 
 		idWd += layout::item(id->_aabb[X][MAX] - id->_aabb[X][MIN]);
 
