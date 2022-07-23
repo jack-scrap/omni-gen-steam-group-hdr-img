@@ -209,7 +209,24 @@ void dictPush(Dict* inst, std::string key, unsigned int x, unsigned int y, Cont*
 	}
 }
 
-Cont* dictPop(Dict* inst, std::string key) {
+Cont* dictPop(Dict* inst, std::string key, unsigned int x, unsigned int y) {
+	Cont* byte = nullptr;
+
+	int k = dictHash(inst, (char*) key.c_str());
+
+	switch (inst->type[k]) {
+		case omni::IDX:
+			byte = idxPop((Idx*) inst->data[k]);
+
+			break;
+
+		case omni::ARRAY:
+			byte = arrayPop((Array*) inst->data[k], 0, 0);
+
+			break;
+	}
+
+	return byte;
 }
 
 bool dictEq(Dict* lhs, Dict* rhs) {

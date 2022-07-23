@@ -26,6 +26,6 @@ int dictHash(Dict* inst, char* key);
 
 void dictPush(Dict* inst, std::string key, unsigned int x, unsigned int y, Cont* byte);
 
-Cont* dictPop(Dict* inst, std::string key);
+Cont* dictPop(Dict* inst, std::string key, unsigned int x, unsigned int y);
 
 bool dictEq(Dict* lhs, Dict* rhs);
