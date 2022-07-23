@@ -1,4 +1,5 @@
 #include <cstdlib>
+#include <iostream>
 
 #include "dict.h"
 #include "str.h"
@@ -15,6 +16,14 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 	inst->no = deser.size();
 	inst->data = (void**) malloc(inst->no * sizeof (void*));
 	inst->type = (unsigned int*) malloc(inst->no * sizeof (unsigned int));
+
+	inst->key = (char**) malloc(inst->no * sizeof (char*));
+	int p = 0;
+	for (const auto& pair : deser.items()) {
+		inst->key[p] = util::json::id(pair.key());
+
+		p++;
+	}
 
 	Obj* child[deser.size() + 1];
 

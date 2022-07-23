@@ -10,6 +10,7 @@
 typedef struct {
 	void** data;
 	unsigned int* type;
+	char** key;
 	unsigned int no;
 
 	float offset[3];
