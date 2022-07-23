@@ -177,6 +177,20 @@ void dictDel(Dict* inst) {
 	free(inst);
 }
 
+int dictHash(Dict* inst, char* key) {
+	int i = 0;
+	char c = key[i];
+	int sum = 0;
+	while (c != '\0') {
+		sum += c;
+
+		i++;
+		c = key[i];
+	}
+
+	return sum % inst->no;
+}
+
 void dictPush(Dict* inst, std::string key, Cont* byte) {
 }
 

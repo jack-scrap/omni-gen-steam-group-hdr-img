@@ -22,6 +22,8 @@ Dict* dictMk(nlohmann::json deser, std::string name = "", glm::vec3 loc = glm::v
 
 void dictDel(Dict* inst);
 
+int dictHash(Dict* inst, char* key);
+
 void dictPush(Dict* inst, std::string key, Cont* byte);
 
 Cont* dictPop(Dict* inst, std::string key);
