@@ -193,7 +193,20 @@ int dictHash(Dict* inst, char* key) {
 	return sum % inst->no;
 }
 
-void dictPush(Dict* inst, std::string key, Cont* byte) {
+void dictPush(Dict* inst, std::string key, unsigned int x, unsigned int y, Cont* byte) {
+	int k = dictHash(inst, (char*) key.c_str());
+
+	switch (inst->type[k]) {
+		case omni::IDX:
+			idxPush((Idx*) inst->data[k], byte);
+
+			break;
+
+		case omni::ARRAY:
+			arrayPush((Array*) inst->data[k], x, y, byte);
+
+			break;
+	}
 }
 
 Cont* dictPop(Dict* inst, std::string key) {
