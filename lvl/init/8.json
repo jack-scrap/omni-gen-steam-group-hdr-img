@@ -1,24 +1,36 @@
 {
 	"data": {
 		"in": {
-			"block": 1
+			"block": [
+				1
+			]
 		},
 		"fst": {
-			"block": 1
+			"block": [
+				1
+			]
 		},
 		"snd": {
-			"block": 0
+			"block": [
+				0
+			]
 		}
 	},
 	"goal": {
 		"in": {
-			"block": 0
+			"block": [
+				0
+			]
 		},
 		"fst": {
-			"block": 1
+			"block": [
+				1
+			]
 		},
 		"snd": {
-			"block": 1
+			"block": [
+				1
+			]
 		}
 	},
 	"vehicle": [

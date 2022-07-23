@@ -2,16 +2,24 @@
 	"data": {
 		"in": {
 			"in": {
-				"key": 3,
-				"other_key": 7
+				"key": [
+					3
+				],
+				"other_key": [
+					7
+				]
 			}
 		}
 	},
 	"goal": {
 		"in": {
 			"in": {
-				"key": 7,
-				"other_key": 3
+				"key": [
+					7
+				],
+				"other_key": [
+					3
+				]
 			}
 		}
 	},

@@ -1,7 +1,9 @@
 {
 	"data": {
 		"in": {
-			"block": 1,
+			"block": [
+				1
+			],
 			"loc": [
 				0,
 				0,
@@ -9,7 +11,9 @@
 			]
 		},
 		"out": {
-			"block": 0,
+			"block": [
+				0
+			],
 			"loc": [
 				0,
 				0,
@@ -19,10 +23,14 @@
 	},
 	"goal": {
 		"in": {
-			"block": 0
+			"block": [
+				0
+			]
 		},
 		"out": {
-			"block": 1
+			"block": [
+				1
+			]
 		}
 	},
 	"vehicle": [

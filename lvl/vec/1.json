@@ -14,7 +14,7 @@
 			]
 		},
 		"scalar": {
-			"block": 7
+			"block": [7]
 		}
 	},
 	"goal": {
@@ -32,7 +32,7 @@
 			]
 		},
 		"scalar": {
-			"block": 3
+			"block": [3]
 		}
 	},
 	"vehicle": [
