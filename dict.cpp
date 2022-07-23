@@ -38,6 +38,8 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 	GLfloat maxX = 0.0;
 	GLfloat accY = 0.0;
 	for (const auto& entry : deser.items()) {
+		int k = dictHash(inst, (char*) entry.key().c_str());
+
 		Obj* id;
 		switch (entry.value().type()) {
 			// stack
@@ -48,8 +50,8 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 
 				child[i] = idx->_parent;
 
-				((Idx**) inst->data)[i] = idx;
-				inst->type[i] = omni::IDX;
+				((Idx**) inst->data)[k] = idx;
+				inst->type[k] = omni::IDX;
 
 				if (strideIdx[X] > maxX) {
 					maxX = strideIdx[X];
@@ -73,8 +75,8 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 
 						child[1 + i] = array->_parent;
 
-						((Array**) inst->data)[i] = array;
-						inst->type[i] = omni::ARRAY;
+						((Array**) inst->data)[k] = array;
+						inst->type[k] = omni::ARRAY;
 
 						if (layout::scoped(init.x * strideIdx[X]) > maxX) {
 							maxX = layout::scoped(init.x * strideIdx[X]);
@@ -97,8 +99,8 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 
 						child[1 + i] = array->_parent;
 
-						((Array**) inst->data)[i] = array;
-						inst->type[i] = omni::ARRAY;
+						((Array**) inst->data)[k] = array;
+						inst->type[k] = omni::ARRAY;
 
 						if (layout::scoped(init.x * strideIdx[X]) > maxX) {
 							maxX = layout::scoped(init.x * strideIdx[X]);
@@ -123,8 +125,8 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 
 				child[1 + i] = dict->_parent;
 
-				((Dict**) inst->data)[i] = dict;
-				inst->type[i] = omni::DICT;
+				((Dict**) inst->data)[k] = dict;
+				inst->type[k] = omni::DICT;
 
 				break;
 			}																			 
