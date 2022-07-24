@@ -5,12 +5,12 @@
 				0
 			]
 		},
-		"out": {
+		"fst": {
 			"block": [
 				1
 			]
 		},
-		"other_out": {
+		"snd": {
 			"block": [
 				0
 			]
@@ -22,12 +22,12 @@
 				0
 			]
 		},
-		"out": {
+		"fst": {
 			"block": [
 				0
 			]
 		},
-		"other_out": {
+		"snd": {
 			"block": [
 				1
 			]

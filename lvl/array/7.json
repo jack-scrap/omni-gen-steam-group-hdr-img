@@ -7,7 +7,7 @@
 				]
 			]
 		},
-		"out": {
+		"out_fst": {
 			"block": [
 				[
 					3
@@ -19,7 +19,7 @@
 				-25.12
 			]
 		},
-		"other_out": {
+		"out_snd": {
 			"block": [
 				[
 					3
@@ -31,7 +31,7 @@
 				-50.24
 			]
 		},
-		"other_other_out": {
+		"out_thrd": {
 			"block": [
 				[
 					3
@@ -50,17 +50,17 @@
 				3
 			]
 		},
-		"out": {
+		"out_fst": {
 			"block": [
 				3
 			]
 		},
-		"other_out": {
+		"out_snd": {
 			"block": [
 				3
 			]
 		},
-		"other_other_out": {
+		"out_thrd": {
 			"block": [
 				3
 			]

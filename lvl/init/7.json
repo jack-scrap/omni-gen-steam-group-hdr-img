@@ -1,43 +1,43 @@
 {
 	"data": {
-		"in": {
+		"in_fst": {
 			"block": [
 				1
 			]
 		},
-		"out": {
+		"out_fst": {
 			"block": [
 				0
 			]
 		},
-		"other_in": {
+		"in_snd": {
 			"block": [
 				1
 			]
 		},
-		"other_out": {
+		"out_snd": {
 			"block": [
 				0
 			]
 		}
 	},
 	"goal": {
-		"in": {
+		"in_fst": {
 			"block": [
 				0
 			]
 		},
-		"out": {
+		"out_fst": {
 			"block": [
 				1
 			]
 		},
-		"other_in": {
+		"in_snd": {
 			"block": [
 				0
 			]
 		},
-		"other_out": {
+		"out_snd": {
 			"block": [
 				1
 			]
