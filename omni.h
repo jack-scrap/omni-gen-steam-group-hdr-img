@@ -28,7 +28,7 @@ namespace omni {
 			"matrix",
 			30
 		}, {
-			"vec",
+			"stack",
 			45
 		}, {
 			"ctrl_flow",
