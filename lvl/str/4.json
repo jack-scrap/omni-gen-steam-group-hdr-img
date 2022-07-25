@@ -1,9 +1,9 @@
 {
 	"data": {
-		"str": "text"
+		"string": "text"
 	},
 	"goal": {
-		"str": "ettx"
+		"string": "ettx"
 	},
 	"vehicle": [
 		{

@@ -1,6 +1,6 @@
 {
 	"data": {
-		"str": {
+		"string": {
 			"block": "                     "
 		},
 		"sub": {
@@ -11,7 +11,7 @@
 		}
 	},
 	"goal": {
-		"str": {
+		"string": {
 			"block": "Text Other text"
 		},
 		"sub": {

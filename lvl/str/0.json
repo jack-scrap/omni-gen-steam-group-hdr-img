@@ -1,11 +1,11 @@
 {
 	"data": {
-		"str": {
+		"string": {
 			"block": "eTxt"
 		}
 	},
 	"goal": {
-		"str": {
+		"string": {
 			"block": "Text"
 		}
 	},
