@@ -3,17 +3,17 @@
 #include "util.h"
 
 Cont* contMk(char c, glm::vec3 loc, glm::vec3 rot) {
-	Cont* _ = (Cont*) malloc(sizeof (Cont));
+	Cont* inst = (Cont*) malloc(sizeof (Cont));
 
-	_->_c = c;
+	inst->_c = c;
 
-	_->_parent = objMk("container_2x4", "obj", "dir", true, loc, rot);
+	inst->_parent = objMk("container_2x4", "obj", "dir", true, loc, rot);
 
-	if (_->_c >= '!' && _->_c <= '~') {
-		_->_parent->_tex = util::tex::spray("glyph/" + util::glyphName(std::tolower(_->_c)));
+	if (inst->_c >= '!' && inst->_c <= '~') {
+		inst->_parent->_tex = util::tex::spray("glyph/" + util::glyphName(std::tolower(inst->_c)));
 	}
 
-	return _;
+	return inst;
 }
 
 void contDel(Cont* inst) {
