@@ -3,16 +3,36 @@
 		"in": {
 			"block": {
 				"key": [
+					1
+				],
+				"other_key": [
+					0
+				]
+			}
+		},
+		"out": {
+			"block": {
+				"key": [
 					0
 				],
 				"other_key": [
-					1
+					0
 				]
 			}
 		}
 	},
 	"goal": {
 		"in": {
+			"block": {
+				"key": [
+					0
+				],
+				"other_key": [
+					0
+				]
+			}
+		},
+		"out": {
 			"block": {
 				"key": [
 					1
