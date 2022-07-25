@@ -1,0 +1,67 @@
+{
+	"data": {
+		"dict": {
+			"block": {
+				"key": {
+					"key": [
+						3
+					],
+					"other_key": [
+						7
+					]
+				},
+				"other_key": {
+					"key": [
+						3
+					],
+					"other_key": [
+						7
+					]
+				}
+			}
+		}
+	},
+	"goal": {
+		"dict": {
+			"block": {
+				"key": {
+					"key": [
+						7
+					],
+					"other_key": [
+						3
+					]
+				},
+				"other_key": {
+					"key": [
+						7
+					],
+					"other_key": [
+						3
+					]
+				}
+			}
+		}
+	},
+	"vehicle": [
+		{
+			"name": "crane"
+		}
+	],
+	"bound": {
+		"rng": [
+			{
+				"min": {
+					"axis": "Z",
+					"val": -11.16,
+					"status": "halt"
+				},
+				"max": {
+					"axis": "Z",
+					"val": 11.16,
+					"status": "halt"
+				}
+			}
+		]
+	}
+}
