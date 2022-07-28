@@ -32,12 +32,12 @@ glm::vec3 layout::center(Obj* obj) {
 		bound[a] = obj->_aabb[a][MAX] - obj->_aabb[a][MIN];
 	}
 
-	glm::vec3 _;
+	glm::vec3 loc;
 	for (int a = 0; a < 3; a++) {
 		bound[a] = obj->_aabb[a][MAX] - obj->_aabb[a][MIN];
 
-		_[a] = -(bound[a] / 2);
+		loc[a] = -(bound[a] / 2);
 	}
 
-	return _;
+	return loc;
 }
