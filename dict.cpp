@@ -193,7 +193,7 @@ int dictHash(Dict* inst, char* key) {
 	return sum % inst->no;
 }
 
-void dictPush(Dict* inst, std::string key, unsigned int x, unsigned int y, Cont* byte) {
+void dictIns(Dict* inst, std::string key, unsigned int x, unsigned int y, Cont* byte) {
 	int k = dictHash(inst, (char*) key.c_str());
 
 	switch (inst->type[k]) {
@@ -203,13 +203,13 @@ void dictPush(Dict* inst, std::string key, unsigned int x, unsigned int y, Cont*
 			break;
 
 		case omni::ARRAY:
-			arrayPush((Array*) inst->data[k], x, y, byte);
+			arrayIns((Array*) inst->data[k], x, y, byte);
 
 			break;
 	}
 }
 
-Cont* dictPop(Dict* inst, std::string key, unsigned int x, unsigned int y) {
+Cont* dictRm(Dict* inst, std::string key, unsigned int x, unsigned int y) {
 	Cont* byte = nullptr;
 
 	int k = dictHash(inst, (char*) key.c_str());
@@ -221,7 +221,7 @@ Cont* dictPop(Dict* inst, std::string key, unsigned int x, unsigned int y) {
 			break;
 
 		case omni::ARRAY:
-			byte = arrayPop((Array*) inst->data[k], 0, 0);
+			byte = arrayRm((Array*) inst->data[k], 0, 0);
 
 			break;
 	}

@@ -207,7 +207,7 @@ void craneGrab(Crane* inst) {
 
 							if (inst->data && !idx->sz) {
 								if (util::phys::aabb(glm::vec3(0.0), inst->data->_parent, idx->_parent->_acc, inst->data->_parent->_acc)) {
-									arrayPush(array, x, y, craneRm(inst));
+									arrayIns(array, x, y, craneRm(inst));
 
 									return;
 								}
@@ -241,7 +241,7 @@ void craneGrab(Crane* inst) {
 
 					if (inst->data && !idx->sz) {
 						if (util::phys::aabb(glm::vec3(0.0), inst->data->_parent, idx->_parent->_acc, inst->data->_parent->_acc)) {
-							arrayPush(array, x, y, craneRm(inst));
+							arrayIns(array, x, y, craneRm(inst));
 
 							return;
 						}
@@ -270,7 +270,7 @@ void craneGrab(Crane* inst) {
 
 					if (inst->data && !idx->sz) {
 						if (util::phys::aabb(glm::vec3(0.0), inst->data->_parent, idx->_parent->_acc, inst->data->_parent->_acc)) {
-							arrayPush(array, x, y, craneRm(inst));
+							arrayIns(array, x, y, craneRm(inst));
 
 							return;
 						}
@@ -313,7 +313,7 @@ void craneGrab(Crane* inst) {
 
 							if (idx->sz) {
 								if (util::phys::aabb(inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD], idx->data[idx->sz - 1]->_parent, inst->_parent->_child[Crane::TRACK]->_child[Crane::HEAD]->_acc, idx->data[idx->sz - 1]->_parent->_acc)) {
-									craneInsert(inst, arrayPop(array, x, y));
+									craneInsert(inst, arrayRm(array, x, y));
 
 									return;
 								}

@@ -24,8 +24,8 @@ void dictDel(Dict* inst);
 
 int dictHash(Dict* inst, char* key);
 
-void dictPush(Dict* inst, std::string key, unsigned int x, unsigned int y, Cont* byte);
+void dictIns(Dict* inst, std::string key, unsigned int x, unsigned int y, Cont* byte);
 
-Cont* dictPop(Dict* inst, std::string key, unsigned int x, unsigned int y);
+Cont* dictRm(Dict* inst, std::string key, unsigned int x, unsigned int y);
 
 bool dictEq(Dict* lhs, Dict* rhs);

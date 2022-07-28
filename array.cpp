@@ -173,7 +173,7 @@ void arrayDel(Array* inst) {
 	free(inst);
 }
 
-void arrayPush(Array* inst, unsigned int x, unsigned int y, Cont* byte) {
+void arrayIns(Array* inst, unsigned int x, unsigned int y, Cont* byte) {
 	int i = util::math::idx::array({
 		x,
 		y
@@ -199,7 +199,7 @@ void arrayPush(Array* inst, unsigned int x, unsigned int y, Cont* byte) {
 	objAcc(idx->_parent, inst->_parent->_acc);
 }
 
-Cont* arrayPop(Array* inst, unsigned int x, unsigned int y) {
+Cont* arrayRm(Array* inst, unsigned int x, unsigned int y) {
 	Idx* idx = inst->data[(y * inst->_x) + x];
 
 	return idxPop(idx);
