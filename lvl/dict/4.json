@@ -1,6 +1,6 @@
 {
 	"data": {
-		"dict": {
+		"dictionary": {
 			"block": {
 				"key": {
 					"key": [
@@ -22,7 +22,7 @@
 		}
 	},
 	"goal": {
-		"dict": {
+		"dictionary": {
 			"block": {
 				"key": {
 					"key": [
