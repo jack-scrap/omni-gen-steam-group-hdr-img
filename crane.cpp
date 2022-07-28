@@ -193,14 +193,14 @@ void craneGrab(Crane* inst) {
 				case omni::ARRAY: {
 					Array* array = (Array*) data[i]->ptr;
 
-					for (int y = 0; y < array->_y; y++) {
-						for (int x = 0; x < array->_x; x++) {
+					for (int y = 0; y < array->y; y++) {
+						for (int x = 0; x < array->x; x++) {
 							unsigned int i = util::math::idx::array({
 								x,
 								y
 							}, {
-								array->_x,
-								array->_y
+								array->x,
+								array->y
 							});
 
 							Idx* idx = array->data[i];
@@ -227,14 +227,14 @@ void craneGrab(Crane* inst) {
 
 			Array* array = truckInst->data;
 
-			for (int y = 0; y < array->_y; y++) {
-				for (int x = 0; x < array->_x; x++) {
+			for (int y = 0; y < array->y; y++) {
+				for (int x = 0; x < array->x; x++) {
 					unsigned int i = util::math::idx::array({
 						x,
 						y
 					}, {
-						array->_x,
-						array->_y
+						array->x,
+						array->y
 					});
 
 					Idx* idx = array->data[i];
@@ -256,14 +256,14 @@ void craneGrab(Crane* inst) {
 
 			Array* array = cargoShipInst->data;
 
-			for (int y = 0; y < array->_y; y++) {
-				for (int x = 0; x < array->_x; x++) {
+			for (int y = 0; y < array->y; y++) {
+				for (int x = 0; x < array->x; x++) {
 					unsigned int i = util::math::idx::array({
 						x,
 						y
 					}, {
-						array->_x,
-						array->_y
+						array->x,
+						array->y
 					});
 
 					Idx* idx = array->data[i];
@@ -299,14 +299,14 @@ void craneGrab(Crane* inst) {
 				case omni::ARRAY: {
 					Array* array = (Array*) data[i]->ptr;
 
-					for (int y = 0; y < array->_y; y++) {
-						for (int x = 0; x < array->_x; x++) {
+					for (int y = 0; y < array->y; y++) {
+						for (int x = 0; x < array->x; x++) {
 							unsigned int i = util::math::idx::array({
 								x,
 								y
 							}, {
-								array->_x,
-								array->_y
+								array->x,
+								array->y
 							});
 
 							Idx* idx = array->data[i];
@@ -332,14 +332,14 @@ void craneGrab(Crane* inst) {
 
 				Array* array = truckInst->data;
 
-				for (int y = 0; y < array->_y; y++) {
-					for (int x = 0; x < array->_x; x++) {
+				for (int y = 0; y < array->y; y++) {
+					for (int x = 0; x < array->x; x++) {
 						unsigned int i = util::math::idx::array({
 							x,
 							y
 						}, {
-							array->_x,
-							array->_y
+							array->x,
+							array->y
 						});
 
 						Idx* idx = array->data[i];
@@ -363,14 +363,14 @@ void craneGrab(Crane* inst) {
 
 				Array* array = cargoShipInst->data;
 
-				for (int y = 0; y < array->_y; y++) {
-					for (int x = 0; x < array->_x; x++) {
+				for (int y = 0; y < array->y; y++) {
+					for (int x = 0; x < array->x; x++) {
 						unsigned int i = util::math::idx::array({
 							x,
 							y
 						}, {
-							array->_x,
-							array->_y
+							array->x,
+							array->y
 						});
 
 						Idx* idx = array->data[i];

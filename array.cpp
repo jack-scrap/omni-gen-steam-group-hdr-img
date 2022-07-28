@@ -11,19 +11,19 @@
 Array* arrayMk(char* init, unsigned int x, std::string name, unsigned int axis, glm::vec3 loc, glm::vec3 rot) {
 	Array* inst = (Array*) malloc(sizeof (Array));
 
-	inst->_x = x;
-	inst->_y = 1;
+	inst->x = x;
+	inst->y = 1;
 
 	// data
-	inst->data = (Idx**) malloc(inst->_x * inst->_y * sizeof (Idx*));
+	inst->data = (Idx**) malloc(inst->x * inst->y * sizeof (Idx*));
 
-	unsigned int noChild = 1 + (inst->_x * inst->_y);
+	unsigned int noChild = 1 + (inst->x * inst->y);
 	Obj** child = (Obj**) malloc(noChild * sizeof (Obj*));
 
 	glm::vec2 stride = glm::vec2(layout::item(layout::scoped(layout::idx[X])), layout::item(layout::scoped(layout::idx[Z])));
 
 	int c = 0;
-	for (int i = 0; i < inst->_x; i++) {
+	for (int i = 0; i < inst->x; i++) {
 		Idx* idx;
 
 		glm::vec3 offset;
@@ -62,12 +62,12 @@ Array* arrayMk(char* init, unsigned int x, std::string name, unsigned int axis, 
 	glm::vec2 bound;
 	switch (axis) {
 		case X:
-			bound = glm::vec2(inst->_x, inst->_y);
+			bound = glm::vec2(inst->x, inst->y);
 
 			break;
 
 		case Z:
-			bound = glm::vec2(inst->_y, inst->_x);
+			bound = glm::vec2(inst->y, inst->x);
 
 			break;
 	}
@@ -76,16 +76,16 @@ Array* arrayMk(char* init, unsigned int x, std::string name, unsigned int axis, 
 	switch (axis) {
 		case X:
 			scope = borderMk({
-				inst->_x * stride[X],
-				inst->_y * stride[Y]
+				inst->x * stride[X],
+				inst->y * stride[Y]
 			}, child, noChild, loc, rot);
 
 			break;
 
 		case Z:
 			scope = borderMk({
-				inst->_y * stride[X],
-				inst->_x * stride[Y]
+				inst->y * stride[X],
+				inst->x * stride[Y]
 			}, child, noChild, loc, rot);
 
 			break;
@@ -105,10 +105,10 @@ Array* arrayMk(char* init, unsigned int x, std::string name, unsigned int axis, 
 Array* arrayMk(char* init, unsigned int x, unsigned int y, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	Array* _ = (Array*) malloc(sizeof (Array));
 
-	_->_x = x;
-	_->_y = y;
+	_->x = x;
+	_->y = y;
 
-	unsigned int noChild = 1 + (_->_x * _->_y);
+	unsigned int noChild = 1 + (_->x * _->y);
 	Obj** child = (Obj**) malloc(noChild * sizeof (Obj*));
 
 	// identifier
@@ -120,13 +120,13 @@ Array* arrayMk(char* init, unsigned int x, unsigned int y, std::string name, glm
 	}
 
 	// data
-	_->data = (Idx**) malloc(_->_x * _->_y * sizeof (Idx*));
+	_->data = (Idx**) malloc(_->x * _->y * sizeof (Idx*));
 
 	glm::vec2 stride = glm::vec2(layout::item(layout::scoped(layout::idx[X])), layout::item(layout::scoped(layout::idx[Z])));
 
 	int c = 0;
-	for (int j = 0; j < _->_y; j++) {
-		for (int i = 0; i < _->_x; i++) {
+	for (int j = 0; j < _->y; j++) {
+		for (int i = 0; i < _->x; i++) {
 			Idx* idx;
 
 			glm::vec3 offset = glm::vec3(layout::overhead, 0.0, layout::overhead) + glm::vec3(i * stride[X], 0.0, j * stride[Y]);
@@ -145,8 +145,8 @@ Array* arrayMk(char* init, unsigned int x, unsigned int y, std::string name, glm
 	}
 
 	Border* scope = borderMk({
-		_->_x * stride[X],
-		_->_y * stride[Y]
+		_->x * stride[X],
+		_->y * stride[Y]
 	}, child, noChild, loc, rot);
 
 	_->_parent = scope->_parent;
@@ -161,9 +161,9 @@ Array* arrayMk(char* init, unsigned int x, unsigned int y, std::string name, glm
 }
 
 void arrayDel(Array* inst) {
-	for (int y = 0; y < inst->_y; y++) {
-		for (int x = 0; x < inst->_x; x++) {
-			idxDel(inst->data[(y * inst->_x) + x]);
+	for (int y = 0; y < inst->y; y++) {
+		for (int x = 0; x < inst->x; x++) {
+			idxDel(inst->data[(y * inst->x) + x]);
 		}
 	}
 	free(inst->data);
@@ -178,8 +178,8 @@ void arrayIns(Array* inst, unsigned int x, unsigned int y, Cont* byte) {
 		x,
 		y
 	}, {
-		inst->_x,
-		inst->_y
+		inst->x,
+		inst->y
 	});
 
 	Idx* idx = inst->data[i];
@@ -200,15 +200,15 @@ void arrayIns(Array* inst, unsigned int x, unsigned int y, Cont* byte) {
 }
 
 Cont* arrayRm(Array* inst, unsigned int x, unsigned int y) {
-	Idx* idx = inst->data[(y * inst->_x) + x];
+	Idx* idx = inst->data[(y * inst->x) + x];
 
 	return idxPop(idx);
 }
 
 bool arrayEq(Array* lhs, Array* rhs) {
 	int i = 0;
-	for (int y = 0; y < lhs->_y; y++) {
-		for (int x = 0; x < lhs->_x; x++) {
+	for (int y = 0; y < lhs->y; y++) {
+		for (int x = 0; x < lhs->x; x++) {
 			if (!idxEq(lhs->data[i], rhs->data[i])) {
 				return false;
 			}

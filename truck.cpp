@@ -34,7 +34,7 @@ Truck* truckMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 
 	inst->ang = 0.0;
 
-	Obj* child[4 + ((init->_x + 1) * 2) + 2 + init->_x];
+	Obj* child[4 + ((init->x + 1) * 2) + 2 + init->x];
 
 	// bed
 	Obj* bed = ptMk(Truck::_bedVtx, Truck::_bedIdx, 1, "main", "bed", "dir", false, glm::vec3(0.0), glm::vec3(0.0, M_PI / 2, 0.0));
@@ -44,7 +44,7 @@ Truck* truckMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	bed->_uni = (GLint*) realloc(bed->_uni, (5 + 1) * sizeof (GLint));
 
 	bed->_uni[5] = glGetUniformLocation(bed->_prog._id, "sz");
-	glUniform1ui(bed->_uni[5], init->_x);
+	glUniform1ui(bed->_uni[5], init->x);
 
 	bed->_prog.unUse();
 
@@ -55,7 +55,7 @@ Truck* truckMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	outer->_uni = (GLint*) realloc(outer->_uni, (5 + 1) * sizeof (GLint));
 
 	outer->_uni[5] = glGetUniformLocation(outer->_prog._id, "sz");
-	glUniform1ui(outer->_uni[5], init->_x);
+	glUniform1ui(outer->_uni[5], init->x);
 
 	outer->_prog.unUse();
 
@@ -64,7 +64,7 @@ Truck* truckMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 
 	GLfloat ht = -(0.2 * 2);
 
-	child[Truck::TAIL] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-layout::scoped(init->_x * layout::scoped(layout::idx[Z]) - (0.32 / 2)), -(0.2 * 2), 0.0));
+	child[Truck::TAIL] = objMk("truck/tail", "obj", "dir", true, glm::vec3(-layout::scoped(init->x * layout::scoped(layout::idx[Z]) - (0.32 / 2)), -(0.2 * 2), 0.0));
 
 	// data
 	inst->data = init;
@@ -76,7 +76,7 @@ Truck* truckMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 
 	int w = 0;
 	for (int z = 0; z < 2; z++) {
-		for (int x = 0; x < init->_x + 1; x++) {
+		for (int x = 0; x < init->x + 1; x++) {
 			Obj* wheel = objMk("wheel", "obj", "dir", false);
 
 			child[4 + w] = objMk("rim", "obj", "dir", true, &wheel, 1, overhead + glm::vec3(x * -layout::scoped(layout::idx[Z]), -1.0 + (ht * 2) + ht, (z ? 1 : -1) * (layout::scoped(layout::idx[X]) / 2)), glm::vec3(0.0, z * M_PI, 0.0));
@@ -87,12 +87,12 @@ Truck* truckMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 
 	// light
 	for (int z = 0; z < 2; z++) {
-		child[4 + ((init->_x + 1) * 2) + z] = objMk(Truck::_lightVtc, Truck::_lightIdc, 2 * 3, Mesh::OBJ, "obj", "alert", false, glm::vec3(-(layout::scoped(init->_x * layout::scoped(layout::idx[Z])) + (layout::margin * 2)), -0.2, (z ? 1 : -1) * 0.74), glm::vec3(0.0, z * M_PI, 0.0));
+		child[4 + ((init->x + 1) * 2) + z] = objMk(Truck::_lightVtc, Truck::_lightIdc, 2 * 3, Mesh::OBJ, "obj", "alert", false, glm::vec3(-(layout::scoped(init->x * layout::scoped(layout::idx[Z])) + (layout::margin * 2)), -0.2, (z ? 1 : -1) * 0.74), glm::vec3(0.0, z * M_PI, 0.0));
 	}
 
 	// wheel-well
-	for (int i = 0; i < init->_x; i++) {
-		child[4 + ((init->_x + 1) * 2) + 2 + i] = objMk("truck/well", "obj", "dir", true, glm::vec3(-((layout::scoped(layout::idx[Z]) / 2) + (i * layout::scoped(layout::idx[Z]))), ht, 0.0));
+	for (int i = 0; i < init->x; i++) {
+		child[4 + ((init->x + 1) * 2) + 2 + i] = objMk("truck/well", "obj", "dir", true, glm::vec3(-((layout::scoped(layout::idx[Z]) / 2) + (i * layout::scoped(layout::idx[Z]))), ht, 0.0));
 	}
 
 	inst->_parent = objMk("truck/front", "obj", "dir", true, child, sizeof child / sizeof *child, loc, rot);
@@ -116,13 +116,13 @@ void truckDel(Truck* inst) {
 
 void truckAnim(Truck* inst, glm::vec3 loc, glm::vec3 rot) {
 	for (int i = 0; i < 2; i++) {
-		inst->_parent->_child[4 + ((inst->data->_x + 1) * 2) + i]->_active = true;
+		inst->_parent->_child[4 + ((inst->data->x + 1) * 2) + i]->_active = true;
 	}
 
 	objMv(inst->_parent, nullptr, loc, rot, Truck::_speed);
 
 	for (int i = 0; i < 2; i++) {
-		inst->_parent->_child[4 + ((inst->data->_x + 1) * 2) + i]->_active = false;
+		inst->_parent->_child[4 + ((inst->data->x + 1) * 2) + i]->_active = false;
 	}
 }
 
