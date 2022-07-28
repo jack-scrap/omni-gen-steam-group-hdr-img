@@ -39,7 +39,8 @@
 	"vehicle": [
 		{
 			"name": "crane"
-		}, {
+		},
+		{
 			"name": "crane",
 			"loc": [
 				0.0,
@@ -61,7 +62,8 @@
 					"val": 11.16,
 					"status": "halt"
 				}
-			}, {
+			},
+			{
 				"min": {
 					"axis": "Z",
 					"val": -36.28,
