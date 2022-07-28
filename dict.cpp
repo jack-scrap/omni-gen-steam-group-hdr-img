@@ -173,6 +173,9 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 	return inst;
 }
 
+Dict* dictMk(Node* node, std::string name, glm::vec3 loc, glm::vec3 rot) {
+}
+
 void dictDel(Dict* inst) {
 	objDel(inst->_parent);
 

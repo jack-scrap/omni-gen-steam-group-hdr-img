@@ -6,6 +6,7 @@
 #include "var.h"
 #include "var.h"
 #include "cont.h"
+#include "node.h"
 
 typedef struct {
 	void** data;
@@ -19,6 +20,8 @@ typedef struct {
 } Dict;
 
 Dict* dictMk(nlohmann::json deser, std::string name = "", glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
+
+Dict* dictMk(Node* node, std::string name = "", glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
 
 void dictDel(Dict* inst);
 
