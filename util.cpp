@@ -755,22 +755,22 @@ bool util::json::array::euclid(nlohmann::json deser, unsigned int sz) {
 }
 
 CBuff util::json::str(nlohmann::json deser) {
-	CBuff _;
+	CBuff cBuff;
 
-	_.y = 1;
-	_.z = 1;
+	cBuff.y = 1;
+	cBuff.z = 1;
 
 	std::string buff = deser;
 
-	_.x = buff.size();
+	cBuff.x = buff.size();
 
-	_.ptr = (char*) malloc(_.x);
+	cBuff.ptr = (char*) malloc(cBuff.x);
 
 	for (int i = 0; i < buff.size(); i++) {
-		((char*) _.ptr)[i] = buff[i];
+		((char*) cBuff.ptr)[i] = buff[i];
 	}
 
-	return _;
+	return cBuff;
 }
 
 StreetSign* util::json::streetSign(nlohmann::json deser) {
@@ -803,40 +803,40 @@ StreetSign* util::json::streetSign(nlohmann::json deser) {
 }
 
 CBuff util::json::array::lin(nlohmann::json deser) {
-	CBuff _;
+	CBuff cBuff;
 
-	_.x = deser.size();
-	_.y = 1;
-	_.z = 1;
-	_.ptr = (char*) malloc(_.x);
-	for (int i = 0; i < _.x; i++) {
+	cBuff.x = deser.size();
+	cBuff.y = 1;
+	cBuff.z = 1;
+	cBuff.ptr = (char*) malloc(cBuff.x);
+	for (int i = 0; i < cBuff.x; i++) {
 		omni::assert(ascii(deser[i]), std::string("Data at index [") + std::to_string(i) + std::string("] not ASCII applicable"));
 
-		((char*) _.ptr)[i] = util::json::byte(deser[i]);
+		((char*) cBuff.ptr)[i] = util::json::byte(deser[i]);
 	}
 
-	return _;
+	return cBuff;
 }
 
 CBuff util::json::array::matrix(nlohmann::json deser) {
-	CBuff _;
+	CBuff cBuff;
 
-	_.x = deser[0].size();
-	_.y = deser.size();
-	_.z = 1;
-	_.ptr = (char*) malloc(_.x * _.y);
+	cBuff.x = deser[0].size();
+	cBuff.y = deser.size();
+	cBuff.z = 1;
+	cBuff.ptr = (char*) malloc(cBuff.x * cBuff.y);
 	int c = 0;
-	for (int j = 0; j < _.y; j++) {
-		for (int i = 0; i < _.x; i++) {
+	for (int j = 0; j < cBuff.y; j++) {
+		for (int i = 0; i < cBuff.x; i++) {
 			omni::assert(ascii(deser[j][i]), std::string("Data at index [") + std::to_string(j) + "][" + std::to_string(i) + std::string("] not ASCII applicable"));
 
-			((char*) _.ptr)[c] = util::json::byte(deser[i]);
+			((char*) cBuff.ptr)[c] = util::json::byte(deser[i]);
 
 			c++;
 		}
 	}
 
-	return _;
+	return cBuff;
 }
 
 Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm::vec3 rot) {
