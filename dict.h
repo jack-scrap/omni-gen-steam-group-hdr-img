@@ -4,7 +4,6 @@
 
 #include "obj.h"
 #include "var.h"
-#include "var.h"
 #include "cont.h"
 #include "node.h"
 
