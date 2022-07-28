@@ -25,9 +25,6 @@ namespace omni {
 			"dict",
 			20
 		}, {
-			"matrix",
-			30
-		}, {
 			"stack",
 			45
 		}, {
