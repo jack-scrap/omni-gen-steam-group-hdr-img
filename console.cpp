@@ -73,34 +73,28 @@ void dispatch(std::string fName, unsigned int ptrEditorX) {
 
 		console->_buff = util::log(console->_buff.size(), ptrEditorX);
 
-		nlohmann::json deserFin = nlohmann::json::parse(util::fs::rd<std::string>("fin.json"));
+		nlohmann::json deser = nlohmann::json::parse(util::fs::rd<std::string>("stat.json"));
 
-		if (!deserFin[stage][lvl]) {
-			deserFin[stage][lvl] = true;
+		if (!deser["fin"][stage][lvl]) {
+			deser["fin"][stage][lvl] = true;
 
-			std::string serialFin = deserFin.dump(1, '\t');
-
-			util::fs::write(util::fs::path::build({
-				"fin.json"
-			}), util::str::split(serialFin, '\n'));
-
-			nlohmann::json deserStat = nlohmann::json::parse(util::fs::rd<std::string>("stat.json"));
-
-			unsigned int rank = deserStat["rank"];
+			unsigned int rank = deser["rank"];
 
 			rank++;
 
-			nlohmann::json dataStat = {
+			nlohmann::json data = {
 				{
 					"rank", rank
+				}, {
+					"fin", deser["fin"]
 				}
 			};
 
-			std::string serialStat = dataStat.dump(1, '\t');
+			std::string serial = data.dump(1, '\t');
 
 			util::fs::write(util::fs::path::build({
 				"stat.json"
-			}), util::str::split(serialStat, '\n'));
+			}), util::str::split(serial, '\n'));
 		}
 	}
 
