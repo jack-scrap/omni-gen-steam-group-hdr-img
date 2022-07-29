@@ -1,23 +1,25 @@
 {
 	"fin": {
-		"array": [
-			false,
-			false,
-			false,
-			false,
-			false,
-			false,
-			false,
-			false,
-			false,
-			false,
-			false,
-			false,
-			false,
-			false,
-			false,
-			false,
-			{
+		"array": {
+			"lvl": [
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false
+			],
+			"sub": {
 				"matrix": [
 					false,
 					false,
@@ -29,68 +31,84 @@
 					false
 				]
 			}
-		],
-		"ctrl_flow": [
-			false,
-			false,
-			false,
-			false
-		],
-		"dict": [
-			false,
-			false,
-			false,
-			false,
-			{
+		},
+		"ctrl_flow": {
+			"lvl": [
+				false,
+				false,
+				false,
+				false
+			]
+		},
+		"dict": {
+			"lvl": [
+				false,
+				false,
+				false,
+				false
+			],
+			"sub": {
 				"bin": [
 					false
 				]
 			}
-		],
-		"init": [
-			false,
-			false,
-			false,
-			false,
-			false,
-			false,
-			false,
-			false
-		],
-		"matrix": [
-			false,
-			false,
-			false,
-			false,
-			false,
-			false,
-			false,
-			false
-		],
-		"path": [
-			false,
-			false,
-			false
-		],
-		"str": [
-			false,
-			false,
-			false,
-			false,
-			false,
-			false,
-			false,
-			false
-		],
-		"thread": [
-			false,
-			false
-		],
-		"vec": [
-			false,
-			false,
-			false
-		]
+		},
+		"init": {
+			"lvl": [
+				true,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false
+			]
+		},
+		"matrix": {
+			"lvl": [
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false
+			]
+		},
+		"path": {
+			"lvl": [
+				false,
+				false,
+				false
+			]
+		},
+		"str": {
+			"lvl": [
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false,
+				false
+			]
+		},
+		"thread": {
+			"lvl": [
+				false,
+				false
+			]
+		},
+		"vec": {
+			"lvl": [
+				false,
+				false,
+				false
+			]
+		}
 	},
-	"rank": 0
+	"rank": 1
 }

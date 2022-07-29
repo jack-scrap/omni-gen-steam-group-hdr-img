@@ -75,8 +75,8 @@ void dispatch(std::string fName, unsigned int ptrEditorX) {
 
 		nlohmann::json deser = nlohmann::json::parse(util::fs::rd<std::string>("stat.json"));
 
-		if (!deser["fin"][stage][lvl]) {
-			deser["fin"][stage][lvl] = true;
+		if (!deser["fin"][stage]["lvl"][lvl]) {
+			deser["fin"][stage]["lvl"][lvl] = true;
 
 			unsigned int rank = deser["rank"];
 
