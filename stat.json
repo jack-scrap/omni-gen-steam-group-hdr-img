@@ -53,7 +53,14 @@
 				"bin": {
 					"lvl": [
 						false
-					]
+					],
+					"sub": {
+						"full": {
+							"lvl": [
+								false
+							]
+						}
+					}
 				}
 			}
 		},
