@@ -1105,13 +1105,6 @@ void Console::exec() {
 				}
 
 				if (cmd == "set") {
-					std::string path = util::fs::path::build({
-						"script",
-						arg[0],
-						arg[1],
-						"main.py"
-					});
-
 					nlohmann::json deser = nlohmann::json::parse(util::fs::rd<std::string>("stat.json"));
 
 					unsigned int rank = deser["rank"];
@@ -1123,8 +1116,6 @@ void Console::exec() {
 							arg[0]
 						});
 					}
-
-					console->open(path);
 				}
 
 				if (cmd == "next") {
