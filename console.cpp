@@ -84,9 +84,11 @@ void dispatch(std::string fName, unsigned int ptrEditorX) {
 
 			nlohmann::json data = {
 				{
-					"rank", rank
+					"rank",
+					rank
 				}, {
-					"fin", deser["fin"]
+					"fin",
+					deser["fin"]
 				}
 			};
 
