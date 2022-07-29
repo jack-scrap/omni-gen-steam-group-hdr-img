@@ -16,7 +16,19 @@
 			false,
 			false,
 			false,
-			false
+			false,
+			{
+				"matrix": [
+					false,
+					false,
+					false,
+					false,
+					false,
+					false,
+					false,
+					false
+				]
+			}
 		],
 		"ctrl_flow": [
 			false,
@@ -28,7 +40,12 @@
 			false,
 			false,
 			false,
-			false
+			false,
+			{
+				"bin": [
+					false
+				]
+			}
 		],
 		"init": [
 			false,
