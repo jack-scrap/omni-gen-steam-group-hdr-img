@@ -20,16 +20,18 @@
 				false
 			],
 			"sub": {
-				"matrix": [
-					false,
-					false,
-					false,
-					false,
-					false,
-					false,
-					false,
-					false
-				]
+				"matrix": {
+					"lvl": [
+						false,
+						false,
+						false,
+						false,
+						false,
+						false,
+						false,
+						false
+					]
+				}
 			}
 		},
 		"ctrl_flow": {
@@ -48,14 +50,16 @@
 				false
 			],
 			"sub": {
-				"bin": [
-					false
-				]
+				"bin": {
+					"lvl": [
+						false
+					]
+				}
 			}
 		},
 		"init": {
 			"lvl": [
-				true,
+				false,
 				false,
 				false,
 				false,
@@ -110,5 +114,5 @@
 			]
 		}
 	},
-	"rank": 1
+	"rank": 0
 }
