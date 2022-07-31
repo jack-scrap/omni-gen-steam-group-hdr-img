@@ -328,17 +328,17 @@ const std::string util::fs::path::curr = ".";
 const std::string util::fs::path::prev = "..";
 
 std::vector<std::string> util::fs::path::tok(std::string buff) {
-	std::vector<std::string> _;
+	std::vector<std::string> cont;
 
 	int i = 0;
 	while (i < buff.size()) {
 		if (std::string(1, buff[i]) == sep) {
-			_.push_back(std::string(1, buff[i]));
+			cont.push_back(std::string(1, buff[i]));
 
 			i++;
 		} else {
 			if (std::string(1, buff[i]) == home) {
-				_.push_back(home);
+				cont.push_back(home);
 
 				i++;
 			} else {
@@ -349,35 +349,35 @@ std::vector<std::string> util::fs::path::tok(std::string buff) {
 					i++;
 				}
 
-				_.push_back(entry);
+				cont.push_back(entry);
 			}
 		}
 	}
 
-	return _;
+	return cont;
 }
 
 std::vector<std::string> util::fs::path::entry(std::string buff) {
-	std::vector<std::string> _;
+	std::vector<std::string> cont;
 
 	std::vector<std::string> tok = util::fs::path::tok(buff);
 	for (int i = 0; i < tok.size(); i++) {
 		if (tok[i] != sep) {
 			if (tok[i] == home) {
-				_.push_back(homeExpand);
+				cont.push_back(homeExpand);
 			} else if (tok[i] == prev) {
-				if (_.size()) {
-					_.pop_back();
+				if (cont.size()) {
+					cont.pop_back();
 				} else {
 					omni::err(omni::ERR_FS_ROOT_DIR);
 				}
 			} else {
-				_.push_back(tok[i]);
+				cont.push_back(tok[i]);
 			}
 		}
 	}
 
-	return _;
+	return cont;
 }
 
 std::string util::fs::path::build(std::vector<std::string> entry) {
@@ -454,7 +454,7 @@ std::vector<GLfloat> util::mesh::rd::attr(std::string fName, unsigned int attr) 
 		fName + ".obj"
 	}));
 
-	std::vector<GLfloat> _;
+	std::vector<GLfloat> cont;
 	for (int l = 0; l < buff.size(); l++) {
 		std::vector<std::string> tok = str::split(buff[l], ' ');
 
@@ -465,12 +465,12 @@ std::vector<GLfloat> util::mesh::rd::attr(std::string fName, unsigned int attr) 
 				std::stringstream out;
 				out << std::fixed << std::setprecision(4) << std::stof(tok[i]);
 
-				_.push_back(std::stof(out.str()));
+				cont.push_back(std::stof(out.str()));
 			}
 		}
 	}
 
-	return _;
+	return cont;
 }
 
 void util::mesh::strip(GLushort idc[2][3]) {
@@ -528,16 +528,16 @@ std::vector<GLfloat> util::mesh::rect::pos(glm::vec2 bound, unsigned int up, boo
 }
 
 std::vector<GLushort> util::mesh::rect::idc() {
-	std::vector<GLushort> _;
+	std::vector<GLushort> cont;
 	for (int t = 0; t < 2; t++) {
 		for (int a = 0; a < 3; a++) {
 			GLushort offset = (t * 3);
 
-			_.push_back(offset + (a * (t ? -1 : 1)));
+			cont.push_back(offset + (a * (t ? -1 : 1)));
 		}
 	}
 
-	return _;
+	return cont;
 }
 
 glm::vec3 util::mesh::gen::norm(std::vector<glm::vec3> vtc) {
@@ -561,7 +561,7 @@ std::vector<GLushort> util::mesh::rd::idc(std::string fName, unsigned int attr) 
 		fName + ".obj"
 	}));
 
-	std::vector<GLushort> _;
+	std::vector<GLushort> cont;
 	for (int l = 0; l < buff.size(); l++) {
 		std::vector<std::string> tok = str::split(buff[l], ' ');
 
@@ -571,12 +571,12 @@ std::vector<GLushort> util::mesh::rd::idc(std::string fName, unsigned int attr) 
 			for (int i = 1; i < 1 + 3; i++) {
 				std::vector<std::string> type = str::split(tok[i], '/');
 
-				_.push_back(std::stoi(type[attr]) - 1);
+				cont.push_back(std::stoi(type[attr]) - 1);
 			}
 		}
 	}
 
-	return _;
+	return cont;
 }
 
 glm::mat4 util::matr::rot(glm::mat4 model, glm::vec3 rot) {
