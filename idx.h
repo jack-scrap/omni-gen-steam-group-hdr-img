@@ -9,8 +9,6 @@ typedef struct {
 	Cont** data;
 	unsigned int sz;
 
-	float offset[3];
-
 	Obj* _parent;
 } Idx;
 

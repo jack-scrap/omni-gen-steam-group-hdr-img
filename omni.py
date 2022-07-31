@@ -91,7 +91,6 @@ class _Idx(Structure):
     _fields_ = [
             ('_data', POINTER(_Cont)),
             ('sz', c_uint),
-            ('_offset', c_float * 3),
             ('_parent', c_void_p)
     ]
 
@@ -100,7 +99,6 @@ class _Array(Structure):
             ('_data', POINTER(POINTER(_Idx))),
             ('x', c_uint),
             ('y', c_uint),
-            ('_offset', c_float * 3),
             ('_parent', c_void_p)
     ]
 
@@ -110,7 +108,6 @@ class _Dict(Structure):
             ('_type', POINTER(c_uint)),
             ('_key', POINTER(POINTER(c_char))),
             ('_no', c_uint),
-            ('_offset', c_float * 3),
             ('_parent', c_void_p)
     ]
 
@@ -132,7 +129,6 @@ class _Scope:
             name = var.id.decode('utf-8')
 
             rep = None
-            offset = None
 
             # index
             if (var.type == 0):
@@ -141,8 +137,6 @@ class _Scope:
                 idxPtr = cast(var.ptr, POINTER(_Idx))
                 idx = idxPtr.contents
 
-                offset = _parseOffset(idx._offset)
-
             # array
             if (var.type == 1):
                 rep = _parseArray(var.ptr)
@@ -150,12 +144,9 @@ class _Scope:
                 arrayPtr = cast(var.ptr, POINTER(_Array))
                 array = arrayPtr.contents
 
-                offset = _parseOffset(array._offset)
-
             self.__intern[name] = {
                     'ptr': var.ptr,
-                    'type': var.type,
-                    'offset': offset
+                    'type': var.type
             }
 
     def __getitem__(self, k):
@@ -163,7 +154,6 @@ class _Scope:
 
         ptr = el['ptr']
         t = el['type']
-        offset = el['offset']
 
         rep = None
 
@@ -176,8 +166,7 @@ class _Scope:
             rep = _parseArray(ptr)
 
         return {
-                'val': rep,
-                'offset': offset
+                'val': rep
         }
 
 class _Bound:

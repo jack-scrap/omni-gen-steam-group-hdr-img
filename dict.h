@@ -13,8 +13,6 @@ typedef struct {
 	char** key;
 	unsigned int no;
 
-	float offset[3];
-
 	Obj* _parent;
 } Dict;
 

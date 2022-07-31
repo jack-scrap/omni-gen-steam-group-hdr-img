@@ -13,8 +13,6 @@ typedef struct {
 	unsigned int x;
 	unsigned int y;
 
-	float offset[3];
-
 	Obj* _parent;
 } Array;
 

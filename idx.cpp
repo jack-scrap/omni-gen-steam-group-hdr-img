@@ -51,12 +51,6 @@ Idx* idxMk(unsigned int i, std::string name, glm::vec3 loc, glm::vec3 rot) {
 
 	objAcc(inst->_parent, glm::mat4(1.0));
 
-	// offset
-	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
-	for (int a = 0; a < 3; a++) {
-		inst->offset[a] = offset[a];
-	}
-
 	return inst;
 }
 
@@ -108,12 +102,6 @@ Idx* idxMk(unsigned int i, char* c, unsigned int sz, std::string name, glm::vec3
 		glm::vec3 center = layout::center(child[i]);
 
 		objMv(child[i], inst->_parent, glm::vec3(center[X], 0.0, -center[Z]), glm::vec3(0.0));
-	}
-
-	// offset
-	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
-	for (int a = 0; a < 3; a++) {
-		inst->offset[a] = offset[a];
 	}
 
 	return inst;
