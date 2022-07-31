@@ -57,7 +57,7 @@ Array* arrayMk(char* init, unsigned int x, std::string name, unsigned int axis, 
 	if (!name.empty()) {
 		Str* id = strMk(name, glm::vec3(0.0, 0.0, -(layout::margin * 2)));
 		child[0] = id->_parent;
-}
+	}
 
 	glm::vec2 bound;
 	switch (axis) {
