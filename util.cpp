@@ -262,12 +262,12 @@ std::string util::fs::perm(std::string fName) {
 		return "";
 	}
 
-	std::string _;
-	_.push_back(f.st_mode & S_IRUSR ? 'r' : '-');
-	_.push_back(f.st_mode & S_IWUSR ? 'w' : '-');
-	_.push_back(f.st_mode & S_IXUSR ? 'x' : '-');
+	std::string buff;
+	buff.push_back(f.st_mode & S_IRUSR ? 'r' : '-');
+	buff.push_back(f.st_mode & S_IWUSR ? 'w' : '-');
+	buff.push_back(f.st_mode & S_IXUSR ? 'x' : '-');
 
-	return _;
+	return buff;
 }
 
 void util::fs::setW(std::string path) {
