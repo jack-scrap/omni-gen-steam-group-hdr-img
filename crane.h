@@ -9,6 +9,7 @@ typedef struct Crane {
 	Cont* data;
 
 	float offset[3];
+	float offsetHead[3];
 
 	Obj* _parent;
 

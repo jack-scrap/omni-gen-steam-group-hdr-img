@@ -305,6 +305,7 @@ class _Crane(_Obj):
     _fields_ = [
             ('_data', POINTER(_Cont)),
             ('_offset', c_float * 3),
+            ('_offsetHead', c_float * 3),
             ('_parent', c_void_p)
     ]
 
@@ -328,6 +329,17 @@ class _Crane(_Obj):
             val = data.contents._c
 
         return val
+
+    @property
+    def head(self):
+        ptr = self._ptr
+        offset = ptr.contents._offsetHead
+
+        ls = _parseOffset(offset)
+
+        return {
+            'offset': ls
+        }
 
     @property
     def offset(self):
