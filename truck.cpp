@@ -98,7 +98,7 @@ Truck* truckMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	inst->_parent = objMk("truck/front", "obj", "dir", true, child, sizeof child / sizeof *child, loc, rot);
 
 	// offset
-	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 offset = util::matr::apply(glm::vec3(0.0), inst->_parent->_acc);
 	for (int a = 0; a < 3; a++) {
 		inst->offset[a] = offset[a];
 	}
@@ -131,7 +131,7 @@ void truckMv(Truck* inst, float delta) {
 
 	truckAnim(inst, dest, glm::vec3(0.0));
 
-	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 offset = util::matr::apply(glm::vec3(0.0), inst->_parent->_acc);
 	for (int a = 0; a < 3; a++) {
 		inst->offset[a] = offset[a];
 	}
@@ -153,7 +153,7 @@ void truckTurn(Truck* inst, float delta) {
 	}
 
 	// offset
-	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 offset = util::matr::apply(glm::vec3(0.0), inst->_parent->_acc);
 	for (int a = 0; a < 3; a++) {
 		inst->offset[a] = offset[a];
 	}

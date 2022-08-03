@@ -70,7 +70,7 @@ CargoShip* cargoShipMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	inst->_parent = objMk("cargo_ship", "obj", "dir", true, child, sizeof child / sizeof *child, loc, rot);
 
 	// offset
-	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 offset = util::matr::apply(glm::vec3(0.0), inst->_parent->_acc);
 	for (int a = 0; a < 3; a++) {
 		inst->offset[a] = offset[a];
 	}
@@ -110,7 +110,7 @@ void cargoShipMv(CargoShip* inst, float delta) {
 	}
 
 	// offset
-	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 offset = util::matr::apply(glm::vec3(0.0), inst->_parent->_acc);
 	for (int a = 0; a < 3; a++) {
 		inst->offset[a] = offset[a];
 	}

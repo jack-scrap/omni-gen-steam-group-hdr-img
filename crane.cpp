@@ -91,12 +91,12 @@ Crane* craneMk(Cont* init, glm::vec3 loc, glm::vec3 rot) {
 	inst->_parent = objMk("crane/front", "obj", "dir", true, child, sizeof child / sizeof* child, loc, rot);
 
 	// offset
-	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 offset = util::matr::apply(glm::vec3(0.0), inst->_parent->_acc);
 	for (int a = 0; a < 3; a++) {
 		inst->offset[a] = offset[a];
 	}
 
-	glm::vec3 offsetHead = inst->_parent->_child[Crane::HEAD]->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 offsetHead = util::matr::apply(glm::vec3(0.0), inst->_parent->_child[Crane::HEAD]->_acc);
 	for (int a = 0; a < 3; a++) {
 		inst->offsetHead[a] = offsetHead[a];
 	}
@@ -131,7 +131,7 @@ void craneZoom(Crane* inst, float delta) {
 
 	craneAnim(inst, dest);
 
-	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 offset = util::matr::apply(glm::vec3(0.0), inst->_parent->_acc);
 	for (int a = 0; a < 3; a++) {
 		inst->offset[a] = offset[a];
 	}
@@ -152,12 +152,12 @@ void cranePan(Crane* inst, float delta) {
 		});
 	}
 
-	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 offset = util::matr::apply(glm::vec3(0.0), inst->_parent->_acc);
 	for (int a = 0; a < 3; a++) {
 		inst->offset[a] = offset[a];
 	}
 
-	glm::vec3 offsetHead = inst->_parent->_child[Crane::HEAD]->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 offsetHead = util::matr::apply(glm::vec3(0.0), inst->_parent->_child[Crane::HEAD]->_acc);
 	for (int a = 0; a < 3; a++) {
 		inst->offsetHead[a] = offsetHead[a];
 	}
@@ -177,12 +177,12 @@ void cranePed(Crane* inst, float delta) {
 		});
 	}
 
-	glm::vec3 offset = inst->_parent->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 offset = util::matr::apply(glm::vec3(0.0), inst->_parent->_acc);
 	for (int a = 0; a < 3; a++) {
 		inst->offset[a] = offset[a];
 	}
 
-	glm::vec3 offsetHead = inst->_parent->_child[Crane::HEAD]->_acc * glm::vec4(glm::vec3(0.0), 1.0);
+	glm::vec3 offsetHead = util::matr::apply(glm::vec3(0.0), inst->_parent->_child[Crane::HEAD]->_acc);
 	for (int a = 0; a < 3; a++) {
 		inst->offsetHead[a] = offsetHead[a];
 	}
