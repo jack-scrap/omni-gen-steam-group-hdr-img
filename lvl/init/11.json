@@ -1,0 +1,90 @@
+{
+	"data": {
+		"fst": {
+			"block": [
+				1
+			]
+		},
+		"snd": {
+			"block": [
+				0
+			],
+			"loc": [
+				40,
+				0,
+				0
+			]
+		},
+		"thrd": {
+			"block": [
+				0
+			],
+			"loc": [
+				40,
+				0,
+				20
+			]
+		}
+	},
+	"goal": {
+		"fst": {
+			"block": [
+				0
+			]
+		},
+		"snd": {
+			"block": [
+				0
+			]
+		},
+		"thrd": {
+			"block": [
+				1
+			]
+		}
+	},
+	"vehicle": [ 
+		{
+			"name": "crane"
+		}, {
+			"name": "crane",
+			"loc": [
+				40,
+				0,
+				0
+			],
+			"rot": [
+				0,
+				90,
+				0
+			]
+		}
+	],
+	"bound": {
+		"rng": [
+			{
+				"min": {
+					"axis": "Z",
+					"val": -11.16,
+					"status": "halt"
+				},
+				"max": {
+					"axis": "Z",
+					"val": 11.16,
+					"status": "halt"
+				}
+			}, {
+				"min": {
+					"axis": "X",
+					"val": 28.84,
+					"status": "halt"
+				},
+				"max": {
+					"axis": "X",
+					"val": 51.16,
+					"status": "halt"
+				}
+			}
+		]
+	}
+}  
