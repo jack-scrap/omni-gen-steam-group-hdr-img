@@ -4,6 +4,9 @@
 #include <vector>
 #include <map>
 
+#include "util.h"
+#include "json.hpp"
+
 #undef assert
 
 namespace omni {
@@ -38,6 +41,8 @@ namespace omni {
 			100
 		}
 	};
+
+	static nlohmann::json stageJson = nlohmann::json::parse(util::fs::rd<std::string>("lvl_spec.json"));
 
 	static std::map<std::string, std::vector<unsigned int>> lib = {
 		{

@@ -1,0 +1,36 @@
+{
+	"init": {
+		"val": 0
+	},
+	"array": {
+		"val": 5,
+		"sub": {
+			"matrix": {
+				"val": 10
+			}
+		}
+	},
+	"str": {
+		"val": 10
+	},
+	"dict": {
+		"val": 20,
+		"sub": {
+			"bin": {
+				"val": 25
+			}
+		}
+	},
+	"stack": {
+		"val": 45
+	},
+	"ctrl_flow": {
+		"val": 60
+	},
+	"path": {
+		"val": 80
+	},
+	"thread": {
+		"val": 100
+	}
+}
