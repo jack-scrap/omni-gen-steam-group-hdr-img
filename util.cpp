@@ -690,6 +690,10 @@ std::string util::str::pad(std::string buff, unsigned int roof) {
 	return line;
 }
 
+bool util::str::ascii(char c) {
+	return c >= 0 && c <= 127;
+}
+
 char* util::json::id(nlohmann::json deser) {
 	std::string buff = deser.get<std::string>();
 
@@ -704,13 +708,9 @@ char* util::json::id(nlohmann::json deser) {
 }
 
 char util::json::byte(nlohmann::json deser) {
-	omni::assert(ascii(deser), std::string("Data not ASCII applicable"));
+	omni::assert(str::ascii((char) ((int) deser)), std::string("Data not ASCII applicable"));
 
 	return (char) ((int) deser);
-}
-
-bool util::json::ascii(nlohmann::json deser) {
-	return deser >= 0 && deser <= 127;
 }
 
 CBuff util::json::array::dim(nlohmann::json deser, CBuff buff, int i) {
@@ -810,7 +810,7 @@ CBuff util::json::array::lin(nlohmann::json deser) {
 	cBuff.z = 1;
 	cBuff.ptr = (char*) malloc(cBuff.x);
 	for (int i = 0; i < cBuff.x; i++) {
-		omni::assert(ascii(deser[i]), std::string("Data at index [") + std::to_string(i) + std::string("] not ASCII applicable"));
+		omni::assert(str::ascii((char) ((int) deser[i])), std::string("Data at index [") + std::to_string(i) + std::string("] not ASCII applicable"));
 
 		((char*) cBuff.ptr)[i] = util::json::byte(deser[i]);
 	}
@@ -828,7 +828,7 @@ CBuff util::json::array::matrix(nlohmann::json deser) {
 	int c = 0;
 	for (int j = 0; j < cBuff.y; j++) {
 		for (int i = 0; i < cBuff.x; i++) {
-			omni::assert(ascii(deser[j][i]), std::string("Data at index [") + std::to_string(j) + "][" + std::to_string(i) + std::string("] not ASCII applicable"));
+			omni::assert(str::ascii((char) ((int) deser[j][i])), std::string("Data at index [") + std::to_string(j) + "][" + std::to_string(i) + std::string("] not ASCII applicable"));
 
 			((char*) cBuff.ptr)[c] = util::json::byte(deser[i]);
 

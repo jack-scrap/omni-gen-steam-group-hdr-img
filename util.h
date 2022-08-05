@@ -109,14 +109,14 @@ namespace util {
 		std::string join(std::vector<std::string> buff);
 
 		std::string pad(std::string buff, unsigned int roof);
+
+		bool ascii(char c);
 	}
 
 	namespace json {
 		char* id(nlohmann::json deser);
 
 		char byte(nlohmann::json deser);
-
-		bool ascii(nlohmann::json deser);
 
 		Var* var(nlohmann::json key, nlohmann::json val, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
 
