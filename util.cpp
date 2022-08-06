@@ -879,13 +879,13 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 				case nlohmann::json::value_t::number_unsigned: {
 					CBuff init = array::lin(val["block"]);
 
-					Array* val = arrayMk((char*) init.ptr, init.x, key, X, loc + glm::vec3(0.0, 0.0, -(layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2)), glm::radians(rot));
+					Array* array = arrayMk((char*) init.ptr, init.x, key, X, loc + glm::vec3(0.0, 0.0, -(layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2)), glm::radians(rot));
 
-					omni::assert(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
+					omni::assert(!phys::aabbGround(array->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
-					glm::vec3 offset = util::matr::apply(glm::vec3(0.0), val->_parent->_acc);
+					glm::vec3 offset = util::matr::apply(glm::vec3(0.0), array->_parent->_acc);
 
-					inst = varMk(name, val, omni::ARRAY, offset);
+					inst = varMk(name, array, omni::ARRAY, offset);
 
 					break;
 				}
@@ -894,13 +894,13 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 				case nlohmann::json::value_t::array: {
 					CBuff init = array::matrix(val["block"]);
 
-					Array* val = arrayMk((char*) init.ptr, init.x, init.y, key, loc + glm::vec3(0.0, 0.0, -(layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2)), glm::radians(rot));
+					Array* array = arrayMk((char*) init.ptr, init.x, init.y, key, loc + glm::vec3(0.0, 0.0, -(layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2)), glm::radians(rot));
 
-					omni::assert(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
+					omni::assert(!phys::aabbGround(array->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
-					glm::vec3 offset = util::matr::apply(glm::vec3(0.0), val->_parent->_acc);
+					glm::vec3 offset = util::matr::apply(glm::vec3(0.0), array->_parent->_acc);
 
-					inst = varMk(name, val, omni::ARRAY, offset);
+					inst = varMk(name, array, omni::ARRAY, offset);
 
 					break;
 				}
@@ -913,13 +913,13 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 		case nlohmann::json::value_t::string: {
 			CBuff init = str(val["block"]);
 
-			Array* val = arrayMk((char*) init.ptr, init.x, key, X, loc + glm::vec3(0.0, 0.0, -(layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2)), glm::radians(rot));
+			Array* array = arrayMk((char*) init.ptr, init.x, key, X, loc + glm::vec3(0.0, 0.0, -(layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2)), glm::radians(rot));
 
-			omni::assert(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
+			omni::assert(!phys::aabbGround(array->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
-			glm::vec3 offset = util::matr::apply(glm::vec3(0.0), val->_parent->_acc);
+			glm::vec3 offset = util::matr::apply(glm::vec3(0.0), array->_parent->_acc);
 
-			inst = varMk(name, val, omni::ARRAY, offset);
+			inst = varMk(name, array, omni::ARRAY, offset);
 
 			break;
 		}
@@ -927,13 +927,13 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 		// dictionary
 		case nlohmann::json::value_t::object: {
 			nlohmann::json block = val["block"];
-			Dict* val = dictMk(block, key);
+			Dict* dict = dictMk(block, key);
 
-			omni::assert(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
+			omni::assert(!phys::aabbGround(dict->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
-			glm::vec3 offset = util::matr::apply(glm::vec3(0.0), val->_parent->_acc);
+			glm::vec3 offset = util::matr::apply(glm::vec3(0.0), dict->_parent->_acc);
 
-			inst = varMk(name, val, omni::DICT, offset);
+			inst = varMk(name, dict, omni::DICT, offset);
 
 			break;
 		}
