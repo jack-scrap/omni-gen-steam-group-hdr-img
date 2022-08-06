@@ -23,7 +23,7 @@ GLushort CargoShip::_lightIdc[2 * 3] = {
 	2, 1, 3
 };
 
-CargoShip* cargoShipMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
+CargoShip* cargoShipMk(Array* array, glm::vec3 loc, glm::vec3 rot) {
 	CargoShip* inst = (CargoShip*) malloc(sizeof (CargoShip));
 
 	// bed
@@ -52,7 +52,7 @@ CargoShip* cargoShipMk(Array* init, glm::vec3 loc, glm::vec3 rot) {
 	child[CargoShip::BED] = objMk(vtc, (GLushort*) idc, 2 * 3, Mesh::OBJ, "obj", "dir", false, glm::vec3(-center[X], 0.0, -center[Y]));
 
 	// data
-	inst->data = init;
+	inst->data = array;
 
 	child[CargoShip::DATA] = nullptr;
 

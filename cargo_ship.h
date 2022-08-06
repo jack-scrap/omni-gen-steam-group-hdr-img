@@ -25,7 +25,7 @@ typedef struct CargoShip {
 	};
 } CargoShip;
 
-CargoShip* cargoShipMk(Array* init, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
+CargoShip* cargoShipMk(Array* array, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
 
 void cargoShipDel(CargoShip* inst);
 

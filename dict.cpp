@@ -44,9 +44,9 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 		switch (entry.value().type()) {
 			// stack
 			case nlohmann::json::value_t::number_unsigned: {
-				char init = (char) ((int) entry.value());
+				char data = (char) ((int) entry.value());
 
-				Idx* idx = idxMk(0, &init, 1, entry.key(), glm::vec3(overhead[X], 0.0, overhead[Y]) + glm::vec3(0.0, 0.0, accY));
+				Idx* idx = idxMk(0, &data, 1, entry.key(), glm::vec3(overhead[X], 0.0, overhead[Y]) + glm::vec3(0.0, 0.0, accY));
 
 				child[i] = idx->_parent;
 
@@ -69,17 +69,17 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 				switch (entry.value()[0].type()) {
 					// 1D
 					case nlohmann::json::value_t::number_unsigned: {
-						CBuff init = util::json::array::lin(entry.value());
+						CBuff data = util::json::array::lin(entry.value());
 
-						Array* array = arrayMk((char*) init.ptr, init.x, entry.key(), X, glm::vec3(overhead[X], 0.0, overhead[Y]) + glm::vec3(0.0, 0.0, accY));
+						Array* array = arrayMk((char*) data.ptr, data.x, entry.key(), X, glm::vec3(overhead[X], 0.0, overhead[Y]) + glm::vec3(0.0, 0.0, accY));
 
 						child[1 + i] = array->_parent;
 
 						((Array**) inst->data)[k] = array;
 						inst->type[k] = omni::ARRAY;
 
-						if (layout::scoped(init.x * strideIdx[X]) > maxX) {
-							maxX = layout::scoped(init.x * strideIdx[X]);
+						if (layout::scoped(data.x * strideIdx[X]) > maxX) {
+							maxX = layout::scoped(data.x * strideIdx[X]);
 						}
 
 						id = (((Array**) inst->data)[i])->_parent->_child[1];
@@ -93,22 +93,22 @@ Dict* dictMk(nlohmann::json deser, std::string name, glm::vec3 loc, glm::vec3 ro
 
 					// 2D
 					case nlohmann::json::value_t::array: {
-						CBuff init = util::json::array::matrix(entry.value());
+						CBuff data = util::json::array::matrix(entry.value());
 
-						Array* array = arrayMk((char*) init.ptr, init.x, init.y, entry.key(), glm::vec3(overhead[X], 0.0, overhead[Y]) + glm::vec3(0.0, 0.0, accY));
+						Array* array = arrayMk((char*) data.ptr, data.x, data.y, entry.key(), glm::vec3(overhead[X], 0.0, overhead[Y]) + glm::vec3(0.0, 0.0, accY));
 
 						child[1 + i] = array->_parent;
 
 						((Array**) inst->data)[k] = array;
 						inst->type[k] = omni::ARRAY;
 
-						if (layout::scoped(init.x * strideIdx[X]) > maxX) {
-							maxX = layout::scoped(init.x * strideIdx[X]);
+						if (layout::scoped(data.x * strideIdx[X]) > maxX) {
+							maxX = layout::scoped(data.x * strideIdx[X]);
 						}
 
 						id = (((Array**) inst->data)[i])->_parent->_child[1];
 
-						GLfloat szY = layout::scoped(strideLetter[Y] + (init.y * strideIdx[Y]));
+						GLfloat szY = layout::scoped(strideLetter[Y] + (data.y * strideIdx[Y]));
 
 						accY += szY;
 

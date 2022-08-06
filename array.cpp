@@ -8,7 +8,7 @@
 #include "str.h"
 #include "util.h"
 
-Array* arrayMk(char* init, unsigned int x, std::string name, unsigned int axis, glm::vec3 loc, glm::vec3 rot) {
+Array* arrayMk(char* data, unsigned int x, std::string name, unsigned int axis, glm::vec3 loc, glm::vec3 rot) {
 	Array* inst = (Array*) malloc(sizeof (Array));
 
 	inst->x = x;
@@ -39,8 +39,8 @@ Array* arrayMk(char* init, unsigned int x, std::string name, unsigned int axis, 
 				break;
 		}
 
-		if (init[c]) {
-			idx = idxMk(c, &init[c], 1, "", glm::vec3(layout::overhead, 0.0, layout::overhead) + offset);
+		if (data[c]) {
+			idx = idxMk(c, &data[c], 1, "", glm::vec3(layout::overhead, 0.0, layout::overhead) + offset);
 		} else {
 			idx = idxMk(c, "", glm::vec3(layout::overhead, 0.0, layout::overhead) + offset);
 		}
@@ -96,7 +96,7 @@ Array* arrayMk(char* init, unsigned int x, std::string name, unsigned int axis, 
 	return inst;
 }
 
-Array* arrayMk(char* init, unsigned int x, unsigned int y, std::string name, glm::vec3 loc, glm::vec3 rot) {
+Array* arrayMk(char* data, unsigned int x, unsigned int y, std::string name, glm::vec3 loc, glm::vec3 rot) {
 	Array* _ = (Array*) malloc(sizeof (Array));
 
 	_->x = x;
@@ -125,8 +125,8 @@ Array* arrayMk(char* init, unsigned int x, unsigned int y, std::string name, glm
 
 			glm::vec3 offset = glm::vec3(layout::overhead, 0.0, layout::overhead) + glm::vec3(i * stride[X], 0.0, j * stride[Y]);
 
-			if (init[c]) {
-				idx = idxMk(c, &init[c], 1, "", offset);
+			if (data[c]) {
+				idx = idxMk(c, &data[c], 1, "", offset);
 			} else {
 				idx = idxMk(c, "", offset);
 			}

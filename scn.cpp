@@ -377,14 +377,14 @@ void scn::init(std::string stage, unsigned int lvl) {
 		}
 
 		if (entry["name"] == "crane") {
-			Cont* init = nullptr;
+			Cont* cont = nullptr;
 			if (entry.contains("data")) {
 				char c = util::json::byte(entry["data"]);
 
-				init = contMk(c);
+				cont = contMk(c);
 			}
 
-			Crane* instCrane = craneMk(init, loc, glm::radians(rot));
+			Crane* instCrane = craneMk(cont, loc, glm::radians(rot));
 
 			omni::assert(!util::phys::aabbGround(instCrane->_parent), "Crane clipping into ground plane");
 
@@ -396,21 +396,21 @@ void scn::init(std::string stage, unsigned int lvl) {
 		}
 
 		if (entry["name"] == "truck") {
-			CBuff init;
+			CBuff data;
 			if (entry.contains("data")) {
-				init = util::json::array::lin(entry["data"]);
+				data = util::json::array::lin(entry["data"]);
 			} else {
-				init = {
+				data = {
 					(char*) malloc(1),
 					1,
 					0,
 					0
 				};
 
-				((char*) init.ptr)[0] = 0;
+				((char*) data.ptr)[0] = 0;
 			}
 
-			Array* instArray = arrayMk((char*) init.ptr, init.x, "", Z, glm::vec3(0.0, layout::padded(0.0), -((layout::idx[X] / 2) + (layout::stroke * 2) + (layout::margin * 2 * 2))), glm::vec3(0.0, -M_PI / 2, 0.0));
+			Array* instArray = arrayMk((char*) data.ptr, data.x, "", Z, glm::vec3(0.0, layout::padded(0.0), -((layout::idx[X] / 2) + (layout::stroke * 2) + (layout::margin * 2 * 2))), glm::vec3(0.0, -M_PI / 2, 0.0));
 
 			Truck* instTruck = truckMk(instArray, loc, glm::radians(rot));
 
@@ -426,29 +426,29 @@ void scn::init(std::string stage, unsigned int lvl) {
 		if (entry["name"] == "cargo_ship") {
 			std::string name;
 
-			CBuff init;
+			CBuff data;
 			if (entry.contains("data")) {
-				init = util::json::array::lin(entry["data"]["block"]);
+				data = util::json::array::lin(entry["data"]["block"]);
 
 				if (entry["data"].contains("name")) {
 					name = std::string(entry["data"]["name"]);
 				}
 			} else {
-				init = {
+				data = {
 					(char*) malloc(6 * 2),
 					6,
 					2,
 					0
 				};
 
-				for (int j = 0; j < init.x; j++) {
-					for (int i = 0; i < init.y; i++) {
-						((char*) init.ptr)[(j * init.y) + i] = 0;
+				for (int j = 0; j < data.x; j++) {
+					for (int i = 0; i < data.y; i++) {
+						((char*) data.ptr)[(j * data.y) + i] = 0;
 					}
 				}
 			}
 
-			Array* instArray = arrayMk((char*) init.ptr, init.x, init.y, name, glm::vec3(0.0, layout::padded(0.0), 0.0));
+			Array* instArray = arrayMk((char*) data.ptr, data.x, data.y, name, glm::vec3(0.0, layout::padded(0.0), 0.0));
 
 			CargoShip* instCargoShip = cargoShipMk(instArray, loc, glm::radians(rot));
 

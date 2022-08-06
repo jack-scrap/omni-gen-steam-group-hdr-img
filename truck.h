@@ -40,7 +40,7 @@ typedef struct Truck {
 	};
 } Truck;
 
-Truck* truckMk(Array* init, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
+Truck* truckMk(Array* array, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));
 
 void truckDel(Truck* inst);
 

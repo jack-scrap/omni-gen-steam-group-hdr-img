@@ -26,22 +26,22 @@ GLushort Crane::_lightIdc[2 * 3] = {
 	2, 1, 3
 };
 
-Crane* craneMk(Cont* init, glm::vec3 loc, glm::vec3 rot) {
+Crane* craneMk(Cont* cont, glm::vec3 loc, glm::vec3 rot) {
 	Crane* inst = (Crane*) malloc(sizeof (Crane));
 
 	inst->data = nullptr;
 
-	if (init) {
-		inst->data = init;
+	if (cont) {
+		inst->data = cont;
 	}
 
 	Obj* child[1 + (2 * 2 * 2 * 2) + (2 * 2) + (2 * 2) + 1];
 
 	// track
-	Obj* cont = nullptr;
+	Obj* byte = nullptr;
 
 	Obj* trackChild[] = {
-		objMk("crane/head", "obj", "dir", true, &cont, 1),
+		objMk("crane/head", "obj", "dir", true, &byte, 1),
 		objMk("crane/track_back", "obj", "dir", true)
 	};
 

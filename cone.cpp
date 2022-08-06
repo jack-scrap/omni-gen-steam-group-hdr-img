@@ -10,14 +10,14 @@ GLushort Cone::_idx[1] = {
 	0
 };
 
-Cone* coneMk(GLfloat init[2][2], glm::vec3 loc, glm::vec3 rot) {
+Cone* coneMk(GLfloat data[2][2], glm::vec3 loc, glm::vec3 rot) {
 	Cone* inst = (Cone*) malloc(sizeof (Cone));
 	
 	Obj* child[1];
 
 	for (int y = 0; y < 2; y++) {
 		for (int x = 0; x < 2; x++) {
-			inst->bound[x][y] = init[x][y];
+			inst->bound[x][y] = data[x][y];
 		}
 	}
 

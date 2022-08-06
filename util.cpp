@@ -854,11 +854,11 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 	switch (val["block"].type()) {
 		// stack
 		case nlohmann::json::value_t::number_unsigned: {
-			char init = byte(val["block"]);
+			char data = byte(val["block"]);
 
 			Idx* idx;
-			if (init) {
-				idx = idxMk(0, &init, 1, key, loc, glm::radians(rot));
+			if (data) {
+				idx = idxMk(0, &data, 1, key, loc, glm::radians(rot));
 			} else {
 				idx = idxMk(0, key, loc, glm::radians(rot));
 			}
@@ -877,9 +877,9 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 			switch (val["block"][0].type()) {
 				// 1D
 				case nlohmann::json::value_t::number_unsigned: {
-					CBuff init = array::lin(val["block"]);
+					CBuff data = array::lin(val["block"]);
 
-					Array* array = arrayMk((char*) init.ptr, init.x, key, X, loc + glm::vec3(0.0, 0.0, -(layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2)), glm::radians(rot));
+					Array* array = arrayMk((char*) data.ptr, data.x, key, X, loc + glm::vec3(0.0, 0.0, -(layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2)), glm::radians(rot));
 
 					omni::assert(!phys::aabbGround(array->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
@@ -892,9 +892,9 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 
 				// 2D
 				case nlohmann::json::value_t::array: {
-					CBuff init = array::matrix(val["block"]);
+					CBuff data = array::matrix(val["block"]);
 
-					Array* array = arrayMk((char*) init.ptr, init.x, init.y, key, loc + glm::vec3(0.0, 0.0, -(layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2)), glm::radians(rot));
+					Array* array = arrayMk((char*) data.ptr, data.x, data.y, key, loc + glm::vec3(0.0, 0.0, -(layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2)), glm::radians(rot));
 
 					omni::assert(!phys::aabbGround(array->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
@@ -911,9 +911,9 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 
 		// string
 		case nlohmann::json::value_t::string: {
-			CBuff init = str(val["block"]);
+			CBuff data = str(val["block"]);
 
-			Array* array = arrayMk((char*) init.ptr, init.x, key, X, loc + glm::vec3(0.0, 0.0, -(layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2)), glm::radians(rot));
+			Array* array = arrayMk((char*) data.ptr, data.x, key, X, loc + glm::vec3(0.0, 0.0, -(layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2)), glm::radians(rot));
 
 			omni::assert(!phys::aabbGround(array->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
@@ -1050,10 +1050,10 @@ Obj* util::json::prop(nlohmann::json deser) {
 }
 
 Mark* util::json::bound::mark(nlohmann::json deser) {
-	GLfloat init[2][2];
+	GLfloat data[2][2];
 	for (int j = 0; j < 2; j++) {
 		for (int i = 0; i < 2; i++) {
-			init[j][i] = deser["val"][j][i];
+			data[j][i] = deser["val"][j][i];
 		}
 	}
 
@@ -1066,7 +1066,7 @@ Mark* util::json::bound::mark(nlohmann::json deser) {
 		status = ALERT;
 	}
 
-	Mark* inst = markMk(&init[0], status);
+	Mark* inst = markMk(&data[0], status);
 
 	omni::assert(!phys::aabbGround(inst->_parent), "Marking clipping into ground plane");
 
@@ -1100,10 +1100,10 @@ Lim* util::json::bound::lim(nlohmann::json deser) {
 }
 
 Cone* util::json::bound::area(nlohmann::json deser) {
-	GLfloat init[2][2];
+	GLfloat data[2][2];
 	for (int a = 0; a < 2; a++) {
 		for (int b = 0; b < 2; b++) {
-			init[a][b] = deser["bound"][a][b];
+			data[a][b] = deser["bound"][a][b];
 		}
 	}
 
@@ -1112,7 +1112,7 @@ Cone* util::json::bound::area(nlohmann::json deser) {
 		loc = vec(deser["loc"]);
 	}
 
-	Cone* inst = coneMk(init, loc);
+	Cone* inst = coneMk(data, loc);
 
 	omni::assert(!phys::aabbGround(inst->_parent), "Cone clipping into ground plane");
 
