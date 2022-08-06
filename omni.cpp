@@ -87,7 +87,7 @@ void omni::err(unsigned int err, std::vector<std::string> arg) {
 
 			unsigned int rank = deser["rank"];
 
-			msg = "Cannot load level; player rank (" + std::to_string(rank) + ") less than required for section '" + arg[0] + "' (" + std::to_string(omni::stage[arg[0]]) + ")";
+			msg = "Cannot load level; player rank (" + std::to_string(rank) + ") less than required for section '" + arg[0] + "' (" + std::to_string((int) omni::stage[arg[0]]["val"]) + ")";
 
 	 		break;
 		}

@@ -14,35 +14,7 @@ namespace omni {
 
 	void assert(bool cond, std::string msg);
 
-	static std::map<std::string, unsigned int> stage = {
-		{
-			"init",
-			0
-		}, {
-			"array",
-			5
-		}, {
-			"str",
-			10
-		}, {
-			"dict",
-			20
-		}, {
-			"stack",
-			45
-		}, {
-			"ctrl_flow",
-			60
-		}, {
-			"path",
-			80
-		}, {
-			"thread",
-			100
-		}
-	};
-
-	static nlohmann::json stageJson = nlohmann::json::parse(util::fs::rd<std::string>("lvl_spec.json"));
+	static nlohmann::json stage = nlohmann::json::parse(util::fs::rd<std::string>("lvl_spec.json"));
 
 	static std::map<std::string, std::vector<unsigned int>> lib = {
 		{

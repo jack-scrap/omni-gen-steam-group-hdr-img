@@ -713,7 +713,7 @@ int main(int argc, char* argv[]) {
 
 	unsigned int rank = deser["rank"];
 
-	if (rank >= omni::stage[stage]) {
+	if (rank >= (int) omni::stage[stage]["val"]) {
 		scn::init(stage, lvl);
 	} else {
 		omni::err(omni::ERR_RANK_LT, {

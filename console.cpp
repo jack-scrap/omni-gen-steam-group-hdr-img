@@ -1109,7 +1109,7 @@ void Console::exec() {
 
 					unsigned int rank = deser["rank"];
 
-					if (rank >= omni::stage[stage]) {
+					if (rank >= (int) omni::stage[stage]["val"]) {
 						scn::init(arg[0], std::stoi(arg[1]));
 					} else {
 						omni::err(omni::ERR_RANK_LT, {
