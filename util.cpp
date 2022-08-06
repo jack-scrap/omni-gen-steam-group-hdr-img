@@ -865,7 +865,9 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 
 			omni::assert(!phys::aabbGround(idx->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
-			inst = varMk(name, idx, omni::IDX);
+			glm::vec3 offset = util::matr::apply(glm::vec3(0.0), idx->_parent->_acc);
+
+			inst = varMk(name, idx, omni::IDX, offset);
 
 			break;
 		}
@@ -881,7 +883,9 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 
 					omni::assert(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
-					inst = varMk(name, val, omni::ARRAY);
+					glm::vec3 offset = util::matr::apply(glm::vec3(0.0), val->_parent->_acc);
+
+					inst = varMk(name, val, omni::ARRAY, offset);
 
 					break;
 				}
@@ -894,7 +898,9 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 
 					omni::assert(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
-					inst = varMk(name, val, omni::ARRAY);
+					glm::vec3 offset = util::matr::apply(glm::vec3(0.0), val->_parent->_acc);
+
+					inst = varMk(name, val, omni::ARRAY, offset);
 
 					break;
 				}
@@ -911,7 +917,9 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 
 			omni::assert(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
-			inst = varMk(name, val, omni::ARRAY);
+			glm::vec3 offset = util::matr::apply(glm::vec3(0.0), val->_parent->_acc);
+
+			inst = varMk(name, val, omni::ARRAY, offset);
 
 			break;
 		}
@@ -923,7 +931,9 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 
 			omni::assert(!phys::aabbGround(val->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
 
-			inst = varMk(name, val, omni::DICT);
+			glm::vec3 offset = util::matr::apply(glm::vec3(0.0), val->_parent->_acc);
+
+			inst = varMk(name, val, omni::DICT, offset);
 
 			break;
 		}

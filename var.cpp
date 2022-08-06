@@ -1,8 +1,9 @@
 #include <cstdlib>
+#include <glm/glm.hpp>
 
 #include "var.h"
 
-Var* varMk(char* id, void* ptr, unsigned int type) {
+Var* varMk(char* id, void* ptr, unsigned int type, glm::vec3 offset) {
 	Var* inst = (Var*) malloc(sizeof (Var));
 
 	inst->id = id;

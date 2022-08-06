@@ -115,7 +115,8 @@ class _Var(Structure):
     _fields_ = [
             ('id', c_char_p),
             ('ptr', c_void_p),
-            ('type', c_uint)
+            ('type', c_uint),
+            ('offset', c_float * 3)
     ]
 
 class _Scope:
