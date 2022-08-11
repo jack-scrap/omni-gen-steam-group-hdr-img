@@ -25,14 +25,12 @@ Cone* coneMk(GLfloat data[2][2], glm::vec3 loc, glm::vec3 rot) {
 
 	bound->_prog.use();
 
-	bound->_noUni += 2;
+	bound->_noUni++;
 	bound->_uni = (GLint*) realloc(bound->_uni, bound->_noUni * sizeof (bound->_noUni));
 
-	bound->_uni[5] = glGetUniformLocation(bound->_prog._id, "boundX");
-	bound->_uni[6] = glGetUniformLocation(bound->_prog._id, "boundZ");
+	bound->_uni[5] = glGetUniformLocation(bound->_prog._id, "bound");
 
-	glUniform2fv(bound->_uni[5], 1, inst->bound[X]);
-	glUniform2fv(bound->_uni[6], 1, inst->bound[Y]);
+	glUniform2fv(bound->_uni[5], 2, (GLfloat*) inst->bound);
 
 	bound->_prog.unUse();
 
