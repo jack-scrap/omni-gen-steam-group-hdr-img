@@ -292,7 +292,7 @@ void craneGrab(Crane* inst) {
 					}
 				}
 			}
-		}	
+		}
 	} else {
 		/* data */
 		for (int i = 0; i < noData; i++) {
@@ -401,7 +401,7 @@ void craneGrab(Crane* inst) {
 						}
 					}
 				}
-			}	
+			}
 		}
 	}
 }
