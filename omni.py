@@ -306,6 +306,7 @@ class _Crane(_Obj):
     _fields_ = [
             ('_data', POINTER(_Cont)),
             ('_offset', c_float * 3),
+            ('_offsetTrack', c_float * 3),
             ('_offsetHead', c_float * 3),
             ('_parent', c_void_p)
     ]

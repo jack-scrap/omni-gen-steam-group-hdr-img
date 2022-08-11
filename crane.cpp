@@ -96,6 +96,11 @@ Crane* craneMk(Cont* cont, glm::vec3 loc, glm::vec3 rot) {
 		inst->offset[a] = offset[a];
 	}
 
+	glm::vec3 offsetTrack = util::matr::apply(glm::vec3(0.0), inst->_parent->_child[Crane::TRACK]->_acc);
+	for (int a = 0; a < 3; a++) {
+		inst->offsetHead[a] = offsetTrack[a];
+	}
+
 	glm::vec3 offsetHead = util::matr::apply(glm::vec3(0.0), inst->_parent->_child[Crane::HEAD]->_acc);
 	for (int a = 0; a < 3; a++) {
 		inst->offsetHead[a] = offsetHead[a];
@@ -157,6 +162,11 @@ void cranePan(Crane* inst, float delta) {
 		inst->offset[a] = offset[a];
 	}
 
+	glm::vec3 offsetTrack = util::matr::apply(glm::vec3(0.0), inst->_parent->_child[Crane::TRACK]->_acc);
+	for (int a = 0; a < 3; a++) {
+		inst->offsetHead[a] = offsetTrack[a];
+	}
+
 	glm::vec3 offsetHead = util::matr::apply(glm::vec3(0.0), inst->_parent->_child[Crane::HEAD]->_acc);
 	for (int a = 0; a < 3; a++) {
 		inst->offsetHead[a] = offsetHead[a];
@@ -180,6 +190,11 @@ void cranePed(Crane* inst, float delta) {
 	glm::vec3 offset = util::matr::apply(glm::vec3(0.0), inst->_parent->_acc);
 	for (int a = 0; a < 3; a++) {
 		inst->offset[a] = offset[a];
+	}
+
+	glm::vec3 offsetTrack = util::matr::apply(glm::vec3(0.0), inst->_parent->_child[Crane::TRACK]->_acc);
+	for (int a = 0; a < 3; a++) {
+		inst->offsetHead[a] = offsetTrack[a];
 	}
 
 	glm::vec3 offsetHead = util::matr::apply(glm::vec3(0.0), inst->_parent->_child[Crane::HEAD]->_acc);
