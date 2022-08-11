@@ -71,7 +71,7 @@ void dispatch(std::string fName, unsigned int ptrEditorX) {
 			util::fs::path::base(fName) + ".log"
 		});
 
-		console->_buff = util::log(console->_buff.size(), ptrEditorX);
+		console->_buff = console->log();
 
 		nlohmann::json deser = nlohmann::json::parse(util::fs::rd<std::string>("stat.json"));
 
@@ -1377,6 +1377,56 @@ void Console::print(char c, bool b, Coord st) {
 	};
 
 	glTexSubImage2D(GL_TEXTURE_2D, 0, st.x * layout::glyph[X], st.y * layout::glyph[Y], layout::glyph[X], layout::glyph[Y], GL_BGR, GL_UNSIGNED_BYTE, &(((char*) _map->pixels)[((b * sz) + (idx.y * stride[Y]) + (idx.x * stride[X])) * 3]));
+}
+
+std::vector<std::string> Console::log() {
+	unsigned int loc = _buff.size();
+	unsigned int ptrEditorX = maxFs() + maxNo();
+
+	std::vector<std::string> buff;
+
+	std::string head = "Level complete";
+	buff.push_back(head);
+
+	std::string lb;
+	for (int i = ptrEditorX; i < state::lineWd; i++) {
+		lb.push_back('=');
+	}
+	buff.push_back(lb);
+
+	std::map<std::string, std::string> attr = {
+		{
+			"LOC",
+			std::to_string(loc)
+		}, {
+			"CALLS",
+			std::to_string(call)
+		}
+	};
+
+	for (std::map<std::string, std::string>::iterator it = attr.begin(); it != attr.end(); ++it) {
+		std::string key = it->first;
+		key += ":";
+
+		std::string val = it->second;
+
+		std::string pair = util::str::pad(key, (state::lineWd - ptrEditorX) - val.size());
+		pair += val;
+
+		buff.push_back(pair);
+	}
+
+	for (int i = buff.size(); i < state::lineCnt - 2 - 1 - 2 - 1; i++) {
+		buff.push_back("");
+	}
+
+	buff.push_back("");
+	buff.push_back(util::now(state::format));
+
+	buff.push_back("");
+	buff.push_back("Enter `next` to proceed");
+
+	return buff;
 }
 
 void Console::draw() {

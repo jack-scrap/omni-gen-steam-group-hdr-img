@@ -1397,53 +1397,6 @@ Coord util::math::coord::determ(unsigned int idx, std::vector<std::string> buff)
 	return _;
 }
 
-std::vector<std::string> util::log(unsigned int loc, unsigned int ptrEditorX) {
-	std::vector<std::string> buff;
-
-	std::string head = "Level complete";
-	buff.push_back(head);
-
-	std::string lb;
-	for (int i = ptrEditorX; i < state::lineWd; i++) {
-		lb.push_back('=');
-	}
-	buff.push_back(lb);
-
-	std::map<std::string, std::string> attr = {
-		{
-			"LOC",
-			std::to_string(loc)
-		}, {
-			"CALLS",
-			std::to_string(call)
-		}
-	};
-
-	for (std::map<std::string, std::string>::iterator it = attr.begin(); it != attr.end(); ++it) {
-		std::string key = it->first;
-		key += ":";
-
-		std::string val = it->second;
-
-		std::string pair = str::pad(key, (state::lineWd - ptrEditorX) - val.size());
-		pair += val;
-
-		buff.push_back(pair);
-	}
-
-	for (int i = buff.size(); i < state::lineCnt - 2 - 1 - 2 - 1; i++) {
-		buff.push_back("");
-	}
-
-	buff.push_back("");
-	buff.push_back(now(state::format));
-
-	buff.push_back("");
-	buff.push_back("Enter `next` to proceed");
-
-	return buff;
-}
-
 std::string util::now(std::string format) {
 	time_t epoch;
 	time(&epoch);

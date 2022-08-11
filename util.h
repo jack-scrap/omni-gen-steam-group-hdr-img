@@ -210,8 +210,6 @@ namespace util {
 		}
 	}
 
-	std::vector<std::string> log(unsigned int loc, unsigned int ptrEditorX);
-
 	std::string now(std::string format);
 
 	std::string glyphName(char c);

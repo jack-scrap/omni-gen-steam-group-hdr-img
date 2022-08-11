@@ -127,6 +127,8 @@ class Console {
 
 		void draw();
 
+		std::vector<std::string> log();
+
 		void getTime();
 
 		static bool lexicoEntry(std::map<std::string, std::string> lhs, std::map<std::string, std::string> rhs);
