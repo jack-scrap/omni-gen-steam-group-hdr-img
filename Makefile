@@ -15,7 +15,7 @@ LDLIBS=-L$(BUILDDIR) -Wl,-rpath=$(BUILDDIR) $(LIBS:%.cpp=-l%)
 SRCS:=main.cpp disp.cpp util.cpp mesh.cpp console.cpp var.cpp str.cpp border.cpp node.cpp cont.cpp idx.cpp array.cpp dict.cpp mark.cpp lim.cpp cone.cpp road.cpp state.cpp layout.cpp i_beam.cpp omni.cpp c_buff.cpp
 LIBS:=scn.cpp prog.cpp obj.cpp line.cpp pt.cpp crane.cpp truck.cpp cargo_ship.cpp street_sign.cpp
 
-HDR:=cam.h col.h math.h phys.h class_def.h
+HDR:=cam.h col.h math.h phys.h
 
 OBJ_SRCS=$(SRCS:%.cpp=$(BUILDDIR)/%.o)
 OBJ_LIBS=$(LIBS:%.cpp=$(BUILDDIR)/lib%.so)
