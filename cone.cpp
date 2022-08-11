@@ -23,19 +23,6 @@ Cone* coneMk(GLfloat data[2][2], glm::vec3 loc, glm::vec3 rot) {
 
 	Obj* bound = ptMk(inst->_vtx, inst->_idx, 1, "main", "bevel/main", "alert", true, glm::vec3(0.0, 1.408, 0.0));
 
-	bound->_prog.use();
-
-	bound->_noUni += 2;
-	bound->_uni = (GLint*) realloc(bound->_uni, bound->_noUni * sizeof (bound->_noUni));
-
-	bound->_uni[5] = glGetUniformLocation(bound->_prog._id, "boundX");
-	bound->_uni[6] = glGetUniformLocation(bound->_prog._id, "boundZ");
-
-	glUniform2fv(bound->_uni[5], 1, inst->bound[X]);
-	glUniform2fv(bound->_uni[6], 1, inst->bound[Y]);
-
-	bound->_prog.unUse();
-
 	child[0] = bound;
 
 	inst->_parent = objMk("cone", "obj", "dir", true, child, sizeof child / sizeof *child, loc, rot);

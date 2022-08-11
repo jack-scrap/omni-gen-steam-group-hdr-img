@@ -10,9 +10,6 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 proj;
 
-uniform vec2 boundX;
-uniform vec2 boundZ;
-
 const float pad = 0.16;
 
 void main() {
@@ -20,7 +17,7 @@ void main() {
 	for	(int z = 0; z < 2; z++) {
 		for	(int y = 0; y < 2; y++) {
 			for	(int x = 0; x < 2; x++) {
-				vec3 pos = vec3((bool(x) ? 1 : -1) * boundX[x], (bool(y) ? 1 : -1) * (2 * pad), (bool(z) ? 1 : -1) * boundZ[z]);
+				vec3 pos = vec3(bool(x) ? 1 : -1, (bool(y) ? 1 : -1) * (2 * pad), bool(z) ? 1 : -1);
 
 				gl_Position = proj * view * model * vec4(gl_in[0].gl_Position.xyz + pos, 1.0);
 
