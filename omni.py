@@ -7,22 +7,22 @@ _cargo_ship = CDLL('libcargo_ship.so')
 _street_sign = CDLL('libstreet_sign.so')
 _scn = CDLL('libscn.so')
 
-def _parseFloat(val):
+def _parse_float(val):
     return round(val, 4)
 
-def _parseByte(ptr):
-    bytePtr = ptr
-    byte = bytePtr.contents
+def _parse_byte(ptr):
+    byte_ptr = ptr
+    byte = byte_ptr.contents
 
     return int.from_bytes(byte._c, byteorder = 'little')
 
-def _parseIdx(ptr):
+def _parse_idx(ptr):
     rep = None
 
-    ptrIdx = cast(ptr, POINTER(_Idx))
-    idx = ptrIdx.contents
+    ptr_idx = cast(ptr, POINTER(_Idx))
+    idx = ptr_idx.contents
 
-    byteCont = cast(idx._data, POINTER(POINTER(_Cont)))
+    byte_cont = cast(idx._data, POINTER(POINTER(_Cont)))
 
     if (idx.sz):
         # list
@@ -30,21 +30,21 @@ def _parseIdx(ptr):
             rep = []
 
             for i in range(idx.sz):
-                rep.append(_parseByte(byteCont[i]))
+                rep.append(_parse_byte(byte_cont[i]))
 
         # scalar
         else:
-            rep = _parseByte(byteCont.contents)
+            rep = _parse_byte(byte_cont.contents)
 
     return rep
 
-def _parseArray(ptr):
+def _parse_array(ptr):
     rep = []
 
-    ptrArray = cast(ptr, POINTER(_Array))
-    array = ptrArray.contents
+    ptr_array = cast(ptr, POINTER(_Array))
+    array = ptr_array.contents
 
-    idxCont = cast(array._data, POINTER(POINTER(_Idx)))
+    idx_cont = cast(array._data, POINTER(POINTER(_Idx)))
 
     # 2D
     if (array.y > 1):
@@ -54,19 +54,19 @@ def _parseArray(ptr):
             for x in range(array.x):
                 i = (y * array.y) + x
 
-                sub.append(_parseIdx(idxCont[i]))
+                sub.append(_parse_idx(idx_cont[i]))
 
             rep.append(sub)
 
     # 1D
     else:
         for x in range(array.x):
-            rep.append(_parseIdx(idxCont[x]))
+            rep.append(_parse_idx(idx_cont[x]))
 
         return rep
 
-def _parseOffset(offset):
-    ls = [_parseFloat(val) for val in list(offset)]
+def _parse_offset(offset):
+    ls = [_parse_float(val) for val in list(offset)]
 
     return ls
 
@@ -124,8 +124,8 @@ class _Scope:
         self.__intern = {}
 
         for i in range(no):
-            varPtr = ptr[i]
-            var = varPtr.contents
+            var_ptr = ptr[i]
+            var = var_ptr.contents
 
             name = var.id.decode('utf-8')
 
@@ -133,17 +133,17 @@ class _Scope:
 
             # index
             if (var.type == 0):
-                rep = _parseIdx(var.ptr)
+                rep = _parse_idx(var.ptr)
 
-                idxPtr = cast(var.ptr, POINTER(_Idx))
-                idx = idxPtr.contents
+                idx_ptr = cast(var.ptr, POINTER(_Idx))
+                idx = idx_ptr.contents
 
             # array
             if (var.type == 1):
-                rep = _parseArray(var.ptr)
+                rep = _parse_array(var.ptr)
 
-                arrayPtr = cast(var.ptr, POINTER(_Array))
-                array = arrayPtr.contents
+                array_ptr = cast(var.ptr, POINTER(_Array))
+                array = array_ptr.contents
 
             self.__intern[name] = {
                     'ptr': var.ptr,
@@ -160,24 +160,24 @@ class _Scope:
 
         # index
         if (t == 0):
-            rep = _parseIdx(ptr)
+            rep = _parse_idx(ptr)
 
         # array
         if (t == 1):
-            rep = _parseArray(ptr)
+            rep = _parse_array(ptr)
 
         return {
                 'val': rep
         }
 
 class _Bound:
-    def __init__(self, ptrRng, ptrArea):
+    def __init__(self, ptr_rng, ptr_area):
         self._intern = {
-                'rng': ptrRng,
-                'area': ptrArea
+                'rng': ptr_rng,
+                'area': ptr_area
         }
 
-    def _axisStr(self, i):
+    def _axis_str(self, i):
         val = None
 
         if i == 0:
@@ -192,27 +192,27 @@ class _Bound:
         return val
 
     def __getitem__(self, k):
-        cArr = self._intern[k]
+        c_arr = self._intern[k]
 
         rep = []
         if k == 'rng':
-            limCont = cast(cArr.ptr, POINTER(POINTER(_Lim)))
+            lim_cont = cast(c_arr.ptr, POINTER(POINTER(_Lim)))
 
-            for i in range(int(cArr.sz / 4)):
-                limPtr = limCont[i]
-                lim = limPtr.contents
+            for i in range(int(c_arr.sz / 4)):
+                lim_ptr = lim_cont[i]
+                lim = lim_ptr.contents
 
                 rep.append({
-                        'axis': self._axisStr(lim.axis),
-                        'val': _parseFloat(lim.val)
+                        'axis': self._axis_str(lim.axis),
+                        'val': _parse_float(lim.val)
                 })
 
         if k == 'area':
-            coneCont = cast(cArr.ptr, POINTER(POINTER(_Cone)))
+            cone_cont = cast(c_arr.ptr, POINTER(POINTER(_Cone)))
 
-            for i in range(int(cArr.sz / 8)):
-                conePtr = coneCont[i]
-                cone = conePtr.contents
+            for i in range(int(c_arr.sz / 8)):
+                cone_ptr = cone_cont[i]
+                cone = cone_ptr.contents
 
                 rep.append({
                     'bound': cone.bound,
@@ -221,21 +221,21 @@ class _Bound:
 
         return rep
 
-_dataGet = _scn.dataGet
-_dataGet.restype = POINTER(POINTER(_Var))
-_dataGet.argtypes = None
+_data_get = _scn.dataGet
+_data_get.restype = POINTER(POINTER(_Var))
+_data_get.argtypes = None
 
-_goalGet = _scn.goalGet
-_goalGet.restype = POINTER(POINTER(_Var))
-_goalGet.argtypes = None
+_goal_get = _scn.goalGet
+_goal_get.restype = POINTER(POINTER(_Var))
+_goal_get.argtypes = None
 
-_noDataGet = _scn.noDataGet
-_noDataGet.restype = c_uint
-_noDataGet.argtypes = None
+_no_data_get = _scn.noDataGet
+_no_data_get.restype = c_uint
+_no_data_get.argtypes = None
 
-_data = _dataGet()
-_goal = _goalGet()
-_noData = _noDataGet()
+_data = _data_get()
+_goal = _goal_get()
+_noData = _no_data_get()
 
 data = _Scope(_data, _noData)
 goal = _Scope(_goal, _noData)
@@ -254,11 +254,11 @@ class _Lim(Structure):
 
     @property
     def val(self):
-        return _parseFloat(self._val)
+        return _parse_float(self._val)
 
-_boundRngGet = _scn.boundRngGet
-_boundRngGet.restype = _CArr
-_boundRngGet.argtypes = None
+_bound_rng_get = _scn.boundRngGet
+_bound_rng_get.restype = _CArr
+_bound_rng_get.argtypes = None
 
 class _Cone(Structure):
     _fields_ = [
@@ -273,7 +273,7 @@ class _Cone(Structure):
             for y in range(2):
                 rng = []
                 for x in range(2):
-                    rng.append(_parseFloat(self._bound[y][x]))
+                    rng.append(_parse_float(self._bound[y][x]))
 
                 area.append(rng)
 
@@ -281,26 +281,26 @@ class _Cone(Structure):
 
     @property
     def offset(self):
-        return _parseOffset(self._ptr.contents.offset)
+        return _parse_offset(self._ptr.contents.offset)
 
-_boundAreaGet = _scn.boundAreaGet
-_boundAreaGet.restype = _CArr
-_boundAreaGet.argtypes = None
+_bound_area_get = _scn.boundAreaGet
+_bound_area_get.restype = _CArr
+_bound_area_get.argtypes = None
 
-_ptrBoundArea = cast(_boundAreaGet().ptr, POINTER(POINTER(_Cone)))
+_ptr_bound_area = cast(_bound_area_get().ptr, POINTER(POINTER(_Cone)))
 
-_boundRngGet = _scn.boundRngGet
-_boundRngGet.restype = _CArr
-_boundRngGet.argtypes = None
+_bound_rng_get = _scn.boundRngGet
+_bound_rng_get.restype = _CArr
+_bound_rng_get.argtypes = None
 
-_ptrBoundArea = cast(_boundRngGet().ptr, POINTER(POINTER(_Lim)))
+_ptr_bound_area = cast(_bound_rng_get().ptr, POINTER(POINTER(_Lim)))
 
-bound = _Bound(_boundRngGet(), _boundAreaGet())
+bound = _Bound(_bound_rng_get(), _bound_area_get())
 
 # vehicle
-_callIncr = _scn.callIncr
-_callIncr.restype = c_void_p
-_callIncr.argtypes = None
+_call_incr = _scn.callIncr
+_call_incr.restype = c_void_p
+_call_incr.argtypes = None
 
 class _Crane(_Obj):
     _fields_ = [
@@ -337,7 +337,7 @@ class _Crane(_Obj):
         ptr = self._ptr
         offset = ptr.contents._offsetTrack
 
-        ls = _parseOffset(offset)
+        ls = _parse_offset(offset)
 
         return {
             'offset': ls
@@ -348,7 +348,7 @@ class _Crane(_Obj):
         ptr = self._ptr
         offset = ptr.contents._offsetHead
 
-        ls = _parseOffset(offset)
+        ls = _parse_offset(offset)
 
         return {
             'offset': ls
@@ -356,52 +356,52 @@ class _Crane(_Obj):
 
     @property
     def offset(self):
-        return _parseOffset(self._ptr.contents._offset)
+        return _parse_offset(self._ptr.contents._offset)
 
     def zoom(self, delta):
-        _craneZoom(self._ptr, delta)
+        _crane_zoom(self._ptr, delta)
 
-        _callIncr()
+        _call_incr()
 
     def pan(self, delta):
-        _cranePan(self._ptr, delta)
+        _crane_pan(self._ptr, delta)
 
-        _callIncr()
+        _call_incr()
 
     def ped(self, delta):
-        _cranePed(self._ptr, delta)
+        _crane_ped(self._ptr, delta)
 
-        _callIncr()
+        _call_incr()
 
     def grab(self):
-        _craneGrab(self._ptr)
+        _crane_grab(self._ptr)
 
-        _callIncr()
+        _call_incr()
 
-_craneZoom = _crane.craneZoom
-_craneZoom.restype = c_void_p
-_craneZoom.argtypes = [
+_crane_zoom = _crane.craneZoom
+_crane_zoom.restype = c_void_p
+_crane_zoom.argtypes = [
         POINTER(_Crane),
         c_float
 ]
 
-_cranePan = _crane.cranePan
-_cranePan.restype = c_void_p
-_cranePan.argtypes = [
+_crane_pan = _crane.cranePan
+_crane_pan.restype = c_void_p
+_crane_pan.argtypes = [
         POINTER(_Crane),
         c_float
 ]
 
-_cranePed = _crane.cranePed
-_cranePed.restype = c_void_p
-_cranePed.argtypes = [
+_crane_ped = _crane.cranePed
+_crane_ped.restype = c_void_p
+_crane_ped.argtypes = [
         POINTER(_Crane),
         c_float
 ]
 
-_craneGrab = _crane.craneGrab
-_craneGrab.restype = c_void_p
-_craneGrab.argtypes = None
+_crane_grab = _crane.craneGrab
+_crane_grab.restype = c_void_p
+_crane_grab.argtypes = None
 
 class Crane:
     rng_track = _Crane.rng_track
@@ -424,41 +424,41 @@ class _Truck(_Obj):
     @property
     def data(self):
         ptr = self._ptr
-        arrayPtr = ptr.contents._data
+        array_ptr = ptr.contents._data
 
-        return _parseArray(arrayPtr)
+        return _parse_array(array_ptr)
 
     @property
     def offset(self):
-        return _parseOffset(self._ptr.contents._offset)
+        return _parse_offset(self._ptr.contents._offset)
 
     @property
     def ang(self):
         ptr = self._ptr
         ang = ptr.contents._ang
 
-        return _parseFloat(ang)
+        return _parse_float(ang)
 
     def turn(self, delta):
-        _truckTurn(self._ptr, delta)
+        _truck_turn(self._ptr, delta)
 
-        _callIncr()
+        _call_incr()
 
     def mv(self, delta):
-        _truckMv(self._ptr, delta)
+        _truck_mv(self._ptr, delta)
 
-        _callIncr()
+        _call_incr()
 
-_truckTurn = _truck.truckTurn
-_truckTurn.restype = c_void_p
-_truckTurn.argtypes = [
+_truck_turn = _truck.truckTurn
+_truck_turn.restype = c_void_p
+_truck_turn.argtypes = [
                 POINTER(_Truck),
                 c_float
 ]
 
-_truckMv = _truck.truckMv
-_truckMv.restype = c_void_p
-_truckMv.argtypes = [
+_truck_mv = _truck.truckMv
+_truck_mv.restype = c_void_p
+_truck_mv.argtypes = [
                 POINTER(_Truck),
                 c_float
 ]
@@ -476,22 +476,22 @@ class _CargoShip(_Obj):
     @property
     def data(self):
         ptr = self._ptr
-        arrayPtr = ptr.contents._data
+        array_ptr = ptr.contents._data
 
-        return _parseArray(arrayPtr)
+        return _parse_array(array_ptr)
 
     @property
     def offset(self):
-        return _parseOffset(self._ptr.contents._offset)
+        return _parse_offset(self._ptr.contents._offset)
 
     def mv(self, delta):
-        _cargoShipMv(self._ptr, delta)
+        _cargo_ship_mv(self._ptr, delta)
 
-        _callIncr()
+        _call_incr()
 
-_cargoShipMv = _cargo_ship.cargoShipMv
-_cargoShipMv.restype = c_void_p
-_cargoShipMv.argtypes = [
+_cargo_ship_mv = _cargo_ship.cargoShipMv
+_cargo_ship_mv.restype = c_void_p
+_cargo_ship_mv.argtypes = [
                 POINTER(_CargoShip),
                 c_float
 ]
@@ -499,65 +499,65 @@ _cargoShipMv.argtypes = [
 class CargoShip:
     pass
 
-_craneGet = _scn.craneGet
-_craneGet.restype = _CArr
-_craneGet.argtypes = None
+_crane_get = _scn.craneGet
+_crane_get.restype = _CArr
+_crane_get.argtypes = None
 
-_cranePtr = cast(_craneGet().ptr, POINTER(POINTER(_Crane)))
+_crane_ptr = cast(_crane_get().ptr, POINTER(POINTER(_Crane)))
 
 crane = None
-if _craneGet().sz:
-    if _craneGet().sz > 8:
+if _crane_get().sz:
+    if _crane_get().sz > 8:
         crane = []
 
         i = 0
-        while i < _craneGet().sz:
-            crane.append(_Crane(_cranePtr[i]))
+        while i < _crane_get().sz:
+            crane.append(_Crane(_crane_ptr[i]))
 
             i += sizeof(c_void_p)
 
     else:
-        crane = _Crane(_cranePtr.contents)
+        crane = _Crane(_crane_ptr.contents)
 
-_truckGet = _scn.truckGet
-_truckGet.restype = _CArr
-_truckGet.argtypes = None
+_truck_get = _scn.truckGet
+_truck_get.restype = _CArr
+_truck_get.argtypes = None
 
-_truckPtr = cast(_truckGet().ptr, POINTER(POINTER(_Truck)))
+_truck_ptr = cast(_truck_get().ptr, POINTER(POINTER(_Truck)))
 
 truck = None
-if _truckGet().sz:
-    if _truckGet().sz > 8:
+if _truck_get().sz:
+    if _truck_get().sz > 8:
         truck = []
 
         i = 0
-        while i < _truckGet().sz:
-            truck.append(_Truck(_truckPtr[i]))
+        while i < _truck_get().sz:
+            truck.append(_Truck(_truck_ptr[i]))
 
             i += sizeof(c_void_p)
 
     else:
-        truck = _Truck(_truckPtr.contents)
+        truck = _Truck(_truck_ptr.contents)
 
-_cargoShipGet = _scn.cargoShipGet
-_cargoShipGet.restype = _CArr
-_cargoShipGet.argtypes = None
+_cargo_ship_get = _scn.cargoShipGet
+_cargo_ship_get.restype = _CArr
+_cargo_ship_get.argtypes = None
 
-_cargoShipPtr = cast(_cargoShipGet().ptr, POINTER(POINTER(_CargoShip)))
+_cargo_ship_ptr = cast(_cargo_ship_get().ptr, POINTER(POINTER(_CargoShip)))
 
 cargo_ship = None
-if _cargoShipGet().sz:
-    if _cargoShipGet().sz > 8:
+if _cargo_ship_get().sz:
+    if _cargo_ship_get().sz > 8:
         cargo_ship = []
 
         i = 0
-        while i < _cargoShipGet().sz:
-            cargo_ship.append(_CargoShip(_cargoShipPtr))
+        while i < _cargo_ship_get().sz:
+            cargo_ship.append(_CargoShip(_cargo_ship_ptr))
 
             i += sizeof(c_void_p)
 
     else:
-        cargo_ship = _CargoShip(_cargoShipPtr.contents)
+        cargo_ship = _CargoShip(_cargo_ship_ptr.contents)
 
 class _StreetSign(_Obj):
     _fields_ = [
@@ -574,39 +574,39 @@ class _StreetSign(_Obj):
         return ls
 
     def toggle(self, i):
-        _streetSignToggle(self._ptr, i)
+        street_sign_toggle(self._ptr, i)
 
-        _callIncr()
+        _call_incr()
 
 # control-flow
-_streetSignGet = _scn.streetSignGet
-_streetSignGet.restype = _CArr
-_streetSignGet.argtypes = None
+_street_sign_get = _scn.streetSignGet
+_street_sign_get.restype = _CArr
+_street_sign_get.argtypes = None
 
-_streetSignToggle = _street_sign.streetSignToggle
-_streetSignToggle.restype = c_uint
-_streetSignToggle.argtypes = None
+street_sign_toggle = _street_sign.streetSignToggle
+street_sign_toggle.restype = c_uint
+street_sign_toggle.argtypes = None
 
-_streetSignPtr = cast(_streetSignGet().ptr, POINTER(_StreetSign))
+_street_sign_ptr = cast(_street_sign_get().ptr, POINTER(_StreetSign))
 
 street_sign = []
 i = 0
-while i < _streetSignGet().sz:
-    street_sign.append(_StreetSign(_streetSignPtr[i]))
+while i < _street_sign_get().sz:
+    street_sign.append(_StreetSign(_street_sign_ptr[i]))
 
     i += sizeof(c_void_p)
 
 # path
 ## node
-_nodeGet = _scn.nodeGet
-_nodeGet.restype = _CArr
-_nodeGet.argtypes = None
+_node_get = _scn.nodeGet
+_node_get.restype = _CArr
+_node_get.argtypes = None
 
-node = _nodeGet()
+node = _node_get()
 
 ## strip
-_pathGet = _scn.pathGet
-_pathGet.restype = _CArr
-_pathGet.argtypes = None
+_path_get = _scn.pathGet
+_path_get.restype = _CArr
+_path_get.argtypes = None
 
-path = _pathGet()
+path = _path_get()
