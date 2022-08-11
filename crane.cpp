@@ -96,12 +96,12 @@ Crane* craneMk(Cont* cont, glm::vec3 loc, glm::vec3 rot) {
 		inst->offset[a] = offset[a];
 	}
 
-	glm::vec3 offsetTrack = util::matr::apply(glm::vec3(0.0), inst->_parent->_child[Crane::TRACK]->_acc);
+	glm::vec3 offsetTrack = util::matr::apply(glm::vec3(0.0), inst->_parent->_child[Crane::TRACK]->_model);
 	for (int a = 0; a < 3; a++) {
 		inst->offsetHead[a] = offsetTrack[a];
 	}
 
-	glm::vec3 offsetHead = util::matr::apply(glm::vec3(0.0), inst->_parent->_child[Crane::HEAD]->_acc);
+	glm::vec3 offsetHead = util::matr::apply(glm::vec3(0.0), inst->_parent->_child[Crane::HEAD]->_model);
 	for (int a = 0; a < 3; a++) {
 		inst->offsetHead[a] = offsetHead[a];
 	}
@@ -162,12 +162,12 @@ void cranePan(Crane* inst, float delta) {
 		inst->offset[a] = offset[a];
 	}
 
-	glm::vec3 offsetTrack = util::matr::apply(glm::vec3(0.0), inst->_parent->_child[Crane::TRACK]->_acc);
+	glm::vec3 offsetTrack = util::matr::apply(glm::vec3(0.0), inst->_parent->_child[Crane::TRACK]->_model);
 	for (int a = 0; a < 3; a++) {
 		inst->offsetHead[a] = offsetTrack[a];
 	}
 
-	glm::vec3 offsetHead = util::matr::apply(glm::vec3(0.0), inst->_parent->_child[Crane::HEAD]->_acc);
+	glm::vec3 offsetHead = util::matr::apply(glm::vec3(0.0), inst->_parent->_child[Crane::HEAD]->_model);
 	for (int a = 0; a < 3; a++) {
 		inst->offsetHead[a] = offsetHead[a];
 	}
@@ -175,7 +175,7 @@ void cranePan(Crane* inst, float delta) {
 
 void cranePed(Crane* inst, float delta) {
 	glm::mat4 trans = glm::translate(glm::mat4(1.0), glm::vec3(0.0, delta, 0.0));
-	glm::vec3 dest = glm::vec3(inst->_parent->_child[Crane::TRACK]->_acc * trans * glm::vec4(glm::vec3(0.0), 1.0));
+	glm::vec3 dest = glm::vec3(inst->_parent->_child[Crane::TRACK]->_model * trans * glm::vec4(glm::vec3(0.0), 1.0));
 
 	if (dest[Y] > Crane::_rngTrack[MIN] && dest[Y] < Crane::_rngTrack[MAX]) {
 		glm::vec3 offset = glm::vec3(0.0, delta, 0.0);
@@ -187,17 +187,17 @@ void cranePed(Crane* inst, float delta) {
 		});
 	}
 
-	glm::vec3 offset = util::matr::apply(glm::vec3(0.0), inst->_parent->_acc);
+	glm::vec3 offset = util::matr::apply(glm::vec3(0.0), inst->_parent->_model);
 	for (int a = 0; a < 3; a++) {
 		inst->offset[a] = offset[a];
 	}
 
-	glm::vec3 offsetTrack = util::matr::apply(glm::vec3(0.0), inst->_parent->_child[Crane::TRACK]->_acc);
+	glm::vec3 offsetTrack = util::matr::apply(glm::vec3(0.0), inst->_parent->_child[Crane::TRACK]->_model);
 	for (int a = 0; a < 3; a++) {
 		inst->offsetHead[a] = offsetTrack[a];
 	}
 
-	glm::vec3 offsetHead = util::matr::apply(glm::vec3(0.0), inst->_parent->_child[Crane::HEAD]->_acc);
+	glm::vec3 offsetHead = util::matr::apply(glm::vec3(0.0), inst->_parent->_child[Crane::HEAD]->_model);
 	for (int a = 0; a < 3; a++) {
 		inst->offsetHead[a] = offsetHead[a];
 	}
