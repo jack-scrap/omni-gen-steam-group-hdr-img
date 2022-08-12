@@ -215,37 +215,10 @@ void scn::init(std::string stage, unsigned int lvl) {
     GLfloat wd;
     switch (pair.value()["block"].type()) {
 			// stack
-			case nlohmann::json::value_t::number_unsigned: {
+			case nlohmann::json::value_t::array: {
 				wd = ((Idx*) item->ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->ptr)->_parent->_aabb[X][MIN];
 
 				data[i] = item;
-
-				break;
-			}
-
-			// array
-			case nlohmann::json::value_t::array: {
-				omni::assert(util::json::array::euclid(pair.value()["block"], 0), std::string("Depth of `") + pair.key() + std::string("` exceeds 3 dimensions"));
-
-				switch (pair.value()["block"][0].type()) {
-					// 1D
-					case nlohmann::json::value_t::number_unsigned: {
-						wd = ((Array*) item->ptr)->_parent->_aabb[X][MAX] - ((Array*) item->ptr)->_parent->_aabb[X][MIN];
-
-						data[i] = item;
-
-						break;
-					}
-
-					// 2D
-					case nlohmann::json::value_t::array: {
-						wd = ((Array*) item->ptr)->_parent->_aabb[X][MAX] - ((Array*) item->ptr)->_parent->_aabb[X][MIN];
-
-						data[i] = item;
-
-						break;
-					}
-				}
 
 				break;
 			}
@@ -288,7 +261,7 @@ void scn::init(std::string stage, unsigned int lvl) {
     GLfloat wd;
     switch (pair.value()["block"].type()) {
 			// stack
-			case nlohmann::json::value_t::number_unsigned: {
+			case nlohmann::json::value_t::array: {
 				goal[i] = item;
 				typeRhs = omni::IDX;
 
@@ -299,31 +272,6 @@ void scn::init(std::string stage, unsigned int lvl) {
 			case nlohmann::json::value_t::string: {
 				goal[i] = item;
 				typeRhs = omni::ARRAY;
-
-				break;
-			}
-
-			// array
-			case nlohmann::json::value_t::array: {
-				omni::assert(util::json::array::euclid(pair.value()["block"], 0), std::string("Depth of `") + pair.key() + std::string("` exceeds 3 dimensions"));
-
-				switch (pair.value()["block"][0].type()) {
-					// 1D
-					case nlohmann::json::value_t::number_unsigned: {
-						goal[i] = item;
-						typeRhs = omni::ARRAY;
-
-						break;
-					}
-
-					// 2D
-					case nlohmann::json::value_t::array: {
-						goal[i] = item;
-						typeRhs = omni::ARRAY;
-
-						break;
-					}
-				}
 
 				break;
 			}

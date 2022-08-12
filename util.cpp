@@ -853,12 +853,12 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 	Var* inst;
 	switch (val["block"].type()) {
 		// stack
-		case nlohmann::json::value_t::number_unsigned: {
-			char data = byte(val["block"]);
+		case nlohmann::json::value_t::array: {
+			CBuff data = array::lin(val["block"]);
 
 			Idx* idx;
-			if (data) {
-				idx = idxMk(0, &data, 1, key, loc, glm::radians(rot));
+			if (data.ptr) {
+				idx = idxMk(0, (char*) data.ptr, data.x, key, loc, glm::radians(rot));
 			} else {
 				idx = idxMk(0, key, loc, glm::radians(rot));
 			}
@@ -868,43 +868,6 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 			glm::vec3 offset = util::matr::apply(glm::vec3(0.0), idx->_parent->_acc);
 
 			inst = varMk(name, idx, omni::IDX, offset);
-
-			break;
-		}
-
-		// array
-		case nlohmann::json::value_t::array: {
-			switch (val["block"][0].type()) {
-				// 1D
-				case nlohmann::json::value_t::number_unsigned: {
-					CBuff data = array::lin(val["block"]);
-
-					Array* array = arrayMk((char*) data.ptr, data.x, key, X, loc + glm::vec3(0.0, 0.0, -(layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2)), glm::radians(rot));
-
-					omni::assert(!phys::aabbGround(array->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
-
-					glm::vec3 offset = util::matr::apply(glm::vec3(0.0), array->_parent->_acc);
-
-					inst = varMk(name, array, omni::ARRAY, offset);
-
-					break;
-				}
-
-				// 2D
-				case nlohmann::json::value_t::array: {
-					CBuff data = array::matrix(val["block"]);
-
-					Array* array = arrayMk((char*) data.ptr, data.x, data.y, key, loc + glm::vec3(0.0, 0.0, -(layout::idx[Z] / 2) + (layout::offset * 2) + (layout::margin * 2)), glm::radians(rot));
-
-					omni::assert(!phys::aabbGround(array->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
-
-					glm::vec3 offset = util::matr::apply(glm::vec3(0.0), array->_parent->_acc);
-
-					inst = varMk(name, array, omni::ARRAY, offset);
-
-					break;
-				}
-			}
 
 			break;
 		}
