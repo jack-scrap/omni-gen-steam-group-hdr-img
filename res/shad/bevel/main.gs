@@ -22,11 +22,7 @@ void main() {
 	for	(int z = 0; z < 2; z++) {
 		for	(int y = 0; y < 2; y++) {
 			for	(int x = 0; x < 2; x++) {
-				vec3 pos = vec3(
-					bound[0][x],
-					(bool(y) ? 1 : -1) * (2 * pad),
-					bound[1][z]
-				);
+				vec3 pos = vec3(bound[0][x], (bool(y) ? 1 : -1) * (2 * pad), bound[1][z]);
 
 				gl_Position = proj * view * model * vec4(gl_in[0].gl_Position.xyz + pos, 1.0);
 
@@ -43,11 +39,7 @@ void main() {
 	for	(int x = 0; x < 2; x++) {
 		for (int y = 0; y < 2; y++) {
 			for (int z = 0; z < 2; z++) {
-				vec3 pos = vec3(
-					bound[0][x],
-					(bool(y) ? 1 : -1) * (2 * pad),
-					bound[1][z]
-				);
+				vec3 pos = vec3(bound[0][x], (bool(y) ? 1 : -1) * (2 * pad), bound[1][z]);
 
 				gl_Position = proj * view * model * vec4(gl_in[0].gl_Position.xyz + pos, 1.0);
 
