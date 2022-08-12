@@ -497,7 +497,8 @@ _cargo_ship_mv.argtypes = [
 ]
 
 class CargoShip:
-    pass
+    x = 10
+    y = 4
 
 _crane_get = _scn.craneGet
 _crane_get.restype = _CArr
