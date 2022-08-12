@@ -687,7 +687,7 @@ int main(int argc, char* argv[]) {
 
 		stage = argv[1];
 	} else {
-		stage = "init";
+		stage = "idx";
 	}
 	if (argc > 2) {
 		std::string name = argv[2];
