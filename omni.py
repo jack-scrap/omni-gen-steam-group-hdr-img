@@ -333,6 +333,10 @@ class _Crane(_Obj):
         return val
 
     @property
+    def offset(self):
+        return _parse_offset(self._ptr.contents._offset)
+
+    @property
     def offset_track(self):
         ptr = self._ptr
         offset = ptr.contents._offsetTrack
@@ -349,10 +353,6 @@ class _Crane(_Obj):
         ls = _parse_offset(offset)
 
         return ls
-
-    @property
-    def offset(self):
-        return _parse_offset(self._ptr.contents._offset)
 
     def zoom(self, delta):
         _crane_zoom(self._ptr, delta)
