@@ -587,14 +587,12 @@ while i < _street_sign_get().sz:
     i += sizeof(c_void_p)
 
 # Path
-## Node
 _node_get = _scn.nodeGet
 _node_get.restype = _CArr
 _node_get.argtypes = None
 
 node = _node_get()
 
-## Strip
 _path_get = _scn.pathGet
 _path_get.restype = _CArr
 _path_get.argtypes = None
