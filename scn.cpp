@@ -358,7 +358,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 				((char*) data.ptr)[0] = 0;
 			}
 
-			Array* instArray = arrayMk((char*) data.ptr, data.x, "", Z, glm::vec3(0.0, layout::padded(0.0), -((layout::idx[X] / 2) + (layout::stroke * 2) + (layout::margin * 2 * 2))), glm::vec3(0.0, -M_PI / 2, 0.0));
+			Array* instArray = arrayMk((char*) data.ptr, data.x, "", Z, glm::vec3(0.0, layout::padded(0.0), -((layout::idx[X] / 2) + (layout::item(layout::stroke) * 2))), glm::vec3(0.0, -M_PI / 2, 0.0));
 
 			Truck* instTruck = truckMk(instArray, loc, glm::radians(rot));
 
