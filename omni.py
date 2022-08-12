@@ -24,14 +24,14 @@ def _parse_idx(ptr):
     byte_cont = cast(idx._data, POINTER(POINTER(_Cont)))
 
     if (idx.sz):
-        # list
+        # List
         if idx.sz > 1:
             rep = []
 
             for i in range(idx.sz):
                 rep.append(_parse_byte(byte_cont[i]))
 
-        # scalar
+        # Scalar
         else:
             rep = _parse_byte(byte_cont.contents)
 
@@ -79,7 +79,7 @@ class _Obj(Structure):
     def __init__(self, ptr):
         self._ptr = ptr
 
-# data
+# Data
 class _Cont(Structure):
     _fields_ = [
             ('_c', c_char),
@@ -130,14 +130,14 @@ class _Scope:
 
             rep = None
 
-            # index
+            # Index
             if (var.type == 0):
                 rep = _parse_idx(var.ptr)
 
                 idx_ptr = cast(var.ptr, POINTER(_Idx))
                 idx = idx_ptr.contents
 
-            # array
+            # Array
             if (var.type == 1):
                 rep = _parse_array(var.ptr)
 
@@ -157,11 +157,11 @@ class _Scope:
 
         rep = None
 
-        # index
+        # Index
         if (t == 0):
             rep = _parse_idx(ptr)
 
-        # array
+        # Array
         if (t == 1):
             rep = _parse_array(ptr)
 
@@ -239,7 +239,7 @@ _noData = _no_data_get()
 data = _Scope(_data, _noData)
 goal = _Scope(_goal, _noData)
 
-# bound
+# Bound
 class _Lim(Structure):
     _fields_ = [
             ('_axis', c_uint),
@@ -296,7 +296,7 @@ _ptr_bound_area = cast(_bound_rng_get().ptr, POINTER(POINTER(_Lim)))
 
 bound = _Bound(_bound_rng_get(), _bound_area_get())
 
-# vehicle
+# Vehicle
 _call_incr = _scn.callIncr
 _call_incr.restype = c_void_p
 _call_incr.argtypes = None
@@ -568,7 +568,7 @@ class _StreetSign(_Obj):
 
         _call_incr()
 
-# control-flow
+# Control-flow
 _street_sign_get = _scn.streetSignGet
 _street_sign_get.restype = _CArr
 _street_sign_get.argtypes = None
@@ -586,15 +586,15 @@ while i < _street_sign_get().sz:
 
     i += sizeof(c_void_p)
 
-# path
-## node
+# Path
+## Node
 _node_get = _scn.nodeGet
 _node_get.restype = _CArr
 _node_get.argtypes = None
 
 node = _node_get()
 
-## strip
+## Strip
 _path_get = _scn.pathGet
 _path_get.restype = _CArr
 _path_get.argtypes = None
