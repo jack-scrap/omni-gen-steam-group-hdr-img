@@ -11,8 +11,7 @@ def _parse_float(val):
     return round(val, 4)
 
 def _parse_byte(ptr):
-    byte_ptr = ptr
-    byte = byte_ptr.contents
+    byte = ptr.contents
 
     return int.from_bytes(byte._c, byteorder = 'little')
 
@@ -322,8 +321,7 @@ class _Crane(_Obj):
 
     @property
     def data(self):
-        ptr = self._ptr
-        data = ptr.contents._data
+        data = self._ptr.contents._data
 
         val = None
 
@@ -338,8 +336,7 @@ class _Crane(_Obj):
 
     @property
     def offset_track(self):
-        ptr = self._ptr
-        offset = ptr.contents._offsetTrack
+        offset = self._ptr.contents._offsetTrack
 
         ls = _parse_offset(offset)
 
@@ -347,8 +344,7 @@ class _Crane(_Obj):
 
     @property
     def offset_head(self):
-        ptr = self._ptr
-        offset = ptr.contents._offsetHead
+        offset = self._ptr.contents._offsetHead
 
         ls = _parse_offset(offset)
 
@@ -419,8 +415,7 @@ class _Truck(_Obj):
 
     @property
     def data(self):
-        ptr = self._ptr
-        array_ptr = ptr.contents._data
+        array_ptr = self._ptr.contents._data
 
         return _parse_array(array_ptr)
 
@@ -430,8 +425,7 @@ class _Truck(_Obj):
 
     @property
     def ang(self):
-        ptr = self._ptr
-        ang = ptr.contents._ang
+        ang = self._ptr.contents._ang
 
         return _parse_float(ang)
 
@@ -471,8 +465,7 @@ class _CargoShip(_Obj):
 
     @property
     def data(self):
-        ptr = self._ptr
-        array_ptr = ptr.contents._data
+        array_ptr = self._ptr.contents._data
 
         return _parse_array(array_ptr)
 
