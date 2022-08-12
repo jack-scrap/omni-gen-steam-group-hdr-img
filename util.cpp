@@ -915,7 +915,7 @@ glm::vec3 util::json::vec(nlohmann::json deser) {
 }
 
 std::vector<Obj*> util::json::path(nlohmann::json path, nlohmann::json node, nlohmann::json status) {
-	std::vector<Obj*> _;
+	std::vector<Obj*> root;
 
 	GLushort idc[2] = {
 		0, 1
@@ -953,7 +953,7 @@ std::vector<Obj*> util::json::path(nlohmann::json path, nlohmann::json node, nlo
 					}
 				}
 
-				_.push_back(lineMk((GLfloat*) vtc, idc, 2, "main", "lane", name, active));
+				root.push_back(lineMk((GLfloat*) vtc, idc, 2, "main", "lane", name, active));
 
 				break;
 			}
@@ -972,7 +972,7 @@ std::vector<Obj*> util::json::path(nlohmann::json path, nlohmann::json node, nlo
 						}
 					}
 
-					_.push_back(lineMk((GLfloat*) vtc, idc, 2, "obj", "thick", name, active));
+					root.push_back(lineMk((GLfloat*) vtc, idc, 2, "obj", "thick", name, active));
 				}
 
 				break;
@@ -980,7 +980,7 @@ std::vector<Obj*> util::json::path(nlohmann::json path, nlohmann::json node, nlo
 		}
 	}
 
-	return _;
+	return root;
 }
 
 template <typename T>
