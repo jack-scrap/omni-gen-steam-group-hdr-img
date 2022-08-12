@@ -333,26 +333,22 @@ class _Crane(_Obj):
         return val
 
     @property
-    def track(self):
+    def offset_track(self):
         ptr = self._ptr
         offset = ptr.contents._offsetTrack
 
         ls = _parse_offset(offset)
 
-        return {
-            'offset': ls
-        }
+        return ls
 
     @property
-    def head(self):
+    def offset_head(self):
         ptr = self._ptr
         offset = ptr.contents._offsetHead
 
         ls = _parse_offset(offset)
 
-        return {
-            'offset': ls
-        }
+        return ls
 
     @property
     def offset(self):
