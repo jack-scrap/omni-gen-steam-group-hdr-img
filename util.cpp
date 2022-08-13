@@ -857,7 +857,7 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 			CBuff data = array::lin(val["block"]);
 
 			Idx* idx;
-			if (data.ptr) {
+			if (data.x) {
 				idx = idxMk(0, (char*) data.ptr, data.x, key, loc, glm::radians(rot));
 			} else {
 				idx = idxMk(0, key, loc, glm::radians(rot));
