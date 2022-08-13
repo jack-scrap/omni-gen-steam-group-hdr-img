@@ -57,7 +57,7 @@ void main() {
 	for (int y = 0; y < 2; y++) {
 		for (int c = 0; c < 2; c++) {
 			vec3 shear = vec3(0.0, (bool(y) ? 1 : -1) * pad * 2, 0.0);
-			shear[bool(c) ? 0 : 2] = fac;
+			shear[bool(c) ? 2 : 0] = fac;
 
 			vec3 pos = corner + shear;
 
