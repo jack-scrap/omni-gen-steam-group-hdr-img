@@ -10,10 +10,7 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 proj;
 
-uniform vec2 bound[2] = vec2[2](
-	vec2(-3.0, 7.0),
-	vec2(-12.0, 3.0)
-);
+uniform vec2 bound[2];
 
 const float pad = 0.16;
 
