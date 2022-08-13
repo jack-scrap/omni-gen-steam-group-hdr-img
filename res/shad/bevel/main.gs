@@ -2,7 +2,7 @@
 
 layout (points) in;
 
-layout (triangle_strip, max_vertices = 20) out;
+layout (triangle_strip, max_vertices = 24) out;
 
 out vec3 _pos;
 
@@ -52,22 +52,24 @@ void main() {
 	}
 
 	// corners
-	vec3 corner = vec3(bound[0][0], 0.0, bound[0][0]);
+	for (int i = 0; i < 2; i++) {
+		vec3 corner = vec3(bound[0][i], 0.0, bound[1][i]) - vec3((bool(i) ? 1 : -1) * fac, 0.0, (bool(i) ? 1 : -1) * fac);
 
-	for (int y = 0; y < 2; y++) {
-		for (int c = 0; c < 2; c++) {
-			vec3 shear = vec3(0.0, (bool(y) ? 1 : -1) * pad * 2, 0.0);
-			shear[bool(c) ? 2 : 0] = fac;
+		for (int y = 0; y < 2; y++) {
+			for (int c = 0; c < 2; c++) {
+				vec3 shear = vec3(0.0, (bool(y) ? 1 : -1) * pad * 2, 0.0);
+				shear[bool(c) ? 2 : 0] = fac;
 
-			vec3 pos = corner + shear;
+				vec3 pos = corner + shear;
 
-			gl_Position = proj * view * model * vec4(gl_in[0].gl_Position.xyz + pos, 1.0);
+				gl_Position = proj * view * model * vec4(gl_in[0].gl_Position.xyz + pos, 1.0);
 
-			_pos = vec3(model * vec4(pos, 1.0));
+				_pos = vec3(model * vec4(pos, 1.0));
 
-			EmitVertex();
+				EmitVertex();
+			}
 		}
-	}
 
-	EndPrimitive();
+		EndPrimitive();
+	}
 }
