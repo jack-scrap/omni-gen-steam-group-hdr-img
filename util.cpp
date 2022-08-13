@@ -456,6 +456,10 @@ std::vector<GLfloat> util::mesh::rd::attr(std::string fName, unsigned int attr) 
 
 	std::vector<GLfloat> cont;
 	for (int l = 0; l < buff.size(); l++) {
+		if (!buff[l].size()) {
+			continue;
+		}
+
 		std::vector<std::string> tok = str::split(buff[l], ' ');
 
 		if (tok[0] == id[attr]) {
@@ -563,6 +567,10 @@ std::vector<GLushort> util::mesh::rd::idc(std::string fName, unsigned int attr) 
 
 	std::vector<GLushort> cont;
 	for (int l = 0; l < buff.size(); l++) {
+		if (!buff[l].size()) {
+			continue;
+		}
+
 		std::vector<std::string> tok = str::split(buff[l], ' ');
 
 		if (tok[0] == "f") {
