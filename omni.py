@@ -305,8 +305,8 @@ class _Crane(_Obj):
     _fields_ = [
             ('_data', POINTER(_Cont)),
             ('_offset', c_float * 3),
-            ('_offsetTrack', c_float * 3),
-            ('_offsetHead', c_float * 3),
+            ('_offsetTrack', c_float),
+            ('_offsetHead', c_float),
             ('_parent', c_void_p)
     ]
 
@@ -336,19 +336,15 @@ class _Crane(_Obj):
 
     @property
     def offset_track(self):
-        offset = self._ptr.contents._offsetTrack
+        val = self._ptr.contents._offsetTrack
 
-        ls = _parse_offset(offset)
-
-        return ls
+        return _parse_float(val)
 
     @property
     def offset_head(self):
-        offset = self._ptr.contents._offsetHead
+        val = self._ptr.contents._offsetHead
 
-        ls = _parse_offset(offset)
-
-        return ls
+        return _parse_float(val)
 
     def zoom(self, delta):
         _crane_zoom(self._ptr, delta)
