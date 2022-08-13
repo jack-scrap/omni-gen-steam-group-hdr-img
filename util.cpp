@@ -820,7 +820,7 @@ CBuff util::json::array::lin(nlohmann::json deser) {
 	for (int i = 0; i < cBuff.x; i++) {
 		omni::assert(str::ascii((char) ((int) deser[i])), std::string("Data at index [") + std::to_string(i) + std::string("] not ASCII applicable"));
 
-		((char*) cBuff.ptr)[i] = util::json::byte(deser[i]);
+		((char*) cBuff.ptr)[i] = byte(deser[i]);
 	}
 
 	return cBuff;
@@ -838,7 +838,7 @@ CBuff util::json::array::matrix(nlohmann::json deser) {
 		for (int i = 0; i < cBuff.x; i++) {
 			omni::assert(str::ascii((char) ((int) deser[j][i])), std::string("Data at index [") + std::to_string(j) + "][" + std::to_string(i) + std::string("] not ASCII applicable"));
 
-			((char*) cBuff.ptr)[c] = util::json::byte(deser[i]);
+			((char*) cBuff.ptr)[c] = byte(deser[i]);
 
 			c++;
 		}
