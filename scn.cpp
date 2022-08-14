@@ -214,11 +214,24 @@ void scn::init(std::string stage, unsigned int lvl) {
 
     GLfloat wd;
     switch (pair.value()["block"].type()) {
-			// stack
+			// array
 			case nlohmann::json::value_t::array: {
-				wd = ((Idx*) item->ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->ptr)->_parent->_aabb[X][MIN];
+				if (pair.value()["block"].empty()) {
+					wd = ((Idx*) item->ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->ptr)->_parent->_aabb[X][MIN];
 
-				data[i] = item;
+					data[i] = item;
+				} else {
+					switch (pair.value()["block"][0].type()) {
+						// stack
+						case nlohmann::json::value_t::number_unsigned: {
+							wd = ((Idx*) item->ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->ptr)->_parent->_aabb[X][MIN];
+
+							data[i] = item;
+
+							break;
+					 	}
+					}
+				}
 
 				break;
 			}
@@ -260,10 +273,22 @@ void scn::init(std::string stage, unsigned int lvl) {
 
     GLfloat wd;
     switch (pair.value()["block"].type()) {
-			// stack
+			// array
 			case nlohmann::json::value_t::array: {
-				goal[i] = item;
-				typeRhs = omni::IDX;
+				if (pair.value()["block"].empty()) {
+					goal[i] = item;
+					typeRhs = omni::IDX;
+				} else {
+					switch (pair.value()["block"][0].type()) {
+						// stack
+						case nlohmann::json::value_t::number_unsigned: {
+							goal[i] = item;
+							typeRhs = omni::IDX;
+
+							break;
+						}
+					}
+				}
 
 				break;
 			}

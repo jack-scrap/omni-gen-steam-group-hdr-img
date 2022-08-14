@@ -860,22 +860,46 @@ Var* util::json::var(nlohmann::json key, nlohmann::json val, glm::vec3 loc, glm:
 
 	Var* inst;
 	switch (val["block"].type()) {
-		// stack
+		// array
 		case nlohmann::json::value_t::array: {
-			CBuff data = array::lin(val["block"]);
+			if (val["block"].empty()) {
+				CBuff data = array::lin(val["block"]);
 
-			Idx* idx;
-			if (data.x) {
-				idx = idxMk(0, (char*) data.ptr, data.x, key, loc, glm::radians(rot));
+				Idx* idx;
+				if (data.x) {
+					idx = idxMk(0, (char*) data.ptr, data.x, key, loc, glm::radians(rot));
+				} else {
+					idx = idxMk(0, key, loc, glm::radians(rot));
+				}
+
+				omni::assert(!phys::aabbGround(idx->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
+
+				glm::vec3 offset = util::matr::apply(glm::vec3(0.0), idx->_parent->_acc);
+
+				inst = varMk(name, idx, omni::IDX, offset);
 			} else {
-				idx = idxMk(0, key, loc, glm::radians(rot));
+				switch (val["block"][0].type()) {
+					// stack
+					case nlohmann::json::value_t::number_unsigned: {
+						CBuff data = array::lin(val["block"]);
+
+						Idx* idx;
+						if (data.x) {
+							idx = idxMk(0, (char*) data.ptr, data.x, key, loc, glm::radians(rot));
+						} else {
+							idx = idxMk(0, key, loc, glm::radians(rot));
+						}
+
+						omni::assert(!phys::aabbGround(idx->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
+
+						glm::vec3 offset = util::matr::apply(glm::vec3(0.0), idx->_parent->_acc);
+
+						inst = varMk(name, idx, omni::IDX, offset);
+
+						break;
+				 	}
+				}
 			}
-
-			omni::assert(!phys::aabbGround(idx->_parent), std::string("Data `") + std::string(key) + std::string("` clipping into ground plane"));
-
-			glm::vec3 offset = util::matr::apply(glm::vec3(0.0), idx->_parent->_acc);
-
-			inst = varMk(name, idx, omni::IDX, offset);
 
 			break;
 		}
