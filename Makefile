@@ -3,6 +3,7 @@ SH:=/bin/bash
 CXX:=g++
 
 BUILDDIR:=build
+
 DESTDIR:=/usr/local/bin
 LIBDIR:=/usr/lib
 
