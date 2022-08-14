@@ -1377,24 +1377,24 @@ Coord util::math::coord::array(unsigned int idx, Coord bound) {
 }
 
 Coord util::math::coord::determ(unsigned int idx, std::vector<std::string> buff) {
-	Coord _ = {
+	Coord coord = {
 		0,
 		0
 	};
 
 	int i = 0;
 	while (i < idx) {
-		if (_.x < buff[_.y].size() - 1) {
-			_.x++;
+		if (coord.x < buff[coord.y].size() - 1) {
+			coord.x++;
 		} else {
-			_.y++;
-			_.x = 0;
+			coord.y++;
+			coord.x = 0;
 		}
 
 		i++;
 	}
 
-	return _;
+	return coord;
 }
 
 std::string util::now(std::string format) {

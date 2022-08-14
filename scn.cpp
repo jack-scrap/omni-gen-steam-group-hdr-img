@@ -237,6 +237,13 @@ void scn::init(std::string stage, unsigned int lvl) {
 							switch (pair.value()["block"][0][0].type()) {
 								// 1D
 								case nlohmann::json::value_t::number_unsigned:
+									CBuff data = util::json::array::matrix(pair.value()["block"]);
+
+									std::cout << data.x << std::endl;
+									std::cout << data.x << std::endl;
+									std::cout << data.z << std::endl;
+									std::cout << std::endl;
+
 									break;
 						 	}
 						}
