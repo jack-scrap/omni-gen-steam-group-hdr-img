@@ -231,6 +231,15 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 							break;
 					 	}
+
+						// array
+						case nlohmann::json::value_t::array: {
+							switch (pair.value()["block"][0][0].type()) {
+								// 1D
+								case nlohmann::json::value_t::number_unsigned:
+									break;
+						 	}
+						}
 					}
 				}
 
@@ -289,6 +298,15 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 							break;
 						}
+
+						// array
+						case nlohmann::json::value_t::array: {
+							switch (pair.value()["block"][0][0].type()) {
+								// 1D
+							 	case nlohmann::json::value_t::number_unsigned:
+								 	break;
+						 	}
+					 	}
 					}
 				}
 
