@@ -1,6 +1,6 @@
 {
 	"data": {
-		"vector": {
+		"stack": {
 			"block": [
 				7,
 				3,
@@ -15,7 +15,7 @@
 		}
 	},
 	"goal": {
-		"vector": {
+		"stack": {
 			"block": [
 				3,
 				3,
