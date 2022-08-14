@@ -4,6 +4,7 @@ CXX:=g++
 
 BUILDDIR:=build
 DESTDIR:=/usr/local/bin
+LIBDIR:=/usr/lib
 
 CXXFLAGS:=-std=c++11 -Wno-narrowing
 
@@ -57,7 +58,8 @@ mk_script:
 
 .PHONY: install
 install:
-	sudo mv omni $(DESTDIR)
+	sudo mv omni $(DESTDIR) ;
+	sudo mv build/*.so $(LIBDIR)
 
 .PHONY: clean
 clean:
