@@ -1343,30 +1343,30 @@ unsigned int util::math::idx::array(Coord st, Coord bound) {
 }
 
 unsigned int util::math::idx::determ(Coord st, std::vector<std::string> buff) {
-	unsigned int _ = 0;
-	for (int i = 0; i < st.y; i++) {
-		_ += buff[i].size();
+	unsigned int i = 0;
+	for (int l = 0; l < st.y; l++) {
+		i += buff[l].size();
 	}
-	_ += st.x;
+	i += st.x;
 
-	return _;
+	return i;
 }
 
 unsigned int util::math::idx::expand(std::string line, unsigned int idx) {
-	unsigned int _ = 0;
+	unsigned int i = 0;
 
 	unsigned int c = 0;
 	while (c < idx) {
 		if (line[c] == '\t') {
-			_ += state::tabWd;
+			i += state::tabWd;
 		} else {
-			_++;
+			i++;
 		}
 
 		c++;
 	}
 
-	return _;
+	return i;
 }
 
 Coord util::math::coord::array(unsigned int idx, Coord bound) {
