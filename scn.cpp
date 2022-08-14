@@ -212,7 +212,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 
     Var* item = util::json::var(pair.key(), pair.value(), loc, rot);
 
-    GLfloat wd;
+    GLfloat wd = 0.0;
     switch (pair.value()["block"].type()) {
 			// array
 			case nlohmann::json::value_t::array: {
@@ -271,7 +271,7 @@ void scn::init(std::string stage, unsigned int lvl) {
 
 		unsigned int typeRhs;
 
-    GLfloat wd;
+    GLfloat wd = 0.0;
     switch (pair.value()["block"].type()) {
 			// array
 			case nlohmann::json::value_t::array: {
