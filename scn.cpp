@@ -216,6 +216,7 @@ void scn::init(std::string stage, unsigned int lvl) {
     switch (pair.value()["block"].type()) {
 			// array
 			case nlohmann::json::value_t::array: {
+				// stack
 				if (pair.value()["block"].empty()) {
 					wd = ((Idx*) item->ptr)->_parent->_aabb[X][MAX] - ((Idx*) item->ptr)->_parent->_aabb[X][MIN];
 
@@ -275,6 +276,7 @@ void scn::init(std::string stage, unsigned int lvl) {
     switch (pair.value()["block"].type()) {
 			// array
 			case nlohmann::json::value_t::array: {
+				// stack
 				if (pair.value()["block"].empty()) {
 					goal[i] = item;
 					typeRhs = omni::IDX;
