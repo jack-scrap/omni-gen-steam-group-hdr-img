@@ -1,22 +1,22 @@
 {
 	"data": {
-		"stack": {
+		"stack_1": {
 			"block": [
 				1,
 				1
 			]
 		},
-		"scalar": {
+		"stack_2": {
 			"block": [
 			]
 		}
 	},
 	"goal": {
-		"stack": {
+		"stack_1": {
 			"block": [
 			]
 		},
-		"scalar": {
+		"stack_2": {
 			"block": [
 				1,
 				1
