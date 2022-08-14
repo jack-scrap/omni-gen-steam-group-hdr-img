@@ -833,14 +833,19 @@ CBuff util::json::array::matrix(nlohmann::json deser) {
 	cBuff.y = deser.size();
 	cBuff.z = 1;
 	cBuff.ptr = (char*) malloc(cBuff.x * cBuff.y);
-	int c = 0;
 	for (int j = 0; j < cBuff.y; j++) {
 		for (int i = 0; i < cBuff.x; i++) {
 			omni::assert(str::ascii((char) ((int) deser[j][i])), std::string("Data at index [") + std::to_string(j) + "][" + std::to_string(i) + std::string("] not ASCII applicable"));
 
-			((char*) cBuff.ptr)[c] = byte(deser[i]);
+			int c = util::math::idx::array({
+				i,
+				j
+			}, {
+				cBuff.x,
+				cBuff.y
+			});
 
-			c++;
+			((char*) cBuff.ptr)[c] = byte(deser[i]);
 		}
 	}
 
