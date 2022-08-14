@@ -1538,7 +1538,7 @@ GLuint util::tex::spray(std::string tex) {
 }
 
 std::string util::glyphName(char c) {
-	std::string _;
+	std::string name;
 
 	// alpha-numeric
 	if (
@@ -1546,170 +1546,170 @@ std::string util::glyphName(char c) {
 		(c >= 'A' && c <= 'Z') ||
 		(c >= 'a' && c <= 'z')
 	) {
-		_ = std::string(1, c);
+		name = std::string(1, c);
 	} else {
 		switch (c) {
 			case ' ':
-				_ = "spc";
+				name = "spc";
 
 				break;
 
 			case '!':
-				_ = "bang";
+				name = "bang";
 
 				break;
 
 			case '"':
-				_ = "dbl_quote";
+				name = "dbl_quote";
 
 				break;
 
 			case '#':
-				_ = "pound";
+				name = "pound";
 
 				break;
 
 			case '$':
-				_ = "dollar";
+				name = "dollar";
 
 				break;
 
 			case '%':
-				_ = "percent";
+				name = "percent";
 
 				break;
 
 			case '&':
-				_ = "ampersand";
+				name = "ampersand";
 
 				break;
 
 			case '\'':
-				_ = "single_quote";
+				name = "single_quote";
 
 				break;
 
 			case '(':
-				_ = "round_bracket_l";
+				name = "round_bracket_l";
 
 				break;
 
 			case ')':
-				_ = "round_bracket_r";
+				name = "round_bracket_r";
 
 				break;
 
 			case '*':
-				_ = "asterisk";
+				name = "asterisk";
 
 				break;
 
 			case '+':
-				_ = "plus";
+				name = "plus";
 
 				break;
 
 			case ',':
-				_ = "comma";
+				name = "comma";
 
 				break;
 
 			case '-':
-				_ = "minus";
+				name = "minus";
 
 				break;
 
 			case '.':
-				_ = "period";
+				name = "period";
 
 				break;
 
 			case '/':
-				_ = "fwd_slash";
+				name = "fwd_slash";
 
 				break;
 
 			case ':':
-				_ = "colon";
+				name = "colon";
 
 				break;
 
 			case ';':
-				_ = "semi_colon";
+				name = "semi_colon";
 
 				break;
 
 			case '<':
-				_ = "less_than";
+				name = "less_than";
 
 				break;
 
 			case '=':
-				_ = "equals";
+				name = "equals";
 
 				break;
 
 			case '>':
-				_ = "greater_than";
+				name = "greater_than";
 
 				break;
 
 			case '?':
-				_ = "question";
+				name = "question";
 
 				break;
 
 			case '@':
-				_ = "at";
+				name = "at";
 
 				break;
 
 			case '[':
-				_ = "sq_bracket_l";
+				name = "sq_bracket_l";
 
 				break;
 
 			case ']':
-				_ = "sq_bracket_r";
+				name = "sq_bracket_r";
 
 				break;
 
 			case '^':
-				_ = "carat";
+				name = "carat";
 
 				break;
 
 			case '_':
-				_ = "underscore";
+				name = "underscore";
 
 				break;
 
 			case '`':
-				_ = "back_tick";
+				name = "back_tick";
 
 				break;
 
 			case '{':
-				_ = "curly_bracket_l";
+				name = "curly_bracket_l";
 
 				break;
 
 			case '|':
-				_ = "pipe";
+				name = "pipe";
 
 				break;
 
 			case '}':
-				_ = "curly_bracket_r";
+				name = "curly_bracket_r";
 
 				break;
 
 			case '~':
-				_ = "tilde";
+				name = "tilde";
 
 				break;
 		}
 	}
 
-	return _;
+	return name;
 }
