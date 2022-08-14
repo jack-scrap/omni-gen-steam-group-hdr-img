@@ -142,7 +142,7 @@ Console::Console(std::string fName, std::string dir) :
 			}
 		}
 
-		if (!_buffName.empty()) {
+		if (!fName.empty()) {
 			open(fName);
 		}
 
