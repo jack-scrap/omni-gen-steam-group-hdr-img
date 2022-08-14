@@ -2,20 +2,6 @@
 	"data": {
 		"vector": {
 			"block": [
-				3,
-				3,
-				3
-			]
-		},
-		"scalar": {
-			"block": [
-				7
-			]
-		}
-	},
-	"goal": {
-		"vector": {
-			"block": [
 				7,
 				3,
 				3,
@@ -24,7 +10,21 @@
 		},
 		"scalar": {
 			"block": [
+				0
+			]
+		}
+	},
+	"goal": {
+		"vector": {
+			"block": [
+				3,
+				3,
 				3
+			]
+		},
+		"scalar": {
+			"block": [
+				7
 			]
 		}
 	},

@@ -1,20 +1,20 @@
 {
 	"data": {
-		"in": {
+		"vector": {
 			"block": [
 				3,
 				3,
 				3
 			]
 		},
-		"head": {
+		"scalar": {
 			"block": [
 				7
 			]
 		}
 	},
 	"goal": {
-		"in": {
+		"vector": {
 			"block": [
 				7,
 				3,
@@ -22,9 +22,9 @@
 				3
 			]
 		},
-		"head": {
+		"scalar": {
 			"block": [
-				0
+				3
 			]
 		}
 	},

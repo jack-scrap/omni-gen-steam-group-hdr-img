@@ -1,26 +1,38 @@
 {
 	"data": {
-		"vector": {
+		"in": {
 			"block": [
-				1
+				3,
+				7,
+				12
 			]
 		},
-		"scalar": {
-			"block": [
-				1
-			]
-		}
-	},
-	"goal": {
-		"vector": {
+		"swp": {
 			"block": [
 				0
 			]
 		},
-		"scalar": {
+		"out": {
 			"block": [
-				1,
-				1
+				0
+			]
+		}
+	},
+	"goal": {
+		"in": {
+			"block": [
+				7,
+				12
+			]
+		},
+		"swp": {
+			"block": [
+				0
+			]
+		},
+		"out": {
+			"block": [
+				3
 			]
 		}
 	},
