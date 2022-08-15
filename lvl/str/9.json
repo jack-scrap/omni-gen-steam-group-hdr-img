@@ -1,0 +1,45 @@
+{
+	"data": {
+		"string": {
+			"block": "Text,Other text"
+		},
+		"sub": {
+			"block": [
+				"    ",
+				"          "
+			]
+		}
+	},
+	"goal": {
+		"string": {
+			"block": "    ,          "
+		},
+		"sub": {
+			"block": [
+				"Text",
+				"Other text"
+			]
+		}
+	},
+	"vehicle": [
+		{
+			"name": "crane"
+		}
+	],
+	"bound": {
+		"rng": [
+			{
+				"min": {
+					"axis": "Z",
+					"val": -11.16,
+					"status": "halt"
+				},
+				"max": {
+					"axis": "Z",
+					"val": 11.16,
+					"status": "halt"
+				}
+			}
+		]
+	}
+}
