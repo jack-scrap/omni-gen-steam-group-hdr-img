@@ -20,7 +20,7 @@ LIBS:=scn.cpp prog.cpp obj.cpp line.cpp pt.cpp crane.cpp truck.cpp cargo_ship.cp
 HDR:=cam.h col.h math.h phys.h
 
 OBJ_STATIC=$(SRCS:%.cpp=$(BUILDDIR)/%.o)
-OBJ_LIBS=$(LIBS:%.cpp=$(BUILDDIR)/lib%.so)
+OBJ_DYNA=$(LIBS:%.cpp=$(BUILDDIR)/lib%.so)
 
 STAGE:=init array str dict matrix vec ctrl_flow path thread
 
@@ -42,7 +42,7 @@ $(BUILDDIR)/console.o: console.cpp console.h
 $(BUILDDIR)/lib%.so: $(BUILDDIR)/%.o
 	$(CXX) $(CXXFLAGS) -shared $< -o $@
 
-omni: $(OBJ_STATIC) $(OBJ_LIBS) $(HDR)
+omni: $(OBJ_STATIC) $(OBJ_DYNA) $(HDR)
 	$(CXX) $(CXXFLAGS) $(OBJ_STATIC) -o $@ $(SDLFLAGS) $(GLFLAGS) $(PYFLAGS) $(LDLIBS)
 
 .PHONY: ro
