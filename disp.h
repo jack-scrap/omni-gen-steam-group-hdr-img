@@ -13,9 +13,9 @@ class Disp {
 	private:
 		SDL_GLContext _ctx;
 
+	public:
 		SDL_Window* _win;
 
-	public:
 		SDL_Renderer* rend;
 
 		bool open = false;
