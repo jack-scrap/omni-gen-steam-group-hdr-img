@@ -6,10 +6,10 @@
 #include "obj.h"
 
 typedef struct Cone {
+	Obj* _parent;
+
 	GLfloat bound[2][2];
 	float offset[3];
-
-	Obj* _parent;
 
 	static GLfloat _vtx[3];
 	static GLushort _idx[1];

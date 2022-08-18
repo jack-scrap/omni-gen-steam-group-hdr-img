@@ -4,11 +4,11 @@
 #include "array.h"
 
 typedef struct CargoShip {
+	Obj* _parent;
+
 	Array* data;
 
 	float offset[3];
-
-	Obj* _parent;
 
 	static unsigned int _x;
 	static unsigned int _y;

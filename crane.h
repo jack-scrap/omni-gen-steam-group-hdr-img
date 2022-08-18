@@ -6,13 +6,13 @@
 #include "cont.h"
 
 typedef struct Crane {
+	Obj* _parent;
+
 	Cont* data;
 
 	float offset[3];
 	float offsetTrack;
 	float offsetHead;
-
-	Obj* _parent;
 
 	static constexpr float _rngTrack[2] = {
 		4.0,

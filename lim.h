@@ -3,10 +3,10 @@
 #include "obj.h"
 
 typedef struct Lim {
+	Obj* _parent;
+
 	unsigned int axis;
 	float val;
-
-	Obj* _parent;
 
 	static GLushort _idc[2];
 } Lim;

@@ -3,9 +3,9 @@
 #include "obj.h"
 
 typedef struct Mark {
-	GLfloat val[2][2];
-
 	Obj* _parent;
+
+	GLfloat val[2][2];
 
 	static GLushort _idc[2];
 } Mark;

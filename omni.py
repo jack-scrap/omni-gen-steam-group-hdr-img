@@ -82,32 +82,32 @@ class _Obj(Structure):
 # Data
 class _Cont(Structure):
     _fields_ = [
-            ('_c', c_char),
-            ('_parent', c_void_p)
+            ('_parent', c_void_p),
+            ('_c', c_char)
     ]
 
 class _Idx(Structure):
     _fields_ = [
+            ('_parent', c_void_p),
             ('_data', POINTER(_Cont)),
-            ('sz', c_uint),
-            ('_parent', c_void_p)
+            ('sz', c_uint)
     ]
 
 class _Array(Structure):
     _fields_ = [
+            ('_parent', c_void_p),
             ('_data', POINTER(POINTER(_Idx))),
             ('x', c_uint),
             ('y', c_uint),
-            ('_parent', c_void_p)
     ]
 
 class _Dict(Structure):
     _fields_ = [
+            ('_parent', c_void_p),
             ('_data', POINTER(c_void_p)),
             ('_type', POINTER(c_uint)),
             ('_key', POINTER(POINTER(c_char))),
-            ('_no', c_uint),
-            ('_parent', c_void_p)
+            ('_no', c_uint)
     ]
 
 class _Var(Structure):
@@ -242,9 +242,9 @@ goal = _Scope(_goal, _noData)
 # Bound
 class _Lim(Structure):
     _fields_ = [
+            ('_parent', c_void_p),
             ('_axis', c_uint),
-            ('_val', c_float),
-            ('_parent', c_void_p)
+            ('_val', c_float)
     ]
 
     @property
@@ -261,9 +261,9 @@ _bound_rng_get.argtypes = None
 
 class _Cone(Structure):
     _fields_ = [
+            ('_parent', c_void_p),
             ('_bound', c_float * 2 * 2),
-            ('_offset', c_float * 3),
-            ('_parent', c_void_p)
+            ('_offset', c_float * 3)
     ]
 
     @property
@@ -303,11 +303,11 @@ _call_incr.argtypes = None
 
 class _Crane(_Obj):
     _fields_ = [
+            ('_parent', c_void_p),
             ('_data', POINTER(_Cont)),
             ('_offset', c_float * 3),
             ('_offsetTrack', c_float),
-            ('_offsetHead', c_float),
-            ('_parent', c_void_p)
+            ('_offsetHead', c_float)
     ]
 
     rng_track = [
@@ -397,11 +397,11 @@ class Crane:
 
 class _Truck(_Obj):
     _fields_ = [
+            ('_parent', c_void_p),
             ('_data', POINTER(_Array)),
             ('_offset', c_float * 3),
             ('_ang', c_float),
-            ('_uni', c_uint * 2),
-            ('_parent', c_void_p)
+            ('_uni', c_uint * 2)
     ]
 
     rng_wheel = [
@@ -454,9 +454,9 @@ class Truck:
 
 class _CargoShip(_Obj):
     _fields_ = [
+            ('_parent', c_void_p),
             ('_data', POINTER(_Array)),
-            ('_offset', c_float * 3),
-            ('_parent', c_void_p)
+            ('_offset', c_float * 3)
     ]
 
     @property
@@ -547,8 +547,8 @@ if _cargo_ship_get().sz:
 
 class _StreetSign(_Obj):
     _fields_ = [
-            ('_status', _CArr),
-            ('_parent', c_void_p)
+            ('_parent', c_void_p),
+            ('_status', _CArr)
     ]
 
     @property

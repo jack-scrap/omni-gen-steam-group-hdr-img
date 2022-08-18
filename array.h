@@ -8,12 +8,12 @@
 #include "math.h"
 
 typedef struct {
+	Obj* _parent;
+
 	Idx** data;
 
 	unsigned int x;
 	unsigned int y;
-
-	Obj* _parent;
 } Array;
 
 Array* arrayMk(char* data, unsigned int x, std::string name = "", unsigned int axis = X, glm::vec3 loc = glm::vec3(0.0), glm::vec3 rot = glm::vec3(0.0));

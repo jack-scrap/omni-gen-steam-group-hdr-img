@@ -8,6 +8,8 @@
 #include "c_buff.h"
 
 typedef struct Truck {
+	Obj* _parent;
+
 	Array* data;
 
 	float offset[3];
@@ -15,8 +17,6 @@ typedef struct Truck {
 	float ang;
 
 	GLuint _uni[2];
-
-	Obj* _parent;
 
 	static constexpr float _rngWheel[2] = {
 		-90,
