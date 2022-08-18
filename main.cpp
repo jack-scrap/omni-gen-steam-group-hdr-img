@@ -19,6 +19,7 @@
 #include "omni.h"
 #include "col.h"
 #include "layout.h"
+#include "class_def.h"
 
 Disp* disp;
 Console* console;
