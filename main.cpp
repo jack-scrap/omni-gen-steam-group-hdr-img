@@ -91,7 +91,9 @@ int main(int argc, char* argv[]) {
 	disp = new Disp("Omni", {
 		dim,
 		dim
-	}, col[false]);
+	}, {
+		0, 0, 0
+	});
 
 	GLfloat vtc[] = {
 		-0.26, 0.0, -0.26,
