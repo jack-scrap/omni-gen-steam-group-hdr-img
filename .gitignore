@@ -10,3 +10,5 @@ omni
 
 *.pyc
 __pycache__
+
+*.png
