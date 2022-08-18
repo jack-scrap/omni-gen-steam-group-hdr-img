@@ -182,7 +182,7 @@ int main(int argc, char* argv[]) {
 
 	disp->update();
 
-	if (!scr("icon_" + std::to_string(dim) + "x" + std::to_string(dim) + ".png", disp->_win, disp->rend)) {
+	if (!scr("o/icon_" + std::to_string(dim) + "x" + std::to_string(dim) + ".png", disp->_win, disp->rend)) {
 		std::cout << "Error" << std::endl;
 	}
 

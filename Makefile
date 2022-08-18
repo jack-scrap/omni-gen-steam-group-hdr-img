@@ -25,7 +25,7 @@ OBJ_DYNA=$(LIBS:%.cpp=$(BUILDDIR)/lib%.so)
 STAGE:=init array str dict matrix vec ctrl_flow path thread
 
 .PHONY: all
-all: mk_build mk_script omni ro
+all: mk_build mk_script mk_o omni ro
 
 $(BUILDDIR)/main.o: main.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@ $(PYFLAGS)
@@ -61,6 +61,10 @@ mk_script:
 install:
 	sudo mv omni $(DESTDIR) ;
 	sudo mv build/*.so $(LIBDIR)
+
+.PHONY: mk_o
+mk_o:
+	mkdir -p o
 
 .PHONY: clean
 clean:
