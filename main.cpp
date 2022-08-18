@@ -821,44 +821,5 @@ int main(int argc, char* argv[]) {
 		std::this_thread::sleep_for(std::chrono::milliseconds(3000));
 	}
 
-	std::thread event(handle);
-	event.detach();
-
-	SDL_AddTimer(0, epoch, NULL);
-
-	while (disp->open) {
-		if (adv) {
-			lvl++;
-
-			scn::init(stage, lvl);
-
-			adv = false;
-		}
-
-		disp->clear();
-
-		glViewport(0, 0, layout::canv[X], layout::canv[Y]);
-
-		glDisable(GL_DEPTH_TEST);
-
-		console->clear();
-
-		console->fmtScr();
-		console->hl();
-
-		console->render();
-		console->draw();
-
-		glViewport(layout::canv[X], 0, layout::view[X], layout::view[Y]);
-
-		glEnable(GL_DEPTH_TEST);
-
-		for (int i = 0; i < scn::obj.size(); i++) {
-			objDraw(scn::obj[i]);
-		}
-
-		disp->update();
-	}
-
 	return 0;
 }
