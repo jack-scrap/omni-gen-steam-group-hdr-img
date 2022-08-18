@@ -681,53 +681,6 @@ int main(int argc, char* argv[]) {
 		layout::res[Y]
 	}, col[false]);
 
-	nlohmann::json deser = nlohmann::json::parse(util::fs::rd<std::string>("stat.json"));
-
-	if (argc > 1) {
-		omni::assert(omni::stage.find(argv[1]) != omni::stage.end(), "Couldn't initialize; no corresponding section `" + std::string(argv[1]) + "`");
-
-		stage = argv[1];
-	} else {
-		stage = "idx";
-	}
-	if (argc > 2) {
-		std::string name = argv[2];
-
-		std::string path = std::string("lvl") + util::fs::path::sep + argv[1] + util::fs::path::sep + name + std::string(".json");
-		std::ifstream in(path);
-		omni::assert(in.good(), "Couldn't initialize; no level `" + std::to_string(std::stoi(argv[2])) + std::string("` in stage `") + argv[1] + std::string("`"));
-
-		lvl = atoi(argv[2]);
-	} else {
-		lvl = 0;
-	}
-
-	std::string name;
-	if (!(argc > 1)) {
-		name = util::fs::path::build({
-			"doc",
-			"intro.txt"
-		});
-	}
-
-	console = new Console(name, state::startDir);
-
-	unsigned int rank = deser["rank"];
-
-	if (rank >= (int) omni::stage[stage]["val"]) {
-		scn::init(stage, lvl);
-	} else {
-		omni::err(omni::ERR_RANK_LT, {
-			stage
-		});
-	}
-
-	Py_Initialize();
-
-	PyObject* path = PySys_GetObject("path");
-	PyList_Append(path, PyUnicode_FromString("."));
-	PyList_Append(path, PyUnicode_FromString("player/script"));
-
 	GLfloat vtc[] = {
 		-0.26, 0.0, -0.26,
 		0.16, 0.0, -0.26,
