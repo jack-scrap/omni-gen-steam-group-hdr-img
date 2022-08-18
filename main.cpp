@@ -77,9 +77,20 @@ bool scr(std::string filepath, SDL_Window* SDLWindow, SDL_Renderer* SDLRenderer)
 }
 
 int main(int argc, char* argv[]) {
+	unsigned int dim = 0;
+	if (argc > 1) {
+		if (argc != 2) {
+			std::cout << "Error: Wrong number of arguments" << std::endl;
+
+			return 1;
+		}
+
+		dim = atoi(argv[1]);
+	}
+
 	disp = new Disp("Omni", {
-		500,
-		500
+		dim,
+		dim
 	}, col[false]);
 
 	GLfloat vtc[] = {
@@ -171,7 +182,7 @@ int main(int argc, char* argv[]) {
 
 	disp->update();
 
-	scr("icon.png", disp->_win, disp->rend);
+	scr("icon_" + std::to_string(dim) + "x" + std::to_string(dim) + ".png", disp->_win, disp->rend);
 
 	std::this_thread::sleep_for(std::chrono::milliseconds(3000));
 
