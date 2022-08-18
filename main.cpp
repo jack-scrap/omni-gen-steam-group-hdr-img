@@ -185,7 +185,7 @@ int main(int argc, char* argv[]) {
 	disp->update();
 
 	if (!scr("o/icon_" + std::to_string(dim) + "x" + std::to_string(dim) + ".png", disp->_win, disp->rend)) {
-		std::cout << "Error" << std::endl;
+		std::cout << "Error: Couldn't save renderbuffer" << std::endl;
 	}
 
 	std::this_thread::sleep_for(std::chrono::milliseconds(3000));
