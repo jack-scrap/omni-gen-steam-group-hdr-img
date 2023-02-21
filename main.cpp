@@ -51,7 +51,19 @@ bool scr(std::string filepath, SDL_Window* SDLWindow, SDL_Renderer* SDLRenderer)
 
 				return false;
 			} else {
-				saveSurface = SDL_CreateRGBSurfaceFrom(pixels, infoSurface->w, infoSurface->h, infoSurface->format->BitsPerPixel, infoSurface->w * infoSurface->format->BytesPerPixel, infoSurface->format->Rmask, infoSurface->format->Gmask, infoSurface->format->Bmask, infoSurface->format->Amask);
+				std::cout << ((int)infoSurface->format->BitsPerPixel) << std::endl;
+
+				saveSurface = SDL_CreateRGBSurfaceFrom(
+					pixels,
+					infoSurface->w,
+					infoSurface->h,
+					infoSurface->format->BitsPerPixel,
+					infoSurface->w * infoSurface->format->BytesPerPixel,
+					infoSurface->format->Rmask,
+					infoSurface->format->Gmask,
+					infoSurface->format->Bmask,
+					infoSurface->format->Amask
+				);
 
 				if (saveSurface == NULL) {
 					std::cerr << "Couldn't create SDL_Surface from renderer pixel data. SDL_GetError() - " << SDL_GetError() << "\n";
