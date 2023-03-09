@@ -6,7 +6,7 @@ fin.json
 
 *.o
 *.so
-omni_gen_icon
+omni_gen_client_image
 
 *.pyc
 __pycache__
