@@ -89,16 +89,7 @@ bool scr(std::string filepath, SDL_Window* SDLWindow, SDL_Renderer* SDLRenderer)
 }
 
 int main(int argc, char* argv[]) {
-	unsigned int dim = 0;
-	if (argc > 1) {
-		if (argc != 2) {
-			std::cout << "Error: Wrong number of arguments" << std::endl;
-
-			return 1;
-		}
-
-		dim = atoi(argv[1]);
-	}
+	unsigned int dim = 16;
 
 	disp = new Disp("Omni", {
 		dim,
