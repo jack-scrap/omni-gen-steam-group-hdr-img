@@ -104,7 +104,7 @@ int main(int argc, char* argv[]) {
 		dim,
 		dim
 	}, {
-		0, 0, 0
+		38, 38, 38
 	});
 
 	GLfloat vtc[] = {

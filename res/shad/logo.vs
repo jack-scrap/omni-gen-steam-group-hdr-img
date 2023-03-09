@@ -10,5 +10,5 @@ const float max = 0.26;
 const float scale = 1 / 0.26;
 
 void main() {
-	gl_Position = vec4(vec3(pos.x / ratio, pos.z, 0.0) * scale, 1.0);
+	gl_Position = vec4(vec3(pos.x / ratio, pos.z, 0.0) * vec3(0.6) * scale, 1.0);
 }
