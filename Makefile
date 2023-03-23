@@ -25,7 +25,7 @@ OBJ_DYNA=$(LIBS:%.cpp=$(BUILDDIR)/lib%.so)
 STAGE:=init array str dict matrix vec ctrl_flow path thread
 
 .PHONY: all
-all: mk_build mk_script mk_o omni_gen_client_image ro
+all: mk_build mk_script mk_o omni_gen_steam_client_image ro
 
 $(BUILDDIR)/main.o: main.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@ $(PYFLAGS)
@@ -42,7 +42,7 @@ $(BUILDDIR)/console.o: console.cpp console.h
 $(BUILDDIR)/lib%.so: $(BUILDDIR)/%.o
 	$(CXX) $(CXXFLAGS) -shared $< -o $@
 
-omni_gen_client_image: $(OBJ_STATIC) $(OBJ_DYNA) $(HDR)
+omni_gen_steam_client_image: $(OBJ_STATIC) $(OBJ_DYNA) $(HDR)
 	$(CXX) $(CXXFLAGS) $(OBJ_STATIC) -o $@ $(SDLFLAGS) $(GLFLAGS) $(PYFLAGS) $(LDLIBS)
 
 .PHONY: ro
@@ -59,7 +59,7 @@ mk_script:
 
 .PHONY: install
 install:
-	sudo mv omni_gen_client_image $(DESTDIR) ;
+	sudo mv omni_gen_steam_client_image $(DESTDIR) ;
 	sudo mv build/*.so $(LIBDIR)
 
 .PHONY: mk_o
@@ -68,4 +68,4 @@ mk_o:
 
 .PHONY: clean
 clean:
-	rm $(BUILDDIR)/*.o $(BUILDDIR)/*.so omni_gen_client_image
+	rm $(BUILDDIR)/*.o $(BUILDDIR)/*.so omni_gen_steam_client_image

@@ -6,7 +6,7 @@ fin.json
 
 *.o
 *.so
-omni_gen_client_image
+omni_gen_steam_client_image
 
 *.pyc
 __pycache__
