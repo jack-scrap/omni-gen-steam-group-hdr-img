@@ -51,8 +51,6 @@ bool scr(std::string filepath, SDL_Window* SDLWindow, SDL_Renderer* SDLRenderer)
 
 				return false;
 			} else {
-				std::cout << ((int)infoSurface->format->BitsPerPixel) << std::endl;
-
 				saveSurface = SDL_CreateRGBSurfaceFrom(
 					pixels,
 					infoSurface->w,
