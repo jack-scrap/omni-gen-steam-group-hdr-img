@@ -22,7 +22,8 @@
 #include "layout.h"
 #include "class_def.h"
 
-#define dim 184
+#define wd 444
+#define ht 208
 
 typedef struct {
 	unsigned int _r;
@@ -103,8 +104,8 @@ bool scr(std::string filepath, SDL_Window* SDLWindow, SDL_Renderer* SDLRenderer)
 
 int main(int argc, char* argv[]) {
 	disp = new Disp("Omni", {
-		dim,
-		dim
+		wd,
+		ht
 	}, {
 		38, 38, 38
 	});
@@ -200,7 +201,7 @@ int main(int argc, char* argv[]) {
 
 	SDL_RenderPresent(disp->rend);
 
-	SDL_Surface* surf = SDL_CreateRGBSurface(0, dim, dim, 32, 0, 0, 0, 0);
+	SDL_Surface* surf = SDL_CreateRGBSurface(0, wd, ht, 32, 0, 0, 0, 0);
 	SDL_RenderReadPixels(disp->rend, NULL, surf->format->format, surf->pixels, surf->pitch);
 
 	IMG_SavePNG(surf, "o/scr.png");
