@@ -2,6 +2,7 @@
 #include <dlfcn.h>
 #include <thread>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <vector>
 #include <string>
 #include <Python.h>
@@ -21,6 +22,15 @@
 #include "layout.h"
 #include "class_def.h"
 
+#define dim 184
+
+typedef struct {
+	unsigned int _r;
+	unsigned int _g;
+	unsigned int _b;
+	unsigned int _a;
+} Col;
+
 Disp* disp;
 Console* console;
 
@@ -30,6 +40,11 @@ bool boot = false;
 
 extern std::string stage;
 extern unsigned int lvl;
+
+uint32_t rmask = 0xff000000;
+uint32_t gmask = 0x00ff0000;
+uint32_t bmask = 0x0000ff00;
+uint32_t amask = 0x000000ff;
 
 bool scr(std::string filepath, SDL_Window* SDLWindow, SDL_Renderer* SDLRenderer) {
 	SDL_Surface* saveSurface = NULL;
@@ -87,8 +102,6 @@ bool scr(std::string filepath, SDL_Window* SDLWindow, SDL_Renderer* SDLRenderer)
 }
 
 int main(int argc, char* argv[]) {
-	unsigned int dim = 16;
-
 	disp = new Disp("Omni", {
 		dim,
 		dim
@@ -185,9 +198,12 @@ int main(int argc, char* argv[]) {
 
 	disp->update();
 
-	if (!scr("o/icon_" + std::to_string(dim) + "x" + std::to_string(dim) + ".png", disp->_win, disp->rend)) {
-		std::cout << "Error: Couldn't save renderbuffer" << std::endl;
-	}
+	SDL_RenderPresent(disp->rend);
+
+	SDL_Surface* surf = SDL_CreateRGBSurface(0, dim, dim, 32, 0, 0, 0, 0);
+	SDL_RenderReadPixels(disp->rend, NULL, surf->format->format, surf->pixels, surf->pitch);
+
+	IMG_SavePNG(surf, "o/scr.png");
 
 	std::this_thread::sleep_for(std::chrono::milliseconds(3000));
 

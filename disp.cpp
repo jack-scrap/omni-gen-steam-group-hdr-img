@@ -36,7 +36,17 @@ Disp::Disp(const char* title, glm::vec2 res, glm::vec3 bg) :
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_BACK);
 
-		rend = SDL_CreateRenderer(_win, -1, 0);
+		rend = SDL_CreateRenderer(
+			_win,
+			-1,
+			0
+			/* SDL_RENDERER_SOFTWARE | SDL_RENDERER_TARGETTEXTURE */
+			/* SDL_RENDERER_SOFTWARE */
+			/* SDL_RENDERER_TARGETTEXTURE */
+			/* SDL_RENDERER_SOFTWARE | SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE */
+			/* SDL_RENDERER_PRESENTVSYNC */
+			/* SDL_RENDERER_TARGETTEXTURE */
+		);
 
 		glClearColor(bg[R] / 255.0, bg[G] / 255.0, bg[B] / 255.0, 1.0);
 
